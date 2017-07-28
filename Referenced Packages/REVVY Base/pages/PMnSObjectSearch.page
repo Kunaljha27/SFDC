@@ -1,0 +1,113 @@
+<apex:page showHeader="true" sidebar="true" controller="REVVY.CMnSObjectSearchCtrl" standardStylesheets="false">
+    <apex:form id="theForm">
+        <apex:pageMessages id="pageMessages"/>
+        <link href="{!URLFOR($Resource.REVVY__BootZip, 'dist/css/bootstrap.css')}" rel="stylesheet"/>
+        <script language="JavaScript" type="text/javascript">
+            function reset() {
+                document.getElementById(theForm).reset();
+            }
+
+            function onEnter_doSearch(e) {
+                var keynum;
+                if (window.event) {
+                    keynum = e.keyCode;
+                }
+                if (keynum == 13 || e.which == 13) {
+                    doSearch();
+                    return false;
+                }
+            }
+        </script>
+        <style>
+            .table th, .table td {
+                border: 1px solid black;
+                overflow: auto;
+                width: 300px;
+            }
+
+            .headingStyle {
+                font-weight:;
+                color:#2A94D6;
+                font-size:14px;
+            }
+
+            .table-nonfluid {
+                width: 80% !important;
+                overflow:scroll;
+            }
+
+            .halfwidth{
+                width:100px;
+                color :#ffffff;
+            }
+
+            .center {
+                margin:10px;
+                padding: 10px;
+            }
+
+            .rightbuttons {
+                float:right;
+            }
+        </style>
+
+        <apex:actionFunction name="doSearch" action="{!createWhereClause}" reRender="list" status="status"/>
+
+        <div class="bs">
+            <apex:commandButton value="{!$Label.revvy__Action_Button_Cancel}" action="{!goBack}"
+                                immediate="true" styleClass="btn btn-info" style="margin-bottom: 10px"/>
+            <br />
+            <apex:pageBlock title="Advanced Search" >
+                <div class="container-fluid">
+                    <apex:pageBlockSection columns="2">
+                        <apex:repeat value="{!searchFields}" var="searchField">
+                            <apex:pageBlockSectionItem rendered="{!NOT(searchField.isLookup)}">
+                                <apex:outputLabel style="margin-top: 5px" value="{!searchField.fieldLabel}" />
+                                <apex:inputField id="pmnsobjet-input-text" required="false"
+                                                 value="{!searchObject[searchField.fieldName]}"
+                                                onkeypress="return onEnter_doSearch(event);" />
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem rendered="{!searchField.isLookup}">
+                                <apex:outputLabel style="margin-top: 5px"
+                                                  value="{!searchField.fieldLabel}" />
+                                <apex:inputText id="pmnsobjet-input-parent" required="false"
+                                                value="{!searchField.fieldValue}"
+                                                onKeyPress="return onEnter_doSearch(event);" />
+                            </apex:pageBlockSectionItem>
+                        </apex:repeat>
+                    </apex:pageBlockSection>
+
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton style="width: 100px; margin-left: 10px; margin-right: 10px; margin-bottom: 0px;"
+                                styleClass="btn btn-default" value="{!$Label.revvy__Action_Button_Search}" action="{!createWhereClause}"
+                                reRender="list" status="status"/>
+                        <apex:commandButton style="width: 100px; margin-left: 10px; margin-right: 10px; margin-bottom: 0px;"
+                                styleClass="btn btn-default" value="{!$Label.revvy__Action_Button_Clear}"
+                                onclick="reset()" />
+                    </apex:pageBlockButtons>
+                </div>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+    <div style="overflow:auto;width:82vw;">
+        <apex:outputPanel layout="block">
+            <c:VMnListCmp id="list" pComponentId="1"
+                          pSObjectType="{!sObjectType}"
+                          pColumnFieldSetName="{!fieldsToShowFieldSet}"
+                          pShowActionButtons="true"
+                          pShowMassActionsAlways="true"
+                          pSelectionType="Multiple"
+                          pIsSelectAll="false"
+                          pViewNameAsLinkToDetail="true"
+                          pPageController="{!this}"
+                          pSelectionController="{!this}"
+                          pMassActionController="{!this}"
+                          pMassActionLabels="{!massActionLabels}"
+                          pShowSaveCancelAction="false"
+                          pMassActionNeedValidations="{!actionValidations}"
+                          pExtraWhereClause="{!whereClause}"
+                          pListSize="10"
+            />
+        </apex:outputPanel>
+    </div>
+</apex:page>

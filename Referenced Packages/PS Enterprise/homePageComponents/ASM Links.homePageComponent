@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <links>Project_Planner</links>
+    <links>Project_Planner_PM</links>
+    <links>Resource_Planner</links>
+    <links>Staffer</links>
+    <links>Log_a_Timecard</links>
+    <pageComponentType>links</pageComponentType>
+</HomePageComponent>

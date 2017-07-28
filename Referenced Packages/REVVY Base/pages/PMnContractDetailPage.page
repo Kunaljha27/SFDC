@@ -1,0 +1,8 @@
+<apex:page standardController="REVVY__MnContract__c" extensions="REVVY.CMnContractDetailCtrl" sidebar="false">
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <script>
+        var namespaceLowerCase = "{!JSENCODE(namespaceLowerCase)}";
+        var url = '{!JSENCODE(sitePrefix)}/apex/' + namespaceLowerCase + 'PMnUIShell#mncatalog/catalog/contract/' + "{!JSENCODE(MnContract__c.Id)}";
+        mnNavigateToUrl(url);
+    </script>
+</apex:page>

@@ -1,0 +1,35 @@
+<apex:page controller="M2O_UserLoginInfoController1" showHeader="true" sidebar="true" >
+<br/>
+ <Apex:pageBlock >
+ 
+  <Apex:outputText > <br/><b>All CONCURRENT SESSIONS</b><br/></Apex:outputText><br></br>
+  <apex:pageBlockTable var="a" value="{!concurrentLoginList}">
+ 
+  <apex:column >
+  <apex:facet name="header">ParentId</apex:facet>
+  {!a.ParentId}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">SourceIp</apex:facet>
+  {!a.SourceIp}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">Updated</apex:facet>
+  {!a.LastModifiedDate}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">CreatedDate</apex:facet>
+  {!a.CreatedDate}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">LoginType</apex:facet>
+  {!a.LoginType}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">SessionType</apex:facet>
+  {!a.SessionType}
+  </apex:column>
+  </apex:pageBlockTable>
+  
+  </Apex:pageBlock>
+</apex:page>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Payment Rollup Attribute</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Payment Rollup Attributes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Attribute Type --></label>
+        <name>AttributeType__c</name>
+        <picklistValues>
+            <masterLabel>Attribute1</masterLabel>
+            <translation><!-- Attribute1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Attribute2</masterLabel>
+            <translation><!-- Attribute2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Attribute3</masterLabel>
+            <translation><!-- Attribute3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Attribute4</masterLabel>
+            <translation><!-- Attribute4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Attribute5</masterLabel>
+            <translation><!-- Attribute5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Attribute --></label>
+        <name>Attribute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Datasource Payment Rollup --></label>
+        <name>DatasourcePaymentRollup__c</name>
+        <relationshipLabel><!-- Payment Rollup Attributes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label --></label>
+        <name>Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Attribute --></label>
+        <name>ParentAttribute__c</name>
+    </fields>
+    <layouts>
+        <layout>Payment Rollup Attribute Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

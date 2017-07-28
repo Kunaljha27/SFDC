@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Action --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Action Sequence --></label>
+        <name>ActionSequence__c</name>
+    </fields>
+    <fields>
+        <label><!-- Action Plugin --></label>
+        <name>Action__c</name>
+        <relationshipLabel><!-- Actions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Custom Permissions --></label>
+        <name>CustomPermissions__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- LifeCycle Action External Id --></label>
+        <name>ExternalId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Need Comments --></label>
+        <name>NeedComments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Next Stage --></label>
+        <name>NextStage__c</name>
+        <relationshipLabel><!-- Actions (Next Stage) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reorder Action --></label>
+        <name>ReorderAction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stage --></label>
+        <name>Stage__c</name>
+        <relationshipLabel><!-- Actions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>LifeCycleActionLayout24_1</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

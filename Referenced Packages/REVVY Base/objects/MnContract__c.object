@@ -1,0 +1,2790 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies contract header information</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>EditableWhenLockedFieldsFS</fullName>
+        <availableFields>
+            <field>Account__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>AmendedFrom__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>AmendmentIdPrefix__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>AmendmentNumber__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>AvailableCredit__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Contact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>ContractId__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>ContractSignDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>ContractSignStatus__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Currency__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>EndDateContract__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>ExtContractId__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>ExtId__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>IsSkipDocumentAssembly__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>IsThirdPartyPaper__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>LifecycleConfig__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Lifecycle__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MonthlyCostPriceBeforeAdjustment_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MonthlyTotalValue_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MonthlyUnitPrice_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MonthlyValueBeforeDiscount_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>NeedsApproval__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>OneTimeCostPriceBeforeAdjustment_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>OneTimeTotalValue_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>OneTimeUnitPrice_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>OneTimeValueBeforeDiscount_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Opportunity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Perpetual__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Phase__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Segment__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>SourceQuote__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>StartDateContract__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>SubPhase__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>TermYear__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Term__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>TerminationDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>VersionNum__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>WeeklyCostPriceBeforeAdjustment_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>WeeklyTotalValue_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>WeeklyUnitPrice_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>WeeklyValueBeforeDiscount_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>YearlyCostPriceBeforeAdjustment_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>YearlyTotalValue_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>YearlyUnitPrice_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>YearlyValueBeforeDiscount_S__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Lists the fields that are always editable on a contract</description>
+        <label>Editable when locked Fields</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>ThirdPartyPaperFields</fullName>
+        <availableFields>
+            <field>Currency__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Opportunity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>TermYear__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Used to list the fields used to create contract for Third Party Paper</description>
+        <displayedFields>
+            <field>Contact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>StartDateContract__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Perpetual__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Segment__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Term__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Third Party Paper Fields</label>
+    </fieldSets>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the account that is associated with the contract.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the account that is associated with the contract.</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Revvy Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>true</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Action__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(Status__c , &apos;Active&apos;)||ISPICKVAL(Status__c , &apos;Expired&apos;)||ISPICKVAL(Status__c , &apos;In Renewal&apos;),
+  HYPERLINK(&quot;/apex/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;PMnContractActionPage?action=renew&amp;contractId=&quot;+ Id , IMAGE(&quot;/resource/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;contractRenewButton&quot;,&quot;&quot;),&quot;_self&quot;),
+  &apos;&apos;)
+  + IF(ISPICKVAL(Status__c , &apos;Active&apos;),
+  HYPERLINK(&quot;/apex/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;PMnContractActionPage?action=terminate&amp;contractId=&quot;+ Id , IMAGE(&quot;/resource/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;contractTerminateButton&quot;,&quot;&quot;),&quot;_self&quot;),
+  &apos;&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Action</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AdjustmentArrow__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>if ( OverallDiscount__c &gt; 0,
+                   IMAGE(&apos;/resource/&apos; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c +     &apos;staticui/uifw/ui/images/icons/discount-down.png&apos;, &apos;down&apos; ),
+                   if ( OverallDiscount__c &lt; 0,
+                     IMAGE(&apos;/resource/&apos; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c +     &apos;staticui/uifw/ui/images/icons/discount-up.png&apos;, &apos;up&apos; ),&apos;&apos;
+                     )
+                 )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>↑↓</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Adjustment__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>abs(OverallDiscount__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Adjustment %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>AmendedFrom__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Amended From</label>
+        <referenceTo>MnContract__c</referenceTo>
+        <relationshipLabel>Amendments</relationshipLabel>
+        <relationshipName>Amendments</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AmendmentIdPrefix__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Amendment ID Prefix</label>
+        <length>32</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AmendmentNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Amendment #</description>
+        <externalId>false</externalId>
+        <label>Amendment #</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AvailableCredit__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Available Credit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the contact person associated with this contract.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the contact person associated with this contract.</inlineHelpText>
+        <label>Account Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ContractId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract ID</label>
+        <length>32</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ContractItemSubLinesNeedApprovalCount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>ContractItemSubLines Need Approval Count</label>
+        <summaryFilterItems>
+            <field>MnContractItem__c.ContractItemSubLinesNeedApprovalCount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryForeignKey>MnContractItem__c.Contract__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>ContractItemsNeedApprovalCount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract Items Need Approval Count</label>
+        <summaryFilterItems>
+            <field>MnContractItem__c.NeedsApproval__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>MnContractItem__c.Contract__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>ContractNum__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record</description>
+        <displayFormat>C{00000}</displayFormat>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Contract Number</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>ContractSignDate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>eSignature Date - populated by external signature software</description>
+        <externalId>false</externalId>
+        <label>eSignature Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ContractSignStatus__c</fullName>
+        <deprecated>false</deprecated>
+        <description>eSignature Status - updated by external signature software</description>
+        <externalId>false</externalId>
+        <label>eSignature Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Signed</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Signed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ContractValueDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>ContractValue__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Year Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ContractValue__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Contract value is the total cost of ownership for the first year.</description>
+        <externalId>false</externalId>
+        <formula>OneTimeTotalValue_S__c  +  YearlyTotalValue_S__c  + 12*MonthlyTotalValue_S__c  + 52*WeeklyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Contract value is the total cost of ownership for the first year.</inlineHelpText>
+        <label>First Year Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Currency__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Currency used in the contract.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Currency used in the contract.</inlineHelpText>
+        <label>Currency</label>
+        <picklist>
+            <picklistValues>
+                <fullName>USD</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Internal description or note about the contract. This field is not displayed on the proposal for customers.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Internal description or note about the contract. This field is not displayed on the proposal for customers.</inlineHelpText>
+        <label>Internal Notes</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>EndDateContract__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract End Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract End Date(Deprecated)</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ExtContractId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Contract ID from external system</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Contract ID from external system.</inlineHelpText>
+        <label>External Contract ID</label>
+        <length>36</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExtId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique External ID for this record.</inlineHelpText>
+        <label>Contract Ext ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>FollowingYearsValue_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>YearlyTotalValue_S__c + 12*MonthlyTotalValue_S__c + 52*WeeklyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Following Years Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>IsAmendment_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>AmendedFrom__c  &lt;&gt; null</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Amendment</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSkipDocumentAssembly__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is Skip Document Assembly</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsThirdPartyPaper__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is Third Party Paper</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LifecycleConfig__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Lifecycle Configuration associated with this contract record</description>
+        <externalId>false</externalId>
+        <label>Lifecycle Config</label>
+        <referenceTo>MnLifeCycle__c</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Lifecycle__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Lifecycle</label>
+        <picklist>
+            <controllingField>Status__c</controllingField>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>true</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+                <controllingFieldValues>Active</controllingFieldValues>
+                <controllingFieldValues>Implemented</controllingFieldValues>
+                <controllingFieldValues>In Renewal</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ended</fullName>
+                <default>false</default>
+                <controllingFieldValues>Amended</controllingFieldValues>
+                <controllingFieldValues>Cancelled</controllingFieldValues>
+                <controllingFieldValues>Expired</controllingFieldValues>
+                <controllingFieldValues>Renewed</controllingFieldValues>
+                <controllingFieldValues>Terminated</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of Adjustment 1 absolute for Monthly products</description>
+        <externalId>false</externalId>
+        <formula>MonthlyValueBeforeDiscount_S__c - MonthlyCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate of Adjustment 1 absolute for Monthly products</inlineHelpText>
+        <label>Monthly Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of Adjustment 1 in percent for Monthly products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(MonthlyCostPriceBeforeAdjustment_S__c,0)==0, 0,(MonthlyValueBeforeDiscount_S__c - MonthlyCostPriceBeforeAdjustment_S__c)/MonthlyCostPriceBeforeAdjustment_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of Adjustment 1 in percent for Monthly products</inlineHelpText>
+        <label>Monthly Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all Monthly cost prices before adjustment from Contract Lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all Monthly cost prices before adjustment from Contract Lines</inlineHelpText>
+        <label>Monthly Total Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyLineDiscountAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of the discounts offered on products that are billed on a monthly basis.</description>
+        <externalId>false</externalId>
+        <formula>MonthlyValueBeforeDiscount_S__c  - MonthlyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of the discounts offered on products that are billed on a monthly basis.</inlineHelpText>
+        <label>Monthly Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyLineDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate percentage discount offered for products that are billed on a monthly basis.</description>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(MonthlyValueBeforeDiscount_S__c) , ISBLANK(MonthlyValueBeforeDiscount_S__c), MonthlyValueBeforeDiscount_S__c &lt;= 0) ,
+0,
+((MonthlyValueBeforeDiscount_S__c - MonthlyTotalValue_S__c) / MonthlyValueBeforeDiscount_S__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate percentage discount offered for products that are billed on a monthly basis.</inlineHelpText>
+        <label>Monthly Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of all margin values as absolute for Monthly products</description>
+        <externalId>false</externalId>
+        <formula>MonthlyUnitPrice_S__c - MonthlyCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of all margin values as absolute for Monthly products</inlineHelpText>
+        <label>Monthly Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyMargin_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of margin percent for Monthly products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(MonthlyUnitPrice_S__c,0)==0, 0,(MonthlyUnitPrice_S__c - MonthlyCostPriceBeforeAdjustment_S__c)/MonthlyUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of margin percent for Monthly products</inlineHelpText>
+        <label>Monthly Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyTotalAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>MonthlyLineDiscount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Monthly Discounts</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyTotalAfterAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>MonthlyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Monthly Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyTotalBeforeAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>MonthlyValueBeforeDiscount_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Monthly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyTotalValue_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of products that are billed on a monthly basis after the discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a monthly basis after the discounts are applied.</inlineHelpText>
+        <label>Monthly Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all Monthly unit prices of sub lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all Monthly unit prices of sub lines</inlineHelpText>
+        <label>Monthly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyValueBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of products that are billed on a monthly basis before the discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a monthly basis before the discounts are applied.</inlineHelpText>
+        <label>Monthly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NeedsApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This flag is set by the system when the workflow suggests an approval is needed for the underlying contract.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This flag is set by the system when the workflow suggests an approval is needed for the underlying contract.</inlineHelpText>
+        <label>Approval Required</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of Adjustment 1 absolute for one time products</description>
+        <externalId>false</externalId>
+        <formula>OneTimeValueBeforeDiscount_S__c - OneTimeCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate of Adjustment 1 absolute for one time products</inlineHelpText>
+        <label>One-time Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of Adjustment 1 in percent for one time products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(OneTimeCostPriceBeforeAdjustment_S__c,0)==0, 0,(OneTimeValueBeforeDiscount_S__c - OneTimeCostPriceBeforeAdjustment_S__c)/OneTimeCostPriceBeforeAdjustment_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of Adjustment 1 in percent for one time products</inlineHelpText>
+        <label>One-time Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all one time cost prices before adjustment from Contract Lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all one time cost prices before adjustment from Contract Lines</inlineHelpText>
+        <label>One-time Total Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeLineDiscountAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of the discounts offered on products that are billed on a one-time basis.</description>
+        <externalId>false</externalId>
+        <formula>OneTimeValueBeforeDiscount_S__c  -  OneTimeTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of the discounts offered on products that are billed on a one-time basis.</inlineHelpText>
+        <label>One-time Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeLineDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate percentage discount offered on products that are billed on a one-time basis.</description>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(OneTimeValueBeforeDiscount_S__c) , ISBLANK(OneTimeValueBeforeDiscount_S__c), OneTimeValueBeforeDiscount_S__c &lt;= 0) ,
+0,
+((OneTimeValueBeforeDiscount_S__c - OneTimeTotalValue_S__c) / OneTimeValueBeforeDiscount_S__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate percentage discount offered for products that are billed on a one-time basis.</inlineHelpText>
+        <label>One-time Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of all margin values as absolute for one time products</description>
+        <externalId>false</externalId>
+        <formula>OneTimeUnitPrice_S__c - OneTimeCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of all margin values as absolute for one time products</inlineHelpText>
+        <label>One-time Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeMargin_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of margin percent for one time products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(OneTimeUnitPrice_S__c,0)==0, 0,(OneTimeUnitPrice_S__c - OneTimeCostPriceBeforeAdjustment_S__c)/OneTimeUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of margin percent for one time products</inlineHelpText>
+        <label>One-time Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeTotalAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OneTimeLineDiscount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>One-time Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeTotalAfterAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OneTimeTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>One-time Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeTotalBeforeAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OneTimeValueBeforeDiscount_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>One-time List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeTotalValue_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of products that are billed on a one-time basis after the discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a one-time basis after the discounts are applied.</inlineHelpText>
+        <label>One-time Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all one time unit prices of sub lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all one time unit prices of sub lines</inlineHelpText>
+        <label>One-time Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeValueBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of products that are billed on a one-time basis before the discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a one-time basis before the discounts are applied.</inlineHelpText>
+        <label>One-time List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the sales opportunity associated with this contract.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the sales opportunity associated with this contract.</inlineHelpText>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Revvy Contracts</relationshipLabel>
+        <relationshipName>MnContract</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OverallDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Total first tier discount, shown as a percentage of the total list price.</description>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(TotalListPrice__c) , ISBLANK(TotalListPrice__c), TotalListPrice__c &lt;= 0) ,
+0,
+((TotalListPrice__c -   ContractValue__c) / TotalListPrice__c)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Total first tier discount, shown as a percentage of the total list price.</inlineHelpText>
+        <label>Total Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Perpetual__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether this contract is perpetual based or not</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether this contract is perpetual based or not</inlineHelpText>
+        <label>Perpetual</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Phase__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Phase</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Authoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Collaboration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Signature</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Activation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expiration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Termination</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Final Review and Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal Review and Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Signing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Segment__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Customer segment that is used in this contract. The segment is based on the account that is associated with this contract.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Customer segment that is used in this contract. The segment is based on the account that is associated with this contract.</inlineHelpText>
+        <label>Price Segment</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health Care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Process Industry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SourceQuote__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Source quote from which this Contract was created.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Source quote from which this Contract was created.</inlineHelpText>
+        <label>Source Quote</label>
+        <referenceTo>MnQuote__c</referenceTo>
+        <relationshipLabel>Contracts</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StartDateContract__c</fullName>
+        <defaultValue>Today()</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract Start Date(Deprecated)</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Status of the contract</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Where the contract is in the life cycle</inlineHelpText>
+        <label>Actual Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Amended</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Implemented</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubPhase__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sub Phase</label>
+        <picklist>
+            <controllingField>Phase__c</controllingField>
+            <picklistValues>
+                <fullName>In Process</fullName>
+                <default>true</default>
+                <controllingFieldValues>Authoring</controllingFieldValues>
+                <controllingFieldValues>Collaboration</controllingFieldValues>
+                <controllingFieldValues>Draft</controllingFieldValues>
+                <controllingFieldValues>Negotiation</controllingFieldValues>
+                <controllingFieldValues>Signature</controllingFieldValues>
+                <controllingFieldValues>Signing</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Approvals</fullName>
+                <default>false</default>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <controllingFieldValues>Signature</controllingFieldValues>
+                <controllingFieldValues>Signing</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Effect</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Amendment</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Superseded</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired</fullName>
+                <default>false</default>
+                <controllingFieldValues>Expiration</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+                <controllingFieldValues>Collaboration</controllingFieldValues>
+                <controllingFieldValues>Negotiation</controllingFieldValues>
+                <controllingFieldValues>Termination</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TermYear__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Term (Year)</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Term__c</fullName>
+        <defaultValue>12</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Number of Months.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of units.</inlineHelpText>
+        <label>Term (Months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TerminationDate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Termination Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>TotalListPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate list price for all products before any discounts are applied for the first year.</description>
+        <externalId>false</externalId>
+        <formula>OneTimeValueBeforeDiscount_S__c + YearlyValueBeforeDiscount_S__c  + 12* MonthlyValueBeforeDiscount_S__c  + 52* WeeklyValueBeforeDiscount_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate list price for all products before any discounts are applied for the first year.</inlineHelpText>
+        <label>Total List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>VersionNum__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Version Number of this contract</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Version Number of this contract</inlineHelpText>
+        <label>Contract Version Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>WeeklyAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of Adjustment 1 absolute for Weekly products</description>
+        <externalId>false</externalId>
+        <formula>WeeklyValueBeforeDiscount_S__c - WeeklyCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate of Adjustment 1 absolute for Weekly products</inlineHelpText>
+        <label>Weekly Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of Adjustment 1 in percent for Weekly products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(WeeklyCostPriceBeforeAdjustment_S__c,0)==0, 0,(WeeklyValueBeforeDiscount_S__c - WeeklyCostPriceBeforeAdjustment_S__c)/WeeklyCostPriceBeforeAdjustment_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of Adjustment 1 in percent for Weekly products</inlineHelpText>
+        <label>Weekly Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all Weekly cost prices before adjustment from Contract Lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all Weekly cost prices before adjustment from Contract Lines</inlineHelpText>
+        <label>Weekly Total Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyLineDiscountAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of the discounts offered on products that are billed on a weekly basis.</description>
+        <externalId>false</externalId>
+        <formula>WeeklyValueBeforeDiscount_S__c  - WeeklyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of the discounts offered on products that are billed on a weekly basis.</inlineHelpText>
+        <label>Weekly Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyLineDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate percentage discount offered on products that are billed on a weekly basis.</description>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(WeeklyValueBeforeDiscount_S__c) , ISBLANK(WeeklyValueBeforeDiscount_S__c), WeeklyValueBeforeDiscount_S__c &lt;= 0) ,
+0,
+((WeeklyValueBeforeDiscount_S__c - WeeklyTotalValue_S__c) / WeeklyValueBeforeDiscount_S__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate percentage discount offered on products that are billed on a weekly basis.</inlineHelpText>
+        <label>Weekly Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of all margin values as absolute for Weekly products</description>
+        <externalId>false</externalId>
+        <formula>WeeklyUnitPrice_S__c - WeeklyCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of all margin values as absolute for Weekly products</inlineHelpText>
+        <label>Weekly Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyMargin_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of margin percent for Weekly products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(WeeklyUnitPrice_S__c,0)==0, 0,(WeeklyUnitPrice_S__c - WeeklyCostPriceBeforeAdjustment_S__c)/WeeklyUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of margin percent for Weekly products</inlineHelpText>
+        <label>Weekly Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyTotalAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>WeeklyLineDiscount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Weekly Discounts</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyTotalAfterAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>WeeklyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Weekly Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyTotalBeforeAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>WeeklyValueBeforeDiscount_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Weekly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyTotalValue_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate price of products that are billed on a weekly basis after the discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a weekly basis after the discounts are applied.</inlineHelpText>
+        <label>Weekly Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all Weekly unit prices of sub lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all Weekly unit prices of sub lines</inlineHelpText>
+        <label>Weekly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyValueBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate price of products that are billed on a weekly basis before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a weekly basis before the discounts are applied.</inlineHelpText>
+        <label>Weekly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of Adjustment 1 absolute for Yearly products</description>
+        <externalId>false</externalId>
+        <formula>YearlyValueBeforeDiscount_S__c - YearlyCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate of Adjustment 1 absolute for Yearly products</inlineHelpText>
+        <label>Yearly Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of Adjustment 1 in percent for Yearly products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(YearlyCostPriceBeforeAdjustment_S__c,0)==0, 0,(YearlyValueBeforeDiscount_S__c - YearlyCostPriceBeforeAdjustment_S__c)/YearlyCostPriceBeforeAdjustment_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of Adjustment 1 in percent for Yearly products</inlineHelpText>
+        <label>Yearly Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all Yearly cost prices before adjustment from Contract Lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all Yearly cost prices before adjustment from Contract Lines</inlineHelpText>
+        <label>Yearly Total Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyLineDiscountAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of the discounts offered on products that are billed on a yearly basis.</description>
+        <externalId>false</externalId>
+        <formula>YearlyValueBeforeDiscount_S__c  -  YearlyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of the discounts offered on products that are billed on a yearly basis.</inlineHelpText>
+        <label>Yearly Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyLineDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate percentage discount offered on products that are billed on a yearly basis.</description>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(YearlyValueBeforeDiscount_S__c) , ISBLANK(YearlyValueBeforeDiscount_S__c), YearlyValueBeforeDiscount_S__c &lt;= 0) ,
+0,
+((YearlyValueBeforeDiscount_S__c - YearlyTotalValue_S__c) / YearlyValueBeforeDiscount_S__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate percentage discount offered on products that are billed on a yearly basis.</inlineHelpText>
+        <label>Yearly Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of all margin values as absolute for Yearly products</description>
+        <externalId>false</externalId>
+        <formula>YearlyUnitPrice_S__c - YearlyCostPriceBeforeAdjustment_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of all margin values as absolute for Yearly products</inlineHelpText>
+        <label>Yearly Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyMargin_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of margin percent for Yearly products</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(YearlyUnitPrice_S__c,0)==0, 0,(YearlyUnitPrice_S__c - YearlyCostPriceBeforeAdjustment_S__c)/YearlyUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate value of margin percent for Yearly products</inlineHelpText>
+        <label>Yearly Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyTotalAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>YearlyLineDiscount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Yearly Discounts</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyTotalAfterAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>YearlyTotalValue_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Yearly Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyTotalBeforeAdjustmentDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>YearlyValueBeforeDiscount_S__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Yearly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyTotalValue_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of products that are billed on a yearly basis after the discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a yearly basis after the discounts are applied.</inlineHelpText>
+        <label>Yearly Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate of all Yearly unit prices of sub lines</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate of all Yearly unit prices of sub lines</inlineHelpText>
+        <label>Yearly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyValueBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate value of products that are billed on a yearly basis before the discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate value of products that are billed on a yearly basis before the discounts are applied.</inlineHelpText>
+        <label>Yearly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>REVVY Contract</label>
+    <nameField>
+        <label>Contract Name</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Revvy Contracts</pluralLabel>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>NDA</fullName>
+        <active>true</active>
+        <description>Non-Disclosure Agreement record type</description>
+        <label>NDA</label>
+        <picklistValues>
+            <picklist>ContractSignStatus__c</picklist>
+            <values>
+                <fullName>Not Signed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Signed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Currency__c</picklist>
+            <values>
+                <fullName>USD</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lifecycle__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ended</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Phase__c</picklist>
+            <values>
+                <fullName>Activation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Authoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collaboration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Expiration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final Review and Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review and Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Signature</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Signing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Termination</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Segment__c</picklist>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Process Industry</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Amended</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Implemented</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubPhase__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approvals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Effect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Process</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Superseded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TermYear__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SalesContract</fullName>
+        <active>true</active>
+        <description>Sales Contract record type</description>
+        <label>Sales Contract</label>
+        <picklistValues>
+            <picklist>ContractSignStatus__c</picklist>
+            <values>
+                <fullName>Not Signed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Signed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Currency__c</picklist>
+            <values>
+                <fullName>USD</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lifecycle__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ended</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Phase__c</picklist>
+            <values>
+                <fullName>Activation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Authoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collaboration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Expiration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final Review and Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review and Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Signature</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Signing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Termination</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Segment__c</picklist>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Process Industry</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Amended</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Implemented</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubPhase__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approvals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Effect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Process</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Superseded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TermYear__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ServiceContract</fullName>
+        <active>true</active>
+        <description>Service Contract record type</description>
+        <label>Service Contract</label>
+        <picklistValues>
+            <picklist>ContractSignStatus__c</picklist>
+            <values>
+                <fullName>Not Signed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Signed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Currency__c</picklist>
+            <values>
+                <fullName>USD</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lifecycle__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ended</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Phase__c</picklist>
+            <values>
+                <fullName>Activation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Authoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collaboration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Expiration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final Review and Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review and Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Signature</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Signing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Termination</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Segment__c</picklist>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Process Industry</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Amended</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Implemented</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubPhase__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approvals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Effect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Process</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Superseded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TermYear__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <listViewButtons>ImportThirdPartyPaperButton</listViewButtons>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>VMnPerpetualAndEndDateCheck</fullName>
+        <active>true</active>
+        <description>Make sure only one of perpetual or end date are set and not both.</description>
+        <errorConditionFormula>!(RecordType.DeveloperName == &apos;ServiceContract&apos; || RecordType.DeveloperName == &apos;&apos;) &amp;&amp; Perpetual__c &amp;&amp;  (!ISNULL(EndDateContract__c))</errorConditionFormula>
+        <errorMessage>Contracts cannot be Perpetual and have an End date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnPerpetualAndEndDateCheck2</fullName>
+        <active>true</active>
+        <description>make sure one of perpetual or end date exist</description>
+        <errorConditionFormula>!(RecordType.DeveloperName == &apos;ServiceContract&apos; || RecordType.DeveloperName == &apos;&apos;) &amp;&amp; !Perpetual__c &amp;&amp;  ISNULL(EndDateContract__c)</errorConditionFormula>
+        <errorMessage>End date and Perpetual cannot be both blank. Please set either End date or check Perpetual</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnPerpetualAndTermCheck</fullName>
+        <active>true</active>
+        <errorConditionFormula>!(RecordType.DeveloperName == &apos;ServiceContract&apos; || RecordType.DeveloperName == &apos;&apos;) &amp;&amp; Term__c &gt; 0 &amp;&amp;  Perpetual__c</errorConditionFormula>
+        <errorMessage>You cannot mark a Contract Perpetual and provide terms at the same time. Please set terms to blank or uncheck Perpetual.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnSegmentDefaultValValidity</fullName>
+        <active>true</active>
+        <description>Validating Segment to be not null</description>
+        <errorConditionFormula>ISPICKVAL(Segment__c,&quot;&quot;)</errorConditionFormula>
+        <errorDisplayField>Segment__c</errorDisplayField>
+        <errorMessage>Segment cannot be blank</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VmnCurrencyDefaultValValidity</fullName>
+        <active>true</active>
+        <description>Validating Currency to be not null</description>
+        <errorConditionFormula>ISPICKVAL(Currency__c,&quot;&quot;)</errorConditionFormula>
+        <errorDisplayField>Currency__c</errorDisplayField>
+        <errorMessage>Currency cannot be blank</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Clone_Contract_Detail</fullName>
+        <availability>online</availability>
+        <description>Clone Contract</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Clone</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!requireScript(&quot;/soap/ajax/29.0/connection.js&quot;)}
+            var origContractId = &quot;{!MnContract__c.Id}&quot;;
+            var namespaceprefix = &quot;{!$Setup.MnHierarchicalProperty__c.Revvy_Namespace__c}&quot;;
+            var cloneConfirmMsg = &quot;{!$Label.revvy__MnQuoteCloneLinkConfirm}&quot;;
+            var proceed = confirm(cloneConfirmMsg);
+            if(proceed){
+                window.top.location = &quot;{!$Site.Prefix}&quot; + &quot;/apex/&quot; + namespaceprefix + &quot;PMnContractCloneRedirect?origContractId=&quot;+ origContractId ;
+            }</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ImportThirdPartyPaperButton</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Import 3rd Party Paper</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>/apex/REVVY__PMnImportThirdPartyPaper</url>
+    </webLinks>
+</CustomObject>

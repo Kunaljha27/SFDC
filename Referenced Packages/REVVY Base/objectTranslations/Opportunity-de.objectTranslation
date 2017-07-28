@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <caseValues>
+            <caseType>Nominative</caseType>
+            <plural>false</plural>
+            <value>Erwarteter Umsatz</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>amount_opportunity</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <caseType>Nominative</caseType>
+            <plural>false</plural>
+            <value>Erwarteter Auftragseingang</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>close_date_opportunity</name>
+    </fields>
+    <fields>
+        <caseValues>
+            <caseType>Nominative</caseType>
+            <plural>false</plural>
+            <value>Gewichteter Umsatz</value>
+        </caseValues>
+        <caseValues>
+            <caseType>Nominative</caseType>
+            <plural>true</plural>
+            <value>Gewichteter Umsatz</value>
+        </caseValues>
+        <gender>Masculine</gender>
+        <name>expected_revenue_opportunity</name>
+    </fields>
+    <fields>
+        <label>Wert</label>
+        <name>MnDisplayValue_F__c</name>
+    </fields>
+    <fields>
+        <label>Wert</label>
+        <name>MnValue__c</name>
+    </fields>
+    <fields>
+        <label>Opportunity Externe ID</label>
+        <name>OppExtId__c</name>
+    </fields>
+    <layouts>
+        <layout>MnOpportunityPageLayout19</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnOpportunityPageLayout23</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnOpportunityPageLayout25_1</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- New Group Quote --></label>
+        <name>New_Group_Quote</name>
+    </quickActions>
+    <quickActions>
+        <label>Neues Angebot</label>
+        <name>New_Quote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Quote --></label>
+        <name>New_Quote_sf1</name>
+    </quickActions>
+</CustomObjectTranslation>

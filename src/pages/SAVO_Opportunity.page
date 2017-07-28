@@ -1,0 +1,92 @@
+<apex:page standardController="Opportunity" showHeader="false" sidebar="false">
+    <apex:pageBlock > 
+    <c:Savo_Header ></c:Savo_Header>
+    <div class="savoBody">
+        <c:Savo_Search ></c:Savo_Search>
+        <div class="wrapper">
+   <div style="width:100%;"> 
+   <style type="text/css">
+      p {margin:.5em 0 .5em 0}
+    </style>
+     <div style="float:left; width=60%;">   
+       <h1 style="display: block;">Recommended Marketing Materials:</h1>     
+       <li>Find
+        <select id="materialTypes">
+        <option value="Presentation">Presentation</option>
+        <option value="Brochure">Brochure</option>
+        <option value="White paper">White Paper</option>
+        <option Value="Case study">Case Study</option>
+        <option Value="Testimionial">Testimonial</option>
+        <option Value="Competitive Positioning">Competitive Positioning </option>
+        <option value="Training">Training</option>
+        <option value="Data Sheet">Data Sheet</option>
+        <option value="Value Calculator">Value Calculator</option>
+       </select>
+        
+      &nbsp;&nbsp;<p>for Product
+      &nbsp;&nbsp;<script>Savo.Salesforce.Opportunity.CreateProductDropDown('{!Opportunity.Id}','productList');</script>                      
+        &nbsp; <a href="#" onclick="openlinkProd()">Go</a></p></li> 
+     &nbsp;
+     <br></br>  
+      <script>
+      var MaterialType;
+      function openlinkProd() 
+        {
+         var matTypeindex = document.getElementById("materialTypes").selectedIndex;
+         var matTypes = document.getElementById("materialTypes").options;
+         MaterialType = matTypes[matTypeindex].text;
+         var product = document.getElementById('productList').value;
+         var url = "/Philips/Search/Search.aspx?t=Sales%20Toolkit," + MaterialType +'&criteria='+ product;
+         window.open(Savo.Salesforce.redirectToUrl(url)); 
+         }
+      </script>           
+      
+     <h1 style="display: block;">Sales Stage Coaching:</h1> 
+     
+     <li>Find coaching for Stage: 
+      <a href="#" onclick="SalesStage()">{!Opportunity.StageName}</a></li>
+            
+      <script>
+      var MaterialType;
+       function SalesStage() 
+        {
+         var matTypeindex = document.getElementById("materialTypes").selectedIndex;
+         var matTypes = document.getElementById("materialTypes").options;
+         MaterialType = matTypes[matTypeindex].text;
+         var url = "/Philips/Search/Search.aspx?t=Coaching,{!Opportunity.StageName}";
+         window.open(Savo.Salesforce.redirectToUrl(url)); 
+        }
+      </script>        
+     </div> 
+           
+      <div style="float:right; width:40%">  
+        <h1>Quick Links</h1>    
+         <ul>
+          <li>Sales Tookit: &nbsp;<a href="#" onclick="window.open('https://www.gosavo.com/Prod/CustomPage/View.aspx?id=16568581');">Imaging Systems</a>, <a href="#" onclick="window.open('https://www.gosavo.com/Philips/CustomPage/View.aspx?id=25457843');">PCCI</a> and <a href="#" onclick="window.open('https://www.gosavo.com/Philips/CustomPage/View.aspx?id=29516213&srlid=18245589&srisprm=False&sritidx=20&srpgidx=1&srpgsz=50');">Ultrasound</a></li>              
+           
+           <li><a href="#" onclick="window.open('https://www.gosavo.com/Philips/CustomPage/View.aspx?id=7771578&srlid=18581216&srisprm=False&sritidx=2&srpgidx=1&srpgsz=50');">Healthcare Reimbursement</a></li>        
+           <li><a href="#" onclick="window.open('https://www.gosavo.com/Philips/CustomPage/View.aspx?id=20935292&srlid=18581267&srisprm=False&sritidx=34&srpgidx=1&srpgsz=50');">Product Security</a></li>         
+  <li><a href="#" onclick="window.open('https://www.gosavo.com/Philips/CustomPage/View.aspx?id=17847668&srlid=18260570&srisprm=False&sritidx=22&srpgidx=1&srpgsz=50');">IS - National Reference Site Program</a></li>
+           <li><a href="#" onclick="window.open('http://www.healthcare.philips.com/us_en/support/SitePlanning/layouts_article.wpd');">IS - Site Drawings</a></li> 
+           <li><a href="#" onclick="window.open('https://www.gosavo.com/Philips/CustomPage/View.aspx?id=23141848&srlid=18260589&srisprm=True&sritidx=0&srpgidx=1&srpgsz=50');">PCCI - Sofon Training</a></li> 
+           <li><a href="#" onclick="window.open('http://www.healthcare.philips.com/us_en/products/supplies/ReferenceGuides/publications.wpd');">PCCI - Medical Consumables e-Commerce Catalog</a></li>     
+           
+         
+                          
+         </ul>            
+         </div> 
+         <div style="clear: both;"></div>        
+       </div>
+       </div>    
+     </div>     
+ 
+  <!-- <li><B>Note:</B><I>If you have recommendations to improve your user experience, please <a href="#" onclick="window.open('https://www.gosavo.com/Philips/Topic/Index/29848835');">click here</a></I></li>          
+   !-->
+   
+     <div style="position: relative">
+     <p style="position: fixed; bottom: 0; width:100%; text-align: left">
+     <B>Note:&nbsp;</B><I>If you have recommendations to improve your user experience, please <a href="#" onclick="window.open('https://www.gosavo.com/Philips/Topic/Index/29848835');">click here</a></I>                 
+     </p>
+    </div> 
+   </apex:pageBlock>
+  </apex:page>

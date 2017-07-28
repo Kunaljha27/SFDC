@@ -1,0 +1,299 @@
+<apex:page title="{!$Label.Gantt_Title}" sidebar="false" showHeader="true" standardController="pse__Proj__c" tabStyle="pse__Project_Task__c" extensions="pse.ProjectTaskGanttController,pse.ProjectTaskSelectorController,pse.BryntumControllerExtension">
+	
+	<apex:outputPanel rendered="{! useLocking &&isEditable && ISNULL(projectLock)}" id="initLock">
+		<apex:form >
+			<apex:actionFunction name="initLock" action="{!acquireLock}" />
+		</apex:form>
+		<script>initLock();</script>
+	</apex:outputPanel>
+
+	<apex:outputPanel rendered="{! ISBLANK(Proj__c.Id) || !isEditable || ( !ISNULL(projectLock) || !useLocking) }" layout="none" id="gantt">
+		<script>
+			//Positive values if JS is ahead, negative is SFDC is
+			(function(window) {
+				var serverTZOffset = Number('{!timezoneOffset}');
+				var clientTZOffset = (new Date()).getTimezoneOffset() * -1; //js reports with signs inverted from how salesforce does
+				window.clientTimeSkew = serverTZOffset - clientTZOffset;
+			}(window));
+		</script>
+
+        <c:fflib_extBootstrap staticResource="{!$Resource.pse__ProjectTaskGanttDependencyBundle}" applicationName="Tm" developmentPrefix="">
+            Visualforce.remoting.timeout = 120000; // Set timeout at page level
+            window['Proj__c'] = window['Proj__c'] || {};
+            Proj__c.Id = '{!JSENCODE(project.Id)}';
+            Proj__c.Name = '{!JSENCODE(project.Name)}';
+            Proj__c.Requires_Dependency_Sync__c = {!project.Requires_Dependency_Sync__c};
+
+			window['ProjectTaskGanttController'] = window['ProjectTaskGanttController'] || {};
+			ProjectTaskGanttController.IsEditable = Boolean({!IsEditable});
+			ProjectTaskGanttController.preferences = {
+				"Hide_Save_Preview__c": {!hideSavePreview},
+				"Single_Click_Task_Selection__c": {!useSingleClickTaskSelection}
+			};
+			ProjectTaskGanttController.useLocking = {!useLocking};
+			<apex:outputPanel rendered="{! !ISNULL(projectLock) }" layout="none">
+				ProjectTaskGanttController.projectLock = JSON.parse('{!JSENCODE(lockJSON)}');
+			</apex:outputPanel>
+			ProjectTaskGanttController.WeekStartDay = Number('{!WeekStartDay}');
+			ProjectTaskGanttController.Columns = JSON.parse('{!JSENCODE(columns)}');
+
+			window['$RemoteAction'] = window['$RemoteAction'] || {};
+			$RemoteAction.ProjectTaskGanttController = $RemoteAction.ProjectTaskGanttController || {};
+		
+			$RemoteAction.ProjectTaskGanttController.fetchProjectTasks = '{!$RemoteAction.ProjectTaskGanttController.fetchProjectTasks}';
+			$RemoteAction.ProjectTaskGanttController.fetchMilestones = '{!$RemoteAction.ProjectTaskGanttController.fetchMilestones}';
+			$RemoteAction.ProjectTaskGanttController.fetchProjectTaskDependencies = '{!$RemoteAction.ProjectTaskGanttController.fetchProjectTaskDependencies}';
+			$RemoteAction.ProjectTaskGanttController.fetchAssignedResources = '{!$RemoteAction.ProjectTaskGanttController.fetchAssignedResources}';
+			$RemoteAction.ProjectTaskGanttController.fetchProjectTasksAssignments = '{!$RemoteAction.ProjectTaskGanttController.fetchProjectTasksAssignments}';
+			$RemoteAction.ProjectTaskGanttController.fetchProjectRoles = '{!$RemoteAction.ProjectTaskGanttController.fetchProjectRoles}';
+
+			$RemoteAction.ProjectTaskGanttController.searchResources = '{!$RemoteAction.ProjectTaskGanttController.searchResources}';
+
+			$RemoteAction.ProjectTaskGanttController.save = '{!$RemoteAction.ProjectTaskGanttController.save}';
+			$RemoteAction.ProjectTaskGanttController.saveColumnPreferences = '{!$RemoteAction.ProjectTaskGanttController.saveColumnPreferences}';
+
+			$RemoteAction.ProjectTaskGanttController.setPreferences = '{!$RemoteAction.ProjectTaskGanttController.setPreferences}';
+
+			
+			$RemoteAction.ProjectTaskGanttController.breakLock = '{!$RemoteAction.ProjectTaskGanttController.breakLock}';		
+			$RemoteAction.ProjectTaskGanttController.refreshLock = '{!$RemoteAction.ProjectTaskGanttController.refreshLock}';
+			$RemoteAction.ProjectTaskGanttController.fetchLookupDetails = '{!$RemoteAction.ProjectTaskGanttController.fetchLookupDetails}';
+			$RemoteAction.ProjectTaskSelectorController = $RemoteAction.ProjectTaskSelectorController || {};
+			$RemoteAction.ProjectTaskSelectorController.fetchValidProjects = '{!$RemoteAction.ProjectTaskSelectorController.fetchValidProjects}';
+			
+			window['$Label'] = window['$Label'] || {};
+			$Label.Gantt_save_preview_record_type_tasks = '{!JSINHTMLENCODE($Label.Gantt_save_preview_record_type_tasks)}';
+			$Label.Gantt_save_preview_record_type_assignments = '{!JSINHTMLENCODE($Label.Gantt_save_preview_record_type_assignments)}';
+			$Label.Gantt_save_preview_record_type_dependencies = '{!JSINHTMLENCODE($Label.Gantt_save_preview_record_type_dependencies)}';
+			$Label.Gantt_save_preview_record_change_category_new = '{!JSINHTMLENCODE($Label.Gantt_save_preview_record_change_category_new)}';
+			$Label.Gantt_save_preview_record_change_category_updated = '{!JSINHTMLENCODE($Label.Gantt_save_preview_record_change_category_updated)}';
+			$Label.Gantt_save_preview_record_change_category_deleted = '{!JSINHTMLENCODE($Label.Gantt_save_preview_record_change_category_deleted)}';
+			$Label.Gantt_save_preview_question_msg = '{!JSINHTMLENCODE($Label.Gantt_save_preview_question_msg)}';
+			$Label.Gantt_save_preview_do_not_show_msg = '{!JSINHTMLENCODE($Label.Gantt_save_preview_do_not_show_msg)}';
+			$Label.Gantt_save_preview_contact_admin_msg = '{!JSINHTMLENCODE($Label.Gantt_save_preview_contact_admin_msg)}';
+
+
+			$Label.Gantt_Assignment_Empty_Resource = '{!JSINHTMLENCODE($Label.Gantt_Assignment_Empty_Resource)}';
+			$Label.Gantt_Assignment_Empty_Role = '{!JSINHTMLENCODE($Label.Gantt_Assignment_Empty_Role)}';
+			$Label.Gantt_Confirm_External_Resource_Title = '{!JSINHTMLENCODE($Label.Gantt_Confirm_External_Resource_Title)}';
+			$Label.Gantt_Confirm_Add_External_Resource = '{!JSINHTMLENCODE($Label.Gantt_Confirm_Add_External_Resource)}';
+			$Label.Gantt_No_Resource_Text = '{!JSINHTMLENCODE($Label.Gantt_No_Resource_Text)}';
+			$Label.Gantt_Add_New = '{!JSINHTMLENCODE($Label.Gantt_Add_New)}';
+			$Label.Gantt_Remove = '{!JSINHTMLENCODE($Label.Gantt_Remove)}';
+			$Label.Gantt_Assign = '{!JSINHTMLENCODE($Label.Gantt_Assign)}';
+			$Label.Gantt_Cancel = '{!JSINHTMLENCODE($Label.Gantt_Cancel)}';
+			$Label.Gantt_Apply = '{!JSINHTMLENCODE($Label.Gantt_Apply)}';
+			$Label.ProjectTaskGantt_unsavedDataExit = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_unsavedDataExit)}';
+			$Label.ProjectTaskGantt_unsavedDataReload = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_unsavedDataReload)}';
+			$Label.ProjectTaskGantt_unsavedDataChangeProject = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_unsavedDataChangeProject)}';
+			$Label.Gantt_Invalid_Session = '{!JSINHTMLENCODE($Label.Gantt_Invalid_Session)}';
+			$Label.Gantt_Security_Error = '{!JSINHTMLENCODE($Label.Gantt_Security_Error)}';
+			$Label.Gantt_Readonly_Message = '{!JSINHTMLENCODE($Label.Gantt_Readonly_Message)}';
+			$Label.Gantt_Readonly_Locked_Message = '{!JSINHTMLENCODE($Label.Gantt_Readonly_Locked_Message)}';
+			$Label.ProjectTaskGantt_invalidDependencyTitle = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_invalidDependencyTitle)}';
+			$Label.ProjectTaskGantt_invalidDependencyMessage = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_invalidDependencyMessage)}';
+			$Label.ProjectTaskGantt_invalidDependencyWarning = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_invalidDependencyWarning)}';
+			$Label.ProjectTaskGantt_lock_msgBox_title = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_lock_msgBox_title)}';
+			$Label.ProjectTaskGantt_lock_breakable = '{!JSINHTMLENCODE($Label.ProjectTaskGantt_lock_breakable)}';
+			$Label.Gantt_search 			= '{!JSINHTMLENCODE($Label.Gantt_search)}';
+			$Label.Gantt_new_task 			= '{!JSINHTMLENCODE($Label.Gantt_new_task)}';
+			$Label.Gantt_delete_task 		= '{!JSINHTMLENCODE($Label.Gantt_delete_task)}';
+			$Label.Gantt_indent_task 		= '{!JSINHTMLENCODE($Label.Gantt_indent_task)}';
+			$Label.Gantt_outdent_task 		= '{!JSINHTMLENCODE($Label.Gantt_outdent_task)}';
+			$Label.Gantt_down 				= '{!JSINHTMLENCODE($Label.Gantt_down)}';
+			$Label.Gantt_up 				= '{!JSINHTMLENCODE($Label.Gantt_up)}';
+			$Label.Gantt_undo 				= '{!JSINHTMLENCODE($Label.Gantt_undo)}';
+			$Label.Gantt_redo 				= '{!JSINHTMLENCODE($Label.Gantt_redo)}';
+			$Label.Gantt_expand 			= '{!JSINHTMLENCODE($Label.Gantt_expand)}';
+			$Label.Gantt_collapse 			= '{!JSINHTMLENCODE($Label.Gantt_collapse)}';
+			$Label.Gantt_today 				= '{!JSINHTMLENCODE($Label.Gantt_today)}';
+			$Label.Gantt_fit_timeline 			= '{!JSINHTMLENCODE($Label.Gantt_fit_timeline)}';
+			$Label.Gantt_show_critical_path = '{!JSINHTMLENCODE($Label.Gantt_show_critical_path)}';
+			$Label.Gantt_locate 			= '{!JSINHTMLENCODE($Label.Gantt_locate)}';
+			$Label.Gantt_view_detail 		= '{!JSINHTMLENCODE($Label.Gantt_view_detail)}';
+			$Label.Gantt_ribbon_slider_day		= '{!JSINHTMLENCODE($Label.Gantt_ribbon_slider_day)}';
+			$Label.Gantt_ribbon_slider_week		= '{!JSINHTMLENCODE($Label.Gantt_ribbon_slider_week)}';
+			$Label.Gantt_ribbon_slider_month	= '{!JSINHTMLENCODE($Label.Gantt_ribbon_slider_month)}';
+			$Label.Gantt_ribbon_slider_qtr		= '{!JSINHTMLENCODE($Label.Gantt_ribbon_slider_qtr)}';
+			$Label.Gantt_ribbon_slider_zoom		= '{!JSINHTMLENCODE($Label.Gantt_ribbon_slider_zoom)}';
+			$Label.Gantt_Toolbar_button_reload		= '{!JSINHTMLENCODE($Label.Gantt_Toolbar_button_reload)}';
+			$Label.Gantt_Toolbar_print				= '{!JSINHTMLENCODE($Label.Gantt_Toolbar_print)}';
+			$Label.Gantt_Toolbar_generaterr			= '{!JSINHTMLENCODE($Label.Gantt_Toolbar_generaterr)}';
+			$Label.Gantt_Toolbar_returntoprojectpage		= '{!JSINHTMLENCODE($Label.Gantt_Toolbar_returntoprojectpage)}';
+			$Label.Gantt_save						= '{!JSINHTMLENCODE($Label.Gantt_save)}';
+			$Label.Gantt_no_changes_button_label	= '{!JSINHTMLENCODE($Label.Gantt_no_changes_button_label)}';
+			$Label.Gantt_no_changes_message			= '{!JSINHTMLENCODE($Label.Gantt_no_changes_message)}';
+			$Label.Gantt_saved_message				= '{!JSINHTMLENCODE($Label.Gantt_saved_message)}';
+			$Label.Gantt_back_to_PSA				= '{!JSINHTMLENCODE($Label.Gantt_back_to_PSA)}';
+			$Label.Gantt_project_selector					= '{!JSINHTMLENCODE($Label.Gantt_project_selector)}';
+			$Label.Gantt_taskForm_milestone					= '{!JSINHTMLENCODE($Label.Gantt_taskForm_milestone)}';
+			$Label.Gantt_taskFrom_milestone_name			= '{!JSINHTMLENCODE($Label.Gantt_taskFrom_milestone_name)}';
+			$Label.Gantt_taskForm_milestone_target_date		= '{!JSINHTMLENCODE($Label.Gantt_taskForm_milestone_target_date)}';
+			$Label.Gantt_task_label							= '{!JSINHTMLENCODE($Label.Gantt_task_label)}';
+			$Label.Gantt_timeline_schedule_label			= '{!JSINHTMLENCODE($Label.Gantt_timeline_schedule_label)}';
+			$Label.Gantt_dependency_editor_ok		= '{!JSINHTMLENCODE($Label.Gantt_dependency_editor_ok)}';
+			$Label.Gantt_dependency_editor_cancel	= '{!JSINHTMLENCODE($Label.Gantt_dependency_editor_cancel)}';
+			$Label.Gantt_dependency_editor_delete	= '{!JSINHTMLENCODE($Label.Gantt_dependency_editor_delete)}';
+			$Label.Gantt_dependency_editor_tasks	= '{!JSINHTMLENCODE($Label.Gantt_dependency_editor_tasks)}';
+			$Label.Gantt_start_date					= '{!JSINHTMLENCODE($Label.Gantt_start_date)}';
+			$Label.Gantt_end_date					= '{!JSINHTMLENCODE($Label.Gantt_end_date)}';
+			$Label.Gantt_duration					= '{!JSINHTMLENCODE($Label.Gantt_duration)}';
+			$Label.Gantt_points						= '{!JSINHTMLENCODE($Label.Gantt_points)}';
+			$Label.Gantt_points_percentage_complete	= '{!JSINHTMLENCODE($Label.Gantt_points_percentage_complete)}';
+			$Label.Gantt_points_complete			= '{!JSINHTMLENCODE($Label.Gantt_points_complete)}';
+			$Label.Gantt_points_remaining			= '{!JSINHTMLENCODE($Label.Gantt_points_remaining)}';
+			$Label.Gantt_estimated_hours			= '{!JSINHTMLENCODE($Label.Gantt_estimated_hours)}';
+			$Label.Gantt_actual_hours				= '{!JSINHTMLENCODE($Label.Gantt_actual_hours)}';
+			$Label.Gantt_hours_percentage_complete	= '{!JSINHTMLENCODE($Label.Gantt_hours_percentage_complete)}';
+			$Label.Gantt_hours_remaining			= '{!JSINHTMLENCODE($Label.Gantt_hours_remaining)}';
+			$Label.Gantt_blocked					= '{!JSINHTMLENCODE($Label.Gantt_blocked)}';
+			$Label.Gantt_wbs						= '{!JSINHTMLENCODE($Label.Gantt_wbs)}';
+			$Label.Gantt_assigned_resources_or_roles				= '{!JSINHTMLENCODE($Label.Gantt_assigned_resources_or_roles)}';
+			$Label.Gantt_milestone									= '{!JSINHTMLENCODE($Label.Gantt_milestone)}';
+			$Label.Gantt_predecessors								= '{!JSINHTMLENCODE($Label.Gantt_predecessors)}';
+			$Label.Gantt_taskStore_buttonText_backToProject			= '{!JSINHTMLENCODE($Label.Gantt_taskStore_buttonText_backToProject)}';
+			$Label.Gantt_resultMessage_saveFailed					= '{!JSINHTMLENCODE($Label.Gantt_resultMessage_saveFailed)}';
+			$Label.Gantt_projectClose_button_close					= '{!JSINHTMLENCODE($Label.Gantt_projectClose_button_close)}';
+			$Label.ProjectTaskGantt_unsavedData_MsgBox_title 		= '{!JSINHTMLENCODE($Label.ProjectTaskGantt_unsavedData_MsgBox_title)}';
+			$Label.ProjectTaskGantt_reloadFromServer_MsgBox_title	= '{!JSINHTMLENCODE($Label.ProjectTaskGantt_reloadFromServer_MsgBox_title)}';
+			$Label.Gantt_tasks_column_header						= '{!JSINHTMLENCODE($Label.Gantt_tasks_column_header)}';
+			$Label.Gantt_milestone_column_header					= '{!JSINHTMLENCODE($Label.Gantt_milestone_column_header)}';
+			$Label.Gantt_assigned_resources 						= '{!JSINHTMLENCODE($Label.Gantt_assigned_resources)}';
+			$Label.Gantt_resourceNameColumn_name					= '{!JSINHTMLENCODE($Label.Gantt_resourceNameColumn_name)}';
+			$Label.Gantt_assignmentEditor_selectType_label			= '{!JSINHTMLENCODE($Label.Gantt_assignmentEditor_selectType_label)}';
+			$Label.Gantt_projectClose_button_ok						= '{!JSINHTMLENCODE($Label.Gantt_projectClose_button_ok)}';
+			$Label.Gantt_logo 										= '{!JSINHTMLENCODE($Label.Gantt_logo)}';
+			$Label.Gantt_points_value_validation 					= '{!JSINHTMLENCODE($Label.Gantt_points_value_validation)}';
+			$Label.Gantt_Task_Name_MsgBox_Title                     = '{!JSINHTMLENCODE($Label.Gantt_Task_Name_MsgBox_Title)}';
+			$Label.Gantt_Task_Name_Required                         = '{!JSINHTMLENCODE($Label.Gantt_Task_Name_Required)}';
+			$Label.Gantt_msgBox_Title 								= '{!JSINHTMLENCODE($Label.Gantt_msgBox_Title)}';
+			$Label.Gantt_btn_Close 									= '{!JSINHTMLENCODE($Label.Gantt_btn_Close)}';
+			$Label.Gantt_save_success_Msg 							= '{!JSINHTMLENCODE($Label.Gantt_Save_Success_Msg)}';
+			$Label.Gantt_save_failure_Msg 							= '{!JSINHTMLENCODE($Label.Gantt_Save_Failure_Msg)}';
+			$Label.Gantt_save_mask_Msg 								= '{!JSINHTMLENCODE($Label.Gantt_Save_Mask_Msg)}';
+			$Label.Gantt_taskForm_calendar							= '{!JSINHTMLENCODE($Label.Gantt_taskForm_calendar)}';
+			$Label.Gantt_taskForm_schedulingMode					= '{!JSINHTMLENCODE($Label.Gantt_taskForm_schedulingMode)}';
+			$Label.Gantt_selected_date_NonWorking 					= '{!JSINHTMLENCODE($Label.Gantt_selected_date_NonWorking)}';
+			$Label.Gantt_endDate_later_startDate 					= '{!JSINHTMLENCODE($Label.Gantt_endDate_later_startDate)}';
+			$Label.Gantt_Mass_Assign 								= '{!JSINHTMLENCODE($Label.Gantt_Mass_Assign)}';
+			$Label.Gantt_No_Tasks_Msg 								= '{!JSINHTMLENCODE($Label.Gantt_No_Tasks_Msg)}';
+			$Label.Gantt_No_Tasks_Msg_Title 						= '{!JSINHTMLENCODE($Label.Gantt_No_Tasks_Msg_Title)}';
+			$Label.Gantt_Mass_Assign_Title 							= '{!JSINHTMLENCODE($Label.Gantt_Mass_Assign_Title)}';
+			$Label.Gantt_Mass_Assign_Msg							= '{!JSINHTMLENCODE($Label.Gantt_Mass_Assign_Msg)}';
+			$Label.Gantt_Assign_Title 								= '{!JSINHTMLENCODE($Label.Gantt_Assign_Title)}';
+			$Label.Gantt_taskForm_taskName							= '{!JSINHTMLENCODE($Label.Gantt_taskForm_taskName)}';
+			$Label.Gantt_taskForm_duration							= '{!JSINHTMLENCODE($Label.Gantt_taskForm_duration)}';
+			$Label.Gantt_taskForm_dates								= '{!JSINHTMLENCODE($Label.Gantt_taskForm_dates)}';
+			$Label.Gantt_taskForm_baseline							= '{!JSINHTMLENCODE($Label.Gantt_taskForm_baseline)}';
+			$Label.Gantt_taskForm_start								= '{!JSINHTMLENCODE($Label.Gantt_taskForm_start)}';
+			$Label.Gantt_taskForm_finish							= '{!JSINHTMLENCODE($Label.Gantt_taskForm_finish)}';
+			$Label.Gantt_taskForm_percentComplete					= '{!JSINHTMLENCODE($Label.Gantt_taskForm_percentComplete)}';
+			$Label.Gantt_taskForm_effort							= '{!JSINHTMLENCODE($Label.Gantt_taskForm_effort)}';
+			$Label.Gantt_taskForm_invalidEffortValue				= '{!JSINHTMLENCODE($Label.Gantt_taskForm_invalidEffortValue)}';			
+			$Label.Gantt_TaskEditor_Title 			            	= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_Title)}';
+			$Label.Gantt_TaskEditor_Task_Information             	= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_Task_Information)}';
+            $Label.Gantt_TaskEditor_Information       				= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_Information)}';
+            $Label.Gantt_TaskEditor_Save_Errors           			= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_Save_Errors)}';
+            $Label.Gantt_TaskEditor_General         				= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_General)}';
+            $Label.Gantt_TaskEditor_Resources      					= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_Resources)}';
+            $Label.Gantt_TaskEditor_Predecessors      				= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_Predecessors)}';
+            $Label.Gantt_TaskEditor_Advanced        				= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_Advanced)}';
+            $Label.Gantt_TaskEditor_WBS_Code         				= '{!JSINHTMLENCODE($Label.Gantt_TaskEditor_WBS_Code)}';
+			$Label.common_label_notes         						= '{!JSINHTMLENCODE($Label.common_label_notes)}';
+			$Label.common_label_save  	     						= '{!JSINHTMLENCODE($Label.common_label_save)}';
+			$Label.common_label_resource_name  	   					= '{!JSINHTMLENCODE($Label.common_label_resource_name)}';
+			$Label.common_label_role  	     						= '{!JSINHTMLENCODE($Label.common_label_role)}';
+			$Label.common_label_ok  	     						= '{!JSINHTMLENCODE($Label.common_label_ok)}';
+ 			$Label.Gantt_Select_Resource        	 				= '{!JSINHTMLENCODE($Label.Gantt_Select_Resource)}';
+ 			$Label.Gantt_Select_Role  			       				= '{!JSINHTMLENCODE($Label.Gantt_Select_Role)}';
+  			$Label.Gantt_External  			       					= '{!JSINHTMLENCODE($Label.Gantt_External)}';
+			$Label.Gantt_Edit_Task_Name 							= '{!JSINHTMLENCODE($Label.Gantt_Edit_Task_Name)}';
+			$Label.Gantt_New_Task_Text 								= '{!JSINHTMLENCODE($Label.Gantt_New_Task_Text)}';
+			$Label.Gantt_New_Milestone 								= '{!JSINHTMLENCODE($Label.Gantt_New_Milestone)}';
+			$Label.Gantt_Add 										= '{!JSINHTMLENCODE($Label.Gantt_Add)}';
+			$Label.Gantt_Delete_Tasks   							= '{!JSINHTMLENCODE($Label.Gantt_Delete_Tasks)}';
+			$Label.Gantt_Delete_Dependency 							= '{!JSINHTMLENCODE($Label.Gantt_Delete_Dependency)}';
+			$Label.Gantt_Task_Above 								= '{!JSINHTMLENCODE($Label.Gantt_Task_Above)}';
+			$Label.Gantt_Task_Below 								= '{!JSINHTMLENCODE($Label.Gantt_Task_Below)}';
+			$Label.Gantt_Checkpoint 								= '{!JSINHTMLENCODE($Label.Gantt_Checkpoint)}';
+			$Label.Gantt_Sub_Task 									= '{!JSINHTMLENCODE($Label.Gantt_Sub_Task)}';
+			$Label.Gantt_Successor 									= '{!JSINHTMLENCODE($Label.Gantt_Successor)}';
+			$Label.Gantt_Predecessor 								= '{!JSINHTMLENCODE($Label.Gantt_Predecessor)}';
+			$Label.Gantt_Resolve_TaskDependency 					= '{!JSINHTMLENCODE($Label.Gantt_Resolve_TaskDependency)}';
+			$Label.Gantt_Resolve_Dependency 						= '{!JSINHTMLENCODE($Label.Gantt_Resolve_Dependency)}';
+
+			$Label.Gantt_create_new_task  							= '{!JSINHTMLENCODE($Label.Gantt_create_new_task)}';
+			$Label.Gantt_delete_task_2 								= '{!JSINHTMLENCODE($Label.Gantt_delete_task_2)}';
+			$Label.Gantt_move_up 									= '{!JSINHTMLENCODE($Label.Gantt_move_up)}';
+			$Label.Gantt_move_down 									= '{!JSINHTMLENCODE($Label.Gantt_move_down)}';
+			$Label.Gantt_expand_pane 								= '{!JSINHTMLENCODE($Label.Gantt_expand_pane)}';
+			$Label.Gantt_collapse_pane 								= '{!JSINHTMLENCODE($Label.Gantt_collapse_pane)}';
+			$Label.Gantt_assign_resources 							= '{!JSINHTMLENCODE($Label.Gantt_assign_resources)}';
+			$Label.Gantt_create_resource_demand 					= '{!JSINHTMLENCODE($Label.Gantt_create_resource_demand)}';
+			$Label.Gantt_resolve_dependencies 						= '{!JSINHTMLENCODE($Label.Gantt_resolve_dependencies)}';
+			$Label.Gantt_view_in_sf 								= '{!JSINHTMLENCODE($Label.Gantt_view_in_sf)}';
+			$Label.Gantt_show_or_hide_critical_path 				= '{!JSINHTMLENCODE($Label.Gantt_show_or_hide_critical_path)}';
+			$Label.Gantt_critical_path 								= '{!JSINHTMLENCODE($Label.Gantt_critical_path)}';
+			$Label.Gantt_day 										= '{!JSINHTMLENCODE($Label.Gantt_day)}';
+			$Label.Gantt_view_day 									= '{!JSINHTMLENCODE($Label.Gantt_view_day)}';
+			$Label.Gantt_week 										= '{!JSINHTMLENCODE($Label.Gantt_week)}';
+			$Label.Gantt_view_week 									= '{!JSINHTMLENCODE($Label.Gantt_view_week)}';
+			$Label.Gantt_month 										= '{!JSINHTMLENCODE($Label.Gantt_month)}';
+			$Label.Gantt_view_month 								= '{!JSINHTMLENCODE($Label.Gantt_view_month)}';
+			$Label.Gantt_quarter 									= '{!JSINHTMLENCODE($Label.Gantt_quarter)}';
+			$Label.Gantt_view_quarter 								= '{!JSINHTMLENCODE($Label.Gantt_view_quarter)}';
+			$Label.Gantt_fit 										= '{!JSINHTMLENCODE($Label.Gantt_fit)}';
+			$Label.Gantt_view_all_tasks 							= '{!JSINHTMLENCODE($Label.Gantt_view_all_tasks)}';
+			$Label.Gantt_locate_today 								= '{!JSINHTMLENCODE($Label.Gantt_locate_today)}';
+			$Label.Gantt_locate_selected_task						= '{!JSINHTMLENCODE($Label.Gantt_locate_selected_task)}';
+
+			
+			$Label.Gantt_SavePreview_title 							= '{!JSINHTMLENCODE($Label.Gantt_SavePreview_title)}';
+			$Label.Gantt_Unsaved_Task_Title 						= '{!JSINHTMLENCODE($Label.Gantt_Unsaved_Task_Title)}';
+			$Label.Gantt_Unsaved_Task_Msg 							= '{!JSINHTMLENCODE($Label.Gantt_Unsaved_Task_Msg)}';
+			$Label.Gantt_Multiple_Task_Title 						= '{!JSINHTMLENCODE($Label.Gantt_Multiple_Task_Title)}';
+			$Label.Gantt_Multiple_Task_Msg 							= '{!JSINHTMLENCODE($Label.Gantt_Multiple_Task_Msg)}';
+			$Label.Gantt_Points_Invalid_Value 						= '{!JSINHTMLENCODE($Label.Gantt_Points_Invalid_Value)}';
+			$Label.Gantt_Points_Percent_Complete_Invalid 			= '{!JSINHTMLENCODE($Label.Gantt_Points_Percent_Complete_Invalid)}';
+			$Label.Gantt_Remaining_Hours_Invalid_Value 				= '{!JSINHTMLENCODE($Label.Gantt_Remaining_Hours_Invalid_Value)}';
+			$Label.Gantt_Points_Remaining_Invalid_Value 			= '{!JSINHTMLENCODE($Label.Gantt_Points_Remaining_Invalid_Value)}';
+			$Label.Gantt_Points_Completed_Invalid_Value 			= '{!JSINHTMLENCODE($Label.Gantt_Points_Completed_Invalid_Value)}';
+			$Label.Gantt_Max_Data_Exceeded_Message 					= '{!JSINHTMLENCODE($Label.Gantt_Max_Data_Exceeded_Message)}';
+
+			window['$Page'] = window['$Page'] || {};
+			$Page.ProjectTaskGantt = '{!JSENCODE(URLFOR($Page.ProjectTaskGantt))}';
+			$Page.ProjectTaskGanttHelp = '{!JSENCODE(URLFOR($Page.ProjectTaskGanttHelp))}';
+			$Page.CreateResourceRequestForPTA = '{!JSENCODE(generateResourceRequestsURL)}';
+			$Page.DisableResolveDependencyButton = Boolean({!disableResolveDependencyButton});
+			if(!$Page.CreateResourceRequestForPTA)
+				$Page.CreateResourceRequestForPTA = undefined;
+			
+			window['$Action'] = window['$Action'] || {};
+			$Action.Proj__c = $Action.Proj__c || {};
+			$Action.Proj__c.Tab = '{!JSENCODE(URLFOR($Action.Proj__c.Tab, $ObjectType.Proj__c))}';
+			$Action.Proj__c.View = '{!IF(ISBLANK(Id), null, JSENCODE(URLFOR($Action.Proj__c.View, Id)))}';
+		</c:fflib_extBootstrap>
+
+		<script>
+			//only warn about unsaved changes in read-write mode
+			if (ProjectTaskGanttController.IsEditable) window.onbeforeunload = function() {
+				if (window.isDirty) {
+					return $Label.ProjectTaskGantt_unsavedDataExit;
+				}
+			}
+			window.onunload = function(){
+				var useLocking = {!useLocking};
+				if(!!ProjectTaskGanttController.projectLock && ProjectTaskGanttController.projectLock.success && useLocking){
+					Ext.Ajax.request({
+					     async: false,
+					     url: '/apex/releaseLock?core.apexpages.devmode.url=1',
+					     headers: { 
+					        "x-psa-lockName": ProjectTaskGanttController.projectLock.obtainedLock.name,
+					        "x-psa-lockId": ProjectTaskGanttController.projectLock.obtainedLock.id
+					     }
+				   	}); 
+				}
+			}
+		</script>
+	</apex:outputPanel>
+</apex:page>

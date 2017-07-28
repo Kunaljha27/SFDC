@@ -1,0 +1,9 @@
+<apex:page standardController="pse__Region__c" action="{!initForRegion}" extensions="pse.BacklogCalculatorController">
+
+    <apex:composition template="pse__BacklogCalculatorTemplate">
+        <apex:define name="sectionHeader">
+            <apex:sectionHeader title="{!$Label.backlog_label_calculate_backlog}" subtitle="{!pse__Region__c.Name}" help="{!$Page.pse__BacklogCalculationHelp}" />
+        </apex:define>
+    </apex:composition>
+
+</apex:page>

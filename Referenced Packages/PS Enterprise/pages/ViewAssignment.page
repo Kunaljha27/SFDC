@@ -1,0 +1,56 @@
+<apex:page standardController="pse__Assignment__c" extensions="pse.ResourceStafferController">
+<strong>This page is deprecated</strong>
+<!--
+<style>
+div#wait { width: 100%; height: 100% }
+div#loading { width: 100%; height: 100%; position: fixed; top: 0px;}
+div#waitingHolder { width: 113px; }
+img.sortIndicator { padding-left: 5px; }
+span.modified { color: red; }
+</style>
+<script type="text/javascript">
+var prevSearchTerm = null;
+var timer = null;
+function setVisible(name, visible) {
+  var e = document.getElementById(name);
+  if (e != null) {
+    if (visible) {
+      e.setAttribute("style", "display: block");
+      e.style.cssText = "display: block";
+    } else {
+      e.setAttribute("style", "display: none");
+      e.style.cssText = "display: none";
+    }
+  }
+}
+function wait(val) {
+  setVisible('loading', val);
+  setVisible('wait', val);
+}
+</script>
+<apex:detail />
+<div id="wait" class="waitingSearchDiv waitingSearchDivOpacity" style="display: none"></div>
+<div id="loading" class="waitingSearchDiv" style="display: none">
+ <div id="waitingHolder" class="waitingHolder">
+  <img class="waitingImage" src="/img/loading.gif"/>
+  <span class="waitingDescription">Loading...</span>
+ </div>
+</div>
+
+<apex:pageMessages id="msgs" />
+<apex:form id="form" >
+    <apex:pageBlock id="scheduleDetails" title="Schedule" mode="view">
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Edit" action="{!editSchedule}" rendered="{!NOT isEditMode}" disabled="{!NOT directResourceSchedule.readyToAssign}" rerender="scheduleDetails" />
+            <apex:commandButton value="Save" action="{!saveSchedule}" rendered="{!isEditMode}" disabled="{!NOT directResourceSchedule.readyToAssign}" />
+            <apex:commandButton value="Cancel" action="{!cancel}" rendered="{!isEditMode}" />
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection columns="1">
+          <c:ScheduleBuilder resourceIdAttribute="{!assignment.Resource__c}" resourceScheduleAttribute="{!directResourceSchedule}" id="schedule"
+            isEditModeAttribute="{!isEditMode}" autoChangeStrategyAttribute="true"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+</apex:form>
+-->
+</apex:page>

@@ -1,0 +1,112 @@
+<apex:page standardController="REVVY__MnPriceList__c"  extensions="REVVY.CMnPriceListController" tabstyle="MnAdmin__tab" sidebar="false">
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+          <apex:sectionHeader title="Price List" subtitle="{!PageSubTitle}"/>
+          <apex:form styleClass="mn-form">
+            <apex:pageBlock title="Price List">
+              <apex:pagemessages id="pageMessages"/>
+                <apex:actionFunction action="{!save}" name="saveRecord" rerender="pageMessages, editBlock"/>
+                <script>
+                  $(document).ready(function(){
+                    var isEdit = {!isEdit};
+
+                    if(isEdit){
+                      $(".mn-form").on("keypress", "input:text", function(ev)  {
+                        if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+                            saveRecord();
+                            return false;
+                         } else {
+                            return true;
+                         }
+                      });
+                    }
+                  })
+                </script>
+              <apex:pageBlockButtons >
+                <apex:commandButton action="{!editView}" rendered="{!allowEdit}" value="{!$Label.revvy__List_Action_Basic_Update}"/>
+                <apex:commandButton action="{!save}" rendered="{!isEdit}" value="Save" rerender="editBlock, pageMessages"/>
+                <apex:commandButton action="{!clonePriceList}" rendered="{!allowEdit}" value="{!cloneLabel}" />
+                <apex:commandButton action="{!cancel}" value="{!cancelLabel}"/>
+              </apex:pageBlockButtons>
+
+              <!-- read only mode -->
+              <apex:pageBlockSection showHeader="false" columns="2" rendered="{!!isEdit}">
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__Id__c}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.Name}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__PriceType__c}" rendered="{!showContractPriceList}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__SourceQuote__c}" rendered="{!isContractPrice}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__Currency__c}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__Segment__c}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__Start_Date__c}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__End_Date__c}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.REVVY__Status__c}" />
+                <apex:outputField value="{!REVVY__MnPriceList__c.Ownerid}" />
+                <apex:repeat value="{!customEditFields}" var="f">
+                  <apex:outputField value="{!REVVY__MnPriceList__c[f]}"/>
+                </apex:repeat>
+              </apex:pageBlockSection>
+
+              <!-- edit mode  -->
+              <apex:pageBlockSection id="editBlock" showHeader="false" columns="2" rendered="{!isEdit}">
+                <apex:inputField value="{!REVVY__MnPriceList__c.REVVY__Id__c}" />
+                <apex:inputField value="{!REVVY__MnPriceList__c.Name}" required="true"/>
+                <!--<apex:outputField value="{!REVVY__MnPriceList__c.REVVY__Currency__c}"/>-->
+                <apex:selectList id="currencyList" value="{!REVVY__MnPriceList__c.REVVY__Currency__c}" multiselect="false" size="1">
+                      <apex:actionSupport event="onchange" action="{!save}" onsubmit="if (!confirmCurrencyChange()) return false;"></apex:actionSupport>
+                      <apex:selectOptions value="{!currenciesOptions}"/>
+                </apex:selectList>
+                <script>
+                      //One currency change if old quote check with user before updating comments
+                      function confirmCurrencyChange(){
+                          var mode = '{!isNewMode}';
+                          if(mode == 'true'){
+                              return false;
+                          }
+                          var warnUser = '{!$Label.revvy__MnPriceListCurrencyChangeWarn}';
+                          var retVal = confirm(warnUser);
+                          if(retVal == false){
+                              var curValue = '{!JSENCODE(REVVY__MnPriceList__c.REVVY__Currency__c)}';
+                              var e = document.getElementById('{!$Component.currencyList}');
+                              e.value = curValue;
+                          }
+                          return retVal;
+                      }
+                </script>
+                <apex:inputField value="{!REVVY__MnPriceList__c.REVVY__Segment__c}" required="true"/>
+                <apex:inputField value="{!REVVY__MnPriceList__c.REVVY__Start_Date__c}" />
+                <apex:inputField value="{!REVVY__MnPriceList__c.REVVY__End_Date__c}" />
+                <apex:inputField value="{!REVVY__MnPriceList__c.REVVY__Status__c}" required="true"/>
+                <apex:outputField value="{!REVVY__MnPriceList__c.Ownerid}" />
+                <apex:repeat value="{!customEditFields}" var="f">
+                  <apex:inputField value="{!REVVY__MnPriceList__c[f]}"/>
+                </apex:repeat>
+              </apex:pageBlockSection>
+
+
+            </apex:pageBlock>
+          </apex:form>
+
+       <c:VMnListNodes rendered="{!!isEdit}" relId="{!REVVY__MnPriceList__c.ID}" relNodeField="PriceList__c" nodeType="PriceListLine" sectionTitle="{!$Label.revvy__Title_PriceListLineSummary}"
+            newButtonLabel="{!$Label.revvy__MnNewPriceListLineButton}" deleteLinkConfirm="{!$Label.revvy__MnPriceListLineDeleteLinkConfirm}"
+            showAddButton="false" showCancelButton="false" isMain="false"
+            fieldSetName="{!priceListLineSummaryFSName}" allowSelection="false" displayActionColumn="{!!isContractPrice}">
+            </c:VMnListNodes>
+
+        <!-- ---------- -->
+      </div>
+    </div>
+    </div>
+
+</apex:page>

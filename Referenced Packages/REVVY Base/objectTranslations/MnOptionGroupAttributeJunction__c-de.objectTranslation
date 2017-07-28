@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <fields>
+        <help><!-- This flag to specify if the user can override the value of the attribute. If true user can provide a value which will always override system calculated value. --></help>
+        <label><!-- Allow Override --></label>
+        <name>AllowOverride__c</name>
+    </fields>
+    <fields>
+        <help><!-- Possible values for user defined attributes --></help>
+        <label>Zulässige Attributwerte</label>
+        <name>AllowedValues__c</name>
+    </fields>
+    <fields>
+        <help><!-- Order of the attributes to be displayed to end user --></help>
+        <label>Attributreihenfolge</label>
+        <name>Attribute_Order__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines which attributes are assigned to a product or category. --></help>
+        <label>Katalogattribut</label>
+        <name>Catalog_Attribute__c</name>
+        <relationshipLabel>Optionsgruppenattribute</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Default Attribute Value --></help>
+        <label>Standardatt.</label>
+        <name>DefaultValue__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique identifier of an option group. --></help>
+        <label>Optionsgruppe</label>
+        <name>Option_Group_Id__c</name>
+        <relationshipLabel>Optionsgruppenattribute</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

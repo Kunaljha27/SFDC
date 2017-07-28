@@ -1,0 +1,42 @@
+<!-- use a list controller in order to supply use this for a custom list button  -->
+<apex:page title="{!$Label.create_res_req_title}" standardController="pse__Resource_Request__c"
+    recordSetVar="resourceRequests" extensions="pse.CreateResourceRequestsController"
+    action="{!initForProject}">
+
+<apex:composition template="pse__CreateResourceRequestsTemplate">
+
+    <apex:define name="sectionHeader">
+        <apex:sectionHeader title="{!$Label.create_res_req_label_request_resources}" subtitle="{!project.Name}" />
+    </apex:define>
+
+    <apex:define name="resourcesSection">
+        <apex:pageBlockSection title="{!$Label.create_res_req_label_resources}" columns="2" id="newResourceSection" collapsible="false">
+        
+        	<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="{!$Label.create_res_req_label_num_resources}" for="numResources"/>
+    			<c:RequiredInputText value="{!numNewResourcesText}" style="width:40px"/>
+			</apex:pageBlockSectionItem>
+
+			<apex:repeat value="{!createRRFromProjFields}" var="fName">
+				<apex:inputField rendered="{!(fName.Label == $ObjectType.pse__Resource_Request__c.Fields.pse__Project__c.Label)}" value="{!newResourceRequest[fName]}"/>
+	
+				<apex:inputField rendered="{!AND(NOT(fName.Label == $ObjectType.Resource_Request__c.Fields.Resource_Role__c.Label),
+										NOT(fName.Label == $ObjectType.Resource_Request__c.Fields.SOW_Hours__c.Label),
+										NOT(fName.Label == $ObjectType.Resource_Request__c.Fields.Start_Date__c.Label),
+                                        NOT(fName.Label == $ObjectType.Resource_Request__c.Fields.Project__c.Label),
+										NOT(fName.Label == $ObjectType.Resource_Request__c.Fields.End_Date__c.Label))}"  required="{!OR(fName.required,fName.DBRequired)}"  value="{!newResourceRequest[fName]}"/>
+
+				<apex:inputField rendered="{!OR(fName.Label == $ObjectType.Resource_Request__c.Fields.Resource_Role__c.Label,
+										fName.Label == $ObjectType.Resource_Request__c.Fields.SOW_Hours__c.Label,
+										fName.Label == $ObjectType.Resource_Request__c.Fields.Start_Date__c.Label,
+										fName.Label == $ObjectType.Resource_Request__c.Fields.End_Date__c.Label)}" required="true" value="{!newResourceRequest[fName]}"/>
+										
+										
+		
+			</apex:repeat>
+		</apex:pageBlockSection>
+    </apex:define>
+
+</apex:composition>
+
+</apex:page>

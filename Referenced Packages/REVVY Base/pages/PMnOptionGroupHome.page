@@ -1,0 +1,63 @@
+<apex:page controller="REVVY.CMnOptionGroupHomePageCtrl" extensions="REVVY.CMnConfigDebugCtrl" sidebar="false" tabstyle="MnAdmin__tab">
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+        <apex:pageMessages id="pageMessages"/>
+        <div class="slds-tabs--default mn-top-nav">
+            <ul class="slds-tabs--default__nav" role="tablist">
+                <li class="slds-tabs__item slds-text-heading--label " title="{!$Label.MnModelHomeLink}" role="presentation">
+                    <!-- <a href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1">Item One</a> -->
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnModelHome');"
+                       alt="ModelHome">
+                        {!$Label.MnModelHomeLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label slds-active" title="{!$Label.MnOptionGroupHomeLink}" role="presentation">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnOptionGroupHome');"
+                       alt="OptionGroupHome">
+                        {!$Label.MnOptionGroupHomeLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label " title="{!$Label.MnConfigRuleHomeLink}" role="presentation">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnConfigRuleHome');"
+                       alt="ConfigRuleHome">
+                        {!$Label.MnConfigRuleHomeLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label" title="{!$Label.MnConfigEngineStatusLink}" role="presentation">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnConfigStatus');"
+                       alt="ConfigEngineStatus">
+                        {!$Label.MnConfigEngineStatusLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label" title="Test" role="presentation" style="display:{!IF(!isDebug, 'none', 'inline-block')}">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnConfigEngineTestData');"
+                       alt="ConfigEngineTestData">
+                        Test</a>
+                </li>
+            </ul>
+        </div>
+
+        <c:VMnList sectionTitle="{!$Label.revvy__MnOptionGroupHomeTitle}" fieldSetName="{!optionGroupListFSName}"
+                   isNewButtonVisible="true"
+                   newButtonLabel="{!$Label.revvy__MnNewOptionGroupButton}"
+                   deleteLinkConfirm="{!$Label.revvy__MnOptionGroupDeleteLinkConfirm}"
+                   retUrl="" singleSelection="true"
+                   sObjTypeStr="MnConfigEngineOptionGroup__c" filterCols="Name, Id__c" showFilter="true"
+                   allowSelection="false" displayActionColumn="true" extraWhere="isSolution__c=false"/>
+
+        <!-- ---------- -->
+      </div>
+    </div>
+    </div>
+
+</apex:page>

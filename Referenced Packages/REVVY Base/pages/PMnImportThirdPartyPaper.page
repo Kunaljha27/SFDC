@@ -1,0 +1,103 @@
+<apex:page standardcontroller="REVVY__MnContract__c" extensions="REVVY.CMnImportThirdPartyPaperCtrl" tabstyle="REVVY__MnContract__c">
+  <apex:sectionHeader title="Import Third Party Paper" subtitle="New Revvy Contract"/>
+  <apex:pageMessages id="showmsg" rendered="{!isShowPageMessages}"></apex:pageMessages>
+  <apex:form enctype="multipart/form-data">
+    <apex:pageBlock title="Contract Edit">
+
+      <apex:pageBlockButtons >
+        <apex:commandButton action="{!upload}" value="Save"/>
+        <apex:commandButton value="Cancel" immediate="true" onclick="navToContractsHome();return false;"/>
+      </apex:pageBlockButtons>
+
+      <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!$ObjectType.REVVY__MnContract__c.fields.Name.label}" for="contractName"/>
+          <apex:inputField value="{!contract.Name}" id="contractName" required="true"/>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!$Label.revvy__MnContract_Label_3rdPartyPaperImportPage_File}" for="file"/>
+          <apex:outputPanel >
+            <div class="requiredInput">
+              <div class="requiredBlock"></div>
+              <apex:inputFile value="{!document.body}" filename="{!document.name}" id="file" required="true"/>
+              <div class="errorMsg">
+                <strong>{!noFileError}</strong>
+              </div>
+            </div>
+          </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!$ObjectType.REVVY__MnContract__c.fields.REVVY__Account__c.label}" for="account"/>
+          <apex:inputField value="{!contract.REVVY__Account__c}" id="account"/>
+        </apex:pageBlockSectionItem>
+
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="{!$Label.revvy__MnContract_Label_3rdPartyPaperImportPage_RecordType}" for="recordTypeId"/>
+                <apex:selectList value="{!selectedRecordTypeId}" size="1" id="RecordTypeId" onchange="return onChange()">
+                  <apex:selectOptions value="{!selectableRecordTypes}"/>
+                </apex:selectList>
+          </apex:pageBlockSectionItem>
+
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="{!$Label.revvy__MnContract_Label_3rdPartyPaperImportPage_AttachmentType}" for="AttachmentType"/>
+              <apex:selectList value="{!AttachmentType}" size="1" id="AttachmentType" onchange="return onChange()">
+                <apex:selectOptions value="{!AttachmentTypes}"/>
+              </apex:selectList>
+          </apex:pageBlockSectionItem>
+
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="{!$Label.revvy__MnContract_Label_3rdPartyPaperImportPage_LibraryName}" for="LibraryId"/>
+              <apex:outputPanel >
+                <apex:selectList value="{!LibraryId}" size="1" id="LibraryId">
+                  <apex:selectOptions value="{!Libraries}"/>
+                </apex:selectList>
+                <div class="errorMsg">
+                  <strong>{!uploadLibraryError}</strong>
+                </div>
+              </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+
+        <apex:repeat value="{!$ObjectType.REVVY__MnContract__c.FieldSets.REVVY__ThirdPartyPaperFields}" var="f">
+          <apex:pageBlockSectionItem >
+            <apex:outputLabel value="{!f.Label}"/>
+            <apex:inputField value="{!REVVY__MnContract__c[f]}" required="{!f.required}"/>
+          </apex:pageBlockSectionItem>
+        </apex:repeat>
+
+      </apex:pageBlockSection>
+
+    </apex:pageBlock>
+  </apex:form>
+  <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+  <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+  <script>
+    function navToContractsHome() {
+      var isSF1 = (typeof sforce != 'undefined') && sforce && (!!sforce.one);
+      var contractObjKeyPrefix = '{!contractObjKeyPrefix}';
+      if (isSF1) {
+          sforce.one.navigateToURL('source=aloha#/sObject/' + contractObjKeyPrefix + '/home');
+      } else {
+          mnNavigateToUrl('/' + contractObjKeyPrefix);
+      }
+    }
+    function onChange(){
+        var j$ = jQuery.noConflict();
+        var attachmentType = j$("select[id$='AttachmentType']").val();
+        if (attachmentType == 'Attachment') {
+            j$("select[id$='LibraryId']").prop('disabled', 'disabled');
+        } else{
+            j$("select[id$='LibraryId']").prop('disabled', false);
+        }
+        var recordType = j$("select[id$='RecordTypeId'] option:selected").text();
+        if (recordType == 'NDA') {
+            j$("select[id$='PriceSegmentType']").prop('disabled', 'disabled');
+        } else{
+            j$("select[id$='PriceSegmentType']").prop('disabled', false);
+        }
+    }
+    onChange();
+  </script>
+</apex:page>

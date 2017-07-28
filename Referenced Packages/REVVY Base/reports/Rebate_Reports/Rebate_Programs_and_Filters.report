@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>MnIncentiveProgram__c$Name</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c$IncentiveProgramName__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Incentive_Program_Lines__r$Name</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Incentive_Program_Lines__r$Description__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Incentive_Program_Lines__r.Data_Sets__r$Name</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Incentive_Program_Lines__r.Data_Sets__r.Filters__r$Name</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Incentive_Program_Lines__r.Data_Sets__r.Filters__r$Attribute__c</field>
+    </columns>
+    <description>Rebate Programs and Filters</description>
+    <format>Tabular</format>
+    <name>Rebate Programs and Filters</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Rebate_Programs_with_Goals_and_Filters__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>MnIncentiveProgram__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

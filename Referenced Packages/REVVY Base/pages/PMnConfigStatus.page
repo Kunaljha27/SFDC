@@ -1,0 +1,78 @@
+<apex:page controller="REVVY.CMnConfigEngineStatusPageCtrl" extensions="REVVY.CMnConfigDebugCtrl" sidebar="false" tabstyle="MnAdmin__tab">
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+        <apex:pageMessages id="pageMessages"/>
+        <div class="slds-tabs--default mn-top-nav">
+            <ul class="slds-tabs--default__nav" role="tablist">
+                <li class="slds-tabs__item slds-text-heading--label " title="{!$Label.MnModelHomeLink}" role="presentation">
+                    <!-- <a href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1">Item One</a> -->
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnModelHome');"
+                       alt="ModelHome">
+                        {!$Label.MnModelHomeLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label " title="{!$Label.MnOptionGroupHomeLink}" role="presentation">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnOptionGroupHome');"
+                       alt="OptionGroupHome">
+                        {!$Label.MnOptionGroupHomeLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label " title="{!$Label.MnConfigRuleHomeLink}" role="presentation">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnConfigRuleHome');"
+                       alt="ConfigRuleHome">
+                        {!$Label.MnConfigRuleHomeLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label slds-active" title="{!$Label.MnConfigEngineStatusLink}" role="presentation">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnConfigStatus');"
+                       alt="ConfigEngineStatus">
+                        {!$Label.MnConfigEngineStatusLink}</a>
+                </li>
+                <li class="slds-tabs__item slds-text-heading--label" title="Test" role="presentation" style="display:{!IF(!isDebug, 'none', 'inline-block')}">
+                    <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefix}PMnConfigEngineTestData');"
+                       alt="ConfigEngineTestData">
+                        Test</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cfgStatusContainer">
+        <p style="font-size: 18px; font-weight: bold "> {!$Label.MnSFDCVersionLabel}: {!revvyVersion}</p> <br/>
+
+        <h1 style="font-size: 24px; font-weight: bold "> {!$Label.MnConfigEngineStatusLabel}:</h1> <br/>
+        <hr width="100%" />
+        <p style="font-size: 18px; font-weight: bold " > {!$Label.MnStatusLabel}: <font color="{!IF(isCfeOnline,'green', 'red')}"> {!IF(isCfeOnline, $Label.MnStatusOnline, $Label.MnStatusOffline)} </font></p>
+        <p style="font-size: 16px; font-weight: bold "> {!$Label.MnVersionLabel}: {!version}</p>
+
+        <apex:outputPanel rendered="{!showDetailConfigEngineStatus}">
+            <p style="font-size: 16px; font-weight: bold "> Config Engine Url: {!cFEUrl}</p>
+
+              <pre>{!cfeError}</pre>
+              <pre> {!cfeStatus}</pre>
+
+              <h1 style="font-size: 24px; font-weight: bold "> {!$Label.MnLBStatusLabel}:</h1> <br/>
+              <hr width="100%" />
+            <p style="font-size: 18px; font-weight: bold " > {!$Label.MnStatusLabel}: <font color="{!IF(isLbOnline,'green', 'red')}"> {!IF(isLbOnline, $Label.MnStatusOnline, $Label.MnStatusOffline)} </font></p>
+
+              <pre>{!lbError}</pre>
+              <pre rendered="{!lbError == ''}"> {!lbStatus}</pre>
+
+        </apex:outputPanel>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+</apex:page>

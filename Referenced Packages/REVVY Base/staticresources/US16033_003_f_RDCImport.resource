@@ -1,0 +1,3 @@
+"ID__C","ATTRIBUTE_NAME__C","ATTRIBUTE_ID__R.ID__C","ANY_VALUE__C","ATTRIBUTE_VALUE__R.ID__C","CATEGORY_OPTION_VALUE__R.ID__C","CELL_TYPE__C","CELL_VALUE_TYPE__C","COLNUMBER__C","OPTIONGROUP_ID__R.ID__C","QUANTITY__C","REGULAR_OPTION_VALUE__R.ID__C","ROWNUMBER__C","RULE__R.ID__C","VISIBLE__C","EXPRESSION__R.ID__C","FIELD_VALUE__C","DISCOUNT__C","DISCOUNT_TYPE__C","LABEL__C","CATALOGNODE__R.ID__C"
+"34035575-bbdf-4466-b016-680c69a39eb0","","","false","","","Condition","Catalog Node","0.0","","","","1.0","c97429e3-d232-4cb7-83b3-18b9b0f767f2","false","","","0.0","","","QAProduct2"
+"e2918c87-ec94-4baf-8c03-23c394a40b69","","","false","","","Target","Catalog Node","1.0","","","","1.0","c97429e3-d232-4cb7-83b3-18b9b0f767f2","false","","","10.0","Percent","","QAProduct14"

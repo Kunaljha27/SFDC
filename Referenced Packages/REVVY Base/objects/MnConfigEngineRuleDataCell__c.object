@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies a rule&apos;s conditions (i.e., which conditions trigger a rule) and the rule&apos;s target (i.e., what option or option group is affected by the rule).</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Any_Value__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Specifies whether a rule condition should be based on the selection of any option in the option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specifies whether a rule condition should be based on the selection of any option in the option group.</inlineHelpText>
+        <label>Any Value</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AttributeMaxValue__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>User Entered Attribute Max Value</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttributeValue__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>User Entered Attribute Value</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Attribute_Id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the attribute.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the attribute.</inlineHelpText>
+        <label>Attribute Id</label>
+        <referenceTo>MnCatalogAttribute__c</referenceTo>
+        <relationshipLabel>Rule Data Cells</relationshipLabel>
+        <relationshipName>Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Attribute_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the attribute.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the attribute.</inlineHelpText>
+        <label>Attribute Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Attribute_Operator__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Operator for the attribute value, such as =, &gt;, range</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Operator for the attribute value.</inlineHelpText>
+        <label>Attribute Operator</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Attribute_Value__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the attribute value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the attribute value.</inlineHelpText>
+        <label>Attribute Value</label>
+        <referenceTo>MnCatalogAttributeValue__c</referenceTo>
+        <relationshipLabel>Rule Data Cells</relationshipLabel>
+        <relationshipName>Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CatalogNode__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the product/category.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the product/category.</inlineHelpText>
+        <label>Category/Product target/condition</label>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>Catalog Rule Data Cells</relationshipLabel>
+        <relationshipName>Catalog_Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Category_Option_Value__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the product.</inlineHelpText>
+        <label>Category Option Value</label>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>Rule Data Cells</relationshipLabel>
+        <relationshipName>Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Cell_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Whether the cell is a target or a condition of the rule.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the cell is a target or a condition of the rule.</inlineHelpText>
+        <label>Cell Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Condition</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Target</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TargetOG</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Cell_Value_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Whether the option is a regular option, category option, or a product attribute value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the option is a regular option, category option, or a product attribute value.</inlineHelpText>
+        <label>Cell Value Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Attribute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Category Option</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Catalog Node</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Regular Option</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Value</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Object</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ColNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Column number used to identify a cell in the rule table.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Column number used to identify a cell in the rule table.</inlineHelpText>
+        <label>Data Column Id</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Discount_Absolute__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Total discount off of list price (e.g., $100 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total discount off of list price (e.g., $100 off).</inlineHelpText>
+        <label>Discount (Absolute)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Discount_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off).</inlineHelpText>
+        <label>Discount Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Percentage discount off of list price (e.g., 20% off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percentage discount off of list price (e.g., 20% off).</inlineHelpText>
+        <label>Discount (Percent)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Expression__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Expression</label>
+        <referenceTo>MnExpression__c</referenceTo>
+        <relationshipLabel>Rule Data Cells</relationshipLabel>
+        <relationshipName>Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Field_Value__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Field Value</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Unique Identifier</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>IsTargetOption__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Specifies whether the condition is based on target option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specifies whether the condition is based on target option.</inlineHelpText>
+        <label>Target Option</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Target_Selected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Specifies is target selected in expression.</description>
+        <externalId>false</externalId>
+        <label>Is Target Selected</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Label__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Label for target</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OptionGroup_id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the option group.</inlineHelpText>
+        <label>Option Group</label>
+        <referenceTo>MnConfigEngineOptionGroup__c</referenceTo>
+        <relationshipName>Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Option__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Option</label>
+        <referenceTo>MnConfigEngineOption__c</referenceTo>
+        <relationshipLabel>Rule Data Cells (Option)</relationshipLabel>
+        <relationshipName>Rule_Data_Cells1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The quantity of the target option set by an auto-select rule.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The quantity of the target option set by an auto-select rule.</inlineHelpText>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Regular_Option_Value__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of an option that belongs to a regular option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of an option that belongs to a regular option group.</inlineHelpText>
+        <label>Regular Option Value</label>
+        <referenceTo>MnConfigEngineOption__c</referenceTo>
+        <relationshipLabel>Rule Data Cells</relationshipLabel>
+        <relationshipName>Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RowNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Row number of this condition cell in the rule table.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Row number of this condition cell in the rule table.</inlineHelpText>
+        <label>Data Row Id</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rule__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the rule associated with this cell.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the rule associated with this cell.</inlineHelpText>
+        <label>Rule</label>
+        <referenceTo>MnConfigEngineRule__c</referenceTo>
+        <relationshipLabel>Rule Data Cells</relationshipLabel>
+        <relationshipName>Rule_Data_Cells</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Set_Attribute_Id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the set attribute.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the set attribute.</inlineHelpText>
+        <label>Set Attribute Id</label>
+        <referenceTo>MnCatalogAttribute__c</referenceTo>
+        <relationshipLabel>Set Rule Data Cells</relationshipLabel>
+        <relationshipName>Set_Rule_Data_Cells</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Set_Attribute_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Set name of the attribute.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Set name of the attribute.</inlineHelpText>
+        <label>Set Attribute Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Value_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Formula that calculates the display value of a cell based on whether the cell is a regular option, category option, or attribute</description>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL( Cell_Value_Type__c ,&apos;Regular Option&apos;),  Regular_Option_Value__r.Label__c ,
+                 IF(ISPICKVAL( Cell_Value_Type__c ,&apos;Category Option&apos;), Regular_Option_Value__r.Label__c,
+                 IF(ISPICKVAL( Cell_Value_Type__c ,&apos;Field Value&apos;),  Field_Value__c ,
+                 IF(ISPICKVAL( Cell_Value_Type__c ,&apos;Attribute&apos;),  Attribute_Value__r.Value_Display__c, &apos;&apos; ))))</formula>
+        <inlineHelpText>Formula that calculates the display value of a cell based on whether the cell is a regular option, category option, or attribute</inlineHelpText>
+        <label>Value Formula</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visible__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Specifies whether an option group should be displayed or hidden when a visibility rule is triggered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specifies whether an option group should be displayed or hidden when a visibility rule is triggered.</inlineHelpText>
+        <label>Visible</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Rule Data Cell</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Name (id)</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Rule Data Cells</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

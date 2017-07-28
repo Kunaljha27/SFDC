@@ -1,0 +1,44 @@
+<apex:page standardController="Account" extensions="GroupMultiselectController">
+  
+  <apex:sectionHeader title="Account Team Members" subtitle="Select the Public Group to Add In Account Team"/>    
+  <apex:pageMessages />
+   <apex:form enctype="multipart/form-data" >
+    <apex:pageBlock >
+         
+       <c:multiselectpicklist leftLabel="Available Groups"
+           leftOptions="{!allgroups}"
+           rightLabel="Selected Groups"
+           rightOptions="{!selectedGroups}"
+           size="15"
+           width="300px"/>
+                      
+        <apex:pageBlockSection columns="1" >
+           <apex:pageBlockSectionItem >
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+             <apex:outputLabel value="Account Access"> </apex:outputLabel> 
+             <apex:selectList value="{!AccountAccess}" size="1" required="true" >      
+                <apex:selectOptions value="{!AccessLevel}"></apex:selectOptions>
+              </apex:selectList> 
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Opportunity Access"> </apex:outputLabel> 
+             <apex:selectList value="{!OpportunityAccess}" size="1" required="true" >      
+               <apex:selectOptions value="{!OpptyAccessLevel}"></apex:selectOptions>
+              </apex:selectList>            
+            </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Case Access"> </apex:outputLabel> 
+             <apex:selectList value="{!CaseAccess }" size="1" required="true" >      
+               <apex:selectOptions value="{!OpptyAccessLevel}"></apex:selectOptions>
+              </apex:selectList>            
+            </apex:pageBlockSectionItem>
+            
+            
+             </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+               <apex:commandButton value="Add" action="{!addteam}"/> 
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

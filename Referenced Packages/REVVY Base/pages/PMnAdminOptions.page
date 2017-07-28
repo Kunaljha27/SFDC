@@ -1,0 +1,66 @@
+<apex:page controller="REVVY.CMnAdminOptionsController" sidebar="false" tabstyle="MnAdmin__tab">
+  <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css"/>
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+
+  <c:CMnZenDesk />
+  <div  class="slds">
+    <div  class="colWrapper slds-grid">
+      <div class="collwrp slds-col" >
+        <div class="coll" >
+          <c:CMnAdminLeftNav />
+        </div>
+      </div>
+      <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+        <apex:form >
+          <apex:pageMessages id="showmsg"/>
+            <apex:pageBlock title="Revvy Multi Language Support">
+              <apex:commandButton action="{!enable}" id="enableButton" value="{!enableValue}" reRender="showmsg,currStatus,enableButton"/>
+              <br/><br/>
+              <h1><apex:outputPanel layout="block" id="currStatus" style="color:green">Currently : {!currentStatus}</apex:outputPanel></h1>
+            </apex:pageBlock>
+            <apex:pageBlock title="{!$Label.revvy__MnAdminContractExpJobSetupTitle}">
+              <apex:outputPanel layout="block" id="scheduledStatus" rendered="{!isAlreadyScheduled}">
+                {!$Label.revvy__MnAdminContractExpJobAlreadyScheduled}
+              </apex:outputPanel>
+              <p></p>
+              <apex:commandButton action="{!scheduleJob}" rendered="{!NOT(isAlreadyScheduled)}"
+                    value="{!$Label.revvy__MnAdminContractExpJobButton}" id="scheduleJobButton"/>
+              <p></p>
+            </apex:pageBlock>
+            <apex:pageBlock title="{!$Label.revvy__MnAdminGPAnalysisJobSetupTitle}">
+              <apex:outputPanel layout="block" id="scheduledGPStatus" rendered="{!IsGPAlreadyScheduled}">
+                {!$Label.revvy__MnAdminGPAnalysisJobAlreadyScheduled}
+              </apex:outputPanel>
+              <p></p>
+              <apex:commandButton action="{!scheduleGPJob}" rendered="{!NOT(IsGPAlreadyScheduled)}"
+                    value="{!$Label.revvy__MnAdminGPAnalysisJobButton}" id="scheduleJGPobButton"/>
+              <p></p>
+            </apex:pageBlock>
+            <apex:pageBlock title="{!$Label.revvy__MnAdminQuoteComparisonJobSetupTitle}">
+              <apex:outputPanel layout="block" id="scheduledQuoteComparisonStatus" rendered="{!IsQuoteComparisonAlreadyScheduled}">
+                {!$Label.revvy__MnAdminQuoteComparisonJobAlreadyScheduled}
+              </apex:outputPanel>
+              <p></p>
+              <apex:commandButton action="{!scheduleQuoteComparisonJob}" rendered="{!NOT(IsQuoteComparisonAlreadyScheduled)}"
+                    value="{!$Label.revvy__MnAdminQuoteComparisonJobButton}" id="scheduleQuoteComparisonJobButton"/>
+              <p></p>
+            </apex:pageBlock>
+            <apex:pageBlock title="{!$Label.revvy__MnAdminQuoteExpirationJobSetupTitle}">
+              <apex:outputPanel layout="block" id="scheduledQuoteExpirationStatus" rendered="{!IsQuoteExpirationAlreadyScheduled}">
+                {!$Label.revvy__MnAdminQuoteExpirationJobAlreadyScheduled}
+              </apex:outputPanel>
+              <p></p>
+              <apex:commandButton action="{!scheduleQuoteExpirationJob}" rendered="{!NOT(IsQuoteExpirationAlreadyScheduled)}"
+                    value="{!$Label.revvy__MnAdminQuoteExpirationJobButton}" id="scheduleQuoteExpirationJobButton"/>
+              <p></p>
+            </apex:pageBlock>
+        </apex:form>
+
+        <!-- ---------- -->
+      </div>
+    </div>
+    </div>
+</apex:page>

@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Revvy Quote</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Revvy Quotes</value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID of the account that is associated with the quote. --></help>
+        <label><!-- Account --></label>
+        <lookupFilter>
+            <errorMessage><!-- You should assign only group accounts to group quotes --></errorMessage>
+        </lookupFilter>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Revvy Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Action --></label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- ↑↓ --></label>
+        <name>AdjustmentArrow__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adjustment % --></label>
+        <name>Adjustment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amended From --></label>
+        <name>AmendedFrom__c</name>
+        <relationshipLabel><!-- Amendments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Amendment ID Prefix --></label>
+        <name>AmendmentIdPrefix__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amendment # --></label>
+        <name>AmendmentNumber__c</name>
+    </fields>
+    <fields>
+        <help><!-- Configit Quote ID for this record. --></help>
+        <label><!-- Configit Quote ID --></label>
+        <name>ConfigitId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the contact person associated with this quote. --></help>
+        <label><!-- Account Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Contract End Date(Deprecated) --></label>
+        <name>ContractEndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract ID --></label>
+        <name>ContractId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Start Date(Deprecated) --></label>
+        <name>ContractStartDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Currency used in the quote. --></help>
+        <label><!-- Revvy Currency --></label>
+        <name>Currency__c</name>
+        <picklistValues>
+            <masterLabel>USD</masterLabel>
+            <translation><!-- USD --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Current_Status__c</name>
+    </fields>
+    <fields>
+        <help><!-- Internal description or note about the quote. This field is not displayed on the proposal for customers. --></help>
+        <label><!-- Internal Notes --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract End Date --></label>
+        <name>EndDateContract__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;Error Messages related to quote --></help>
+        <label><!-- Error Message --></label>
+        <name>ErrorMessage__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when the quote expires. --></help>
+        <label><!-- Expires --></label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Quote Ext ID --></label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Following Years Value --></label>
+        <name>Following_Years_Value_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Term in years for Gross Profit Analysis calculations --></help>
+        <label><!-- Gross Profit Analysis Term (Years) --></label>
+        <name>GPTerm__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Version --></label>
+        <name>IsActiveVersion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Renewal Quote --></label>
+        <name>IsRenewalQuote__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Skip Document Assembly --></label>
+        <name>IsSkipDocumentAssembly__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Third Party Paper --></label>
+        <name>IsThirdPartyPaper__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Aggregation Date --></label>
+        <name>LastAggregationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lifecycle Config --></label>
+        <name>LifecycleConfig__c</name>
+        <relationshipLabel><!-- Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Monthly Discounts (%) --></label>
+        <name>MonthlyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Total --></label>
+        <name>MonthlyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly List --></label>
+        <name>MonthlyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Monthly products --></help>
+        <label><!-- Monthly Mark-ups (Abs) --></label>
+        <name>Monthly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Monthly products --></help>
+        <label><!-- Monthly Mark-ups (%) --></label>
+        <name>Monthly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Monthly cost prices before adjustment from Quote Lines --></help>
+        <label><!-- Monthly Total Cost --></label>
+        <name>Monthly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a monthly basis. --></help>
+        <label><!-- Monthly Discounts (Abs) --></label>
+        <name>Monthly_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered for products that are billed on a monthly basis. --></help>
+        <label><!-- Monthly Discounts (%) --></label>
+        <name>Monthly_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Monthly products --></help>
+        <label><!-- Monthly Margins (Abs) --></label>
+        <name>Monthly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Monthly products --></help>
+        <label><!-- Monthly Margins (%) --></label>
+        <name>Monthly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a monthly basis after the discounts are applied. --></help>
+        <label><!-- Monthly Total --></label>
+        <name>Monthly_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Monthly unit prices of sub lines --></help>
+        <label><!-- Monthly Total Unit Price --></label>
+        <name>Monthly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a monthly basis before the discounts are applied. --></help>
+        <label><!-- Monthly List --></label>
+        <name>Monthly_Value_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag is set by the system when the workflow suggests an approval is needed for the underlying quote. --></help>
+        <label><!-- Approval Required --></label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <label><!-- One-time Discounts (%) --></label>
+        <name>OneTimeTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- One-time Total --></label>
+        <name>OneTimeTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- One-time List --></label>
+        <name>OneTimeTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for one time products --></help>
+        <label><!-- One-time Mark-ups (Abs) --></label>
+        <name>One_Time_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for one time products --></help>
+        <label><!-- One-time Mark-ups (%) --></label>
+        <name>One_Time_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all one time cost prices before adjustment from Quote Lines --></help>
+        <label><!-- One-time Total Cost --></label>
+        <name>One_Time_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a one-time basis. --></help>
+        <label><!-- One-time Discounts (Abs) --></label>
+        <name>One_Time_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered for products that are billed on a one-time basis. --></help>
+        <label><!-- One-time Discounts (%) --></label>
+        <name>One_Time_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for one time products --></help>
+        <label><!-- One-time Margins (Abs) --></label>
+        <name>One_Time_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for one time products --></help>
+        <label><!-- One-time Margins (%) --></label>
+        <name>One_Time_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a one-time basis after the discounts are applied. --></help>
+        <label><!-- One-time Total --></label>
+        <name>One_Time_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all one time unit prices of sub lines --></help>
+        <label><!-- One-time Total Unit Price --></label>
+        <name>One_Time_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a one-time basis before the discounts are applied. --></help>
+        <label><!-- One-time List --></label>
+        <name>One_Time_Value_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the sales opportunity associated with this quote. --></help>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Revvy Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Original quote from which this quote was cloned. --></help>
+        <label><!-- Original Quote --></label>
+        <name>OriginalQuote__c</name>
+        <relationshipLabel><!-- CloneQuotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Total first tier discount, shown as a percentage of the total list price. --></help>
+        <label><!-- Total Discount --></label>
+        <name>Overall_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether this quote is perpetual based or not --></help>
+        <label><!-- Perpetual --></label>
+        <name>Perpetual__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lifecycle Phase --></label>
+        <name>PhaseDisplay__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase --></label>
+        <name>Phase__c</name>
+        <picklistValues>
+            <masterLabel>Activation</masterLabel>
+            <translation><!-- Activation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approval</masterLabel>
+            <translation><!-- Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Authoring</masterLabel>
+            <translation><!-- Authoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collaboration</masterLabel>
+            <translation><!-- Collaboration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disapproved</masterLabel>
+            <translation><!-- Disapproved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiration</masterLabel>
+            <translation><!-- Expiration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finalized</masterLabel>
+            <translation><!-- Finalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal Review</masterLabel>
+            <translation><!-- Internal Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Negotiation</masterLabel>
+            <translation><!-- Negotiation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent to customer</masterLabel>
+            <translation><!-- Sent to customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signature</masterLabel>
+            <translation><!-- Signature --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Termination</masterLabel>
+            <translation><!-- Termination --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date used to determine which price to apply to products. --></help>
+        <label><!-- Price Date --></label>
+        <name>Price_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether this quote is the main quote for the opportunity. --></help>
+        <label><!-- Main Quote --></label>
+        <name>Primary__c</name>
+    </fields>
+    <fields>
+        <label><!-- eSignature Date --></label>
+        <name>ProposalSignDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- eSignature Status --></label>
+        <name>ProposalSignStatus__c</name>
+        <picklistValues>
+            <masterLabel>Not Signed</masterLabel>
+            <translation><!-- Not Signed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signed</masterLabel>
+            <translation><!-- Signed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the model used to configure this quote. --></help>
+        <label><!-- Quote Configuration ID --></label>
+        <name>QuoteConfig__c</name>
+        <relationshipLabel><!-- Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quote Item SubLines Need Approval Count --></label>
+        <name>QuoteItemSubLinesNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Items Need Approval Count --></label>
+        <name>QuoteItemsNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Lines --></label>
+        <name>QuoteLinesEditUrl__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Trace --></label>
+        <name>QuotePricingDetailDebugUrl__c</name>
+    </fields>
+    <fields>
+        <label><!-- Progress --></label>
+        <name>Quote_Status_Image__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Year Value --></label>
+        <name>Quote_Value_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Quote value is the total cost of ownership for the first year. --></help>
+        <label><!-- First Year Value --></label>
+        <name>Quote_Value__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Order Num --></help>
+        <label><!-- SAP Order Num --></label>
+        <name>SAPOrderNum__c</name>
+    </fields>
+    <fields>
+        <label><!-- SalesforceId --></label>
+        <name>SalesforceId__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Bom Usage --></help>
+        <label><!-- SAP Bom Usage --></label>
+        <name>SapBomUsage__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;Sap Disti Channel --></help>
+        <label><!-- SAP Disti. Channel --></label>
+        <name>SapDistiChannel__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Sales Division --></help>
+        <label><!-- SAP Sales Division --></label>
+        <name>SapDivision__c</name>
+    </fields>
+    <fields>
+        <label><!-- Partner Country --></label>
+        <name>SapPartnerCountry_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date used to determine which price to apply to products. --></help>
+        <label><!-- Delivery Date --></label>
+        <name>SapReqDeliveryDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;SAP Sales Doc Type --></help>
+        <label><!-- SAP Sales Doc Type --></label>
+        <name>SapSalesDocumentType__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Sales Org --></help>
+        <label><!-- SAP Sales Org --></label>
+        <name>SapSalesOrg__c</name>
+    </fields>
+    <fields>
+        <help><!-- Customer segment that is used in this quote. The segment is based on the account that is associated with this quote. --></help>
+        <label><!-- Price Segment --></label>
+        <name>Segment__c</name>
+        <picklistValues>
+            <masterLabel>Education</masterLabel>
+            <translation><!-- Education --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Government</masterLabel>
+            <translation><!-- Government --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care</masterLabel>
+            <translation><!-- Health Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Media</masterLabel>
+            <translation><!-- Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Process Industry</masterLabel>
+            <translation><!-- Process Industry --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Set Price As --></label>
+        <name>SetPriceAs__c</name>
+        <picklistValues>
+            <masterLabel>Member Quote Final Price</masterLabel>
+            <translation><!-- Member Quote Final Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Member Quote Starting Price</masterLabel>
+            <translation><!-- Member Quote Starting Price --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Source Contract --></label>
+        <name>SourceContract__c</name>
+        <relationshipLabel><!-- Revvy Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Contract Start Date --></label>
+        <name>StartDateContract__c</name>
+    </fields>
+    <fields>
+        <help><!-- Where the quote is in the sales cycle. The status can be draft, ready, submitted, or ordered. --></help>
+        <label><!-- Actual Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Cloning in progress...</masterLabel>
+            <translation><!-- Cloning in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Creating lines in progress...</masterLabel>
+            <translation><!-- Creating lines in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft in progress...</masterLabel>
+            <translation><!-- Draft in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Importing Quote Lines</masterLabel>
+            <translation><!-- Importing Quote Lines --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ordered</masterLabel>
+            <translation><!-- Ordered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ready</masterLabel>
+            <translation><!-- Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Target Price in progress...</masterLabel>
+            <translation><!-- Target Price in progress... --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sub Phase --></label>
+        <name>SubPhase__c</name>
+        <picklistValues>
+            <masterLabel>Accepted</masterLabel>
+            <translation><!-- Accepted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cloning in progress...</masterLabel>
+            <translation><!-- Cloning in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Contract Created</masterLabel>
+            <translation><!-- Contract Created --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Converted to Contract</masterLabel>
+            <translation><!-- Converted to Contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disapproved</masterLabel>
+            <translation><!-- Disapproved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft in progress...</masterLabel>
+            <translation><!-- Draft in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Amendment</masterLabel>
+            <translation><!-- In Amendment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Approvals</masterLabel>
+            <translation><!-- In Approvals --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Effect</masterLabel>
+            <translation><!-- In Effect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Process</masterLabel>
+            <translation><!-- In Process --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Order Failed</masterLabel>
+            <translation><!-- Order Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ordered</masterLabel>
+            <translation><!-- Ordered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Processing Order</masterLabel>
+            <translation><!-- Processing Order --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re-Configure in progress...</masterLabel>
+            <translation><!-- Re-Configure in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ready</masterLabel>
+            <translation><!-- Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Recalled</masterLabel>
+            <translation><!-- Recalled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Revision in progress...</masterLabel>
+            <translation><!-- Revision in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Superseded</masterLabel>
+            <translation><!-- Superseded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Target Price in progress...</masterLabel>
+            <translation><!-- Target Price in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terminated</masterLabel>
+            <translation><!-- Terminated --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Term (Year) --></label>
+        <name>TermYear__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label><!-- Term (Months) --></label>
+        <name>Term__c</name>
+    </fields>
+    <fields>
+        <label><!-- Terminated Phase --></label>
+        <name>TerminatedPhase__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price for all products before any discounts are applied for the first year. --></help>
+        <label><!-- Total List Price --></label>
+        <name>Total_List_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Number --></label>
+        <name>Version_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weekly Discounts (%) --></label>
+        <name>WeeklyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weekly Total --></label>
+        <name>WeeklyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weekly List --></label>
+        <name>WeeklyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Weekly products --></help>
+        <label><!-- Weekly Mark-ups (Abs) --></label>
+        <name>Weekly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Weekly products --></help>
+        <label><!-- Weekly Mark-ups (%) --></label>
+        <name>Weekly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Weekly cost prices before adjustment from Quote Lines --></help>
+        <label><!-- Weekly Total Cost --></label>
+        <name>Weekly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a weekly basis. --></help>
+        <label><!-- Weekly Discounts (Abs) --></label>
+        <name>Weekly_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered on products that are billed on a weekly basis. --></help>
+        <label><!-- Weekly Discounts (%) --></label>
+        <name>Weekly_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Weekly products --></help>
+        <label><!-- Weekly Margins (Abs) --></label>
+        <name>Weekly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Weekly products --></help>
+        <label><!-- Weekly Margins (%) --></label>
+        <name>Weekly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a weekly basis after the discounts are applied. --></help>
+        <label><!-- Weekly Total --></label>
+        <name>Weekly_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Weekly unit prices of sub lines --></help>
+        <label><!-- Weekly Total Unit Price --></label>
+        <name>Weekly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a weekly basis before the discounts are applied. --></help>
+        <label><!-- Weekly List --></label>
+        <name>Weekly_Value_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Yearly Cost Increase Rate for Gross Profit Analysis calculations --></help>
+        <label><!-- Yearly Cost Increase Rate --></label>
+        <name>YearlyCostIncRate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Yearly Price Increase Rate for Gross Profit Analysis calculations --></help>
+        <label><!-- Yearly Price Increase Rate --></label>
+        <name>YearlyPriceIncRate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Yearly Discounts (%) --></label>
+        <name>YearlyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Yearly Total --></label>
+        <name>YearlyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Yearly List --></label>
+        <name>YearlyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Yearly products --></help>
+        <label><!-- Yearly Mark-ups (Abs) --></label>
+        <name>Yearly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Yearly products --></help>
+        <label><!-- Yearly Mark-ups (%) --></label>
+        <name>Yearly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Yearly cost prices before adjustment from Quote Lines --></help>
+        <label><!-- Yearly Total Cost --></label>
+        <name>Yearly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a yearly basis. --></help>
+        <label><!-- Yearly Discounts (Abs) --></label>
+        <name>Yearly_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered on products that are billed on a yearly basis. --></help>
+        <label><!-- Yearly Discounts (%) --></label>
+        <name>Yearly_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Yearly products --></help>
+        <label><!-- Yearly Margins (Abs) --></label>
+        <name>Yearly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Yearly products --></help>
+        <label><!-- Yearly Margins (%) --></label>
+        <name>Yearly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a yearly basis after the discounts are applied. --></help>
+        <label><!-- Yearly Total --></label>
+        <name>Yearly_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Yearly unit prices of sub lines --></help>
+        <label><!-- Yearly Total Unit Price --></label>
+        <name>Yearly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a yearly basis before the discounts are applied. --></help>
+        <label><!-- Yearly List --></label>
+        <name>Yearly_Value_Before_Discount_S__c</name>
+    </fields>
+    <layouts>
+        <layout>MnGroupQuoteLayout24_1</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnGroupQuoteLayout25_1</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteCMLayout22_2</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteLayout22_4</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteLayout24_1</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteLayout25_4</layout>
+        <sections>
+            <label><!-- Error --></label>
+            <section>Error</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteSalesContractLayout22</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteWithServiceContractLayout19</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quote Layout Mobile</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Add Quote Line Item --></label>
+        <name>Add_a_Product</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Edit Quote --></label>
+        <name>Edit_Quote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Email Proposal --></label>
+        <name>Email_Proposal</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Update Quote Status --></label>
+        <name>Update_Quote_Status</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Group Quote --></label>
+        <name>Group_Quote</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Quote --></label>
+        <name>Quote</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Sales Contract --></label>
+        <name>SalesContract</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Contracts cannot be Perpetual and have an End date --></errorMessage>
+        <name>VMnPerpetualAndEndDateCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- End date and Perpetual cannot be both blank. Please set either End date or check Perpetual --></errorMessage>
+        <name>VMnPerpetualAndEndDateCheck2</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot mark a Contract Perpetual and provide terms at the same time. Please set terms to blank or uncheck Perpetual. --></errorMessage>
+        <name>VMnPerpetualAndTermCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Segment cannot be blank --></errorMessage>
+        <name>VMnSegmentDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Currency cannot be blank --></errorMessage>
+        <name>VmnCurrencyDefaultValValidity</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Account_History --></label>
+        <name>Account_History</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Activate_Version --></label>
+        <name>Activate_Version</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Assemble_Proposal --></label>
+        <name>Assemble_Proposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Clone_Quote --></label>
+        <name>Clone_Quote</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Clone_Quote_Detail --></label>
+        <name>Clone_Quote_Detail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Convert_To_Contract --></label>
+        <name>Convert_To_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_New_Version --></label>
+        <name>Create_New_Version</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_Quote --></label>
+        <name>Create_Quote</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DeleteActiveVersion --></label>
+        <name>DeleteActiveVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- EditActiveVersion --></label>
+        <name>EditActiveVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Gross_Profit_Analysis --></label>
+        <name>Gross_Profit_Analysis</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- ImportThirdPartyPaper --></label>
+        <name>ImportThirdPartyPaper</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Import_Quote_Lines --></label>
+        <name>Import_Quote_Lines</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Manage_Lines --></label>
+        <name>Manage_Lines</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Mark_As_Main_Quote --></label>
+        <name>Mark_As_Main_Quote</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Mark_As_Ordered --></label>
+        <name>Mark_As_Ordered</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MnDocusignESign --></label>
+        <name>MnDocusignESign</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MnDownloadGPExcel --></label>
+        <name>MnDownloadGPExcel</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MnDrawloopProposal --></label>
+        <name>MnDrawloopProposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MnGenerateDMProposal --></label>
+        <name>MnGenerateDMProposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MnSertifiESign --></label>
+        <name>MnSertifiESign</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New --></label>
+        <name>New</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Quote_Comparison --></label>
+        <name>Quote_Comparison</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_To_Contract --></label>
+        <name>Send_To_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SharingActiveVersion --></label>
+        <name>SharingActiveVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SubmitForApprovalActiveVersion --></label>
+        <name>SubmitForApprovalActiveVersion</name>
+    </webLinks>
+</CustomObjectTranslation>

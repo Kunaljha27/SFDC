@@ -1,0 +1,67 @@
+<apex:page sidebar="false" showHeader="false" >
+    <link href="{!URLFOR($Resource.REVVY__BootZip, 'dist/css/bootstrap.css')}" rel="stylesheet"/>
+    <style>
+        .bs .table {
+            //table-layout: fixed;
+            overflow:scroll;
+        }
+
+        .table th{
+            font-weight: normal;
+            //color : #2A94D6;
+            font-size:14px;
+        }
+
+        .headingStyle{
+            font-weight:;
+            color:#2A94D6;
+            font-size:14px;
+        }
+
+        .table-nonfluid {
+            width: 80% !important;
+            overflow:scroll;
+        }
+
+        .halfwidth{
+           width:100px;
+           color :#ffffff;
+        }
+
+        .center {
+            margin:10px;
+            padding: 10px;
+        }
+
+        .rightbuttons{
+            float:right;
+        }
+
+        .glyphicon-refresh-animate {
+            -animation: spin .7s infinite linear;
+            -webkit-animation: spin2 .7s infinite linear;
+        }
+
+        @-webkit-keyframes spin2 {
+            from { -webkit-transform: rotate(0deg);}
+            to { -webkit-transform: rotate(360deg);}
+        }
+
+        @keyframes spin {
+            from { transform: scale(1) rotate(0deg);}
+            to { transform: scale(1) rotate(360deg);}
+        }
+    </style>
+
+    <apex:form id="theScopeForm" >
+        <apex:pageBlock id="thePageBlock" tabStyle="Account">
+            <link href="{!URLFOR($Resource.REVVY__BootZip, 'dist/css/bootstrap.css')}" rel="stylesheet"/>
+            <div class="bs">
+                <c:VMnRebateFilterSearchComponent />
+            </div>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Close" onclick="top.window.close();" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

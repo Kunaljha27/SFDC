@@ -1,0 +1,185 @@
+<apex:page title="{!pageTitle}" sidebar="false" showHeader="true" tabStyle="pse__Project_Task__c" controller="pse.PlannerController" extensions="pse.BryntumControllerExtension">
+    <head>
+        <!-- if chrome frame for IE is installed make use of it -->
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    </head>
+    
+    <script>
+    	var isProjectPlanner = {!isProjectPlanner};
+        var startDayOfWeek = {!weekStartDay};
+        var isAddHolidaysOnAssignmentAdjust = {!addHolidaysOnAssignmentAdjust};
+        var preloadLimit = {!preloadLimit};
+       
+        window['$Page'] = window['$Page'] || {};
+        $Page.NewProjectPlannerHelp = "{!JSINHTMLENCODE(URLFOR($Page.NewProjectPlannerHelp))}";
+        $Page.NewResourcePlannerHelp = "{!JSINHTMLENCODE(URLFOR($Page.NewResourcePlannerHelp))}";
+
+        window.plannerBootstrap = {
+            'initialFilters': JSON.parse("{!JSENCODE(initialFilters)}"),
+            'columns': JSON.parse("{!JSENCODE(columns)}"),
+            'returnURL': "{!JSINHTMLENCODE(returnURL)}",
+            'defaultImageURL': "{!JSINHTMLENCODE(defaultImageURL)}",
+            'restrictEditPastDates': {!restrictEditPastDates},
+            'tooltips': JSON.parse("{!JSENCODE(fieldSetsJSON)}")
+        };
+    </script>
+
+    <!-- hack to get test data -->
+    <!--
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/ProjectTreeData.json')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/AssignmentData_WithType.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/GroupData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/LocationData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/PracticeData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/ProjectList.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/ProjectStageData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/ProjectStatusData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/ProjectTypeData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/RegionData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/ResourceData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/ProjectManagerData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/SkillData.js')}"></script>
+    <script src="{!URLFOR($Resource.Planners, '/resources/testData/FilterData.js')}"></script>
+    //-->
+    <!-- end hack -->
+
+    <c:fflib_extBootstrap developmentPrefix="" staticResource="{!$Resource.pse__Planners}" applicationName="Planner">
+        window['$RemoteAction'] = window['$RemoteAction'] || {};
+        $RemoteAction.PlannerController = $RemoteAction.PlannerController || {};
+        $RemoteAction.PlannerController.getProjectPlannerData 	= '{!$RemoteAction.PlannerController.getProjectPlannerData}';
+        $RemoteAction.PlannerController.getResourcePlannerData 	= '{!$RemoteAction.PlannerController.getResourcePlannerData}';
+        $RemoteAction.PlannerController.save 					= '{!$RemoteAction.PlannerController.save}';
+        $RemoteAction.PlannerController.getWorkCalendars 		= '{!$RemoteAction.PlannerController.getWorkCalendars}';
+        $RemoteAction.PlannerController.getFilterDefinitions 	= '{!$RemoteAction.PlannerController.getFilterDefinitions}';
+        $RemoteAction.PlannerController.getInitialFilters 		= '{!$RemoteAction.PlannerController.getInitialFilters}';
+        $RemoteAction.PlannerController.getFilterValues 		= '{!$RemoteAction.PlannerController.getFilterValues}';
+        $RemoteAction.PlannerController.getTotalRecords 		= '{!$RemoteAction.PlannerController.getTotalRecords}';
+        $RemoteAction.PlannerController.saveFilters 			= '{!$RemoteAction.PlannerController.saveFilters}';
+        $RemoteAction.PlannerController.getPreferences 			= '{!$RemoteAction.PlannerController.getPreferences}';
+        $RemoteAction.PlannerController.savePreferences 		= '{!$RemoteAction.PlannerController.savePreferences}';
+        $RemoteAction.PlannerController.saveColumnPreferences 	= '{!$RemoteAction.PlannerController.saveColumnPreferences}';
+        
+        window['$Label'] = window['$Label'] || {};
+		$Label.PlannerScheduler_unsavedDataExit 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_unsavedDataExit)}';
+        $Label.PlannerScheduler_unsavedDataReload 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_unsavedDataReload)}';
+        $Label.PlannerScheduler_save	 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_save)}';
+        $Label.PlannerScheduler_savedNoChanges				= '{!JSINHTMLENCODE($Label.PlannerScheduler_savedNoChanges)}';
+        $Label.PlannerScheduler_savedChanges				= '{!JSINHTMLENCODE($Label.PlannerScheduler_savedChanges)}';
+        $Label.PlannerScheduler_lastSaved					= '{!JSINHTMLENCODE($Label.PlannerScheduler_lastSaved)}';
+        $Label.PlannerScheduler_reload	 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_reload)}';
+        $Label.PlannerScheduler_beforeFiltering 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_beforeFiltering)}';
+        $Label.PlannerScheduler_backtopsa	 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_backtopsa)}';
+        $Label.PlannerScheduler_planner 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_planner)}';
+        $Label.PlannerScheduler_startDate 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_startDate)}';
+        $Label.PlannerScheduler_endDate 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_endDate)}';
+        $Label.PlannerScheduler_name 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_name)}';
+        $Label.PlannerScheduler_region 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_region)}';
+        $Label.PlannerScheduler_account 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_account)}';
+        $Label.PlannerScheduler_practice 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_practice)}';
+        $Label.PlannerScheduler_group 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_group)}';
+        $Label.PlannerScheduler_location 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_location)}';
+        $Label.PlannerScheduler_active 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_active)}';
+        $Label.PlannerScheduler_filters			 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_filters)}';
+        $Label.PlannerScheduler_enableAll 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_enableAll)}';
+        $Label.PlannerScheduler_disableAll 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_disableAll)}';
+        $Label.PlannerScheduler_removeAll 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_removeAll)}';
+        $Label.PlannerScheduler_restoreAll 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_restoreAll)}';
+        $Label.PlannerScheduler_rememberAllFilters 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_rememberAllFilters)}';
+        $Label.PlannerScheduler_filterName 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_filterName)}';
+        $Label.PlannerScheduler_dragFiltersArea	 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_dragFiltersArea)}';
+        $Label.PlannerScheduler_yes	 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_yes)}';
+        $Label.PlannerScheduler_no		 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_no)}';
+        $Label.PlannerScheduler_enterValue 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_enterValue)}';
+        $Label.PlannerScheduler_listAll 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_listAll)}';
+        $Label.PlannerScheduler_listSelected 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_listSelected)}';
+        $Label.PlannerScheduler_search 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_search)}';
+        $Label.PlannerScheduler_disable 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_disable)}';
+        $Label.PlannerScheduler_remove 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_remove)}';
+        $Label.PlannerScheduler_enable 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_enable)}';
+        $Label.PlannerScheduler_rating 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_rating)}';
+        $Label.PlannerScheduler_any 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_any)}';
+        $Label.PlannerScheduler_selectaValue 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_selectaValue)}';
+        $Label.PlannerScheduler_noMatchingResults 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_noMatchingResults)}';
+        $Label.PlannerScheduler_lessThan 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_lessThan)}';
+        $Label.PlannerScheduler_lessEquals 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_lessEquals)}';
+        $Label.PlannerScheduler_equals 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_equals)}';
+        $Label.PlannerScheduler_notEquals 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_notEquals)}';
+        $Label.PlannerScheduler_greaterEquals 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_greaterEquals)}';
+        $Label.PlannerScheduler_greaterThan 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_greaterThan)}';
+        $Label.PlannerScheduler_startsWith 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_startsWith)}';
+        $Label.PlannerScheduler_contains 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_contains)}';
+        $Label.PlannerScheduler_idEquals 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_idEquals)}';
+        $Label.PlannerScheduler_total 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_total)}';
+        $Label.PlannerScheduler_noAssignmentSelected		= '{!JSINHTMLENCODE($Label.PlannerScheduler_noAssignmentSelected)}';
+        $Label.PlannerScheduler_applySchedulePattern		= '{!JSINHTMLENCODE($Label.PlannerScheduler_applySchedulePattern)}';
+        $Label.PlannerScheduler_totalScheduledHrs 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_totalScheduledHrs)}';
+        $Label.PlannerScheduler_totalHrsAfterAdjusting 		= '{!JSINHTMLENCODE($Label.PlannerScheduler_totalHrsAfterAdjusting)}';
+        $Label.PlannerScheduler_applyPatternBetween 		= '{!JSINHTMLENCODE($Label.PlannerScheduler_applyPatternBetween)}';
+        $Label.PlannerScheduler_schedulePattern 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_schedulePattern)}';
+        $Label.PlannerScheduler_sunday 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_sunday)}';
+        $Label.PlannerScheduler_monday 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_monday)}';
+        $Label.PlannerScheduler_tuesday 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_tuesday)}';
+        $Label.PlannerScheduler_wednesday 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_wednesday)}';
+        $Label.PlannerScheduler_thursday 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_thursday)}';
+        $Label.PlannerScheduler_friday 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_friday)}';
+        $Label.PlannerScheduler_saturday 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_saturday)}';
+        $Label.PlannerScheduler_twoWeeksPeriod 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_twoWeeksPeriod)}';
+        $Label.PlannerScheduler_setStart 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_setStart)}';
+        $Label.PlannerScheduler_setEnd 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_setEnd)}';
+        $Label.PlannerScheduler_DailyNotes 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_DailyNotes)}';
+        $Label.PlannerScheduler_date 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_date)}';
+        $Label.PlannerScheduler_note 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_note)}';
+        $Label.PlannerScheduler_enterNote 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_enterNote)}';
+        $Label.PlannerScheduler_rememberFiltersSucessMsg 	= '{!JSINHTMLENCODE($Label.PlannerScheduler_rememberFiltersSucessMsg)}';
+        $Label.PlannerScheduler_readOnlyAssignment 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_readOnlyAssignment)}';
+        $Label.PlannerScheduler_assignment 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_assignment)}';
+        $Label.PlannerScheduler_openInPsa 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_openInPsa)}';
+        $Label.PlannerScheduler_pinProjects 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_pinProjects)}';
+        $Label.PlannerScheduler_pinResources 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_pinResources)}';
+        $Label.PlannerScheduler_projects 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_projects)}';
+        $Label.PlannerScheduler_resources 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_resources)}';
+        $Label.PlannerScheduler_unPin 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_unPin)}';
+        $Label.PlannerScheduler_pin 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_pin)}';
+        $Label.PlannerScheduler_expand 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_expand)}';
+        $Label.PlannerScheduler_collapse 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_collapse)}';
+        $Label.PlannerScheduler_today 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_today)}';
+        $Label.PlannerScheduler_fittimeline 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_fittimeline)}';
+        $Label.PlannerScheduler_hideRR 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_hideRR)}';
+        $Label.PlannerScheduler_showRR 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_showRR)}';
+        $Label.PlannerScheduler_day 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_day)}';
+        $Label.PlannerScheduler_week 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_week)}';
+        $Label.PlannerScheduler_month 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_month)}';
+        $Label.PlannerScheduler_qtr 						= '{!JSINHTMLENCODE($Label.PlannerScheduler_qtr)}';
+        $Label.PlannerScheduler_applyFiltersReload 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_applyFiltersReload)}';
+        $Label.PlannerScheduler_projectPlanner 				= '{!JSINHTMLENCODE($Label.PlannerScheduler_projectPlanner)}';
+        $Label.PlannerScheduler_resourcePlanner 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_resourcePlanner)}';
+        $Label.PlannerScheduler_editAssignments 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_editAssignments)}';
+        $Label.PlannerScheduler_showing 					= '{!JSINHTMLENCODE($Label.PlannerScheduler_showing)}';
+        $Label.PlannerScheduler_of				 			= '{!JSINHTMLENCODE($Label.PlannerScheduler_of)}';
+        $Label.PlannerScheduler_viewRange				 	= '{!JSINHTMLENCODE($Label.PlannerScheduler_viewRange)}';
+        $Label.PlannerScheduler_to						 	= '{!JSINHTMLENCODE($Label.PlannerScheduler_to)}';
+        $Label.PlannerScheduler_SchedulePatternHrsValidation= '{!JSINHTMLENCODE($Label.PlannerScheduler_SchedulePatternHrsValidation)}';
+        $Label.PlannerScheduler_applyRangeAndReload			= '{!JSINHTMLENCODE($Label.PlannerScheduler_applyRangeAndReload)}';
+        $Label.PlannerScheduler_noSearchResults				= '{!JSINHTMLENCODE($Label.PlannerScheduler_noSearchResults)}';
+        $Label.PlannerScheduler_continueBtn					= '{!JSINHTMLENCODE($Label.PlannerScheduler_continueBtn)}';
+        $Label.PlannerScheduler_yesBtn							= '{!JSINHTMLENCODE($Label.PlannerScheduler_yesBtn)}';
+        $Label.PlannerScheduler_noBtn						= '{!JSINHTMLENCODE($Label.PlannerScheduler_noBtn)}';
+        $Label.PlannerScheduler_cancelBtn						= '{!JSINHTMLENCODE($Label.PlannerScheduler_cancelBtn)}';
+        $Label.PlannerScheduler_closeBtn						= '{!JSINHTMLENCODE($Label.PlannerScheduler_closeBtn)}';
+        $Label.PlannerScheduler_errMsgTitle					= '{!JSINHTMLENCODE($Label.PlannerScheduler_errMsgTitle)}';
+        $Label.PlannerScheduler_loadMaskMsg					= '{!JSINHTMLENCODE($Label.PlannerScheduler_loadMaskMsg)}';
+        $Label.PlannerScheduler_ieIncompatibleMode			= '{!JSINHTMLENCODE($Label.PlannerScheduler_ieIncompatibleMode)}';
+        $Label.PlannerScheduler_errorReturnUrl				= '{!JSINHTMLENCODE($Label.PlannerScheduler_errorReturnUrl)}';
+        $Label.PlannerScheduler_emptyFilter_errMsg_title    = '{!JSINHTMLENCODE($Label.PlannerScheduler_emptyFilter_errMsg_title)}';
+        $Label.PlannerScheduler_emptyFilter_errMsg          = '{!JSINHTMLENCODE($Label.PlannerScheduler_emptyFilter_errMsg)}';
+    </c:fflib_extBootstrap>
+    
+    <script>
+    	window.onbeforeunload = function() {
+			if (window.isDirty) {
+				return $Label.PlannerScheduler_unsavedDataExit;
+			}
+	}
+	</script>
+
+</apex:page>

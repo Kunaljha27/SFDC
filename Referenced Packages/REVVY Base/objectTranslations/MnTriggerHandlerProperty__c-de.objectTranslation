@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Trigger Handler Properties --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Specifies if delete events should be created during a delete operation --></help>
+        <label><!-- Create Delete Event --></label>
+        <name>CreateDeleteEvents__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is After Delete Enabled --></label>
+        <name>IsAfterDeleteEnabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is After Insert Enabled --></label>
+        <name>IsAfterInsertEnabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is After Undelete Enabled --></label>
+        <name>IsAfterUndeleteEnabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is After Update Enabled --></label>
+        <name>IsAfterUpdateEnabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Before Delete Enabled --></label>
+        <name>IsBeforeDeleteEnabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Before Insert Enabled --></label>
+        <name>IsBeforeInsertEnabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Before Update Enabled --></label>
+        <name>IsBeforeUpdateEnabled__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies if the apex class is reentrant (i.e., can handle recursive calls to itself) --></help>
+        <label><!-- Is Reentrant --></label>
+        <name>IsReentrant__c</name>
+    </fields>
+    <fields>
+        <label><!-- SObject Name --></label>
+        <name>SObject__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+</CustomObjectTranslation>

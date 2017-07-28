@@ -1,0 +1,1177 @@
+<apex:page id="tcPage" title="{!$Label.timecard_entry_label_title}" sidebar="false"
+    action="{!init}" 
+    tabStyle="pse__Timecard_Header__c"
+    standardController="pse__Timecard_Header__c" extensions="pse.TimecardEntryController"
+    > 
+
+<!-- static resource is a custom dojo build of 1.2.1 -->
+<style type="text/css">
+    @import "{!URLFOR($Resource.dojo, '/dijit/themes/tundra/tundra.css')}";
+    @import "{!URLFOR($Resource.dojo, '/dojo/resources/dojo.css')}"; 
+    
+    body .pageTitleIcon {
+        background-image:url(/img/icon/alarmClock32.png) !important;
+    }
+    <!--these style override can result in some free space-->
+    .bPageBlock .dataCol {
+        padding:0px 0px 0px 0px; 
+    }
+    .bPageBlock .dataCol { 
+        padding:0px 0px 0px 0px; 
+    }
+    .bPageBlock .pbBody {
+        padding:6px 2px 4px;
+    }
+ 
+</style>   
+
+
+
+<!-- load the dojo toolkit base -->  
+
+<script type="text/javascript" src="{!URLFOR($Resource.dojo, '/dojo/dojo.js')}"
+        djConfig="parseOnLoad:true, isDebug:false"></script>
+<script type="text/javascript" src="{!URLFOR($Resource.dojo, '/dijit/dijit.js')}"
+        djConfig="parseOnLoad:true, isDebug:false"></script>
+
+<script type="text/javascript">
+dojo.require("dojo.parser");
+dojo.require("dijit.form.Button");
+dojo.require("dijit.Dialog");
+dojo.require("dijit.Tooltip");
+</script>
+ 
+
+<style type="text/css">
+
+.dialogTableHeader {
+    font-weight:bold;
+}
+
+.dialogNotes {
+    width:200px;
+}
+
+.dialogNotesLoc {
+    width:150px;
+}
+
+.dialogTextArea {
+    width:300px;
+    height:60px;
+}
+
+.notesRequired {
+    border-left: 3px solid #CC0000;
+}
+
+.notesNotRequired {
+    border: 0;
+}
+
+.myRequired {
+    background-color: #CC0000;
+    margin-right: 2px;
+    display: inline;
+    width: 3px;
+}
+
+</style>
+
+
+
+<apex:includeScript value="/js/functions.js"/>
+
+
+<!-- Waiting status display -->
+   <style>
+div#wait { width: 100%; height: 100% }
+div#loading { width: 100%; height: 100%; position: fixed; top: 0px;}
+div#waitingHolder { width: 113px; }
+img.sortIndicator { padding-left: 5px; }
+span.modified { color: red; }
+</style>
+<script type="text/javascript">
+var timer = null;
+function setVisible(name, visible) {
+  var e = document.getElementById(name);
+  if (e != null) {
+    if (visible) {
+      e.setAttribute("style", "display: block");
+      e.style.cssText = "display: block";
+    } else {
+      e.setAttribute("style", "display: none");
+      e.style.cssText = "display: none";
+    }
+  }
+}
+function wait(val) {
+  setVisible('loading', val);
+  setVisible('wait', val);
+}
+</script>
+<div id="wait" class="waitingSearchDiv waitingSearchDivOpacity" style="display: none"></div>
+<div id="loading" class="waitingSearchDiv" style="display: none">
+ <div id="waitingHolder" class="waitingHolder">
+  <img class="waitingImage" src="/img/loading.gif"/>
+  <span class="waitingDescription">Loading...</span>
+ </div>
+</div>
+<!-- End waiting div -->
+
+<script type="text/javascript">
+
+
+// page-level variables
+var isAuditNotesEnable = false;
+var dirty=false;
+var oldResValue = null;
+var oldWeekValue = null;
+var isPopupOk = false;
+
+function onSubmitClick(){
+    if (confirm("Submit timecards for approval? You will not be able to make changes once they are submitted.")){
+        jsSubmitTimecards();
+    }
+}
+
+function onNewRowClick(){
+   jsNewRow();
+}
+
+function onSaveClick(){
+    jsSave();
+}
+
+
+function onCopyFromScheduleClick() {
+    var weekEndDay = document.getElementById('{!$Component.tcPage.tcForm.detailsBlock.gotoDateField}').value;
+    var message = 'Do you want to copy the schedule for Week - <'+ weekEndDay +'>';
+    if (confirm(message)) {
+        jsCopyFromSchedule();
+    }
+}
+
+function onCopyFromPreviousWeek() { 
+    if (confirm('Do you want to copy timecards from previous Week')) {
+        jsCopyFromPreviousWeek();
+    }
+}
+
+function checkResourceChange(res){ 
+    //We are using HTMl select component for resource selection 
+    //so to bind select value with server side variable we created one hidden field
+    //Now assigning hidden field the seleted value
+    var hiddenResourceIdHolder = document.getElementById('{!$Component.tcForm.detailsBlock.selectedResourceId}');
+    hiddenResourceIdHolder.value = res.value;  
+
+    var doChange = false;
+    if (dirty){ 
+        // unset the focus because if a cancel occurs, the focus may come back to the 
+        // select and it will re-record the value but with the new value
+        res.blur();
+        if (confirm("You have unsaved changes. Discard changes and continue?"))
+            doChange = true;
+        else{
+            res.value = oldResValue;
+        }
+    } else  {
+          doChange = true;
+    }
+    if (doChange)  {
+        jsChangeResource();
+    }
+}
+
+// Added new code for agile task: 000011098  Dated : 1/10/2011  By: Aditi
+function displayRecallDialog(timecardId) {
+	document.getElementById('{!$Component.tcPage.tcForm.recallCommentTextArea}').value = '';
+	dijit.byId('dialog2').show();
+	document.getElementById('{!$Component.tcPage.tcForm.recallTimecard}').value = timecardId;
+	document.getElementById('{!$Component.tcPage.tcForm.recallTimecard}').innerHTML = timecardId;
+}
+
+// Added new code for agile task: 000011098  Dated : 1/10/2011  By: Aditi
+function recallFromApprovalClicked(aurguments) {
+	var tcId = document.getElementById('{!$Component.tcPage.tcForm.recallTimecard}').value;
+	var comment = document.getElementById('{!$Component.tcPage.tcForm.recallCommentTextArea}').value;
+	jsRecallTimecard(tcId, comment);
+}
+
+// Added new code for agile task: 000011098  Dated : 1/10/2011  By: Aditi
+function recalllCancelClicked() {
+	document.getElementById('{!$Component.tcPage.tcForm.recallCommentTextArea}').value = '';
+	dijit.byId('dialog2').hide();
+}
+
+var dialogRoot = null;
+
+// update the hidden form fields with the values entered in the notes dialog box fields
+function updateDetails(dialogFields) {
+    
+    
+    // don't update approved or submitted timecards
+    //Check if current row is editable or not
+    var bool_isRowEditable = document.getElementById(dialogRoot + "isRowEditable").value == "true" ? true : false;
+    if (!bool_isRowEditable){
+        return;
+    }
+
+    setDirty(dialogRoot + "statusValue", dialogRoot + "dirtyHidden");
+
+    document.getElementById(dialogRoot + "hiddenSunNotes").value = document.getElementById("sunNotes").value;
+    document.getElementById(dialogRoot + "hiddenMonNotes").value = document.getElementById("monNotes").value;
+    document.getElementById(dialogRoot + "hiddenTuesNotes").value = document.getElementById("tuesNotes").value;
+    document.getElementById(dialogRoot + "hiddenWedNotes").value = document.getElementById("wedNotes").value;
+    document.getElementById(dialogRoot + "hiddenThursNotes").value = document.getElementById("thursNotes").value;
+    document.getElementById(dialogRoot + "hiddenFriNotes").value = document.getElementById("friNotes").value;
+    document.getElementById(dialogRoot + "hiddenSatNotes").value = document.getElementById("satNotes").value;  
+
+    document.getElementById(dialogRoot + "hiddenWeeklyNotes").value = document.getElementById("weeklyNotes").value;
+
+    document.getElementById(dialogRoot + "hiddenSunTravel").value = document.getElementById("sunTravel").checked == true ? "true" : "false";
+    document.getElementById(dialogRoot + "hiddenMonTravel").value = document.getElementById("monTravel").checked == true ? "true" : "false";
+    document.getElementById(dialogRoot + "hiddenTuesTravel").value = document.getElementById("tuesTravel").checked == true ? "true" : "false";
+    document.getElementById(dialogRoot + "hiddenWedTravel").value = document.getElementById("wedTravel").checked == true ? "true" : "false";
+    document.getElementById(dialogRoot + "hiddenThursTravel").value = document.getElementById("thursTravel").checked == true ? "true" : "false";
+    document.getElementById(dialogRoot + "hiddenFriTravel").value = document.getElementById("friTravel").checked == true ? "true" : "false";
+    document.getElementById(dialogRoot + "hiddenSatTravel").value = document.getElementById("satTravel").checked == true ? "true" : "false";
+    
+    if (isAuditNotesEnable == 'true'){
+        document.getElementById(dialogRoot + "hiddenAuditNotes").value = document.getElementById("auditNotes").value;
+    }
+    //Check if location fields are renedred or not
+    if ('{!pageData.noteLocationAllowed}' == 'true') {
+        document.getElementById(dialogRoot + "hiddenSunNotesLoc").value = document.getElementById('{!$Component.tcPage.tcForm.sunNotesLoc}').value;
+        document.getElementById(dialogRoot + "hiddenMonNotesLoc").value = document.getElementById('{!$Component.tcPage.tcForm.monNotesLoc}').value;
+        document.getElementById(dialogRoot + "hiddenTuesNotesLoc").value = document.getElementById('{!$Component.tcPage.tcForm.tuesNotesLoc}').value;
+        document.getElementById(dialogRoot + "hiddenWedNotesLoc").value = document.getElementById('{!$Component.tcPage.tcForm.wedNotesLoc}').value;
+        document.getElementById(dialogRoot + "hiddenThursNotesLoc").value = document.getElementById('{!$Component.tcPage.tcForm.thursNotesLoc}').value;
+        document.getElementById(dialogRoot + "hiddenFriNotesLoc").value = document.getElementById('{!$Component.tcPage.tcForm.friNotesLoc}').value;
+        document.getElementById(dialogRoot + "hiddenSatNotesLoc").value = document.getElementById('{!$Component.tcPage.tcForm.satNotesLoc}').value;
+    }
+     
+   
+       //Check if Phase options are renedred or not
+       if ('{!pageData.showPhaseOnPopup}' == 'true') {
+           document.getElementById(dialogRoot + "hiddenPhase").value = document.getElementById('{!$Component.tcPage.tcForm.phaseSelect}').value;
+       } 
+       //Check if Methodology options are renedred or not
+       if ('{!pageData.showMethodologyOnPopup}' == 'true') {
+           document.getElementById(dialogRoot + "hiddenMethodology").value = document.getElementById('{!$Component.tcPage.tcForm.methodologySelect}').value;
+       }
+       
+       //Check if Milestones options are renedred or not
+       if ('{!pageData.showMilestoneOnPopup}' == 'true') {
+       //Update milestone info
+           document.getElementById(dialogRoot + "hiddenMilestone").value = document.getElementById('milestoneSelect').value;
+       }   
+   
+}
+
+
+// populate the notes dialog with values from the hidden form fields for this timecard
+function displayNotesDialog(snotes){
+   
+   dialogRoot = snotes.substring(0, snotes.lastIndexOf(':')+1);
+   //Check if current row is editable or not
+   var bool_isRowEditable = document.getElementById(dialogRoot + "isRowEditable").value == "true" ? true : false;
+
+   document.getElementById("sunNotes").value = document.getElementById(dialogRoot + "hiddenSunNotes").value;
+   document.getElementById("monNotes").value = document.getElementById(dialogRoot + "hiddenMonNotes").value;
+   document.getElementById("tuesNotes").value = document.getElementById(dialogRoot + "hiddenTuesNotes").value;
+   document.getElementById("wedNotes").value = document.getElementById(dialogRoot + "hiddenWedNotes").value;
+   document.getElementById("thursNotes").value = document.getElementById(dialogRoot + "hiddenThursNotes").value;
+   document.getElementById("friNotes").value = document.getElementById(dialogRoot + "hiddenFriNotes").value;
+   document.getElementById("satNotes").value = document.getElementById(dialogRoot + "hiddenSatNotes").value;  
+
+   document.getElementById("weeklyNotes").value = document.getElementById(dialogRoot + "hiddenWeeklyNotes").value;
+
+   document.getElementById("sunTravel").checked = document.getElementById(dialogRoot + "hiddenSunTravel").value == "true" ? true : false;
+   document.getElementById("monTravel").checked = document.getElementById(dialogRoot + "hiddenMonTravel").value == "true" ? true : false;
+   document.getElementById("tuesTravel").checked = document.getElementById(dialogRoot + "hiddenTuesTravel").value == "true" ? true : false;
+   document.getElementById("wedTravel").checked = document.getElementById(dialogRoot + "hiddenWedTravel").value == "true" ? true : false;
+   document.getElementById("thursTravel").checked = document.getElementById(dialogRoot + "hiddenThursTravel").value == "true" ? true : false;
+   document.getElementById("friTravel").checked = document.getElementById(dialogRoot + "hiddenFriTravel").value == "true" ? true : false;
+   document.getElementById("satTravel").checked = document.getElementById(dialogRoot + "hiddenSatTravel").value == "true" ? true : false;
+   //IF row is not editable then disable all editable fields or vice-versa on notes popup
+   document.getElementById("sunNotes").disabled = !bool_isRowEditable;
+   document.getElementById("monNotes").disabled = !bool_isRowEditable;
+   document.getElementById("tuesNotes").disabled = !bool_isRowEditable;
+   document.getElementById("wedNotes").disabled = !bool_isRowEditable;
+   document.getElementById("thursNotes").disabled = !bool_isRowEditable;
+   document.getElementById("friNotes").disabled = !bool_isRowEditable;
+   document.getElementById("satNotes").disabled = !bool_isRowEditable;
+
+   document.getElementById("weeklyNotes").disabled = !bool_isRowEditable;
+
+   document.getElementById("sunTravel").disabled = !bool_isRowEditable;
+   document.getElementById("monTravel").disabled = !bool_isRowEditable;
+   document.getElementById("tuesTravel").disabled = !bool_isRowEditable;
+   document.getElementById("wedTravel").disabled = !bool_isRowEditable;
+   document.getElementById("thursTravel").disabled = !bool_isRowEditable;
+   document.getElementById("friTravel").disabled = !bool_isRowEditable;
+   document.getElementById("satTravel").disabled = !bool_isRowEditable;
+   
+   if (isAuditNotesEnable == 'true'){
+       document.getElementById("auditNotes").value = document.getElementById(dialogRoot + "hiddenAuditNotes").value;
+       document.getElementById("auditNotes").disabled = !bool_isRowEditable;
+   }
+   //Check if location fields are renedred or not
+   if ('{!pageData.noteLocationAllowed}' == 'true') {
+       document.getElementById('{!$Component.tcPage.tcForm.sunNotesLoc}').value = document.getElementById(dialogRoot + "hiddenSunNotesLoc").value;
+       document.getElementById('{!$Component.tcPage.tcForm.monNotesLoc}').value = document.getElementById(dialogRoot + "hiddenMonNotesLoc").value;
+       document.getElementById('{!$Component.tcPage.tcForm.tuesNotesLoc}').value = document.getElementById(dialogRoot + "hiddenTuesNotesLoc").value;
+       document.getElementById('{!$Component.tcPage.tcForm.wedNotesLoc}').value = document.getElementById(dialogRoot + "hiddenWedNotesLoc").value;
+       document.getElementById('{!$Component.tcPage.tcForm.thursNotesLoc}').value = document.getElementById(dialogRoot + "hiddenThursNotesLoc").value;
+       document.getElementById('{!$Component.tcPage.tcForm.friNotesLoc}').value = document.getElementById(dialogRoot + "hiddenFriNotesLoc").value;
+       document.getElementById('{!$Component.tcPage.tcForm.satNotesLoc}').value = document.getElementById(dialogRoot + "hiddenSatNotesLoc").value;
+       
+       //IF row is not editable then disable all editable fields or vice-versa on notes popup
+       document.getElementById('{!$Component.tcPage.tcForm.sunNotesLoc}').disabled = !bool_isRowEditable;
+       document.getElementById('{!$Component.tcPage.tcForm.monNotesLoc}').disabled = !bool_isRowEditable;
+       document.getElementById('{!$Component.tcPage.tcForm.tuesNotesLoc}').disabled = !bool_isRowEditable;
+       document.getElementById('{!$Component.tcPage.tcForm.wedNotesLoc}').disabled = !bool_isRowEditable;
+       document.getElementById('{!$Component.tcPage.tcForm.thursNotesLoc}').disabled = !bool_isRowEditable;
+       document.getElementById('{!$Component.tcPage.tcForm.friNotesLoc}').disabled = !bool_isRowEditable;
+       document.getElementById('{!$Component.tcPage.tcForm.satNotesLoc}').disabled = !bool_isRowEditable;
+   }  
+   
+   
+   
+   
+   //Check if Phase options are renedred on popup or not
+   if ('{!pageData.showPhaseOnPopup}' == 'true') {
+       document.getElementById('{!$Component.tcPage.tcForm.phaseSelect}').value = document.getElementById(dialogRoot + "hiddenPhase").value;
+       document.getElementById('{!$Component.tcPage.tcForm.phaseSelect}').disabled = !bool_isRowEditable;
+   } 
+   //Check if Methodology options are renedred on popup or not
+   if ('{!pageData.showMethodologyOnPopup}' == 'true') {
+       document.getElementById('{!$Component.tcPage.tcForm.methodologySelect}').value = document.getElementById(dialogRoot + "hiddenMethodology").value;
+       document.getElementById('{!$Component.tcPage.tcForm.methodologySelect}').disabled = !bool_isRowEditable;
+   }
+   //Check if Milestones options are renedred or not
+  if ('{!pageData.showMilestoneOnPopup}' == 'true') {
+        populateMilestoneSelect(dialogRoot + "hiddenMilestoneOptions",dialogRoot + "hiddenMilestone", bool_isRowEditable);
+   }    
+   dijit.byId('dialog1').show();
+}
+
+function populateMilestoneSelect(hiddenSelectID, hiddenMilestoneID, bool_isRowEditable){
+    
+    var hiddenSelectValue = document.getElementById(hiddenSelectID).value;
+    var hiddenMilestoneValue = document.getElementById(hiddenMilestoneID).value;
+    var selectObj = document.getElementById("milestoneSelect");
+    //Remove all options
+    selectObj.options.length=0;
+    
+    if(hiddenSelectValue != null || hiddenSelectValue.length > 3){
+        var selectOptionStringArray = hiddenSelectValue.split('<end>');
+        var noOfValidOptions = (selectOptionStringArray.length)-1; 
+        selectObj.options[0]=new Option('--None-', '');
+        for (i=0; i<noOfValidOptions;i++){
+            var optionKeyValueArray = selectOptionStringArray[i].split("::");
+            var optionKey = optionKeyValueArray[0];
+            var optionValue = optionKeyValueArray[1];
+            //hiddenMilestoneValue
+            selectObj.options[i+1]=new Option(optionKey, optionValue);
+            if (optionValue == hiddenMilestoneValue){
+                selectObj.options[i+1].selected = true;
+            }
+        }
+    //If row is disable then set this select box read only;
+    selectObj.disabled = !bool_isRowEditable;
+        
+    } else{
+        selectObj.disabled = true;
+    }
+    
+
+}
+
+function installTooltip(imageId, tipHtml){
+    if (tipHtml != null && tipHtml.length > 0){
+        var s = document.createElement("span");
+        s.innerHTML = tipHtml;
+        var tipId = imageId+":tooltipSpan";
+        var oldTip = dijit.byId(tipId);
+        // must destroy the old one if it exists
+        if (oldTip != null){
+            oldTip.destroy();
+        }
+        var tip = new dijit.Tooltip({ connectId:[imageId], id:tipId }, s);
+        tip.startup();
+    }
+}
+
+function onAssignmentChange(selectId, imageId, notesId, dailyNotesRequired, tooltipHiddenId){
+    
+    // remove the old tooltip
+    var ts = dijit.byId(imageId + ":tooltipSpan");
+    if (ts != null){ ts.destroy();}
+
+    var sel = document.getElementById(selectId);
+
+    installTooltip(imageId, document.getElementById(tooltipHiddenId).value);
+    // update the required flag on the notes icon if notes are required
+    if (dailyNotesRequired != null && dailyNotesRequired == 'true'){
+        document.getElementById(notesId + "-req").style.display = "inline";
+    } else{
+        document.getElementById(notesId + "-req").style.display = "none";
+    }
+    
+}
+
+function deleteRow(deleteComp){
+    if (confirm("Delete this row?")){
+        document.getElementById(deleteComp).value = "true";
+        jsDeleteRow();
+    }
+}
+
+function onPreviousWeekClick(){
+    if (dirty){
+        if (!confirm("You have unsaved changes. Discard changes and continue?"))
+            return;
+    }
+    jsPreviousWeek();
+}
+
+function onNextWeekClick(){
+    if (dirty){
+        if (!confirm("You have unsaved changes. Discard changes and continue?"))
+            return;
+    }
+    jsNextWeek();
+}
+
+
+function onWeekPicked(newDateFieldValue){
+    //check if newally picked date is same to the date we picked last time
+    //if (currentDateFieldvalue == newDateFieldValue){
+    //    return true;
+    //}
+    if (dirty){
+        if (!confirm("You have unsaved changes. Discard changes and continue?")){
+            return;
+        }    
+    }
+    //currentDateFieldvalue = newDateFieldValue;
+    jsGotoWeek();
+}
+
+function myOnLoad(){
+	/*We are using html select to show resources.
+	  We could not use apex:selectlist because of it's 1000 record limit.
+	  Due to std html select we need to select selected resource*/
+	document.getElementById('resourceSelect').value = document.getElementById('{!$Component.tcForm.detailsBlock.selectedResourceId}').value; 
+	//
+	//var hiddenResourceIdHolder = ;
+	//resizePageBlocks();
+	//dojo.connect(window, "onresize", resizePageBlocks);	
+}
+
+function resizePageBlocks(){
+	var tcTableWidth = dojo.byId('tcOnlyPage:j_id1:tcPage:tcForm:tcBlock:j_id86:timecardPanel').scrollWidth + 20;
+	//To resize only middle panel, uncomment following line
+	//dojo.style(dojo.byId('tcOnlyPage:j_id1:tcPage:tcForm:tcBlock'),'width',tcTableWidth+'px');
+	
+	//This will resize all pageblocks
+	dojo.query(".apexp").style({
+            "width": tcTableWidth+'px'
+        }); 
+	 
+	
+}
+
+function selectTodayDate(){
+    var dateInputField = document.getElementById('{!$Component.tcPage.tcForm.detailsBlock.gotoDateField}');
+    DatePicker.pickDate(true, dateInputField.id,false);
+    DatePicker.datePicker.shim.setStyle("display", "none");
+    DatePicker.datePicker.selectDate('today');
+}
+
+function showDatePopup(controlId) {
+    var dateInputField = document.getElementById('{!$Component.tcPage.tcForm.detailsBlock.gotoDateField}');
+    DatePicker.pickDate(true, dateInputField.id,false);//document.getElementById(controlId)
+}
+
+function parseTableId(compId){
+    return compId.substring(0, compId.lastIndexOf(':'));
+}
+
+//TODO empty onload
+dojo.addOnLoad(myOnLoad);
+</script>
+
+
+
+<apex:sectionHeader title="{!$Label.timecard_entry_label_title}" help="{!$Page.pse__TimecardEntryHelp}" />
+<apex:pageMessages id="messageSection" />
+<apex:form id="tcForm" rendered="{!isEverythingOk}">
+
+<!-- notes dialog -->
+<div dojoType="dijit.Dialog" id="dialog1" style="display:none;" title="{!$Label.timecard_entry_label_notes}" execute="updateDetails(arguments[0]);">
+
+    <table cellspacing="5">
+        <thead>
+            <tr>
+                <td class="dialogTableHeader">{!$Label.timecard_entry_label_day}</td>
+                <td class="dialogTableHeader">{!$Label.timecard_entry_label_notes}</td>
+                <td class="dialogTableHeader">{!$Label.timecard_entry_label_travel}</td>
+                <td class="dialogTableHeader"><apex:outputText value="{!$Label.timecard_entry_label_location}" rendered="{!pageData.noteLocationAllowed}"/></td> 
+            </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <td>{!$Label.timecard_entry_label_sunday}</td>
+                <td><input type="text" class="dialogNotes" id="sunNotes"/></td>
+                <td align="center"><input type="checkbox" name="sunTravel" id="sunTravel"/></td>
+                <td>
+                      <apex:selectList id="sunNotesLoc" style="width:150px;" size="1"    
+                          rendered="{!pageData.noteLocationAllowed}">    
+                        <apex:selectOptions value="{!pageData.noteLocationOptions}"/>
+                    </apex:selectList>
+                     
+                </td>
+            </tr>
+            <tr>
+                <td>{!$Label.timecard_entry_label_monday}</td>
+                <td><input type="text" class="dialogNotes" id="monNotes"/></td>
+                <td align="center"><input type="checkbox" id="monTravel"/></td>
+                <td>
+                    <apex:selectList id="monNotesLoc" style="width:150px;"   size="1"    
+                                      rendered="{!pageData.noteLocationAllowed}">    
+                       <apex:selectOptions value="{!pageData.noteLocationOptions}"/>
+                    </apex:selectList> 
+                </td>
+            </tr>
+            <tr>
+                <td>{!$Label.timecard_entry_label_tuesday}</td>
+                <td><input type="text" class="dialogNotes" id="tuesNotes"/></td>
+                <td align="center"><input type="checkbox" id="tuesTravel"/></td>
+                <td>
+                    <apex:selectList id="tuesNotesLoc" style="width:150px;" size="1"    
+                          rendered="{!pageData.noteLocationAllowed}">    
+                       <apex:selectOptions value="{!pageData.noteLocationOptions}"/>
+                    </apex:selectList> 
+                </td>
+            </tr>
+            <tr>
+                <td>{!$Label.timecard_entry_label_wednesday}</td>
+                <td><input type="text" class="dialogNotes" id="wedNotes"/></td>
+                <td align="center"><input type="checkbox" id="wedTravel"/></td>
+                <td>
+                    <apex:selectList id="wedNotesLoc" style="width:150px;"  size="1"    
+                          rendered="{!pageData.noteLocationAllowed}">    
+                       <apex:selectOptions value="{!pageData.noteLocationOptions}"/>
+                    </apex:selectList> 
+                </td>
+            </tr>
+            <tr>
+                <td>{!$Label.timecard_entry_label_thursday}</td>
+                <td><input type="text" class="dialogNotes" id="thursNotes"/></td>
+                <td align="center"><input type="checkbox" id="thursTravel"/></td>
+                <td>
+                    <apex:selectList id="thursNotesLoc" style="width:150px;" size="1"    
+                          rendered="{!pageData.noteLocationAllowed}">    
+                       <apex:selectOptions value="{!pageData.noteLocationOptions}"/>
+                    </apex:selectList> 
+                </td>
+            </tr>
+            <tr>
+                <td>{!$Label.timecard_entry_label_friday}</td>
+                <td><input type="text" class="dialogNotes" id="friNotes"/></td>
+                <td align="center"><input type="checkbox" id="friTravel"/></td>
+                <td>
+                    <apex:selectList id="friNotesLoc" style="width:150px;" size="1"    
+                          rendered="{!pageData.noteLocationAllowed}">    
+                       <apex:selectOptions value="{!pageData.noteLocationOptions}"/>
+                    </apex:selectList> 
+                </td>
+            </tr>
+            <tr>
+                <td>{!$Label.timecard_entry_label_saturday}</td>
+                <td><input type="text" class="dialogNotes" id="satNotes"/></td>
+                <td align="center"><input type="checkbox" id="satTravel"/></td>
+                <td>
+                    <apex:selectList id="satNotesLoc" style="width:150px;" size="1"    
+                          rendered="{!pageData.noteLocationAllowed}">    
+                       <apex:selectOptions value="{!pageData.noteLocationOptions}"/>
+                    </apex:selectList> 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    {!$Label.timecard_entry_label_weekly_notes}<br />
+                    <textarea id="weeklyNotes" class="dialogTextArea"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <div style="display:none" id="auditNotesPanel">
+                        {!$Label.timecard_entry_label_audit_notes}<br />
+                        <textarea id="auditNotes" class="dialogTextArea"/>
+                    </div>
+                        
+                </td>
+            </tr>
+      
+          <tr>
+            <td class="dialogTableHeader" colspan="4" align="left">
+                <apex:outputLabel rendered="{!OR(pageData.showMilestoneOnPopup,pageData.showPhaseOnPopup,pageData.showMethodologyOnPopup)}">{!$Label.timecard_entry_label_additional_fields}</apex:outputLabel>
+            </td>
+          </tr>
+          <tr>
+              <td><apex:outputLabel rendered="{!pageData.showPhaseOnPopup}">{!$Label.timecard_entry_label_phase}</apex:outputLabel></td>
+              <td colspan="3" align="left">
+                   <apex:selectList id="phaseSelect" style="width:200px;" size="1" rendered="{!pageData.showPhaseOnPopup}"> 
+                       <apex:selectOptions value="{!pageData.phaseOptions}"/>
+                   </apex:selectList> 
+               </td>
+          </tr>
+          <tr>
+              <td><apex:outputLabel rendered="{!pageData.showMethodologyOnPopup}">{!$Label.timecard_entry_label_methodology}</apex:outputLabel></td>
+              <td colspan="3" align="left">
+                   <apex:selectList id="methodologySelect" style="width:200px;" size="1" rendered="{!pageData.showMethodologyOnPopup}">    
+                       <apex:selectOptions value="{!pageData.methodologyOptions}"/>
+                   </apex:selectList> 
+               </td>
+          </tr>
+           <tr>
+              <td><div style="display:none" id="milestoneListLabelDiv">{!$Label.timecard_entry_label_milestone}</div></td>
+              <td colspan="3" align="left">
+                <div style="display:none" id="milestoneListDiv">
+                   <select id="milestoneSelect">
+                   </select>
+                </div>
+               </td> 
+            </tr>
+         
+            <tr>
+                <td colspan="4" align="center">
+                    <button dojoType="dijit.form.Button" type="submit">{!$Label.timecard_entry_label_ok}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Recall Dialog.  Added code for Agile Task: 000011098   Dated: 1/10/2011  By: Aditi-->
+<div dojoType="dijit.Dialog" id="dialog2" style="display:none;" title="{!$Label.timacard_entry_label_recall_approval_request}" execute="recallFromApprovalClicked(arguments[0]);" >
+	<table>
+		<tr>
+			<td>
+				<apex:outputText value="{!$Label.timacard_entry_label_related_to}"/>
+			</td>
+			<td>
+				<apex:outputLink Id="recallTimecard" onClick="javascript: window.open('/' + this.value); return false;" > </apex:outputLink>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<apex:outputText value="{!$Label.common_label_comments}"/>
+			</td>
+			<td colspan="3">
+				<apex:inputTextarea id="recallCommentTextArea" rows="5" cols="80"></apex:inputTextarea>
+			</td>
+		</tr>
+		<tr>
+        	<td colspan="4" align="center">
+            	<button dojoType="dijit.form.Button" type="submit">
+            		{!$Label.timacard_entry_label_recall_approval_request}</button>
+            	<button dojoType="dijit.form.Button" type="reset" onclick="javascript: recalllCancelClicked()">{!$Label.common_label_cancel}</button>
+            </td>
+        </tr>
+	</table>
+</div>
+
+<!-- Added code for Agile Task: 000011098   Dated: 1/10/2011  By: Aditi -->
+<apex:actionFunction name="jsRecallTimecard" reRender="timecardPanel,messageSection"
+	action="{!recallFromApproval}" status="ajaxStatus" oncomplete="javascript: recalllCancelClicked();">
+	<apex:param name="recallTimecardId" assignTo="{!selectedRecallTimecardId}" value="" />
+	<apex:param name="recallComment" assignTo="{!approverComment}" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="jsSubmitTimecards" reRender="timecardPanel,messageSection" 
+    action="{!submitTimecards}" status="ajaxStatus" />
+
+<apex:actionFunction name="jsChangeResource" reRender="timecardPanel,renderScheduleGridScriptPanel,scheduleGridComponentPanel,messageSection" 
+    action="{!onResourceChanged}" immediate="false" status="ajaxStatus" />
+
+<apex:actionFunction name="jsDeleteRow" reRender="timecardPanel,messageSection" 
+    action="{!deleteRow}" status="ajaxStatus" /> 
+
+<apex:actionFunction name="jsNewRow" reRender="timecardPanel" 
+    action="{!newTimecard}" status="ajaxStatus"/>
+
+<apex:actionFunction name="jsSave" reRender="timecardPanel,messageSection" 
+    action="{!saveTimecards}" status="ajaxStatus" />
+
+<apex:actionFunction name="jsPreviousWeek" 
+    reRender="timecardPanel,renderScheduleGridScriptPanel,scheduleGridComponentPanel,weekEndingPanel,messageSection" 
+    action="{!gotoPreviousWeek}" status="ajaxStatus"/>
+
+<apex:actionFunction name="jsNextWeek" 
+    reRender="timecardPanel,renderScheduleGridScriptPanel,scheduleGridComponentPanel,weekEndingPanel,messageSection"
+    action="{!gotoNextWeek}" status="ajaxStatus"/> 
+    
+<apex:actionFunction name="jsGotoWeek" 
+    reRender="timecardPanel,renderScheduleGridScriptPanel,scheduleGridComponentPanel,weekEndingPanel,messageSection"
+    action="{!gotoDate}" status="ajaxStatus" />
+ 
+<apex:actionFunction name="jsCopyFromSchedule" reRender="timecardPanel,messageSection"
+    action="{!copyFromSchedule}" status="ajaxStatus"/>
+
+<apex:actionFunction name="jsCopyFromPreviousWeek" reRender="timecardPanel,weekEndingPanel,messageSection"
+    action="{!copyFromPreviousWeek}" status="ajaxStatus" />
+ 
+        
+<apex:pageBlock mode="edit" title="{!$Label.timecard_entry_label_details}" rendered="{!displayTimecards}" id="detailsBlock">
+    <!-- NOTE: I tried floating divs but it doesn't render correctly in IE --->
+    <table width="100%">
+        <tr>
+            <td> 
+                <apex:outputPanel id="weekEndingPanel" layout="block">
+                    <table>
+                        <tr>
+                            <TD>
+                                <a href="#" onclick="onPreviousWeekClick()"><apex:image height="32" width="32" 
+                                    value="{!URLFOR($Resource.pse__timecard, '/timecard/left.png')}" /></a>
+                            </TD>
+                            <td>
+                                <apex:outputText value="{!$Label.timecard_entry_label_week_ending_date}:" 
+                                    style="margin-right:10px;line-height:32px;vertical-align:middle;" />
+                            </td>
+                            <td>
+                                <apex:inputField value="{!dateHolderObject.pse__Start_Date__c}" onchange="onWeekPicked(this.value);" id="gotoDateField"/>
+                            </td>
+                            <TD>
+
+                                <a href="#" onclick="onNextWeekClick()"><apex:image height="32" width="32" 
+                                    value="{!URLFOR($Resource.pse__timecard, '/timecard/right.png')}" /> </a>
+                            </TD>
+                        </tr>
+                    </table>
+                </apex:outputPanel>
+            </td>
+        
+            <td align="right">
+                <apex:outputLabel value="{!$Label.timecard_entry_label_resource}" for="resourceSelect" rendered="{!NOT(isFeatureOnlyUser)}" />  
+                <!-- 
+                <apex:selectList id="resourceSelect" style="width:200px;margin-left:20px;"
+                                 value="{!selectedResourceId}" size="1" onchange="checkResourceChange(this)" rendered="{!NOT(isFeatureOnlyUser)}">
+                        <apex:selectOptions value="{!pageData.resourceOptions}"/>
+                </apex:selectList>      
+                -->
+                <apex:variable var="fakeVar" value="none"  rendered="{!NOT(isFeatureOnlyUser)}">
+                <select id="resourceSelect" style="width:200px;margin-left:20px;" onchange="checkResourceChange(this)" size="1">
+                	<apex:repeat value="{!pageData.resourceOptions}" var="opList">
+                       	<apex:repeat value="{!opList}" var="op">
+                			<option value="{!op.value}">{!op.label}</option>
+               			</apex:repeat>
+					</apex:repeat>
+                </select>
+                </apex:variable>
+
+                <apex:inputhidden value="{!selectedResourceId}" id="selectedResourceId"/>
+                <apex:outputfield rendered="{!isFeatureOnlyUser}" value="{!resource.name}" />&nbsp;&nbsp;&nbsp;
+            </td>
+            
+        </tr>
+    </table>
+</apex:pageBlock> 
+
+<apex:pageBlock id="tcBlock" mode="edit" rendered="{!displayTimecards}">    
+
+    <!-- include a title in order to get the required legend displayed on the ui -->
+
+    <apex:pageBlockSection collapsible="false" title="{!$Label.timecard_entry_label_timecards}" >        
+    
+    <apex:outputPanel id="timecardPanel">
+
+       <!-- this script is located here so that it's also executed on a re-render -->
+
+      <script type="text/javascript">
+                dirty = {!pageData.hasUnsavedTimecards};           
+
+           function setDirty(statusId, dirtyId){           
+               dirty = true;
+               var status = document.getElementById(statusId);
+               var dirt = document.getElementById(dirtyId);
+               status.innerHTML = "Unsaved";
+               dirt.value = "true";
+
+           }
+           //Check if audit notes should display or not
+           var auditNotesdiv = document.getElementById('auditNotesPanel');
+           if ('{!pageData.isAuditNotesEnable}' == 'true'){
+            isAuditNotesEnable = 'true';
+            auditNotesdiv.style.display = 'block';
+           } else {
+            isAuditNotesEnable = 'false';
+            auditNotesdiv.style.display = 'none';
+           }
+           //check if milestone select list should display or not
+           var milestoneListLabelDiv = document.getElementById('milestoneListLabelDiv');
+           var milestoneListDiv = document.getElementById('milestoneListDiv');
+           if ('{!pageData.showMilestoneOnPopup}' == 'true') {
+            milestoneListLabelDiv.style.display = 'block';
+            milestoneListDiv.style.display = 'block';
+           } else {
+            milestoneListLabelDiv.style.display = 'none';
+            milestoneListDiv.style.display = 'none';
+           }
+
+       </script>  
+
+       <apex:pageBlockTable id="timecardTable" value="{!pageData.timecardEntryRows}" var="tw" cellspacing="0" cellpadding="0"
+           rowClasses="odd,even" styleClass="tableClass" border="0">
+            
+            <apex:column style="padding:4px 0px 0px 0px;margin:0 0 0 0;">
+    <!--         <apex:facet name="header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account</apex:facet>
+                <div style="white-space:nowrap;width:120px"> -->
+                <apex:facet name="header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!$Label.Timecard_entry_label_proj_assign}</apex:facet>
+                <apex:facet name="footer"><b>{!$Label.timecard_entry_label_total}</b></apex:facet>
+                <div style="white-space:nowrap;" align="center">
+                    <apex:image id="deleteIcon" style="margin-right:4px;" value="{!URLFOR($Resource.pse__timecard, '/timecard/delete_icon.gif')}"
+                                height="15" width="15" rendered="{!tw.isHrsAndNotesEditable}" onclick="deleteRow('{!$Component.markedForDelete}')"/>
+                    <apex:image style="margin-right:4px;" value="/s.gif"
+                                height="15" width="15" rendered="{!NOT(tw.isHrsAndNotesEditable)}"/>
+                    <apex:inputHidden id="markedForDelete" value="{!tw.isMarkedForDelete}"/>
+                    <div class="myRequired">&nbsp;</div>
+
+                    <apex:actionregion >
+                    <apex:selectList id="projList" style="width:{!pagedata.ProjAssignDropDownWidthFromConfig}px;"
+                         value="{!tw.projectOrAssignmentId}" size="1"
+                         disabled="{!NOT(tw.isSelectOptionsEditable)}" > 
+                        <apex:selectOptions value="{!tw.projectOrAssignmentOptions}"/>
+                        <apex:actionSupport event="onchange" reRender="onAssignmentChangeScriptPanel,billable,milestoneSelectListPanel" action="{!onAssignmentChange}" 
+                            oncomplete="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}');"/>
+                    </apex:selectList>
+                    </apex:actionregion>
+                    <apex:inputHidden id="dirtyHidden" value="{!tw.dirty}"/>
+                </div>
+           </apex:column>  
+
+               <!-- Billable Header -->
+               <!-- Changes done as fix for agile task: 000005391   Dated: 05/13/2010  -->
+            <apex:column headerValue="{!$Label.timecard_entry_label_billing}" >
+                <apex:facet name="footer"><div style="white-space:nowrap;width:60px;" align="center">&nbsp;</div></apex:facet>
+                <div style="white-space:nowrap;width:60px;" align="center">
+                    <apex:selectList id="billable" style="width:60px;"
+                         value="{!tw.billableStr}" size="1"
+                         onchange="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+                         disabled="{!IF(ISNULL(tw.ProjectOrAssignmentId),false,NOT(AND(tw.isHrsAndNotesEditable,pagedata.isBillableOptionChangeAllowed)))}">
+                        <apex:selectOptions value="{!tw.billableOptions}"/> 
+                    </apex:selectList>
+                </div>
+            </apex:column>
+                
+               <apex:column headerValue="{!$Label.timecard_entry_label_milestone}" rendered="{!pageData.showMilestoneOnFrontPage}">
+               <apex:facet name="footer"><div style="white-space:nowrap;width:80px;" align="center">&nbsp;</div></apex:facet>
+                   <apex:outputpanel id="milestoneSelectListPanel">
+                   <div style="white-space:nowrap;" align="center">
+                    <apex:selectList id="milestoneSelectList" style="width:{!pageData.MilestoneDropDownWidthFromConfig}px;"
+                         value="{!tw.timecard.pse__Milestone__c}" size="1"
+                         onchange="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+                         disabled="{!NOT(tw.isHrsAndNotesEditable)}" > 
+                        <apex:selectOptions value="{!tw.projectMilestoneOptions}"/> 
+                    </apex:selectList>
+                    </div>
+                    </apex:outputpanel>
+               </apex:column> 
+            <!-- These select list are now conditional visible front/notes  -->
+            
+            
+           <apex:column headerValue="{!$Label.timecard_entry_label_phase}" rendered="{!pageData.showPhaseOnFrontPage}">
+                 <apex:selectList id="phase" style="width:70px;" value="{!tw.timecardPhase}" size="1"
+                         onchange="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+                         disabled="{!NOT(tw.isHrsAndNotesEditable)}">
+                        <apex:selectOptions value="{!pageData.phaseOptions}"/>
+                 </apex:selectList>            
+            </apex:column>
+            <apex:column headerValue="{!$Label.timecard_entry_label_methodology}" rendered="{!pageData.showMethodologyOnFrontPage}">
+                 <apex:selectList id="methodology" style="width:70px;"  value="{!tw.timecardMethodology}" size="1"
+                         onchange="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+                         disabled="{!NOT(tw.isHrsAndNotesEditable)}">
+                        <apex:selectOptions value="{!pageData.methodologyOptions}"/>
+                 </apex:selectList>            
+            </apex:column>
+
+            <apex:column >
+                 <apex:image id="infoImage" value="{!URLFOR($Resource.pse__timecard, '/timecard/info.jpg')}"/>
+            </apex:column>
+
+           <apex:column >
+               <apex:facet name="header">{!pageData.dayLabel_1}</apex:facet>
+               <apex:facet name="footer"><div align="center" style="width:58px;">{!pageData.day1SummaryHoursStr}</div></apex:facet>
+               <div align="center" style="width:58px;">
+                <apex:inputText id="sunTime" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.dayHours_1}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />
+
+            </div>
+
+            </apex:column>
+
+                       <apex:column >
+           <apex:facet name="header">{!pageData.dayLabel_2}</apex:facet>
+           <apex:facet name="footer"><div align="center" style="width:58px;">{!pageData.day2SummaryHoursStr}</div></apex:facet>
+
+                <div align="center" style="width:58px;">
+
+                <apex:inputText id="monTime" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.dayHours_2}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />
+ 
+                </div>
+
+            </apex:column>
+
+                       <apex:column >
+           <apex:facet name="header">{!pageData.dayLabel_3}</apex:facet>
+           <apex:facet name="footer"><div align="center" style="width:58px;">{!pageData.day3SummaryHoursStr}</div></apex:facet>
+
+
+                <div align="center" style="width:58px;">
+
+                <apex:inputText id="tuesTime" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.dayHours_3}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />
+
+                </div>
+
+            </apex:column>
+
+                      <apex:column >
+           <apex:facet name="header">{!pageData.dayLabel_4}</apex:facet>
+           <apex:facet name="footer"><div align="center" style="width:58px;">{!pageData.day4SummaryHoursStr}</div></apex:facet>
+
+
+                <div align="center" style="width:58px;">
+
+                <apex:inputText id="wedTime" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.dayHours_4}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />
+
+                </div>
+
+            </apex:column>
+
+           <apex:column >
+           <apex:facet name="header">{!pageData.dayLabel_5}</apex:facet>
+           <apex:facet name="footer"><div align="center" style="width:58px;">{!pageData.day5SummaryHoursStr}</div></apex:facet>
+
+
+                <div align="center" style="width:58px;">
+
+                <apex:inputText id="thursTime" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.dayHours_5}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />
+
+                </div>
+
+            </apex:column>
+
+                       <apex:column >
+           <apex:facet name="header">{!pageData.dayLabel_6}</apex:facet>
+           <apex:facet name="footer"><div align="center" style="width:58px;">{!pageData.day6SummaryHoursStr}</div></apex:facet>
+
+                <div align="center" style="width:58px;">
+
+                <apex:inputText id="friTime" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.dayHours_6}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />
+
+                </div>
+
+            </apex:column>
+
+                       <apex:column >
+           <apex:facet name="header">{!pageData.dayLabel_7}</apex:facet>
+           <apex:facet name="footer"><div align="center" style="width:58px;">{!pageData.day7SummaryHoursStr}</div></apex:facet>
+
+                <div align="center" style="width:58px;">
+
+                <apex:inputText id="sarTime" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.dayHours_7}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />
+
+                </div>
+
+            </apex:column>
+                
+             <apex:column headerValue="{!$Label.timecard_entry_label_sum}">
+             <apex:facet name="footer"><div align="center" style="width:36px;">{!pageData.totalSummaryHoursStr}</div></apex:facet>
+                 <div align="center" style="width:36px;">
+                
+                    <apex:outputText value="{!tw.totalHours}"/>
+
+                </div>
+            </apex:column>
+            
+            <apex:column headerValue="{!$Label.timecard_entry_label_notes}">
+
+                <div align="center" style="white-space:nowrap;">
+
+                <!-- make an anchor so it can be tabbed to. don't leave any trailing new lines 
+
+                    as ie will display as weird lines -->
+
+                <div id="{!$Component.notesImage}-req" class="myRequired" style="display:none;">&nbsp;</div>
+
+                <a href="javascript:displayNotesDialog('{!$Component.hiddenSunNotes}')">
+
+                    <apex:image id="notesImage"
+
+                        value="{!URLFOR($Resource.pse__timecard, '/timecard/Gedit_icon.png')}" 
+
+                        height="24" width="24"/></a></div>
+
+                
+
+                <!-- run the assignment change method to populate tooltip and required block.
+
+                     execute here after the controls for this row have been created. -->
+                <apex:outputpanel id="onAssignmentChangeScriptPanel">
+
+                <apex:inputHidden id="hiddenToolTip" value="{!tw.tooltip}" />
+                
+                <script type="text/javascript">
+                    onAssignmentChange('{!$Component.projList}', '{!$Component.infoImage}', '{!$Component.notesImage}', '{!tw.isDailyNotesReqired}','{!$Component.hiddenToolTip}');
+                </script>
+
+                <apex:inputHidden id="hiddenMilestoneOptions" value="{!tw.projectMilestoneOptionsString}" rendered="{!pageData.showMilestoneOnPopup}"/>
+                <apex:inputHidden id="hiddenMilestone" value="{!tw.timecard.pse__Milestone__c}" rendered="{!pageData.showMilestoneOnPopup}"/>
+
+                </apex:outputpanel>
+                
+                                 
+
+                <apex:inputHidden id="hiddenSunNotes" value="{!tw.timecard.pse__Sunday_Notes__c}"/>
+                <apex:inputHidden id="hiddenMonNotes" value="{!tw.timecard.pse__Monday_Notes__c}"/>
+                <apex:inputHidden id="hiddenTuesNotes" value="{!tw.timecard.pse__Tuesday_Notes__c}"/>
+                <apex:inputHidden id="hiddenWedNotes" value="{!tw.timecard.pse__Wednesday_Notes__c}"/>
+                <apex:inputHidden id="hiddenThursNotes" value="{!tw.timecard.pse__Thursday_Notes__c}"/>
+                <apex:inputHidden id="hiddenFriNotes" value="{!tw.timecard.pse__Friday_Notes__c}"/>
+                <apex:inputHidden id="hiddenSatNotes" value="{!tw.timecard.pse__Saturday_Notes__c}"/> 
+
+                <!-- Check if location fields to be  renedred or not -->
+                <apex:outputPanel rendered="{!pageData.noteLocationAllowed}">
+                <apex:inputHidden id="hiddenSunNotesLoc" value="{!tw.timecard.pse__Location_Sun__c}"/>   
+                <apex:inputHidden id="hiddenMonNotesLoc" value="{!tw.timecard.pse__Location_Mon__c}"/>
+                <apex:inputHidden id="hiddenTuesNotesLoc" value="{!tw.timecard.pse__Location_Tue__c}"/>
+                <apex:inputHidden id="hiddenWedNotesLoc" value="{!tw.timecard.pse__Location_Wed__c}"/>
+                <apex:inputHidden id="hiddenThursNotesLoc" value="{!tw.timecard.pse__Location_Thu__c}"/>
+                <apex:inputHidden id="hiddenFriNotesLoc" value="{!tw.timecard.pse__Location_Fri__c}"/>
+                <apex:inputHidden id="hiddenSatNotesLoc" value="{!tw.timecard.pse__Location_Sat__c}"/>         
+                </apex:outputPanel>
+
+                <apex:inputHidden id="hiddenSunTravel" value="{!tw.timecard.pse__Travel_Sun__c}"/>
+                <apex:inputHidden id="hiddenMonTravel" value="{!tw.timecard.pse__Travel_Mon__c}"/>
+                <apex:inputHidden id="hiddenTuesTravel" value="{!tw.timecard.pse__Travel_Tue__c}"/>
+                <apex:inputHidden id="hiddenWedTravel" value="{!tw.timecard.pse__Travel_Wed__c}"/>
+                <apex:inputHidden id="hiddenThursTravel" value="{!tw.timecard.pse__Travel_Thu__c}"/>
+                <apex:inputHidden id="hiddenFriTravel" value="{!tw.timecard.pse__Travel_Fri__c}"/>
+                <apex:inputHidden id="hiddenSatTravel" value="{!tw.timecard.pse__Travel_Sat__c}"/>
+                <apex:inputHidden id="hiddenWeeklyNotes" value="{!tw.timecard.pse__Timecard_Notes__c}"/>
+                
+                <apex:inputHidden id="hiddenAuditNotes" value="{!tw.timecard.pse__Audit_Notes__c}" rendered="{!pageData.isAuditNotesEnable}" />
+                
+                <!-- Phase and methodology select lists -->
+               
+                <apex:inputHidden id="hiddenPhase" value="{!tw.timecardPhase}" rendered="{!pageData.showPhaseOnPopup}" />
+                <apex:inputHidden id="hiddenMethodology" value="{!tw.timecardMethodology}" rendered="{!pageData.showMethodologyOnPopup}" />
+                
+                <apex:inputHidden id="isRowEditable" value="{!tw.isHrsAndNotesEditable}"/>
+                  
+
+            </apex:column>           
+            
+            <apex:column id="etcCol" headerValue="{!$Label.timecard_entry_label_etc}" rendered="{!pageData.showETC}">
+
+                <div style="width:37px;">
+
+                    <apex:inputText id="etcValue" onkeypress="setDirty('{!$Component.statusValue}', '{!$Component.dirtyHidden}')" 
+
+                    value="{!tw.etc}" style="width:35px" disabled="{!NOT(tw.isHrsAndNotesEditable)}" />                           
+
+                </div>
+
+            </apex:column>
+            
+            <apex:column id="statusCol" headerValue="{!$Label.timecard_entry_label_status}">
+
+                <div style="width:50px;{!IF(tw.status=='Error','color:red;','')};">
+
+                    <apex:outputText id="statusValue" value="{!tw.status}"/>
+
+                </div>
+
+            </apex:column>
+            
+            <!-- Added code for Agile Task : 000011098  Dated : 01/10/2011  By: Aditi -->
+            <apex:column id="recallCol" headerValue="{!$Label.timacard_entry_label_recall_action}" rendered="{!pageData.showRecall}" style="text-align:center" >
+            	<apex:commandlink value="{!$Label.timacard_entry_label_recall}" onclick="javascript: displayRecallDialog('{!tw.timecard.Id}'); return false;" 
+            		rendered="{! AND(pageData.showRecall, tw.isSubmittedForApproval)}" />
+            </apex:column>
+
+        </apex:pageBlockTable>
+
+        <br />
+
+
+        </apex:outputPanel>
+       
+
+    </apex:pageBlockSection>
+    
+    <div align="center" >
+
+        
+        <input type="button" value="{!$Label.timecard_entry_label_add_line}" onclick="onNewRowClick()" class="btn"/>
+        <input type="button" value="{!$Label.timecard_entry_button_label_copy_from_schedule}" onclick="onCopyFromScheduleClick()" class="btn"/>
+        <input type="button" value="{!$Label.timecard_entry_button_label_copy_from_previous_week}" onclick="onCopyFromPreviousWeek()" class="btn"/>
+        <input type="button" value="{!$Label.timecard_entry_button_label_save}" onclick="onSaveClick()" class="btn"/>
+        <input type="button" value="{!$Label.timecard_entry_button_label_submit}" onclick="onSubmitClick()" class="btn"/>
+
+    </div>
+     
+
+        </apex:pageBlock>
+   
+   
+   <apex:actionStatus id="ajaxStatus" onstart="wait(true)" onstop="wait(false)" />
+    
+</apex:form>
+<!-- Added showScheduleGrid to show hide schedule grid. Changes for agile task: 000000728    Dated: 12/04/2009 -->
+<apex:outputPanel rendered="{!AND(isEverythingOk,showScheduleGrid)}">  
+<apex:form >
+    <apex:actionStatus id="loadingSchGrid" ><apex:facet name="start">{!$Label.timecard_entry_message_loading_sch}</apex:facet></apex:actionStatus>
+    <apex:actionFunction action="{!initRenderScheduleGrid}" rerender="renderScheduleGridScriptPanel,scheduleGridComponentPanel" name="jsRenderScheduleGrid" status="loadingSchGrid" oncomplete="javascript:resizePageBlocks();"/>
+</apex:form>
+
+<!-- End page content -->
+<apex:outputPanel id="renderScheduleGridScriptPanel" >    
+    <apex:outputPanel id="scheduleGridScript" rendered="{!renderScheduleGridScript}">
+        <script type="text/javascript">
+            //run after a delay - if we try to execute immediately, the call isn t made properly
+            setTimeout("jsRenderScheduleGrid()", 350);
+        </script>
+    </apex:outputPanel>
+    
+</apex:outputPanel>
+
+<apex:outputPanel id="scheduleGridComponentPanel">
+     <c:scheduleGrid seedAttribute="{!seed}" id="scheduleGridComponent" rendered="{!renderScheduleGrid}" isLiteModeAttribute="{!isFeatureOnlyUser}"/>
+</apex:outputPanel>
+</apex:outputPanel>
+<script>
+//Code to move focus from date field
+function setFocusOnLoad() {} 
+// Add the tundra style class to the body or else the notes dialog won't display properly
+// set Custom9Tab due to VF bug when page is embedded and showHeader=false
+document.body.className += " tundra Custom9Tab";
+</script>  
+</apex:page>

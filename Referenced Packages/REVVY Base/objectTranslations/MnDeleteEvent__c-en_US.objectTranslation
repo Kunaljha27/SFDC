@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Delete Event</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Delete Events</value>
+    </caseValues>
+    <fields>
+        <label><!-- Direction --></label>
+        <name>Direction__c</name>
+        <picklistValues>
+            <masterLabel>Incoming</masterLabel>
+            <translation><!-- Incoming --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Outgoing</masterLabel>
+            <translation><!-- Outgoing --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Id of sobject record that was deleted --></help>
+        <label><!-- SObject Id --></label>
+        <name>SObjectId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Type of the sobject record that was deleted --></help>
+        <label><!-- SObject Type --></label>
+        <name>SObjectType__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

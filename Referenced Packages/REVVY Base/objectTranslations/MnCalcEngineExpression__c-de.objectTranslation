@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- CalcEngineExpression --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Aggregation Function --></label>
+        <name>Aggregation_Function__c</name>
+        <picklistValues>
+            <masterLabel>MAX</masterLabel>
+            <translation><!-- MAX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NONE</masterLabel>
+            <translation><!-- NONE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SUM</masterLabel>
+            <translation><!-- SUM --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Calc Type --></label>
+        <name>CalcType__c</name>
+        <picklistValues>
+            <masterLabel>BUNDLE</masterLabel>
+            <translation><!-- BUNDLE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FIXED</masterLabel>
+            <translation><!-- FIXED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NONE</masterLabel>
+            <translation><!-- NONE --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Capability Expression --></label>
+        <name>CapabilityExpression__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expression Label --></label>
+        <name>ExpressionLabel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expression --></label>
+        <name>Expression__c</name>
+    </fields>
+    <fields>
+        <label><!-- Measure Expression --></label>
+        <name>MeasureExpression__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity Column Name --></label>
+        <name>QuantityColumnName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Type --></label>
+        <name>SubType__c</name>
+        <picklistValues>
+            <masterLabel>NONE</masterLabel>
+            <translation><!-- NONE --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Allocate Expression</masterLabel>
+            <translation><!-- Allocate Expression --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Benefit Expression</masterLabel>
+            <translation><!-- Benefit Expression --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Benefit-Tier Attained Expression</masterLabel>
+            <translation><!-- Benefit-Tier Attained Expression --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Qualification-Tier Basis Expression</masterLabel>
+            <translation><!-- Qualification-Tier Basis Expression --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Expression Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Expression Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- Quantity Column Name cannot be NULL when Calc Type is &apos;BUNDLE&apos;. --></errorMessage>
+        <name>QuantityColumnNameRequiredForBundle</name>
+    </validationRules>
+</CustomObjectTranslation>

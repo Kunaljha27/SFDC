@@ -1,0 +1,13 @@
+<apex:page standardController="Opportunity">
+    <br /><br />
+    <b>Starting Sofon Proposal Organizer</b>
+    <br /><br />
+    <applet code = 'SofonClipboardApplet' 
+        archive = '{!$Resource.sofonDesktopCon__SofonClipboardApplet}', 
+        width = 300, 
+        height = 300>
+        <param name="oppID" value="{!opportunity.Id}">
+        <param name="oppName" value="{!opportunity.Name}">
+        <param name="actionCode" value="{!$CurrentPage.parameters.ActionCode}">
+    </applet>
+</apex:page>

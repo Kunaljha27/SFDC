@@ -1,0 +1,327 @@
+<apex:page id="CreateRCS" title="{!if(mode=='View',$Label.Rate_Card_Set_Title,if(mode=='Edit',$Label.Rate_Card_Set_Edit_Title,$Label.Rate_Card_Set_Create_Title))}" sidebar="false" 
+standardController="pse__Rate_Card_Set__c" extensions="pse.CreateRateCardSetController">
+
+<c:selectAllCheckboxes functionName="selectAllRows" />
+<style type="text/css"> 
+    .waitingSearchDivOpacity {
+        opacity: 0.60 !important;
+    }
+    #associateOverlayContainer.secondaryPalette{ background-color: transparent !important;}
+    
+ </style>
+ 
+<script src="{!$Resource.yui_combo}/yui-min.js" type="text/javascript"></script>
+<script src="{!$Resource.yui_combo}/loader-min.js" type="text/javascript"></script>
+<script src="{!$Resource.yui_combo}/combo.js" type="text/javascript"></script>
+<script src="{!$Resource.jsComponents}" type="text/javascript"></script>
+<apex:stylesheet value="{!URLFOR($Resource.pse__jsComponentsResources, 'componentStyles.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.pse__yui3_1, 'YUIcombo_3_3_0.css')}"/>
+
+<script type="text/javascript" >
+
+    function confirmDissociate(checkBoxIdPattern) {
+        if(checkSelections(checkBoxIdPattern)) {
+            actionToDissociate();
+        }else{
+            return false;
+        }
+    }
+    
+    function confirmAssociate(checkBoxIdPattern) {
+        if(checkSelections(checkBoxIdPattern)){
+            actionToAssociate();
+        }else{
+            return false;
+        }
+    }
+    
+    function checkSelections(checkBoxIdPattern) {
+        var count = 0; 
+        var inputElem = document.getElementsByTagName("input");
+        for ( var i = 0; i < inputElem.length; i++) {
+            if (inputElem[i].id.indexOf(checkBoxIdPattern) != -1) {
+                if(inputElem[i].checked){
+                  count++;
+                  break;
+                }
+            }
+        }
+        
+        if(count<1){
+            alert('{!$Label.Rate_Card_Set_No_Row_Selected_Msg}');
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    function singleDissociate(id,name) {
+        actionToSingleDissociate(id,name);
+    }
+    
+    function singleAssociate(id,name) {
+        actionToSingleAssociate(id,name);
+    }
+    
+    function onRoleChange() {
+        actionToRoleChange();
+    }
+    
+    function confirmDelete() {
+	    return confirm('{!$Label.Rate_Card_Set_Delete_Confirm_Msg}');
+	}
+        
+</script>
+<c:WaitComponent />
+<apex:form id="CreateRCS_Form">
+	<apex:actionStatus id="ajaxStatus" onstart="wait(true)" onstop="wait(false)" />
+    <apex:actionFunction name="actionToAssociate" status="ajaxStatus" action="{!createRateCardSetJunctions}" rerender="AssociatedRCSection,DissociatedRCSection,MsgSection" oncomplete="javascript:_AssociatePopupHandler.hide();"/>
+    <apex:actionFunction name="actionToDissociate" status="ajaxStatus" action="{!deleteRateCardSetJunctions}" rerender="AssociatedRCSection,DissociatedRCSection,MsgSection" />
+    <apex:actionFunction name="actionToRoleChange" status="ajaxStatus" action="{!roleChange}" rerender="AssociatedRCSection,DissociatedRCSection,MsgSection" />
+    <apex:actionFunction name="actionToSingleAssociate" status="ajaxStatus" action="{!createSingleRateCardSetJunctions}" rerender="AssociatedRCSection,DissociatedRCSection,MsgSection" oncomplete="javascript:_AssociatePopupHandler.hide();">
+        <apex:param name="myParamId" value=""/>
+        <apex:param name="myParamName" value=""/>
+    </apex:actionFunction>
+    <apex:actionFunction name="actionToSingleDissociate" status="ajaxStatus" action="{!deleteSingleRateCardSetJunctions}" rerender="AssociatedRCSection,DissociatedRCSection,MsgSection">
+        <apex:param name="myParamId" value=""/>
+        <apex:param name="myParamName" value=""/>
+    </apex:actionFunction>
+    
+    <apex:sectionHeader title="{!if(mode=='View',$Label.Rate_Card_Set_Title,if(mode=='Edit',$Label.Rate_Card_Set_Edit_Title,$Label.Rate_Card_Set_Create_Title))}" subtitle="{!rateCardSet.Name}" help="{!$Page.pse__CreateRateCardSetHelp}"/>
+    <apex:pageMessages id="MsgSection" />
+    <apex:pageBlock id="CreateRCS_PB" rendered="{!displayContent}" title="{!$Label.Rate_Card_Set_Info_Title}">
+        <apex:pageBlockButtons >
+            <apex:commandButton value="{!$Label.Rate_Card_Set_Save_Btn}" action="{!save}" rendered="{!(mode!='View')}"/>
+            <apex:commandButton value="{!$Label.Rate_Card_Set_Edit_Btn}" action="{!edit}" rendered="{!(mode=='View')}" />
+            <apex:commandButton value="{!$Label.Rate_Card_Set_Delete_Btn}" action="{!deleteRateCradSet}" rendered="{!(mode!='Create')}" onClick="return confirmDelete();" />
+            <apex:commandButton value="{!$Label.Rate_Card_Set_Cancel_Btn}" action="{!cancel}" rendered="{!(mode!='View')}" immediate="true" />
+        </apex:pageBlockButtons>
+        
+        <!-- Rate Card Set Details section -->
+        <apex:pageBlockSection id="info_section_display"  columns="2" rendered="{!(mode=='View')}">
+        	<apex:outputField value="{!rateCardSet.Name}"/>
+        	<apex:outputField value="{!rateCardSet.CurrencyIsoCode}"/>  
+        	
+            <apex:repeat value="{!RateCardSetDisplayFields}" var="fName">
+                <apex:outputField value="{!rateCardSet[fName]}" rendered="{!AND(NOT(fName.Label == $ObjectType.Rate_Card_Set__c.Fields.Name.Label),
+                                     NOT(fName.Label == $ObjectType.Rate_Card_Set__c.Fields.CurrencyIsoCode.Label))}"/> 
+            </apex:repeat>
+        </apex:pageBlockSection>
+         <apex:pageBlockSection id="info_section_edit" columns="2" rendered="{!(mode!='View')}">
+         	<apex:inputField value="{!rateCardSet.Name}" required="true" />
+         	<apex:inputField value="{!rateCardSet.CurrencyIsoCode}" required="true" />
+            <apex:repeat value="{!RateCardSetDisplayFields}" var="fName">
+                <apex:inputField value="{!rateCardSet[fName]}" rendered="{!AND(NOT(fName.Label == $ObjectType.Rate_Card_Set__c.Fields.Name.Label),
+                                     NOT(fName.Label == $ObjectType.Rate_Card_Set__c.Fields.CurrencyIsoCode.Label))}" required="{!OR(fName.required,fName.DBRequired)}" />
+            </apex:repeat>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="info_section_gap" columns="2">
+            <apex:outputPanel id="gap">
+                <br/>       
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+        
+        <!-- Associated Rate Card Set section -->
+        <apex:pageBlock title="{!$Label.Rate_Card_Set_Associated_Title}" id="RC_Associated" rendered="{!(mode!='Create')}">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="{!$Label.Rate_Card_Set_Display_Associate_Btn}"  onclick="javascript:_AssociatePopupHandler.show(this); return false;" />
+            <apex:commandButton value="{!$Label.Rate_Card_Set_Disassociate_Btn}" onclick="confirmDissociate('matchingAssocitedRowSelector'); return false;"/>
+        </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" id="AssociatedRCSection">
+                <apex:outputPanel id="detail">
+                    <apex:outputText id="recordCountLabel" value="{!$Label.Rate_Card_Set_Associated_Count} :  " />
+                    <apex:outputText id="recordCount" value="{!associatedRateCards.size}" />
+                </apex:outputPanel>
+                <apex:pageBlockTable value="{!associatedRateCards}" var="rcWrapper" id="AssociatedRCList">
+                    <apex:column > 
+                        <apex:facet name="header">
+                            <input type="checkbox"  onclick="selectAllRows(this, 'matchingAssocitedRowSelector')" />
+                         </apex:facet>
+                        <apex:inputcheckbox value="{!rcWrapper.isSelected}" id="matchingAssocitedRowSelector" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Rate_Card_Set_Action_Column}</apex:facet>
+                        <apex:outputLink value="" style="text-decoration: none;color:blue"  onclick="singleDissociate('{!rcWrapper.ratecard.Id}','{!rcWrapper.ratecard.name}'); return false;">{!$Label.Rate_Card_Set_Disassociate_Btn}</apex:outputLink>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Rate_Card_Set_Rate_Card_Column}</apex:facet>
+                        <apex:outputLink value="/{!rcWrapper.ratecard.Id}" target="_blank">{!rcWrapper.ratecard.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column >
+                            <apex:facet name="header">{!$Label.Rate_Card_Set_Role_Column}</apex:facet>
+                            <apex:outputField value="{!rcWrapper.ratecard.pse__Role__c}" />
+                    </apex:column>
+                    <apex:repeat value="{!RateCardDisplayFields}" var="fName">
+                        <apex:column rendered="{!AND(NOT(fName.Label == $ObjectType.Rate_Card__c.Fields.Name.Label),
+                                     NOT(fName.Label == $ObjectType.Rate_Card__c.Fields.Role__c.Label))}" value="{!rcWrapper.ratecard[fName]}"/>
+                    </apex:repeat>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+         </apex:pageBlock>
+         
+        <!-- Rate Card Set Project Section -->
+        <apex:pageBlock title="{!$Label.Rate_Card_Set_Project_Title}" id="RCS_Project" rendered="{!(mode!='Create')}">
+            <apex:pageBlockSection columns="1" id="ProjectSection">
+                <apex:pageBlockTable value="{!projects}" var="proj" id="ProjectList">
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Rate_Card_Set_Project_Column}</apex:facet>
+                        <apex:outputLink value="/{!proj.Id}" target="_blank">{!proj.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:repeat value="{!ProjectDisplayFields}" var="fName">
+                        <apex:column rendered="{!(NOT(fName.Label == $ObjectType.pse__Proj__c.Fields.Name.Label))}" value="{!proj[fName]}"/>
+                    </apex:repeat>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+         </apex:pageBlock>
+         
+         <!-- Rate Card Set Opportunity Section -->
+        <apex:pageBlock title="{!$Label.Rate_Card_Set_Opp_Title}" id="RCS_Opportunity" rendered="{!(mode!='Create')}">
+            <apex:pageBlockSection columns="1" id="OpportunitySection">
+                <apex:pageBlockTable value="{!opportunities}" var="opp" id="OpportunityList">
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Rate_Card_Set_Opp_Column}</apex:facet>
+                        <apex:outputLink value="/{!opp.Id}" target="_blank">{!opp.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:repeat value="{!OpportunityDisplayFields}" var="fName">
+                        <apex:column rendered="{!(NOT(fName.Label == $ObjectType.Opportunity.Fields.Name.Label))}" value="{!opp[fName]}"/>
+                    </apex:repeat>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+         </apex:pageBlock>
+     </apex:pageBlock>
+     
+     
+    <!-- Dissociated Rate Card Set Overlay section -->
+	<div id="associateOverlayContainer" class="overlayContainer" >
+	    <div id="associateOverlay">
+	        <div id="associateHeader" class="yui-widget-hd overlarCaptionBar" onclick="javascript:_AssociatePopupHandler.hide();"></div>
+	        <div class="yui-widget-bd overlayBody">
+	          <div id="associateOverlaySubContainer"  >
+	               		 <!-- Dissociated Rate Card Set section -->
+				           <apex:sectionHeader title="{!$Label.Rate_Card_Set_Available_Title}" help="{!$Page.pse__CreateRateCardSetHelp}" />
+					       <apex:pageBlock id="RC_Dissociated" rendered="{!(mode!='Create')}" >
+					            <div id="ratecardsection1"  style="overflow: auto !important;">
+					            <apex:pageBlockSection columns="1" id="DissociatedRCSection">
+					                <apex:outputPanel >
+					                    <apex:outputText id="RoleLabel" value="{!$Label.Rate_Card_Set_Role_Label} :  " />
+					                    <apex:inputField value="{!mockRateCard.pse__Role__c}" onchange="onRoleChange();"/>
+										<apex:commandButton value="{!$Label.Rate_Card_Set_Associate_Btn}" onclick="confirmAssociate('matchingDissociatedRowSelector');return false;"/>
+					                </apex:outputPanel>
+					                <apex:pageBlockTable value="{!DissociatedRateCards}" var="drcWrapper" id="DissociatedRCList" style=" overflow-y:auto;">
+					                    <apex:column > 
+					                        <apex:facet name="header">
+					                            <input type="checkbox"  onclick="selectAllRows(this, 'matchingDissociatedRowSelector')" />
+					                         </apex:facet>
+					                        <apex:inputcheckbox value="{!drcWrapper.isSelected}" id="matchingDissociatedRowSelector" />
+					                    </apex:column>
+					                    <apex:column >
+					                        <apex:facet name="header">{!$Label.Rate_Card_Set_Action_Column}</apex:facet>
+					                        <apex:outputLink value="" style="text-decoration: none;color:blue" onclick="singleAssociate('{!drcWrapper.ratecard.Id}','{!drcWrapper.ratecard.name}'); return false;">{!$Label.Rate_Card_Set_Associate_Btn}</apex:outputLink>
+					                    </apex:column>
+					                    <apex:column >
+					                        <apex:facet name="header">{!$Label.Rate_Card_Set_Rate_Card_Column}</apex:facet>
+					                        <apex:outputLink value="/{!drcWrapper.ratecard.Id}" target="_blank">{!drcWrapper.ratecard.Name}</apex:outputLink>
+					                    </apex:column>
+					                    <apex:column >
+					                            <apex:facet name="header">{!$Label.Rate_Card_Set_Role_Column}</apex:facet>
+					                            <apex:outputField value="{!drcWrapper.ratecard.pse__Role__c}" />
+					                    </apex:column>
+					                    <apex:repeat value="{!RateCardDisplayFields}" var="fName">
+					                        <apex:column rendered="{!AND(NOT(fName.Label == $ObjectType.Rate_Card__c.Fields.Name.Label),
+					                                     NOT(fName.Label == $ObjectType.Rate_Card__c.Fields.Role__c.Label))}" value="{!drcWrapper.ratecard[fName]}"/>
+					                    </apex:repeat>
+					                    
+					                </apex:pageBlockTable>
+					                
+					            </apex:pageBlockSection>
+					            </div>
+					         </apex:pageBlock>
+ 				</div>
+			</div>
+	    </div>          
+	</div> 
+
+</apex:form>
+
+<script type="text/javascript" >
+var _yui;
+var _AssociatePopupHandler = {
+	overlay : null,
+	overlayContainer : null, 
+	overlayEscKeyHandle : null,
+	prepare : function () {
+	    /* Create Overlay from script, this time. With no footer */
+	    _AssociatePopupHandler.overlay = new _yui.Overlay({
+	        contentBox : "#associateOverlay", 
+	        width : "60%",
+	        zIndex:2
+	    });
+	    
+	    /* Center overlay in viewport */
+	    _AssociatePopupHandler.overlay.set("centered", true);
+	    
+	    _AssociatePopupHandler.overlay.render();
+	    _AssociatePopupHandler.overlay.show();
+	    _AssociatePopupHandler.overlayContainer = _yui.one('#associateOverlayContainer'); 
+	},
+	
+    attachEscKey : function () 
+    {
+       _AssociatePopupHandler.overlayEscKeyHandle = _yui.on('key', _AssociatePopupHandler.hide, document, 'down:27', _yui);
+    },
+    
+    detachEscKey : function ()
+    {
+       _AssociatePopupHandler.overlayEscKeyHandle.detach();
+    },
+    
+    show : function () {
+        validateZIndexForOverlay(true);
+        _yui.one('#associateOverlay .overlayBody').setStyle('width','1000px');
+        _yui.one('#associateHeader').setStyle('width','1030px');
+    	_yui.one('#associateOverlay .overlayBody').setStyle('overflow', 'auto');
+ 	    _AssociatePopupHandler.overlayContainer.setStyle('display', 'block');
+	    _AssociatePopupHandler.overlay.set("centered", true);
+	    stablizeOverlay(_AssociatePopupHandler.overlay);
+	    _AssociatePopupHandler.attachEscKey();
+    },
+    
+    hide : function() {
+	    _AssociatePopupHandler.overlayContainer.setStyle('display', 'none');
+	    _AssociatePopupHandler.detachEscKey();
+	    validateZIndexForOverlay(false);
+    }
+}
+
+
+	YUI({fetchCSS : false}).use("node","event","event-key", "io",  "overlay", "anim", "node-event-simulate", function(Y) {
+    /*Recent release of Chrome (V7) have broken the UI. 
+      This is because YUI's NODE creation API is failing while creating some specific type of NODE. 
+      The cause of broken functionality is the YUI code [Y.Node.create()] which creates THEAD/TR/TD. 
+      In latest chrome release any call to Y.Node.create() which creates THEAD/TR/TD without TABLE tag fails.*/
+    Y.mix(Y.DOM.creators, {
+        tbody: function(html, doc) {
+            return Y.DOM.create('<table>' + html + '</table>', doc);
+        },
+        thead: function(html, doc) {
+            return Y.DOM.create('<table>' + html + '</table>', doc);
+        },
+        tr: function(html, doc) {
+            return Y.DOM.create('<tbody>' + html + '</tbody>', doc);
+        },
+        td: function(html, doc) {
+            return Y.DOM.create('<tr>' + html + '</tr>', doc);
+        }, 
+        th: function(html, doc) {
+            return Y.DOM.create('<tr>' + html + '</tr>', doc);
+        }
+        
+    });
+    
+    
+    _yui = Y;
+    _yui.on('domready',_AssociatePopupHandler.prepare,_yui);
+	
+	});  
+</script>
+</apex:page>

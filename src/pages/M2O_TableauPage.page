@@ -1,0 +1,9 @@
+<apex:page standardStylesheets="false" sidebar="false" showHeader="false">
+<script>
+
+    window.open( 'https://pww.tableau.healthcare.philips.com','_self' );
+
+</script>
+
+<a target="_blank" style="text-decoration:none" href="http://pww.tableau.healthcare.philips.com/#/site/phna/projects">--Click here to access Tableau--</a>
+</apex:page>

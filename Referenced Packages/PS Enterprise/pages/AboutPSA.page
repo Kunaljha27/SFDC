@@ -1,0 +1,6 @@
+<apex:page controller="pse.AboutPSAController" action="{!redirect}" showHeader="true" sidebar="false">
+    <apex:iframe src="https://www.financialforce.com/production/psa/content/about/about.php?orgID={!$Organization.Id}" 
+    	width="100%" 
+	    height="650px"
+    />
+</apex:page>

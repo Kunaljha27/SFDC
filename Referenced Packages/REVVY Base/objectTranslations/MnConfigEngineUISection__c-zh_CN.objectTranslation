@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Config Engine UI Section --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Defines the layout of model. --></help>
+        <label>配置引擎 UI 布局</label>
+        <name>Config_Engine_UI_Layout__c</name>
+        <relationshipLabel>配置引擎 UI 部分</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>UI 部分 ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Controls the order in which sections are displayed in the model. --></help>
+        <label>部分号</label>
+        <name>Section_Number__c</name>
+    </fields>
+    <nameFieldLabel><!-- UI Section Name --></nameFieldLabel>
+</CustomObjectTranslation>

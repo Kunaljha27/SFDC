@@ -1,0 +1,66 @@
+<apex:page showHeader="false" sidebar="false" controller="pse.RPGHierarchyViewController" id="pg" tabStyle="pse__Proj__c">
+
+    <apex:stylesheet value="{!URLFOR($Resource.pse__yui3_1, 'yui2_treeview/treeview.css')}"/>
+   	<apex:includeScript value="{!$Resource.pse__yui3_1}/yui2_treeview/yahoo-dom-event.js"/>
+   	<apex:includeScript value="{!$Resource.pse__yui3_1}/yui2_treeview/treeview-min.js"/>
+    
+    <style>
+    	.selectedNodeColor { 
+    		background-color:lightgray;
+    		padding-bottom:4px;
+    	}
+    </style>
+    <script type="text/javascript">
+		    var tree;
+		    function treeInit() {
+		        try{
+		        	var jsonVal = eval('{!JSENCODE(treeNodeJSONStr)}');
+		            tree = new YAHOO.widget.TreeView("treeDiv", jsonVal);
+		            tree.render();
+		            
+		            tree.subscribe('clickEvent',function(oArgs) { 
+		               if(oArgs != null && oArgs.node.href != null) {
+			             	window.opener.location.href = oArgs.node.href;
+			             	window.close();
+			             
+							if (window.opener && !window.opener.closed) {
+								window.opener.location.reload();
+							}
+						}
+					});
+		        }
+		        catch(err){
+		              var txtError = "treeInit(): There was an error on this page.\n\n";
+		              txtError += "Error name: " + err.name + "\n\n";
+		              txtError += "Error message: " + err.message + "\n\n";
+		              txtError += "Click OK to continue.\n\n";
+		              alert(txtError);
+		        }
+		    }
+    </script>
+
+    <apex:form id="frm">
+        <apex:pageBlock id="pb" >
+            <apex:pageBlockButtons id="pbb" location="top">
+            	<apex:commandButton value="Close" onclick="javascript : windowClose(); return false;" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbs" columns="1" title="{!queryFor} Hierarchy" collapsible="false">
+                <apex:outputPanel id="tree" >
+                	<div id="treeDiv" style="text-align: left;" class="ygtv-highlight" />
+                </apex:outputPanel>
+                <br />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    <script type="text/javascript"> 
+        window.onload = function(){treeInit();}
+        //window.onblur = function(){window.close();}
+        function windowClose() { window.close(); }
+        
+        window.onkeyup = function (event) {
+			if (event.keyCode == 27) {
+				window.close ();
+			}
+		}
+    </script>
+</apex:page>

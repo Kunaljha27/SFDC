@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Catalog Node Locale Ext</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Catalog Nodes Locale Ext</value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID for each record that can be used as an external ID for importing and exporting data. --></help>
+        <label><!-- Catalog Node Ext Id --></label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Catalog Locale Ext ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Type of the record. The type can be either Description or Terms and Conditions. --></help>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Description</masterLabel>
+            <translation><!-- Description --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terms and Conditions</masterLabel>
+            <translation><!-- Terms and Conditions --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L10). --></help>
+        <label><!-- Value(L10) --></label>
+        <name>Value_L10__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L11). --></help>
+        <label><!-- Value(L11) --></label>
+        <name>Value_L11__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L12). --></help>
+        <label><!-- Value(L12) --></label>
+        <name>Value_L12__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L13). --></help>
+        <label><!-- Value(L13) --></label>
+        <name>Value_L13__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L14). --></help>
+        <label><!-- Value(L14) --></label>
+        <name>Value_L14__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L15). --></help>
+        <label><!-- Value(L15) --></label>
+        <name>Value_L15__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L16). --></help>
+        <label><!-- Value(L16) --></label>
+        <name>Value_L16__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L17). --></help>
+        <label><!-- Value(L17) --></label>
+        <name>Value_L17__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L18). --></help>
+        <label><!-- Value(L18) --></label>
+        <name>Value_L18__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L19). --></help>
+        <label><!-- Value(L19) --></label>
+        <name>Value_L19__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L1). --></help>
+        <label><!-- Value(L1) --></label>
+        <name>Value_L1__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L20). --></help>
+        <label><!-- Value(L20) --></label>
+        <name>Value_L20__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L2). --></help>
+        <label><!-- Value(L1) --></label>
+        <name>Value_L2__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L3). --></help>
+        <label><!-- Value(L3) --></label>
+        <name>Value_L3__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L4). --></help>
+        <label><!-- Value(L4) --></label>
+        <name>Value_L4__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L5). --></help>
+        <label><!-- Value(L5) --></label>
+        <name>Value_L5__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L6). --></help>
+        <label><!-- Value(L6) --></label>
+        <name>Value_L6__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L7). --></help>
+        <label><!-- Value(L7) --></label>
+        <name>Value_L7__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L8). --></help>
+        <label><!-- Value(L8) --></label>
+        <name>Value_L8__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value(Either Description or Terms and Conditions) of the product(L9). --></help>
+        <label><!-- Value(L9) --></label>
+        <name>Value_L9__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,274 @@
+<apex:page id="thePage" standardController="REVVY__MnCatalogAttribute__c" tabstyle="MnAdmin__tab" extensions="REVVY.CMnAttributeDetailCtrl"
+            action="{!doOnload}" sidebar="false">
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+
+<apex:form id="theForm" styleclass="mn-form">
+
+<apex:pageMessages id="pageMessages"/>
+    
+<apex:actionFunction action="{!saveRecord}" name="saveRecord" rerender="pageMessages, pb1"/>
+
+<script>
+    function saveProduct(ev)  {
+        if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+            saveRecord();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+ $(document).ready(function(){
+        var isEdit = {!isEdit};
+
+    if(isEdit) {
+        $(".mn-form").on("keypress", "input:text", saveProduct);
+        $(".mn-form").on("keypress", "select", saveProduct);
+    }
+ });
+</script>
+
+<apex:pageBlock title="{!$Label.revvy__MnCatalogAttributeDetail}: {!attribute.name}" />
+
+<apex:pageBlock id="pb1">
+
+ <apex:pageBlockButtons >
+  
+    <apex:commandButton action="{!editView}" rendered="{!!isEdit}" value="{!$Label.revvy__List_Action_Basic_Update}"/>
+ 
+    <apex:commandButton action="{!saveRecord}" value="Save" rendered="{!isEdit}" rerender="pageMessages, pb1"/>
+    
+    <apex:commandButton action="{!cancel}" value="Cancel" />
+
+ </apex:pageBlockButtons>
+  
+       <apex:pageBlockSection title="{!$Label.revvy__Record_Detail_Section_Header}">
+           
+            <apex:inputField rendered="{!isEdit}" value="{!attribute.REVVY__Id__c}"  required="true"/>
+            <apex:outputField rendered="{!!isEdit}" value="{!attribute.REVVY__Id__c}"/>
+            <apex:inputField rendered="{!isEdit}" value="{!attribute.Name}"  required="true"/> 
+            <apex:outputField rendered="{!!isEdit}" value="{!attribute.Name}"/>
+             
+             <apex:pageBlockSectionItem rendered="{!isEdit && recordId==null && $ObjectType.REVVY__MnCatalogAttribute__c.fields.REVVY__Format__c.Updateable}" >
+                <apex:outputLabel value="{!typeFieldLabel}" for="inputFieldFormat"/>
+                <apex:actionRegion > 
+                   <apex:selectList id="inputFieldFormat" required="true" size="1" rendered="{!isEdit && recordId==null}" value="{!attribute.REVVY__Format__c}">
+                        <apex:selectOptions value="{!formatOptions}"/>
+                        <apex:actionSupport event="onchange"  action="{!rerender}"  rerender="pbSectionValue"/>
+                     </apex:selectList>
+                </apex:actionRegion>
+            </apex:pageBlockSectionItem>
+             
+            <apex:outputField rendered="{!!isEdit || recordId!=null}" value="{!attribute.REVVY__Format__c}"/>
+
+           <!--  
+           <apex:repeat value="{!fields}" var="f"> 
+               <apex:inputField rendered="{!IF(isEdit && 
+                                         (!(f.fieldPath==typeField || f.fieldPath==multiValuesField) ||
+                                         ((f.fieldPath==typeField || f.fieldPath==multiValuesField) && recordId==null)),
+                                                    'true','false') }" 
+                                value="{!attribute[f.fieldPath]}"  required="{!OR(f.required, f.dbrequired)}"/> 
+               <apex:outputField rendered="{!IF(isEdit && 
+                                         (!(f.fieldPath==typeField || f.fieldPath==multiValuesField) ||
+                                         ((f.fieldPath==typeField || f.fieldPath==multiValuesField) && recordId==null)),
+                                                    'false','true')}" value="{!attribute[f.fieldPath]}"/>
+           </apex:repeat>
+           -->
+       </apex:pageBlockSection>
+         
+        <apex:pageBlockSection id="pbSectionValue" title="{!$Label.revvy__Attribute_Value_Options_Section_Header}">
+          <!--  
+          <apex:inputField rendered="{!isEdit && recordId==null}" value="{!attribute.REVVY__Value_Type__c}"  required="true"/> 
+          -->
+          <apex:pageBlockSectionItem rendered="{!isEdit && recordId==null && $ObjectType.REVVY__MnCatalogAttribute__c.fields.REVVY__Format__c.Updateable}" >
+           <apex:outputLabel value="Attribute Values" for="ddlValueType"/>
+              <apex:actionRegion >
+                  <apex:selectList id="ddlValueType" size="1" rendered="{!isEdit && recordId==null && attribute.REVVY__Format__c!='Boolean'}" value="{!attribute.REVVY__Value_Type__c}">
+                        <apex:selectOptions value="{!valueTypeOptions}"/>
+                        <apex:actionSupport event="onchange"  action="{!rerender}"  rerender="pbSectionValue"/>
+                  </apex:selectList>
+              </apex:actionRegion>
+          </apex:pageBlockSectionItem>
+          <apex:outputField rendered="{!!isEdit || recordId!=null}" value="{!attribute.REVVY__Value_Type__c}"/>
+          <apex:inputField rendered="{!isEdit}" value="{!attribute.REVVY__Required__c}" /> 
+          <apex:outputField rendered="{!!isEdit}" value="{!attribute.REVVY__Required__c}"/>
+           <apex:pageBlockSectionItem rendered="{!isEdit && attribute.REVVY__Format__c=='Text' && attribute.REVVY__Value_Type__c!='User Entered'}">
+             <apex:outputLabel value="Allow Multi-Values" for="chkMultiValues"/>
+               <apex:inputField id="chkMultiValues"  value="{!attribute.REVVY__Multi_values__c}" />
+              </apex:pageBlockSectionItem> 
+             <apex:outputField rendered="{!!isEdit && attribute.REVVY__Format__c=='Text' && attribute.REVVY__Value_Type__c!='User Entered'}" value="{!attribute.REVVY__Multi_values__c}" />
+       </apex:pageBlockSection>
+            
+</apex:pageBlock>
+ 
+<!-- Related bundles: for Product and Bundle pages  -->
+<apex:outputPanel id="divManageValues" rendered="{!!isEdit && recordId!=null && attribute.Value_Type__c!='User Entered' }">
+       <apex:actionRegion >
+           <apex:actionFunction action="{!updateDefaultValue}" name="updateDefaultValue" status="updateStatus" rerender="pbtExistingAttributes">
+            <apex:param name="nodeId" value="" assignTo="{!valueId2Update}"/>
+        </apex:actionFunction>
+        <apex:actionFunction name="addNewValue" action="{!addNewValue}" 
+                             reRender="divTableSection, valueMessages" 
+                             status="updateStatus" />
+
+
+            <apex:pageBlock title="Values" id="pbTable"> 
+                <apex:pageMessages id="valueMessages"/>
+                <apex:outputPanel id="divNewSection">
+                        <script> 
+            
+            
+            function updateDefaultValueJS(id){
+                updateDefaultValue(id);
+            }
+              
+            function noenter(ev)  {
+                if (!ev || window.event && window.event.keyCode == 13 || ev.which == 13) {
+                    addNewValue();
+                    // Unfortunately the $Component variable does not work
+                    
+                    var newValueDOMId1 = 'thePage:theForm:pbTable:pbSectionNewValue:txtNewValueText'
+                    var newValueDOMId2 = 'thePage:theForm:pbTable:pbSectionNewValue:txtDisplayName'
+                    var newValueDOMId3 = 'thePage:theForm:pbTable:pbSectionNewValue:txtNewValueNumber'
+                    if(document.getElementById(newValueDOMId1)){
+                        document.getElementById(newValueDOMId1).value = '';
+                        document.getElementById(newValueDOMId1).focus();
+                    }
+                    if(document.getElementById(newValueDOMId2)){
+                        document.getElementById(newValueDOMId2).value = '';
+                    }
+                    if(document.getElementById(newValueDOMId3)){
+                        document.getElementById(newValueDOMId3).value = '';
+                        document.getElementById(newValueDOMId3).focus();
+                    }
+
+                    return false;
+                } else {
+                    return true;
+                 }
+            } 
+            
+        </script>
+                    <apex:pageBlockSection id="pbSectionNewValue" columns="1">
+                        <apex:outputPanel rendered="{!attribute.Id!=null && attribute.REVVY__Format__c!='Boolean'}" >
+                        <apex:outputLabel rendered="{!attribute.REVVY__Format__c=='Text'}" value="{!$ObjectType.REVVY__MnCatalogAttribute__c.Fields.REVVY__Id__c.Label}" for="txtNewValueText"/>&nbsp;&nbsp;
+                        <apex:inputField value="{!newValue.REVVY__Value__c}" id="txtNewValueText" onkeypress="return noenter(event);" rendered="{!attribute.REVVY__Format__c=='Text'}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <apex:outputLabel rendered="{!attribute.REVVY__Format__c=='Text'}"  value="{!$ObjectType.REVVY__MnCatalogAttribute__c.Fields.Name.Label}" for="txtDisplayName"/>&nbsp;&nbsp;
+                        <apex:inputField value="{!newValue.REVVY__Display_Name__c}" id="txtDisplayName" onkeypress="return noenter(event);" rendered="{!attribute.REVVY__Format__c=='Text'}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <apex:inputText value="{!numericValue}" id="txtNewValueNumber" tabindex="0" onkeypress="return noenter(event);" rendered="{!$ObjectType.REVVY__MnCatalogAttributeValue__c.fields.REVVY__Value_Number__c.Createable && attribute.REVVY__Format__c!='Text'}"/>&nbsp;&nbsp;
+                        <apex:pageBlockSectionItem rendered="{!attribute.REVVY__Format__c=='Range'}">
+                        <apex:outputPanel >
+                            <apex:outputLabel value="Min :" for="txtMinVal"/>
+                            <apex:inputField style="width:40px;" id="txtMinVal" value="{!newValue.REVVY__Value_Min__c}" />
+                            <apex:outputText value=" - " />
+                            <apex:outputLabel value="Max :" for="txtMaxVal"/>
+                            <apex:inputField style="width:40px;" id="txtMaxVal" value="{!newValue.REVVY__Value_Max__c}"/>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:commandButton id="btnNewValue" onclick="return noenter()" onkeydown="return noenter(event)" rerender="divTableSection, valueMessages" value="Add" />
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+                <apex:outputPanel id="divTableSection">
+                <apex:pageBlockTable value="{!attributeValueRecords}" var="item" id="pbtExistingAttributes" rendered="{!records.size>0}">
+                <apex:column rendered="{!attribute.REVVY__Format__c!='Boolean'}">               
+                      <apex:commandLink value="{!$Label.revvy__List_Action_Delete}"  rerender="pbTable" action="{!deleteValue}" status="deleteStatus">
+                           <apex:param name="nodeId" value="{!item.id}" assignTo="{!id2Delete}"/>
+                      </apex:commandLink>
+                      <apex:facet name="header">
+                        <apex:outputText value="Action" />  
+                      </apex:facet>
+                </apex:column> 
+
+                <apex:column rendered="{!attribute.REVVY__Format__c=='Text'}">
+                      <apex:facet name="header">
+                        <apex:outputText >
+                              {!$ObjectType.REVVY__MnCatalogAttribute__c.Fields.REVVY__Id__c.Label}
+                        </apex:outputText>
+                      </apex:facet>
+                      <apex:outputField value="{!item.REVVY__Value__c}"/>
+                </apex:column>
+
+                <apex:column rendered="{!attribute.REVVY__Format__c=='Text'}">               
+                      <apex:outputField value="{!item.REVVY__Display_Name__c}"/>
+                      <apex:facet name="header">
+                        <apex:outputText > 
+                              {!$ObjectType.REVVY__MnCatalogAttribute__c.Fields.Name.Label}
+                        </apex:outputText>
+                      </apex:facet>
+                </apex:column>
+
+                <apex:column rendered="{!attribute.REVVY__Format__c!='Text'}">               
+                      <apex:outputField value="{!item.REVVY__Value_Boolean__c}" rendered="{!attribute.REVVY__Format__c=='Boolean'}"/>
+                      <apex:outputLabel rendered="{!attribute.REVVY__Format__c=='Boolean'}" value="{!IF(item.Value_Boolean__c,$Label.Attribute_True_Label,$Label.Attribute_False_Label) }"/> 
+                      <!--  <apex:outputField value="{!item.REVVY__Value__c}" rendered="{!attribute.REVVY__Format__c=='Text'}"/>
+                      <apex:outputField value="{!item.Value_Number__c}" rendered="{!attribute.Format__c=='Number'}"/>-->
+                      <apex:outputField value="{!item.REVVY__Value_Display__c}" rendered="{!attribute.REVVY__Format__c!='Boolean' && attribute.REVVY__Format__c!='Range'}"/>
+                      <apex:outputField value="{!item.REVVY__Value_Min__c}" rendered="{!attribute.REVVY__Format__c=='Range'}"/>
+                      <apex:outputText value="-" rendered="{!attribute.REVVY__Format__c=='Range'}"/>
+                      <apex:outputField value="{!item.REVVY__Value_Max__c}" rendered="{!attribute.REVVY__Format__c=='Range'}"/>
+                      <apex:facet name="header">
+                        <apex:outputText > 
+                              Value
+                        </apex:outputText>
+                      </apex:facet>
+                </apex:column>
+
+
+                <apex:column rendered="{!attribute.REVVY__Format__c!='Range'}">    
+                     <apex:outputPanel rendered="{!IF(attribute.REVVY__Default_Value__c==item.id , TRUE, FALSE)}">
+                        <input type="radio" name="radio" value="{!item.Id}" onclick="updateDefaultValueJS(this.value);" checked="checked"/>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!IF(attribute.REVVY__Default_Value__c!=item.id , TRUE, FALSE)}">
+                        <input type="radio" name="radio" value="{!item.Id}" onclick="updateDefaultValueJS(this.value);"/>
+                    </apex:outputPanel>
+                         <apex:facet name="header">
+                            <apex:outputText value="Default Value" /> 
+                          </apex:facet>
+                </apex:column>
+                </apex:pageBlockTable>
+                
+                <apex:panelGrid columns="7" rendered="{!records.size>0}">
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value="|<" action="{!first}" disabled="{!!hasPrevious}" title="{!$Label.revvy__MnFirstPage}"/>
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value="<" action="{!previous}" disabled="{!!hasPrevious}" title="{!$Label.revvy__MnPreviousPage}"/>
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value=">" action="{!next}" disabled="{!!hasNext}" title="{!$Label.revvy__MnNextPage}"/>
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value=">|" action="{!last}" disabled="{!!hasNext}" title="{!$Label.revvy__MnLastPage}"/>
+                <!--  
+                <apex:outputText >{!(pageNumber * size)+1-size}-{!IF((pageNumber * size)>noOfRecords, noOfRecords,(pageNumber * size))} of {!noOfRecords}</apex:outputText>
+                -->
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value="Refresh" action="{!refresh}" title="Refresh Page"/>
+                <apex:outputPanel style="color:#4AA02C;font-weight:bold">
+                    <apex:actionStatus id="fetchStatus" startText="{!$Label.revvy__Action_Status_Retrieve}" stopText=""/>
+                </apex:outputPanel>
+                
+                <apex:outputPanel style="color:#4AA02C;font-weight:bold">
+                    <apex:actionStatus id="deleteStatus" startText="{!$Label.revvy__Action_Status_Delete}" stopText=""/>
+                </apex:outputPanel>
+            </apex:panelGrid>
+                </apex:outputPanel>
+            </apex:pageBlock>
+   </apex:actionRegion>   
+</apex:outputPanel>
+</apex:form>
+
+
+        <!-- ---------- -->
+      </div>
+    </div>
+    </div>
+
+</apex:page>

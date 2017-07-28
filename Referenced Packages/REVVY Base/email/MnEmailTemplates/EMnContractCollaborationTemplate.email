@@ -1,0 +1,11 @@
+Dear {!MnContract__c.Contact__c},
+
+Please find attached document for your review.
+
+Please review and send back to Sender with your updates.
+
+If you wish to make changes to the document, download the file, make updates and attach it to your reply.
+
+
+Regards,
+{!MnContract__c.OwnerFullName}

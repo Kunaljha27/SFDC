@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Revvy Sales Qlik Sense Properties --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Hostname of the Qlik Sense Server --></help>
+        <label><!-- Hostname --></label>
+        <name>Hostname__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies if the Qlik Sense Server is configured to use SAML single signon authentication --></help>
+        <label><!-- Is Saml Enabled --></label>
+        <name>IsSamlEnabled__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies if https is used for the Qlik Sense Server --></help>
+        <label><!-- Is Secure --></label>
+        <name>IsSecure__c</name>
+    </fields>
+    <fields>
+        <help><!-- Path Prefix of the Qlik Sense Server --></help>
+        <label><!-- Path Prefix --></label>
+        <name>PathPrefix__c</name>
+    </fields>
+    <fields>
+        <help><!-- Port number of the Qlik Sense Server --></help>
+        <label><!-- Port --></label>
+        <name>Port__c</name>
+    </fields>
+</CustomObjectTranslation>

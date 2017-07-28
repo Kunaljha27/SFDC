@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Quote GroupQuote Junction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quote Members</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>MasterQuoteAccount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expiration Date --></label>
+        <name>MasterQuoteExpirationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Year Value --></label>
+        <name>MasterQuoteFirstYearValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Id --></label>
+        <name>MasterQuoteId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name --></label>
+        <name>MasterQuoteName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>MasterQuoteOpportunity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>MasterQuoteStartDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>MasterQuoteStatus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Master Quote --></label>
+        <name>MasterQuote__c</name>
+        <relationshipLabel><!-- Member Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>MemberQuoteAccount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expiration Date --></label>
+        <name>MemberQuoteExpirationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Year Value --></label>
+        <name>MemberQuoteFirstYearValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Id --></label>
+        <name>MemberQuoteId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name --></label>
+        <name>MemberQuoteName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>MemberQuoteOpportunity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>MemberQuoteStartDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>MemberQuoteStatus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Member Quote --></label>
+        <name>MemberQuote__c</name>
+        <relationshipLabel><!-- Group Quotes --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>MnQuoteMembershipLayout24</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- AssignMemberQuotes --></label>
+        <name>AssignMemberQuotes</name>
+    </webLinks>
+</CustomObjectTranslation>

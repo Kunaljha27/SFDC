@@ -1,0 +1,45 @@
+{
+  "name":"VC_KMAT_PCNEW",
+  "productModelName":"VC_KMAT_PCNEW",
+  "image":"/Configit/Quote/image/Products/VC_KMAT_PCNEW",
+  "description":"Computer",
+  "longText":"",
+  "isConfigurable":true,
+  "baseUnit":"EA",
+  "plant":"1000",
+  "enableVariantMatching":false,
+  "properties":[
+    {
+      "name":"IndustrySector",
+      "value":"Mechanical engineering"
+    },
+    {
+      "name":"MaterialType",
+      "value":"Configurable materials"
+    },
+    {
+      "name":"NetWeight",
+      "value":"0.000"
+    },
+    {
+      "name":"UnitOfWeight",
+      "value":"KG"
+    },
+    {
+      "name":"Division",
+      "value":""
+    },
+    {
+      "name":"ItemCategory",
+      "value":""
+    },
+    {
+      "name":"SalesUnit",
+      "value":""
+    },
+    {
+      "name":"MaterialDeliveringPlant",
+      "value":"1000"
+    }
+  ]
+}

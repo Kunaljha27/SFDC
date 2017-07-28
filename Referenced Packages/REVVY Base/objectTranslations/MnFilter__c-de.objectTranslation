@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Filter --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Attribute --></label>
+        <name>Attribute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Set --></label>
+        <name>DataSet__c</name>
+        <relationshipLabel><!-- Filters --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- EntitySelectorConfig --></label>
+        <name>EntitySelectorConfig__c</name>
+        <relationshipLabel><!-- Filters --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- FilterConfigID --></label>
+        <name>FilterConfigID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Filter Config Name --></label>
+        <name>FilterConfigName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number Of Values --></label>
+        <name>NumberOfValues__c</name>
+    </fields>
+    <fields>
+        <label><!-- Order --></label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- ParentAttribute --></label>
+        <name>ParentAttribute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Filter --></label>
+        <name>ProductFilter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Program Level --></label>
+        <name>ProgramLevel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Expression Based</masterLabel>
+            <translation><!-- Expression Based --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>List Based</masterLabel>
+            <translation><!-- List Based --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Range based Filter</masterLabel>
+            <translation><!-- Range based Filter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- UI Component --></label>
+        <name>UIComponent__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Filter Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

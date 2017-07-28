@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPageWebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <availability>online</availability>
+    <description>M2O.R4.US VM 028 This group links to the M2O Academy website</description>
+    <displayType>link</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>M2O Academy – CRM Training Material</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>window.open(&quot;http://pww.emea.intranet.philips.com/apps/m_dir/i1647401.nsf/pages/salesforce?opendocument&amp;buttonid=78a0956384c04152c1257c070037a6acZ&quot;)</url>
+</CustomPageWebLink>

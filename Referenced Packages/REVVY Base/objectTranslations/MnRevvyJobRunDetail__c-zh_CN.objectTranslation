@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Revvy Job --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Callback Argument --></label>
+        <name>CallbackArgument__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Message --></label>
+        <name>ErrorMessage__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Job Id --></label>
+        <name>ExternalJobId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finish Time --></label>
+        <name>FinishTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job Class --></label>
+        <name>JobClass__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job Info --></label>
+        <name>JobInfo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job Name --></label>
+        <name>JobName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Successful --></label>
+        <name>LastSuccessful__c</name>
+    </fields>
+    <fields>
+        <label><!-- Run By --></label>
+        <name>RunBy__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Time --></label>
+        <name>StartTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>FAILED</masterLabel>
+            <translation><!-- FAILED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FINISHED</masterLabel>
+            <translation><!-- FINISHED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KILLED</masterLabel>
+            <translation><!-- KILLED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PARTITAL_FINISHED</masterLabel>
+            <translation><!-- PARTITAL_FINISHED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RUNNING</masterLabel>
+            <translation><!-- RUNNING --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SUBMITTED</masterLabel>
+            <translation><!-- SUBMITTED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UNKNOWN</masterLabel>
+            <translation><!-- UNKNOWN --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sub Type --></label>
+        <name>SubType__c</name>
+        <picklistValues>
+            <masterLabel>Activate Earning</masterLabel>
+            <translation><!-- Activate Earning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Adjust Payments</masterLabel>
+            <translation><!-- Adjust Payments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Calculate Earnings</masterLabel>
+            <translation><!-- Calculate Earnings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Create Payments</masterLabel>
+            <translation><!-- Create Payments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Import Transaction Data</masterLabel>
+            <translation><!-- Import Transaction Data --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Release Payments</masterLabel>
+            <translation><!-- Release Payments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sync Master Data</masterLabel>
+            <translation><!-- Sync Master Data --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>System</masterLabel>
+            <translation><!-- System --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User</masterLabel>
+            <translation><!-- User --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Revvy Job Run Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- RunId --></nameFieldLabel>
+</CustomObjectTranslation>

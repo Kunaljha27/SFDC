@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Option Group Attribute --></value>
+    </caseValues>
+    <fields>
+        <help><!-- This flag to specify if the user can override the value of the attribute. If true user can provide a value which will always override system calculated value. --></help>
+        <label><!-- Allow Override --></label>
+        <name>AllowOverride__c</name>
+    </fields>
+    <fields>
+        <help><!-- Possible values for user defined attributes --></help>
+        <label>容许的属性值</label>
+        <name>AllowedValues__c</name>
+    </fields>
+    <fields>
+        <help><!-- Order of the attributes to be displayed to end user --></help>
+        <label>属性顺序</label>
+        <name>Attribute_Order__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines which attributes are assigned to a product or category. --></help>
+        <label>目录属性</label>
+        <name>Catalog_Attribute__c</name>
+        <relationshipLabel>选项组属性</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Default Attribute Value --></help>
+        <label>默认属性</label>
+        <name>DefaultValue__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique identifier of an option group. --></help>
+        <label>选项组</label>
+        <name>Option_Group_Id__c</name>
+        <relationshipLabel>选项组属性</relationshipLabel>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

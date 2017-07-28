@@ -1,0 +1,74 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="true"
+    tabStyle="pse__Expense__c" controller="pse.ExpenseEntryFileAttacherController">
+
+<head>
+    <title>{!$Label.expense_label_attach_file}</title>
+</head>
+<style>
+	a.attActionLink {
+		color: #015BA7;
+	    font-weight: normal;
+	    text-decoration: none;
+	}
+	a.attActionLink:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+</style>
+<script>
+	function deleteAttachment(attachmentId) {
+		if (!confirm('{!$Label.common_message_are_you_sure}'))
+	        return;
+		document.getElementById('{!$Component.attachmentForm.attachDeleteId}').value = attachmentId;
+		jsDeleteAttachment();
+	}
+</script>
+
+<body class="Custom20Tab">
+
+<apex:sectionHeader title="{!$Label.expense_label_attach_file}" />
+
+<apex:pageMessages id="messages"/>
+<c:WaitComponent />
+
+<apex:form id="attachmentForm">
+
+<apex:inputHidden id="attachDeleteId" value="{!attachmentToDeleteId}" />
+<apex:actionFunction name="jsDeleteAttachment" action="{!deleteAttachment}" status="ajaxStatus" />
+
+<apex:actionStatus id="ajaxStatus" onstart="wait(true)" onstop="wait(false)" />
+    
+<apex:pageBlock title="{!$Label.expense_label_file_information}" id="attachBlock" mode="edit" rendered="{!displayContent}">
+    <apex:pageBlockButtons location="bottom">
+        <!-- NOTE: getting weird error with the action method not being called if trying to use rerender or onclick+oncomplete methods for wait screen -->
+        <apex:commandButton value="{!$Label.expense_label_attach_file}" action="{!attachFile}" status="ajaxStatus" />
+        <apex:commandButton value="{!$Label.common_label_close}" onclick="javascript:parent.closeAttachmentIFrame();return false;" status="ajaxStatus" />
+    </apex:pageBlockButtons>
+    <apex:pageBlockSection title=" " columns="2">
+        <apex:pageBlockSectionItem >
+	        <apex:outputLabel for="fileField" value="{!$Label.expense_label_file}"/>
+	        <apex:inputFile id="fileField" value="{!fileAttachment.Body}" 
+	           filename="{!fileAttachment.Name}" contentType="{!fileAttachment.ContentType}"/>
+        </apex:pageBlockSectionItem>
+        <apex:inputField id="desc" value="{!fileAttachment.Description}" />
+    </apex:pageBlockSection>
+</apex:pageBlock>
+
+<apex:pageBlock title="{!$Label.expense_entry_label_attachments}" id="attachListBlock" mode="edit" rendered="{!displayContent}">
+	<apex:pageBlockTable value="{!expAttachments}" var="attachment" width="100%" rendered="{!foundAttachments}" style="padding-left:10px" >
+          <apex:column width="20px">
+              <apex:facet name="header"> <apex:outputLabel value="{!$Label.common_label_action}" /> </apex:facet>
+              <a href="{!URLFOR($Action.Attachment.Download, attachment.id)}" class="attActionLink" target="_blank">{!$Label.common_label_view}</a>&nbsp;|&nbsp;
+              <a id="deleteAttach" href="" class="attActionLink" onclick="deleteAttachment('{!attachment.id}');" >{!$Label.common_label_delete}</a>
+          </apex:column>
+          <apex:column width="40px" value="{!attachment.Name}" />
+          <apex:column width="60px" value="{!attachment.Description}" />
+          <apex:column width="40px" value="{!attachment.CreatedDate}" />
+    </apex:pageBlockTable>
+    <apex:outputText value="{!$Label.expense_entry_label_no_records_to_display}" style="padding-left:10px" rendered="{!NOT(foundAttachments)}" />
+    
+</apex:pageBlock>
+
+</apex:form>  
+</body>
+</apex:page>

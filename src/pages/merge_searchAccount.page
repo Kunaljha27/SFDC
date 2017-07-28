@@ -1,0 +1,69 @@
+<!--
+@VF page:     merge_searchAccount
+@Description: It will search for the accounts matching the search criteria. Clicking on the Next button after selecting a Survivor Account, 
+              the User navigates to the next page.
+-->
+
+<apex:page standardController="Account"  wizard="false" extensions="M2O_Merge_SearchAccountController" >
+<script language="javascript">
+    function ck(){       
+   
+        var selAccount = document.getElementsByName('inputRadio');
+        for (var x = 0; x < selAccount.length; x++) {
+          if (selAccount[x].checked) { 
+              document.getElementById('{!$Component.frm.hid}').value = selAccount[x].value;
+          }
+        }       
+    }
+</script>
+    <apex:form id="frm" >  
+        <apex:inputhidden id="hid" value="{!selectedAccountID}" />
+        <apex:pageBlock title="Step 1. Select the records to merge with {!sourceAccountName}" id="pbBlock"> 
+        <apex:pagemessages />
+        
+            <apex:pageblockButtons dir="RTL" id="pbb">
+                <apex:commandLink action="{!cancel}" title="Cancel" value="Cancel"/> &nbsp;
+                <apex:commandButton title="Next" action="{!next}" value=" Next " rendered="{!displayRecords = true}" />                          
+            </apex:pageblockButtons> <br/>
+            
+            <apex:pageblockSection >
+                <apex:repeat value="{!SearchFields}" var="fl">
+                    <apex:inputField value="{!searchedAccount[fl.fieldPath]}" />           
+                </apex:repeat>
+            </apex:pageblockSection> 
+                       
+            <apex:commandButton action="{!findAccounts}" value="Find Accounts"/> <br/><br/> 
+                      
+            <apex:outputPanel rendered="{!displayRecords = false}">
+                <apex:pageBlockTable value="{!destinationAccountRecords}" var="ab">
+                    <apex:column headerValue="No records to merge"/>                
+                </apex:pageBlockTable>
+            </apex:outputPanel>            
+            
+            <apex:outputPanel rendered="{!displayRecords = true}" id="op">
+                <apex:pageBlockTable value="{!paginatedlstAccount}" var="la" id="pg1">
+                    <apex:column headerValue=" " >
+                        <input type="radio" id="inputRadio" name= "inputRadio" value="{!la.Id}" onclick="ck()" />                                           
+                    </apex:column>    
+                    <apex:repeat value="{!fieldResult}" var="fr">
+                       <apex:column value="{!la[fr]}"/>
+                    </apex:repeat>         
+                </apex:pageBlockTable> 
+                <apex:panelGrid columns="7">
+                  <apex:commandlink status="fetchStatus" reRender="pbBlock" value="First" action="{!setPaginationSelectedAccounts.first}" rendered="{!setPaginationSelectedAccounts.HasPrevious}"/>
+                      <apex:outputtext value="First" rendered="{!!setPaginationSelectedAccounts.HasPrevious}"/>
+                  <apex:commandlink status="fetchStatus" reRender="pbBlock" value="Previous" action="{!setPaginationSelectedAccounts.previous}" rendered="{!setPaginationSelectedAccounts.HasPrevious}"/>
+                      <apex:outputtext value="Previous" rendered="{!!setPaginationSelectedAccounts.HasPrevious}" />
+                  <apex:commandlink status="fetchStatus" reRender="pbBlock" value="Next" action="{!setPaginationSelectedAccounts.next}" rendered="{!setPaginationSelectedAccounts.HasNext}"/>
+                      <apex:outputtext value="Next" rendered="{!!setPaginationSelectedAccounts.HasNext}"/>
+                  <apex:commandlink status="fetchStatus" reRender="pbBlock" value="Last" action="{!setPaginationSelectedAccounts.last}" rendered="{!setPaginationSelectedAccounts.HasNext}"/>
+                      <apex:outputtext value="Last" rendered="{!!setPaginationSelectedAccounts.HasNext}"/>
+                  <apex:outputPanel style="color:green;">
+                   <apex:actionStatus id="fetchStatus" startText="Fetching..." stopText=""/>
+                  </apex:outputPanel>                                   
+              </apex:panelGrid>
+            </apex:outputPanel>  
+                
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Revvy_quote_sub_line_compact_layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Revvy_quote_sub_line_compact_layout</fullName>
+        <fields>Name</fields>
+        <fields>Catalog_Node__c</fields>
+        <fields>Billing_Frequency_WF__c</fields>
+        <label>Revvy quote sub line compact layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies info about the products that are components of configurable products and bundles.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>Quote_Bundle_Cols</fullName>
+        <availableFields>
+            <field>LineType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Columns for the bundle sublines table</description>
+        <displayedFields>
+            <field>Catalog_Node__r.LocaleName_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Catalog_Node__r.Id__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Quote Bundle Cols</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Quote_SubLine_Additional_Fields</fullName>
+        <availableFields>
+            <field>Adjustment1Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Adjustment1Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Adjustment1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Billing_Frequency_WF__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>CostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount_Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Extended_Price_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Margin__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Unit_Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>VolDiscAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>VolDisc__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields for quote item subline additional fields, both columns.</description>
+        <displayedFields>
+            <field>LineType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Quote SubLine Additional Fields</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Quote_SubLine_Cols</fullName>
+        <availableFields>
+            <field>Adjustment1Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Adjustment1Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Adjustment1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Billing_Frequency_WF__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Catalog_Node__r.Billing_Frequency__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>CostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount_Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discountable__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Frozen__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Catalog_Node__r.InventoryLevel__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>IsBelowLine__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>LineType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Margin__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>NeedsApproval__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Catalog_Node__r.ProductAvailability__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>TotalCostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Columns for the Config sublines table.</description>
+        <displayedFields>
+            <field>Catalog_Node__r.LocaleName_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Catalog_Node__r.Id__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Discount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDisc__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDiscAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Unit_Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Extended_Price_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Quote SubLine Cols</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Quote_SubLine_Pricing</fullName>
+        <availableFields>
+            <field>Adjustment1Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Adjustment1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Billing_Frequency_WF__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>IsBelowLine__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>LineType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Margin__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>VolDisc__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields for quote item subline pricing detail, left column.</description>
+        <displayedFields>
+            <field>CostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Adjustment1Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDiscAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Discount_Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Unit_Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Extended_Price_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Quote Subline Pricing</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Quote_SubLine_Pricing_2</fullName>
+        <availableFields>
+            <field>Adjustment1Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Adjustment1Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>CostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount_Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Discount_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Extended_Price_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>MarginType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Unit_Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>VolDiscAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields for quote item subline pricing detail, right column.</description>
+        <displayedFields>
+            <field>Billing_Frequency_WF__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Adjustment1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDisc__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Discount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Margin__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Quote SubLine Pricing 2</label>
+    </fieldSets>
+    <fields>
+        <fullName>Adjustment1Absolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Absolute value of Adjustment 1</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Absolute value of Adjustment 1</inlineHelpText>
+        <label>Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Adjustment1Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether the Adjustment 1 is based on percentage (e.g., 20%) or on an absolute amount (e.g., $100).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the Adjustment 1 is based on percentage (e.g., 20%) or on an absolute amount (e.g., $100).</inlineHelpText>
+        <label>Mark-up Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Adjustment1__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Percent value of Adjustment 1</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percent value of Adjustment 1</inlineHelpText>
+        <label>Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Billing_Frequency_WF__c</fullName>
+        <deprecated>false</deprecated>
+        <description>How often the customer is charged for a product. Options are one-time, weekly, monthly, and yearly.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How often the customer is charged for a product. Options are one-time, weekly, monthly, and yearly.</inlineHelpText>
+        <label>Billing Frequency</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Catalog_Node__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique Salesforce ID for the product that this price list line refers to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique Salesforce ID for the product that this price list line refers to.</inlineHelpText>
+        <label>Product</label>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>QuoteItemSubLine</relationshipLabel>
+        <relationshipName>QuoteItemSubLine</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CostPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Cost Price of a product in quote sub line</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Cost Price of a product in quote sub line</inlineHelpText>
+        <label>Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Discount_Absolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value of the absolute discount that is applied to the product (e.g., $20 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value of the absolute discount that is applied to the product (e.g., $20 off).</inlineHelpText>
+        <label>Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Discount_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Whether the discount is an absolute discount (e.g., $20 off) or a percentage discount (e.g., 20% off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the discount is an absolute discount (e.g., $20 off) or a percentage discount (e.g., 20% off).</inlineHelpText>
+        <label>Discount Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value of the percentage discount that is applied to the product (e.g., 20% off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value of the percentage discount that is applied to the product (e.g., 20% off).</inlineHelpText>
+        <label>Man. Disc. (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Discountable__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Specifies If manual discount can be applied as defined in the Catalog.</description>
+        <externalId>false</externalId>
+        <formula>Catalog_Node__r.Discountable__c</formula>
+        <inlineHelpText>Specifies If manual discount can be applied as defined in the Catalog.</inlineHelpText>
+        <label>Discountable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExtId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Quote Item Sub Line ID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Extended_Price_Display_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Extended_Price_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Ext. Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Extended_Price_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of product multiplied by the quantity of products. (Unit price x quantity)</description>
+        <externalId>false</externalId>
+        <formula>Unit_Price__c * Quantity__c</formula>
+        <inlineHelpText>Unit price of product multiplied by the quantity of products. (Unit price x quantity)</inlineHelpText>
+        <label>Ext. Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>FreezePricing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Freezes the pricing and prevents manual discounts on this line.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Freezes the pricing and prevents manual discounts on this line</inlineHelpText>
+        <label>Freeze Pricing</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Frozen__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Controls if manual discount is allowed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Controls if manual discount is allowed..</inlineHelpText>
+        <label>Frozen</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GroupNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort sub-lines of a configurable product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort sub-lines of a configurable product.</inlineHelpText>
+        <label>Group Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Deprecated</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Deprecated</inlineHelpText>
+        <label>Deprecated</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>IsBelowLine__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag indicates whether the quote item is a below-the-line recommendation. Items flagged shouldn&apos;t be included with final calculations.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Flag indicates whether the quote item is a below-the-line recommendation. Items flagged shouldn&apos;t be included with final calculations.</inlineHelpText>
+        <label>Recommended</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsInstallBase__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Defines whether the subline Install Base Relevant. Copied from MnCatalogNode__c when quote item subline is created.</description>
+        <externalId>false</externalId>
+        <label>Install Base Relevant</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSystemCostPrice__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered.</inlineHelpText>
+        <label>Is Cost Price System populated</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSystemListPrice__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered.</inlineHelpText>
+        <label>Is List Price System populated</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSystemUnitPrice__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This attribute is to track if the Unit price was calculated by system or user entered. Value is false for user entered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This attribute is to track if the Unit price was calculated by system or user entered. Value is false for user entered.</inlineHelpText>
+        <label>Is Unit Price System populated</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LineType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Tracked On</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not tracked on contract</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>MarginAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Absolute value of the margin</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Absolute value of the margin</inlineHelpText>
+        <label>Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MarginType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether the Margin is based on percentage (e.g., 20%) or on an absolute amount(e.g., $100).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the Margin is based on percentage (e.g., 20%) or on an absolute amount(e.g., $100).</inlineHelpText>
+        <label>Margin Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Margin__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Percent value of the margin</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percent value of the margin</inlineHelpText>
+        <label>Margin ( % )</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>NeedsApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This flag is set by the system when the workflow suggests an approval is needed for the underlying quote.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This flag is set by the system when the workflow suggests an approval is needed for the underlying quote.</inlineHelpText>
+        <label>Needs Approval</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OptionNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort sub-lines of a configurable product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort sub-lines of a configurable product.</inlineHelpText>
+        <label>Option Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PriceDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Price__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Price Display</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PriceListLine__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the Price List Line object used to derive the List Price for this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the Price List Line object used to derive the List Price for this product.</inlineHelpText>
+        <label>Price List Line</label>
+        <referenceTo>MnPriceListLine__c</referenceTo>
+        <relationshipLabel>QuoteSubLineItem</relationshipLabel>
+        <relationshipName>QuoteSubLineItem</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Price__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price of product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>List price of product.</inlineHelpText>
+        <label>List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <defaultValue>1</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Quantity of products.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Quantity of products.</inlineHelpText>
+        <label>Qty</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuoteItem__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the line item (i.e., the quote item) in the quote.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the line item (i.e., the quote item) in the quote.</inlineHelpText>
+        <label>Quote Item</label>
+        <referenceTo>MnQuoteItem__c</referenceTo>
+        <relationshipLabel>QuoteItemSubLine</relationshipLabel>
+        <relationshipName>QuoteItemSubLine</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>SectionNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The SectionNumber, OptionNumber, and GroupNumber fields  are used internally to sort sub-lines of a configurable product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The SectionNumber, OptionNumber, and GroupNumber fields  are used internally to sort sub-lines of a configurable product.</inlineHelpText>
+        <label>Section Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SourceContractItemSubLine__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Source Contract Item Sub Line</label>
+        <referenceTo>MnContractItemSubLine__c</referenceTo>
+        <relationshipLabel>Quote Item Sub Line</relationshipLabel>
+        <relationshipName>Quote_Item_Sub_Line</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TotalCostPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Total Cost (taking quantity into account).</description>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(CostPrice__c), ISBLANK(CostPrice__c)), null, (CostPrice__c * Quantity__c))</formula>
+        <inlineHelpText>Total Cost Price Including Quantity.</inlineHelpText>
+        <label>Total Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Price_Before_Discount__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate price before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(Price__c) , ISBLANK(Price__c), Price__c &lt;= 0) ,
+0,
+(Price__c * Quantity__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate price before any discounts are applied.</inlineHelpText>
+        <label>Total List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UID__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the BOM from the Configuration Engine.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the BOM from the Configuration Engine.</inlineHelpText>
+        <label>UID Configured BOM</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UISection__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the UI section that is returned by the product configuration.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the UI section that is returned by the product configuration.</inlineHelpText>
+        <label>Section</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit_Price_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>CASE( Discount_Type__c , &apos;Absolute&apos;, (Price__c - Discount_Absolute__c) , Price__c * (1 - Discount__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>(Deprecated)Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Unit_Price__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of product (list price less the discount)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unit price of product (list price less the discount)</inlineHelpText>
+        <label>Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>VolDiscAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Total volume discount off of list price (e.g., $100 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total volume discount off of list price (e.g., $100 off).</inlineHelpText>
+        <label>Vol. Disc. (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>VolDisc__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Percentage volume discount off of list price (e.g., 20% off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percentage volumn discount off of list price (e.g., 20% off).</inlineHelpText>
+        <label>Vol. Disc. (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <label>Quote Item Sub Line</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>UISection__c</columns>
+        <columns>UID__c</columns>
+        <columns>QuoteItem__c</columns>
+        <columns>NAME</columns>
+        <columns>OBJECT_ID</columns>
+        <columns>Catalog_Node__c</columns>
+        <columns>Quantity__c</columns>
+        <columns>Discount__c</columns>
+        <columns>Discount_Absolute__c</columns>
+        <columns>Discount_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>QISL{00000}</displayFormat>
+        <label>Id</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Quote Item Sub Line</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>VMnCostPriceValidity</fullName>
+        <active>true</active>
+        <description>Cost Price should be greater than or equal to zero</description>
+        <errorConditionFormula>CostPrice__c &lt; 0</errorConditionFormula>
+        <errorDisplayField>CostPrice__c</errorDisplayField>
+        <errorMessage>Cost Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnListPriceValidity</fullName>
+        <active>true</active>
+        <errorConditionFormula>Price__c &lt; 0</errorConditionFormula>
+        <errorDisplayField>Price__c</errorDisplayField>
+        <errorMessage>List Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnManDiscountValidity</fullName>
+        <active>true</active>
+        <description>Manual Discount cannot change when Product is not discountable / line is frozen</description>
+        <errorConditionFormula>ISCHANGED(Discount__c) &amp;&amp; ((Frozen__c)  || (!Discountable__c))</errorConditionFormula>
+        <errorDisplayField>Discount__c</errorDisplayField>
+        <errorMessage>Manual Discount/ Unit Price Cannot be changed if Product is not discountable or line is marked as frozen.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnUnitPriceValidity1</fullName>
+        <active>true</active>
+        <description>Unit Price should be greater than or equal to zero</description>
+        <errorConditionFormula>ISPICKVAL(QuoteItem__r.Quote__r.Status__c , &apos;Ready&apos;)  &amp;&amp;  Unit_Price__c &lt; 0</errorConditionFormula>
+        <errorDisplayField>Unit_Price__c</errorDisplayField>
+        <errorMessage>Unit Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VmnQuantityValValidity</fullName>
+        <active>true</active>
+        <errorConditionFormula>Quantity__c &lt;= 0</errorConditionFormula>
+        <errorDisplayField>Quantity__c</errorDisplayField>
+        <errorMessage>Quantity cannot be zero or negative</errorMessage>
+    </validationRules>
+</CustomObject>

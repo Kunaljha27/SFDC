@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>common_error_invalid_field</fullName>
+        <categories>common,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>common.error.invalid-field</shortDescription>
+        <value>Invalid field: {0}</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_corporate_rate_must_be</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.corporate-rate-must-be</shortDescription>
+        <value>Corporate Currencies must only have Exchange Rates of</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_currency_code_constant</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.currency-code-constant</shortDescription>
+        <value>A Currency record&apos;s Currency Code may not be changed.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_currencytype_not_found</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.currencytype-not-found</shortDescription>
+        <value>sObject type &apos;CurrencyType&apos; is not supported</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_dated_exchange_rates_not_found</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.dated-exchange-rates-not-found</shortDescription>
+        <value>Multi-currency Conversion Error: Use_Dated_Exchange_Rates config value set to true but no Dated Exchange Rates found for org. No currency conversions allowed. All records must be in corporate currency.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_duplicate_currency_code</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.duplicate-currency-code</shortDescription>
+        <value>No duplicate Currency Codes are allowed:</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_effective_date_fixed</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.effective-date-fixed</shortDescription>
+        <value>The Effective Date for a Currency Exchange Rate may not be updated.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_max_one_corp_currency</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.max-one-corp-currency</shortDescription>
+        <value>No more than one Corporate Currency is allowed.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_max_one_test_corp_currency</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.max-one-test-corp-currency</shortDescription>
+        <value>No more than one TEST Corporate Currency is allowed.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_need_test_prefix_or_checkbox</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.need-test-prefix-or-checkbox</shortDescription>
+        <value>In Apex Currency Test mode, Currency Code must have test checkbox checked and use prefix</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_next_effective_date_fixed</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.next-effective-date-fixed</shortDescription>
+        <value>The Next Effective Date for a Currency Exchange Rate may not be directly inserted or updated.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_rate_minimum</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.rate-minimum</shortDescription>
+        <value>All Currency Exchange Rate records must have a defined rate greater than</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_rate_missing_currency</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.rate-missing-currency</shortDescription>
+        <value>All Currency Exchange Rate records must reference a Currency.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_rate_missing_date</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.rate-missing-date</shortDescription>
+        <value>All Currency Exchange Rate records must reference an Effective Date.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_rate_with_duplicate_date</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.rate_with_duplicate_date</shortDescription>
+        <value>Currency Exchange Rate with duplicate Effective Date for same Currency:</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_test_prefix_disallowed</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.test-prefix-disallowed</shortDescription>
+        <value>In regular operation, Currency Code must NOT use reserved apex test prefix</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_test_rate_duplicate</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.test-rate-duplicate</shortDescription>
+        <value>Test Mode Currency Exchange Rate with duplicate Effective Date for same Currency:</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_use_dated_rates_flag_false</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.use-dated-rates-flag-false</shortDescription>
+        <value>Multi-currency Conversion Error: Use_Dated_Exchange_Rates config value set to false. No currency conversions allowed. All records must be in corporate currency.</value>
+    </labels>
+    <labels>
+        <fullName>currency_error_valid_exchange_rates_not_found</fullName>
+        <categories>currency,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>currency.error.valid-exchange-rates-not-found</shortDescription>
+        <value>Multi-currency Conversion Error: Valid exchange rates not found for currencies and/or dates specified.</value>
+    </labels>
+    <labels>
+        <fullName>security_error_field_not_insertable</fullName>
+        <categories>security,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>security.error.field-not-insertable</shortDescription>
+        <value>You do not have permission to insert field {1} on {0}</value>
+    </labels>
+    <labels>
+        <fullName>security_error_field_not_readable</fullName>
+        <categories>security,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>security.error.field-not-readable</shortDescription>
+        <value>You do not have permission to read the field {1} on {0}</value>
+    </labels>
+    <labels>
+        <fullName>security_error_field_not_updateable</fullName>
+        <categories>security,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>security.error.field-not-updateable</shortDescription>
+        <value>You do not have permission to update the field {1} on {0}</value>
+    </labels>
+    <labels>
+        <fullName>security_error_object_not_deletable</fullName>
+        <categories>security,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>security.error.object-not-deletable</shortDescription>
+        <value>You do not have permission to delete {0}</value>
+    </labels>
+    <labels>
+        <fullName>security_error_object_not_insertable</fullName>
+        <categories>security,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>security.error.object-not-insertable</shortDescription>
+        <value>You do not have permission to insert {0}</value>
+    </labels>
+    <labels>
+        <fullName>security_error_object_not_readable</fullName>
+        <categories>security,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>security.error.object-not-readable</shortDescription>
+        <value>You do not have permission to read {0}</value>
+    </labels>
+    <labels>
+        <fullName>security_error_object_not_updateable</fullName>
+        <categories>security,error</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>security.error.object-not-updateable</shortDescription>
+        <value>You do not have permission to update {0}</value>
+    </labels>
+</CustomLabels>

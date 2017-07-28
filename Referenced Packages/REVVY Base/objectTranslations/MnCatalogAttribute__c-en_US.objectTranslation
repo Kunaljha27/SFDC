@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Catalog Attribute</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Catalog Attributes</value>
+    </caseValues>
+    <fields>
+        <help><!-- Default value of a pre-defined attribute. --></help>
+        <label><!-- Default Value --></label>
+        <name>Default_Value__c</name>
+        <relationshipLabel><!-- Catalog Attributes --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Data format of an attribute. The format can be Boolean, decimal, integer, or text. --></help>
+        <label><!-- Format --></label>
+        <name>Format__c</name>
+        <picklistValues>
+            <masterLabel>Boolean</masterLabel>
+            <translation><!-- Boolean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Decimal</masterLabel>
+            <translation><!-- Decimal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Integer</masterLabel>
+            <translation><!-- Integer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Text</masterLabel>
+            <translation><!-- Text --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Attribute ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Locale Name --></label>
+        <name>LocaleName_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the attribute can have multiple values. --></help>
+        <label><!-- Multi-values --></label>
+        <name>Multi_values__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 10)</label>
+        <name>Name_L10__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 11)</label>
+        <name>Name_L11__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 12)</label>
+        <name>Name_L12__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 13)</label>
+        <name>Name_L13__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 14)</label>
+        <name>Name_L14__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 15)</label>
+        <name>Name_L15__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 16)</label>
+        <name>Name_L16__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 17)</label>
+        <name>Name_L17__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 18)</label>
+        <name>Name_L18__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 19)</label>
+        <name>Name_L19__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 1)</label>
+        <name>Name_L1__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 20)</label>
+        <name>Name_L20__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 2)</label>
+        <name>Name_L2__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 3)</label>
+        <name>Name_L3__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 4)</label>
+        <name>Name_L4__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 5)</label>
+        <name>Name_L5__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 6)</label>
+        <name>Name_L6__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 7)</label>
+        <name>Name_L7__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 8)</label>
+        <name>Name_L8__c</name>
+    </fields>
+    <fields>
+        <label>Name (Lanuguage 9)</label>
+        <name>Name_L9__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether an attribute value is required for this product. --></help>
+        <label><!-- Required --></label>
+        <name>Required__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the attribute value is pre-defined or user entered. --></help>
+        <label><!-- Attribute Values --></label>
+        <name>Value_Type__c</name>
+        <picklistValues>
+            <masterLabel>Pre-Defined</masterLabel>
+            <translation><!-- Pre-Defined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User Entered</masterLabel>
+            <translation><!-- User Entered --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Whether the attribute is visible in the end user catalog. This field is not used in the current release. --></help>
+        <label><!-- Visible to Sales Reps --></label>
+        <name>Visible__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Only attributes of type text can have multi values! --></errorMessage>
+        <name>Multi_Values_Not_Available_on_Non_Text</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- ID can only contain letter, number and underscore and it must start with letter. --></errorMessage>
+        <name>VMnValidateId</name>
+    </validationRules>
+</CustomObjectTranslation>

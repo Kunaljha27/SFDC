@@ -1,0 +1,5 @@
+<apex:page controller="REVVY.CMnMindtouchRedirectController">
+  <apex:form >
+    <apex:commandLink target="_blank" action="{!openDocumentation}" value="{!$Label.revvy__MnDocumentationLinkLabel}"></apex:commandLink>
+  </apex:form>
+</apex:page>

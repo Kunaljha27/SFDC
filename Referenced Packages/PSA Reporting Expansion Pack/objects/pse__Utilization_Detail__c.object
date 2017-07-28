@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <fields>
+        <fullName>Month__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>pse__Scheduled_End_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Month</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Remaining_Capacity__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(pse__Scheduled_Calendar_Hours__c&gt;0,Remaining_Capacity_hours__c/pse__Scheduled_Calendar_Hours__c,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Remaining Capacity %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Remaining_Capacity_hours__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Scheduled Calendar Hours - Total Scheduled hours, which should indicate remaining capacity (ie unassigned) hours.</description>
+        <externalId>false</externalId>
+        <formula>pse__Scheduled_Calendar_Hours__c - (pse__Scheduled_Billable_Hours__c + pse__Scheduled_Non_Billable_Hours__c + pse__Scheduled_Excluded_Hours__c + pse__Scheduled_Credited_Hours__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Scheduled Calendar Hours - Total Scheduled hours, which should indicate remaining capacity (ie unassigned) hours.</inlineHelpText>
+        <label>Remaining Capacity Hours</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Scheduled_Hours__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sum of all scheduled hours - billable, non billable, credited and excluded</description>
+        <externalId>false</externalId>
+        <formula>pse__Scheduled_Billable_Hours__c + pse__Scheduled_Non_Billable_Hours__c + pse__Scheduled_Excluded_Hours__c + pse__Scheduled_Credited_Hours__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Sum of all scheduled hours - billable, non billable, credited and excluded</inlineHelpText>
+        <label>Total Scheduled Hours</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

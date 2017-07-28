@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Quote Revision Junction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quote Revisions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Primary Quote Id --></label>
+        <name>PrimaryQuoteId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Quote --></label>
+        <name>PrimaryQuote__c</name>
+        <relationshipLabel><!-- Quote Revisions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Active Version --></label>
+        <name>RevisionActiveVersion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name --></label>
+        <name>RevisionName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expiration Date --></label>
+        <name>RevisionQuoteExpirationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Year Value --></label>
+        <name>RevisionQuoteFirstYearValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revision Quote Id --></label>
+        <name>RevisionQuoteId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>RevisionQuoteStartDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revision Quote --></label>
+        <name>RevisionQuote__c</name>
+        <relationshipLabel><!-- Quote Revision Rel --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>RevisionStatus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Number --></label>
+        <name>RevisionVersion__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Quote_Comparison --></label>
+        <name>Quote_Comparison</name>
+    </webLinks>
+</CustomObjectTranslation>

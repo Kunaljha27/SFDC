@@ -1,0 +1,7 @@
+<apex:page standardController="pse__Proj__c" title="Project Billing" sidebar="false">
+
+    <apex:composition template="pse__BillingTemplate">
+    </apex:composition>
+
+
+</apex:page>

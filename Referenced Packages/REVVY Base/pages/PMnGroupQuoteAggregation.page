@@ -1,0 +1,2 @@
+<apex:page controller="REVVY.CMnGroupQuoteAggregationCtrl" action="{!redirect}">
+</apex:page>

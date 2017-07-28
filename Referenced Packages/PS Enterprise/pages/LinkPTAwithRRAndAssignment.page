@@ -1,0 +1,167 @@
+<apex:page id="LinkPTAwithRRAndAssignment" title="{!$Label.mass_link_ui_label_pta_with_rr_and_assignment}" 
+	 controller="pse.LinkPTAwithRRAndAssignmentController"  
+	sidebar="false">
+
+<style type="text/css">
+    input.search
+    {
+        width: 9em;
+        height: 2em;
+        text-align: center;
+    }
+
+</style>
+			
+<c:WaitComponent />
+    
+<apex:form id="tcMassAppForm">
+
+   	<script type="text/javascript">
+   		function showDifferRows(){
+ 		 	actionOnPtas();	
+   	   	}
+   	   	
+   		function selectAllCheckbox(checkBoxObj, checkBoxIdPattern) {
+			var isChecked = checkBoxObj.checked;
+			var inputElem = document.getElementsByTagName("input");
+			for ( var i = 0; i < inputElem.length; i++) {
+				if (inputElem[i].id.indexOf(checkBoxIdPattern) != -1)
+					inputElem[i].checked = isChecked;
+			}
+		}
+		function updateSelectAllCheckBox(checkBoxIdPattern, selectAllCheckBoxIdPattern){
+			var selectAllElem = null;
+			var isAllSelectedflag = true;
+			var inputElem = document.getElementsByTagName("input");
+			for ( var i = 0; i < inputElem.length; i++) {
+				if (inputElem[i].id.indexOf(checkBoxIdPattern) != -1)
+				{
+					isAllSelectedflag = isAllSelectedflag && inputElem[i].checked;
+				}
+				if (inputElem[i].id.indexOf(selectAllCheckBoxIdPattern) != -1)
+				{
+					selectAllElem = inputElem[i];
+				}
+			}
+			selectAllElem.checked = isAllSelectedflag;
+		}
+   	</script>
+   	<apex:actionFunction status="ajaxStatus" name="actionOnPtas" action="{!actionFunctionCall}"  reRender="indicator,PtaSelectionPanel"/>
+   	<apex:sectionHeader title="{!$Label.mass_link_ui_label_pta_with_rr_and_assignment}" subtitle="{!selectedproject.Name}" help="{!$Page.pse__LinkPTAwithRRAndAssignmentHelp}" />
+	<apex:commandLink style="padding-left:39px;font-weight:bold;" action="{!redirectToProject}" 
+			id="backToProjectLink">{!$Label.mass_assign_proj_resources_label_back_to_project}</apex:commandLink>
+   	
+   	<apex:pageMessages id="pageMessages"/>
+   		
+        <apex:actionStatus id="ajaxStatus" onstart="wait(true)" onstop="wait(false)" />
+        <apex:pageBlock id="ptaFilterPB" title="{!$Label.mass_link_ui_filter_pta}" >
+        
+            <apex:pageBlockSection columns="2" id="massLinkFilterbyTable" >
+                <apex:pageBlockSectionItem id="projectLookup">
+                    <apex:outputLabel for="projectLst" value="{!$Label.common_label_project}" />
+                    <apex:inputField id="selectedProject" value="{!parentPT.pse__Project__c}" label="" required="true" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                <apex:outputLabel for="showAllField" value="{!$Label.mass_link_ui_show_all_pta}" />
+                    <apex:inputCheckbox id="showAllField" value="{!showAll}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="resourceLst" value="{!$Label.common_label_resource}" />
+                    <apex:inputField id="resourceLst" value="{!selectedPTA.pse__Resource__c}" label=""/>
+                </apex:pageBlockSectionItem>
+				
+				<apex:pageBlockSectionItem >
+                    <apex:outputLabel for="roleLst" value="{!$Label.common_label_role}" />
+                    <apex:inputField id="roleLst" value="{!selectedPTA.pse__Resource_Role__c}" label=""/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="startDateField" value="{!$Label.common_label_start_date}" /> 
+                   	<apex:inputfield value="{!project.pse__Start_Date__c}" id="startDateField" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="endDateField" value="{!$Label.common_label_end_date}" /> 
+                   	<apex:inputField value="{!project.pse__End_Date__c}" id="endDateField"/>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="{!$Label.common_label_filter}" action="{!filterRecords}" status="ajaxStatus" reRender="tcMassAppForm,PtaSelectionPanel,pageMessages,rrAsnMassLinkingSection" styleClass="search"/>
+            	<apex:commandButton value="{!$Label.common_label_clear}" action="{!clearFilters}" reRender="tcMassAppForm,PtaSelectionPanel,pageMessages,rrAsnMassLinkingSection" status="ajaxStatus"  styleClass="search"/>
+            	<apex:commandButton action="{!redirectToProject}" value="{!$Label.common_label_cancel}" styleClass="search"/>
+        	</apex:pageBlockButtons>
+        </apex:pageBlock>
+    
+    	<apex:pageBlock title="{!$Label.mass_link_ui_label_rr_and_assignment}" id="rrAsnMassLinkingSection" rendered="{!renderFilteredPTA}">
+		   <!-- Filtered RR/ASN section-->
+		   
+				<apex:pageBlockSection id="rrAsnMassLinkingSectionPB" >
+					<apex:pageBlockSectionItem >
+						<apex:outputLabel value="Resource Request" for="rrSelector" />
+					   
+   						<apex:outputPanel >
+            			    <c:CustomLookup id="rr1" isRRLookup="true" value="{!selectedResourceRequest}" whereCondition="and assignment__r.status__c != \'closed\'" callBackfunctionName="showDifferRows"
+               					     projectId="{!parentPT.pse__Project__c}" loadRequiredScripts="true" title="{!$Label.custom_lookup_resource_request}"/>
+              			</apex:outputPanel>
+	                </apex:pageBlockSectionItem>
+	                <apex:pageBlockSectionItem >
+						<apex:outputLabel value="Assignment" for="assignmentSelector" />
+	                
+		                <apex:outputPanel >
+            			    <c:CustomLookup id="as1" isRRLookup="false"  value="{!selectedAssignment}" whereCondition="and status__c != \'closed\'" callBackfunctionName="showDifferRows"
+               					     projectId="{!parentPT.pse__Project__c}"  loadRequiredScripts="false"  title="{!$Label.custom_lookup_assignment}"/>
+             			</apex:outputPanel>
+	                </apex:pageBlockSectionItem>
+	            </apex:pageBlockSection>
+				
+		   <!-- Filtered RR/ASN section ends here-->
+		</apex:pageBlock>
+		<apex:outputPanel id="indicator" >
+			<apex:outputText rendered="{!(selectedAsnResource!='' && selectedAsnResource!=null)}" style="color: #CC0000;margin-left: 2px;margin-right: 2px;float: left;font-weight: bold;" value="{!$Label.mass_link_pta_resource_auto_updation_note}"/>
+		</apex:outputPanel>
+		
+				
+   	 	<apex:pageBlock title="{!$Label.mass_link_ui_label_ptas}" id="PtaSelectionPanel" rendered="{!renderFilteredPTA}">
+   	 	<apex:actionStatus id="ajaxStatus" onstart="wait(true)" onstop="wait(false)" />
+   	 		<apex:pageBlockTable value="{!PTAs}" var="ptaWrapper" >
+	        	<apex:column >
+		            <apex:facet name="header">
+	                	<input type="checkbox" onclick="selectAllCheckbox(this, 'massLinkPtaSelector')" id="massLinkPtaSelectAll"/>
+	                </apex:facet>
+	                <apex:inputcheckbox value="{!ptaWrapper.isSelected}" id="massLinkPtaSelector" onclick="updateSelectAllCheckBox('massLinkPtaSelector','massLinkPtaSelectAll')"  />
+	            </apex:column>
+	           	<apex:column >
+	            	<apex:facet name="header">
+	                	<apex:outputText value="{!$ObjectType.pse__Project_Task_Assignment__c.Fields.Name.Label}" />
+	           		</apex:facet>
+	               	<apex:outputpanel >
+	                   <a href="/{!ptaWrapper.pta.id}" target="_blank">
+	                       <apex:outputText rendered="{!(selectedAsnResource!='' && selectedAsnResource!=null && ptaWrapper.pta.pse__Resource__c!=null) && Not(selectedAsnResource == ptaWrapper.pta.pse__Resource__c)}" style="color: #CC0000;margin-left: 2px;margin-right: 2px;float: left;font-weight: bold;font-size:16px" value="*"/><apex:outputField value="{!ptaWrapper.pta.Name}"/>
+	                   </a>
+	               	</apex:outputpanel>
+	           	</apex:column>
+				<apex:repeat value="{!ptaColumnsFieldset}" var="f">
+	       		 	<apex:column rendered="{!NOT(f.Label == $ObjectType.pse__Project_Task_Assignment__c.Fields.Name.Label)}" >
+	       		 		<apex:facet name="header">
+	                         <apex:outputText value="{!f.Label}" />
+	                 	</apex:facet>
+	       		 		<apex:outputField value="{!ptaWrapper.pta[f.fieldPath]}"/>                    	
+	          		 </apex:column>	               	
+	      		</apex:repeat>
+	       	</apex:pageBlockTable>
+	       	<apex:outputPanel >
+	      	 	<c:Paginator pagenatorAttribute="{!ptaPaginator}" pageRerenderAttribute="PtaSelectionPanel"/> 
+		   </apex:outputPanel>
+	   <!-- Filtered PTA section Ends here-->
+	   
+	   		<apex:pageBlockButtons location="bottom">
+	               <apex:commandButton value="{!$Label.mass_link_ui_button}" action="{!massLink}" status="ajaxStatus" reRender="tcMassAppForm,PtaSelectionPanel,pageMessages,rrAsnMassLinkingSection" styleClass="search" />
+           	</apex:pageBlockButtons>
+	   </apex:pageBlock>
+	   
+	</apex:form>
+</apex:page>

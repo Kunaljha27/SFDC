@@ -1,0 +1,32 @@
+<apex:page standardController="pse__Expense__c" action="{!initActionForFeatureOnlyUser}"
+    extensions="pse.EditExpensesController" tabStyle="pse__Expense__c"
+    title="{!$Label.expense_title_edit}" showHeader="false" sidebar="false" standardStylesheets="true">
+<!-- 
+    <apex:composition template="FeatureOnlyTemplate">
+        <apex:define name="pageBody">
+        
+            <style type="text/css">        
+	        .secondaryPalette {
+	            background-color:#2AABAB;
+	            border-color: #2AABAB;
+	        }
+	        
+	        body .pageTitleIcon {
+		        background-image:url(/img/icon/plane32.png) !important;
+		        background-position: 0 0;
+		        height: 32px;
+		        width: 32px;
+		    }
+	        </style> -->
+	        <head>
+	           <title>{!$Label.expense_title_edit}</title>
+	        </head>
+	        
+	        <body class="Custom20Tab">
+                <apex:include pageName="pse__EditExpenses"/>
+            </body>
+            <!-- 
+        </apex:define>    
+    </apex:composition>
+-->
+</apex:page>

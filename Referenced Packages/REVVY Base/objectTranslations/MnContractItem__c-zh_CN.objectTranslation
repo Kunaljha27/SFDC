@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Absolute value of Adjustment 1 --></help>
+        <label>加价（绝对金额）</label>
+        <name>Adjustment1Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Adjustment 1 is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label>加价类型</label>
+        <name>Adjustment1Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of Adjustment 1 --></help>
+        <label>加价 (%)</label>
+        <name>Adjustment1__c</name>
+    </fields>
+    <fields>
+        <help><!-- Auto discount off of list price with manual adjustment (e.g., $100 off auto discount + $100 manual so total $200), calculated by adjustment rules. --></help>
+        <label>自动折扣（绝对金额）</label>
+        <name>AutoDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the auto discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off). --></help>
+        <label>自动折扣类型</label>
+        <name>AutoDiscountType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percentage auto discount off of list price (e.g., 20% off), calculated by adjustment rules. --></help>
+        <label>自动折扣 (%)</label>
+        <name>AutoDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the product is charged on a recurring basis. A product can be charged one-time, weekly, monthly, or yearly. --></help>
+        <label>结账频率</label>
+        <name>BillingFrequency_WF__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the product associated with this contract item. --></help>
+        <label>产品</label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel>合同项目</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ContractItemSubLines Need Approval Count --></label>
+        <name>ContractItemSubLinesNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the solution that this quote item belongs to. --></help>
+        <label><!-- Contract Solution --></label>
+        <name>ContractSolution__c</name>
+        <relationshipLabel><!-- Solution Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the contract that this contract item belongs to. --></help>
+        <label>合同</label>
+        <name>Contract__c</name>
+        <relationshipLabel>合同项目</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Cost Price of a product in contract  item --></help>
+        <label>成本</label>
+        <name>CostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total discount off of list price (e.g., $100 off). --></help>
+        <label>折扣（绝对金额）</label>
+        <name>DiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off). --></help>
+        <label>折扣类型</label>
+        <name>DiscountType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percentage discount off of list price (e.g., 20% off). --></help>
+        <label>百分比折扣</label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <label>合同项目结束日期</label>
+        <name>EndDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>合同项目 ID</label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <label>总价（显示）</label>
+        <name>ExtendedPriceDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Price after discount multiplied by quantity. --></help>
+        <label>总价（计算）</label>
+        <name>ExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label><!-- Is Cost Price System populated --></label>
+        <name>IsSystemCostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label><!-- Is List Price System populated --></label>
+        <name>IsSystemListPrice__c</name>
+    </fields>
+    <fields>
+        <label>行类型</label>
+        <name>LineType__c</name>
+        <picklistValues>
+            <masterLabel>Not tracked on contract</masterLabel>
+            <translation><!-- Not tracked on contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Absolute value of the margin --></help>
+        <label>毛利（绝对金额）</label>
+        <name>MarginAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Margin is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label>毛利类型</label>
+        <name>MarginType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of the margin --></help>
+        <label>毛利 (%)</label>
+        <name>Margin__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Monthly basis, shown in currency. --></help>
+        <label>每月加价（绝对金额）</label>
+        <name>MonthlyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly adjustment field is the adjustment on all sub-lines that are billed Monthly, including the adjustment on the main line --></help>
+        <label>每月加价 (%)</label>
+        <name>MonthlyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Monthly basis. --></help>
+        <label>每月成本</label>
+        <name>MonthlyCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Monthly basis. --></help>
+        <label>包括子行在内的每月成本</label>
+        <name>MonthlyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate absolute discount on products that are billed on a monthly basis, shown in currency. --></help>
+        <label>每月折扣（绝对金额）</label>
+        <name>MonthlyDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed monthly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed monthly, including the discount on the main line if the main line is billed monthly. --></help>
+        <label>每月折扣 (%)</label>
+        <name>MonthlyDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed monthly, and the unit price of the configurable product, if the configurable product is billed monthly. --></help>
+        <label>包括子行在内的每月总价</label>
+        <name>MonthlyExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed monthly. --></help>
+        <label>所有子行的每月总价</label>
+        <name>MonthlyExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Monthly basis, shown in currency. --></help>
+        <label>每月毛利（绝对金额）</label>
+        <name>MonthlyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly margin field is the adjustment on all sub-lines that are billed Monthly, including the margin on the main line --></help>
+        <label>每月毛利 (%)</label>
+        <name>MonthlyMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>每月列表</label>
+        <name>MonthlyPriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a monthly basis. --></help>
+        <label>包括子行在内的每月列表</label>
+        <name>MonthlyPriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a monthly basis, before any discounts are applied. --></help>
+        <label>所有子行的每月列表</label>
+        <name>MonthlyPriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>每月总单位价格</label>
+        <name>MonthlyTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis after discounts have been applied. --></help>
+        <label>每月总单位价格</label>
+        <name>MonthlyTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Monthly basis. --></help>
+        <label>包括子行在内的每月单位价格</label>
+        <name>MonthlyUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Monthly basis. --></help>
+        <label>所有子行的每月单位价格</label>
+        <name>MonthlyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis before any discounts are applied. --></help>
+        <label>每月总值列表</label>
+        <name>MonthlyValueBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag is set by the system when the workflow suggests an approval is needed for the underlying contract item. --></help>
+        <label><!-- Approval Required --></label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a one-time basis, shown in currency. --></help>
+        <label>一次性加价（绝对金额）</label>
+        <name>OneTimeAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed one time. If the product is configurable, then the one time adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed one time plus main line --></help>
+        <label>一次性加价 (%)</label>
+        <name>OneTimeAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost  price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label>一次性成本</label>
+        <name>OneTimeCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a one-time basis. --></help>
+        <label>包括子行在内的一次性成本</label>
+        <name>OneTimeCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a one-time basis, shown in currency. --></help>
+        <label>一次性折扣（绝对金额）</label>
+        <name>OneTimeDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed one time. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed one time, including the discount on the main line if the main line is billed one time. --></help>
+        <label>一次性折扣 (%)</label>
+        <name>OneTimeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed one time, and the unit price of the configurable product, if the configurable product is billed one time. --></help>
+        <label>包括子行在内的一次性总价</label>
+        <name>OneTimeExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed one time. --></help>
+        <label>所有子行的一次性总价</label>
+        <name>OneTimeExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a one-time basis, shown in currency. --></help>
+        <label>一次性毛利（绝对金额）</label>
+        <name>OneTimeMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed one time. If the product is configurable, then the one time margin field is the adjustment on all sub-lines (e.g., the components) that are billed one time, including the margin on the main line i --></help>
+        <label>一次性毛利 (%)</label>
+        <name>OneTimeMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>一次性列表</label>
+        <name>OneTimePriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label>包括子行在内的一次性列表</label>
+        <name>OneTimePriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a one-time basis, before any discounts are applied. --></help>
+        <label>所有子行的一次性列表</label>
+        <name>OneTimePriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>一次性总单位价格</label>
+        <name>OneTimeTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis after discounts have been applied. --></help>
+        <label>一次性总单位价格</label>
+        <name>OneTimeTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label>一次性单位价格</label>
+        <name>OneTimeUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a one-time basis. --></help>
+        <label>包括子行在内的一次性单位价格</label>
+        <name>OneTimeUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis before any discounts are applied. --></help>
+        <label>一次性总列表</label>
+        <name>OneTimeValueBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <label>价格</label>
+        <name>PriceDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the Price List Line object used to derive the List Price for this product. --></help>
+        <label><!-- Price List Line --></label>
+        <name>PriceListLine__c</name>
+        <relationshipLabel><!-- ContractLineItem --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>价格类型</label>
+        <name>PriceType__c</name>
+        <picklistValues>
+            <masterLabel>List</masterLabel>
+            <translation><!-- List --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- List price of product for this contract. --></help>
+        <label>标价</label>
+        <name>Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Denotes the contract subtype / pricing list ID from medtech --></help>
+        <label>定价源</label>
+        <name>PricingSource__c</name>
+    </fields>
+    <fields>
+        <label>产品名称</label>
+        <name>ProductName_F__c</name>
+    </fields>
+    <fields>
+        <label>产品类型</label>
+        <name>ProductType_F__c</name>
+    </fields>
+    <fields>
+        <label>产品 ID</label>
+        <name>Product_ID_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label>数量</label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Position number for this contract item. --></help>
+        <label>合同项目位置</label>
+        <name>RecordNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Solution Name --></label>
+        <name>Solution_Name_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Source quote item from which this contract item was created. --></help>
+        <label>源报价项目</label>
+        <name>SourceQuoteItem__c</name>
+        <relationshipLabel>合同项目</relationshipLabel>
+    </fields>
+    <fields>
+        <label>合同项目开始日期</label>
+        <name>StartDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label>期限（月份）</label>
+        <name>Term__c</name>
+    </fields>
+    <fields>
+        <label>总折扣（绝对金额）</label>
+        <name>TotalDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <label>总折扣 (%)</label>
+        <name>TotalDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price multiplied by quantity. --></help>
+        <label>总标价</label>
+        <name>TotalPrice__c</name>
+    </fields>
+    <fields>
+        <label>总值</label>
+        <name>TotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Price (Display) --></label>
+        <name>UnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of product (list price less the discount) --></help>
+        <label>单位价格</label>
+        <name>UnitPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total volume discount off of list price (e.g., $100 off). --></help>
+        <label><!-- Vol. Disc. (Abs) --></label>
+        <name>VolDiscAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Percentage volume discount off of list price (e.g., 20% off). --></help>
+        <label><!-- Vol. Disc. (%) --></label>
+        <name>VolDisc__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Weekly basis, shown in currency. --></help>
+        <label>每周加价（绝对金额）</label>
+        <name>WeeklyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the adjustment on the main --></help>
+        <label>每周加价 (%)</label>
+        <name>WeeklyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Weekly basis. --></help>
+        <label>每周成本</label>
+        <name>WeeklyCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Weekly basis. --></help>
+        <label>包括子行在内的每周成本</label>
+        <name>WeeklyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a weekly basis, shown in currency. --></help>
+        <label>每周折扣（绝对金额）</label>
+        <name>WeeklyDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed weekly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed weekly, including the discount on the main line if the main line is billed weekly. --></help>
+        <label>每周折扣 (%)</label>
+        <name>WeeklyDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed weekly, and the unit price of the configurable product, if the configurable product is billed weekly. --></help>
+        <label>包括子行在内的每周总价</label>
+        <name>WeeklyExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed weekly. --></help>
+        <label>所有子行的每周总价</label>
+        <name>WeeklyExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Weekly basis, shown in currency. --></help>
+        <label>每周毛利（绝对金额）</label>
+        <name>WeeklyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <label>每周列表</label>
+        <name>WeeklyPriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a weekly basis. --></help>
+        <label>包括子行在内的每周列表</label>
+        <name>WeeklyPriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a weekly basis, before any discounts are applied. --></help>
+        <label>所有子行的每周列表</label>
+        <name>WeeklyPriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>每周总单位价格</label>
+        <name>WeeklyTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis after discounts have been applied. --></help>
+        <label>每周总单位价格</label>
+        <name>WeeklyTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Weekly basis. --></help>
+        <label>包括子行在内的每周单位价格</label>
+        <name>WeeklyUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Weekly basis. --></help>
+        <label>所有子行的每周单位价格</label>
+        <name>WeeklyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis before any discounts are applied. --></help>
+        <label>每周总列表</label>
+        <name>WeeklyValueBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the margin on the main line if the --></help>
+        <label>每周毛利 (%)</label>
+        <name>Weekly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Yearly basis, shown in currency. --></help>
+        <label>每年加价（绝对金额）</label>
+        <name>YearlyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the adjustment on the main --></help>
+        <label>每年加价 (%)</label>
+        <name>YearlyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Yearly basis. --></help>
+        <label>每年成本</label>
+        <name>YearlyCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Yearly basis. --></help>
+        <label>包括子行在内的每年成本</label>
+        <name>YearlyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a yearly basis, shown in currency. --></help>
+        <label>每年折扣（绝对金额）</label>
+        <name>YearlyDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed yearly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed yearly, including the discount on the main line if the main line is billed yearly. --></help>
+        <label>每年折扣 (%)</label>
+        <name>YearlyDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed yearly, and the unit price of the configurable product, if the configurable product is billed yearly. --></help>
+        <label>包括子行在内的每年总价</label>
+        <name>YearlyExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed yearly. --></help>
+        <label>所有子行的每年总价</label>
+        <name>YearlyExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Yearly basis, shown in currency. --></help>
+        <label>每年毛利（绝对金额）</label>
+        <name>YearlyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the margin on the main line if the --></help>
+        <label>每年毛利 (%)</label>
+        <name>YearlyMarginF__c</name>
+    </fields>
+    <fields>
+        <label>每年列表</label>
+        <name>YearlyPriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a yearly basis. --></help>
+        <label>包括子行在内的每年列表</label>
+        <name>YearlyPriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a yearly basis, before any discounts are applied. --></help>
+        <label>所有子行的每年列表</label>
+        <name>YearlyPriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>每年总单位价格</label>
+        <name>YearlyTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis after discounts have been applied. --></help>
+        <label>每年总单位价格</label>
+        <name>YearlyTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Yearly basis. --></help>
+        <label>包括子行在内的每年单位价格</label>
+        <name>YearlyUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Yearly basis. --></help>
+        <label>所有子行的每年单位价格</label>
+        <name>YearlyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis before any discounts are applied. --></help>
+        <label>每年总列表</label>
+        <name>YearlyValueBeforeDiscount_F__c</name>
+    </fields>
+    <layouts>
+        <layout>MnContractItemLayout19</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnContractItemLayout20</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Id --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>成本价格必须大于或等于零</errorMessage>
+        <name>VMnCostPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>标价必须大于或等于零</errorMessage>
+        <name>VMnListPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>单位价格必须大于或等于零</errorMessage>
+        <name>VMnUnitPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>数量不能为零或负数</errorMessage>
+        <name>VmnQuantityValValidity</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Browse_Catalog --></label>
+        <name>Browse_Catalog</name>
+    </webLinks>
+</CustomObjectTranslation>

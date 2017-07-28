@@ -1,0 +1,85 @@
+<apex:page standardController="Strategic_Account_Plan__c" extensions="M2O_ActivationPlanController">
+    
+    <apex:stylesheet value="{!$Resource.M2O_ActivationPlan_VF_Css}"/>
+    <script language="javascript" type="text/javascript">
+        function setFocusOnLoad() {}
+        function updateActivity(activityDetail,type,category,startDate,enddate,status,activityId){
+             update(activityDetail,activityDetail,type,type,category,category,startDate,enddate,status,activityId);
+        } 
+         
+    </script>
+    <apex:form id="tableform" >
+        <apex:actionFunction name="update" action="{!showEditActivity}" rerender="editActivitySectionId,addActivitySectionId">
+            <apex:param name="previousActivityDetail" value="" assignTo="{!previousActivityDetail}" /> 
+            <apex:param name="updatedActivityDetail" value="" assignTo="{!ActivationPlan.Activity_Detail__c}" />
+            <apex:param name="previousType" value="" assignTo="{!previousType}" />
+            <apex:param name="updatedType" value="" assignTo="{!ActivationPlan.Type__c}" />
+            <apex:param name="previousCategory" value="" assignTo="{!previousCategory}" />
+            <apex:param name="updatedCategory" value="" assignTo="{!ActivationPlan.Category__c}" />
+            <apex:param name="startDate" value="" assignTo="{!ActivationPlan.Activity_Start_Date__c}" />
+            <apex:param name="endDate" value="" assignTo="{!ActivationPlan.Activity_End_Date__c}" />
+            <apex:param name="status" value="" assignTo="{!ActivationPlan.Activity_Status__c}" />
+            <apex:param name="activityId" value="" assignTo="{!activityId}" />
+        </apex:actionFunction>
+        <table border="1" id="activitytable" class="tableWidth">  
+            <tr>
+                <td rowspan="2" class="header" >{!$label.M2O_ActivationPlan_VF_Category}</td>
+                <td colspan="3" class="header">{!$label.M2O_ActivationPlan_VF_Q1}</td>
+                <td colspan="3" class="header">{!$label.M2O_ActivationPlan_VF_Q2}</td>
+                <td colspan="3" class="header">{!$label.M2O_ActivationPlan_VF_Q3}</td>
+                <td colspan="3" class="header">{!$label.M2O_ActivationPlan_VF_Q4}</td>
+            </tr>
+            <tr>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_JAN}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_FEB}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_MAR}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_APR}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_MAY}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_JUN}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_JUL}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_AUG}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_SEP}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_OCT}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_NOV}</td>
+                <td class="monthAndCategoryHeader">{!$label.M2O_ActivationPlan_VF_DEC}</td>
+            </tr>
+            <apex:repeat value="{!mapOfWrapperTypeCategoryActivityList}" var="mapValue" id="repeatBlockOFMap">
+                <tr>
+                    <td colspan="13" class="typeHeader"><center>{!mapValue}</center></td>
+                </tr>
+                <c:M2O_ActivationPlanCategoryComponent categorylist="{!mapOfWrapperTypeCategoryActivityList[mapValue]}"/>
+            </apex:repeat>        
+        </table>
+    </apex:form>
+    <apex:form id="addAndEditSectionForm">
+        <apex:outputPanel id="addActivitySectionId" rendered="{!hasAccess.haseditaccess}" >
+            <apex:pageBlock id="addActivityPageBlockId" title="{!$Label.M2O_ActivationPlan_VF_AddActivity}" rendered="{!showAddActivity}">
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:pageBlockSection id="addActivityPageBlockSectionId">
+                    <apex:inputfield id="actTypeId" value="{!ActivationPlan.Type__c}" required="true"/>
+                    <apex:inputfield id="actCatagoryId" value="{!ActivationPlan.Category__c}" required="true"/>
+                    <apex:inputfield id="actDetailId" value="{!ActivationPlan.Activity_Detail__c}" required="true"/>
+                    <apex:inputfield id="actStatusId" value="{!ActivationPlan.Activity_Status__c}" required="true"/>
+                    <apex:inputfield id="actStartDateId" value="{!ActivationPlan.Activity_Start_Date__c}" required="true"/>
+                    <apex:inputfield id="actEndDateId" value="{!ActivationPlan.Activity_End_Date__c}" required="true"/>
+                </apex:pageBlockSection>
+                <center><apex:commandButton id="addBtnId" value="{!$Label.M2O_ActivationPlan_VF_Save}" action="{!addActivity}" /><apex:commandButton value="{!$Label.M2O_ActivationPlan_VF_Cancel}" action="{!cancel}" rerender="addActivitySectionId"/> </center>
+            </apex:pageBlock>
+        </apex:outputpanel>
+        <apex:outputPanel id="editActivitySectionId" rendered="{!hasAccess.haseditaccess}">
+            <apex:pageBlock id="editActivityPageBlockId" title="Edit Activity"  rendered="{!showEditActivity}">
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:pageBlockSection id="editActivityPageBlockSectionId">
+                    <apex:inputfield id="actTypeEditId" value="{!ActivationPlan.Type__c}" required="true"/>
+                    <apex:inputfield id="actCatagoryEditId" value="{!ActivationPlan.Category__c}" required="true"/>
+                    <apex:inputfield id="actDetailEditId" value="{!ActivationPlan.Activity_Detail__c}" required="true"/>
+                    <apex:inputfield id="actStatusEditId" value="{!ActivationPlan.Activity_Status__c}" required="true"/>
+                    <apex:inputfield id="actStartDateEditId" value="{!ActivationPlan.Activity_Start_Date__c}" required="true"/>                  
+                    <apex:inputfield id="actEndDateEditId" value="{!ActivationPlan.Activity_End_Date__c}" required="true"/>
+                </apex:pageBlockSection>
+                <center><apex:commandButton id="updateBtnId" value="{!$Label.M2O_ActivationPlan_VF_Update}" action="{!updateActivity}" /><apex:commandButton value="{!$Label.M2O_ActivationPlan_VF_Delete}" action="{!deleteActivity}"/><apex:commandButton value="{!$Label.M2O_ActivationPlan_VF_Cancel}" action="{!cancel}"/> </center><br/>
+            </apex:pageBlock> 
+        </apex:outputpanel>  
+    </apex:form>   
+    <c:M2O_SAPAttachmentComponent attachmentRecordID="{!attachmentRecordId}" />
+</apex:page>

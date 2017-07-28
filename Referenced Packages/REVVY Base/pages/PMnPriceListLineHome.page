@@ -1,0 +1,23 @@
+<apex:page sidebar="false" tabstyle="MnAdmin__tab" controller="REVVY.CMnPricingTabCtrl">
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+        <apex:pageMessages id="pageMessages"/>
+        <c:VMnListNodes nodeType="PriceListLine" newButtonLabel="{!$Label.revvy__MnNewPriceListLineButton}" deleteLinkConfirm="{!$Label.revvy__MnPriceListLineDeleteLinkConfirm}" sectionTitle="{!$Label.revvy__Title_PriceListLineSummary}" fieldSetName="{!priceListLineSummaryFSName}" allowSelection="false" displayActionColumn="true"/>
+
+        <!-- ---------- -->
+      </div>
+    </div>
+    </div>
+ </apex:page>

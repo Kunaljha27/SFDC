@@ -1,0 +1,41 @@
+<apex:page standardController="pse__Project_Task__c" extensions="pse.AddTaskFromProjTemplateController" id="page" action="{!init}" recordSetVar="Project Tasks">
+	
+	<apex:pageMessages id="pageMessages"/>
+	<c:projectPicker modelAttribute="{!projectPickerModel}" rendered="{!NOT(isProjectTemplateSelected) && isEverythingOk}" />
+	
+	<apex:outputPanel rendered="{!isProjectTemplateSelected}">
+		<apex:sectionHeader title="{!$Label.Add_Project_Task_Page_Title}" help="{!$Page.pse__AddTaskFromProjectTemplateHelp}"/>
+		<apex:form id="pageForm">
+	
+			
+	
+			<apex:pageBlock title="{!$Label.create_project_task_details}"  id="pageBlock" rendered="{!isEverythingOk}">
+				{!$Label.Create_Project_Task_From_Template_Message}
+				<p/>
+				<apex:pageBlockButtons >
+                	<apex:commandButton value="{!$Label.add_task}" action="{!onAddTaskClick}" />
+                	<apex:commandButton value="{!$Label.Select_Different_Template}"  action="{!onNextClick}" immediate="true"/>
+                	<apex:commandButton value="{!$Label.common_label_cancel}" action="{!onCancelClick}" immediate="true"/>
+            	</apex:pageBlockButtons>
+            	
+            	<apex:pageBlockSection title="{!$Label.create_project_task_details}" columns="1"  rendered="{!hasProjectTasks}" id="projectsTasksFromTemplateProject"> 
+	
+	           		<apex:pageBlockSectionItem >
+	           			<apex:outputText value="{!$Label.Top_Level_Task_Start_Date}" />
+	           			<apex:inputField value="{!mockProjForStartDate.pse__Start_Date__c}" />
+	           		</apex:pageBlockSectionItem>
+	
+					<apex:pageBlockTable value="{!templateProjectTaskMap}" var="taskKey">
+						<apex:repeat value="{!TemplateProjTaskColumn}" var="fName">
+							<apex:column headerValue="{!fName.Label}">
+								<apex:outputField value="{!templateProjectTaskMap[taskKey][fName.fieldPath]}" />
+							</apex:column> 
+						</apex:repeat>
+					</apex:pageBlockTable>
+    
+           		</apex:pageBlockSection>
+           		
+			</apex:pageBlock>
+		</apex:form>
+	</apex:outputPanel>
+</apex:page>

@@ -1,0 +1,16 @@
+<apex:page standardController="REVVY__MnCatalogNode__c" extensions="REVVY.PMnCategoryMultiselect">
+    <apex:form >
+        <apex:pageBlock title="Categories">
+            <c:MultiselectPicklist leftLabel="Available Categories"
+                leftOptions="{!allCategories}"
+                rightLabel="Selected Categories"
+                rightOptions="{!selectedCategories}"
+                size="14"
+                width="150px"/>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:outputText >{!message}</apex:outputText>
+</apex:page>

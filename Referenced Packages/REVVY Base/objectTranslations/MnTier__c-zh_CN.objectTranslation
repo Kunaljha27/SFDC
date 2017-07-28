@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Tier --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Tier ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Maximum Quantity --></help>
+        <label><!-- Max Quote Line Qty --></label>
+        <name>MaxQuantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Minimum Quantity --></help>
+        <label><!-- Min Quote Line Qty --></label>
+        <name>MinQuantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the pricing Tier that this tier belongs to. --></help>
+        <label><!-- Volume Pricing Name --></label>
+        <name>PricingTierList__c</name>
+        <relationshipLabel><!-- Volume Pricing --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This is discount amount or the list price based on the Type field on Tiered Pricing. --></help>
+        <label><!-- Tier Value --></label>
+        <name>TierValue__c</name>
+    </fields>
+    <nameFieldLabel><!-- Tier --></nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- Tier value should be greater than or equal to zero --></errorMessage>
+        <name>VMnTierValueValidity</name>
+    </validationRules>
+</CustomObjectTranslation>

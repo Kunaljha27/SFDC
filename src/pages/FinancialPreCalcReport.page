@@ -1,0 +1,336 @@
+<apex:page controller="FinancialPreCalcReportUtility" sidebar="false" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+        <head>
+        <style type="text/css">
+            table, th, td { border: 1px solid black; border-collapse: collapse;font: bold 1em Arial, Helvetica, sans-serif; }
+            td.blue {color: white;background: #0B5ED7;vertical-align: top; font: bold 1em Arial, Helvetica, sans-serif;}
+            td.grey {color: white;background: #606060;vertical-align: top; font: bold 1em Arial, Helvetica, sans-serif;}
+            td.hide {border-style: hidden;}
+            @page {
+                margin-top: 0.6in;
+                @top-center {
+                    content: element(header);
+                }
+            }
+            div.header {
+                position: running(header);
+            }
+            div.absolute{
+                position: absolute;
+                top: 14px;
+                left: 10px;
+                
+            }
+
+        </style>
+        </head>
+
+        <div class="header">
+            <center><img src="{!$Resource.HeaderLogo}" width="100%"/></center>
+            <div class="absolute" style="font: bold 9pt Arial, Helvetica, sans-serif;">Quote: {!quote.name}<br/>Valid: {!startDate}
+                until {!endDate}<br/>{!netSalesValueTotal}</div>
+
+        </div>
+        
+
+        <body style = "font:11px">
+
+
+        <table style="text-align: left; width: 100%;">
+            <tbody>
+                <tr style="background: black; color: white;">
+                    <td>Category</td>
+                    <td>Description</td>
+                    <td>GL-Account</td>
+                    <td>Total</td>
+                    <td>Equipment</td>
+                    <td>3rd Party</td>
+                    <td>CS</td>
+                </tr>
+            <apex:repeat value="{!reportLineDataBucket}" var="qi">
+
+                <apex:repeat value="{!qi}" var="qis">
+                    <tr>
+                        <td style="white-space: nowrap;" class="{!IF(qis.blueLine == true, 'blue',IF(qis.greyLine == true, 'grey',''))}">{!qis.category} </td>
+                        <td style="width:30%;font:10px;" class="{!IF(qis.blueLine == true, 'blue',IF(qis.greyLine == true, 'grey',''))}">{!qis.description}</td>
+                        <td class="{!IF(qis.blueLine == true, 'blue',IF(qis.greyLine == true, 'grey',''))}">{!qis.glaccount}</td>
+                        <td style="white-space: nowrap;"><apex:outputText value="{!IF(qis.total != null, '', '')}{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!IF(qis.total != null, qis.total,'')}"/>
+                            </apex:outputText>
+                            <br/>
+                            <apex:outputText value="{0,number,##0.00}{!IF(qis.totalPercent != null, '%', '')}"> 
+                                <apex:param value="{!IF(qis.totalPercent != null, qis.totalPercent, '')}"/> 
+                            </apex:outputText>
+                        </td>
+                        <td style="white-space: nowrap;"><apex:outputText value="{!IF(qis.equipment != null, '', '')}{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!IF(qis.equipment != null, qis.equipment, '')}"/>
+                            </apex:outputText>
+                            <br/>
+                            <apex:outputText value="{0,number,##0.00}{!IF(qis.equipmentPercent != null, '%','')}"> 
+                                <apex:param value="{!qis.equipmentPercent}"/> 
+                            </apex:outputText>
+                        </td>
+                        <td style="white-space: nowrap;"><apex:outputText value="{!IF(qis.thirdParty != null, '', '')}{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!qis.thirdParty}"/>
+                            </apex:outputText>
+                            <br/>
+                            <apex:outputText value="{0,number,##0.00}{!IF(qis.thirdPartyPercent != null, '%','')}"> 
+                                <apex:param value="{!qis.thirdPartyPercent}"/> 
+                            </apex:outputText>
+                        </td>
+                        <td style="white-space: nowrap;"><apex:outputText value="{!IF(qis.cs != null, '', '')}{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!qis.cs}"/>
+                            </apex:outputText>
+                            <br/>
+                            <apex:outputText value="{0,number,##0.00}{!IF(qis.csPercent != null, '%','')}"> 
+                                <apex:param value="{!qis.csPercent}"/> 
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <!-- Blank row to separate sections -->
+                <tr style="border-style: hidden">
+                    <td class="hide"></td>
+                        <td class="hide"></td>
+                        <td class="hide"></td>
+                        <td class="hide"><br/></td>
+                        <td class="hide"><br/></td>
+                        <td class="hide"><br/></td>
+                        <td class="hide"><br/><apex:outputText >&nbsp;</apex:outputText></td>
+                </tr>
+            </apex:repeat>
+            <!-- Blank row to separate sections -->
+                <tr style="border-style: hidden">
+                    <td class="hide"></td>
+                        <td class="hide"></td>
+                        <td class="hide"></td>
+                        <td class="hide"><br/></td>
+                        <td class="hide"><br/></td>
+                        <td class="hide"><br/></td>
+                        <td class="hide"><br/><apex:outputText >&nbsp;</apex:outputText></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+        <table style="text-align: left; width: 100%;">
+
+            <tr>
+                <td colspan="7" style="text-align:center;">Integral Margin</td>
+            </tr>
+            <tr style="background: black; color: white;">
+                <td style="width:33%">Description</td>
+                <td>List Price</td>
+                <td>Target Price</td>
+                <td>Offer Price</td>
+                <td>ISM</td>
+                <td>IVM</td>
+                <td>IGM</td>
+            </tr>
+            <tr>
+                <td style="width:33%;" class="blue">Quote Total</td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!listPriceRollup}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!quote.Extended_Target_Price__c}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!offerPriceRollup}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!totalISM[0]}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!totalIVM[0]}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!totalIGM[0]}"/>
+                    </apex:outputText>
+                </td>
+            </tr>
+            <apex:repeat value="{!reportProductList}" var="rpl">
+                <tr>
+                    <td>{!rpl.name}</td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!rpl.quoteItem.REVVY__Extended_Price_F__c}"/>
+                    </apex:outputText>
+                </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!rpl.quoteItem.Extended_Target_Price__c}"/>
+                    </apex:outputText>
+                </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!rpl.quoteItem.REVVY__Extended_Price_F__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><br/>&nbsp;</td>
+                    <td><br/>&nbsp;</td>
+                    <td><br/>&nbsp;</td>
+                </tr>
+            </apex:repeat>
+
+        </table>
+
+        <br/><br/>
+
+        <table style="text-align: left; width: 100%;">
+
+            <tr>
+                <td colspan="7" style="text-align:center;">Margin/TPA Percentage</td>
+            </tr>
+            <tr style="background: black; color: white;">
+                <td style="width:33%">Description</td>
+                <td>List Price</td>
+                <td>Target Price</td>
+                <td>Attainment</td>
+                <td>ISM</td>
+                <td>IVM</td>
+                <td>IGM</td>
+            </tr>
+            <tr>
+                <td style="width:33%;" class="blue">Quote Total</td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!listPriceRollup}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!quote.Extended_Target_Price__c}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,###,###,###,##0.00}%"> 
+                            <apex:param value="{!IF(quote.Extended_Target_Price__c != 0, 100*offerPriceRollup/quote.Extended_Target_Price__c, '')}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,##0.00}{!IF(quote.HISS_Total_Sell_Price__c != null, '%','')}"> 
+                    <apex:param value="{!IF(quote.HISS_Total_Sell_Price__c != 0, 100*totalISM[0]/quote.HISS_Total_Sell_Price__c,'')}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,##0.00}{!IF(quote.HISS_Total_Sell_Price__c != null, '%','')}"> 
+                    <apex:param value="{!IF(quote.HISS_Total_Sell_Price__c != 0, 100*totalIVM[0]/quote.HISS_Total_Sell_Price__c,'')}"/>
+                    </apex:outputText>
+                </td>
+                <td><apex:outputText value="{0,number,##0.00}{!IF(quote.HISS_Total_Sell_Price__c != null, '%','')}"> 
+                    <apex:param value="{!IF(quote.HISS_Total_Sell_Price__c != 0, 100*totalIGM[0]/quote.HISS_Total_Sell_Price__c,'')}"/>
+                    </apex:outputText>
+                </td>
+            </tr>
+            <apex:repeat value="{!reportProductList}" var="rpl">
+                <tr>
+                    <td>{!rpl.name}</td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!rpl.quoteItem.REVVY__Extended_Price_F__c}"/>
+                    </apex:outputText>
+                </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                            <apex:param value="{!rpl.quoteItem.Extended_Target_Price__c}"/>
+                    </apex:outputText>
+                </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}%"> 
+                                <apex:param value="{!IF(rpl.quoteItem.Extended_Target_Price__c != 0,(100*rpl.quoteItem.REVVY__Extended_Price_F__c/rpl.quoteItem.Extended_Target_Price__c),0)}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><br/>&nbsp;</td>
+                    <td><br/>&nbsp;</td>
+                    <td><br/>&nbsp;</td>
+                </tr>
+            </apex:repeat>
+
+        </table>
+
+        <br/><br/>
+
+        <table style="text-align: left; width: 100%;">
+            <tbody>
+                <tr style="background: black; color: white;">
+                    <td/>
+                    <td>Offer</td>
+                    <td>List</td>
+                    <td>Discount</td>
+                    <td>Relative</td>
+                    <td>Target</td>
+                    <td>Distance to Target</td>
+                    <td>Relative</td>
+                    <td>Stop</td>
+                    <td>Distance to Stop</td>
+                    <td>Relative</td>
+                </tr>
+                <tr >
+                    <td>Quote</td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!offerPriceRollup}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!listPriceRollup}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!listPriceRollup-offerPriceRollup}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}%"> 
+                                <apex:param value="{!IF(listPriceRollup != 0, (100*(listPriceRollup-offerPriceRollup))/listPriceRollup,'')}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!quote.Extended_Target_Price__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!totalNSV[0]-quote.Extended_Target_Price__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}%"> 
+                                <apex:param value="{!IF(quote.Extended_Target_Price__c != 0, (100*(offerPriceRollup-quote.Extended_Target_Price__c))/quote.Extended_Target_Price__c,'')}"/>
+                        </apex:outputText>
+                    </td>
+                    <td class="grey"/>
+                    <td class="grey"/>
+                    <td class="grey"/>
+                </tr>
+
+                <tr>
+                    <td colspan="8" style="text-align: center;">Offer requires REGIONAL approval</td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!quote.Extended_Pat1__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!totalNSV[0]-quote.Extended_Pat1__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}%"> 
+                                <apex:param value="{!IF(quote.Extended_Pat1__c != 0,(100*(offerPriceRollup-quote.Extended_Pat1__c))/quote.Extended_Pat1__c,'')}"/>
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" style="text-align: center;">and next CLUSTER approval</td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!quote.Extended_Pat2__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}"> 
+                                <apex:param value="{!totalNSV[0]-quote.Extended_Pat2__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td><apex:outputText value="{0,number,###,###,###,##0.00}%">
+                                <apex:param value="{!IF(quote.Extended_Pat2__c != 0,(100*(offerPriceRollup-quote.Extended_Pat2__c))/quote.Extended_Pat2__c,'')}"/>
+                        </apex:outputText>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+</body>
+</apex:page>

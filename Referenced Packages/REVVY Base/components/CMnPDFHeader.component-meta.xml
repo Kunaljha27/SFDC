@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>26.0</apiVersion>
+    <description>Component to show DRAFT status on header</description>
+    <label>Header for proposal to show quote status</label>
+</ApexComponent>

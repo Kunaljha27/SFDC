@@ -1,0 +1,14 @@
+<apex:page standardController="REVVY__MnConfigEngineOptionGroup__c" extensions="REVVY.CMnOGDetailCtrl,REVVY.CMnVFPageGenericCtrl" sidebar="false">
+  <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+  <script>
+    var namespaceLowerCase = "{!namespaceLowerCase}";
+    var isSolution = "{!isSolution}";
+    var url = '';
+    if(isSolution === 'true') {
+        url = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/solutionoptiongroup/new';
+    } else {
+        url = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/optiongroup/new';
+    }
+    mnNavigateToUrl(url);
+  </script>
+</apex:page>

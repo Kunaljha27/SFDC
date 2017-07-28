@@ -1,0 +1,109 @@
+<apex:page standardController="Strategic_Account_Plan__c" showHeader="false" extensions="M2O_FinancialTrackingController" sidebar="false">
+
+    <apex:stylesheet value="{!$Resource.M2O_FinancialTracking_VF_CSS}"/>
+    <apex:form id="tableForm">
+        <apex:pageblock id="mainPage">
+            <apex:pagemessages id="errorMsg"></apex:pagemessages>
+            <center id="centerButton">
+                <apex:commandButton id="editT" value="{!$Label.M2O_FinancialTracking_Edit}" action="{!enableEditing}" rendered="{!(!editMode) && Hasaccess.haseditaccess}"/>
+                <apex:commandButton id="saveT" value="{!$Label.M2O_FinancialTracking_Save}" action="{!save}"  rendered="{!editMode}"/>
+                <apex:commandButton id="cancelT" value="{!$Label.M2O_FinancialTracking_Cancel}" action="{!cancel}" rendered="{!editMode}"/>
+            </center>    
+            
+            <apex:variable id="dLCount" value="{!1}" var="DLCount"/>
+            <apex:variable id="blue" value="businessNameCurrent" var="Blue"/>
+            <apex:variable id="white" value="whiteCell" var="White"/>
+            <apex:variable id="orange" value="businessNameIntegrated" var="Orange"/> 
+            <table class="outerTable">
+                <tr><td>
+                    <table id="InnerTable" class="innerTable">
+                        <col id="colBusiness" class="colBusiness"/>
+                        <col id="colData1" width="87px"/>
+                        <col id="colData2" width="87px"/>
+                        <col id="colData3" width="87px"/>
+                     <tr id="headCurrent"><td id="blank"></td><td id="headingCurrent" class="headingCurrent" colspan="3" align="Center">{!$Label.M2O_FinancialTracking_Sales}</td></tr>
+    
+                    <tr id="subHeading" class="subHeading"><td>{!$Label.M2O_FinancialTracking_Business}</td><td>{!Year(fromDate)} <br/> {!$Label.M2O_FinancialTracking_Target}</td><td>{!Year(fromDate)}<br/> {!$Label.M2O_FinancialTracking_Outlook}<br/>(Latest View)</td><td>{!Year(fromDate)}<br/> {!$Label.M2O_FinancialTracking_Actual_YTD}<br/><font class="monthFont"> {!SAP.From_Month__c} - <apex:outputField value="{!SAP.FT_to_month__c}" rendered="{!!editMode}"/><apex:inputField style="width:55px; height:20px;" value="{!SAP.FT_to_month__c}" rendered="{!editMode}"/></font></td></tr>
+                    <apex:repeat id="dataTable" value="{!finalRelatedFinTrack}" var="ab">
+                        <tr class="dataCell" id="dataCell">
+                            <td id="dataCell1" class="{!if((Mod(DLCount,5)==0),Blue,White)}"><apex:outputlabel style=" word-break: keep-all; font-weight:bold;" value="{!ab.Business__c}" rendered="{!if((Mod(DLCount,5)==0),True,False)}" id="labelBusiness"/>
+                            <apex:outputtext value="{!ab.BMC__c}" escape="true" style="display: inline; word-break: keep-all;" rendered="{!if((Mod(DLCount,5)!=0 && !editMode),True,False)}" id="outputBMC"/>
+                            <apex:inputtext value="{!ab.BMC__c}" rendered="{!if((Mod(DLCount,5)!=0 && editMode),True,False)}" id="inputBMC"/></td>
+                            <td id="dataCell2" class="{!if((Mod(DLCount,5)==0),Blue,White)}" align="right"><apex:outputtext value="{!currencyS} {!ab.Current_Target__c}" rendered="{!(!editMode && ab.Current_Target__c != 0 && ab.Current_Target__c != null)}" id="currencyTarget"/>
+                            <apex:inputfield value="{!ab.Current_Target__c}" rendered="{!editMode}" style="width:80px" id="inputCurrencyTarget"/></td>
+                            <td id="dataCell3" class="{!if((Mod(DLCount,5)==0),Blue,White)}" align="right"><apex:outputtext value="{!currencyS} {!ab.Current_Outlook_Latest_View__c}" rendered="{!(!editMode && ab.Current_Outlook_Latest_View__c != 0 && ab.Current_Outlook_Latest_View__c != null)}" id="outputCurrentOutlookLatestView"/>
+                            <apex:inputtext value="{!ab.Current_Outlook_Latest_View__c}" rendered="{!editMode}" style="width:80px" id="currentInputLatestView"/></td>
+                            <td id="datacell4" class="{!if((Mod(DLCount,5)==0),Blue,White)}" align="right"><apex:outputtext value="{!currencyS} {!ab.Current_Actuals_YTD__c}" rendered="{!(!editMode && ab.Current_Actuals_YTD__c != 0 && ab.Current_Actuals_YTD__c != null)}" id="outputCurrentActualsYTD"/>
+                            <apex:inputtext id="putCurrentActualsYTD" value="{!ab.Current_Actuals_YTD__c}" rendered="{!editMode}" style="width:80px"/></td>
+                            </tr>
+                            <apex:variable id="DLCount" value="{!DLCount+1}" var="DLCount"/>
+                    </apex:repeat>
+                    <tr id="footer" class="totalCurrent">
+                        <td id="total">Total</td>
+                        <td id="currentTarget" align="right"><apex:outputtext id="outputCurrentTarget" value="{!currencyS} {!total.Current_Target__c}" rendered="{!!editMode}"/></td>
+                        <td id="currentOutlookLatestView" align="right"><apex:outputtext id="outputCurrentOutlookView" value="{!currencyS}{!total.Current_Outlook_Latest_View__c}" rendered="{!!editMode}"/></td>
+                        <td id="currentActualsYTD" align="right"><apex:outputtext id="outputCurrentActualsYTD" value="{!currencyS} {!total.Current_Actuals_YTD__c}" rendered="{!!editMode}"/></td>
+                    </tr>
+            </table></td>
+    
+            <apex:variable id="DLCountIGM" value="{!1}" var="DLCount"/>
+                <td>
+                    <table id="innerTable" class="innerTable">
+                        <col id="colData4" width="87px"/>
+                        <col id="colData5" width="87px"/>
+                        <col id="colData6" width="87px"/>
+                        <tr height="20" bgcolor="FF9966"><td colspan="3" align="Center" id="labelFinancialTrackingIGM">{!$Label.M2O_FinancialTracking_Integration_Gross_Margin}</td></tr>
+                        <tr height="70px" bgcolor="#F0F0F0"><td id="yearFromDate">{!Year(fromDate)}<br/> Target</td><td>{!Year(fromDate)}<br/> Outlook<br/>(Latest View)</td><td>{!Year(fromDate)}<br/> Actual YTD<br/><font color="Blue">{!SAP.From_Month__c} - <apex:outputField id="outputSAPFinacialTracking" value="{!SAP.FT_to_month__c}"/></font></td></tr>
+                        <apex:repeat id="abRepeat" value="{!finalRelatedFinTrack}" var="ab">
+                            <tr id="dataCell" class="dataCell">
+                            <td class="{!if((Mod(DLCount,5)==0),Orange,White)}" align="right"><apex:outputtext id="outputIGMCurrentTarget" value="{!currencyS} {!ab.IGM_Current_Target__c}" rendered="{!(!editMode && ab.IGM_Current_Target__c != 0 && ab.IGM_Current_Target__c != null)}"/>
+                            <apex:inputtext id="inputIGMCurrentTarget" value="{!ab.IGM_Current_Target__c}" rendered="{!editMode}" style="width:80px"/></td>
+                            <td class="{!if((Mod(DLCount,5)==0),Orange,White)}" align="right"><apex:outputtext id="outputIGMCurrentOutlookLatestView" value="{!currencyS} {!ab.IGM_Current_Outlook_Latest_View__c}" rendered="{!(!editMode && ab.IGM_Current_Outlook_Latest_View__c != 0 && ab.IGM_Current_Outlook_Latest_View__c != null)}"/>
+                            <apex:inputtext id="inputIGMCurrentOutlookLatestView" value="{!ab.IGM_Current_Outlook_Latest_View__c}" rendered="{!editMode}" style="width:80px"/></td>
+                            <td class="{!if((Mod(DLCount,5)==0),Orange,White)}" align="right"><apex:outputtext id="outputIGMCurrentActualsYTD" value="{!currencyS} {!ab.IGM_Current_Actuals_YTD__c}" rendered="{!(!editMode && ab.IGM_Current_Actuals_YTD__c != 0 && ab.IGM_Current_Actuals_YTD__c != null)}"/>
+                            <apex:inputtext id="inputIGMCurrentActualsYTD" value="{!ab.IGM_Current_Actuals_YTD__c}" rendered="{!editMode}" style="width:80px"/>
+                            </td>
+                            </tr>
+                            <apex:variable id="DLCount" value="{!DLCount+1}" var="DLCount" />
+                        </apex:repeat>
+                        <tr class="totalIntegrated" id="totalIntegrated">
+                            <td align="right"><apex:outputtext id="outputTotalIGMTarget" value="{!currencyS} {!total.IGM_Current_Target__c}" rendered="{!!editMode}"/></td>
+                            <td align="right"><apex:outputtext id="outputTotalIGMOutlookLatestView" value="{!currencyS} {!total.IGM_Current_Outlook_Latest_View__c}" rendered="{!!editMode}"/></td>
+                            <td align="right"><apex:outputtext id="outputTotalIGMActualsYTD" value="{!currencyS} {!total.IGM_Current_Actuals_YTD__c}" rendered="{!!editMode}"/></td>
+                        </tr>
+                </table></td>
+    
+                <apex:variable id="DLCountIGMP" value="{!1}" var="DLCount"/>
+                    <td>
+                        <table class="innerTable">
+                            <col id="colData7" width="80px"/>
+                            <col id="colData8" width="80px"/>
+                            <col id="colData9" width="80px"/>
+                            <tr height="20" bgcolor="FF9966"><td id="labelFinancialTrackingIGMP" colspan="3" align="Center">{!$Label.M2O_FinancialTracking_Integration_Gross_MarginP}</td></tr>
+                            <tr height="70px" bgcolor="#F0F0F0"><td id="yearFromDate" >{!Year(fromDate)}<br/> Target</td><td>{!Year(fromDate)}<br/> Outlook<br/>(Latest View)</td><td>{!Year(fromDate)}<br/> Actual YTD<br/><font color="Blue">{!SAP.From_Month__c} - <apex:outputField value="{!SAP.FT_to_month__c}"/></font></td></tr>
+                            <apex:repeat id="repeatAb" value="{!finalRelatedFinTrack}" var="ab">
+                                <tr class="dataCell">
+                                <td class="{!if((Mod(DLCount,5)==0),Orange,White)}" align="right"><apex:outputtext id="outputIGMTarget" value="{!ab.IGM_Target__c}"/></td>
+                                <td class="{!if((Mod(DLCount,5)==0),Orange,White)}" align="right"><apex:outputtext id="outputIGMOutlookLatestView" value="{!ab.IGM_Outlook_Latest_View__c}"/></td>
+                                <td class="{!if((Mod(DLCount,5)==0),Orange,White)}" align="right"><apex:outputtext id="outputIGMActualsYTD" value="{!ab.IGM_Actuals_YTD__c}"/></td>
+                                </tr>
+                                <apex:variable id="DLCount" value="{!DLCount+1}" var="DLCount"/>
+                            </apex:repeat>
+                            <tr class="totalIntegrated" id="totalIntegrated">
+                            <td></td><td></td><td></td>
+                            </tr>
+                        </table>
+            
+                    </td></tr>
+    
+                </table>
+            <center>
+                <apex:commandButton id="editButton" value="{!$Label.M2O_FinancialTracking_Edit}" action="{!enableEditing}" rendered="{!(!editMode) && Hasaccess.haseditaccess}"/>
+                <apex:commandButton id="saveButton" value="{!$Label.M2O_FinancialTracking_Save}" action="{!save}"  rendered="{!editMode}"/>
+                <apex:commandButton id="cancelButton" value="{!$Label.M2O_FinancialTracking_Cancel}" action="{!enableEditing}" rendered="{!editMode}"/>
+            </center>    
+        </apex:pageblock>
+
+    </apex:form> 
+    <c:M2O_SAPAttachmentComponent attachmentRecordID="{!if((finalRelatedFinTrack[0].id = null || finalRelatedFinTrack[0].id = ''),SAP.ID,finalRelatedFinTrack[0].id)}" rendered="{!(finalRelatedFinTrack[0].id != null && finalRelatedFinTrack[0].id != '')}" id="componentSAPAttachment"/>
+</apex:page>

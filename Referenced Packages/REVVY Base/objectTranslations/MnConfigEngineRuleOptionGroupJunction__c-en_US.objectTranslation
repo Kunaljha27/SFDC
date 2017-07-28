@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rule OptionGroup Junction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rule OptionGroup Junctions</value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID of the attribute. --></help>
+        <label><!-- Attribute Id --></label>
+        <name>Attribute_Id__c</name>
+        <relationshipLabel><!-- Rule OptionGroup Junctions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Name of the attribute. --></help>
+        <label><!-- Attribute Name --></label>
+        <name>Attribute_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>CatalogNodeType__c</name>
+        <picklistValues>
+            <masterLabel>Category</masterLabel>
+            <translation><!-- Category --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product</masterLabel>
+            <translation><!-- Product --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Order of columns in the rule table. --></help>
+        <label><!-- Column Order --></label>
+        <name>ColId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Name --></label>
+        <name>Field_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Name --></label>
+        <name>Object_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the option group that this rule applies to. --></help>
+        <label><!-- Option Group --></label>
+        <name>Option_Group__c</name>
+        <relationshipLabel><!-- Rule OptionGroup Junctions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>ProductType__c</name>
+        <picklistValues>
+            <masterLabel>Attribute</masterLabel>
+            <translation><!-- Attribute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ProductID</masterLabel>
+            <translation><!-- ProductID --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the rule. --></help>
+        <label><!-- Rule --></label>
+        <name>Rule__c</name>
+        <relationshipLabel><!-- Rule OptionGroup Junctions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Catalog Node</masterLabel>
+            <translation><!-- Catalog Node --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Object</masterLabel>
+            <translation><!-- Object --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Option Group</masterLabel>
+            <translation><!-- Option Group --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

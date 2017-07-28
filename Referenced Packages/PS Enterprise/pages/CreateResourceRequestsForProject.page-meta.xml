@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>VF page for create resource requests from a project</description>
+    <label>CreateResourceRequestsForProject</label>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>91</minorNumber>
+        <namespace>appirio_core</namespace>
+    </packageVersions>
+</ApexPage>

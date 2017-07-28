@@ -1,0 +1,193 @@
+<apex:page controller="REVVY.CMnQuoteItemImpCtrl"
+sidebar="false" standardStylesheets="false" tabStyle="REVVY__MnQuote__c" >
+<!-- sidebar="false" tabStyle="Account" showheader="false" > -->
+
+<link rel="stylesheet" href="{!URLFOR($Resource.FontAwesomeIcons, 'css/font-awesome.min.css')}" type="text/css" charset="utf-8" />
+<script type="text/javascript" src="/soap/ajax/26.0/connection.js"> </script>
+<script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jszip.min.js"></script>
+
+<style>
+
+    td.pbTitle :nth-of-type(1) {
+        width: 60em !important;
+    }
+    .noSidebarCell {
+        padding: 0px !important;
+
+    }
+
+    .bPageBlock {
+        background-color: white !important;
+        border: 1px solid white !important;
+    }
+
+    .pbSubheader {
+        border-left: 1px solid #D6D6D6 !important;
+        border-right: 1px solid #D6D6D6 !important;
+        border-bottom: 1px solid #D6D6D6 !important;
+        background-color:#9cb5c3 !important;
+        margin-top:20px !important;
+    }
+
+    .pbSubsection {
+
+    }
+
+    .pbSubheader h3 {
+        color: white;
+    }
+
+    .pbBody
+    {
+        padding-top:0px !important;
+        margin: 0px !important;
+    }
+
+    .pbBody > div
+    {
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+    }
+
+    .buttonDiv {
+        float: right;
+    }
+
+    .buttons {
+        text-align:center;
+        vertical-align: middle;
+        min-width:75px;
+        min-height:30px;;
+        margin-right:10px !important;
+    }
+
+    .saveButton {
+        background:#12b7df !important;
+        color: white !important;
+    }
+
+    .cancelButton {
+        background:#e9ebe9 !important;
+    }
+
+    .titleContainer {
+        width:100%;
+        border-bottom:1px solid  #D6D6D6;
+        background-color: #f0f0f0;
+        min-height: 50px;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    .title {
+        font-size:20px;
+        padding-left:40px;
+        color:#6ABFDA;
+
+    }
+
+    .bPageBlock .detailList tr td,
+    .bPageBlock .detailList tr th {
+        /* removing line divider between fields */
+        border-bottom: 0px solid #e3deb8;
+    }
+
+    .disabled {
+        opacity: 0.3;
+        cursor: default !important;
+    }
+
+    .progressBar{
+        background-color: #f8f8f8;
+        border:1px solid #DDDDDD;
+        height: 19px;
+        width: 300px;
+        align:center
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+    }
+
+    .progress{
+        background-color: #F7B64B;
+        border:1px solid #E78F08;
+        height: 100%;
+        margin: -1px;
+        text-align: center;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        line-height: 18px;
+    }
+
+</style>
+
+
+<script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<apex:form id="impFrm">
+<apex:pageBlock id="pgblk1"  >
+<table class="titleContainer"><tr><td>
+    <apex:outputPanel styleClass="title">{!$Label.revvy__MnQuoteItemImportTittle}</apex:outputPanel>
+</td></tr></table>
+<p/>
+<p/>
+
+<div id="buttonbar" class="buttonDiv">
+
+    <apex:commandButton title="{!$Label.revvy__MnAppItemImport}"
+            styleClass="buttons saveButton"
+            id="importButton"
+            disabled="{(!percentComplete > 0) && (!percentComplete < 100)}"
+            value="{!$Label.revvy__MnAppItemImport}"
+            action="{!importFile}"  />
+
+    <apex:commandButton title="{!$Label.revvy__MnProposalBackToQuoteTooltip}"
+                        styleClass="buttons cancelButton"
+                        action="{!returnToQuoteDetails}"
+                        value="{!$Label.revvy__MnProposalBackToQuote}" />
+
+</div>
+
+<apex:actionRegion >
+<apex:pageBlockSection id="progressUpdate" columns="1">
+<apex:outputText value="{!ImportStatus}" id="importMessage"/>
+<div class="progressBar">
+    <div class="progress" style="width: {!percentComplete}%;">
+    </div>
+</div>
+</apex:pageBlockSection>
+<apex:actionPoller action="{!updateImportStatus}" enabled="{!actionPollerEnabled}" reRender="progressUpdate" interval="5"/>
+</apex:actionRegion>
+<apex:messages />
+<br/>
+
+<apex:pageBlockSection id="pgblksec1" title="{!$Label.revvy__MnSelFileAndFormat}"  columns="1"  >
+
+        <apex:pageBlockSectionItem id="pbsecfile">
+        <apex:outputLabel value="File" />
+        <apex:outputPanel >
+        <div id="fileDiv" class="requiredInput">
+            <div class="requiredBlock"></div>
+            <apex:inputFile styleclass="impFileClass" id="importFile" title=""  value="{!fileBody}" filename="{!fileName}"/>
+        </div>
+        </apex:outputPanel>
+        </apex:pageBlockSectionItem><p/>
+
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel value="File Format" />
+        <apex:outputPanel >
+        <div id="fileFormatDiv" class="requiredInput">
+        <div class="requiredBlock"></div>
+        <apex:selectList id="fileFormatSelection" size="1" value="{!selectedFileFormatName}" >
+            <apex:selectOptions value="{!fileFormatList}"></apex:selectOptions>
+        </apex:selectList>
+        </div>
+        </apex:outputPanel>
+        </apex:pageBlockSectionItem><p/>
+
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

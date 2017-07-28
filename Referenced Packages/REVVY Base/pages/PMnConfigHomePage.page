@@ -1,0 +1,70 @@
+<apex:page sidebar="false" tabstyle="MnAdmin__tab" Controller="REVVY.CMnConfigHomePageCtrl">
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/libs/src/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/admin.js"></script>
+
+    <style>
+        .adminhome {
+            padding: 16px;
+        }
+
+        .inlineDisp {
+           display:table-cell;
+           padding:16px;
+           margin:16px;
+           width:200px;
+           height:200px;
+        }
+
+
+    </style>
+
+    <script>
+        var CMnNamespacePrefix = "{!namespacePrefix}";
+        var CMnNamespacePrefixUS = "";
+        var CMnNamespacePrefixDT = "";
+        if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+            CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+            CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+        }
+
+
+          function navToModelHome() {
+            Visualforce.remoting.Manager.invokeAction(
+                  CMnNamespacePrefixDT + 'CMnConfigHomePageCtrl.navToModelHomePage', handleNavResult, {escape:false});
+          }
+
+        function handleNavResult(result, event) {
+        }
+    </script>
+    <c:CMnZenDesk />
+    <div  class="colWrapper">
+      <div class="collwrp" >
+        <div class="coll" >
+          <c:CMnAdminLeftNav />
+        </div>
+      </div>
+      <div class="colr">
+        <!--- Actual VF code goes here -->
+
+          <div class="adminhome">
+<apex:form id="form">
+
+          <h1><font size="3">Config Home</font></h1> <br/> <br/><br/>
+          <ul style="display:inline-block;">
+              <li class="inlineDisp"><img src="{!URLFOR($Resource.REVVY__AdminHomePageImage_Resources, 'Products.jpg')}" title="Models"/><br/><br/><apex:commandLink action="{!navToModelHomePage}" value="Models"/></li>
+              <li class="inlineDisp"><img src="{!URLFOR($Resource.REVVY__AdminHomePageImage_Resources, 'Catalogs.jpg')}" title="Option Groups"/>
+              <br/><br/><apex:commandLink action="{!navToOGHomePage}" value="Option Group"/>
+              </li>
+              <li class="inlineDisp"><img src="{!URLFOR($Resource.REVVY__AdminHomePageImage_Resources, 'Categories.jpg')}" title="Rules"/>
+              <br/><br/><apex:commandLink action="{!navToRuleHomePage}" value="Rule"/>
+              </li>
+              <li class="inlineDisp"><a href="/apex/PMnConfigEngineTestData"><img src="{!URLFOR($Resource.REVVY__AdminHomePageImage_Resources, 'Config.jpg')}" title="Config"/><br/><br/>Config</a></li>
+            </ul>
+</apex:form>
+
+          </div>
+        <!-- ---------- -->
+      </div>
+    </div>
+</apex:page>

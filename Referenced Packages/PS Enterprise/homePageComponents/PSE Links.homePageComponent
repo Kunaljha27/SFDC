@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <links>Project_Planner</links>
+    <links>Resource_Planner</links>
+    <links>Project_Planner_PM</links>
+    <links>Staffer</links>
+    <links>Log_a_Timecard</links>
+    <links>Log_a_Timecard_New_UI</links>
+    <links>Log_a_Timecard_with_Task_Time</links>
+    <links>Self_Assignment</links>
+    <links>Multiple_Expense_Entry_UI</links>
+    <links>Manage_Project_Tasks</links>
+    <links>Manage_Project_Gantt</links>
+    <links>Approve_Multiple_Timecards</links>
+    <links>Approve_Multiple_Expense_Reports</links>
+    <links>Search_Resources</links>
+    <links>Online_Help</links>
+    <pageComponentType>links</pageComponentType>
+</HomePageComponent>

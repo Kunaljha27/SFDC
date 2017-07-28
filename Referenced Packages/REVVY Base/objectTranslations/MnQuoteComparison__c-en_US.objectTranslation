@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Quote Comparison</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quote Comparisons</value>
+    </caseValues>
+    <fields>
+        <label><!-- Margin ( % ) (Display) --></label>
+        <name>AvgMarginDisp__c</name>
+    </fields>
+    <fields>
+        <help><!-- Percent value of the margin --></help>
+        <label><!-- Margin ( % ) --></label>
+        <name>AvgMargin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Average Unit Price --></label>
+        <name>AvgUnitPriceDisp__c</name>
+    </fields>
+    <fields>
+        <label><!-- Average Unit Price --></label>
+        <name>AvgUnitPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the product is charged on a recurring basis. A product can be charged one-time, weekly, monthly, or yearly. --></help>
+        <label><!-- Billing Frequency --></label>
+        <name>BillingFrequency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Catalog Node --></label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel><!-- Quote Comparisons --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Quote Comparison ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label><!-- Qty --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote --></label>
+        <name>Quote__c</name>
+        <relationshipLabel><!-- Quote Comparisons --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- GUID for this record. --></help>
+        <label><!-- Report ID --></label>
+        <name>ReportId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Value --></label>
+        <name>TotalValueDisp__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Value --></label>
+        <name>TotalValue__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,379 @@
+<apex:page showHeader="true" sidebar="true" controller="REVVY.CMnQualBenComponentController" standardStylesheets="false">
+    <apex:form id="theForm">
+        <apex:pageMessages id="thePageMessage"/>
+        <link href="{!URLFOR($Resource.REVVY__BootZip, 'dist/css/bootstrap.css')}" rel="stylesheet"/>
+        <script>
+            function openWindow(dataSourceName,relId,Id,type,showProduct,mode)
+            {
+                var namespaceprefix = "{!URLENCODE($Setup.MnHierarchicalProperty__c.Revvy_Namespace__c)}";
+                var Url="{!URLENCODE($Site.Prefix)}" + "/apex/" + namespaceprefix + "PMnCreateRebateStructure?dSource=";
+                Url=Url+dataSourceName;
+                Url=Url+'&relId=';
+                Url=Url+relId;
+                Url=Url+'&Id='
+                Url=Url+Id;
+                Url=Url+'&type=';
+                Url=Url+type;
+                Url=Url+'&showProduct=';
+                Url=Url+showProduct;
+                Url=Url+'&mode=';
+                Url=Url+mode;
+
+                window.open(Url,"_blank","width=900, height=500,top=300, left=700,titlebar=no");
+                return false;
+            }
+
+            function UpdateType(type,qualification)
+            {
+                Visualforce.remoting.Manager.invokeAction
+                (
+                    '{!$RemoteAction.CMnQualBenComponentController.updateType}',
+                    type,
+                    qualification,
+                    function(result,event){
+                        if(event.status)
+                            console.log('====>'+result);
+                    }
+                );
+            }
+        </script>
+
+        <style>
+            .table th, .table td {
+                //border: 1px solid black;
+                // overflow: auto;
+                width: 250px;
+            }
+
+            .headingStyle{
+                font-weight:;
+                color:#2A94D6;
+                font-size:14px;
+            }
+
+            .table-nonfluid {
+                width: 80% !important;
+                overflow:scroll;
+            }
+
+            .halfwidth{
+                width:100px;
+                color :#ffffff;
+            }
+
+            .center {
+                margin:10px;
+                padding: 10px;
+            }
+
+            .rightbuttons{
+                float:right;
+            }
+
+            .glyphicon-refresh-animate {
+                -animation: spin .7s infinite linear;
+                -webkit-animation: spin2 .7s infinite linear;
+            }
+
+            @-webkit-keyframes spin2 {
+                from { -webkit-transform: rotate(0deg);}
+                to { -webkit-transform: rotate(360deg);}
+            }
+
+            @keyframes spin {
+                from { transform: scale(1) rotate(0deg);}
+                to { transform: scale(1) rotate(360deg);}
+            }
+        </style>
+
+        <div class="bs">
+            <!--------------------      Section Header -------------------------------------->
+            <apex:pageBlock title="{!$Label.revvy__MnGoalPageHeader}">
+                <apex:pageBlockSection columns="2">
+                    <apex:repeat value="{!$ObjectType.REVVY__MnGoal__c.fieldsets.REVVY__MnGoalPageHeader}" var="fieldValue">
+                        <apex:outputfield value="{!incPrgmLine[fieldValue]}">
+                            <apex:inlineEditSupport disabled="{!OR(CONTAINS(fieldValue,'Configuration__c'), CONTAINS(fieldValue,'DataSource__c'))}"
+                                                    event="ondblclick" showOnEdit="update"/>
+                        </apex:outputfield>
+                    </apex:repeat>
+                    <!-- <apex:outputField value="{!incPrgmLine.Name}"/>
+                    <apex:outputLabel value="Data Source"/>
+                    <apex:outputText value="{!selectedDataSource}"/> -->
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton tabindex="3" styleClass="btn btn-default" value="Cancel" action="{!Cancel}"/>
+                    <apex:commandButton tabindex="2" styleClass="btn btn-default" value="Save" action="{!save}"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+            <!--------------------Section Header------------------------------>
+
+            <apex:pageBlock id="thePageBlock" title="Global Scope">
+                <c:VMnRebateFilterSearchComponent isViewOnly="true"/>
+            </apex:pageBlock>
+
+            <apex:pageBlock id="theQualificationBenefitpb" rendered="{!incPrgmLine.REVVY__Configuration__c<>'No Qualification'}">
+                <div class="bs container">
+                    <apex:pageMessages id="thePageMessageQualSection"/>
+                    <apex:actionStatus id="theActStatus">
+                        <apex:facet name="start">
+                            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                       height: 100%;opacity:0.65;width:100%;">
+                                <div class="waitingHolder">
+                                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..."/>
+                                    <span class="waitingDescription">Please Wait...</span>
+                                </div>
+                            </div>
+                        </apex:facet>
+                    </apex:actionStatus>
+                    <!-- Tier definition Button Section Begins -->
+                    <apex:outputPanel rendered="{!incPrgmLine.REVVY__Configuration__c<>'Single Qualification'}">
+                        <div class="col-xs-4">
+                            <apex:inputHidden id="selectedRecordId" value="{!productid}"/>
+                            <apex:inputText styleClass="form-control" id="memNam" label="Search Product"
+                                            html-placeholder="Type To Search Product" value="{!productName}">
+                                <c:VMnAutoComplete autocomplete_textbox="{!$Component.memNam}"
+                                                   entitySelectorConfigId="{!productFilterConfig.REVVY__EntitySelectorConfig__c}"
+                                                   objectname="{!productNameWithNS}"
+                                                   selectedId="{!$Component.selectedRecordId}"/>
+                            </apex:inputText>
+                        </div>
+                        <apex:commandButton value="+" styleClass="glyphicon glyphicon-plus" action="{!Add}"
+                                            reRender="theQualificationBenefitpb,thePageMessage,thePageMessageQualSection"
+                                            status="loadingStatus" disabled="{!objWrapperList.size>MaxNumberofProduct}">
+                        </apex:commandButton>
+                        <apex:commandLink action="{!doAdvancedSearch}" style="padding-left:10px;">
+                            {!$Label.revvy__MnAdvancedSearch}
+                            <apex:param id="advSearchObject" name="advSearchObject" value="{!productNameWithNS}"
+                                        assignTo="{!advancedSearchObjectType}" />
+                            <apex:param id="advSearchFilterConfId" name="advSearchFilterConfId" value="{!productFilterConfig.Id}"
+                                        assignTo="{!advancedSearchFilterConfId}" />
+                            <apex:param id="advSearchReturnUrl" name="advSearchReturnUrl" value="{!currentUrl}"
+                                        assignTo="{!advancedSearchReturnUrl}" />
+                        </apex:commandLink>
+                    </apex:outputPanel>
+                    <br/><br/>
+                    <!--Counter variable -->
+                    <apex:variable var="productIndex" value="{!0}"/>
+                    <!--Counter variable -->
+                    <apex:actionStatus id="loadingStatus">
+                        <apex:facet name="start">
+                            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                       height: 100%;opacity:0.65;width:100%;">
+                                <button class="btn btn-lg btn-info"><span
+                                        class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                                </button>
+                            </div>
+                        </apex:facet>
+                    </apex:actionStatus>
+                    <!--Counter main repeat element to loop against list of products  -->
+                    <apex:repeat value="{!objWrapperList}" var="obj">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"
+                                 style="font-size:12px">
+                                <apex:commandLink status="loadingStatus" action="{!removeProduct}" reRender="theQualificationBenefitpb"
+                                                  rendered="{!AND(NOT(ISNULL(objWrapperList)),objWrapperList.size>0,incPrgmLine.REVVY__Configuration__c<>'Single Qualification')}">
+                                    <apex:param name="productIndexname" value="{!productIndex}" assignTo="{!selectedProductIndex}" />
+                                    <span class="glyphicon glyphicon-minus-sign" />
+                                </apex:commandLink>
+                                {!obj.productname}
+                            </div>
+                            <div class="panel-body">
+                                <apex:commandButton styleClass="btn btn-default" style="margin-right: 10px" value="Add Tier"
+                                                    action="{!addTierRow}" reRender="theQualificationBenefitpb"
+                                                    status="theActStatus" disabled="{!obj.tiers.size>9}">
+                                    <!--Hard Coding the Tier limit to 10  -->
+                                    <apex:param name="qualificationID" value="{!obj.qualification.id}" assignTo="{!qualificationID}"/>
+                                </apex:commandButton>
+                                <apex:commandButton styleClass="btn btn-default" style="margin-right: 10px"
+                                                    value="Add Benefit" action="{!addBenefit}"
+                                                    reRender="theQualificationBenefitpb,thePageMessageQualSection"
+                                                    status="theActStatus" disabled="{!obj.benefitList.size>MaxNumberofBenefit}">
+                                    <apex:param name="qualificationIDben" value="{!obj.qualification.id}" assignTo="{!qualificationID}"/>
+                                </apex:commandButton>
+                                <apex:commandButton styleClass="btn btn-default" style="margin-right: 10px"
+                                                    value="Remove Tier" action="{!removeTier}"
+                                                    reRender="theQualificationBenefitpb" status="theActStatus"
+                                                    disabled="{!obj.tiers.size<2}">
+                                    <apex:param name="qualificationIDTier" value="{!obj.qualification.id}" assignTo="{!qualificationID}"/>
+                                </apex:commandButton>
+
+                                <div style="overflow-x:scroll">
+                                    <table class="table" style="table-layout:fixed;">
+                                        <!-- Table Header Section  -->
+                                        <thead>
+                                            <tr>
+                                                <th style="width:50px">Tiers<br/><br/><br/><br/></th>
+                                                <th>
+                                                    Qualification
+                                                    <br/>
+                                                    <apex:outputLink title="{!obj.textScopeChange}" styleClass="btn btn-link" style="float:right;font-size:10px"
+                                                                     onclick="openWindow('Sales','{!JSENCODE(obj.qualification.id)}','{!JSENCODE(incPrgmLine.id)}','{!JSENCODE(incPrgmLine.REVVY__Configuration__c)}','false','edit'); return false;">
+                                                        Edit Scope
+                                                    </apex:outputLink>
+                                                    <br/>
+                                                    <apex:selectList html-data-toggle="tooltip" title="{!obj.textScopeChange}" styleClass="form-control"
+                                                                     style="background-color:#F0F1F2" id="thequalSelectList" value="{!obj.qualification.REVVY__Type__c}" size="1">
+                                                        <apex:selectOptions value="{!qualPickList }"/>
+                                                    </apex:selectList>
+                                                </th>
+                                                <!-- counter Variable -->
+                                                <!-- Benefit ------------------------------------>
+                                                <apex:variable var="index" value="{!0}"/>
+                                                <apex:repeat value="{!obj.benefitList}" var="benefitwrapper" id="thePbTable">
+                                                    <th>
+                                                        <apex:commandLink action="{!removeBenefit}" type="image/png" reRender="theQualificationBenefitpb"
+                                                                          rendered="{!obj.benefitList.size>1}" status="loadingStatus">
+                                                            <apex:param name="benefit Index" value="{!index}" assignTo="{!benefitIndex}" />
+                                                            <apex:param name="qualificationID" value="{!obj.qualification.id}"
+                                                                        assignTo="{!qualificationID}"/>
+                                                            <span class="glyphicon glyphicon-minus-sign" />
+                                                        </apex:commandLink>
+                                                            {!benefitwrapper.REVVY__Benefit_Label__c}
+                                                        <br/>
+                                                        <apex:outputLink title="{!obj.tiers[0].benefitWrapperValues[index].textScopeChange}" styleClass="btn btn-link" style="float:right;font-size:10px"
+                                                                onclick="openWindow('Sales','{!JSENCODE(benefitwrapper.id)}','{!JSENCODE(incPrgmLine.id)}','{!JSENCODE(incPrgmLine.REVVY__Configuration__c)}','true','edit'); return false;"
+                                                                target="_blank">Edit Scope
+                                                        </apex:outputLink>
+                                                        <apex:selectList styleClass="form-control" style="background-color:#F0F1F2" id="theBenSelectList"
+                                                                         value="{!benefitwrapper.REVVY__Type__c}" size="1">
+                                                            <apex:selectOptions value="{!benPickList}"/>
+                                                        </apex:selectList>
+                                                    </th>
+                                                    <apex:variable var="index" value="{!index+1}"/>
+                                                </apex:repeat>
+                                                <!-- Benefit ------------------------------------>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <apex:repeat value="{!obj.benefitList}" var="benefitwrapper" id="thefooterTable">
+                                                    <!-- SDR #362879 - Benefit Valuation Type can be changed by Custom Label -->
+                                                    <td>{!$Label.MnBenefitValuationType}: &nbsp;
+                                                        <apex:outputText value="{!benefitwrapper.REVVY__BenefitValuationType__c}"/>
+                                                        <br/>
+                                                        <apex:inputField styleClass="form-control" value="{!benefitwrapper.REVVY__BenefitValuation__c}"/>
+                                                    </td>
+                                                </apex:repeat>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <apex:repeat value="{!obj.tiers}" var="tier">
+                                                <tr>
+                                                    <td>Tier {!tier.index}</td>
+                                                    <td>
+                                                        <div class="col-xs-5" style="padding-left:0px; padding-top:6px;">
+                                                            <apex:outputField styleClass="form-control" html-placeholder="Low value"
+                                                                             value="{!obj.qualification['tier'+TEXT(tier.index)+'lowValue__c']}"/>
+                                                        </div>
+                                                        <div class  ="col-xs-2" style="padding-left: 10px; padding-top: 6px;">
+                                                            &nbsp;&lt;&nbsp;&nbsp;T{!tier.index}&nbsp;&nbsp;&le;&nbsp;</div>
+                                                        <!-- &infin; -->
+                                                        <div class="col-xs-5" style="padding-right:10px; text-align: right;">
+                                                            <apex:inputField styleClass="form-control" html-placeHolder="High value"
+                                                                              value="{!obj.qualification['tier'+TEXT(tier.index)+'highValue__c']}"/>
+                                                        </div>
+                                                    </td>
+                                                    <apex:repeat value="{!obj.benefitList}" var="benefit" id="thePbTable1">
+                                                        <td>
+                                                            <apex:inputField styleClass="form-control"
+                                                                             value="{!benefit['tier'+TEXT(tier.index)+'Value__c']}"/>
+                                                        </td>
+                                                    </apex:repeat>
+                                                </tr>
+                                            </apex:repeat>
+                                        </tbody>
+                                        <apex:variable var="productIndex" value="{!productIndex+1}"/>
+                                    </table>
+                                </div>
+                            </div>
+                         <apex:outputPanel id="theAdditionalInfoSection" rendered="{!additionFieldsInQualificationFieldSet.size>0}">  <div class="panel-footer">
+                                <apex:outputLabel value="Additional Information:"></apex:outputLabel>
+                                <apex:pageBlockSection columns="2">
+
+                                    <apex:repeat value="{!additionFieldsInQualificationFieldSet}" var="qualFields" >
+                                        <apex:inputField value="{!obj.qualification[qualFields]}"/>
+                                    </apex:repeat>
+                                </apex:pageBlockSection>
+                            </div></apex:outputPanel>
+                        </div>
+                    </apex:repeat>
+                    <!--<apex:actionFunction name="refreshScope" reRender="theForm" />-->
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton styleClass="btn btn-default" value="Cancel" action="{!Cancel}"/>
+                        <apex:commandButton styleClass="btn btn-default" value="Save" action="{!save}"/>
+                    </apex:pageBlockButtons>
+                </div>
+            </apex:pageBlock>
+            <apex:pageBlock id="theSingleQualificationPb" rendered="{!incPrgmLine.REVVY__Configuration__c=='No Qualification'}">
+                <div class="bs container">
+                    <apex:variable var="index" value="{!0}"/>
+                    <apex:repeat value="{!objWrapperList}" var="obj">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Benefits
+                            </div>
+                            <div class="panel-body">
+                                <apex:commandButton styleClass="btn btn-default" value="Add Benefit" action="{!addBenefit}"
+                                                    reRender="theSingleQualificationPb" status="theActStatus" />
+                                <br/><br/>
+                                <div style="overflow-x:scroll">
+                                    <table class="table" style="table-layout:fixed;">
+                                        <thead>
+                                            <apex:variable var="index" value="{!0}"/>
+                                            <apex:repeat value="{!obj.benefitList}" var="benefit">
+                                                <th>
+                                                    <apex:commandLink action="{!removeBenefit}" type="image/png" reRender="theSingleQualificationPb"
+                                                                      rendered="{!obj.benefitList.size>1}" status="loadingStatus">
+                                                        <apex:param name="benefit Index" value="{!index}" assignTo="{!benefitIndex}" />
+                                                        <span class="glyphicon glyphicon-minus-sign" />
+                                                    </apex:commandLink>
+                                                        {!benefit.REVVY__Benefit_Label__c}
+                                                    <br/>
+                                                    <br/>
+                                                    <apex:selectList styleClass="form-control" style="background-color:#F0F1F2;width:200px" id="theBenSelectList"
+                                                                     value="{!benefit.REVVY__Type__c}" size="1">
+                                                        <apex:selectOptions value="{!benPickList}"/>
+                                                    </apex:selectList>
+                                                </th>
+                                                <apex:variable var="index" value="{!index+1}"/>
+                                            </apex:repeat>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <apex:repeat value="{!obj.benefitList}" var="benefitwrapper" id="thefooterTable">
+                                                    <!-- SDR #362879 - Benefit Valuation Type can be changed by Custom Label -->
+                                                    <td>{!$Label.MnBenefitValuationType}: &nbsp;
+                                                        <apex:outputText value="{!benefitwrapper.REVVY__BenefitValuationType__c}"/>
+                                                        <br/>
+                                                        <apex:inputField styleClass="form-control"
+                                                                         value="{!benefitwrapper.REVVY__BenefitValuation__c}"/>
+                                                    </td>
+                                                </apex:repeat>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr>
+                                                <apex:repeat value="{!obj.benefitList}" var="benefit" id="thePbTable1">
+                                                    <td>
+                                                        <apex:inputField styleClass="form-control"
+                                                                         value="{!benefit['tier1Value__c']}"/>
+                                                    </td>
+                                                </apex:repeat>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:repeat>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton styleClass="btn btn-default" value="Cancel" action="{!Cancel}"/>
+                        <apex:commandButton styleClass="btn btn-default" value="Save" action="{!save}"/>
+                    </apex:pageBlockButtons>
+                </div>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

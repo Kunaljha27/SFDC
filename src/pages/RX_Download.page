@@ -1,0 +1,458 @@
+<apex:page controller="RX_DownloadController" showHeader="true" sidebar="false" docType="html-5.0" applyBodyTag="false" action="{!setPushTopic}">
+
+<head>
+	<script type="text/javascript" src="/soap/ajax/33.0/connection.js"> </script>
+
+	<apex:includeScript value="{!URLFOR($Resource.RX, '/jquery-1.8.2.min.js')}"/>
+
+	<apex:includeScript value="{!URLFOR($Resource.RX, '/jszip.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.RX, '/jszip-load.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.RX, '/jszip-deflate.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.RX, '/jszip-inflate.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.RX, '/FileSaver.js')}"/>
+	<!-- 
+	<apex:includeScript value="{!URLFOR($Resource.CometD, 'js/jquery/jquery-1.5.1.js')}"/> 
+	-->
+    <apex:includeScript value="{!URLFOR($Resource.CometD, 'js/jquery/json2.js')}"/> 
+    <apex:includeScript value="{!URLFOR($Resource.CometD, 'js/cometd.js')}"/> 
+    <apex:includeScript value="{!URLFOR($Resource.CometD, 'js/jquery/jquery.cometd.js')}"/> 
+     
+
+    <script type="text/javascript">
+	    Visualforce.remoting.timeout = 120000; // Set timeout at page level
+        var j$ = jQuery.noConflict();
+        var uploadFileNames =[]; 
+        j$(document).ready(function() {
+        	 // Connect to the CometD endpoint
+            j$.cometd.init({
+               url: window.location.protocol+'//'+window.location.hostname+'/cometd/24.0/',
+               requestHeaders: { Authorization: 'OAuth {!$Api.Session_ID}'}
+           });
+           
+           j$.cometd.subscribe('/topic/RXExportImportProcess', function(message) {
+           	   var note =JSON.stringify(message.data.sobject.Note__c);
+               note = note.replace(/"/g,'');
+               //j$('.showUpdate').html(note );
+               //document.getElementById('spinnerId').style.display='block';
+               j$('#spinnerId').css('display', 'block');
+               j$('#spinnerId').html(note );
+               
+               //console.log(new Date(Date.parse(message.data.sobject.Finished__c)).toLocaleString());
+               if(message.data.sobject.Status__c === 'Completed' && (message.data.sobject.ID__c.startsWith("Export"))) {
+               		j$('input[id$=DownloadExportAllBtnId]').css('display', 'block');
+               		var status =JSON.stringify(message.data.sobject.Status__c);
+               		//var timeStamp =JSON.stringify(message.data.sobject.Finished__c);
+               		status = status.replace(/"/g,'');
+               		//timeStamp = timeStamp.replace(/"/g,'');
+               		j$('.toolStatus').html(status );
+               		j$('.finishedTimestamp').html(new Date(Date.parse(message.data.sobject.Finished__c)).toLocaleString() );
+               		j$('.showUpdate').css('display', 'none');
+               } else if(message.data.sobject.Status__c === 'Completed' && (message.data.sobject.ID__c.startsWith("Import"))) {
+               		var status =JSON.stringify(message.data.sobject.Status__c);
+               		//var timeStamp =JSON.stringify(message.data.sobject.Finished__c);
+               		status = status.replace(/"/g,'');
+               		//timeStamp = timeStamp.replace(/"/g,'');
+               		 j$('#spinnerId').css('display', 'none');
+               		j$('.importStatus').html(status );
+               		j$('.import.finishedTimestamp').html(new Date(Date.parse(message.data.sobject.Finished__c)).toLocaleString() );
+               }
+            });
+            
+        	//Hide upload button
+        	var uploadZipButton = j$('input[id$=uploadZipButton]');
+        	uploadZipButton.css('display', 'none');
+			//j$('input[id$=DownloadExportAllBtnId]').css('display', 'none');
+			j$(".toolStatus").find( "span" ).each(function() {
+				if(j$(this).text() == "Completed") {
+					j$(this).closest('td').siblings('td').find('input[id$=DownloadExportAllBtnId]').css('display', 'block');
+				} else {
+					j$(this).closest('td').siblings('td').find('input[id$=DownloadExportAllBtnId]').css('display', 'none');
+				}
+				
+			});
+        	var uploadCVFileButton = j$('input[id$=uploadCVFileButton]');
+        	uploadCVFileButton.css('display', 'none');
+        	
+        	//Instantiate JSZip
+        	var zipFile = new JSZip();
+
+			//Intercept click event
+        	j$('#DownloadExportAllBtnId').click(function() {
+				document.getElementById('spinnerId').style.display='block';
+				j$('span[id$=statusId]').text('Status: processing file...');
+				var cvarr=null;
+
+				Visualforce.remoting.Manager.invokeAction(
+				    '{!$RemoteAction.RX_DownloadController.getContentIds}', 
+				    function(result, event){
+				    	var vsuccess=true;
+				        if (event.status) {
+				        	cvar=result;
+				        	var cnt=0;
+				        	var processcnt=0;
+				        	for(xno in cvar) {
+				        		processcnt++;
+								var cvId = cvar[xno];
+								console.log('>>> Download cvId: '+ cvId);
+								try {
+									if(cvId !=null && cvId.toString().substring(0,3)=='068') {
+										Visualforce.remoting.Manager.invokeAction(
+											'{!$RemoteAction.RX_DownloadController.getContent}', cvId,
+											function(resultCV, eventCV){
+												if (eventCV.status) {
+													cnt++;
+													processcnt--;
+													//Add the file
+													j$('span[id$=statusId]').text('file: '+resultCV.name);
+													compressFile(zipFile, resultCV.name, resultCV.encodedBody);
+										        	if(cnt==cvar.length) {
+														//Send form
+														sendZip(zipFile);
+													}				        	
+		
+												} else if (eventCV.type === 'exception') {
+													alert('Exception 1: ' + eventCV.message );
+													//closeSpinner();
+												} else {
+													alert('Message 1: ' + eventCV.message );
+													//closeSpinner();
+												}
+		
+											}, 
+											{escape: true, buffer: false }
+										);//End getAttachment
+									}
+								}catch(ex) {
+									console.log('>>> ERROR: ' + ex);
+									alert('ERROR DOWNLAD: ' + ex );
+								}
+				        	}
+				        	
+				        } else if(event.type='exception') {
+							alert('Exception 2: ' + event.message);	
+							//closeSpinner();			        
+				        } else {
+							alert('Message 2: ' + event.message);
+							//closeSpinner();
+				        }
+				    }, 
+				    {escape: true}
+				);
+
+
+        	});//end click - Download
+			
+			
+			//Compress one single file
+			function compressFile(zipFile, name, data) {
+				console.log('>>> zipFile = ' + zipFile);
+				j$('span[id$=statusId]').text('Compressing file: '+name);
+				zipFile.file(name, data, {base64:true});
+				
+			}
+
+			//Generate and upload zip file
+			function sendZip(zipFile) {
+				//Refresh zip process status
+				j$('span[id$=statusId]').text('Status: Creating zip file...');
+
+				//var data = zipFile.generate();
+				var blob = zipFile.generate({type:"blob"});
+				//setTimeout(closeSpinner, 3000);
+				saveAs(blob, "REVVY_ExportFile.zip");
+				
+				//var zipContent = j$('input[id$=zipContent]');
+				//zipContent.val(data);
+				
+				//var uploadZipButton = j$('input[id$=uploadZipButton]');
+				//uploadZipButton.trigger('click');
+			}
+			
+			//upload zip file
+			function uploadFile(iname, idata, bcs) {
+				console.log('uploading file ' +iname);
+				//zipFile = new JSZip();
+				//zipFile.file(iname, idata, {base64:true});
+				
+				//var data = zipFile.generate();
+				var zipContent = j$('input[id$=zipContent]');
+				zipContent.val(idata);
+				
+
+				var zipFileName = j$('input[id$=zipFileName]');
+				zipFileName.val(iname);
+
+				var uploadCVFileButton = j$('input[id$=uploadCVFileButton]');
+				uploadCVFileButton.trigger('click');
+				
+				//if(bcs)
+				//	setTimeout(closeSpinner, 3000);
+			}		
+
+			
+			//Intercept click event - Import
+        	j$('#importAllBtnId').click(function() {
+	        	console.log('hi  1');
+				if (!window.FileReader || !window.ArrayBuffer) {
+			      alert('You will need a recent browser to perform this task.');
+			      return;
+			    }
+			    
+				if (window.File && window.FileReader && window.FileList && window.Blob) {
+				  // Great success! All the File APIs are supported.
+				} else {
+				  alert('The File APIs are not fully supported in this browser.');
+				  return;
+				}			    
+        	
+				document.getElementById('spinnerId').style.display='block';
+				j$('span[id$=statusId]').text('Status: processing file...');
+				
+				vzip = {};
+				Visualforce.remoting.Manager.invokeAction(
+				    '{!$RemoteAction.RX_DownloadController.removeImportedFiles}', 
+				    function(result, event){
+				    	var vsuccess=true;
+				        if (event.status) {
+							//refreshStatusJS();
+							var files = document.getElementById('importFileId').files;
+					        for (var i = 0, f; f = files[i]; i++) {
+                                //if (f.type !== "application/zip") {
+                                //  alert('Invalid file type - ' + f.type + '-' + f.name );
+                                //}
+			
+					            var reader = new FileReader();
+					            try { 
+							       // Closure to capture the file information.
+							        reader.onload = (function(theFile) {
+							          return function(e) {
+							            try {
+							              // read the content of the file with JSZip
+							              console.log('hi inside closure');
+
+							              vzip = new JSZip(e.target.result);
+							              totalFiles = 0;
+							              
+										  for(vx in vzip.files) {
+										  		var vzipFile = vzip.files[vx];
+										  		uploadFileNames.push(vx);
+										  		if(!vzipFile.name.startsWith('_')) {
+										  			totalFiles++;
+										  		}
+										  }
+										  console.log("vtotal =" + totalFiles);
+										  var fileCnt=0;
+
+										  //for(var i=0; i < 6; i++) {
+										  for(vx in vzip.files) {
+										  		//var vx = uploadFileNames.shift();
+										  		var vzipFile = vzip.files[vx];
+										  		if(!vzipFile.name.startsWith('_')) {
+													j$('span[id$=statusId]').text('Status: uploading file -  '+ vzipFile.name);
+										  			var tfx = totalFiles;
+										  			fileCnt++;	
+										  			var vlastFile = false;
+													if(totalFiles==fileCnt) {
+														console.log('1234');
+														vlastFile=true;
+														Visualforce.remoting.Manager.invokeAction(
+															'{!$RemoteAction.RX_DownloadController.updateImportedStatus}',
+															function(resultCV, eventCV){
+																if (eventCV.status) {
+																	console.log('----------');
+																	//setTimeout(closeSpinner, 0);
+																}
+															}, 
+															{escape: true}
+														);									  				
+
+										  			}
+
+										  			//console.log("vx=" + vzipFile.name + " isLast =" + vlastFile);
+
+										  			//uploadDataFile(vzipFile.name, vzipFile.data, totalFiles, vlastFile);
+										  			uploadFile(vzipFile.name, vzipFile.data, vlastFile);
+										  		}
+										  	}
+							              // end of the magic !
+							            } catch(e) {
+							            	alert('Exception Read File: ' + e);
+							            }
+							          }
+							        })(f);
+							        reader.readAsArrayBuffer(f);
+							        
+					           } catch(fe) {
+					           	  alert('Exception FE - ' + fe);
+					           } 
+							}
+							
+							document.getElementById('importFileId').value='';
+							
+				        } else if(event.type='exception') {
+							alert('Exception 2: ' + event.message);	
+							closeSpinner();			        
+				        } else {
+							alert('Message 2: ' + event.message);
+							closeSpinner();
+				        }
+				    }, 
+				    {escape: true}
+				);				
+        	});//end click - Import
+        });
+
+		function closeSpinner() {
+			document.getElementById('spinnerId').style.display='none';
+			//refreshStatusJS();
+		}
+		function datafileUploadComplete(fName) {
+			console.log('Returned from action function >>' + fName + ' array len = ' + uploadFileNames.length);
+			//console.log('Retuened from action function uploadFileNames len >>' + uploadFileNames.length);
+			console.log(uploadFileNames);
+			var index = uploadFileNames.indexOf(fName);
+			console.log('Returned from action function index ' + index);
+			if (index > -1) {
+			    uploadFileNames.splice(index, 1);
+			}
+			if(uploadFileNames.length == 1) {
+				console.log('>>>' + uploadFileNames[0]);
+			}
+			//console.log('Retuened from action function len = ' + uploadFileNames.length);
+			if(uploadFileNames.length == 0) {
+				console.log('Returned from action function done!!!');
+			}
+		}
+
+    </script>
+</head>
+
+<apex:sectionHeader title="REVVY CPQ" subtitle="Revvy Export Import"/>
+
+<apex:form id="uploadZipForm" enctype="multipart/form-data">
+
+	
+	<apex:inputHidden id="zipFileName" value="{!zipFileName}" />
+	<apex:inputHidden id="zipContent" value="{!zipContent}" />
+	<apex:commandButton id="uploadZipButton" value="Upload" action="{!uploadZip}"  />
+	<apex:commandButton id="uploadCVFileButton" value="Upload File" action="{!uploadCVFile}" rerender="false" oncomplete="datafileUploadComplete('{!zipFileName}');"/>
+	<apex:actionFunction action="{!refreshStatus}" name="refreshStatusJS" rerender="false"/> 
+	<div class="showUpdate"></div>
+	<apex:outputPanel id="opSpinnerId">
+	<center>
+	<p style="display:none;" id="spinnerId">
+	<img src="{!URLFOR($Resource.RX, '/spinner.gif')}" alt="processing..." />   
+	&nbsp;<br/>&nbsp;<br/><span id="statusId"></span>
+	&nbsp;<br/></p>
+	</center>
+	</apex:outputPanel>
+
+    <apex:pageBlock title="REVVY Export" id="pbsExport">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton action="{!exportAllButton}" value="Export ALL"/>
+	    	<input class="btn" type="Button" name="refreshExpBtn" value=" Refresh Status " id="refreshExpBtnId" onclick="refreshStatusJS();"/>
+        </apex:pageBlockButtons>
+        <apex:outputPanel id="pbsExportStatusId">
+		<apex:pageBlockTable value="{!ExportStatus}" var="st" rendered="{!ExportStatus.size > 0}" >
+			<apex:column value="{!st.ID__c}"/>
+			<apex:column value="{!st.Submitted__c}"/>
+			<apex:column value="{!st.Finished__c}" styleClass="finishedTimestamp"/>
+			<apex:column value="{!st.Status__c}" styleClass="toolStatus"/>
+			<apex:column >
+				<apex:facet name="header">File Download</apex:facet>
+				<apex:outputPanel >
+				<input class="btn" type="Button" name="DownloadExportAllBtn" value="Download" id="DownloadExportAllBtnId"/>  
+				</apex:outputPanel>
+			</apex:column>
+		</apex:pageBlockTable>
+		</apex:outputPanel>
+		<!-- 
+        <apex:pageBlockSection title="REVVY Objects" columns="1">
+		<apex:pageBlockTable value="{!RevvyObjects}" var="ro">
+			<apex:column >
+				<input type="checkbox" name="cv_ids_group[]" value="{!ro}" checked="true"/>
+			</apex:column>
+			<apex:column value="{!ro}">
+				<apex:facet name="header">Object Name</apex:facet>
+			</apex:column>
+		</apex:pageBlockTable>
+        </apex:pageBlockSection>
+		-->
+    </apex:pageBlock>
+	
+    <apex:pageBlock title="REVVY Import" id="pbsImport">
+    	<br/>Choose File: &nbsp;&nbsp;<input type="file" name="importFile" id="importFileId"/>
+    	
+    	<input class="btn" type="Button" name="ImportAllBtn" value=" Import File " id="importAllBtnId" />  &nbsp;
+    	<input class="btn" type="Button" name="refreshImpBtn" value=" Refresh Status " id="refreshImpBtnId" onclick="refreshStatusJS();"/>  
+		<br/>&nbsp;<br/>
+		<apex:outputPanel id="pbsImportStatusId">
+		<apex:pageBlockTable value="{!ImportStatus}" var="st" rendered="{!ImportStatus.size > 0}" >
+			<apex:column value="{!st.ID__c}"/>
+			<apex:column value="{!st.Submitted__c}"/>
+			<apex:column value="{!st.Finished__c}" styleClass="import finishedTimestamp"/>
+			<apex:column value="{!st.Status__c}" styleClass="importStatus"/>
+			<apex:column value="{!st.Job_ID__c}"/>
+		</apex:pageBlockTable>
+		</apex:outputPanel>
+    </apex:pageBlock>
+
+    <apex:pageBlock title="REVVY Model Export" id="pbsModelExport">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton onclick="getSelectedModel()" value="Export Model"/>
+	    	<!--  input class="btn" type="Button" name="refreshModelsBtn" value=" Refresh Status " id="refreshModelsBtnId" onclick="refreshStatusJS();"/-->
+
+				<!--  input class="btn" type="Button" name="DownloadModelsBtn" value="Downloadd" id="DownloadModelsBtnId"/-->  
+
+        </apex:pageBlockButtons>
+        <apex:outputPanel id="pbsModelsId">
+		<apex:pageBlockTable value="{!Models}" var="md" rendered="{!Models.size > 0}" >
+			<apex:column ><input type="radio" name="modelRadio" value="{!md.REVVY__Id__c}"/></apex:column>
+			<apex:column value="{!md.Name}"/>
+			<apex:column value="{!md.REVVY__Id__c}"/>
+			<apex:column value="{!md.REVVY__Status__c}"/>
+
+		</apex:pageBlockTable>
+		</apex:outputPanel>
+		<apex:actionFunction name="exportModel" action="{!exportModel}" rerender="pbsExport">
+    		<apex:param name="modelId" value="" />
+		</apex:actionFunction>
+		<script>
+	 	function getSelectedModel()
+        {
+            var radio = j$('input[name=modelRadio]:checked');
+            var modelId = radio.val();
+            exportModel(modelId);
+        }
+		</script>    
+		</apex:pageBlock>
+
+	<!--  
+    <apex:pageBlock title="REVVY Product Export" id="pbsProductExport">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton onclick="getSelectedProduct()" value="Export Product"/>    
+        </apex:pageBlockButtons>
+        <apex:outputPanel id="pbsProductId">
+		<apex:pageBlockTable value="{!Products}" var="pd" rendered="{!Products.size > 0}" >
+			<apex:column ><input type="radio" name="productRadio" value="{!pd.REVVY__Id__c}"/></apex:column>
+			<apex:column value="{!pd.Name}"/>
+			<apex:column value="{!pd.REVVY__Id__c}"/>
+		</apex:pageBlockTable>
+		</apex:outputPanel>
+		<apex:actionFunction name="exportProduct" action="{!exportProduct}" rerender="pbsExport">
+    		<apex:param name="prodId" value="" />
+		</apex:actionFunction>
+		<script>
+	 	function getSelectedProduct()
+        {
+            var radio = j$('input[name=productRadio]:checked');
+            var prodId = radio.val();
+            exportProduct(prodId);
+        }
+		</script>
+    </apex:pageBlock>
+    -->
+
+</apex:form>
+
+</apex:page>

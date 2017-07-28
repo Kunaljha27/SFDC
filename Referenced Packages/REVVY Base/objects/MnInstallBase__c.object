@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Captures information about products that are marked as &apos;Install Base Relevant&apos; when they are ordered through a Quote</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The account that is associated with the Install Base item.</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Install Base Items</relationshipLabel>
+        <relationshipName>InstallBaseItems</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CatalogNode__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Product associated with this Install Base Item.</description>
+        <externalId>false</externalId>
+        <label>Product</label>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>Install Base Items</relationshipLabel>
+        <relationshipName>InstallBaseItems</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ExpirationDate__c</fullName>
+        <defaultValue>IF( AND(
+                                MONTH( Today() ) = 2,
+                                DAY( Today() ) = 29,
+                                NOT( 
+                                    OR( 
+                                        MOD( YEAR( Today() ), 400 ) = 0, 
+                                        AND( 
+                                            MOD( YEAR( Today() ), 4 ) = 0,
+                                            MOD( YEAR( Today() ), 100 ) != 0
+                                       )
+                                    )
+                                ) 
+                           ),
+                        DATE( YEAR( Today() ) + value($Label.revvy__MnDefaultInstallBaseExpirationDateInYears), 3, 1),
+                        DATE( YEAR( Today() ) + value($Label.revvy__MnDefaultInstallBaseExpirationDateInYears), MONTH( Today() ), DAY( Today() ) )
+                       )</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Date when this install base item expires.</description>
+        <externalId>false</externalId>
+        <label>Expiration Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ExportedModelAttachmentId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The exported model JSON associated with this Install Base Record. (Populated only for Config Products/sublines of Config Products)</description>
+        <externalId>false</externalId>
+        <label>Exported Model Attachment Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstallDate__c</fullName>
+        <defaultValue>Today()</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Date when this install base item was installed/ordered.</description>
+        <externalId>false</externalId>
+        <label>Install Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ListPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price of install base item.</description>
+        <externalId>false</externalId>
+        <label>List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LocCity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Location City.</description>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocCountry__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Location Country.</description>
+        <externalId>false</externalId>
+        <label>Country</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocPostalCode__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Location Postal Code.</description>
+        <externalId>false</externalId>
+        <label>Postal Code</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocState__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Location State.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Location State.</inlineHelpText>
+        <label>State</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocStreet__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Location Street.</description>
+        <externalId>false</externalId>
+        <label>Street</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ParentCatalogNode__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Parent Product associated with this Install Base Item. Set Only for Bundle or Config Product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Product associated with this Install Base Item.Set Only for Bundle or Config Product.</inlineHelpText>
+        <label>Parent Product</label>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>Child Install Base Items</relationshipLabel>
+        <relationshipName>ChildInstallBaseItems</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ParentInstallBase__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Install Base of the parent. Set only for products which are part of a configurable product or bundle.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Install Base of the parent. Set only for products which are part of a configurable product or bundle.</inlineHelpText>
+        <label>Parent Install Base</label>
+        <referenceTo>MnInstallBase__c</referenceTo>
+        <relationshipLabel>Child Install Base Items</relationshipLabel>
+        <relationshipName>ChildInstallBaseItems</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <defaultValue>1</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Number of units.</description>
+        <externalId>false</externalId>
+        <label>Qty</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuoteItemSubline__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The subline (i.e., the quote item subline) in the quote with which this install base item is associated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The subline (i.e., the quote item subline) in the quote with which this install base item is associated.</inlineHelpText>
+        <label>Quote Item Subline</label>
+        <referenceTo>MnQuoteItemSubLine__c</referenceTo>
+        <relationshipLabel>Install Base Item</relationshipLabel>
+        <relationshipName>InstallBaseItem</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>QuoteItem__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The main line (i.e., the quote item) in the quote with which this install base item is associated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The main line (i.e., the quote item) in the quote with which this install base item is associated.</inlineHelpText>
+        <label>Quote Item</label>
+        <referenceTo>MnQuoteItem__c</referenceTo>
+        <relationshipLabel>Install Base Item</relationshipLabel>
+        <relationshipName>InstallBaseItem</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>QuoteSolution__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The solution that this install base item belongs to.</description>
+        <externalId>false</externalId>
+        <label>Quote Solution</label>
+        <referenceTo>MnQuoteSolution__c</referenceTo>
+        <relationshipLabel>Solution Install Base Items</relationshipLabel>
+        <relationshipName>SolutionInstallBaseItems</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Quote__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The quote that this install base item belongs to.</description>
+        <externalId>false</externalId>
+        <label>Quote</label>
+        <referenceTo>MnQuote__c</referenceTo>
+        <relationshipLabel>Install Base Items</relationshipLabel>
+        <relationshipName>InstallBaseItems</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Status of the install base item. The status can be sold, installed, inactive.</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Installed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sold</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>UnitPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of the install base item. (list price less the discount)</description>
+        <externalId>false</externalId>
+        <label>Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Install Base Item</label>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Install Base Items</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

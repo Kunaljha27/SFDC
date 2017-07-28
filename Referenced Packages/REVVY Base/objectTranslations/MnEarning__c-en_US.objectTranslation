@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Revvy Earning</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Revvy Earnings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Closing --></label>
+        <name>Closing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Earned (Override) --></label>
+        <name>EarnedOverride__c</name>
+    </fields>
+    <fields>
+        <label><!-- Earned --></label>
+        <name>Earned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Earnings Period --></label>
+        <name>EarningsPeriod__c</name>
+    </fields>
+    <fields>
+        <label><!-- Program ID --></label>
+        <name>IncentiveProgram__c</name>
+        <relationshipLabel><!-- Revvy Earnings --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Job Status --></label>
+        <name>JobStatus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job Type --></label>
+        <name>JobType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job --></label>
+        <name>Job__c</name>
+        <relationshipLabel><!-- Revvy Earnings (Calc Job) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Last Successful Run Calc Job --></label>
+        <name>LastSuccessfulRunCalcJob__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Successful Run Create Payment --></label>
+        <name>LastSuccessfulRunCreatePayment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Successful Run --></label>
+        <name>LastSuccessfulRun__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Due --></label>
+        <name>PaymentDue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period End --></label>
+        <name>PeriodEnd__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period Start --></label>
+        <name>PeriodStart__c</name>
+    </fields>
+    <fields>
+        <label><!-- Projected --></label>
+        <name>Projected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Released --></label>
+        <name>Released__c</name>
+    </fields>
+    <fields>
+        <label><!-- Settlement Name --></label>
+        <name>SettlementName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Future</masterLabel>
+            <translation><!-- Future --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Payment Created</masterLabel>
+            <translation><!-- Payment Created --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review for Payment</masterLabel>
+            <translation><!-- Review for Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terminated</masterLabel>
+            <translation><!-- Terminated --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Earning Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Earnings Amount --></label>
+            <section>Earnings Amount</section>
+        </sections>
+        <sections>
+            <label><!-- Revvy Jobs Information --></label>
+            <section>Revvy Jobs Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- CalculateResult --></label>
+        <name>CalculateResult</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- CreatePayment --></label>
+        <name>CreatePayment</name>
+    </webLinks>
+</CustomObjectTranslation>

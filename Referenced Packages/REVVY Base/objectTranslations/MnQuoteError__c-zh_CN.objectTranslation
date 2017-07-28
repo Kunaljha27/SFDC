@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quote Error --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Type of error. --></help>
+        <label>错误类型</label>
+        <name>ErrorType__c</name>
+        <picklistValues>
+            <masterLabel>Create</masterLabel>
+            <translation><!-- Create --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Import</masterLabel>
+            <translation><!-- Import --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Target Price</masterLabel>
+            <translation><!-- Target Price --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>信息</label>
+        <name>Message__c</name>
+    </fields>
+    <fields>
+        <label>报价</label>
+        <name>Quote__c</name>
+        <relationshipLabel>报价错误</relationshipLabel>
+    </fields>
+    <nameFieldLabel><!-- Id --></nameFieldLabel>
+</CustomObjectTranslation>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <fields>
+        <label>Istwert</label>
+        <name>ActualValue__c</name>
+    </fields>
+    <fields>
+        <label>Attributwert</label>
+        <name>AttributeValue__c</name>
+    </fields>
+    <fields>
+        <label>Katalogattribut</label>
+        <name>CatalogAttribute__c</name>
+        <relationshipLabel>AngebotsobjektUnterzeilenAttribute</relationshipLabel>
+    </fields>
+    <fields>
+        <label>AngebotsobjektUnterzeile</label>
+        <name>QuoteItemSubLine__c</name>
+        <relationshipLabel>AngebotsobjektUnterzeilenAttribute</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

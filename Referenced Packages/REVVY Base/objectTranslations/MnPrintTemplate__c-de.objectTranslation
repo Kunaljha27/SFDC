@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Proposal Template --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Flag that controls whether the terms and conditions can be edited on the print proposal page. --></help>
+        <label>Bearbeitung der Bedingungen zulassen</label>
+        <name>Edit_T_C__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Eindeutiger Bezeichner</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag that controls whether the current template is the default template. --></help>
+        <label>Ist Standardvorlage</label>
+        <name>IsDefault__c</name>
+    </fields>
+    <fields>
+        <help><!-- Text field where the admin can add terms of service or other boilerplate info. --></help>
+        <label>Bedingungen</label>
+        <name>TermsOfService__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Visualforce page that is used to generate the proposal. --></help>
+        <label>Visualforce-Seitenname</label>
+        <name>VisualforcePageName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Supplies default text that is used in the quote when the sales rep generates a proposal. --></help>
+        <label>Abschließende Anmerkungen</label>
+        <name>closingComments__c</name>
+    </fields>
+    <fields>
+        <help><!-- Preview of the sample conclusion page that is shown in the proposal page. --></help>
+        <label>Thumbnail Zusammenfassung</label>
+        <name>imgConclusionURL__c</name>
+    </fields>
+    <fields>
+        <help><!-- Preview of the sample cover letter page that is shown in the proposal page. --></help>
+        <label>Thumbnail Anschreiben</label>
+        <name>imgCoverLetterURL__c</name>
+    </fields>
+    <fields>
+        <help><!-- Preview of the sample opening comments page that is shown in the proposal page. --></help>
+        <label>Thumbnail Eingangsanmerkungen</label>
+        <name>imgOpeningURL__c</name>
+    </fields>
+    <fields>
+        <help><!-- Preview of the quote that is used on the print proposal page. --></help>
+        <label>Thumbnail Angebotsdetails</label>
+        <name>imgPricingURL__c</name>
+    </fields>
+    <fields>
+        <help><!-- Preview of the sample conclusion page that is shown in the proposal page. --></help>
+        <label>Thumbnail Bedingungen</label>
+        <name>imgTermsOfServiceURL__c</name>
+    </fields>
+    <fields>
+        <help><!-- Supplies default text that is used in the quote when the sales rep generates a proposal. --></help>
+        <label>Eingangsanmerkungen</label>
+        <name>openingComments__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Print Template Layout20</layout>
+        <sections>
+            <label><!-- Closing Comments --></label>
+            <section>Closing Comments</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Opening Comments --></label>
+            <section>Opening Comments</section>
+        </sections>
+        <sections>
+            <label><!-- Proposal Template Thumbnail Images --></label>
+            <section>Proposal Template Thumbnail Images</section>
+        </sections>
+        <sections>
+            <label><!-- Terms and Conditions --></label>
+            <section>Terms and Conditions</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Proposal Template Name --></nameFieldLabel>
+</CustomObjectTranslation>

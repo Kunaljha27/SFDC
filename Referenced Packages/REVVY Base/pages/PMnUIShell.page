@@ -1,0 +1,140 @@
+<apex:page controller="REVVY.CMnRemoter" sidebar="false" standardStylesheets="false" cache="false" docType="html-5.0">
+    <style>
+        #bodyTable { table-layout: fixed; }
+    </style>
+
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-scoped.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/select2.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/overrides/select2override.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/lionbars.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/kalendae.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/jquery.qtip.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/jquery.dataTables.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/src/css/style.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/github.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/messi.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/overrides/messioverride.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/font-awesome.css" />
+
+
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/react-select.min.css" />
+
+    <c:CMnZenDesk />
+
+    <div id="uishell">
+        <div class="loadingSpinner">
+            <img src="{!$Resource.staticui}/uifw/ui/images/spinner.gif"/>
+        </div>
+    </div>
+
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/react.min.js"></script>
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/react-dom.min.js"></script>
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/classnames.js"></script>
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/react-input-autosize.js"></script>
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/react-select.min.js"></script>
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/svg4everybody.min.js"></script>
+
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/require.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <script>
+        Visualforce.remoting.timeout = 120000; //sometime dev orgs are very slow and html5 UI pages doesn't load unless u attempt multiple times.
+        if (typeof console === "undefined" || typeof console.log === "undefined") {
+            console = {};
+            console.log = function() {};
+        }
+        var CMnNamespacePrefix = "{!namespacePrefix}";
+        var CMnSitePrefix = "{!sitePrefix}";
+        var CMnNamespacePrefixUS = "";
+        var CMnNamespacePrefixDT = "";
+        if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+            CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+            CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+        }
+        var CMnLoggedInUserName = "{!userName}";
+        var CMnProposalTemplateValid = "{!ProposalTemplateValid}";
+
+        var ApexRemoteControllerNameDT = "CMnRemoter.";
+        var UserUITheme = '{! $User.UIThemeDisplayed }'
+
+        // ***************** Begin SFDC Tabs activation *****************
+        if( (typeof sforce == 'undefined') || (sforce == null) ) {
+            var tabToActivate = "";
+
+            if (document.URL.indexOf('#mnquote') !== -1 || document.URL.indexOf('#mncatalog/catalog/quote') !== -1) {
+                //means quote tab is selected. get tab url.
+                tabToActivate = "{!quoteTab}";
+            } else if (document.URL.indexOf('#mncatalog/catalog/contract') !== -1) {
+                tabToActivate = "{!contractTab}";
+            } else {
+                tabToActivate = "{!adminTab}";
+            }
+            var classes = "primaryPalette zen-active brandPrimaryBgr brandPrimaryFgr";
+            classes.split(' ').forEach(function (data, i) {
+                document.querySelector('#tabContainer li').classList.remove(data);
+                document.querySelector('#tabContainer li a').classList.remove(data);
+            });
+            var tabElem = undefined;
+            [].forEach.call(document.querySelectorAll('#tabContainer li a'), function (el) {
+                if (el.innerHTML === tabToActivate) tabElem = el;
+                return;
+            });
+            var tabParent = tabElem !== undefined ? tabElem.parentNode : undefined;
+            if (tabParent !== undefined) {
+                classes.split(' ').forEach(function (data, i) {
+                    tabParent.classList.add(data);
+                });
+            }
+        }
+        // ***************** End SFDC Tabs activation *****************
+    </script>
+
+    <script>
+        define('react', function() { return window.React; });
+        define('classnames', function() { return window.classNames; });
+        define('react-dom', function() { return window.ReactDOM; });
+        define('svg4everybody', function() { return window.svg4everybody; });
+        define('Select', function() { return window.Select; });
+        define('uuid', function() { return function() { return Math.random().toString(36).substring(7); }; });
+    </script>
+
+    <script>
+        window.sldsPath = '{!$Resource.slds}/assets';
+        if (localStorage.getItem('devMode')) {
+            window.revvyUIPath = 'revvy-ui/lib/';
+            require.config({
+                baseUrl: 'https://localhost:8000/',
+                config: {
+                    text: {
+                        useXhr: function() {
+                            return true;
+                        }
+                    }
+                }
+            });
+
+
+            require(['https://localhost:8000/uifw/ui/src/js/main.js'], function(CMnApp) {
+                require(['rui/scripts/util'], function(util) {
+                    util.default.setAssetRoot(window.sldsPath);
+                    CMnApp.start();
+                });
+            });
+        } else {
+            window.revvyUIPath = '../../..{!$Resource.revvyui}';
+            require.config({
+                // instruct RequireJS to use the SFDC static resource URL when loading dependencies
+                baseUrl: "{!URLFOR($Resource.staticui, '')}"
+            });
+
+            require(["uifw/ui/src/js/main"], function (CMnApp) {
+                require(['rui/scripts/util'], function(util) {
+                    util.default.setAssetRoot(window.sldsPath);
+                    CMnApp.start();
+                });
+            });
+        }
+
+    </script>
+
+</apex:page>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>EstimateVsActualsHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Compares the estimated and actual hours worked by a resource on an assignment, derived from scheduled hours and entered timecard hours respectively. FinancialForce PSA generates Est Vs Actuals when you create or update assignments and schedules, and when timecard hours are entered for an assignment.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Actual_Average_Bill_Rate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Actual Billable Amount divided by Actual Hours or Actual Days as appropriate</description>
+        <externalId>false</externalId>
+        <formula>IF(OR(Actual_Days__c = 0, Actual_Hours__c = 0), 0, IF ( Assignment__r.Daily_Bill_Rate__c, (Actual_Billable_Amount__c / Actual_Days__c), (Actual_Billable_Amount__c / Actual_Hours__c)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Actual Billable Amount divided by Actual Hours or Actual Days as appropriate</inlineHelpText>
+        <label>Actual Average Bill Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Billable_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>The billable amount of timecard hours</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The billable amount of timecard hours</inlineHelpText>
+        <label>Actual Billable Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Days__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Actual number of days worked in the time period</inlineHelpText>
+        <label>Actual Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Actual_Hours__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of hours entered on timecards</inlineHelpText>
+        <label>Actual Hours</label>
+        <precision>12</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Assignment</label>
+        <referenceTo>Assignment__c</referenceTo>
+        <relationshipLabel>Est Vs Actuals</relationshipLabel>
+        <relationshipName>Est_Vs_Actuals</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Days_Percent_Variance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(Estimated_Days__c=0,0,(Actual_Days__c - Estimated_Days__c) / Estimated_Days__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Percent Variance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Days_Variance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Actual_Days__c - Estimated_Days__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Variance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>End date of the time period for this record. This should not be confused with the end date of the associated assignment or timecards.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>End date of the time period for this record. This should not be confused with the end date of the associated assignment or timecards.</inlineHelpText>
+        <label>End Date</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Estimated_Days__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of days scheduled for work during the time period</inlineHelpText>
+        <label>Estimated Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Estimated_Hours__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of hours scheduled</inlineHelpText>
+        <label>Estimated Hours</label>
+        <precision>12</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Percent_Variance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(Estimated_Hours__c != 0,(Actual_Hours__c - Estimated_Hours__c) / Estimated_Hours__c,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hours Percent Variance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Project_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Linked to the project manager for the project. This allows for easier workflow alerts to be sent</description>
+        <externalId>false</externalId>
+        <label>Project Manager</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Est Vs Actuals (Project Manager)</relationshipLabel>
+        <relationshipName>Est_Vs_Actuals_Project_Manager</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Proj__c</referenceTo>
+        <relationshipLabel>Est Vs Actuals</relationshipLabel>
+        <relationshipName>Est_Vs_Actuals</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Resource__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Linked to the resource record for the assignment. This allows for easier workflow alerts to be sent</description>
+        <externalId>false</externalId>
+        <label>Resource</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Est Vs Actuals</relationshipLabel>
+        <relationshipName>Est_Vs_Actuals_Resource</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Bill_Rate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Assignment__r.Bill_Rate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Bill rate from the Assignment</inlineHelpText>
+        <label>Scheduled Bill Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Bill_Rate_is_Daily_Rate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(Assignment__r.Daily_Bill_Rate__c, &apos;true&apos;, &apos;false&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Scheduled Bill Rate is Daily Rate</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Start date of the time period for this record. This should not be confused with the start date of the associated assignment or timecards.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Start date of the time period for this record. This should not be confused with the start date of the associated assignment or timecards.</inlineHelpText>
+        <label>Start Date</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Time_Period_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The type of time period this time span represents</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The type of time period this time span represents</inlineHelpText>
+        <label>Time Period Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Week</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Month</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quarter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Time_Period__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The associated time period</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The associated time period</inlineHelpText>
+        <label>Time Period</label>
+        <referenceTo>Time_Period__c</referenceTo>
+        <relationshipLabel>Est Vs Actuals</relationshipLabel>
+        <relationshipName>Est_Vs_Actuals</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Timecards_Submitted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Are all associated timecards submitted?</inlineHelpText>
+        <label>Timecards Submitted</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Variance__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Actual_Hours__c - Estimated_Hours__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The amount of variance in hours</inlineHelpText>
+        <label>Hours Variance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Est Vs Actuals</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Start_Date__c</columns>
+        <columns>End_Date__c</columns>
+        <columns>Estimated_Hours__c</columns>
+        <columns>Actual_Hours__c</columns>
+        <columns>Variance__c</columns>
+        <columns>Percent_Variance__c</columns>
+        <columns>Timecards_Submitted__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Est Vs Actuals Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Est Vs Actuals</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Start_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>End_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Estimated_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Estimated_Days__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Actual_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Actual_Days__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Assignment__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Time_Period__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Time_Period_Type__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Start_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>End_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Estimated_Hours__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Actual_Hours__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Estimated_Days__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Actual_Days__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Assignment__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Start_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>End_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Estimated_Hours__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Actual_Hours__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Estimated_Days__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Actual_Days__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Assignment__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <sharingReasons>
+        <fullName>PSE_Member_Share__c</fullName>
+        <label>PSE Member Share</label>
+    </sharingReasons>
+    <sharingReasons>
+        <fullName>PSE_PM_Share__c</fullName>
+        <label>PSE PM Share</label>
+    </sharingReasons>
+    <validationRules>
+        <fullName>Assignment_required</fullName>
+        <active>true</active>
+        <errorConditionFormula>LEN(Assignment__c) = 0</errorConditionFormula>
+        <errorDisplayField>Assignment__c</errorDisplayField>
+        <errorMessage>Assignment is required</errorMessage>
+    </validationRules>
+</CustomObject>

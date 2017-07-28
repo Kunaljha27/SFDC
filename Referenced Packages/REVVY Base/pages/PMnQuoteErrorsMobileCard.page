@@ -1,0 +1,98 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnRemoter" docType="html-5.0" standardStylesheets="false" showheader="false" sidebar="false">
+<link href="{!$Resource.revvymobile}/revvy-mobile/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<style>
+    body{
+    background-color:transparent;
+    padding-left:18px;
+  }
+  ul.errors {
+  color:#ff0000;
+  padding-left:0;
+    }
+ 
+</style>
+
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/jquery.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/underscore-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone.geppetto.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/handlebars.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/bootstrap.min.js"></script>
+
+<script type="text/template" id="errors-view-template">
+    <ul class="errors">
+        {{#each errors}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+</script>
+<script>
+var MyApp = {};
+var CMnNamespacePrefix = "{!namespacePrefix}";
+var CMnNamespacePrefixUS = "";
+var CMnNamespacePrefixDT = "";
+if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+    CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+    CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+}
+
+var ApexRemoteControllerNameDT = "CMnRemoter.";
+
+//current quote information
+var currentQuoteId = '<apex:outputText value="{!REVVY__MnQuote__c.Id}"/>';
+
+MyApp.ApplicationContext = Backbone.Geppetto.Context.extend({
+    initialize : function(){
+        this.mapCommand("LoadErrorsEvent", MyApp.LoadErrorsCommand);
+    }
+});
+MyApp.LoadErrorsCommand = function () {};
+MyApp.LoadErrorsCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var quoteId = this.eventData.quoteId;
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.getQuoteErrorsList',
+        quoteId,
+        function (result, event) {
+            if (event.status) {
+               that.context.dispatch("onErrorsLoaded",{data:result}); 
+            }
+        });
+}; 
+MyApp.ErrorsListView = Backbone.View.extend({
+    template: Handlebars.compile($("#errors-view-template").html()),
+    initialize: function () {
+        _.bindAll.apply(_, [this].concat(_.functions(this)));
+        Backbone.Geppetto.bindContext({
+            view: this,
+            context: MyApp.ApplicationContext
+        });
+        this.context.listen(this,"onErrorsLoaded",this.onErrorsLoaded);
+    },
+    render: function () {
+        this.context.dispatch("LoadErrorsEvent",{quoteId: this.model.get("quoteId")});
+    },
+    onErrorsLoaded : function(result){
+        var data = result.data;
+        this.model.set({
+        "errors" : data
+        });
+        var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+    }
+});
+
+$(function(){
+    var errorsListViewInstance = new MyApp.ErrorsListView({
+        model : new Backbone.Model({
+            quoteId: currentQuoteId,
+            errors:[]
+        })
+    });
+    errorsListViewInstance.render();
+    $("body").append(errorsListViewInstance.$el);
+});
+
+</script>
+</apex:page>

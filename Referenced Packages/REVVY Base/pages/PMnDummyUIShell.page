@@ -1,0 +1,5 @@
+<apex:page controller="REVVY.CMnRemoter" sidebar="false" standardStylesheets="false" cache="false">
+
+ <p>Hello!</p>
+    
+</apex:page>

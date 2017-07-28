@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Node --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Defines whether price can be set. Checking this box allows this node to be selectable in price list line. --></help>
+        <label><!-- Allow Pricing --></label>
+        <name>AllowPricing__c</name>
+    </fields>
+    <fields>
+        <label>结账频率增倍器</label>
+        <name>Billing_Frequency_Multiplier__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the product is charged on a recurring basis. A product can be charged one-time, weekly, monthly, or yearly. --></help>
+        <label>结账频率</label>
+        <name>Billing_Frequency__c</name>
+        <picklistValues>
+            <masterLabel>Monthly</masterLabel>
+            <translation><!-- Monthly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>One Time</masterLabel>
+            <translation><!-- One Time --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weekly</masterLabel>
+            <translation><!-- Weekly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yearly</masterLabel>
+            <translation><!-- Yearly --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Defines product as a configurable product. Checking this box means that the product is configurable. --></help>
+        <label>可配置</label>
+        <name>Configurable__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique Salesforce ID for the Description:Catalog Node Locale Extension. --></help>
+        <label>描述目录区域设置扩展</label>
+        <name>Description_Catalog_Locale_Ext__c</name>
+        <relationshipLabel>目录节点</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Description of the product. The description is displayed in the end user catalog. --></help>
+        <label>描述</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag to allow/block Manual discount when product is added to the Quote. --></help>
+        <label><!-- Discountable --></label>
+        <name>Discountable__c</name>
+    </fields>
+    <fields>
+        <help><!-- The last date that the product is available in the catalog. --></help>
+        <label>有效结束日期</label>
+        <name>Effective_End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when product becomes available in end user catalog. --></help>
+        <label>有效开始日期</label>
+        <name>Effective_Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- How much of the product is left in stock. --></help>
+        <label>库存水平</label>
+        <name>InventoryLevel__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines whether a regular product, bundle, or config product is specified as Install Base Relevant. --></help>
+        <label><!-- Install Base Relevant --></label>
+        <name>IsInstallBase__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines product as a physical bundle (kit). Checking this box means that the product is kit and all its components are for information only. --></help>
+        <label>是否为套装？</label>
+        <name>IsKit__c</name>
+    </fields>
+    <fields>
+        <label>行类型</label>
+        <name>LineType__c</name>
+        <picklistValues>
+            <masterLabel>Not tracked on contract</masterLabel>
+            <translation><!-- Not tracked on contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Description of the product in Locale. --></help>
+        <label>区域设置描述</label>
+        <name>LocaleDesc_RF__c</name>
+    </fields>
+    <fields>
+        <label>名称</label>
+        <name>LocaleName_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Terms and Conditions for a product(Locale) --></help>
+        <label>区域设置条款和条件</label>
+        <name>LocaleTC_RF__c</name>
+    </fields>
+    <fields>
+        <help><!-- Model used to configure product. --></help>
+        <label>模型</label>
+        <name>Model__c</name>
+        <relationshipLabel>配置产品</relationshipLabel>
+    </fields>
+    <fields>
+        <label>名称（语言 10）</label>
+        <name>Name_L10__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 11）</label>
+        <name>Name_L11__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 12）</label>
+        <name>Name_L12__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 13）</label>
+        <name>Name_L13__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 14）</label>
+        <name>Name_L14__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 15）</label>
+        <name>Name_L15__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 16）</label>
+        <name>Name_L16__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 17）</label>
+        <name>Name_L17__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 18）</label>
+        <name>Name_L18__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 19）</label>
+        <name>Name_L19__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 1）</label>
+        <name>Name_L1__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 20）</label>
+        <name>Name_L20__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 2）</label>
+        <name>Name_L2__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 3）</label>
+        <name>Name_L3__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 4）</label>
+        <name>Name_L4__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 5）</label>
+        <name>Name_L5__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 6）</label>
+        <name>Name_L6__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 7）</label>
+        <name>Name_L7__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 8）</label>
+        <name>Name_L8__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 9）</label>
+        <name>Name_L9__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines the parent category of a subcategory. --></help>
+        <label>父层</label>
+        <name>Parent__c</name>
+        <relationshipLabel>目录节点</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Admin can show the availability, delivery time, or backorder status for the product. --></help>
+        <label>产品供应情况</label>
+        <name>ProductAvailability__c</name>
+        <picklistValues>
+            <masterLabel>1 Month Lead Time</masterLabel>
+            <translation><!-- 1 Month Lead Time --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 Month Lead Time</masterLabel>
+            <translation><!-- 2 Month Lead Time --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 Week Lead Time</masterLabel>
+            <translation><!-- 2 Week Lead Time --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 Week Lead Time</masterLabel>
+            <translation><!-- 3 Week Lead Time --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Available</masterLabel>
+            <translation><!-- Available --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low Inventory</masterLabel>
+            <translation><!-- Low Inventory --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>On Backorder</masterLabel>
+            <translation><!-- On Backorder --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Out of Inventory</masterLabel>
+            <translation><!-- Out of Inventory --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Contains a formula field that supports catalog search. --></help>
+        <label>快速搜索助手</label>
+        <name>QuickSearchHelper__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP ID for this record. --></help>
+        <label><!-- SAP ID --></label>
+        <name>SapId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Field mapping from ConfigIT to Revvy. --></help>
+        <label><!-- SAP Field Mapping --></label>
+        <name>SapPricingFieldMap__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field determines whether a product can be sold alone. If this field is set to false, this product will not appear in product quick search results. --></help>
+        <label>单独销售</label>
+        <name>StandaloneSellable__c</name>
+    </fields>
+    <fields>
+        <help><!-- State of the product. The status can be either draft or active. If status is draft, then the product is not available in the catalog. If status is active, then product is available in the catalog. --></help>
+        <label>状态</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>子类型</label>
+        <name>SubType__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique Salesforce ID for the Terms and Condition:Catalog Node Locale Extension. --></help>
+        <label>条款和条件目录区域设置扩展</label>
+        <name>TC_Catalog_Locale_Ext__c</name>
+        <relationshipLabel>目录节点（条款和条件目录区域设置扩展）</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Terms and Conditions for a product --></help>
+        <label>条款和条件</label>
+        <name>TermsAndConditions__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines whether the node is a catalog, category, product, or  bundle. --></help>
+        <label>类型</label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Bundle</masterLabel>
+            <translation><!-- Bundle --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalog</masterLabel>
+            <translation><!-- Catalog --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Category</masterLabel>
+            <translation><!-- Category --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product</masterLabel>
+            <translation><!-- Product --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Solution</masterLabel>
+            <translation><!-- Solution --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Virtual SKU --></label>
+        <name>VirtualSKU__c</name>
+        <relationshipLabel><!-- Catalog Nodes --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Determines whether a category is shown in the end user catalog. --></help>
+        <label>销售代表可见</label>
+        <name>Visible__c</name>
+    </fields>
+    <fields>
+        <help><!-- Second image of product. --></help>
+        <label>图 2</label>
+        <name>image2__c</name>
+    </fields>
+    <fields>
+        <help><!-- Third image of product. --></help>
+        <label>图 3</label>
+        <name>image3__c</name>
+    </fields>
+    <fields>
+        <help><!-- Fourth image of product. --></help>
+        <label>图 4</label>
+        <name>image4__c</name>
+    </fields>
+    <fields>
+        <help><!-- First image of product. This is the primary picture that is displayed. --></help>
+        <label>主图像 1</label>
+        <name>mainImage1__c</name>
+    </fields>
+    <fields>
+        <help><!-- Index to control the sorting of the product display through the Catalog interface. By default the sort is in ascending order. (i.e. 1, 5, 6, 20 as represented in the list.) --></help>
+        <label>排序次序</label>
+        <name>sortOrder__c</name>
+    </fields>
+    <layouts>
+        <layout>Catalog Node Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>目录</label>
+        <name>Catalog</name>
+    </recordTypes>
+    <recordTypes>
+        <label>产品</label>
+        <name>Product</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage>“产品”和“包”类型的结账频率为必填</errorMessage>
+        <name>VMnBillingFrequencyDefaultVal</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>分配至此产品的模型尚未发布。状态为“活跃”的已配置产品具有已发布模型。</errorMessage>
+        <name>VMnConfigActiveWithModelDraft</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>无法配置包。</errorMessage>
+        <name>VMnConfigBundle</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>库存水平必须为正整数！</errorMessage>
+        <name>VMnIntReqForInventoryLevel</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>活跃的可配置产品应具有已选择模型！</errorMessage>
+        <name>VMnModelReqForActiveConfigProduct</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>活跃的解决方案应具有已选择模型！</errorMessage>
+        <name>VMnModelReqForActiveSolution</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>结束日期不可早于开始日期！</errorMessage>
+        <name>VMnStartDateBeforeEnddate</name>
+    </validationRules>
+</CustomObjectTranslation>

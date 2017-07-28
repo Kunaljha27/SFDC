@@ -1,0 +1,50 @@
+<apex:page standardController="REVVY__MnConfigEngineModel__c"
+ extensions="REVVY.CMnConfigAttachModelPageCtrl"
+  sidebar="false" tabstyle="MnAdmin__tab"
+>
+
+<!-- action="{!autoRun}" sidebar="false" tabstyle="MnAdmin__tab"-->
+
+  <apex:pageMessages />
+  <!--
+  <apex:sectionHeader title="Auto-Running Model attachment"/>
+  <apex:outputPanel >
+      You tried calling Apex Code from a button.  If you see this page, something went wrong.  You should have
+      been redirected back to the record you clicked the button from.
+  </apex:outputPanel>
+  -->
+<apex:form id="form">
+
+  <table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+      <td>
+           <b>Pre compiled model JSON:</b>   &nbsp;&nbsp;&gt;&gt;&gt;&gt;&gt;&nbsp;&nbsp;
+           <!-- <button onclick="compileAndAttachModel(document.getElementById('inT').value);">Compile And Attach JSON</button>
+           -->
+
+               <apex:commandButton action="{!compileAndAttachModel}"  value="Compile and Attach Model"/>
+
+      </td>
+      <!-- <td>
+          <b>Compiled JSON:</b>   &nbsp;&nbsp;&gt;&gt;&gt;&gt;&gt;&nbsp;&nbsp;
+          <button onclick="evalModel(document.getElementById('cmpT').value, document.getElementById('mNameT').value)">Evaluate</button>
+      </td> -->
+  </tr>
+
+  <tr>
+      <td>
+          <!-- <textarea cols="176" id="inT" rows="40">{!jsonModel}</textarea> -->
+         <apex:inputTextArea value="{!jsonModel}" cols="356" rows="40"  style="width:380px"/>
+        <!-- <apex:inputField value="{!jsonModel}"   style="width:380px"/> -->
+      </td>
+<!--      <td>
+          <textarea cols="76" id="cmpT" rows="40"></textarea>
+      </td> -->
+  </tr>
+  </tbody>
+  </table>
+
+</apex:form>
+
+</apex:page>

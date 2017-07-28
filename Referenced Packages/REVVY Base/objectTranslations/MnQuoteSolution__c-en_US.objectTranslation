@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>QuoteSolution</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>QuoteSolutions</value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID of the product associated with this solution --></help>
+        <label><!-- Product --></label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel><!-- QuoteSolutions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for each record that can be used as an external ID for importing and exporting data. --></help>
+        <label><!-- Quote Solution Id --></label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag indicates whether the configuration is complete for this solution --></help>
+        <label><!-- Needs Config --></label>
+        <name>IsConfigurationComplete__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag indicates whether the configuration is complete for the configurable products within this solution --></help>
+        <label><!-- Items Need Config --></label>
+        <name>IsItemsConfigurationComplete__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote --></label>
+        <name>Quote__c</name>
+        <relationshipLabel><!-- QuoteSolutions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the model used to configure this solution --></help>
+        <label><!-- Solution Configuration Id --></label>
+        <name>SolutionConfig__c</name>
+        <relationshipLabel><!-- QuoteSolutions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Solution Name --></label>
+        <name>Solution_Name_F__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Manage_Lines --></label>
+        <name>Manage_Lines</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,128 @@
+<!--
+ - Created by vigupta on 2/19/2016.
+ -->
+
+<apex:page id="PMnTxSubmissionDownload" standardController="REVVY__MnTxDataSubmission__c" extensions="REVVY.CMnTxSubmissionDownloadCtrl">
+    <apex:includeScript value="{!URLFOR($Resource.REVVY__jquery, 'js/jquery-1.7.1.min.js')}" />
+
+<div id="progressbar" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close"><input type="button" onClick="hideProgressBar();" value="Cancel"/></span>
+    <img id="spinner" src="/img/loading.gif"/>
+    <p id="txnStatus"/>
+  </div>
+
+</div>    
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+    <script>
+
+        var j$=jQuery.noConflict();
+
+        j$(document).ready( function(){
+            
+            j$("#spinner").attr('src','/img/loading.gif');
+     		j$("#progressbar").show();
+     		j$("#txnStatus").text('Downloading.....');
+            var submissionStatus=j$('#theSubmissionStatus').val();
+
+            //Calling the controller method through JS function to get the presinged URL from Third Party Webservice
+           if(submissionStatus!='UPLOADING' && submissionStatus!='PROCESSING') {
+               getPreSingedUrlJS();
+           }
+            else{
+               j$("#progressbar").hide();
+           }
+
+		});
+    
+    function getDownloadFile(){
+            console.log('<------Success------>');
+            var s3Url=j$('#theHiddenS3Url').val();
+            var isError=j$('#theError').val();
+            if(isError=='true'){
+                j$("#progressbar").hide();
+                throw 'Error Occurred';
+            }
+            console.log('PreSinged URL : '+s3Url);
+            j$.ajax({
+
+                url:s3Url,
+                type: 'GET',
+                processData: false,
+                contentType: 'application/octet-stream',
+
+                success:function(data, textStatus, jqXHR){
+                    
+                    console.log('<------Success------>');
+                    var binaryData = [];
+					binaryData.push(data);
+                    var downloadUrl = URL.createObjectURL(new Blob(binaryData));
+                     var j$a = j$('<a />', {
+          									'href': downloadUrl,
+         								    'download': 'document.csv',
+         									 'text': "click"
+        									}).hide().appendTo("body")[0].click();
+                    
+                    window.history.back();
+               
+                	},
+
+                error:function(xhr, ajaxOptions, thrownError){
+                    console.log(thrownError);
+                    alert('Error:'+thrownError);
+                }
+
+            })
+        }
+    </script>
+    <apex:form >
+        <apex:pageMessages id="thePageMessage" ></apex:pageMessages>
+        <apex:actionFunction name="getPreSingedUrlJS" action="{!downloadSubmissionFile}" reRender="responseBlock,thePageMessage" oncomplete="getDownloadFile()"> </apex:actionFunction>
+         <apex:outputPanel id="responseBlock">
+            <input id="theHiddenS3Url" type="hidden" value="{!presingedUrl}"/>
+             <input id="theSubmissionStatus" type="hidden" value="{!submissionStatus}"/>
+             <input id="theError" type="hidden" value="{!isError}"/>
+         </apex:outputPanel>
+    <apex:commandButton value="Back" onClick=" window.history.back();"></apex:commandButton>
+    </apex:form>
+</apex:page>

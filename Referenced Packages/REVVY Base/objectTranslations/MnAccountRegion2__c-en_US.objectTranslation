@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Account Region</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Account Regions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Account Regions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Defines account region as a branch. Checking this box means that the region is branch also. --></help>
+        <label><!-- Is Branch? --></label>
+        <name>IsBranch__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Account Region --></label>
+        <name>Parent__c</name>
+        <relationshipLabel><!-- Sub Regions --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Account Region Layout23</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

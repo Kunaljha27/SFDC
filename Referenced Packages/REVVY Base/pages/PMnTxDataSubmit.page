@@ -1,0 +1,286 @@
+<apex:page id="thePage" standardController="REVVY__MnTxDataSubmission__c" extensions="REVVY.CMnTxDataSubmitController" >
+ <apex:includeScript value="{!URLFOR($Resource.REVVY__jquery, 'js/jquery-1.7.1.min.js')}" />
+<apex:pageMessages id="theMessage" escape="false">
+</apex:pageMessages>
+
+<!-- The Modal -->
+<div id="progressbar" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close"><input id="theCloseButton" type="button" onClick="abortThisSubmission();" value="Abort"/></span>
+    <img id="spinner" src="/img/loading.gif"/>
+    <p id="txnStatus"/>
+  </div>
+</div>
+
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+</style>
+<script>
+    var j$=jQuery.noConflict();
+
+    var namespace = "{!namespace}";
+    var CMnNamespacePrefix = namespace.length > 0 ? namespace.slice(0, -2) : "";
+    var CMnNamespacePrefixUS = "";
+    var CMnNamespacePrefixDT = "";
+    if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+        CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+        CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+    }
+
+//Flag to Maintain if the Submission is aborted
+    var submissionName;
+    var submissionLabel;
+    var presingedUrl;
+    var dataSourceName;
+    var isSubmissionAborted=false;
+    var MAX_FILE_SIZE=25000000;
+ //Function to show the progress Bar on click on the Upload Button
+
+
+
+//Utility Functions For Showing the ProgressBar
+
+    // Function to hide the progress Bar
+    function hideProgressBar(){
+        j$("#progressbar").hide();
+    }
+
+    //Show the Error Message on the FrontEnd
+    function showError(errorMessage){
+
+        j$("#spinner").attr('src','/img/msg_icons/error24.png');
+        j$("#txnStatus").text('Error in Uploading File:'+errorMessage);
+        j$("#theCloseButton").attr('value','Close');
+    }
+
+
+    function showProgressBar(dataSource,submissionLabel){
+
+
+        this.submissionLabel=submissionLabel;
+        //Check if User Selected Any Files
+        dataSourceName=dataSource;
+        var files =j$('#thefileUploader')[0].files;
+        if(files.length==0){
+         alert('Please Select a File to Upload ');
+         throw 'No File Selected'; //throwing the Error
+        }
+        else  if(files[0].size>MAX_FILE_SIZE){
+
+         alert('File Size Limit Exceeded, Maximum Allowed Size is :'+getFileSizeInMb(MAX_FILE_SIZE)+ ' MB');
+         throw 'File Size Limit Exceeded';
+
+        }
+        else{
+         j$("#spinner").attr('src', '/img/loading.gif');
+         j$("#progressbar").show();
+         j$("#txnStatus").text('Uploading.....');
+
+         //Calling the Start Submission Now
+         if(!isSubmissionAborted) {
+             startSubmission();
+         }
+     }
+ }
+
+    function getFileSizeInMb(fileSizeinBytes){
+
+        //Since 1 MB= 1000000 Bytes
+        var fileSizeinMb=fileSizeinBytes/1000000;
+
+        return fileSizeinMb;
+    }
+
+    function startSubmission(){
+        try {
+            Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnTxDataSubmitController.startSubmission', dataSourceName,submissionLabel, function (result, event) {
+                if (event.type == 'exception') {
+                    showError(event.message);
+                } else {
+                        submissionName = result.name;
+                        presingedUrl = result.preSignedUrl;
+
+                    if(!isSubmissionAborted) {
+                        if (submissionName != '' && presingedUrl != '') {
+                            putFileToS3(result);
+                            //If Successfully able to PUT file in S3
+                        }
+                    }else{
+                        abortSubmission();
+                    }
+                }
+
+            });
+        }catch(Ex){ //Calling Abort Submission if the submissionName is present and startSubmission results in Exception for any reason
+            if(submissionName!='')
+                abortSubmission();
+            showError(Ex); }
+    }
+
+
+
+
+
+    function finishSubmission(result){
+
+        result.dataSource=dataSourceName;
+
+        Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnTxDataSubmitController.finishSubmission', result, function (callbackResult, event) {
+            if (event.type == 'exception') {
+                showError(event.message);
+                if(submissionName!=null && submissionName!=''){
+                    abortSubmission();
+                }
+            }
+            else{
+                console.log('--->'+callbackResult);
+                j$("#txnStatus").html('<p> File Successfully Uploaded !!</p> <p> Submission <a href="/'+callbackResult+'">'+result.name +'</a> is created </p>');
+                j$("#theCloseButton").attr('value','Close');
+                j$("#spinner").attr('src','/img/msg_icons/confirm24.png');
+            }
+        });
+    }
+
+
+    function abortSubmission(){
+
+        j$("#txnStatus").text('Aborting Submission...');
+        Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnTxDataSubmitController.abortSubmission',submissionName,dataSourceName, function (callbackResult, event) {
+            if (event.type == 'exception') {
+                alert(event.message);
+                showError(event.message);
+            }
+            else{
+
+                window.history.back();
+            }
+        });
+
+    }
+
+    //Function to Abort the submission
+    function abortThisSubmission(){
+
+        j$("#txnStatus").text('Aborting Submission...');
+        var buttonValue= j$("#theCloseButton").attr('value');
+        if(buttonValue!= 'Close' ) {
+            isSubmissionAborted = true;
+            if (submissionName != null && submissionName!='') //Call Abort Submission if Submission ID is Received
+            {
+                console.log('Calling Abort for ....'+submissionName);
+                abortSubmission();
+            }
+        }else{
+            hideProgressBar();
+            backtoDetail();
+
+        }
+    }
+//The Jquery Code to call the amazon with the presinged URL to submit the file
+//To the AMAZON
+//This script will perform the following operations
+//1. Read the file from the file uploader
+//2.Get the URL from the variable which is assigned by the controller
+//3.make a webservice call to the URL and POST the file to the perticulat webservice
+
+//Read the File
+
+function putFileToS3(result) {
+
+var files =j$('#thefileUploader')[0].files; //Getting all the Files form file Selector in  Jquery
+
+    //Creating a Temprory HTML component so that if any special character is escaped by HTML it will unescape that character
+    //for example '&amp;' will be converted to '&' and other special characters too .
+    var generatedS3Url=result.preSignedUrl;
+    var elem = document.createElement('textarea');
+    elem.innerHTML = generatedS3Url;
+    j$.support.cors = true;
+
+j$.ajax({
+    url:elem.value,
+    type: 'PUT',
+    data: files[0],
+    processData: false,
+    contentType: 'application/octet-stream',
+
+success:function(data, textStatus, jqXHR){
+    //return this function Successfully if submssion is Successfully put on S3
+    finishSubmission(result);
+    return ;
+},
+
+error:function(xhr, ajaxOptions, thrownError){
+  abortSubmission();
+    throw thrownError;
+}
+});
+
+}
+</script>
+<apex:form >
+    <apex:pageBlock title="Upload File" id="thePageBlock">
+
+        <apex:pageBlockButtons >
+               <!-- <apex:commandButton onclick="showProgressBar();" action="{!startSubmission}" value="Upload" oncomplete="startSubmissionJS(); " reRender="responseBlock,theMessage"> -->
+                  <apex:commandButton onclick="showProgressBar(document.getElementById('{!$Component.thePageBlock.thePageBlockSection.theListSF}').value,document.getElementById('{!$Component.thePageBlock.thePageBlockForSubmissionLabel.theSubmissionLabel}').value)" value="Upload" reRender="theMessage">
+        </apex:commandButton>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection columns="1" id="thePageBlockSection" title="File Information " collapsible="false">
+
+           <!-- <apex:outputLabel value="Data Source"></apex:outputLabel> -->
+        <apex:selectList id="theListSF" label="Data Source" value="{!selectedDataSource}" size="1">
+                <apex:selectOptions value="{!dataSourceNames}"></apex:selectOptions>
+            </apex:selectList>
+
+
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Select File"></apex:outputLabel>
+                    <input type="File" id="thefileUploader"/>
+           </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection id="thePageBlockForSubmissionLabel" collapsible="false" columns="1" title="For Your Records">
+                <apex:inputText label="Name This Submission" id="theSubmissionLabel" value="{!thisSubmission.REVVY__SubmissionLabel__c}"></apex:inputText>
+        </apex:pageBlockSection>
+        <apex:actionFunction name="backtoDetail" action="{!backToList}" reRender="theMessage"/>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

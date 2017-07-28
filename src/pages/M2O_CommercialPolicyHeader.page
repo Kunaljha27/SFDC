@@ -1,0 +1,16 @@
+<apex:page standardController="Commercial_Policy__c" extensions="M2O_CommercialPolicyHeaderController" showHeader="false" sidebar="false">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="2">
+                <!-- <apex:outputText value="{!policyList.account__r.name}" label="Account Name:"/> -->
+                <!--<apex:outputText value="{!externalReferenceName}" label="Local Business Partner ID:"/>-->
+                <apex:outputText value="{!policyList.account__r.Golden_Record_Key__c}" label="Golden Record Key:"/>
+                <apex:outputText value="{!policyList.account__r.Street1_Local__c}" label="Street 1:"/>
+                <apex:outputText value="{!policyList.account__r.City_Local__c}" label="City:"/>
+                <apex:outputText value="{!createdTime}" label="Last Upload:"/>
+                <apex:outputText value="{!CreatedBy}" label="Last Uploaded By:"/>
+               <!-- <apex:outputText value="{!policyList.account__r.CurrencyIsoCode}" label="Account Currency:"/>-->
+            </apex:pageBlockSection>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

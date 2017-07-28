@@ -1,0 +1,81 @@
+<apex:page controller="HCNA_LookupPickListValues_CLS" sidebar="false" showHeader="false" readOnly="true">
+    <apex:form >
+        <!--<apex:includeScript value="{!URLFOR($Resource.HCNA_Forecast_Static_Resource, 'HCNA_Forecast_Static_Resource/HCNA_LookupPickListValuesPage.js')}"/>   -->
+        <script language="javascript">
+            window.onload = new function() 
+            { 
+                window.focus(); 
+                var ele=document.getElementById('{!$Component.table}');
+                if (ele){
+                ele.focus();
+                }
+            }
+            function Selectone(fieldType){
+                var inputElem = document.getElementsByTagName("input");                
+                var count =0;   
+                var item;
+                if (fieldType == 'BOOLEAN'){                  
+                    for(var index=0; index<inputElem.length; index++){
+                        item = inputElem[index];                    
+                        if(item.getAttribute('type') === "checkbox" && item.checked){                        
+                            count++;
+                        }
+                    }                   
+                    if (count >1){ 
+                        alert("Please select only one option");
+                        for(var index=0; index<inputElem.length; index++){
+                            item = inputElem[index];                    
+                            if(item.getAttribute('type') === "checkbox" && item.checked){                        
+                                item.checked = false;
+                            }
+                        }
+                        return false;
+                    }                   
+                }
+                updateValues();
+                return true;         
+            }
+            function fillIn(id){ 
+                var winMain=window.opener;
+                if (null==winMain){
+                    winMain=window.parent.opener;
+                } 
+                oldEleId=winMain.document.getElementById('{!$CurrentPage.parameters.fieldId}');
+                ele=winMain.document.getElementById('{!$CurrentPage.parameters.fieldId}');
+                if (oldEleId.value != '' ){                
+                    ele.value= oldEleId.value + ',' + id;
+                } 
+                else{
+                    ele.value=id;
+                }
+                CloseWindow();
+            }
+            function CloseWindow(){
+                var winMain=window.opener;
+                if (null==winMain){
+                winMain=window.parent.opener;
+                }
+                winMain.closeLookupPopup();
+            }  
+        </script> 
+        <apex:pageMessages /> 
+        <apex:pageBlock >
+            <apex:actionStatus id="loadingimage">
+                <apex:facet name="start">
+                <Center> <img src="/img/loading32.gif" border="0" width="20" height="20"/></Center>
+                </apex:facet>
+            </apex:actionStatus>
+            <apex:outputPanel id="panelId">       
+                <apex:pageBlockTable value="{!Options}" var="c" id="table">
+                    <apex:column headerValue="Select" width="5">
+                    <apex:inputCheckbox value="{!c.selected}" id="CheckId"  onClick="return Selectone('{!fieldType}');">
+                    </apex:inputCheckbox>                
+                    </apex:column>
+                    <apex:column value="{!c.value}" headerValue="Value"/>
+                </apex:pageBlockTable>
+                <Center> <apex:commandbutton value="Insert" onclick="fillIn('{!Value}');"/> </Center>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:actionFunction name="updateValues" action="{!Values}" status="loadingimage" rerender="panelId" />
+    </apex:form>
+</apex:page>

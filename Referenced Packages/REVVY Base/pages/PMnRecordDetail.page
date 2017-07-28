@@ -1,0 +1,253 @@
+<apex:page standardController="REVVY__MnCatalogNode__c" extensions="REVVY.CMnRecordDetailCtrl" action="{!doOnload}"
+           tabstyle="MnAdmin__tab" sidebar="false">
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+
+    <style>
+        .slds h3 {
+            display:inline;
+        }
+    </style>
+
+    <c:CMnZenDesk />
+    <div  class="slds mnrecorddetail">
+    <div  class="colWrapper slds-grid">
+        <div class="collwrp slds-col" >
+            <div class="coll" >
+                <c:CMnAdminLeftNav />
+            </div>
+        </div>
+        <div class="colr slds-col">
+
+<apex:form id="form">
+
+<apex:actionFunction action="{!saveRecord}" name="saveRecord" rerender="pageMessages, saveBtn, bottom:saveBtn"/>
+
+<apex:inputHidden id="success" value="{!isSaveSuccess}"/>
+<apex:inputHidden id="retUrlInp" value="{!retUrl}"/>
+<apex:actionFunction action="{!saveRecordNoNav}" name="saveRecordNoNav" rerender="pageMessages, saveBtn, bottom:saveBtn, success, retUrlInp"
+        oncomplete="return navOnSuccess();" />
+<script>
+
+
+    function navOnSuccess() {
+        var successElement = document.getElementById('{!$Component.form.success}');
+        var retUrlElement = document.getElementById('{!$Component.form.retUrlInp}');
+
+        if(successElement.value=='true') {
+            navForSForce1orLE(retUrlElement.value);
+        }
+
+        return false;
+    }
+
+    function saveRecordJS() {
+
+        if (isSalesforce1orLE()) {
+            saveRecordNoNav();
+        } else {
+            saveRecord();
+        }
+    }
+
+
+    function saveProduct(ev)  {
+        if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+            return saveRecordJS();
+        } else {
+            return true;
+        }
+    }
+
+    $(document).ready(function(){
+
+     var escapedFormId = "{!$Component.form}".replace(/:/g, "\\:");
+     var isEdit = {!isEdit};
+
+    if(isEdit) {
+         $("#" + escapedFormId + " input:text").on("keypress", saveProduct); //Call Save on text if enter is pressed
+         $("#" + escapedFormId + " select").on("keypress", saveProduct); //Call Save on drop down if enter is pressed
+       }
+    });
+</script>
+
+<apex:pageBlock title="{!node.REVVY__Type__c} {!$Label.revvy__MnCatalogDetail}: {!node.name}" />
+
+<apex:pageBlock id="pb1">
+    <apex:pagemessages id="pageMessages"/>
+
+  <apex:pageBlockButtons >
+
+    <apex:commandButton action="{!editView}" rendered="{!!isEdit}" value="{!$Label.revvy__List_Action_Basic_Update}"/>
+
+    <apex:commandButton id="saveBtn" value="Save" rerender="pageMessages, saveBtn, bottom:saveBtn" rendered="{!isEdit}" disabled="{!disabledFlag}"
+          onclick="setTimeout('document.getElementById(\'' + this.id + '\').disabled=true;', 1); saveRecordJS();"
+          oncomplete="setTimeout('document.getElementById(\'' + this.id + '\').disabled=false;', 1);"
+          />
+
+    <apex:commandButton action="{!cancel}" value="Cancel"/>
+  </apex:pageBlockButtons>
+
+
+  <apex:pageBlockSection title="{!$Label.revvy__Record_Detail_Section_Header}" id="detailSection">
+    <apex:repeat value="{!fields}" var="f">
+    <apex:pageBlockSectionItem rendered="{!f.fieldPath!=modelField && f.fieldPath!=configurableField && f.fieldPath!=stdAloneField}">
+     <apex:outputLabel value="{!f.Label}"/>
+     <apex:outputPanel >
+      <apex:inputField rendered="{!isEdit && f.fieldPath=='Name'}"
+                       value="{!node[f.fieldPath]}"  required="{!OR(f.required, f.dbrequired)}" style="width:280px"/>
+
+      <apex:inputField rendered="{!isEdit && f.fieldPath!='Name' && f.fieldPath!=statusField  && f.fieldPath!=typeField && f.fieldPath!=modelField && f.fieldPath!=configurableField && f.fieldPath!=stdAloneField}"
+                       value="{!node[f.fieldPath]}"  required="{!OR(f.required, f.dbrequired)}"/>
+      <apex:actionRegion >
+      <apex:inputField rendered="{!isEdit && f.fieldPath==statusField}" value="{!node[f.fieldPath]}" required="{!OR(f.required, f.dbrequired)}">
+         <apex:actionSupport event="onchange"  action="{!rerender}" rerender="standalone ,createModelBtnPanel">
+         </apex:actionSupport>
+      </apex:inputField>
+
+      <apex:inputField rendered="{!isEdit && f.fieldPath==typeField && !renderTypeFieldReadOnly}" value="{!node[f.fieldPath]}" required="{!OR(f.required, f.dbrequired)}">
+         <apex:actionSupport event="onchange"  action="{!rerender}" rerender="configSection, standalone"/>
+      </apex:inputField>
+      </apex:actionRegion>
+
+      <apex:outputField rendered="{!IF( (isEdit && (f.fieldPath!=typeField || (f.fieldPath==typeField && !renderTypeFieldReadOnly))) ||
+                                    f.fieldPath == configurableField || f.fieldPath == modelField || f.fieldPath==stdAloneField,
+                           'false','true')}"
+                        value="{!node[f.fieldPath]}"/>
+     </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    </apex:repeat>
+    <apex:pageBlockSectionItem rendered="{!isProductDetailPage}">
+      <apex:outputLabel value="{!$ObjectType.REVVY__MnCatalogNode__c.Fields.REVVY__StandaloneSellable__c.Label}"/>
+      <apex:outputPanel id="standalone">
+      <apex:inputField rendered="{!isEdit && node.REVVY__Type__c == 'Product' && !node.REVVY__Configurable__c}" value="{!node.REVVY__StandaloneSellable__c}"/>
+      <apex:outputField rendered="{!!(isEdit && node.REVVY__Type__c == 'Product' && !node.REVVY__Configurable__c)}" value="{!node.REVVY__StandaloneSellable__c}"/>
+      </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+  </apex:pageBlockSection>
+
+  <apex:actionRegion >
+  <apex:pageBlockSection title="{!$Label.revvy__Record_Config_Section_Header}" id="configSection" rendered="{!isProductDetailPage || isSolutionDetailPage && hasConfiguration}">
+    <apex:repeat value="{!fields}" var="f">
+        <apex:inputField rendered="{!isEdit && f.fieldPath==configurableField && !isProductAlreadyReferenced && node.REVVY__Type__c!='Bundle' && node.REVVY__Type__c!='Solution'}"
+                       value="{!node[f.fieldPath]}"  required="{!OR(f.required, f.dbrequired)}">
+
+          <apex:actionSupport event="onclick"  action="{!rerender}" rerender="configSection, standalone"/>
+
+      </apex:inputField>
+
+      <apex:pageBlockSectionItem rendered="{!isEdit && f.fieldPath==modelField  && !isProductAlreadyReferenced && node.REVVY__Configurable__c && node.REVVY__Type__c!='Bundle'}">
+        <apex:outputLabel value="{!f.Label}"/>
+        <apex:outputPanel id="modelItemPanel">
+          <apex:inputField id="modelFieldId" value="{!node[f.fieldPath]}"  required="{!OR(f.required, f.dbrequired)}"/>
+            <apex:outputPanel id="createModelBtnPanel">
+                <apex:commandButton rendered="{!node.REVVY__Status__c == 'Draft' || node.REVVY__Model__c != null}" id="createModelBtn" value=" New " action="{!saveAndCreateNewModel}"/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+      </apex:pageBlockSectionItem>
+
+      <apex:outputField rendered="{!f.fieldPath == configurableField && node.REVVY__Type__c!='Solution' && (!isEdit || isProductAlreadyReferenced || node.REVVY__Type__c == 'Bundle')}"
+                        value="{!node[f.fieldPath]}"/>
+
+      <apex:outputField rendered="{!f.fieldPath == modelField && node.REVVY__Configurable__c && (!isEdit || isProductAlreadyReferenced || node.REVVY__Type__c == 'Bundle')}"
+                        value="{!node[f.fieldPath]}"/>
+
+    </apex:repeat>
+  </apex:pageBlockSection>
+  </apex:actionRegion>
+
+  <apex:pageBlockSection title="{!$Label.revvy__Record_TermsAndConditions_Section_Header}" rendered="{!isProductDetailPage || isSolutionDetailPage }">
+    <apex:pageBlockSectionItem >
+      <apex:outputLabel value="{!$ObjectType.REVVY__MnCatalogNode__c.Fields.REVVY__TermsAndConditions__c.Label}"/>
+        <apex:outputPanel >
+         <apex:inputField rendered="{!isEdit}" value="{!node.REVVY__TermsAndConditions__c}"/>
+         <apex:outputField rendered="{!IF((isEdit),'false','true')}"
+         value="{!node.REVVY__TermsAndConditions__c}"/>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+  </apex:pageBlockSection>
+
+</apex:pageBlock>
+
+<!--  Custom component to upload images: rendered for all 4 pages (catalog/category/product/bundle/Solution detail) -->
+<c:CMnNodeImageUploadCmp rendered="{!!isEdit && node!=null}" fieldSetName="{!imageFieldSetName}"
+                      customObject="{!node}" cmpTitle="Images"/>
+
+<!-- Parent Categories: for Product and Bundle pages  -->
+<c:VMnManagePrimaryCategoryRelatedRecords rendered="{!renderParentCategories}"
+                           fldSetName="{!categoryNodeListFS}"
+                           masterRecId="{!recordId}" relationType="parent"
+                           ndType="Category" tabTitle="{!$Label.revvy__Record_Detail_Section_Parent_Categories}"
+                           isRelCatList="true"/>
+
+<!-- Parent bundles: for Product detail page  -->
+<c:VMnManageRelatedRecords rendered="{!renderParentBundles}"
+                           fieldSetName="{!productNodeListFS}"
+                           masterRecordId="{!recordId}" relationType="parent"
+                           nodeType="Bundle" title="{!$Label.revvy__Record_Detail_Section_Related_Bundles}"/>
+
+<!-- Parent Category: for Category pages  -->
+<c:VMnManageRelatedRecords rendered="{!renderParentCategory}"
+                           fieldSetName="{!parentListFS}"
+                           masterRecordId="{!recordId}" relationType="parent"
+                           nodeType="{!nodeType}" title="{!$Label.revvy__Record_Detail_Section_Parent}"/>
+
+<!-- Sub Categories: for Catalog and Category pages  -->
+<c:VMnManageRelatedRecords rendered="{!renderChildrenCategories}"
+                           fieldSetName="{!categoryNodeListFS}"
+                           masterRecordId="{!recordId}"
+                           relationType="child"
+                           nodeType="Category" title="{!$Label.revvy__Record_Detail_Section_Children}"/>
+
+<!-- Products: for Category pages  -->
+<c:VMnManageRelatedRecords rendered="{!renderChildrenProducts}"
+                           relationType="child"
+                           fieldSetName="{!productNodeListFS}"
+                           masterRecordId="{!recordId}"
+                           nodeType="Product" title="{!$Label.revvy__Record_Detail_Section_Child_Products}"/>
+
+<!-- Products: for Bundle pages  -->
+<c:VMnManageBundleRelatedRecords rendered="{!renderChildrenProductsForBundle}"
+                           relationType="child"
+                           fieldSetName="{!productNodeListFS}"
+                           masterRecordId="{!recordId}"
+                           nodeType="Product" title="{!$Label.revvy__Record_Detail_Section_Child_Products}"/>
+
+<!-- Products: Up-Sell for Product/Bundle pages  -->
+<c:VMnManageRelatedRecords rendered="{!renderUpSellProducts}"
+                           relationType="child"
+                           fieldSetName="{!productNodeListFS}"
+                           masterRecordId="{!recordId}"
+                           nodeType="Product" relatedProdType="UpSell" title="{!$Label.revvy__Record_Detail_Section_UpSell_Products}"/>
+
+<!-- Products: Cross-Sell for Product/Bundle pages  -->
+<c:VMnManageRelatedRecords rendered="{!renderCrossSellProducts}"
+                           relationType="child"
+                           fieldSetName="{!productNodeListFS}"
+                           masterRecordId="{!recordId}"
+                           nodeType="Product" relatedProdType="CrossSell" title="{!$Label.revvy__Record_Detail_Section_CrossSell_Products}"/>
+
+<!-- Solutions: for Category pages  -->
+  <c:VMnManageRelatedRecords rendered="{!renderChildrenSolutions}" fieldSetName="{!solutionNodeListFS}"
+                          masterRecordId="{!recordId}"
+                          relationType="child"
+                          nodeType="Solution" title="{!$Label.revvy__Record_Detail_Section_Child_Solutions}"/>
+
+<!-- Attributes on Categories  -->
+  <c:VMnManageRelatedAttributes rendered="{!renderAttributes}" fieldSetName="{!catalogAttributeFS}"
+                          masterRecordId="{!recordId}"
+                          relationType="child"
+                          nodeType="Attribute" title="Attributes"/>
+
+
+</apex:form>
+
+            <!-- ---------- -->
+        </div>
+    </div>
+</div>
+
+</apex:page>

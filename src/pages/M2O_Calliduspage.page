@@ -1,0 +1,8 @@
+<apex:page standardStylesheets="false" sidebar="false" showHeader="false">
+<script>
+
+    window.open( 'https://phps-prd.callidusondemand.com/CallidusPortal','_self' );
+
+</script>
+        
+</apex:page>

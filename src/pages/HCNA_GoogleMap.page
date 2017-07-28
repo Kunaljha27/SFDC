@@ -1,0 +1,38 @@
+<apex:page standardController="Strategic_Account_Plan__c">
+    <apex:pageBlock >
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+        <div id="map" style="height: 800px;"></div>
+
+        <script type="text/javascript">
+            var str = '{!Strategic_account_plan__C.key_geographies__c}';
+            var locations = str.split(",");
+            var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 10,
+                        center: new google.maps.LatLng(43.253205,-80.480347),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                     });
+
+            var infowindow = new google.maps.InfoWindow();
+            var geocoder = new google.maps.Geocoder();
+            var marker, i;
+            for(i = 0; i < locations.length; i++) {
+                geocoder.geocode( { 'address': locations[i]}, function(results, status) {
+                if(status == google.maps.GeocoderStatus.OK) {
+                   map.setCenter(results[0].geometry.location);
+                   marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: map
+                        }); 
+
+                    google.maps.event.addListener(marker, 'mouseover', function() { infowindow.open(marker, map);});
+                    google.maps.event.addListener(marker, 'mouseout', function() { infowindow.close();});
+                }
+                else {
+                    //alert("Sorry for the inconvenience, Some problem in funding the location on Google map! Please accept to proceed without location pointer on google map" + status);
+                }
+                }); 
+            }
+        </script>
+    </apex:pageBlock>
+</apex:page>

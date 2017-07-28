@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Option Group --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Turn ON to add decimal / integer attributes to option groups --></help>
+        <label>允许用户输入数字</label>
+        <name>Allow_Attributes__c</name>
+    </fields>
+    <fields>
+        <help><!-- Allowed values for quantity --></help>
+        <label>容许的数量值</label>
+        <name>AllowedQuantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the category associated with this option group. --></help>
+        <label>目录节点</label>
+        <name>Catalog_Node__c</name>
+        <relationshipLabel>选项组</relationshipLabel>
+    </fields>
+    <fields>
+        <label>默认的数量值</label>
+        <name>Default_Quantity_Value__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L10). --></help>
+        <label>描述 (L10)</label>
+        <name>Desc_L10__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L11). --></help>
+        <label>描述 (L11)</label>
+        <name>Desc_L11__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L12). --></help>
+        <label>描述 (L12)</label>
+        <name>Desc_L12__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L13). --></help>
+        <label>描述 (L13)</label>
+        <name>Desc_L13__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L14). --></help>
+        <label>描述 (L14)</label>
+        <name>Desc_L14__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L15). --></help>
+        <label>描述 (L15)</label>
+        <name>Desc_L15__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L16). --></help>
+        <label>描述 (L16)</label>
+        <name>Desc_L16__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L17). --></help>
+        <label>描述 (L17)</label>
+        <name>Desc_L17__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L18). --></help>
+        <label>描述 (L18)</label>
+        <name>Desc_L18__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L19). --></help>
+        <label>描述 (L19)</label>
+        <name>Desc_L19__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L1). --></help>
+        <label>描述 (L1)</label>
+        <name>Desc_L1__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L20). --></help>
+        <label>描述 (L20)</label>
+        <name>Desc_L20__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L2). --></help>
+        <label>描述 (L2)</label>
+        <name>Desc_L2__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L3). --></help>
+        <label>描述 (L3)</label>
+        <name>Desc_L3__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L4). --></help>
+        <label>描述 (L4)</label>
+        <name>Desc_L4__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L5). --></help>
+        <label>描述 (L5)</label>
+        <name>Desc_L5__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L6). --></help>
+        <label>描述 (L6)</label>
+        <name>Desc_L6__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L7). --></help>
+        <label>描述 (L7)</label>
+        <name>Desc_L7__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L8). --></help>
+        <label>描述 (L8)</label>
+        <name>Desc_L8__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the Option Group(L9). --></help>
+        <label>描述 (L9)</label>
+        <name>Desc_L9__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the option group. --></help>
+        <label>描述</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the List Price is displayed in the table view on the end user config page. --></help>
+        <label><!-- Display List Price in Table view --></label>
+        <name>DisplayListPriceAttr__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the Product Id is displayed in the table view on the end user config page --></help>
+        <label><!-- Display Product Id in Table view --></label>
+        <name>DisplayProdIdAttr__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the user can enter a quantity for the selected option. --></help>
+        <label>容许数量</label>
+        <name>Has_Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>选项组 ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether configuration info of this option group should be saved when creating Install Base Records. --></help>
+        <label><!-- Is Exported --></label>
+        <name>IsExported__c</name>
+    </fields>
+    <fields>
+        <label>为解决方案</label>
+        <name>IsSolution__c</name>
+    </fields>
+    <fields>
+        <help><!-- Label for this option group. --></help>
+        <label>标签</label>
+        <name>Label__c</name>
+    </fields>
+    <fields>
+        <label>区域设置描述</label>
+        <name>LocaleDesc_F__c</name>
+    </fields>
+    <fields>
+        <label>区域设置名称</label>
+        <name>LocaleName_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the user can select more than one option. --></help>
+        <label>允许多种选择</label>
+        <name>Multi_Select__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 10）</label>
+        <name>Name_L10__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 11）</label>
+        <name>Name_L11__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 12）</label>
+        <name>Name_L12__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 13）</label>
+        <name>Name_L13__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 14）</label>
+        <name>Name_L14__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 15）</label>
+        <name>Name_L15__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 16）</label>
+        <name>Name_L16__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 17）</label>
+        <name>Name_L17__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 18）</label>
+        <name>Name_L18__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 19）</label>
+        <name>Name_L19__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 1）</label>
+        <name>Name_L1__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 20）</label>
+        <name>Name_L20__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 2）</label>
+        <name>Name_L2__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 3）</label>
+        <name>Name_L3__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 4）</label>
+        <name>Name_L4__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 5）</label>
+        <name>Name_L5__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 6）</label>
+        <name>Name_L6__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 7）</label>
+        <name>Name_L7__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 8）</label>
+        <name>Name_L8__c</name>
+    </fields>
+    <fields>
+        <label>名称（语言 9）</label>
+        <name>Name_L9__c</name>
+    </fields>
+    <fields>
+        <help><!-- Dynamically changes the names of the options in an option group. --></help>
+        <label>选项标签字段</label>
+        <name>Option_Label_Field__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, then an option (if it is linked to a product) from this option group will be added to the sales bill of materials (BOM). --></help>
+        <label>可引用</label>
+        <name>Quotable__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the user is required to make a selection in this option group. --></help>
+        <label>必填</label>
+        <name>Required__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the option group is a category option group or a regular option group. --></help>
+        <label>类型</label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>attribute</masterLabel>
+            <translation><!-- attribute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>category</masterLabel>
+            <translation><!-- category --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>regular</masterLabel>
+            <translation><!-- regular --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the section that the option group belongs to. --></help>
+        <label>配置引擎 UI 部分</label>
+        <name>UI_Section__c</name>
+        <relationshipLabel>选项组</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- How the option group is displayed on the UI (e.g., as checkboxes, as radio buttons, etc.). --></help>
+        <label>UI 类型</label>
+        <name>UI_Type__c</name>
+        <picklistValues>
+            <masterLabel>checkbox</masterLabel>
+            <translation><!-- checkbox --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pulldown</masterLabel>
+            <translation><!-- pulldown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>radiobutton</masterLabel>
+            <translation><!-- radiobutton --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>table</masterLabel>
+            <translation><!-- table --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>textField</masterLabel>
+            <translation><!-- textField --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Whether the upload button is visible in the end-user configuration page. --></help>
+        <label><!-- Upload Attributes Button --></label>
+        <name>VisibleUploadButton__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the option group is visible in the end-user configuration page. --></help>
+        <label>可见</label>
+        <name>Visible__c</name>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>ID 仅可包含字母、数字和下划线，且必须以字母开始。</errorMessage>
+        <name>MnCheckIDFormat</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>选项组的 ID 不可为空</errorMessage>
+        <name>MnNoBlankID</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>选项组名称不可为空</errorMessage>
+        <name>MnNoBlankName</name>
+    </validationRules>
+</CustomObjectTranslation>

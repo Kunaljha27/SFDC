@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies info about proposal generation.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>closingCommentsTitle__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Title for closing comments section.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title for closing comments section.</inlineHelpText>
+        <label>Closing Comments Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>closingComments__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A personalized note about this quote from the sales rep to the customer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>A personalized note about this quote from the sales rep to the customer.</inlineHelpText>
+        <label>Closing Comments</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>companyLogoURL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field that stores a URL that points to an uploaded image.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field that stores a URL that points to an uploaded image.</inlineHelpText>
+        <label>Company Logo URL</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>displayDiscounts__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether discounts are displayed in the proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether discounts are displayed in the proposal.</inlineHelpText>
+        <label>Display Discounts</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>displayProductIds__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether to display product IDs in the proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether to display product IDs in the proposal.</inlineHelpText>
+        <label>Display Product Ids</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>displayProductImages__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether to display images of products in the proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether to display images of products in the proposal.</inlineHelpText>
+        <label>Display Product Images</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>openingCommentsTitle__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Title of opening comments section.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of opening comments section.</inlineHelpText>
+        <label>Opening Comments Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>openingComments__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A personalized note about this quote from the sales rep to the customer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>A personalized note about this quote from the sales rep to the customer.</inlineHelpText>
+        <label>Opening Comments</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>printStatus__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Whether the proposal is in a draft state or a final state. If the proposal is in draft, then a watermark is displayed on the proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the proposal is in a draft state or a final state. If the proposal is in draft, then a watermark is displayed on the proposal.</inlineHelpText>
+        <label>Print Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Final</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>proposalTitle__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Title of the proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the proposal.</inlineHelpText>
+        <label>Proposal Title</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>quote__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the quote.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the quote.</inlineHelpText>
+        <label>Quote Id</label>
+        <referenceTo>MnQuote__c</referenceTo>
+        <relationshipLabel>Quote Proposal Parameters</relationshipLabel>
+        <relationshipName>Quote_Proposal_Parameters</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>termsOfServiceTitle__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Title of the terms of service section.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of the terms of service section.</inlineHelpText>
+        <label>Terms and Conditions Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>termsOfService__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Text field for terms of conditions or other boilerplate info.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Text field for terms of conditions or other boilerplate info.</inlineHelpText>
+        <label>Terms and Conditions</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>usedTemplate__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the proposal template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the proposal template.</inlineHelpText>
+        <label>Used Template</label>
+        <referenceTo>MnPrintTemplate__c</referenceTo>
+        <relationshipLabel>Quote Proposal Parameters</relationshipLabel>
+        <relationshipName>Quote_Proposal_Parameters</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Quote Proposal Parameter</label>
+    <nameField>
+        <displayFormat>{000000000}</displayFormat>
+        <label>Quote Proposal Parameters Id</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Quote Proposal Parameters</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

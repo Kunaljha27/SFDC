@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Expression Reference</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Expression References</value>
+    </caseValues>
+    <fields>
+        <label><!-- Expression --></label>
+        <name>Expression__c</name>
+        <relationshipLabel><!-- Expression References --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Id --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Expression --></label>
+        <name>Sub_Expression__c</name>
+        <relationshipLabel><!-- Sub Expression References --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Attribute</masterLabel>
+            <translation><!-- Attribute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalog</masterLabel>
+            <translation><!-- Catalog --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expression</masterLabel>
+            <translation><!-- Expression --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

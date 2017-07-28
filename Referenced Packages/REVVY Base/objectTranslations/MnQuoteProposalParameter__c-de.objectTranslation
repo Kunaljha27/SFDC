@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Parameter --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Title for closing comments section. --></help>
+        <label>Titel abschließende Anmerkungen</label>
+        <name>closingCommentsTitle__c</name>
+    </fields>
+    <fields>
+        <help><!-- A personalized note about this quote from the sales rep to the customer. --></help>
+        <label>Abschließende Anmerkungen</label>
+        <name>closingComments__c</name>
+    </fields>
+    <fields>
+        <help><!-- Field that stores a URL that points to an uploaded image. --></help>
+        <label>Unternehmenslogo URL</label>
+        <name>companyLogoURL__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether discounts are displayed in the proposal. --></help>
+        <label>Rabatte anzeigen</label>
+        <name>displayDiscounts__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether to display product IDs in the proposal. --></help>
+        <label>Produkt-IDs anzeigen</label>
+        <name>displayProductIds__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether to display images of products in the proposal. --></help>
+        <label>Produktbilder anzeigen</label>
+        <name>displayProductImages__c</name>
+    </fields>
+    <fields>
+        <help><!-- Title of opening comments section. --></help>
+        <label>Titel Eingangsanmerkungen</label>
+        <name>openingCommentsTitle__c</name>
+    </fields>
+    <fields>
+        <help><!-- A personalized note about this quote from the sales rep to the customer. --></help>
+        <label>Eingangsanmerkungen</label>
+        <name>openingComments__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the proposal is in a draft state or a final state. If the proposal is in draft, then a watermark is displayed on the proposal. --></help>
+        <label>Druckstatus</label>
+        <name>printStatus__c</name>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final</masterLabel>
+            <translation><!-- Final --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Title of the proposal. --></help>
+        <label>Vorschlagstitel</label>
+        <name>proposalTitle__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the quote. --></help>
+        <label>Angebots-ID</label>
+        <name>quote__c</name>
+        <relationshipLabel>Angebot Vorschlag Parameter</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Title of the terms of service section. --></help>
+        <label>Titel Bedingungen</label>
+        <name>termsOfServiceTitle__c</name>
+    </fields>
+    <fields>
+        <help><!-- Text field for terms of conditions or other boilerplate info. --></help>
+        <label>Bedingungen</label>
+        <name>termsOfService__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the proposal template. --></help>
+        <label>Verwendete Vorlage</label>
+        <name>usedTemplate__c</name>
+        <relationshipLabel>Angebot Vorschlag Parameter</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Quote Proposal Parameters Id --></nameFieldLabel>
+</CustomObjectTranslation>

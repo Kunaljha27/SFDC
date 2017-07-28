@@ -1,0 +1,8 @@
+<apex:page standardController="REVVY__MnQuote__c" tabstyle="RevvyCM__tab">
+  <apex:form >
+  <p><br/></p>
+  <h1><apex:outputLink value="/apex/REVVY__PMnImportThirdPartyPaper">Import 3rd Party Paper</apex:outputLink></h1>
+  <p><br/></p>
+  </apex:form>
+  <apex:enhancedList type="REVVY__MnQuote__c" height="800"/>
+</apex:page>

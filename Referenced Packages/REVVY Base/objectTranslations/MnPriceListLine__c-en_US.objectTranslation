@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Price List Line</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Price List Lines</value>
+    </caseValues>
+    <fields>
+        <help><!-- Stores the cost of a product --></help>
+        <label><!-- Cost --></label>
+        <name>CostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list line expires. --></help>
+        <label><!-- Effective End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Price List Line ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Price charged for the product. --></help>
+        <label><!-- List Price --></label>
+        <name>ListedPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checkbox that lets you override the warnings when the effective dates of a price list line item is out of sync with the effective dates of the price list. --></help>
+        <label><!-- OverrideWarnings --></label>
+        <name>OverrideWarnings__c</name>
+    </fields>
+    <fields>
+        <help><!-- Internal field that is used to make a price list line ID. --></help>
+        <label><!-- Price List Line Number --></label>
+        <name>PriceListLineNum__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the price list that this price list line belongs to. --></help>
+        <label><!-- Price List Name --></label>
+        <name>PriceList__c</name>
+        <relationshipLabel><!-- Price List Lines --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Price List ID --></label>
+        <name>Price_List_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the price list. --></help>
+        <label><!-- Price List Name --></label>
+        <name>Price_List_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for the Pricing Tier that this price list line refers to. --></help>
+        <label><!-- Volume Pricing --></label>
+        <name>PricingTier__c</name>
+        <relationshipLabel><!-- Volume Pricing --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique external ID of the product that this price list line refers to. --></help>
+        <label><!-- Product Id --></label>
+        <name>Product_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the product. --></help>
+        <label><!-- Product Name --></label>
+        <name>Product_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique Salesforce ID for the product that this price list line refers to. --></help>
+        <label><!-- Product Name --></label>
+        <name>Product__c</name>
+        <relationshipLabel><!-- Price List Lines --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- How often the customer is charged for a product. Options are one-time, weekly, monthly, and yearly. --></help>
+        <label><!-- Billing Frequency --></label>
+        <name>RecurringPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Source quote item from which this contract price line was created. --></help>
+        <label><!-- Source Quote Item --></label>
+        <name>SourceQuoteItem__c</name>
+        <relationshipLabel><!-- Contract Price Lines --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list line goes into effect. --></help>
+        <label><!-- Effective Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Comma-separated list of warning messages on this price list line. --></help>
+        <label><!-- WarningCodes --></label>
+        <name>WarningCodes__c</name>
+    </fields>
+    <fields>
+        <help><!-- Warning messages that appear when the price list line&apos;s effective dates are out of sync with the price list&apos;s effective dates. --></help>
+        <label><!-- Warnings --></label>
+        <name>Warnings__c</name>
+    </fields>
+    <layouts>
+        <layout>Price List Line Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Cost Price should be greater than or equal to zero --></errorMessage>
+        <name>VMnCostPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Price should be greater than or equal to zero --></errorMessage>
+        <name>VMnPriceValidity</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- New_Price_List_Line --></label>
+        <name>New_Price_List_Line</name>
+    </webLinks>
+</CustomObjectTranslation>

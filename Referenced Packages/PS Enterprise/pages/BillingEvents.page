@@ -1,0 +1,535 @@
+<apex:page standardController="pse__Billing_Event__c" extensions="pse.BillingEventsController" tabStyle="Billing_Event_Generation__tab" title="Billing Events">
+<style>
+a.actionLink { text-decoration: underline; }
+a.actionLink2 { font-weight: bold; }
+div#wait { width: 100%; height: 100% }
+div#loading { width: 100%; height: 100%; position: fixed; top: 0px;}
+div#waitingHolder { width: 113px; }
+table.items th.headerRow { font-weight: bold; }
+img.sortIndicator { padding-left: 5px; }
+.lookupInput img { vertical-align:bottom; }
+</style>
+<script type="text/javascript">
+var batchesSelected = 0;
+var eventsSelected = 0;
+var itemsSelected = 0;
+
+function checkEnter(e) {
+  var characterCode;
+  if (e && e.which) {
+    e = e;
+    characterCode = e.which;
+  } else {
+    e = event;
+    characterCode = e.keyCode;
+  }
+
+  if (characterCode == 13) {
+    wait(true);
+    refresh();
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function setVisible(name, visible) {
+  var e = document.getElementById(name);
+  if (e != null) {
+    if (visible) {
+      e.setAttribute("style", "display: block");
+      e.style.cssText = "display: block";
+    } else {
+      e.setAttribute("style", "display: none");
+      e.style.cssText = "display: none";
+    }
+  }
+}
+function wait(val) {
+  setVisible('loading', val);
+  setVisible('wait', val);
+}
+
+function selectBatch(val) {
+  batchesSelected += (val ? 1 : -1);
+}
+
+function selectEvent(val) {
+  eventsSelected += (val ? 1 : -1);
+}
+
+function selectItem(val) {
+  itemsSelected += (val ? 1 : -1);
+}
+
+function reset() {
+  batchesSelected = 0;
+  eventsSelected = 0;
+  itemsSelected = 0;
+}
+
+function prerelease() {
+  if (eventsSelected <= 0 && batchesSelected <= 0) {
+    alert('Please select at least one billing event batch or event to release');
+    return false;
+  } else {
+    var msg = '';
+    if (eventsSelected > 0 && batchesSelected > 0) {
+      msg = batchesSelected + ' selected billing event batch(es) and ';
+      msg += eventsSelected + ' selected billing event(s)';
+    } else if (eventsSelected > 0) {
+      msg = eventsSelected + ' selected billing event(s)';
+    } else {
+      msg = batchesSelected + ' selected billing event batch(es)';
+    }
+    if (confirm('Are you sure you want to release the ' + msg + '?')) {
+      wait(true);
+      return true;
+    }
+  }
+  return false;
+}
+
+function preremove() {
+  if (itemsSelected <= 0 && eventsSelected <= 0 && batchesSelected <= 0) {
+    alert('Please select at least one billing event batch, event, or item to remove');
+    return false;
+  } else {
+    var msg = '';
+    var first = true;
+    if (batchesSelected > 0) {
+      msg += batchesSelected + ' selected billing event batch(es)';
+      first = false;
+    }
+    if (eventsSelected > 0) {
+      if (!first) {
+        msg += ' and ';
+      }
+      msg += eventsSelected + ' selected billing event(s)';
+      first = false;
+    }
+    if (itemsSelected > 0) {
+      if (!first) {
+        msg += ' and ';
+      }
+      msg += itemsSelected + ' selected billing event item(s)'
+    }
+    if (confirm('Are you sure you want to remove the ' + msg + '?')) {
+      wait(true);
+      return true;
+    }
+  }
+  return false;
+}
+
+function precancel() {
+  if (confirm('Are you sure you want to cancel the selected task?')) {
+    wait(true);
+    return true;
+  }
+  return false;
+}
+
+function trim(str) {
+	return str.replace(/^\s+|\s+$/g, '');
+}
+
+function trimDash(str) {
+	return str.replace(/^\-*\s+/, '');
+}
+
+// New code added for AT 000011105
+function pregenerate() {
+	var configForConfirm = {!CONFIRM_BILLING_GENERATION};
+	if (!configForConfirm) 
+	{
+		return true;
+	} 
+	else 
+	{
+		var region = regionList.options[regionList.selectedIndex].text;
+		var period = periodList.options[periodList.selectedIndex].text;
+	
+		var confirmMsg = 'Are you sure you wish to generate Billing Events for ';
+		if (accnt.value != null && trim(accnt.value) != '') {
+			confirmMsg += "\"" + trim(accnt.value) + "\" Account";
+			if (confirm(confirmMsg + '?')) {
+	      		wait(true);
+	      		return true;
+	      	}
+		} else if (project.value != null && trim(project.value) != '') {
+			confirmMsg += "\"" + trim(project.value) + "\" Project";
+			if (confirm(confirmMsg + '?')) {
+	      		wait(true);
+	      		return true;
+	      	}
+		} else {
+			var regionSelected = false;
+			if (region != null && region != '') {
+				confirmMsg += "\"" + trimDash(region) + "\" Region";
+				regionSelected = true;
+			}
+			if (period != null && period != '') {
+				if (regionSelected) confirmMsg += ', ';
+				confirmMsg += "\"" + period + "\" Time Period";
+				if (includePrior.checked || includePrior.checked == 'true') {
+					confirmMsg += " and Prior Time Periods";
+				}
+			}
+			if (confirm(confirmMsg + '?')) {
+	      		wait(true);
+	      		return true;
+	      	}
+		}	
+		return false;
+	}
+}
+
+</script>
+
+
+<div id="wait" class="waitingSearchDiv waitingSearchDivOpacity" style="display: none"></div>
+<div id="loading" class="waitingSearchDiv" style="display: none">
+ <div id="waitingHolder" class="waitingHolder">
+  <img class="waitingImage" src="/img/loading.gif"/>
+  <span class="waitingDescription">Loading...</span>
+ </div>
+</div>
+
+<apex:form id="form">
+<apex:sectionHeader title="Billing Events" help="{!$Page.pse__ProcessingBillingEventsHelp}"/>
+<apex:actionFunction id="sortBatches" name="sortBatches" action="{!sortBatches}" rerender="events" immediate="true" oncomplete="wait(false);">
+ <apex:param id="sortColumn" name="sortColumn" value="" assignTo="{!sortColumn}" />
+</apex:actionFunction>
+
+<apex:pageMessages id="msgs" />
+
+<!-- Generation -------------------------------------------------------------->
+<apex:pageBlock title="Generate Billing Events" rendered="{!NOT isProcessing && initError=null}">
+
+<apex:pageBlockButtons id="generateButtons">
+<apex:commandButton action="{!generate}" value="Generate" onclick="return pregenerate();" />
+<apex:commandButton action="{!gotoPage}" value="{!$Label.common_label_schedule}" onclick="wait(true);" />
+</apex:pageBlockButtons>
+
+<table border="0">
+<tr>
+<td style="vertical-align:middle">{!IF(USE_FLEXIBLE_PERIOD_MODE,'Cutoff','Period')}</td>
+<td>
+<apex:pageBlockSection rendered="{!USE_FLEXIBLE_PERIOD_MODE}" columns="1">
+<apex:inputField value="{!selectedEndDate.pse__Date__c}" id="cutoffDate" label=""/>
+</apex:pageBlockSection>
+<apex:outputPanel rendered="{!NOT(USE_FLEXIBLE_PERIOD_MODE)}" id="periodSelector" >
+<apex:selectList id="selectedPeriodId" title="Selected Period" value="{!selectedPeriodId}" size="1" >
+   <apex:selectOptions value="{!periodOptions}" />
+</apex:selectList>
+<script>var periodList = document.getElementById("{!$Component.selectedPeriodId}");</script>
+<apex:inputCheckbox id="includePriorPeriods" value="{!includePriorPeriods}" style="margin-left:20px;" />
+<script>var includePrior = document.getElementById("{!$Component.includePriorPeriods}");</script>
+<apex:outputLabel value="Include prior periods" for="includePriorPeriods" style="padding-left: 5px;" />
+</apex:outputPanel>
+</td>
+</tr>
+
+<tr>
+<td>{!UNIT_TYPE_LABEL}</td>
+<td>
+<apex:outputPanel id="unitSelector1" rendered="{!NOT(UNIT_TYPE_SUBFILTER)}">
+<c:UnitPicker id="unitPicker1" unitTypeAttribute="{!UNIT_TYPE_LABEL}" selectedUnitId="{!selectedUnitId}" showLabel="false" />
+</apex:outputPanel>
+<apex:outputPanel id="unitSelector2" rendered="{!UNIT_TYPE_SUBFILTER}">
+<c:UnitPicker id="unitPicker2" unitTypeAttribute="{!UNIT_TYPE_LABEL}" selectedUnitId="{!selectedUnitId}" showLabel="false"  allowAnyAttribute="true" />
+<script>var regionList = document.getElementById("{!$Component.unitPicker.unitPickerComponent.selectedUnitId}");</script>
+</apex:outputPanel>
+</td>
+</tr>
+
+<apex:outputPanel rendered="{!UNIT_TYPE_SUBFILTER}" >
+<tr>
+<td>{!UNIT_TYPE_LABEL_SUB1}</td>
+<td>
+<c:UnitPicker id="unitPickerSub1" unitTypeAttribute="{!UNIT_TYPE_LABEL_SUB1}" selectedUnitId="{!selectedUnitIdSub1}" showLabel="false" allowAnyAttribute="true" />
+</td>
+</tr>
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!UNIT_TYPE_SUBFILTER}" >
+<tr>
+<td>{!UNIT_TYPE_LABEL_SUB2}</td>
+<td>
+<c:UnitPicker id="unitPickerSub2" unitTypeAttribute="{!UNIT_TYPE_LABEL_SUB2}" selectedUnitId="{!selectedUnitIdSub2}" showLabel="false" allowAnyAttribute="true" />
+</td>
+</tr>
+</apex:outputPanel>
+
+
+<tr>
+<td>Account</td>
+<td>
+<apex:inputField id="selectedAccount" value="{!selectedAccount.pse__Account__c}" label=""/>
+<script>var accnt = document.getElementById("{!$Component.selectedAccount}");</script>
+</td>
+</tr>
+
+<tr>
+<td>Project</td>
+<td>
+<apex:inputField id="selectedProject" value="{!selectedProject.pse__Project__c}" label=""/>
+<script>var project = document.getElementById("{!$Component.selectedProject}");</script>
+</td>
+</tr>
+
+</table>
+
+<apex:outputText rendered="{!selectedPeriodId != null}">
+<p>Click <b>Generate</b> to create billing event batches for each account within the selected {!UNIT_TYPE_LABEL_LC}, time period, account, and project.</p>
+<ul>
+ <li>Each batch contains billing events separated by project.</li>
+ <li>The following data is included in billing events: {!INCLUDE_LABEL}</li>
+<apex:outputText rendered="{!SEPARATES != null}">
+ <li>The following business records are placed in separate billing events: {!SEPARATES}.</li>
+</apex:outputText>
+<apex:outputText rendered="{!APPEND_GENERATED_ITEMS}">
+ <li>Existing un-released batches and events will be reused for the billing data.</li>
+</apex:outputText>
+<apex:outputText rendered="{!NOT APPEND_GENERATED_ITEMS}">
+ <li>New batches and events will be created for the billing data.</li>
+</apex:outputText>
+</ul>
+</apex:outputText>
+
+</apex:pageBlock>
+
+<!-- Processing -------------------------------------------------------------->
+
+<apex:pageBlock title="Process Billing Events" rendered="{!NOT isProcessing && initError = null}">
+
+<apex:pageBlockButtons id="processButtons">
+<apex:actionFunction name="refresh" action="{!refresh}"
+    rerender="events, msgs" oncomplete="wait(false);"  />
+<apex:commandButton action="{!refresh}" value="Refresh"
+    onclick="wait(true);" style="margin-right: 15px;" />
+<apex:commandButton action="{!release}" value="Release" onclick="return prerelease();" />
+<apex:commandButton action="{!remove}" value="Remove" onclick="return preremove();" />
+</apex:pageBlockButtons>
+
+<apex:pageBlockSection title="Filters">
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="{!UNIT_TYPE_LABEL}:" />
+<apex:inputText value="{!filters.unit}" onkeypress="return checkEnter(event);" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Time Period:" />
+<apex:inputText value="{!filters.timePeriod}" onkeypress="return checkEnter(event);" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Account:" />
+<apex:inputText value="{!filters.account}" onkeypress="return checkEnter(event);" />
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Category:" />
+<apex:selectList value="{!filters.category}" size="1" onkeypress="return checkEnter(event);">
+<apex:selectOptions value="{!categoryOptions}" />
+</apex:selectList>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Pre-Bill:" />
+<apex:inputCheckbox value="{!filters.prebill}" onkeypress="return checkEnter(event);" />
+</apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>
+
+<apex:outputPanel id="events">
+<table class="list" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr class="headerRow">
+ <th></th>
+ <th><a class="link" onclick="wait(true); sortBatches('Name');">Batch Name</a>
+<apex:image styleClass="sortIndicator" value="/img/{!sortImage}" rendered="{!sortColumn == 'Name'}" />
+ </th>
+ <th><a class="link" onclick="wait(true); sortBatches('Account__r.Name');">Account</a>
+<apex:image styleClass="sortIndicator" value="/img/{!sortImage}" rendered="{!sortColumn == 'Account__r.Name'}" />
+ </th>
+ <th><a class="link" onclick="wait(true); sortBatches('Time_Period__r.Name');">Time Period</a>
+<apex:image styleClass="sortIndicator" value="/img/{!sortImage}" rendered="{!sortColumn == 'Time_Period__r.Name'}" />
+ </th>
+ <th><a class="link" onclick="wait(true); sortBatches('Summary_Amount__c');">Total Amount</a>
+<apex:image styleClass="sortIndicator" value="/img/{!sortImage}" rendered="{!sortColumn == 'Summary_Amount__c'}" />
+ </th>
+ <th><a class="link" onclick="wait(true); sortBatches('CreatedDate');">Created Date</a>
+<apex:image styleClass="sortIndicator" value="/img/{!sortImage}" rendered="{!sortColumn == 'CreatedDate'}" />
+ </th>
+</tr>
+<apex:repeat value="{!batchData.batches}" var="b">
+<tr class="dataRow" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);} " onmouseover="if (window.hiOn){hiOn(this);}">
+ <td class="actionColumn" nowrap="true">
+  <apex:commandLink rendered="{!b.expanded}" action="{!collapseBatch}" onclick="wait(true);" rerender="events" oncomplete="wait(false);">
+    <apex:param name="selectedBatchId" value="{!b.Data.Id}" assignTo="{!selectedBatchId}" />
+    <apex:image url="{!URLFOR($Resource.pse__appirioCommon, 'collapse.gif')}" />
+  </apex:commandLink>
+  <apex:commandLink rendered="{!NOT b.expanded}" action="{!expandBatch}" onclick="wait(true);" rerender="events" oncomplete="wait(false);" >
+    <apex:param name="selectedBatchId" value="{!b.Data.Id}" assignTo="{!selectedBatchId}" />
+    <apex:image url="{!URLFOR($Resource.pse__appirioCommon, 'expand.gif')}" />
+  </apex:commandLink>
+  <apex:inputCheckbox value="{!b.selected}" onclick="selectBatch(this.checked);" />
+ </td>
+ <td class="dataCell" nowrap="true"><a href="../{!b.Data.Id}"><apex:outputField value="{!b.Data.Name}" /></a></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!b.Data.Account__r.Name}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!b.Data.Time_Period__r.Name}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!b.amountAsString}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!b.Data.CreatedDate}" /></td>
+</tr>
+<tr style="display: {!IF(b.expanded, '', 'none')}">
+<td colspan="6">
+<table class="list" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr class="headerRow">
+ <th></th>
+ <th>Event Name</th>
+<th>
+  <apex:outputPanel layout="none" rendered="{!GROUP_BY_MASTER_PROJECT}">
+    Master<br/>
+  </apex:outputPanel>
+  Project
+</th>
+ <th>Project<br />{!UNIT_TYPE_LABEL}</th>
+ <th>Stage</th>
+ <th>Budget</th>
+ <th>Pre-Bill<br/>Type</th>
+ <th>Date</th>
+ <th>Event<br />Total Amount</th>
+</tr>
+<apex:repeat value="{!b.events}" var="e">
+<tr class="dataRow" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);} " onmouseover="if (window.hiOn){hiOn(this);}">
+ <td class="actionColumn" nowrap="true" style="padding-left: 45px;">
+  <apex:commandLink rendered="{!e.expanded}" action="{!collapseEvent}" onclick="wait(true);" rerender="events" oncomplete="wait(false);">
+    <apex:param name="selectedBatchId" value="{!b.Data.Id}" assignTo="{!selectedBatchId}" />
+    <apex:param name="selectedEventId" value="{!e.Data.Id}" assignTo="{!selectedEventId}" />
+    <apex:image url="{!URLFOR($Resource.pse__appirioCommon, 'collapse.gif')}" />
+  </apex:commandLink>
+  <apex:commandLink rendered="{!NOT e.expanded}" action="{!expandEvent}" onclick="wait(true);" rerender="events" oncomplete="wait(false);" >
+    <apex:param name="selectedBatchId" value="{!b.Data.Id}" assignTo="{!selectedBatchId}" />
+    <apex:param name="selectedEventId" value="{!e.Data.Id}" assignTo="{!selectedEventId}" />
+    <apex:image url="{!URLFOR($Resource.pse__appirioCommon, 'expand.gif')}" />
+  </apex:commandLink>
+  <apex:inputCheckbox value="{!e.selected}" onclick="selectEvent(this.checked);" />
+ </td>
+ <td class="dataCell" nowrap="true"><a href="../{!e.Data.Id}"><apex:outputField value="{!e.Data.Name}" rendered="{!b.expanded}" /></a></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!e.Data.pse__Project__c}" rendered="{!b.expanded}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!e.Name}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!e.Data.Project__r.pse__Stage__c}" rendered="{!b.expanded}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!e.Data.Project__r.pse__Bookings__c}" rendered="{!b.expanded}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!e.Data.Project__r.pse__Pre_Bill_Type__c}" rendered="{!b.expanded}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!e.Data.pse__Date__c}" rendered="{!b.expanded}" /></td>
+ <td class="dataCell" nowrap="true">
+
+  <span id="amt_{!e.Data.Id}">
+    <apex:outputText value="{!e.amountAsString}" />
+  </span>
+ </td>
+</tr>
+<tr style="display: {!IF(e.expanded, '', 'none')}">
+<td colspan="11">
+<table class="list" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr class="headerRow">
+ <th></th>
+ <th>Date</th>
+ <apex:outputPanel layout="none" rendered="{!GROUP_BY_MASTER_PROJECT}">
+    <th>Project</th>
+ </apex:outputPanel>
+ <th>Category</th>
+ <th>Subcategory</th>
+ <th>Quantity</th>
+ <th>Unit Price</th>
+ <th>Amount</th>
+ <th>Description</th>
+</tr>
+<apex:repeat value="{!e.items}" var="i">
+<tr class="dataRow" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);} " onmouseover="if (window.hiOn){hiOn(this);}">
+ <td class="actionColumn" nowrap="true" style="padding-left: 90px;">
+  <apex:inputCheckbox value="{!i.selected}" onclick="selectItem(this.checked);" />
+ </td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!i.Data.pse__Date__c}" /></td>
+ <apex:outputText rendered="{!GROUP_BY_MASTER_PROJECT}" escape="false" value="<td>" />
+ <apex:outputField rendered="{!GROUP_BY_MASTER_PROJECT}" value="{!i.Data.pse__Project__c}" />
+ <apex:outputText rendered="{!GROUP_BY_MASTER_PROJECT}" escape="false" value="</td>" />
+ <td class="dataCell" nowrap="true"><a href="../{!i.Data.pse__Object_Id__c}"><apex:outputField value="{!i.Data.pse__Category__c}" /></a></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!i.Data.pse__Subcategory__c}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!i.Data.pse__Quantity__c}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!i.unitPriceAsString}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!i.amountAsString}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!i.Data.pse__Description__c}" /></td>
+</tr>
+</apex:repeat>
+</table>
+</td>
+</tr>
+</apex:repeat>
+</table>
+</td>
+</tr>
+</apex:repeat>
+</table>
+<c:PageControls pageActionsController="{!pageActionsController}" reRender="events"/>
+</apex:outputPanel>
+
+</apex:pageBlock>
+
+<!-- Processing Status -------------------------------------------------------------->
+
+<apex:outputPanel id="processingStatus" rendered="{!initError=null}">
+<script>
+  if({!refreshRequired})
+    window.top.location = '{!$Page.BillingEvents}';
+</script>
+<apex:pageBlock title="Processing Status" rendered="{!isProcessing}">
+<table class="list" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr class="headerRow">
+ <th>Description</th>
+ <th>Status</th>
+ <th>User</th>
+ <th>Start Date</th>
+</tr>
+<apex:repeat value="{!processingStatus}" var="s">
+<tr class="dataRow" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);} " onmouseover="if (window.hiOn){hiOn(this);}">
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!s.description}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!s.status}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!s.logEntry.CreatedBy.Name}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!s.logEntry.CreatedDate}" /></td>
+</tr>
+<tr style="display: {!IF(s.hasErrors, '', 'none')}">
+ <td colspan="4">
+
+<table class="list" width="100%" cellspacing="0" cellpadding="0" border="0" style="padding-left: 50px;">
+<tr class="headerRow">
+ <th>Action</th>
+ <th>Error Detail</th>
+</tr>
+<apex:repeat value="{!s.errors}" var="e">
+ <tr>
+  <td class="actionColumn" nowrap="true">
+   <apex:commandLink value="Cancel" action="{!cancelTask}" styleClass="actionLink2" onclick="return precancel();">
+    <apex:param name="taskId" value="{!s.Id}" assignTo="{!selectedTaskId}" />
+    <apex:param name="errorId" value="{!e.Id}" assignTo="{!selectedErrorId}" />
+   </apex:commandLink>
+  </td>
+ <td>
+  <apex:outputPanel layout="inline">
+    <apex:outputText value="{!e.error}" />
+    <apex:repeat value="{!e.erroredRecordIds}" var="erroredRecordId">
+        (<apex:outputLink value="/{!erroredRecordId}" >{!erroredRecordId}</apex:outputLink>)
+    </apex:repeat>
+  </apex:outputPanel>
+ </td>
+</tr>
+</apex:repeat>
+</table>
+</td>
+</tr>
+</apex:repeat>
+</table>
+</apex:pageBlock>
+</apex:outputPanel>
+<apex:actionPoller action="{!refreshProcessingStatus}" interval="5" enabled="{!autoRefresh}" rerender="processingStatus" onsubmit="wait(true);" oncomplete="wait(false);" />
+
+</apex:form>
+
+</apex:page>

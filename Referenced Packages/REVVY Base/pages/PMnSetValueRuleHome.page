@@ -1,0 +1,35 @@
+<apex:page controller="REVVY.CMnSetValueRuleHomePageCtrl" sidebar="false" extensions="REVVY.CMnConfigDebugCtrl" tabstyle="MnAdmin__tab">
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+            <apex:pageMessages id="pageMessages"/>
+            <c:VMnList sectionTitle="{!$Label.revvy__MnSetValue}"
+                       fieldSetName="{!setValueRuleListFSName}"
+                       isNewButtonVisible="true"
+                       newButtonLabel="{!$Label.revvy__MnNewSetValueRuleButtonLabel}"
+                       deleteLinkConfirm="{!$Label.revvy__MnConfigRuleDeleteLinkConfirm}"
+                       retUrl=""
+                       singleSelection="true"
+                       allowEdit="true"
+                       linkToDetail="true"
+                       sObjTypeStr="MnConfigEngineRule__c"
+                       filterCols="Name, Id__c"
+                       showFilter="true"
+                       allowSelection="false"
+                       displayActionColumn="true"
+                       extraWhere="{!extraWhere}"/>
+        </div>
+    </div>
+    </div>
+
+</apex:page>

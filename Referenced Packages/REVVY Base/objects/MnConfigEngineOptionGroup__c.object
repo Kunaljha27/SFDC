@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <comment>Option Group Detail</comment>
+        <content>PMnOGDetailPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <comment>Create New Option Group</comment>
+        <content>PMnCreateNewOG</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Option Group Detail</comment>
+        <content>PMnOGDetailPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies info about option groups, which are the high-level groupings of possible choices (options) that a user can select when configuring a product.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>OptionGroup_List_FS</fullName>
+        <description>Used in model home page</description>
+        <displayedFields>
+            <field>Id__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Type__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Multi_Select__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Has_Quantity__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Required__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Visible__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>LastModifiedById</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>LastModifiedDate</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <label>Option Group List FS</label>
+    </fieldSets>
+    <fields>
+        <fullName>Allow_Attributes__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Ability for the user to add decimal or integer capable attributes to the option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Turn ON to add decimal / integer attributes to option groups</inlineHelpText>
+        <label>Allow user entered numbers</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AllowedQuantity__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Allowed values for quantity in Option Group</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Allowed values for quantity</inlineHelpText>
+        <label>Allowed Quantity Values</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Catalog_Node__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the category associated with this option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the category associated with this option group.</inlineHelpText>
+        <label>Catalog Node</label>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>Option Groups</relationshipLabel>
+        <relationshipName>Option_Groups</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Default_Quantity_Value__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Default quantity value for option group</description>
+        <externalId>false</externalId>
+        <label>Default Quantity Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Desc_L10__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L10).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L10).</inlineHelpText>
+        <label>Description (L10)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L11__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L11).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L11).</inlineHelpText>
+        <label>Description (L11)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L12__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L12).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L12).</inlineHelpText>
+        <label>Description (L12)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L13__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L13).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L13).</inlineHelpText>
+        <label>Description (L13)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L14__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L14).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L14).</inlineHelpText>
+        <label>Description (L14)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L15__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L15).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L15).</inlineHelpText>
+        <label>Description (L15)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L16__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L16).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L16).</inlineHelpText>
+        <label>Description (L16)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L17__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L17).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L17).</inlineHelpText>
+        <label>Description (L17)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L18__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L18).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L18).</inlineHelpText>
+        <label>Description (L18)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L19__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L19).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L19).</inlineHelpText>
+        <label>Description (L19)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L1__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L1).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L1).</inlineHelpText>
+        <label>Description (L1)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L20__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L20).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L20).</inlineHelpText>
+        <label>Description (L20)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L2__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L2)).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L2).</inlineHelpText>
+        <label>Description (L2)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L3__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L3).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L3).</inlineHelpText>
+        <label>Description (L3)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L4__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L4).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L4).</inlineHelpText>
+        <label>Description (L4)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L5__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L5).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L5).</inlineHelpText>
+        <label>Description (L5)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L6__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L6).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L6).</inlineHelpText>
+        <label>Description (L6)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L7__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L7).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L7).</inlineHelpText>
+        <label>Description (L7)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L8__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L8).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L8).</inlineHelpText>
+        <label>Description (L8)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Desc_L9__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the Option Group(L9).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the Option Group(L9).</inlineHelpText>
+        <label>Description (L9)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Description of the option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of the option group.</inlineHelpText>
+        <label>Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>DisplayListPriceAttr__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether the List Price is displayed in the table view on the end user config page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the List Price is displayed in the table view on the end user config page.</inlineHelpText>
+        <label>Display List Price in Table view</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DisplayProdIdAttr__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether the Product Id is displayed in the table view on the end user config page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the Product Id is displayed in the table view on the end user config page</inlineHelpText>
+        <label>Display Product Id in Table view</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Has_Quantity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether the user can enter a quantity for the selected option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the user can enter a quantity for the selected option.</inlineHelpText>
+        <label>Quantity Allowed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Option Group ID</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>IsExported__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether configuration info of this option group should be saved when creating Install Base Records.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether configuration info of this option group should be saved when creating Install Base Records.</inlineHelpText>
+        <label>Is Exported</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSolution__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is Solution</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Label__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Label for this option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Label for this option group.</inlineHelpText>
+        <label>Label</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocaleDesc_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>BLANKVALUE(CASE($User.ul__c,&apos;L1&apos;,Desc_L1__c,&apos;L2&apos;,Desc_L2__c,&apos;L3&apos;,Desc_L3__c,&apos;L4&apos;,Desc_L4__c,&apos;L5&apos;,Desc_L5__c,&apos;L6&apos;,Desc_L6__c,&apos;L7&apos;,Desc_L7__c,&apos;L8&apos;,Desc_L8__c,&apos;L9&apos;,Desc_L9__c,&apos;L10&apos;,Desc_L10__c,&apos;L11&apos;,Desc_L11__c,&apos;L12&apos;,Desc_L12__c,&apos;L13&apos;,Desc_L13__c,&apos;L14&apos;,Desc_L14__c,&apos;L15&apos;,Desc_L15__c,&apos;L16&apos;,Desc_L16__c,&apos;L17&apos;,Desc_L17__c,&apos;L18&apos;,Desc_L18__c,&apos;L19&apos;,Desc_L19__c,&apos;L20&apos;,Desc_L20__c,Description__c),Description__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Locale Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocaleName_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>BLANKVALUE(CASE($User.ul__c,&apos;L1&apos;,Name_L1__c,&apos;L2&apos;,Name_L2__c,&apos;L3&apos;,Name_L3__c,&apos;L4&apos;,Name_L4__c,&apos;L5&apos;,Name_L5__c,&apos;L6&apos;,Name_L6__c,&apos;L7&apos;,Name_L7__c,&apos;L8&apos;,Name_L8__c,&apos;L9&apos;,Name_L9__c,&apos;L10&apos;,Name_L10__c,&apos;L11&apos;,Name_L11__c,&apos;L12&apos;,Name_L12__c,&apos;L13&apos;,Name_L13__c,&apos;L14&apos;,Name_L14__c,&apos;L15&apos;,Name_L15__c,&apos;L16&apos;,Name_L16__c,&apos;L17&apos;,Name_L17__c,&apos;L18&apos;,Name_L18__c,&apos;L19&apos;,Name_L19__c,&apos;L20&apos;,Name_L20__c,Name),Name)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Locale Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Multi_Select__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether the user can select more than one option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the user can select more than one option.</inlineHelpText>
+        <label>Allow multiple selections</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Name_L10__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 10)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L11__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 11)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L12__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 12)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L13__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 13)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L14__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 14)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L15__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 15)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L16__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 16)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L17__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 17)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L18__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 18)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L19__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 19)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L1__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 1)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L20__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 20)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L2__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 2)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L3__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 3)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L4__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 4)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L5__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 5)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L6__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 6)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L7__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 7)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L8__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 8)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_L9__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Name(Language 9)</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Option_Label_Field__c</fullName>
+        <defaultValue>&quot;label&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Dynamically changes the names of the options in an option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Dynamically changes the names of the options in an option group.</inlineHelpText>
+        <label>Option Label Field</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quotable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If checked, then an option (if it is linked to a product) from this option group will be added to the sales bill of materials (BOM).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, then an option (if it is linked to a product) from this option group will be added to the sales bill of materials (BOM).</inlineHelpText>
+        <label>Quotable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether the user is required to make a selection in this option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the user is required to make a selection in this option group.</inlineHelpText>
+        <label>Required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Whether the option group is a category option group or a regular option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the option group is a category option group or a regular option group.</inlineHelpText>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>attribute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>category</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>regular</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>UI_Section__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the section that the option group belongs to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the section that the option group belongs to.</inlineHelpText>
+        <label>Config Engine UI Section</label>
+        <referenceTo>MnConfigEngineUISection__c</referenceTo>
+        <relationshipLabel>Option Groups</relationshipLabel>
+        <relationshipName>Option_Groups</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>UI_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>How the option group is displayed on the UI (e.g., as checkboxes, as radio buttons, etc.).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How the option group is displayed on the UI (e.g., as checkboxes, as radio buttons, etc.).</inlineHelpText>
+        <label>UI Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>checkbox</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>pulldown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>radiobutton</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>table</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>textField</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>VisibleUploadButton__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether the upload button is visible in the end-user configuration page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the upload button is visible in the end-user configuration page.</inlineHelpText>
+        <label>Upload Attributes Button</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Visible__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Whether the option group is visible in the end-user configuration page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the option group is visible in the end-user configuration page.</inlineHelpText>
+        <label>Visible</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Option Group</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_OGs</fullName>
+        <columns>NAME</columns>
+        <columns>Description__c</columns>
+        <columns>Has_Quantity__c</columns>
+        <columns>Label__c</columns>
+        <columns>Multi_Select__c</columns>
+        <columns>Option_Label_Field__c</columns>
+        <columns>Quotable__c</columns>
+        <columns>Catalog_Node__c</columns>
+        <columns>Required__c</columns>
+        <columns>Type__c</columns>
+        <columns>UI_Type__c</columns>
+        <columns>Visible__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All OGs</label>
+        <language>en_US</language>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Option Groups</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>MnCheckIDFormat</fullName>
+        <active>true</active>
+        <errorConditionFormula>Not( REGEX(Id__c, &quot;^[a-zA-Z]([a-zA-Z]|_|\\d)*$&quot;) )</errorConditionFormula>
+        <errorMessage>ID can only contain letter, number and underscore and it must start with letter.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MnNoBlankID</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISBLANK( Id__c )</errorConditionFormula>
+        <errorMessage>ID cannot be blank for option group</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MnNoBlankName</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISBLANK( Name )</errorConditionFormula>
+        <errorMessage>Option Group Name cannot be blank</errorMessage>
+    </validationRules>
+</CustomObject>

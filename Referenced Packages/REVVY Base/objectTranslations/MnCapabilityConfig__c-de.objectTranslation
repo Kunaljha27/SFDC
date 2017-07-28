@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Capability Config --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Benefit Valuation Type --></label>
+        <name>BenefitValuationType__c</name>
+        <picklistValues>
+            <masterLabel>$ Per Unit</masterLabel>
+            <translation><!-- $ Per Unit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>% Of Revenue</masterLabel>
+            <translation><!-- % Of Revenue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fixed $</masterLabel>
+            <translation><!-- Fixed $ --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Calc Expression --></label>
+        <name>CalcExpression__c</name>
+        <relationshipLabel><!-- Capability Config --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Capability Config Label --></label>
+        <name>CapabilityConfigLabel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Source --></label>
+        <name>DataSource__c</name>
+        <relationshipLabel><!-- Capability Config --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- No Qualification Benefit --></label>
+        <name>NoQualification__c</name>
+    </fields>
+    <fields>
+        <label><!-- Step Tier --></label>
+        <name>StepTier__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>EQUAL</masterLabel>
+            <translation><!-- EQUAL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PROPORTIONAL</masterLabel>
+            <translation><!-- PROPORTIONAL --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Capability Config Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Capability Config Layout - Allocation</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Capability Config Layout - Benefit</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Capability Config Layout - Qualification</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label><!-- Allocation --></label>
+        <name>Allocation</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Benefit --></label>
+        <name>Benefit</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Qualification --></label>
+        <name>Qualification</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Aggregation Function field for CalcEngineExpression cannot be NULL --></errorMessage>
+        <name>AggregateFunctionForQualificationType</name>
+    </validationRules>
+</CustomObjectTranslation>

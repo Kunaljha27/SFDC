@@ -1,0 +1,39 @@
+<!--
+  ~ FinancialForce.com, inc. claims copyright in this software, its screen
+  ~ display designs and supporting documentation. FinancialForce and
+  ~ FinancialForce.com are trademarks of FinancialForce.com, inc. Any
+  ~ unauthorized use, copying or sale of the above may constitute an
+  ~ infringement of copyright and may result in criminal or other legal
+  ~ proceedings.
+  ~
+  ~ Copyright (c) 2012 FinancialForce.com, inc. All rights reserved.
+  -->
+<apex:page standardController="pse__Proj__c" sidebar="false" showHeader="false" standardStylesheets="false" expires="0" cache="false" extensions="pse.PSATasksController" > 
+    <html>
+        <head> 
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+			<title>Financialforce PSA Tasks</title>
+			<link rel="stylesheet" href="{!URLFOR($Resource.extjs, 'extjs_4.1/resources/css/ext-all-gray.css')}" type="text/css"/>
+			
+			<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.taskmanagement, 'css/app.css')}"/>
+			
+			<script type="text/javascript" src="{!URLFOR($Resource.extjs, 'extjs_4.1/ext-all.js')}"></script>
+
+			<script>
+				var _projectJSONURL = "{!$Page.ProjectsJSON}";
+				var _resourceJSONURL = "{!$Page.ResourceJSON}";
+				var _projecttasksJSONURL = "{!$Page.ProjectTasksJSON}";
+				var _logo2URL = "{!URLFOR($Resource.taskmanagement, 'images/image_logo2.png')}";
+			</script>
+
+            <!-- Main App -->
+			<script type="text/javascript" src="{!URLFOR($Resource.taskmanagement, 'js/controls.js')}"></script>
+			<script type="text/javascript" src="{!URLFOR($Resource.taskmanagement, 'js/stores.js')}"></script>
+			<script type='text/javascript' src="{!URLFOR($Resource.taskmanagement, 'js/app.js')}"></script>
+			<script type="text/javascript" src="{!URLFOR($Resource.taskmanagement, 'js/layouts.js')}"></script>
+			<script type="text/javascript" src="{!URLFOR($Resource.taskmanagement, 'js/functions.js')}"></script>
+		</head>
+		<body>
+		</body>
+	</html>
+</apex:page>

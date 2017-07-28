@@ -1,0 +1,247 @@
+<!--
+@VF page:    merge_Account
+@Description:Displays the value from both the Accounts- Survivor and Victim. Clicking on the Merge button after selecting the values
+will merge two records.
+-->
+<apex:page title="Merge My Accounts" standardController="Account" extensions="M2O_MergeAccountController">
+    <apex:stylesheet value="{!URLFOR($Resource.M2O_jQuery, 'CSS/siiStyles.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.M2O_jQuery, 'JS/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.M2O_jQuery, 'JS/jquery.blockUI.js')}" />
+    <style type="text/css">
+        .img{
+            position:absolute;
+            width:50%; 
+            height:50%; 
+            left:50%; 
+            top:50%;
+            margin-left:-296px; 
+            margin-top:-256px;
+            }
+    </style>
+    <script language="javascript">   
+        var j$ = jQuery.noConflict();
+        
+        //This function locks the screen
+        function lockScreen() {
+            j$.blockUI.defaults.message = "";
+            j$.blockUI.defaults.overlayCSS.opacity = 0;
+            j$.blockUI();
+        }
+    
+        //This function unlocks the screen 
+        function unlockScreen() {
+            j$.unblockUI();
+        }
+        
+        function selectedValue(c){
+            var selectedVal = document.getElementsByName(c);
+            var val;
+            for (var x = 0; x < selectedVal.length; x++) {
+              if (selectedVal[x].checked) {
+                  val = selectedVal[x].value;
+              }
+            }
+            assignValue(c,val);
+            return false;
+        }
+        function selectedValueAttrib(c){
+            var selectedVal = document.getElementsByName(c);
+            var val;
+            for (var x = 0; x < selectedVal.length; x++) {
+              if (selectedVal[x].checked) {
+                  val = selectedVal[x].value;
+              }
+            }
+            assignValueAttrib(c,val);
+            return false;
+        }
+        function selectAll(c){  
+            var selectedVal = document.getElementsByClassName(c);
+            var apiname = new Array();
+            var val=new Array();
+            for (var x = 0; x < selectedVal.length; x++) {
+                selectedVal[x].checked=true;
+                //if(selectedVal[x].value!=''){
+                if(selectedVal[x].style.display!='none'){
+                    apiname[x] = selectedVal[x].name;
+                    val[x] = selectedVal[x].value;
+                }
+            }
+        assignValueAll(apiname.toString(),val.toString());
+        return false;
+       }
+       function selectAllAttrib(c){  
+            var selectedVal = document.getElementsByClassName(c);
+            var apiname = new Array();
+            var val=new Array();
+            for (var x = 0; x < selectedVal.length; x++) {
+                selectedVal[x].checked=true;
+                //if(selectedVal[x].value!=''){
+                if(selectedVal[x].style.display!='none'){
+                    apiname[x] = selectedVal[x].name;
+                    val[x] = selectedVal[x].value;
+                }
+            }
+        assignValueAllAttrib(apiname.toString(),val.toString());
+        return false;
+       }
+
+    </script>
+    <apex:form id="formMerge">  
+        <apex:actionStatus id="nextPageStatus" >
+            <apex:facet name="stop">
+                <apex:outputPanel layout="none" rendered="true" ></apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="start">
+                <apex:outputPanel layout="none" style="float:center;">
+                    <apex:image value="/img/loading.gif" style="position:fixed;top:50%;right:50%;" />
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>   
+        <apex:actionFunction name="assignValue" action="{!selectedAccount}" reRender="hidden" status="selectedfield" oncomplete="unlockScreen();">
+            <apex:param name="apiName" value=""/>
+            <apex:param name="selectedValue" value=""/>
+        </apex:actionFunction>
+        <apex:actionFunction name="assignValueAttrib" action="{!selectedAttribute}" reRender="hidden" status="selectedfield" oncomplete="unlockScreen();">
+            <apex:param name="apiName" value=""/>
+            <apex:param name="selectedValue" value=""/>
+        </apex:actionFunction>
+        <apex:actionFunction name="assignValueAll" action="{!selectAllAccount}" reRender="hidden" status="nextPageStatus">
+            <apex:param name="apiName" value="" assignTo="{!nonCDHapiNames}"/>
+            <apex:param name="selectedValue" value="" assignTo="{!nonCDHfieldValues}"/>
+        </apex:actionFunction>
+        <apex:actionFunction name="assignValueAllAttrib" action="{!selectAllAccountAttributes}" reRender="hidden" status="nextPageStatus">
+            <apex:param name="apiName" value="" assignTo="{!marketAttributesNames}"/>
+            <apex:param name="selectedValue" value="" assignTo="{!marketAttributesValues}"/>
+        </apex:actionFunction>
+        <apex:pageBlock id="selectionBlock" title="Step 2. Select the values to retain">
+            <apex:pagemessages />
+            <apex:pageBlockButtons dir="RTL">
+                    <apex:commandButton action="{!cancel}" title="Cancel" value="Cancel"/> 
+                    <apex:commandButton action="{!mergeAccounts}" value="Merge Account" />&nbsp;                                 
+             </apex:pageBlockButtons>
+             
+            <p style = "border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #dbdbdb;padding-top: 8px;padding-right: 12px;padding-bottom: 8px;">
+              Select the values that you want to retain in the merged record. The Master Record selected will retain read-only and hidden field values.
+            <br/><br/>
+            </p><br/>       
+            <apex:pageblocktable id="displayTable" value="{!CDHFieldsAndRecords}" var="cdhflrec">
+                <apex:column headerValue="CDH Fields" width="33%" >            
+                    <apex:outputLabel value="{!IF((cdhflrec.fieldName == 'Record Type ID'), 'Account Record Type', IF((cdhflrec.fieldName == 'Owner ID'), 'Account Owner', IF((cdhflrec.fieldName == 'Last Modified By ID'), 'Last Modified By', IF((cdhflrec.fieldName == 'Created By ID'), 'Created By', cdhflrec.fieldName ))))}" for="" style="align:right;"/>            
+                </apex:column>
+                <apex:column headerValue="Losing Record : {!sourceAccountName}" width="33%" >
+                    <apex:outputLabel value="{!cdhflrec.sourceAccountFieldValue}"/>
+                </apex:column>          
+                <apex:column headerValue="Winning Record : {!destinationAccountName}" width="33%">
+                    <apex:outputLabel value="{!cdhflrec.destinationAccountFieldValue}" />
+                </apex:column>
+
+            </apex:pageblocktable>
+
+            <apex:pageblocktable id="nonCdhM2O" value="{!FieldsAndRecords}" var="flrec">
+                <apex:column headerValue="NON-CDH Fields" width="33%" >            
+                    <apex:outputLabel value="{!flrec.fieldName }" for="" style="align:right;"/>            
+                </apex:column>
+                <apex:column width="33%" >
+                    <apex:facet name="header">
+                        <apex:outputPanel layout="none">
+                            <apex:outputLabel value="Losing Record : {!sourceAccountName}" />
+                            <apex:commandLink value="[Select All]" onclick="selectAll('source','{!flrec.apiName}');return false;" />
+                        </apex:outputPanel>    
+                    </apex:facet>
+                    <input type="radio" name= "{!flrec.apiName}" class="source" onclick="selectedValue('{!flrec.apiName}');lockScreen();" value="{!flrec.sourceAccountFieldValue}" style = "display:{!IF(flrec.sourceAccountFieldValue == '' && flrec.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!flrec.sourceAccountFieldValue}"/>
+                </apex:column>          
+                <apex:column width="33%">
+                    <apex:facet name="header">
+                            <apex:outputPanel layout="none">
+                                <apex:outputLabel value="Winning Record : {!destinationAccountName}" />
+                                <apex:commandLink value="[Select All]" onclick="selectAll('destination');return false;" />
+                            </apex:outputPanel>    
+                        </apex:facet>
+                    <input type="radio" name= "{!flrec.apiName}" class="destination" onclick="selectedValue('{!flrec.apiName}');lockScreen();" value="{!flrec.destinationAccountFieldValue}" checked="checked" style = "display:{!IF(flrec.sourceAccountFieldValue == '' && flrec.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!flrec.destinationAccountFieldValue}" />
+                </apex:column>
+            </apex:pageblocktable>
+            
+            <apex:pageblocktable id="nonMDMCDH" value="{!CDHNonMDMFieldsAndRecords}" var="nonMDM">
+                <apex:column headerValue="CDH NON-MDM Fields" width="33%" >            
+                    <apex:outputLabel value="{!IF((nonMDM.fieldName == 'Account Fax'), 'Fax', IF((nonMDM.fieldName == 'Parent Account ID'), 'Parent Account',nonMDM.fieldName ))}" for="" style="align:right;"/>            
+                </apex:column>
+                <apex:column width="33%" >
+                    <apex:facet name="header">
+                        <apex:outputPanel layout="none">
+                            <apex:outputLabel value="Losing Record : {!sourceAccountName}" />
+                            <apex:commandLink value="[Select All]" onclick="selectAll('sourceNonMDM','{!nonMDM.apiName}');return false;" />
+                        </apex:outputPanel>    
+                    </apex:facet>
+                    <input type="radio" name= "{!nonMDM.apiName}" class="sourceNonMDM" onclick="selectedValue('{!nonMDM.apiName}');lockScreen();" value="{!nonMDM.sourceAccountFieldValue}" style = "display:{!IF(nonMDM.sourceAccountFieldValue == '' && nonMDM.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!nonMDM.sourceAccountFieldValue}"/>
+                </apex:column>          
+                <apex:column width="33%">
+                    <apex:facet name="header">
+                            <apex:outputPanel layout="none">
+                                <apex:outputLabel value="Winning Record : {!destinationAccountName}" />
+                                <apex:commandLink value="[Select All]" onclick="selectAll('destinationNonMDM');return false;" />
+                            </apex:outputPanel>    
+                        </apex:facet>
+                    <input type="radio" name= "{!nonMDM.apiName}" class="destinationNonMDM" onclick="selectedValue('{!nonMDM.apiName}');lockScreen();" value="{!nonMDM.destinationAccountFieldValue}" checked="checked" style = "display:{!IF(nonMDM.sourceAccountFieldValue == '' && nonMDM.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!nonMDM.destinationAccountFieldValue}" />
+                </apex:column>
+            </apex:pageblocktable>
+                <apex:pageblocktable id="nonCDHHCNA" value="{!NonCDHHCNAFieldsAndRecords}" var="nonCDHHCNA">
+                <apex:column headerValue="NON-CDH HCNA Fields" width="33%" >            
+                    <apex:outputLabel value="{!nonCDHHCNA.fieldName}" for="" style="align:right;"/>            
+                </apex:column>
+                <apex:column width="33%" >
+                    <apex:facet name="header">
+                        <apex:outputPanel layout="none">
+                            <apex:outputLabel value="Losing Record : {!sourceAccountName}" />
+                            <apex:commandLink value="[Select All]" onclick="selectAll('sourcenonCDHHCNA','{!nonCDHHCNA.apiName}');return false;" />
+                        </apex:outputPanel>    
+                    </apex:facet>
+                    <input type="radio" name= "{!nonCDHHCNA.apiName}" class="sourcenonCDHHCNA" onclick="selectedValue('{!nonCDHHCNA.apiName}');lockScreen();" value="{!nonCDHHCNA.sourceAccountFieldValue}" style = "display:{!IF(nonCDHHCNA.sourceAccountFieldValue == '' && nonCDHHCNA.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!nonCDHHCNA.sourceAccountFieldValue}"/>
+                </apex:column>          
+                <apex:column width="33%">
+                    <apex:facet name="header">
+                            <apex:outputPanel layout="none">
+                                <apex:outputLabel value="Winning Record : {!destinationAccountName}" />
+                                <apex:commandLink value="[Select All]" onclick="selectAll('destinationnonCDHHCNA');return false;" />
+                            </apex:outputPanel>    
+                        </apex:facet>
+                    <input type="radio" name= "{!nonCDHHCNA.apiName}" class="destinationnonCDHHCNA" onclick="selectedValue('{!nonCDHHCNA.apiName}');lockScreen();" value="{!nonCDHHCNA.destinationAccountFieldValue}" checked="checked" style = "display:{!IF(nonCDHHCNA.sourceAccountFieldValue == '' && nonCDHHCNA.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!nonCDHHCNA.destinationAccountFieldValue}" />
+                </apex:column>
+        </apex:pageblocktable>
+
+        <apex:pageblocktable id="attribSelectionTable" value="{!AttributesFieldsAndRecords}" var="attflrec">
+                <apex:column headerValue="Market Sector Attributes Fields" width="33%" >            
+                    <apex:outputLabel value="{!attflrec.fieldName}" for="" style="align:right;"/>            
+                </apex:column>
+                <apex:column width="33%" >
+                    <apex:facet name="header">
+                        <apex:outputPanel layout="none">
+                            <apex:outputLabel value="Losing Record : {!sourceAccountName}" />
+                            <apex:commandLink value="[Select All]" onclick="selectAllAttrib('sourceAttributes','{!attflrec.apiName}');return false;" />
+                        </apex:outputPanel>    
+                    </apex:facet>
+                    <input type="radio" name= "{!attflrec.apiName}" class="sourceAttributes" onclick="selectedValueAttrib('{!attflrec.apiName}');lockScreen();" value="{!attflrec.sourceAccountFieldValue}" style = "display:{!IF(attflrec.sourceAccountFieldValue == '' && attflrec.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!attflrec.sourceAccountFieldValue}"/>
+                </apex:column>          
+                <apex:column width="33%">
+                    <apex:facet name="header">
+                            <apex:outputPanel layout="none">
+                                <apex:outputLabel value="Winning Record : {!destinationAccountName}" />
+                                <apex:commandLink value="[Select All]" onclick="selectAll('destinationAttributes');return false;" />
+                            </apex:outputPanel>    
+                        </apex:facet>
+                    <input type="radio" name= "{!attflrec.apiName}" class="destinationAttributes" onclick="selectedValue('{!attflrec.apiName}');lockScreen();" value="{!attflrec.destinationAccountFieldValue}" checked="checked" style = "display:{!IF(attflrec.sourceAccountFieldValue == '' && attflrec.destinationAccountFieldValue=='' ,'none;','')}" />
+                    <apex:outputLabel value="{!attflrec.destinationAccountFieldValue}" />
+                </apex:column>
+            </apex:pageblocktable>
+        </apex:pageBlock>
+        <apex:pageBlock id="hidden" rendered="false">
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

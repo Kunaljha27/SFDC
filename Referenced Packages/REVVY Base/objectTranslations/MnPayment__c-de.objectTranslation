@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Revvy Payment --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Adjustment Input --></label>
+        <name>AdjustmentInput__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adjustment Reason Input --></label>
+        <name>AdjustmentReasonInput__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adjustment Reason --></label>
+        <name>AdjustmentReason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adjustment --></label>
+        <name>Adjustment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Earnings ID --></label>
+        <name>Earning__c</name>
+        <relationshipLabel><!-- Revvy Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- External Payment Id --></label>
+        <name>ExternalPaymentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Geography --></label>
+        <name>Geography__c</name>
+        <relationshipLabel><!-- Revvy Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Job Status --></label>
+        <name>JobStatus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job Type --></label>
+        <name>JobType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job --></label>
+        <name>Job__c</name>
+        <relationshipLabel><!-- Revvy Payments (Adjust Job) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Last Successful Run Adjust Pay --></label>
+        <name>LastSuccessfulRunAdjustPay__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Successful Run Release Pay --></label>
+        <name>LastSuccessfulRunReleasePay__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Successful Run --></label>
+        <name>LastSuccessfulRun__c</name>
+    </fields>
+    <fields>
+        <label><!-- Manual Payment --></label>
+        <name>ManualPayment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Payment --></label>
+        <name>NetPayment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Due --></label>
+        <name>PaymentDue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment --></label>
+        <name>Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period End --></label>
+        <name>PeriodEnd__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period Start --></label>
+        <name>PeriodStart__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prior Net Payments --></label>
+        <name>PriorNetPayments__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute1Value --></label>
+        <name>RollupAttribute1Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute1 --></label>
+        <name>RollupAttribute1__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute2Value --></label>
+        <name>RollupAttribute2Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute2 --></label>
+        <name>RollupAttribute2__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute3Value --></label>
+        <name>RollupAttribute3Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute3 --></label>
+        <name>RollupAttribute3__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute4Value --></label>
+        <name>RollupAttribute4Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute4 --></label>
+        <name>RollupAttribute4__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute5Value --></label>
+        <name>RollupAttribute5Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- RollupAttribute5 --></label>
+        <name>RollupAttribute5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Released for Payment</masterLabel>
+            <translation><!-- Released for Payment --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Virtual SKU --></label>
+        <name>VirtualSKU__c</name>
+        <relationshipLabel><!-- Revvy Payments --></relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Early Payment</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Amount --></label>
+            <section>Payment Amount</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Rollup --></label>
+            <section>Payment Rollup</section>
+        </sections>
+        <sections>
+            <label><!-- Revvy Jobs Information --></label>
+            <section>Revvy Jobs Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Payment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Amount --></label>
+            <section>Payment Amount</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Rollup --></label>
+            <section>Payment Rollup</section>
+        </sections>
+        <sections>
+            <label><!-- Revvy Jobs Information --></label>
+            <section>Revvy Jobs Information</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Payment ID --></nameFieldLabel>
+    <recordTypes>
+        <label><!-- Early Payment --></label>
+        <name>EarlyPayment</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Regular Payment --></label>
+        <name>RegularPayment</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- AdjustPayment --></label>
+        <name>AdjustPayment</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- ReleasePayment --></label>
+        <name>ReleasePayment</name>
+    </webLinks>
+</CustomObjectTranslation>

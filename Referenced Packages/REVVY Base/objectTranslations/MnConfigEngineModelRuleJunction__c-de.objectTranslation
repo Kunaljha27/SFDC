@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Model Rule Junction --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID of the model. --></help>
+        <label>Modell</label>
+        <name>Model_Id__c</name>
+        <relationshipLabel>Modellregelverknüpfungen</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the rule. --></help>
+        <label>Regel</label>
+        <name>Rule_Id__c</name>
+        <relationshipLabel>Modellregelverknüpfungen</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Name (id) --></nameFieldLabel>
+</CustomObjectTranslation>

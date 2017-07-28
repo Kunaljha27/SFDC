@@ -1,0 +1,210 @@
+<apex:page standardController="pse__Assignment__c" recordsetvar="assignments" extensions="pse.ResourceStafferController" title="Assign Resource to Project">
+<style>
+div#wait { width: 100%; height: 100% }
+div#loading { width: 100%; height: 100%; position: fixed; top: 0px;}
+div#waitingHolder { width: 113px; }
+img.sortIndicator { padding-left: 5px; }
+span.modified { color: red; }
+img.closeIcon {display: none;}
+</style>
+
+<!-- Added these script include as fix for task: AT0771  -->
+<script src="{!$Resource.yui_combo}/yui-min.js" type="text/javascript"></script>
+<script src="{!$Resource.yui_combo}/loader-min.js" type="text/javascript"></script>
+<script src="{!$Resource.yui_combo}/combo.js" type="text/javascript"></script>
+<script src="{!$Resource.jsComponents}" type="text/javascript"></script>
+
+<script type="text/javascript">
+var prevSearchTerm = null;
+var timer = null;
+function setVisible(name, visible) {
+  var e = document.getElementById(name);
+  if (e != null) {
+    if (visible) {
+      e.setAttribute("style", "display: block"); 
+      e.style.cssText = "display: block";
+    } else {
+      e.setAttribute("style", "display: none");
+      e.style.cssText = "display: none";
+    }
+  }
+}
+function updateCostRate(id, id2, id3, optionValue, value) {
+  setVisible(id, !value);
+  setVisible(id2, !value);
+  
+  if(optionValue == 'Project') {
+  	setVisible(id3, !value);
+  } else {
+  	setVisible(id3, false);
+  }
+}
+function hideProjectCurrency(value, id, isChecked) {
+  if(!isChecked) {
+	if(value == 'Resource') {
+	  document.getElementById(id).style.display = 'none' ;
+	} else {
+	  document.getElementById(id).style.display = '' ;
+	}
+  }
+}
+function wait(val) {
+  setVisible('loading', val);
+  setVisible('wait', val);
+}
+</script>
+<div id="wait" class="waitingSearchDiv waitingSearchDivOpacity" style="display: none"></div>
+<div id="loading" class="waitingSearchDiv" style="display: none">
+ <div id="waitingHolder" class="waitingHolder">
+  <img class="waitingImage" src="/img/loading.gif"/>
+  <span class="waitingDescription">Loading...</span>
+ </div>
+</div>
+
+    <apex:sectionHeader title="Assign Resource to Project" subTitle="{!project.Name}"/>
+    <apex:pageMessages id="msgs" />
+    <apex:form >
+    <apex:pageBlock id="assignmentDetails" title="Assignment Details" mode="edit" rendered="{!NOT isDisabled}">
+        <apex:pageBlockSection title="Project Information" columns="2">
+            <apex:pageBlockSectionItem ><apex:outputLabel value="Project Name"/>
+                <apex:outputLink value="../{!project.Id}" target="_blank">{!project.Name}</apex:outputLink>
+            </apex:pageBlockSectionItem>
+            <apex:repeat value="{!$ObjectType.pse__Proj__c.FieldSets.pse__AssignResourceProjectInfoSectionFieldSet}" var="f">
+		   		<apex:outputField value="{!project[f]}" rendered="{!f.Label != $ObjectType.pse__Proj__c.Fields.Name.Label}"/>
+		    </apex:repeat>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Assignment Information" columns="2" id="assignmentDetailSection">
+            <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Resource" for="resource" />
+              <apex:outputPanel >
+              	<c:ResourceLookup required="true" value="{!assignment.pse__Resource__c}" rendered="{!assignResourceCustomLookup}" loadRequiredScripts="false" />
+                <apex:inputField id="resource" value="{!assignment.pse__Resource__c}" required="true" rendered="{!NOT(assignResourceCustomLookup)}"/>
+              </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+          <apex:outputPanel >
+            <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="labelCol" style="width: 35%"> 
+            <apex:outputLabel value="Use Default Cost Rate" for="defaultCostRate" /></td><td class="">
+            <apex:inputField id="defaultCostRate" value="{!assignment.pse__Use_Resource_Default_Cost_Rate__c}"
+              onclick="updateCostRate('{!$Component.costRateAmount}', '{!$Component.costRateAmountLabel}',
+              '{!$Component.costRateCurrency}', document.getElementById('{!$Component.assignmentDetailSection.costRateOptions}').value, this.checked);" /></td>
+            <td>
+            <apex:selectList id="costRateOptions" value="{!selectedCostRateOption}" title="Cost Rate Currency Options" size="1"
+              rendered="{!MULTICURRENCY_ENABLED}" onChange="hideProjectCurrency(this.value, '{!$Component.costRateCurrency}', document.getElementById('{!$Component.defaultCostRate}').checked)">
+              <apex:selectOptions value="{!costRateOptions}" />
+            </apex:selectList>
+            </td></tr></table>
+          </apex:outputPanel>
+
+          <!-- Done changes as fix for agile task: 000011130   Dated : 30 Aug, 2011  
+          	   Added rendered condition for agile task : AT1647	-->
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Role" for="role" rendered="{!NOT(isRoleHidden)}"/>
+          <apex:inputField value="{!assignment.pse__Role__c}" required="{!isRoleRequiredOnCreation}" rendered="{!NOT(isRoleHidden)}"/>
+		  </apex:pageBlockSectionItem>
+          <!-- Added for Agile task: AT0771  Dated : 12 April, 2012  -->
+          <apex:pageBlockSectionItem >
+             <apex:outputLabel value="Milestone" for="milestone" />
+             <apex:outputPanel >
+                <c:MilestoneLookup isRequired="{!isMilestoneCustomLookupRequired}" value="{!assignment.pse__Milestone__c}" 
+                    projectId="{!assignment.pse__Project__c}" rendered="{!assignMilestoneCustomLookup}" loadRequiredScripts="false" />
+                <apex:inputField id="milestone" value="{!assignment.pse__Milestone__c}" rendered="{!NOT(assignMilestoneCustomLookup)}"/>
+             </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+
+          <apex:outputPanel >
+            <table width="97%" border="0" cellspacing="0" cellpadding="0"><tr><td class="labelCol" style="width: 36%">
+            <apex:outputLabel value="Bill Rate" for="billRate" /></td><td class="dataCol" style="width: 16%">
+            <apex:inputField id="billRate" value="{!assignment.pse__Bill_Rate__c}" required="true" rendered="{!project.pse__Is_Billable__c == true}" /></td><td style="vertical-align: middle;">
+            <apex:outputText value="{!assignment.CurrencyIsoCode}" rendered="{!MULTICURRENCY_ENABLED}" /></td></tr></table>
+          </apex:outputPanel>
+          <apex:outputPanel >
+            <table width="97%" border="0" cellspacing="0" cellpadding="0"><tr><td class="labelCol" style="width: 36%">
+            <apex:outputLabel id="costRateAmountLabel" value="Cost Rate Amount" for="costRateAmount" style="{!IF(assignment.pse__Use_Resource_Default_Cost_Rate__c, 'display: none', '')}" /></td><td class="dataCol" style="width: 16%">
+            <apex:inputField id="costRateAmount" value="{!assignment.pse__Cost_Rate_Amount__c}" style="{!IF(assignment.pse__Use_Resource_Default_Cost_Rate__c, 'display: none', '')}" /></td><td style="vertical-align: middle;">
+            <apex:outputText id="costRateCurrency" value="{!project.CurrencyIsoCode}" style="{!IF(assignment.pse__Use_Resource_Default_Cost_Rate__c, 'display: none', '')}" /></td></tr></table>
+          </apex:outputPanel>
+          <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Start Date" for="startDate" />
+            <apex:inputField id="startDate" value="{!schedule.pse__Start_Date__c}" />
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+            <apex:outputLabel value="End Date" for="endDate" />
+            <apex:inputField id="endDate" value="{!schedule.pse__End_Date__c}" />
+          </apex:pageBlockSectionItem>
+        <apex:inputField value="{!assignment.pse__Planned_Hours__c}" required="false"/>
+        <apex:inputField value="{!assignment.pse__Is_Billable__c}" rendered="{!project.pse__Is_Billable__c}"/>
+        <apex:inputField value="{!assignment.pse__Planned_Bill_Rate__c}" rendered="{!SHOW_PLANNED_BILL_RATE}"/>
+        
+        <apex:pageBlockSectionItem id="hiddenAssProjLookup">
+        	<apex:inputField value="{!assignment.pse__Project__c}" style="display : none"/>
+        </apex:pageBlockSectionItem>
+        
+       	<apex:repeat value="{!AssignmentInformationFieldsAfterFilter}" var="f">
+	   		<apex:inputField value="{!assignment[f]}" required="{!OR(f.required,f.DBRequired)}"/>
+	    </apex:repeat>
+        	
+        </apex:pageBlockSection>
+        
+        <script>
+        	updateCostRate('{!$Component.assignmentDetailSection.costRateAmount}', '{!$Component.assignmentDetailSection.costRateAmountLabel}', '{!$Component.assignmentDetailSection.costRateCurrency}', document.getElementById('{!$Component.assignmentDetailSection.costRateOptions}').value, document.getElementById('{!$Component.assignmentDetailSection.defaultCostRate}').checked);
+        	hideProjectCurrency(document.getElementById('{!$Component.assignmentDetailSection.costRateOptions}').value, '{!$Component.assignmentDetailSection.costRateCurrency}', document.getElementById('{!$Component.assignmentDetailSection.defaultCostRate}').checked)
+        </script>
+    </apex:pageBlock>
+	
+	<div style=""></div>
+	
+	<!-- Added changes against AT0704   Dated: 12 Sep, 2012  By: Aditi -->
+    <apex:pageBlock id="scheduleDetails" title="Schedule Details" mode="view" rendered="{!NOT isDisabled}">
+        
+        <!--
+        Commented for changing the design for fixing AT6262   Dated: 19 Sep, 2012   Dated: Aditi 
+        <apex:actionFunction name="jsUpdateSchedule" action="{!updateSchedule}" rerender="msgs, scheduleDetails, assignmentDetails" 
+        	oncomplete="updateScheduleException(document.getElementById('{!$Component.scheduleDetailSection.schedule.ScheduleBuilderComponent.strategySelectList}'), document.getElementById('{!$Component.updateScheduleSuccess}'));" />
+        <apex:inputHidden id="updateScheduleSuccess" value="{!isUpdateScheduleSuccess}" />
+        -->
+        <apex:pageBlockButtons >
+        	<!-- Updated as a fix for agile task : AT16817     Dated : 9 July, 2013 -->
+            <apex:commandButton value="Update Schedule" action="{!updateSchedule}" onclick="wait(true);" disabled="{!zeroScheduleStrategyOption}" rerender="msgs, scheduleDetails, assignmentDetails" oncomplete="wait(false);" />
+            <!-- <apex:commandButton value="Update Schedule" onclick="wait(true); jsUpdateSchedule(); return false;" />  -->
+            <apex:commandButton value="Create Assignment" onclick="wait(true);" action="{!directAssign}" disabled="{!NOT createAssignmentEnabled}" rerender="msgs, scheduleDetails, assignmentDetails" oncomplete="wait(false);" />
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockSection columns="1" id="scheduleDetailSection"> 
+        
+		  <apex:pageBlockSectionItem id="scheduleDetailSectionItem">
+            <apex:outputLabel id="scheduleHourLabel" value="Scheduled Hours" for="nameInput"/>
+            <apex:outputPanel >
+            	<div class="requiredInput">
+            		<div id="requiredBlockDiv" class="requiredBlock" ></div><apex:inputField id="requiredInputText" value="{!schedule.pse__Scheduled_Hours__c}"/>
+            	</div>
+            	<apex:inputHidden id="showTotalScheduleHours" value="{!showTotalScheduleHoursRequired}"/>
+            	
+            </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+          
+          <c:ScheduleBuilder resourceIdAttribute="{!assignment.pse__Resource__c}" resourceScheduleAttribute="{!directResourceSchedule}" id="schedule" isEditModeAttribute="{!isEditMode}" autoChangeStrategyAttribute="false"
+             showTotalHoursId="{!$Component.scheduleDetailSectionItem}"/>
+          </apex:pageBlockSection>
+          
+          <script>var strategyList =  document.getElementById('{!$Component.scheduleDetailSection.schedule.ScheduleBuilderComponent.strategySelectList}');
+            		if (strategyList != null && strategyList.selectedIndex != -1) {
+            			// changes done for AT7455
+	            		if(strategyList.options[strategyList.selectedIndex].value == 'PercentAllocation' || strategyList.options[strategyList.selectedIndex].value == 'ZeroHourSchedule' ) {
+	            			document.getElementById('{!$Component.scheduleDetailSection.scheduleDetailSectionItem.showTotalScheduleHours}').value = false;
+	            		 	document.getElementById('requiredBlockDiv').style.display = 'none';
+	            		 	document.getElementById('{!$Component.scheduleDetailSection.scheduleDetailSectionItem.requiredInputText}').style.display = 'none';
+	            		 	document.getElementById('{!$Component.scheduleDetailSection.scheduleDetailSectionItem.scheduleHourLabel}').style.display = 'none';
+	            		 }
+	            		 else {
+	            		 	document.getElementById('{!$Component.scheduleDetailSection.scheduleDetailSectionItem.showTotalScheduleHours}').value = true;
+	            		 	document.getElementById('requiredBlockDiv').style.display = 'inline';
+	            		 	document.getElementById('{!$Component.scheduleDetailSection.scheduleDetailSectionItem.requiredInputText}').style.display = 'inline';
+	            		 	document.getElementById('{!$Component.scheduleDetailSection.scheduleDetailSectionItem.scheduleHourLabel}').style.display = 'inline';
+	            		 }
+	            	}
+            </script>
+    </apex:pageBlock>
+
+    </apex:form>
+</apex:page>

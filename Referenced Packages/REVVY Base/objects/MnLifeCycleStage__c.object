@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Editable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>We need a flag to indicate whether an object in a stage is editable or not. E.g. Contract is editable when Phase = “Draft” .</description>
+        <externalId>false</externalId>
+        <label>Editable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Expirable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Expirable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExternalId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>LifeCycle Stage External Id</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>LifeCycle__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>LifeCycle</label>
+        <referenceTo>MnLifeCycle__c</referenceTo>
+        <relationshipLabel>Stages</relationshipLabel>
+        <relationshipName>LifecycleStages</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>NumberOfActions__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Number of Actions</label>
+        <summaryForeignKey>MnLifeCycleAction__c.Stage__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>PhaseSequence__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Phase Sequence</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phase__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Phase</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Authoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Collaboration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Signature</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Activation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expiration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finalized</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disapproved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent to customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Final Review and Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal Review and Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Signing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ReorderPhase__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(PhaseSequence__c  &lt;&gt;  LifeCycle__r.NumberOfPhases__c, HYPERLINK(&quot;/apex/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;PMnLifeCyclePhaseReOrderCtrl?currentPhase=&quot;+ TEXT(Phase__c)+&quot;&amp;action=down&amp;stageId=&quot;+ Id +&quot;&amp;currentSeqNumber=&quot;+ TEXT(PhaseSequence__c) +&quot;&amp;lifeCycleId=&quot;+   LifeCycle__c , IMAGE(&quot;/resource/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;staticui/uifw/ui/images/icons/down-arrow.png&quot;,&quot;&quot;),&quot;_self&quot;), &apos;&apos;) +
+
+IF(PhaseSequence__c &lt;&gt; 1,HYPERLINK(&quot;/apex/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;PMnLifeCyclePhaseReOrderCtrl?currentPhase=&quot;+ TEXT(Phase__c)+&quot;&amp;action=up&amp;stageId=&quot;+ Id +&quot;&amp;currentSeqNumber=&quot;+ TEXT(PhaseSequence__c) +&quot;&amp;lifeCycleId=&quot;+ LifeCycle__c , IMAGE(&quot;/resource/&quot; + $Setup.MnHierarchicalProperty__c.Revvy_Namespace__c + &quot;staticui/uifw/ui/images/icons/up-arrow.png&quot;,&quot;&quot;),&quot;_self&quot;),&apos;&apos;)</formula>
+        <label>Reorder Phase</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>TEXT(LifeCycle__r.Status__c)</formula>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubPhase__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sub Phase</label>
+        <picklist>
+            <controllingField>Phase__c</controllingField>
+            <picklistValues>
+                <fullName>In Process</fullName>
+                <default>false</default>
+                <controllingFieldValues>Authoring</controllingFieldValues>
+                <controllingFieldValues>Collaboration</controllingFieldValues>
+                <controllingFieldValues>Draft</controllingFieldValues>
+                <controllingFieldValues>Negotiation</controllingFieldValues>
+                <controllingFieldValues>Signature</controllingFieldValues>
+                <controllingFieldValues>Signing</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Approval</fullName>
+                <default>false</default>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Signed</fullName>
+                <default>false</default>
+                <controllingFieldValues>Signature</controllingFieldValues>
+                <controllingFieldValues>Signing</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Effect</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Amendment</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Supersceded</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Approved</controllingFieldValues>
+                <controllingFieldValues>Disapproved</controllingFieldValues>
+                <controllingFieldValues>Draft</controllingFieldValues>
+                <controllingFieldValues>Expiration</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Negotiation</controllingFieldValues>
+                <controllingFieldValues>Sent to customer</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+                <controllingFieldValues>Activation</controllingFieldValues>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Authoring</controllingFieldValues>
+                <controllingFieldValues>Collaboration</controllingFieldValues>
+                <controllingFieldValues>Draft</controllingFieldValues>
+                <controllingFieldValues>Expiration</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Negotiation</controllingFieldValues>
+                <controllingFieldValues>Signature</controllingFieldValues>
+                <controllingFieldValues>Signing</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Draft in progress...</fullName>
+                <default>false</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready</fullName>
+                <default>false</default>
+                <controllingFieldValues>Approved</controllingFieldValues>
+                <controllingFieldValues>Disapproved</controllingFieldValues>
+                <controllingFieldValues>Negotiation</controllingFieldValues>
+                <controllingFieldValues>Sent to customer</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Processing Order</fullName>
+                <default>false</default>
+                <controllingFieldValues>Finalized</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Order Failed</fullName>
+                <default>false</default>
+                <controllingFieldValues>Negotiation</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Contract Created</fullName>
+                <default>false</default>
+                <controllingFieldValues>Finalized</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ordered</fullName>
+                <default>false</default>
+                <controllingFieldValues>Finalized</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cloning in progress...</fullName>
+                <default>false</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>false</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Superseded</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Approvals</fullName>
+                <default>false</default>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Target Price in progress...</fullName>
+                <default>false</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Configure in progress...</fullName>
+                <default>false</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+                <controllingFieldValues>Approval</controllingFieldValues>
+                <controllingFieldValues>Final Review and Approval</controllingFieldValues>
+                <controllingFieldValues>Internal Review</controllingFieldValues>
+                <controllingFieldValues>Internal Review and Approval</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Creating lines in progress...</fullName>
+                <default>false</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Revision in progress...</fullName>
+                <default>false</default>
+                <controllingFieldValues>Draft</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Converted to Contract</fullName>
+                <default>false</default>
+                <controllingFieldValues>Finalized</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disapproved</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+                <controllingFieldValues>Internal Review</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accepted</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <controllingFieldValues>Internal Review</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Stage</label>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Stages</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>LifeCycle__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

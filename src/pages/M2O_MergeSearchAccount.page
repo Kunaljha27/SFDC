@@ -1,0 +1,88 @@
+<!--
+@VF page:     merge_searchAccount
+@Description: It will search for the accounts matching the search criteria. Clicking on the Next button after selecting a Survivor Account, 
+              the User navigates to the next page.
+-->
+
+<apex:page standardController="Account"  wizard="false" extensions="M2O_MergeSearchAccountController" >
+    <script language="javascript">
+        function captureRadioAccVal(){    
+            var selAccount = document.getElementsByName('inputRadio');
+            for (var x = 0; x < selAccount.length; x++) {
+              if (selAccount[x].checked) { 
+                  document.getElementById('{!$Component.formMerge.inputHidden}').value = selAccount[x].value;
+              }
+            }       
+        }
+        
+        function noenter(ev)  {
+            if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+                doFindAF();
+                return false;
+             } else {
+                  return true;
+             }
+        }
+    </script>
+    <apex:form id="formMerge" >  
+        <apex:actionFunction name="doFindAF" action="{!findAccounts}" />
+        <apex:actionStatus id="nextPageStatus" >
+            <apex:facet name="stop">
+                <apex:outputPanel layout="none" rendered="true" ></apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="start">
+                <apex:outputPanel layout="none" style="float:center;">
+                    <apex:image value="/img/loading.gif" style="position:fixed;top:50%;right:50%;" />
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+
+        <apex:inputhidden id="inputHidden" value="{!selectedAccountID}" />
+        <apex:pageBlock title="Step 1. Select the records to merge with {!sourceAccountName}" id="pbBlock"> 
+        <apex:pagemessages />
+        
+            <apex:pageblockButtons dir="RTL" id="pbb">
+                <apex:commandButton id="cancelBtn" action="{!cancel}" title="Cancel" value="Cancel"/> &nbsp;
+                <apex:commandButton id="nextBtn" title="Next" action="{!next}" value=" Next " rendered="{!hasDisplayRecords = true}" />                          
+            </apex:pageblockButtons> <br/>
+            
+            <apex:pageblockSection >
+                <apex:repeat value="{!SearchFields}" var="fl">
+                    <apex:inputField id="inputSearchText" value="{!searchedAccount[fl.fieldPath]}" onkeypress="return noenter(event);" />           
+                </apex:repeat>
+            </apex:pageblockSection> 
+                       
+            <apex:commandButton id="findBtn" action="{!findAccounts}" value="Find Accounts" reRender="pbBlock" status="nextPageStatus" /> <br/><br/> 
+                      
+            <apex:outputPanel id="panelNoRecordDisplay" rendered="{!!hasDisplayRecords}">
+                <apex:pageBlockTable value="{!destinationAccountRecords}" var="ab">
+                    <apex:column headerValue="No records to merge"/>                
+                </apex:pageBlockTable>
+            </apex:outputPanel>            
+            
+            <apex:outputPanel id="panelAccRecordDisplay" rendered="{!hasDisplayRecords}">
+                <apex:pageBlockTable value="{!listPaginatedAccount}" var="la" id="accPBTabl">
+                    <apex:column headerValue=" " >
+                        <input type="radio" id="inputRadio" name= "inputRadio" value="{!la.Id}" onclick="captureRadioAccVal()" />                                           
+                    </apex:column>    
+                    <apex:repeat value="{!fieldResult}" var="fr">
+                       <apex:column value="{!la[fr]}" />
+                    </apex:repeat>         
+                </apex:pageBlockTable> 
+                <apex:panelGrid id="paginationPanel" columns="7" rendered="{!listPaginatedAccount != Null}">
+                    <apex:commandlink status="fetchStatus" reRender="pbBlock" value="First" action="{!setPaginationSelectedAccounts.first}" rendered="{!setPaginationSelectedAccounts.HasPrevious}"/>
+                      <apex:outputtext value="First" rendered="{!!setPaginationSelectedAccounts.HasPrevious}"/>
+                    <apex:commandlink status="fetchStatus" reRender="pbBlock" value="Previous" action="{!setPaginationSelectedAccounts.previous}" rendered="{!setPaginationSelectedAccounts.HasPrevious}"/>
+                      <apex:outputtext value="Previous" rendered="{!!setPaginationSelectedAccounts.HasPrevious}" />
+                    <apex:commandlink status="fetchStatus" reRender="pbBlock" value="Next" action="{!setPaginationSelectedAccounts.next}" rendered="{!setPaginationSelectedAccounts.HasNext}"/>
+                      <apex:outputtext value="Next" rendered="{!!setPaginationSelectedAccounts.HasNext}"/>
+                    <apex:commandlink status="fetchStatus" reRender="pbBlock" value="Last" action="{!setPaginationSelectedAccounts.last}" rendered="{!setPaginationSelectedAccounts.HasNext}"/>
+                      <apex:outputtext value="Last" rendered="{!!setPaginationSelectedAccounts.HasNext}"/>
+                    <apex:outputPanel id="actionStatusPanel" style="color:green;">
+                        <apex:actionStatus id="fetchStatus" startText="Fetching..." stopText=""/>
+                    </apex:outputPanel>                                   
+                </apex:panelGrid>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

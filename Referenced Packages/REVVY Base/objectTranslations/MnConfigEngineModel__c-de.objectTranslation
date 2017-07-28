@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Model --></value>
+    </caseValues>
+    <fields>
+        <help><!-- JSON representation of the list of attribute IDs used by this model. --></help>
+        <label><!-- Attribute IDs --></label>
+        <name>AttrIDs__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when the model was last published. --></help>
+        <label>Datum der letzten Kompilierung</label>
+        <name>Compile_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- ID of the model JSON that is used to transport values to the Configuration Engine. --></help>
+        <label>Anhang-ID kompiliertes Modell</label>
+        <name>Compiled_Model_Attachment_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Version of the compiled model. --></help>
+        <label>Kompilierte Version</label>
+        <name>Compiled_Version__c</name>
+    </fields>
+    <fields>
+        <help><!-- ID of the exported model JSON that is stored for Install Base Configuration purposes. --></help>
+        <label><!-- Exported Model Attachment Id --></label>
+        <name>ExportedModelAttachmentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Has Exported OG --></label>
+        <name>HasExportedOG__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Modell-ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label>Ist Lösung</label>
+        <name>IsSolution__c</name>
+    </fields>
+    <fields>
+        <label>Sprachversion Modell</label>
+        <name>ModelLocale__c</name>
+    </fields>
+    <fields>
+        <help><!-- ID of the original model from which this model instance was created. --></help>
+        <label>Modelldefinitions-ID</label>
+        <name>Model_definition_id__c</name>
+    </fields>
+    <fields>
+        <help><!-- JSON representation of the list of product IDs used by this model. This is used when regenerating the pricing information. --></help>
+        <label>Produkt-IDs</label>
+        <name>Product_IDs__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines the state of the model. The model can be either in draft or in production (i.e., published). --></help>
+        <label>Lebenszyklusstatus</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Production</masterLabel>
+            <translation><!-- In Production --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Name of the user who is configuring a product using this instance of the model. --></help>
+        <label>Benutzer-ID</label>
+        <name>User_id__c</name>
+        <relationshipLabel>Modelle</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Model Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <webLinks>
+        <label>Kompiliertes Modell anhängen</label>
+        <name>AttachCompileModel</name>
+    </webLinks>
+    <webLinks>
+        <label>Modell kompilieren</label>
+        <name>CompileModel</name>
+    </webLinks>
+</CustomObjectTranslation>

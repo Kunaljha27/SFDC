@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Defines the Multi Language data for Product Description and Product Terms and Conditions.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>ExtId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>(Deprecated) Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for each record that can be used as an external ID for importing and exporting data.</inlineHelpText>
+        <label>Catalog Node Ext Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Catalog Locale Ext ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Type of the record. The type can be either Description or Terms and Conditions.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Type of the record. The type can be either Description or Terms and Conditions.</inlineHelpText>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Description</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Terms and Conditions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Value_L10__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L10).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L10).</inlineHelpText>
+        <label>Value(L10)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L11__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L11).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L11).</inlineHelpText>
+        <label>Value(L11)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L12__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L12).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L12).</inlineHelpText>
+        <label>Value(L12)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L13__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L13).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L13).</inlineHelpText>
+        <label>Value(L13)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L14__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L14).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L14).</inlineHelpText>
+        <label>Value(L14)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L15__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L15).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L15).</inlineHelpText>
+        <label>Value(L15)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L16__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L16).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L16).</inlineHelpText>
+        <label>Value(L16)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L17__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L17).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L17).</inlineHelpText>
+        <label>Value(L17)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L18__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L18).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L18).</inlineHelpText>
+        <label>Value(L18)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L19__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L19).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L19).</inlineHelpText>
+        <label>Value(L19)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L1__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L1).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L1).</inlineHelpText>
+        <label>Value(L1)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L20__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L20).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L20).</inlineHelpText>
+        <label>Value(L20)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L2__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L2)).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L2).</inlineHelpText>
+        <label>Value(L1)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L3__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L3).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L3).</inlineHelpText>
+        <label>Value(L3)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L4__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L4).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L4).</inlineHelpText>
+        <label>Value(L4)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L5__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L5).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L5).</inlineHelpText>
+        <label>Value(L5)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L6__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L6).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L6).</inlineHelpText>
+        <label>Value(L6)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L7__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L7).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L7).</inlineHelpText>
+        <label>Value(L7)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L8__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L8).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L8).</inlineHelpText>
+        <label>Value(L8)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Value_L9__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value(Either Description or Terms and Conditions) of the product(L9).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Value(Either Description or Terms and Conditions) of the product(L9).</inlineHelpText>
+        <label>Value(L9)</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <label>Catalog Node Locale Ext</label>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Catalog Nodes Locale Ext</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

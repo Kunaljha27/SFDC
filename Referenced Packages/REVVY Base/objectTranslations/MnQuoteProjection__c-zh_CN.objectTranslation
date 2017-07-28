@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quote Projection --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Catalog Node --></label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel><!-- Quote Projections --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Projection Date --></label>
+        <name>ProjectionDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote --></label>
+        <name>Quote__c</name>
+        <relationshipLabel><!-- Quote Projections --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Yearly Cost --></label>
+        <name>YearlyCost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Yearly Ext Price --></label>
+        <name>YearlyExtPrice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Yearly Profit --></label>
+        <name>YearlyProfit__c</name>
+    </fields>
+    <nameFieldLabel><!-- Id --></nameFieldLabel>
+</CustomObjectTranslation>

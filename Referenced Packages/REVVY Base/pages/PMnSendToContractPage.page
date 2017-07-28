@@ -1,0 +1,18 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnQuoteDetailCtrl" sidebar="false">
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <apex:outputText rendered="false" value="{!REVVY__MnQuote__c.REVVY__Status__c}"/>
+    <script>
+        var status = "{!REVVY__MnQuote__c.REVVY__Status__c}";
+        var errorMsg = "{!$Label.revvy__MnQuoteSendToContractNotAllowed}";
+        var namespaceLowerCase = "{!JSENCODE(namespaceLowerCase)}";
+        if (status == "Ready"){
+            var url = '{!JSENCODE(sitePrefix)}/apex/' + namespaceLowerCase + "PMnUpdateQuoteLifeCycle?quoteStatus=Contract Created&quoteId=" + "{!JSENCODE(REVVY__MnQuote__c.Id)}";
+            mnNavigateToUrl(url);
+        }
+        else {
+            alert(errorMsg);
+            var url = '{!JSENCODE(sitePrefix)}/'+ "{!JSENCODE(REVVY__MnQuote__c.Id)}";
+            mnNavigateToUrl(url);
+        }
+    </script>
+</apex:page>

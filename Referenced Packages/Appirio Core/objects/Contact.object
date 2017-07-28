@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Last_Access_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Contains a timestamp for the most recent &quot;login&quot; of this feature user, to be used for PIN expiration.</description>
+        <externalId>false</externalId>
+        <label>Last Access Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Licensed_Features__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Licensed Features</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Timecard Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expenses Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Project Management</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open Enrollment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resource</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>PIN__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Used to authenticate feature-only users to the Sites pages</description>
+        <externalId>false</externalId>
+        <label>PIN</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+</CustomObject>

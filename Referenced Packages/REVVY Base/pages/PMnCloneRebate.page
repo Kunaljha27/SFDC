@@ -1,0 +1,3 @@
+<apex:page standardController="REVVY__MnIncentiveProgram__c" extensions="REVVY.CMnCloneRebateCntlrExtn" action="{!cloneRebate}">
+    <apex:pageMessages />
+</apex:page>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Sequence Generator --></value>
+    </caseValues>
+    <fields>
+        <label>当前值</label>
+        <name>CurrentValue__c</name>
+    </fields>
+    <fields>
+        <label>最小长度</label>
+        <name>MinLength__c</name>
+    </fields>
+    <fields>
+        <label>对象名称</label>
+        <name>ObjectName__c</name>
+    </fields>
+    <fields>
+        <label>前缀</label>
+        <name>Prefix__c</name>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

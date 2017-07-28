@@ -1,0 +1,14 @@
+<apex:page id="PMnQuoteNewVersion"
+           standardController="REVVY__MnQuote__c"
+           extensions="REVVY.CMnQuoteRevisionsCtrl"
+           action="{!url}">
+
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:messages />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

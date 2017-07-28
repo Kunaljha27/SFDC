@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label>Anwendbar auf Angebot</label>
+        <name>ApplicableToQuote__c</name>
+    </fields>
+    <fields>
+        <label>Anwendbar auf Kaufvertrag</label>
+        <name>ApplicableToSalesContract__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apply to Amendment --></label>
+        <name>ApplyToAmendment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apply to Original --></label>
+        <name>ApplyToOriginal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Type --></label>
+        <name>ContractType__c</name>
+        <picklistValues>
+            <masterLabel>GPO Contract</masterLabel>
+            <translation><!-- GPO Contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hospital Contract UK</masterLabel>
+            <translation><!-- Hospital Contract UK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hospital Contract US</masterLabel>
+            <translation><!-- Hospital Contract US --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NDA</masterLabel>
+            <translation><!-- NDA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NHS Contract</masterLabel>
+            <translation><!-- NHS Contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Contract</masterLabel>
+            <translation><!-- Sales Contract --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Document Object Id --></label>
+        <name>DocumentObjectId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revvy Document Id --></label>
+        <name>RevvyDocumentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deactivated</masterLabel>
+            <translation><!-- Deactivated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+    </fields>
+    <recordTypes>
+        <label>Klausel</label>
+        <name>Clause</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Sonstige</label>
+        <name>Other</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Begleitdokument</label>
+        <name>SupportingDocument</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Vorlage</label>
+        <name>Template</name>
+    </recordTypes>
+</CustomObjectTranslation>

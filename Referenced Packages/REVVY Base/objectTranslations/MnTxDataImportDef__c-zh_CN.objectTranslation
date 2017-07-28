@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Tx Data Import Def --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Data Source --></label>
+        <name>DataSource__c</name>
+        <relationshipLabel><!-- TxDataImportDefs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Import Definition JSON --></label>
+        <name>ImportDefinitionJSON__c</name>
+    </fields>
+    <fields>
+        <label><!-- Import Definition Name --></label>
+        <name>ImportDefinitionName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Tx Data Import Def Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- Import Definition JSON can not be NULL --></errorMessage>
+        <name>VMnImportDefinitionJsonNullCheck</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- SaveImportDef --></label>
+        <name>SaveImportDef</name>
+    </webLinks>
+</CustomObjectTranslation>

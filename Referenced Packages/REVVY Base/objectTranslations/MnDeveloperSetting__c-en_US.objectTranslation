@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Developer Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Developer Settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- SecurityToken --></label>
+        <name>SecurityToken__c</name>
+    </fields>
+    <fields>
+        <label><!-- isDeveloperMode --></label>
+        <name>isDeveloperMode__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

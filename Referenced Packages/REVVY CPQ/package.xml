@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REVVY CPQ</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <namespacePrefix>REVVYQ</namespacePrefix>
+    <types>
+        <members>CMnCPQPostInstall</members>
+        <members>CMnCPQPostInstallTest</members>
+        <members>CMnCPQStandardObjectExtPermissions</members>
+        <members>CMnCPQStandardObjectPermissions</members>
+        <members>CMnManualUpgradeCPQController</members>
+        <members>CMnManualUpgradeCPQControllerTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>PMnManualCPQUpgrade</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>REVVYCPQ</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>REVVY__MnPrintTemplate__c</members>
+        <members>REVVY__MnProductExclusion__c</members>
+        <members>REVVY__MnQuote__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>img</members>
+        <name>Document</name>
+    </types>
+    <types>
+        <members>en_US</members>
+        <name>Translations</name>
+    </types>
+    <version>36.0</version>
+</Package>

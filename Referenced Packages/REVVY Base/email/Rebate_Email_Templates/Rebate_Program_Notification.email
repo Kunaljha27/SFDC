@@ -1,0 +1,10 @@
+Please review the following rebate program {!MnIncentiveProgram__c.Name}
+
+Name: {!MnIncentiveProgram__c.IncentiveProgramName__c}
+Start Date: {!MnIncentiveProgram__c.StartDate__c}
+End Date: {!MnIncentiveProgram__c.EndDate__c}
+Type: {!MnIncentiveProgram__c.Type__c}
+Earnings Period: {!MnIncentiveProgram__c.Frequency__c}
+Payee: {!MnIncentiveProgram__c.Payee__c}
+
+Link to rebate program {!MnIncentiveProgram__c.Link}

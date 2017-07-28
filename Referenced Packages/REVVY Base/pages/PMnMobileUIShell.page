@@ -1,0 +1,56 @@
+<apex:page controller="REVVY.CMnRemoter" sidebar="false" standardStylesheets="false" cache="false" docType="html-5.0" >
+
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/select2.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/overrides/select2override.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/lionbars.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/kalendae.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/jquery.qtip.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/jquery.dataTables.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/src/css/style.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/github.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/messi.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/overrides/messioverride.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/font-awesome.css" />
+
+    <div id="uishell">
+        <div class="loadingSpinner">
+            <img src="{!$Resource.staticui}/uifw/ui/images/spinner.gif"/>
+        </div>
+    </div>
+
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/require.js"></script>
+<!--    <script src="http://mnksoni:8080/target/target-script-min.js"></script>-->
+    <script>
+        //var CMnSForceOne = (typeof sforce != 'undefined' && sforce != null) ? sforce: null;
+        //alert('---sf1: ' + sforce);
+
+        Visualforce.remoting.timeout = 120000; //sometime dev orgs are very slow and html5 UI pages doesn't load unless u attempt multiple times.
+        if (typeof console === "undefined" || typeof console.log === "undefined") {
+            console = {};
+            console.log = function() {};
+        }
+        var CMnNamespacePrefix = "{!namespacePrefix}";
+        var CMnSitePrefix = "{!sitePrefix}";
+        var CMnNamespacePrefixUS = "";
+        var CMnNamespacePrefixDT = "";
+        if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+            CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+            CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+        }
+        var CMnLoggedInUserName = "{!userName}";
+        var CMnProposalTemplateValid = "{!ProposalTemplateValid}";
+
+        var ApexRemoteControllerNameDT = "CMnRemoter.";
+
+        require.config({
+            // instruct RequireJS to use the SFDC static resource URL when loading dependencies
+            baseUrl: "{!$Resource.staticui}"
+        });
+
+        require(["uifw/ui/src/js/main"], function(CMnApp) {
+            CMnApp.start();
+        });
+
+    </script>
+
+</apex:page>

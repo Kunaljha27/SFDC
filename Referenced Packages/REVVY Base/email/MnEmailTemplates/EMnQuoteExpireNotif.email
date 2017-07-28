@@ -1,0 +1,15 @@
+Dear {!MnQuote__c.OwnerFirstName},
+
+The contract you own will expire in 30 days, below are the details
+  Account : {!MnQuote__c.Account__c}
+  Contract ID : {!MnQuote__c.Id__c}
+  Start Date : {!MnQuote__c.StartDateContract__c}
+  End date : {!MnQuote__c.EndDateContract__c}
+  Total Agreement Value : {!MnQuote__c.Total_List_Price__c}
+
+Please login in here to go to the Contract. {!MnQuote__c.Link}
+
+
+Thank you,
+
+System Admin

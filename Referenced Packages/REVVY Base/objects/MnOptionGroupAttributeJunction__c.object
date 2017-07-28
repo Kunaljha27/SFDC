@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies what attributes are possible for a option group</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AllowOverride__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This flag to specify if the user can override the value of the attribute. If true user can provide a value which will always override system calculated value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This flag to specify if the user can override the value of the attribute. If true user can provide a value which will always override system calculated value.</inlineHelpText>
+        <label>Allow Override</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AllowedValues__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Possible values for user defined attributes</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Possible values for user defined attributes</inlineHelpText>
+        <label>Allowed Attribute Values</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Attribute_Order__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Order of the attributes to be displayed to end user</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Order of the attributes to be displayed to end user</inlineHelpText>
+        <label>Attribute Order</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Catalog_Attribute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Defines which attributes are assigned to a product or category.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defines which attributes are assigned to a product or category.</inlineHelpText>
+        <label>Catalog Attribute</label>
+        <referenceTo>MnCatalogAttribute__c</referenceTo>
+        <relationshipLabel>Option Group Attributes</relationshipLabel>
+        <relationshipName>Option_Group_Attributes1</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>DefaultValue__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Default Attribute Value</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Default Attribute Value</inlineHelpText>
+        <label>Default Att</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Option_Group_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique identifier of an option group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique identifier of an option group.</inlineHelpText>
+        <label>Option Group</label>
+        <referenceTo>MnConfigEngineOptionGroup__c</referenceTo>
+        <relationshipLabel>Option Group Attributes</relationshipLabel>
+        <relationshipName>Option_Group_Attributes1</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <label>Option Group Attribute</label>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Option Group Attributes</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

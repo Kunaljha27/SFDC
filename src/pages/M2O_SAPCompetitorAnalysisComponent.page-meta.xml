@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>M2O.R4. This Vf page is used to show components of Account Plan in a VF page to maintain the sequencing of components.</description>
+    <label>M2O_SAPCompetitorAnalyisComponent</label>
+</ApexPage>

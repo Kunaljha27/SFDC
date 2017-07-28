@@ -1,0 +1,88 @@
+<apex:page controller="DataTokenizationController" title="Tokenization" docType="html-5.0" >
+<apex:form >
+    <apex:sectionHeader subtitle="{!$Label.Bulk_header}" title="{!$Label.Bulk_subHeader}"/>
+    <apex:pageBlock id="pageblock">    
+        <apex:actionFunction name="empty" action="{!empty}" reRender="outputPanel" oncomplete="console.log('empty completed')" />
+        <apex:pageBlockSection collapsible="false" columns="6"> 
+
+           <b> {!$Label.tokenization_object_select} </b>  
+              <apex:selectList value="{!selectedObject}" multiselect="false" size="1" onchange="empty();">
+                  <apex:selectOptions value="{!soList}"/>
+              </apex:selectList> 
+              &nbsp;
+           <b> {!$Label.bulkPage_BulkSizeSelect} </b>  
+              <apex:selectList value="{!selectedBulkSize}" multiselect="false" size="1" onchange="empty();">
+                  <apex:selectOptions value="{!BulkSizeOptions}"/>
+              </apex:selectList> 
+
+              <apex:outputPanel ></apex:outputPanel>
+              <apex:outputPanel ></apex:outputPanel> 
+ 
+           <b> {!$Label.dfgMass_LogErrors} </b>
+              <apex:inputCheckbox value="{!showErrors}" onchange="empty();" />
+
+           <apex:commandButton value="{!$Label.dfgErr_GoToErrPage}" action="{!gotoErrors}" reRender="none"/>   
+          
+          <!-- <apex:outputPanel ></apex:outputPanel>
+              <apex:outputPanel ></apex:outputPanel> -->
+
+        </apex:pageBlockSection> 
+        <br></br>
+        <table class="list "  border="0" cellpadding="0" cellspacing="0">
+            <thead class="rich-table-thead">
+                <tr class="headerRow ">
+                    <th class="headerRow ">{!$Label.Task}</th>
+                    <th class="headerRow ">{!$Label.Action}</th>  
+                    <th class="headerRow ">{!$Label.Description}</th>  
+                    <th class="headerRow ">{!$Label.Information_about_previous_launches}</th>                                                    
+                </tr>
+            </thead>                        
+            <tbody>
+               
+                    <apex:repeat value="{!bulkJobMap}" var="row" id="theRepeat">
+                    <script> console.log('rerendered!'); </script>
+                    <tr class="dataRow ">
+                        <td class="dataCell ">
+                            <apex:outputText value="{!bulkJobMap[row].title}"/>
+                        </td>
+                        <td class="dataCell ">
+                         <apex:outputPanel id="outputPanel">
+                            <apex:commandButton id="runBulkButton" value="{!$Label.Start_Process_Button}" 
+                                disabled="{!bulkJobMap[row].IsProcess || selectedObject == ''}" 
+                                action="{!runBulk}" 
+                                reRender="pageblock, err,bulkJobMapPanel" oncomplete="window.location.reload();">
+                                <apex:param name="bulkType" value="{!bulkJobMap[row].name}"/>
+                            </apex:commandButton>  
+                         </apex:outputPanel>                       
+                        </td>
+                        <td class="dataCell ">
+                            <div>{!bulkJobMap[row].description}</div> 
+                        </td>
+                        <td class="dataCell ">
+                            <small>
+                              <apex:outputText value="{!bulkJobMap[row].ProcessInfo}" escape="false"/>
+                              <apex:outputText value="{!errors}" escape="false"/> 
+                            </small>
+                        </td>                                         
+                    </tr>       
+                    </apex:repeat>                                
+            </tbody>
+       </table>
+     
+       
+       <apex:pageblocksection columns="1">
+        <apex:pageMessage severity="info" strength="2" summary="{!$Label.Message}"/>
+        <apex:pageMessages id="err"/>
+        </apex:pageblocksection>
+        
+        <apex:pageblocksection columns="1">
+           <apex:outputPanel id="bulkJobMapPanel">
+                <apex:repeat value="{!bulkJobMap}" var="row" id="theRepeat">
+                    <c:DFGBatchJobs clname="{!bulkJobMap[row].name}" rendered="{!bulkJobMap[row].IsProcess}" />
+                </apex:repeat>
+            </apex:outputPanel>
+        </apex:pageblocksection>        
+    </apex:pageBlock>
+
+</apex:form>
+</apex:page>

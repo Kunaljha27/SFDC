@@ -1,0 +1,4 @@
+<!-- This VF page is DEPRECATED as of RELEASE 25 -->
+<apex:page tabstyle="REVVY__MnContract__c">
+  <apex:enhancedList type="MnContract__c" height="800"/>
+</apex:page>

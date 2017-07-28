@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <fields>
+        <label>Anhang</label>
+        <name>AttachmentId__c</name>
+    </fields>
+    <fields>
+        <label>Dateigröße (Byte)</label>
+        <name>BodyLength__c</name>
+    </fields>
+    <fields>
+        <label>Dateiname</label>
+        <name>FileName__c</name>
+    </fields>
+    <fields>
+        <label>Dateigröße</label>
+        <name>FileSizeKB__c</name>
+    </fields>
+    <fields>
+        <label>Angebot</label>
+        <name>Quote__c</name>
+        <relationshipLabel>Angebot Vorschlag Anhänge</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Erstellt von</label>
+        <name>UploadedBy__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Quote Proposal Attachment Name --></nameFieldLabel>
+</CustomObjectTranslation>

@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>QuoteItem</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quote Line Items</value>
+    </caseValues>
+    <fields>
+        <help><!-- Absolute value of Adjustment 1 --></help>
+        <label><!-- Mark-up (Abs) --></label>
+        <name>Adjustment1Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Adjustment 1 is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label><!-- Mark-up Type --></label>
+        <name>Adjustment1Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of Adjustment 1 --></help>
+        <label><!-- Mark-up (%) --></label>
+        <name>Adjustment1__c</name>
+    </fields>
+    <fields>
+        <help><!-- JSON representation of the quote item adjustment rule mapping in quote model. Useful for debugging quote level pricing rules. --></help>
+        <label><!-- Adjustment Rule Mapping Json --></label>
+        <name>AdjustmentRuleMapping__c</name>
+    </fields>
+    <fields>
+        <help><!-- JSON representation of the quote item adjustment rule reason in quote model. Useful for debugging quote level pricing rules. --></help>
+        <label><!-- Adjustment Rule Reason Json --></label>
+        <name>AdjustmentRuleReason__c</name>
+    </fields>
+    <fields>
+        <help><!-- All adjustment rule applied to this quote item, copied from quote model.. --></help>
+        <label><!-- All Adjustment Rules --></label>
+        <name>AllAdjustmentRules__c</name>
+    </fields>
+    <fields>
+        <help><!-- All pricing rule applied to this quote item, copied from quote model.. --></help>
+        <label><!-- All Pricing Rules --></label>
+        <name>AllPricingRules__c</name>
+    </fields>
+    <fields>
+        <help><!-- Auto discount off of list price with manual adjustment (e.g., $100 off auto discount + $100 manual so total $200), calculated by adjustment rules. --></help>
+        <label><!-- Auto Discount (Abs) --></label>
+        <name>AutoDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Auto discount label based on which rule sets the auto discount. --></help>
+        <label><!-- Auto Discount Reason --></label>
+        <name>AutoDiscountReason__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the auto discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off). --></help>
+        <label><!-- Auto Discount Type --></label>
+        <name>AutoDiscountType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percentage auto discount off of list price (e.g., 20% off), calculated by adjustment rules. --></help>
+        <label><!-- Auto Discount (%) --></label>
+        <name>AutoDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the product is charged on a recurring basis. A product can be charged one-time, weekly, monthly, or yearly. --></help>
+        <label><!-- Billing Frequency --></label>
+        <name>Billing_Frequency_WF__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the product associated with this quote item. --></help>
+        <label><!-- Product --></label>
+        <name>Catalog_Node__c</name>
+        <relationshipLabel><!-- Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Configit Quote ID for this record. --></help>
+        <label><!-- Configit Main ID --></label>
+        <name>ConfigitMainItemId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Configit Quote ID --></label>
+        <name>ConfigitQuoteId_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Configit Quote item ID for this record. --></help>
+        <label><!-- Configit Quote Item ID --></label>
+        <name>ConfigitQuoteItemId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Percentage discount off of list price (e.g., 20% off). --></help>
+        <label><!-- Contract Discount --></label>
+        <name>ContractDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Resolved Price --></help>
+        <label><!-- Contract Price --></label>
+        <name>ContractPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost Price of a product in quote item --></help>
+        <label><!-- Cost --></label>
+        <name>CostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total discount off of list price (e.g., $100 off). --></help>
+        <label><!-- Manual Discount (Abs) --></label>
+        <name>Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off). --></help>
+        <label><!-- Manual Discount Type --></label>
+        <name>Discount_Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percentage discount off of list price (e.g., 20% off). --></help>
+        <label><!-- Man. Disc. (%) --></label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies If manual discount can be applied as defined in the Catalog. --></help>
+        <label><!-- Discountable --></label>
+        <name>Discountable__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;Error Messages related to quote item --></help>
+        <label><!-- Error Message --></label>
+        <name>ErrorMessage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Extended Price (Display) --></label>
+        <name>Extended_Price_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Price after discount multiplied by quantity. --></help>
+        <label><!-- Ext. Price --></label>
+        <name>Extended_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Freezes the pricing and prevents manual discounts on this line --></help>
+        <label><!-- Freeze Pricing --></label>
+        <name>FreezePricing__c</name>
+    </fields>
+    <fields>
+        <help><!-- Controls if manual discount is allowed. --></help>
+        <label><!-- Frozen --></label>
+        <name>Frozen__c</name>
+    </fields>
+    <fields>
+        <help><!-- The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort the quote items within a solution. --></help>
+        <label><!-- Group Number --></label>
+        <name>GroupNumber__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is set to true only if there is any subline linked to this quote line and the list price on any sub line is null. --></help>
+        <label><!-- Has sub lines with no list price. --></label>
+        <name>HasSubLineWithoutListPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Quote Item ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag indicates whether the quote item is a below-the-line recommendation. Items flagged shouldn&apos;t be included with final calculations. --></help>
+        <label><!-- Recommended --></label>
+        <name>IsBelowLine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Install Base Relevant --></label>
+        <name>IsInstallBase__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag indicates whether due to any dependency a re-configure of this configuration is required. --></help>
+        <label><!-- Re-Config Required --></label>
+        <name>IsReConfigRequired__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label><!-- Is Cost Price System populated --></label>
+        <name>IsSystemCostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label><!-- Is List Price System populated --></label>
+        <name>IsSystemListPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the Unit price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label><!-- Is Unit Price System populated --></label>
+        <name>IsSystemUnitPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag indicates whether the configuration is complete for a configurable product. --></help>
+        <label><!-- Needs Config --></label>
+        <name>Is_Configuration_Complete__c</name>
+    </fields>
+    <fields>
+        <help><!-- JSON representation of the quote item in quote model. Useful for debugging quote level pricing rules. --></help>
+        <label><!-- Option Json --></label>
+        <name>ItemOption__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tracked On --></label>
+        <name>LineType__c</name>
+        <picklistValues>
+            <masterLabel>Not tracked on contract</masterLabel>
+            <translation><!-- Not tracked on contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the main quote item for this quote item. --></help>
+        <label><!-- Main Quote Item --></label>
+        <name>MainItemId__c</name>
+        <relationshipLabel><!-- RelatedQuoteItems --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Absolute value of the margin --></help>
+        <label><!-- Margin (Abs) --></label>
+        <name>MarginAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Margin is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label><!-- Margin Type --></label>
+        <name>MarginType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of the margin --></help>
+        <label><!-- Margin ( % ) --></label>
+        <name>Margin__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Monthly basis, shown in currency. --></help>
+        <label><!-- Monthly Mark-ups (Abs) --></label>
+        <name>Monthly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly adjustment field is the adjustment on all sub-lines that are billed Monthly, including the adjustment on the main line --></help>
+        <label><!-- Monthly Mark-ups (%) --></label>
+        <name>Monthly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Monthly basis. --></help>
+        <label><!-- Monthly Cost --></label>
+        <name>Monthly_Cost_Price_Before_Adjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Monthly basis. --></help>
+        <label><!-- Monthly Cost including sub-lines --></label>
+        <name>Monthly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate absolute discount on products that are billed on a monthly basis, shown in currency. --></help>
+        <label><!-- Monthly Discounts (Abs) --></label>
+        <name>Monthly_Discount_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed monthly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed monthly, including the discount on the main line if the main line is billed monthly. --></help>
+        <label><!-- Monthly Discounts (%) --></label>
+        <name>Monthly_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed monthly, and the unit price of the configurable product, if the configurable product is billed monthly. --></help>
+        <label><!-- Monthly Extended Price incl. sub-lines --></label>
+        <name>Monthly_Extended_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed monthly. --></help>
+        <label><!-- Monthly Extended Price all sub-lines --></label>
+        <name>Monthly_Extended_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Monthly basis, shown in currency. --></help>
+        <label><!-- Monthly Margins (Abs) --></label>
+        <name>Monthly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly margin field is the adjustment on all sub-lines that are billed Monthly, including the margin on the main line --></help>
+        <label><!-- Monthly Margins (%) --></label>
+        <name>Monthly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly List --></label>
+        <name>Monthly_Price_Before_Discount_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a monthly basis. --></help>
+        <label><!-- Monthly List including sub-lines --></label>
+        <name>Monthly_Price_Before_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a monthly basis, before any discounts are applied. --></help>
+        <label><!-- Monthly List all sub-lines --></label>
+        <name>Monthly_Price_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price (cost price x quantity) of all products that are billed on a Monthly basis. --></help>
+        <label><!-- Total Monthly Cost Price --></label>
+        <name>Monthly_Total_Cost_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Total Unit Price --></label>
+        <name>Monthly_Total_Value_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis after discounts have been applied. --></help>
+        <label><!-- Monthly Total Unit Price --></label>
+        <name>Monthly_Total_Value_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Monthly basis. --></help>
+        <label><!-- Monthly Unit Price including sub-lines --></label>
+        <name>Monthly_Unit_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Monthly basis. --></help>
+        <label><!-- Monthly Unit Price all sub-lines --></label>
+        <name>Monthly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis before any discounts are applied. --></help>
+        <label><!-- Monthly Total List --></label>
+        <name>Monthly_Value_Before_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag that indicates whether the quote requires approval. This flag is set based on the criteria specified in the approval process workflow. --></help>
+        <label><!-- Needs Approval --></label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a one-time basis, shown in currency. --></help>
+        <label><!-- One-time Mark-ups (Abs) --></label>
+        <name>One_Time_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed one time. If the product is configurable, then the one time adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed one time plus main line --></help>
+        <label><!-- One-time Mark-ups (%) --></label>
+        <name>One_Time_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost  price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label><!-- One-time Cost --></label>
+        <name>One_Time_Cost_Price_Before_Adjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a one-time basis. --></help>
+        <label><!-- One-time Cost including sub-lines --></label>
+        <name>One_Time_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a one-time basis, shown in currency. --></help>
+        <label><!-- One-time Discounts (Abs) --></label>
+        <name>One_Time_Discount_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed one time. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed one time, including the discount on the main line if the main line is billed one time. --></help>
+        <label><!-- One-time Discounts (%) --></label>
+        <name>One_Time_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed one time, and the unit price of the configurable product, if the configurable product is billed one time. --></help>
+        <label><!-- One-time Extended Price incl. sub-lines --></label>
+        <name>One_Time_Extended_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed one time. --></help>
+        <label><!-- One-time Extended Price all sub-lines --></label>
+        <name>One_Time_Extended_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a one-time basis, shown in currency. --></help>
+        <label><!-- One-time Margins (Abs) --></label>
+        <name>One_Time_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed one time. If the product is configurable, then the one time margin field is the adjustment on all sub-lines (e.g., the components) that are billed one time, including the margin on the main line i --></help>
+        <label><!-- One-time Margins (%) --></label>
+        <name>One_Time_Margin_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- One-time List --></label>
+        <name>One_Time_Price_Before_Discount_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label><!-- One-time List including sub-lines --></label>
+        <name>One_Time_Price_Before_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a one-time basis, before any discounts are applied. --></help>
+        <label><!-- One-time List all sub-lines --></label>
+        <name>One_Time_Price_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price (cost price x quantity) of all products that are billed on a one-time basis. --></help>
+        <label><!-- Total One Time Cost Price --></label>
+        <name>One_Time_Total_Cost_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- One-time Total Unit Price --></label>
+        <name>One_Time_Total_Value_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis after discounts have been applied. --></help>
+        <label><!-- One-time Total Unit Price --></label>
+        <name>One_Time_Total_Value_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label><!-- One-time Unit Price --></label>
+        <name>One_Time_Unit_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a one-time basis. --></help>
+        <label><!-- One-time Unit Price including sub-lines --></label>
+        <name>One_Time_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis before any discounts are applied. --></help>
+        <label><!-- One-time Total List --></label>
+        <name>One_Time_Value_Before_Discount_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Revvy Quoted Products --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort the quote items within a solution. --></help>
+        <label><!-- Option Number --></label>
+        <name>OptionNumber__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;Original contract ID applied to this quote item --></help>
+        <label><!-- Original Contract Id --></label>
+        <name>OriginalContractId__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;Original contract applied to this quote item --></help>
+        <label><!-- Original Contract --></label>
+        <name>OriginalContract__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the Price List Line object used to derive the List Price for this product. --></help>
+        <label><!-- Price List Line --></label>
+        <name>PriceListLine__c</name>
+        <relationshipLabel><!-- QuoteLineItem --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Price Type --></label>
+        <name>PriceType__c</name>
+        <picklistValues>
+            <masterLabel>List</masterLabel>
+            <translation><!-- List --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- List Price (Display) --></label>
+        <name>Price_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of product for this quote. --></help>
+        <label><!-- List Price --></label>
+        <name>Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- JSON representation of the quote item pricing rule mapping in quote model. Useful for debugging quote level pricing rules. --></help>
+        <label><!-- Pricing Rule Mapping Json --></label>
+        <name>PricingRuleMapping__c</name>
+    </fields>
+    <fields>
+        <help><!-- JSON representation of the quote item pricing rule reason in quote model. Useful for debugging quote level pricing rules. --></help>
+        <label><!-- Pricing Rule Reason Json --></label>
+        <name>PricingRuleReason__c</name>
+    </fields>
+    <fields>
+        <help><!-- Denotes the contract subtype / pricing list ID from medtech --></help>
+        <label><!-- Pricing Source --></label>
+        <name>PricingSource__c</name>
+    </fields>
+    <fields>
+        <help><!-- Primary category for this product, used in gross profit analysis calculations. --></help>
+        <label><!-- Primary Category --></label>
+        <name>PrimaryCategory__c</name>
+        <relationshipLabel><!-- QuoteItemPrimaryCategory --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the model used to configure this product. --></help>
+        <label><!-- Item Configuration ID --></label>
+        <name>ProductConfig__c</name>
+        <relationshipLabel><!-- QuoteItems --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product ID --></label>
+        <name>Product_ID_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name --></label>
+        <name>Product_Name_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Product_Type_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label><!-- Qty --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Item SubLines Need Approval Count --></label>
+        <name>QuoteItemSubLinesNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the solution that this quote item belongs to. --></help>
+        <label><!-- Quote Solution --></label>
+        <name>QuoteSolution__c</name>
+        <relationshipLabel><!-- Solution Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the quote that this quote item belongs to. --></help>
+        <label><!-- Quote --></label>
+        <name>Quote__c</name>
+        <relationshipLabel><!-- Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Position number for this quote item. --></help>
+        <label><!-- Quote Item Position --></label>
+        <name>Record_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- Configit Quote ID for this record. --></help>
+        <label><!-- Sap Plant --></label>
+        <name>SapPlant__c</name>
+    </fields>
+    <fields>
+        <help><!-- The SectionNumber, OptionNumber, and GroupNumber fields  are used internally to sort the quote items within a solution. --></help>
+        <label><!-- Section Number --></label>
+        <name>SectionNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Solution Name --></label>
+        <name>Solution_Name_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source Contract Item --></label>
+        <name>SourceContractItem__c</name>
+        <relationshipLabel><!-- Quote Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- &gt;Pricing Tier of the product --></help>
+        <label><!-- Customer Pricing Tier --></label>
+        <name>TierName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total Cost (taking quantity into account). --></help>
+        <label><!-- Total Cost --></label>
+        <name>TotalCostPrice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Discount (Abs) --></label>
+        <name>TotalDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Discount (%) --></label>
+        <name>TotalDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price multiplied by quantity. --></help>
+        <label><!-- Total List Price --></label>
+        <name>Total_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Value --></label>
+        <name>Total_Value_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the BOM from the Configuration Engine. --></help>
+        <label><!-- UID Configured BOM --></label>
+        <name>UID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the UI section that is returned by the product configuration. --></help>
+        <label><!-- Section --></label>
+        <name>UISection__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Price (Display) --></label>
+        <name>Unit_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of product (list price less the discount) --></help>
+        <label><!-- Unit Price --></label>
+        <name>Unit_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total volume discount off of list price (e.g., $100 off). --></help>
+        <label><!-- Vol. Disc. (Abs) --></label>
+        <name>VolDiscAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Percentage volume discount off of list price (e.g., 20% off). --></help>
+        <label><!-- Vol. Disc. (%) --></label>
+        <name>VolDisc__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Weekly basis, shown in currency. --></help>
+        <label><!-- Weekly Mark-ups (Abs) --></label>
+        <name>Weekly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the adjustment on the main --></help>
+        <label><!-- Weekly Mark-ups (%) --></label>
+        <name>Weekly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Weekly basis. --></help>
+        <label><!-- Weekly Cost --></label>
+        <name>Weekly_Cost_Price_Before_Adjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Weekly basis. --></help>
+        <label><!-- Weekly Cost including sub-lines --></label>
+        <name>Weekly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a weekly basis, shown in currency. --></help>
+        <label><!-- Weekly Discount (Abs) --></label>
+        <name>Weekly_Discount_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed weekly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed weekly, including the discount on the main line if the main line is billed weekly. --></help>
+        <label><!-- Weekly Discount (%) --></label>
+        <name>Weekly_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed weekly, and the unit price of the configurable product, if the configurable product is billed weekly. --></help>
+        <label><!-- Weekly Extended Price incl. sub-lines --></label>
+        <name>Weekly_Extended_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed weekly. --></help>
+        <label><!-- Weekly Extended Price all sub-lines --></label>
+        <name>Weekly_Extended_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Weekly basis, shown in currency. --></help>
+        <label><!-- Weekly Margins (Abs) --></label>
+        <name>Weekly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the margin on the main line if the --></help>
+        <label><!-- Weekly Margins (%) --></label>
+        <name>Weekly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weekly List --></label>
+        <name>Weekly_Price_Before_Discount_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a weekly basis. --></help>
+        <label><!-- Weekly List including sub-lines --></label>
+        <name>Weekly_Price_Before_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a weekly basis, before any discounts are applied. --></help>
+        <label><!-- Weekly List all sub-lines --></label>
+        <name>Weekly_Price_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price (cost price x quantity) of all products that are billed on a Weekly basis. --></help>
+        <label><!-- Total Weekly Cost Price --></label>
+        <name>Weekly_Total_Cost_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weekly Total Unit Price --></label>
+        <name>Weekly_Total_Value_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis after discounts have been applied. --></help>
+        <label><!-- Weekly Total Unit Price --></label>
+        <name>Weekly_Total_Value_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Weekly basis. --></help>
+        <label><!-- Weekly Unit Price including sub-lines --></label>
+        <name>Weekly_Unit_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Weekly basis. --></help>
+        <label><!-- Weekly Unit Price all sub-lines --></label>
+        <name>Weekly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis before any discounts are applied. --></help>
+        <label><!-- Weekly Total List --></label>
+        <name>Weekly_Value_Before_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Yearly basis, shown in currency. --></help>
+        <label><!-- Yearly Mark-up (Abs) --></label>
+        <name>Yearly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the adjustment on the main --></help>
+        <label><!-- Yearly Mark-up (%) --></label>
+        <name>Yearly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Yearly basis. --></help>
+        <label><!-- Yearly Cost --></label>
+        <name>Yearly_Cost_Price_Before_Adjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Yearly basis. --></help>
+        <label><!-- Yearly Cost including sub-lines --></label>
+        <name>Yearly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a yearly basis, shown in currency. --></help>
+        <label><!-- Yearly Discounts (Abs) --></label>
+        <name>Yearly_Discount_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed yearly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed yearly, including the discount on the main line if the main line is billed yearly. --></help>
+        <label><!-- Yearly Discounts (%) --></label>
+        <name>Yearly_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed yearly, and the unit price of the configurable product, if the configurable product is billed yearly. --></help>
+        <label><!-- Yearly Extended Price incl. sub-lines --></label>
+        <name>Yearly_Extended_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed yearly. --></help>
+        <label><!-- Yearly Extended Price all sub-lines --></label>
+        <name>Yearly_Extended_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Yearly basis, shown in currency. --></help>
+        <label><!-- Yearly Margins (Abs) --></label>
+        <name>Yearly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the margin on the main line if the --></help>
+        <label><!-- Yearly Margins (%) --></label>
+        <name>Yearly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Yearly List --></label>
+        <name>Yearly_Price_Before_Discount_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a yearly basis. --></help>
+        <label><!-- Yearly List including sub-lines --></label>
+        <name>Yearly_Price_Before_Discount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a yearly basis, before any discounts are applied. --></help>
+        <label><!-- Yearly List all sub-lines --></label>
+        <name>Yearly_Price_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price (cost price x quantity) of all products that are billed on a Yearly basis. --></help>
+        <label><!-- Total Yearly Cost Price --></label>
+        <name>Yearly_Total_Cost_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Yearly Total Unit Price --></label>
+        <name>Yearly_Total_Value_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis after discounts have been applied. --></help>
+        <label><!-- Yearly Total Unit Price --></label>
+        <name>Yearly_Total_Value_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Yearly basis. --></help>
+        <label><!-- Yearly Unit Price including sub-lines --></label>
+        <name>Yearly_Unit_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Yearly basis. --></help>
+        <label><!-- Yearly Unit Price all sub-lines --></label>
+        <name>Yearly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis before any discounts are applied. --></help>
+        <label><!-- Yearly Total List --></label>
+        <name>Yearly_Value_Before_Discount_F__c</name>
+    </fields>
+    <layouts>
+        <layout>QuoteItem Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Configure --></label>
+        <name>ConfigureQuoteItem</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Edit --></label>
+        <name>Edit</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Edit --></label>
+        <name>Edit_Manage_Line</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Edit Quote Line Item --></label>
+        <name>Edit_Quote_Line_Item</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Cost Price should be greater than or equal to zero --></errorMessage>
+        <name>VMnCostPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- List Price should be greater than or equal to zero --></errorMessage>
+        <name>VMnListPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Manual Discount/ Unit Price Cannot be changed if Product is not discountable or line is marked as frozen. --></errorMessage>
+        <name>VMnManDiscountValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Unit Price should be greater than or equal to zero --></errorMessage>
+        <name>VMnUnitPriceValidity1</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Discount (Absolute) cannot be negative. Deprecated. --></errorMessage>
+        <name>VmnAbsoluteDiscountValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Discount (Percent) should be less than 100</errorMessage>
+        <name>VmnDiscountValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Quantity cannot be zero or negative --></errorMessage>
+        <name>VmnQuantityValValidity</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Aggregate_Member_Quotes --></label>
+        <name>Aggregate_Member_Quotes</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Browse_Catalog --></label>
+        <name>Browse_Catalog</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Manage_Lines --></label>
+        <name>Manage_Lines</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Product_Price_History --></label>
+        <name>Product_Price_History</name>
+    </webLinks>
+</CustomObjectTranslation>

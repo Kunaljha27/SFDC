@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Currency used for this price list. --></help>
+        <label>币种</label>
+        <name>Currency__c</name>
+        <picklistValues>
+            <masterLabel>USD</masterLabel>
+            <translation><!-- USD --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list expires. --></help>
+        <label>有效结束日期</label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>价目表 ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- The type of price stored in this pricelist --></help>
+        <label><!-- Price Type --></label>
+        <name>PriceType__c</name>
+        <picklistValues>
+            <masterLabel>Contract Price</masterLabel>
+            <translation><!-- Contract Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price List</masterLabel>
+            <translation><!-- Price List --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Defines the customer segment that this price list is applied to. --></help>
+        <label>价格段</label>
+        <name>Segment__c</name>
+        <picklistValues>
+            <masterLabel>Education</masterLabel>
+            <translation><!-- Education --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Government</masterLabel>
+            <translation><!-- Government --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care</masterLabel>
+            <translation><!-- Health Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Media</masterLabel>
+            <translation><!-- Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Process Industry</masterLabel>
+            <translation><!-- Process Industry --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the Quote object used to generate this pricelist. --></help>
+        <label><!-- Group Quote --></label>
+        <name>SourceQuote__c</name>
+        <relationshipLabel><!-- Contract Price List --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list takes effect. --></help>
+        <label>有效开始日期</label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Controls whether the price list is in effect. If the price list is in draft, then it is not in effect. If the price list is active, then it is in effect. --></help>
+        <label>状态</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+    </fields>
+    <nameFieldLabel><!-- Price List Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>段为必填，不得为空</errorMessage>
+        <name>VMnSegmentDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>开始日期不能在结束日期之后</errorMessage>
+        <name>VMnStartAndEndDatesValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>币种不可为“无”。请选择有效值。</errorMessage>
+        <name>VmnCurrencyDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>状态不可为“无”。请选择有效值。</errorMessage>
+        <name>VmnStatusDefaultValValidity</name>
+    </validationRules>
+</CustomObjectTranslation>

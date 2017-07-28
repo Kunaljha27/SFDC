@@ -1,0 +1,46 @@
+<apex:page controller="REVVY.CMnQuoteHomePageCtrl" sidebar="false" tabstyle="REVVY__MnQuote__c">
+<apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+<script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+<script>
+    function toggleMnDashboardFrame() {
+        var mnDF = $('#mnDashboardFrame');
+        var mnDE = $('#mnDashboardExpando');
+        if (mnDF.length === 0) {
+            return;
+        };
+        mnDF.toggle();
+        if (mnDF.css('display') == 'none') {
+            mnDE.text('{!$Label.MnQuoteShowDashboard}');
+        } else {
+            mnDE.text('{!$Label.MnQuoteHideDashboard}');
+        }
+    }
+</script>
+<c:CMnZenDesk />
+<div  class="colWrapper">
+<div class="collwrp" >
+<div class="coll" >
+<c:CMnQuoteLeftNav />
+</div>
+</div>
+<div class="colr">
+<!--- Actual VF code goes here -->
+
+<apex:outputLink rendered="{!NOT(ISNULL(DashboardId))}" value="#" style="text-decoration:none;"> <div id="mnDashboardExpando" onclick="toggleMnDashboardFrame();" style="font-weight:bold; font-size: 12pt;">{!$Label.revvy__MnQuoteShowDashboard}</div> </apex:outputLink>
+<br/>
+<apex:iframe height="{!DashboardHeight}" rendered="{!NOT(ISNULL(DashboardId))}" id="mnDashboardFrame" src="/{!DashboardId}?isdtp=vw" width="100%"/>
+<br/>
+<c:VMnList sectionTitle="{!$Label.revvy__MnQuoteHomeTitle}" fieldSetName="{!quoteListFSName}"
+                   isNewButtonVisible="true"
+                   newButtonLabel="{!$Label.revvy__MnNewQuoteButton}"
+                   deleteLinkConfirm="{!$Label.revvy__MnQuoteDeleteLinkConfirm}" 
+                   cloneLinkConfirm="{!$Label.revvy__MnQuoteCloneLinkConfirm}" 
+                   retUrl="" singleSelection="true"
+                   sObjTypeStr="MnQuote__c" filterCols="Name, Id__c, Account__r.Name" showFilter="true"
+                   showStatusFilter="true" statusFilterCol="Current_Status__c" statusValues="{!statusValues}"
+                   allowSelection="false" displayActionColumn="true" allowClone="false" />
+<!-- ---------- -->
+</div>
+</div>
+<script> toggleMnDashboardFrame(); </script>
+</apex:page>

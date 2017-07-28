@@ -1,0 +1,5 @@
+<apex:page standardController="REVVY__MnEarning__c" extensions="REVVY.CMnShowPendingPaymentsController">
+    <apex:form >
+        <apex:pageMessages ></apex:pageMessages>
+      </apex:form>
+</apex:page>

@@ -1,0 +1,108 @@
+<apex:page controller="HCNA_GSPAdventistHealthSystemController" sidebar="false">
+        <!-- Google API inclusion -->
+        <apex:includeScript id="GoogleAPI" value="https://www.google.com/jsapi" />
+          
+        <apex:sectionHeader title="For Internal Use Only. Not for compensation purposes." subtitle="{!accName}"/>
+        <apex:pageBlock >
+        <apex:pageBlockSection columns="2"> 
+        <apex:pageBlockSection columns="1"> 
+        <apex:pagemessages />    
+        <html>
+        <table>        
+            <tr>                
+                <td id="BarChartBlock"></td>
+            </tr>                                
+        </table>
+        </html>
+               
+        <script type="text/javascript">
+            // Load the Visualization API and the piechart package.
+            google.load('visualization', '1.0', {'packages':['corechart']});
+            
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.setOnLoadCallback(initCharts);
+        
+            function initCharts() {                     
+                HCNA_GSPAdventistHealthSystemController.loadBenchmark(
+                     '{!$CurrentPage.parameters.SAPID}',
+                     function(result, event){ 
+                         // load the chart
+                         var visualization = new google.visualization.BarChart(document.getElementById('BarChartBlock'));
+                         // Prepare table model for chart with columns
+                         var data = new google.visualization.DataTable();
+                         data.addColumn('string', 'Opportunities');
+                         data.addColumn('number', 'Value');                            
+                         // add rows from the remoting results
+                         for(var row = 0; row < result.length; row++){
+                            var record = result[row];                           
+                            data.addRow([record.name, record.value]);
+                          }
+                        //Format data for display 
+                        var formatter = new google.visualization.NumberFormat({pattern: '###,###.##'});
+                        formatter.format(data, 1);
+                        
+                        // draw the chart with some options to make it look nice.
+                        visualization.draw(data, {title: 'Benchmark', vAxis: {textStyle: {fontSize: 8}}});
+                  }, {escape:true});
+              }
+        </script>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1" title="National Benchmark Numbers on Scale of 0 - 99">
+            <html>
+            <table style="width:400px" bgcolor="#FFFF99" border="2">
+              <tr>
+                <th bgcolor="#F0F0F5">Category</th>
+                <th bgcolor="#F0F0F5">10th Percentile</th>
+                <th bgcolor="#F0F0F5">50th Percentile</th>
+                <th bgcolor="#F0F0F5">90th Percentile</th>
+              </tr>
+              <tr>
+                <td>Recommendation</td>
+                <td>12</td>
+                <td>51</td>
+                <td>92</td>
+              </tr>
+              <tr>
+                <td>Room Quiet</td>
+                <td>10</td>
+                <td>51</td>
+                <td>91</td>
+              </tr>
+              <tr>
+                <td>HAI/HAC</td>
+                <td>25</td>
+                <td>53</td>
+                <td>91</td>
+              </tr>
+              <tr>
+                <td>Readmission</td>
+                <td>22</td>
+                <td>53</td>
+                <td>79</td>
+              </tr>
+              <tr>
+                <td>Mortality</td>
+                <td>24</td>
+                <td>51</td>
+                <td>78</td>
+              </tr>
+              <tr>
+                <td>Cost of Care</td>
+                <td>10</td>
+                <td>56</td>
+                <td>91</td>
+              </tr>
+            </table> 
+            </html>
+        </apex:pageBlockSection>
+        </apex:pageBlockSection>
+                
+            <apex:pageBlockSection title="CMS Scorecard" columns="1">
+                <apex:pageBlockTable value="{!Scorecard}" var="scoreDetail" style="background:#FFFF99;" columnsWidth="100%">
+                    <apex:column value="{!scoreDetail['name']}"/>
+                    <apex:column value="{!scoreDetail['value']}%" headerValue="IDN" style="text-align:right" rendered="{!IF(scoreDetail['name'] != 'Healthcare-Associated Infection', true, false)}"/> 
+                    <apex:column value="{!scoreDetail['value']}" headerValue="IDN" style="text-align:right" rendered="{!IF(scoreDetail['name'] == 'Healthcare-Associated Infection', true, false)}"/> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:page>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- ConfigMetadata --></value>
+    </caseValues>
+    <fields>
+        <label><!-- FieldSet Name --></label>
+        <name>FieldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Full Data Sync --></label>
+        <name>LastFullDataSync__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Sync --></label>
+        <name>LastSync__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object API Name --></label>
+        <name>ObjectAPIName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync Order --></label>
+        <name>SyncOrder__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>MASTER</masterLabel>
+            <translation><!-- MASTER --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TRANSACTION</masterLabel>
+            <translation><!-- TRANSACTION --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Version --></label>
+        <name>Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Label --></label>
+        <name>objectlabel__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>ConfigMetadata Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- ConfigMetadata Name --></nameFieldLabel>
+    <webLinks>
+        <label><!-- ImportTxData --></label>
+        <name>ImportTxData</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Sync_Data --></label>
+        <name>Sync_Data</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Sync_Metadata --></label>
+        <name>Sync_Metadata</name>
+    </webLinks>
+</CustomObjectTranslation>

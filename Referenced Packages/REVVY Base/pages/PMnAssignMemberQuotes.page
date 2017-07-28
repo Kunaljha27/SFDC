@@ -1,0 +1,23 @@
+<apex:page tabstyle="REVVY__MnQuote__c">
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    
+    <apex:sectionHeader title="{!$Label.revvy__MnAssignMemberQuotesPageTitle}"
+    					subtitle="{!$CurrentPage.parameters.Name}"
+    					description="{!$Label.revvy__MnAssignMemberQuotesPageDescription}"
+    />
+    
+    <div class="slds">             
+        <c:VMnListNodes relId="{!$CurrentPage.parameters.Id}"
+    					nodeType="MnQuote__c"
+                        newButtonLabel=""
+                        deleteLinkConfirm=""
+                        sectionTitle="{!$Label.revvy__MnAssignMemberQuotesPageTitle}"
+                        fieldSetName="{!$CurrentPage.parameters.fs}"
+                        relType="MnQuoteMembership__c"
+                        singleSelection="false"
+                        allowSelection="true"
+         />
+    </div>
+</apex:page>

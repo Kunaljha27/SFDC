@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>ResourceSkillRequestHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Represents the skills or certifications requested for a resource prior to staffing them on a project. A skill or certification can be marked as primary to identify the primary skill desired in the resource request.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Is_Primary__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this the primary skill / certification for the request?</inlineHelpText>
+        <label>Primary</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Minimum_Rating__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Minimum Rating</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1 - Limited Exposure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2 - Some Familiarity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3 - Comfortable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4 - Strong</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5 - Expert</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Resource_Request__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Resource Request</label>
+        <referenceTo>Resource_Request__c</referenceTo>
+        <relationshipLabel>Resource Skill Requests</relationshipLabel>
+        <relationshipName>Resource_Skill_Requests</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Skill_Certification__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Skill / Certification</label>
+        <referenceTo>Skill__c</referenceTo>
+        <relationshipLabel>Resource Skill Requests</relationshipLabel>
+        <relationshipName>Resource_Skill_Requests</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Skill_or_Certification__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(
+    ISPICKVAL(Skill_Certification__r.Skill_Or_Certification__c,&apos;Skill&apos;), &apos;Skill&apos;, 
+    IF(
+        ISPICKVAL(Skill_Certification__r.Skill_Or_Certification__c, &apos;Certification&apos;), &apos;Certification&apos;, 
+        &apos;Unknown&apos;
+    )
+)</formula>
+        <label>Skill or Certification</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Resource Skill Request</label>
+    <nameField>
+        <displayFormat>SkillRequest{0000000}</displayFormat>
+        <label>Resource Skill Request Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Resource Skill Requests</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Rating_Required_For_Skill</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( Skill_or_Certification__c = &apos;Skill&apos;, ISPICKVAL( Minimum_Rating__c, &quot;&quot; ))</errorConditionFormula>
+        <errorDisplayField>Minimum_Rating__c</errorDisplayField>
+        <errorMessage>Minimum rating is required for skill requests.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Resource_Request_Required</fullName>
+        <active>true</active>
+        <errorConditionFormula>LEN( Resource_Request__c ) = 0</errorConditionFormula>
+        <errorDisplayField>Resource_Request__c</errorDisplayField>
+        <errorMessage>Resource request is required</errorMessage>
+    </validationRules>
+</CustomObject>

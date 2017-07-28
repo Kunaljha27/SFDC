@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- QiCharacteristic --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Characteristic Value --></label>
+        <name>CharcValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Characteristic --></label>
+        <name>Charc__c</name>
+    </fields>
+    <fields>
+        <label><!-- QuoteItem --></label>
+        <name>QuoteItem__c</name>
+        <relationshipLabel><!-- QiCharacteristics --></relationshipLabel>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

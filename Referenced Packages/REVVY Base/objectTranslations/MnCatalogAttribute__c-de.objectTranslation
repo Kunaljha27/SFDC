@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Default value of a pre-defined attribute. --></help>
+        <label>Standardwert</label>
+        <name>Default_Value__c</name>
+        <relationshipLabel>Katalogattribute</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Data format of an attribute. The format can be Boolean, decimal, integer, or text. --></help>
+        <label><!-- Format --></label>
+        <name>Format__c</name>
+        <picklistValues>
+            <masterLabel>Boolean</masterLabel>
+            <translation><!-- Boolean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Decimal</masterLabel>
+            <translation><!-- Decimal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Integer</masterLabel>
+            <translation><!-- Integer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Text</masterLabel>
+            <translation><!-- Text --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Attribut-ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label>Name Sprachversion</label>
+        <name>LocaleName_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the attribute can have multiple values. --></help>
+        <label>Mehrfachwerte</label>
+        <name>Multi_values__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 10)</label>
+        <name>Name_L10__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 11)</label>
+        <name>Name_L11__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 12)</label>
+        <name>Name_L12__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 13)</label>
+        <name>Name_L13__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 14)</label>
+        <name>Name_L14__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 15)</label>
+        <name>Name_L15__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 16)</label>
+        <name>Name_L16__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 17)</label>
+        <name>Name_L17__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 18)</label>
+        <name>Name_L18__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 19)</label>
+        <name>Name_L19__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 1)</label>
+        <name>Name_L1__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 20)</label>
+        <name>Name_L20__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 2)</label>
+        <name>Name_L2__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 3)</label>
+        <name>Name_L3__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 4)</label>
+        <name>Name_L4__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 5)</label>
+        <name>Name_L5__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 6)</label>
+        <name>Name_L6__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 7)</label>
+        <name>Name_L7__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 8)</label>
+        <name>Name_L8__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 9)</label>
+        <name>Name_L9__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether an attribute value is required for this product. --></help>
+        <label>Erforderlich</label>
+        <name>Required__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the attribute value is pre-defined or user entered. --></help>
+        <label>Attributwerte</label>
+        <name>Value_Type__c</name>
+        <picklistValues>
+            <masterLabel>Pre-Defined</masterLabel>
+            <translation><!-- Pre-Defined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User Entered</masterLabel>
+            <translation><!-- User Entered --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Whether the attribute is visible in the end user catalog. This field is not used in the current release. --></help>
+        <label>Sichtbar für Handelsvertreter</label>
+        <name>Visible__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Attribute Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>&quot;Nur Attribute vom Typ &quot;&quot;Text&quot;&quot; können mehrere Werte haben!&quot;</errorMessage>
+        <name>Multi_Values_Not_Available_on_Non_Text</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>&quot;Die ID darf nur Buchstaben, Zahlen und Unterstriche enthalten und muss mit einem Buchstaben beginnen.&quot;</errorMessage>
+        <name>VMnValidateId</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Expression Condition --></value>
+    </caseValues>
+    <fields>
+        <label>目录属性值</label>
+        <name>Catalog_Attribute_Value__c</name>
+        <relationshipLabel>表达式条件</relationshipLabel>
+    </fields>
+    <fields>
+        <label>目录节点</label>
+        <name>Catalog_Node__c</name>
+        <relationshipLabel>表达式条件</relationshipLabel>
+    </fields>
+    <fields>
+        <label>条件关键字</label>
+        <name>Condition_Key__c</name>
+    </fields>
+    <fields>
+        <label>条件值</label>
+        <name>Condition_Value__c</name>
+    </fields>
+    <fields>
+        <label>表达式</label>
+        <name>Expression__c</name>
+        <relationshipLabel>表达式条件</relationshipLabel>
+    </fields>
+    <fields>
+        <label>字段名称</label>
+        <name>Field_Name__c</name>
+    </fields>
+    <fields>
+        <label>字段值</label>
+        <name>Field_Value__c</name>
+    </fields>
+    <fields>
+        <label>ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label>类型</label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Attribute</masterLabel>
+            <translation><!-- Attribute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalog Field</masterLabel>
+            <translation><!-- Catalog Field --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Category</masterLabel>
+            <translation><!-- Category --></translation>
+        </picklistValues>
+    </fields>
+    <nameFieldLabel><!-- Expression Condition Name --></nameFieldLabel>
+</CustomObjectTranslation>

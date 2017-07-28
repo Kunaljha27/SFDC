@@ -1,0 +1,6 @@
+<apex:page standardController="REVVY__MnGoal__c" extensions="REVVY.CMnEditIPLDispatcherController" action="{!dispatchEdit}">
+  <apex:pageMessages />
+  <apex:form >
+  <apex:commandButton action="{!back}" value="Back"></apex:commandButton>
+  </apex:form>
+</apex:page>

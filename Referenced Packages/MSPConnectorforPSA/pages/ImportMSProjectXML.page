@@ -1,0 +1,158 @@
+<apex:page standardStylesheets="false"  id="pg" Controller="psamsp.ImportMSProjectXMLController" action="{!deleteImportBatchInfo}" >
+    <head>
+        <!-- Static Resources for CSS -->
+        <link href="{!URLFOR($Resource.ImportXML, 'css/bootstrap.css')}" rel="stylesheet"/>
+        <link href="{!URLFOR($Resource.ImportXML, 'css/ImportXML.css')}" rel="stylesheet"/>
+    </head>
+    
+    <!-- jquery plugin -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+    <!-- Include page specific script -->  
+    <script src="{!URLFOR($Resource.ImportXML, 'js/ImportXML.js')}" />
+   
+    
+    <!--  Import page controls -->
+    <div class="panel panel-primary panelHeight">
+        <div class="panel-heading">
+           <h3 class="panel-title">Import from MS Project into FinancialForce PSA	<span style="float:right;">{!PackageVersion}</span></h3>
+        </div> 
+        <div id="divAlert">
+                
+        </div>
+        <apex:outputPanel layout="block" id="msgPanel">
+            <apex:messages styleClass="alert alert-warning" />
+        </apex:outputPanel>
+        <apex:form id="frm"> 
+
+            <!-- "Loading" or "Processing" popup -->
+            <apex:actionStatus id="processingStatus" stopText="" >
+                <apex:facet name="start">
+                    <div>
+                        <div class="popupBackground" />
+                        <div class="popupPanel">
+                            <table border="0" width="100%" height="100%">
+                                <tr>
+                                    <td align="center" style="font-family: Calibri; font-size: 13px; font-weight: normal;"><b>Processing... Please Wait</b></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><img src="/img/loading.gif"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionStatus>
+
+            <div class="panel-body">
+                <apex:outputLabel value="Select XML File" for="xmlFile" rendered="{!NOT(showProjectTask)}"/>
+                 <apex:outputLabel value="Selected XML File: {!fileName}"  rendered="{!showProjectTask || showProjectTaskAssignment}"/>
+                <apex:inputFile id="xmlFile" accept=".xml" fileName="{!fileName}" value="{!body}" onchange="check(this)"  onclick="stop(this)" rendered="{!NOT(showProjectTask)}"/>   
+                
+                <br/> 
+            </div>
+
+
+            <apex:outputPanel layout="block" id="projectPanel" >
+                <apex:actionRegion >
+                    <!-- Project task poller -->
+                    <apex:actionPoller action="{!checkProjectTaskStatus}" status="processingStatus" rerender="projectPanel" interval="5" rendered="{!showProjectTask}" />
+
+                    <!-- Project Task assignment poller -->
+                    <apex:actionPoller action="{!checkProjectTaskAssignmentStatus}" status="processingStatus" rerender="projectPanel" interval="5" rendered="{!showProjectTaskAssignment}" />
+
+                    <br />
+
+                    <c:BatchJobDetail Caption="{!$Label.Project_Task}" StartDate="{!projectTaskJob.startDateTime}" AsyncApexJob="{!projectTaskJob.asyncApexJob}" rendered="{!NOT(ISNULL(projectTaskJob))}" 
+                    TotalItems="{!projectTaskJob.totalItems}" TotalItemsCompleted="{!projectTaskJob.totalItemsCompleted}"/>
+
+                    <br />
+
+                    <c:BatchJobDetail Caption="{!$Label.Project_Task_Assignment}" StartDate="{!projectTaskAssingmentJob.startDateTime}" AsyncApexJob="{!projectTaskAssingmentJob.asyncApexJob}" rendered="{!NOT(ISNULL(projectTaskAssingmentJob))}" 
+                    TotalItems="{!projectTaskAssingmentJob.totalItems}" TotalItemsCompleted="{!projectTaskAssingmentJob.totalItemsCompleted}"/>
+                </apex:actionRegion>
+            </apex:outputPanel>
+
+            <apex:outputPanel layout="block" styleclass="panel-footer" id="projectsListPanel"> 
+                <apex:actionRegion >
+                    <apex:selectRadio id="checkNewProject" value="{!isNewProj}" layout="pageDirection" rendered="{!$CurrentPage.parameters.proj == 'both'}" >
+                        <apex:selectOptions value="{!Options}"/>
+                        <apex:actionSupport event="onchange" status="processingStatus" rerender="projectsListPanel" />
+                    </apex:selectRadio>
+
+                    <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.proj == '2' || isNewProj == '2'}" >
+                        <b>Select a project : </b>
+                        <apex:inputField id="projectLookup" value="{!assignment.pse__Project__c}"  />
+                    </apex:outputPanel>
+                    <div class="row pull-right" id="btnDiv" style="padding-right:5px">
+                            <apex:actionFunction action="{!ImportXMLFile}" name="CallControllerMethod"  >
+                               
+                            </apex:actionFunction> 
+                          
+                            <apex:commandButton disabled="{!disableButton}" onclick="callController();return false;" id="cmdImport" value="Import" style="margin-top:60px;" styleClass="btn btn-lg buttonHeight"   />
+                    </div>
+                </apex:actionRegion>
+            </apex:outputPanel>
+        </apex:form> 
+        <div class="progress progress-striped active"  id="pleaseWaitDialog" >
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                Importing{!IF($CurrentPage.parameters.proj == '1',' into a New Project ', IF($CurrentPage.parameters.proj == '2',' into an Existing Project ',' into a New Project '))}...
+              </div>
+        </div>
+    </div>
+    
+<script type="text/javascript"> 
+	var PROJECT_OBJ_PREFIX = '{!ProjectObjectPrefix}';
+	
+	function openLookup(baseURL, width, modified, searchParam){
+		var originalbaseURL = baseURL;
+	    var originalwidth = width;
+	    var originalmodified = modified;
+	    var originalsearchParam = searchParam;
+	    
+	    var lookupType = baseURL.substr(baseURL.length-3, 3);
+	    if (modified == '1') baseURL = baseURL + searchParam;
+	    
+	    var isCustomLookup = false;
+	    
+	    // checking if lookup type is for Project object as need to override only standard project lookup only.
+	    if(lookupType == PROJECT_OBJ_PREFIX){
+	  
+	      var urlArr = baseURL.split("&");
+	      var txtId = '';
+	      if(urlArr.length > 2) {
+	        urlArr = urlArr[1].split('=');
+	        txtId = urlArr[1];
+	      }
+	      
+	      // Following is the url of Custom Lookup page. You need to change that accordingly
+	      baseURL = "/apex/CustomProjectLookup?txt=" + txtId;
+	      
+	      // Following is the id of apex:form control "frm". You need to change that accordingly
+	      baseURL = baseURL + "&frm=" + escapeUTF("{!$Component.frm}");
+	      if (modified == '1') {
+	        baseURL = baseURL + "&lksearch=" + searchParam;
+	      }
+	      
+	      // Following is the ID of inputField that is the lookup to be customized as custom lookup
+	      if(txtId.indexOf('projectLookup') > -1 ){
+	        isCustomLookup = true;
+	      }
+	    }
+	    
+	    
+	    if(isCustomLookup == true){
+	      openPopup(baseURL, "lookup", 350, 480, "width="+width+",height=480,toolbar=no,status=no,directories=no,menubar=no,resizable=yes,scrollable=no", true);
+	    }
+	    else {
+	      if (modified == '1') originalbaseURL = originalbaseURL + originalsearchParam;
+	      openPopup(originalbaseURL, "lookup", 350, 480, "width="+originalwidth+",height=480,toolbar=no,status=no,directories=no,menubar=no,resizable=yes,scrollable=no", true);
+	    }
+	} 
+</script>
+    
+    
+</apex:page>

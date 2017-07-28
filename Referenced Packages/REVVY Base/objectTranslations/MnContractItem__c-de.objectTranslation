@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Absolute value of Adjustment 1 --></help>
+        <label>Mark-up (abs)</label>
+        <name>Adjustment1Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Adjustment 1 is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label>Mark-up-Typ</label>
+        <name>Adjustment1Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of Adjustment 1 --></help>
+        <label><!-- Mark-up (%) --></label>
+        <name>Adjustment1__c</name>
+    </fields>
+    <fields>
+        <help><!-- Auto discount off of list price with manual adjustment (e.g., $100 off auto discount + $100 manual so total $200), calculated by adjustment rules. --></help>
+        <label>Autom. Rabatt (abs)</label>
+        <name>AutoDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the auto discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off). --></help>
+        <label>Autom. Rabatttyp</label>
+        <name>AutoDiscountType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percentage auto discount off of list price (e.g., 20% off), calculated by adjustment rules. --></help>
+        <label>Autom. Rabatt (%)</label>
+        <name>AutoDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the product is charged on a recurring basis. A product can be charged one-time, weekly, monthly, or yearly. --></help>
+        <label>Abrechnungshäufigkeit</label>
+        <name>BillingFrequency_WF__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the product associated with this contract item. --></help>
+        <label>Produkt</label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel>Vertragsobjekte</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ContractItemSubLines Need Approval Count --></label>
+        <name>ContractItemSubLinesNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the solution that this quote item belongs to. --></help>
+        <label><!-- Contract Solution --></label>
+        <name>ContractSolution__c</name>
+        <relationshipLabel><!-- Solution Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the contract that this contract item belongs to. --></help>
+        <label>Vertrag</label>
+        <name>Contract__c</name>
+        <relationshipLabel>Vertragsobjekte</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Cost Price of a product in contract  item --></help>
+        <label>Kosten</label>
+        <name>CostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total discount off of list price (e.g., $100 off). --></help>
+        <label>Rabatt (absolut)</label>
+        <name>DiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off). --></help>
+        <label>Rabatttyp</label>
+        <name>DiscountType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percentage discount off of list price (e.g., 20% off). --></help>
+        <label>Rabatt in %</label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <label>Vertragsobjekt Enddatum</label>
+        <name>EndDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Vertragsobjekt-ID</label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <label>Erweiterter Preis (angezeigt)</label>
+        <name>ExtendedPriceDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Price after discount multiplied by quantity. --></help>
+        <label>Erweiterter Preis (berechnet)</label>
+        <name>ExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label><!-- Is Cost Price System populated --></label>
+        <name>IsSystemCostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label><!-- Is List Price System populated --></label>
+        <name>IsSystemListPrice__c</name>
+    </fields>
+    <fields>
+        <label>Linientyp</label>
+        <name>LineType__c</name>
+        <picklistValues>
+            <masterLabel>Not tracked on contract</masterLabel>
+            <translation><!-- Not tracked on contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Absolute value of the margin --></help>
+        <label>Marge (absolut)</label>
+        <name>MarginAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Margin is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label>Margentyp</label>
+        <name>MarginType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of the margin --></help>
+        <label>Marge ( % )</label>
+        <name>Margin__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Monthly basis, shown in currency. --></help>
+        <label>Monatliches Mark-up (abs)</label>
+        <name>MonthlyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly adjustment field is the adjustment on all sub-lines that are billed Monthly, including the adjustment on the main line --></help>
+        <label>Monatliches Mark-up (%)</label>
+        <name>MonthlyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Monthly basis. --></help>
+        <label>Monatliche Kosten</label>
+        <name>MonthlyCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Monthly basis. --></help>
+        <label>Monatliche Kosten inklusive Unterlinien</label>
+        <name>MonthlyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate absolute discount on products that are billed on a monthly basis, shown in currency. --></help>
+        <label>Monatlicher Rabatt (abs)</label>
+        <name>MonthlyDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed monthly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed monthly, including the discount on the main line if the main line is billed monthly. --></help>
+        <label>Monatlicher Rabatt (%)</label>
+        <name>MonthlyDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed monthly, and the unit price of the configurable product, if the configurable product is billed monthly. --></help>
+        <label>Monatl. erweit. Preis inkl. Unterlinien</label>
+        <name>MonthlyExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed monthly. --></help>
+        <label>Monatl. erweit. Preis alle Unterlinien</label>
+        <name>MonthlyExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Monthly basis, shown in currency. --></help>
+        <label>Monatliche Marge (abs)</label>
+        <name>MonthlyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly margin field is the adjustment on all sub-lines that are billed Monthly, including the margin on the main line --></help>
+        <label>Monatliche Marge (%)</label>
+        <name>MonthlyMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>Monatliche Liste</label>
+        <name>MonthlyPriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a monthly basis. --></help>
+        <label>Monatliche Liste inkl. Unterlinien</label>
+        <name>MonthlyPriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a monthly basis, before any discounts are applied. --></help>
+        <label>Monatliche Liste aller Unterlinien</label>
+        <name>MonthlyPriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>Monatlicher Gesamtstückpreis</label>
+        <name>MonthlyTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis after discounts have been applied. --></help>
+        <label>Monatlicher Gesamtstückpreis</label>
+        <name>MonthlyTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Monthly basis. --></help>
+        <label>Monatlicher Stückpreis inkl. Unterlinien</label>
+        <name>MonthlyUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Monthly basis. --></help>
+        <label>Monatlicher Stückpreis alle Unterlinien</label>
+        <name>MonthlyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis before any discounts are applied. --></help>
+        <label>Monatliche Gesamtwerteliste</label>
+        <name>MonthlyValueBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag is set by the system when the workflow suggests an approval is needed for the underlying contract item. --></help>
+        <label><!-- Approval Required --></label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a one-time basis, shown in currency. --></help>
+        <label>Einmaliges Mark-up (abs)</label>
+        <name>OneTimeAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed one time. If the product is configurable, then the one time adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed one time plus main line --></help>
+        <label>Einmaliges Mark-up (%)</label>
+        <name>OneTimeAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost  price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label>Einmalige Kosten</label>
+        <name>OneTimeCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a one-time basis. --></help>
+        <label>Einmalige Kosten inklusive Unterlinien</label>
+        <name>OneTimeCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a one-time basis, shown in currency. --></help>
+        <label>Einmaliger Rabatt (abs)</label>
+        <name>OneTimeDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed one time. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed one time, including the discount on the main line if the main line is billed one time. --></help>
+        <label>Einmaliger Rabatt (%)</label>
+        <name>OneTimeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed one time, and the unit price of the configurable product, if the configurable product is billed one time. --></help>
+        <label>Einmal. erweit. Preis inkl. Unterlinien</label>
+        <name>OneTimeExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed one time. --></help>
+        <label>Einmalig erweit. Preis alle Unterlinien</label>
+        <name>OneTimeExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a one-time basis, shown in currency. --></help>
+        <label>Einmalige Marge (abs)</label>
+        <name>OneTimeMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed one time. If the product is configurable, then the one time margin field is the adjustment on all sub-lines (e.g., the components) that are billed one time, including the margin on the main line i --></help>
+        <label>Einmalige Marge (%)</label>
+        <name>OneTimeMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>Einmalige Liste</label>
+        <name>OneTimePriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label>Einmalige Liste inklusive Unterlinien</label>
+        <name>OneTimePriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a one-time basis, before any discounts are applied. --></help>
+        <label>Einmalige Liste alle Unterlinien</label>
+        <name>OneTimePriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>Einmaliger Gesamtstückpreis</label>
+        <name>OneTimeTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis after discounts have been applied. --></help>
+        <label>Einmaliger Gesamtstückpreis</label>
+        <name>OneTimeTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a one-time basis. --></help>
+        <label>Einmaliger Stückpreis</label>
+        <name>OneTimeUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a one-time basis. --></help>
+        <label>Einmalig erweit. St. preis inkl. Unt. li</label>
+        <name>OneTimeUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis before any discounts are applied. --></help>
+        <label>Einmalige Gesamtliste</label>
+        <name>OneTimeValueBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <label>Preis</label>
+        <name>PriceDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the Price List Line object used to derive the List Price for this product. --></help>
+        <label><!-- Price List Line --></label>
+        <name>PriceListLine__c</name>
+        <relationshipLabel><!-- ContractLineItem --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Preistyp</label>
+        <name>PriceType__c</name>
+        <picklistValues>
+            <masterLabel>List</masterLabel>
+            <translation><!-- List --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- List price of product for this contract. --></help>
+        <label>Listenpreis</label>
+        <name>Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Denotes the contract subtype / pricing list ID from medtech --></help>
+        <label>Preisquelle</label>
+        <name>PricingSource__c</name>
+    </fields>
+    <fields>
+        <label>Produktname</label>
+        <name>ProductName_F__c</name>
+    </fields>
+    <fields>
+        <label>Produkttyp</label>
+        <name>ProductType_F__c</name>
+    </fields>
+    <fields>
+        <label>Produkt-ID</label>
+        <name>Product_ID_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label>Menge</label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Position number for this contract item. --></help>
+        <label>Vertragsobjektposition</label>
+        <name>RecordNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Solution Name --></label>
+        <name>Solution_Name_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Source quote item from which this contract item was created. --></help>
+        <label>Ausgangsangebotsobjekt</label>
+        <name>SourceQuoteItem__c</name>
+        <relationshipLabel>Vertragsobjekte</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Vertragsobjekt Startdatum</label>
+        <name>StartDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label>Laufzeit (Monate)</label>
+        <name>Term__c</name>
+    </fields>
+    <fields>
+        <label>Gesamtrabatt (abs)</label>
+        <name>TotalDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <label>Gesamtrabatt (%)</label>
+        <name>TotalDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price multiplied by quantity. --></help>
+        <label>Gesamtlistenpreis</label>
+        <name>TotalPrice__c</name>
+    </fields>
+    <fields>
+        <label>Gesamtwert</label>
+        <name>TotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Price (Display) --></label>
+        <name>UnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of product (list price less the discount) --></help>
+        <label>Stückpreis</label>
+        <name>UnitPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total volume discount off of list price (e.g., $100 off). --></help>
+        <label><!-- Vol. Disc. (Abs) --></label>
+        <name>VolDiscAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Percentage volume discount off of list price (e.g., 20% off). --></help>
+        <label><!-- Vol. Disc. (%) --></label>
+        <name>VolDisc__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Weekly basis, shown in currency. --></help>
+        <label>Wöchentliches Mark-up (abs)</label>
+        <name>WeeklyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the adjustment on the main --></help>
+        <label>Wöchentliches Mark-up (%)</label>
+        <name>WeeklyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Weekly basis. --></help>
+        <label>Wöchentliche Kosten</label>
+        <name>WeeklyCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Weekly basis. --></help>
+        <label>Wöchentliche Kosten inklusive Unterlini</label>
+        <name>WeeklyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a weekly basis, shown in currency. --></help>
+        <label>Wöchentlicher Rabatt (abs)</label>
+        <name>WeeklyDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed weekly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed weekly, including the discount on the main line if the main line is billed weekly. --></help>
+        <label>Wöchentlicher Rabatt (%)</label>
+        <name>WeeklyDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed weekly, and the unit price of the configurable product, if the configurable product is billed weekly. --></help>
+        <label>Wöchtl. erweit. Preis inkl. Unterlinien</label>
+        <name>WeeklyExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed weekly. --></help>
+        <label>Wöchtl. erweit. Preis alle Unterlinien</label>
+        <name>WeeklyExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Weekly basis, shown in currency. --></help>
+        <label>Wöchentliche Marge (abs)</label>
+        <name>WeeklyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <label>Wöchentliche Liste</label>
+        <name>WeeklyPriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a weekly basis. --></help>
+        <label>Wöchentliche Liste inklusive Unterlinien</label>
+        <name>WeeklyPriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a weekly basis, before any discounts are applied. --></help>
+        <label>Wöchentliche Liste aller Unterlinien</label>
+        <name>WeeklyPriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>Wöchentlicher Gesamtstückpreis</label>
+        <name>WeeklyTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis after discounts have been applied. --></help>
+        <label>Wöchentlicher Gesamtstückpreis</label>
+        <name>WeeklyTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Weekly basis. --></help>
+        <label>Wöchentlicher Stückpreis inkl. Unterlin</label>
+        <name>WeeklyUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Weekly basis. --></help>
+        <label>Wöchentlicher Stückpreis alle Unterlini</label>
+        <name>WeeklyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis before any discounts are applied. --></help>
+        <label>Wöchentliche Gesamtliste</label>
+        <name>WeeklyValueBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the margin on the main line if the --></help>
+        <label>Wöchentliche Marge (%)</label>
+        <name>Weekly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate adjustment1 on products that are billed on a Yearly basis, shown in currency. --></help>
+        <label>Jährliches Mark-up (abs)</label>
+        <name>YearlyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Adjustment that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the adjustment on the main --></help>
+        <label>Jährliches Mark-up (%)</label>
+        <name>YearlyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Yearly basis. --></help>
+        <label>Jährliche Kosten</label>
+        <name>YearlyCostPriceBeforeAdjustment_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate cost price of all sub-lines in a configurable product that are billed on a Yearly basis. --></help>
+        <label>Jährliche Kosten inklusive Unterlinien</label>
+        <name>YearlyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate discount on products that are billed on a yearly basis, shown in currency. --></help>
+        <label>Jährlicher Rabatt (abs)</label>
+        <name>YearlyDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Discount applied to a regular product that is billed yearly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed yearly, including the discount on the main line if the main line is billed yearly. --></help>
+        <label>Jährlicher Rabatt (%)</label>
+        <name>YearlyDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Sum of the aggregate extended price of all components of a configurable product, where the components are billed yearly, and the unit price of the configurable product, if the configurable product is billed yearly. --></help>
+        <label>Jährlich erweit. Preis inkl. Unterlinien</label>
+        <name>YearlyExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed yearly. --></help>
+        <label>Jährlich erweit. Preis alle Unterlinien</label>
+        <name>YearlyExtendedPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate margin on products that are billed on a Yearly basis, shown in currency. --></help>
+        <label>Jährliche Marge (abs)</label>
+        <name>YearlyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Margin that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the margin on the main line if the --></help>
+        <label>Jährliche Marge (%)</label>
+        <name>YearlyMarginF__c</name>
+    </fields>
+    <fields>
+        <label>Jährliche Liste</label>
+        <name>YearlyPriceBeforeDiscountDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a yearly basis. --></help>
+        <label>Jährliche Liste inklusive Unterlinien</label>
+        <name>YearlyPriceBeforeDiscount_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price of all sub-lines in a configurable product that are billed on a yearly basis, before any discounts are applied. --></help>
+        <label>Jährliche Liste alle Unterlinien</label>
+        <name>YearlyPriceBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <label>Jährlicher Gesamtstückpreis</label>
+        <name>YearlyTotalValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis after discounts have been applied. --></help>
+        <label>Jährlicher Gesamtstückpreis</label>
+        <name>YearlyTotalValue_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Yearly basis. --></help>
+        <label>Jährlicher Stückpreis inkl. Unterlinien</label>
+        <name>YearlyUnitPrice_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate unit price of all sub-lines in a configurable product that are billed on a Yearly basis. --></help>
+        <label>Jährlicher Stückpreis alle Unterlinien</label>
+        <name>YearlyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis before any discounts are applied. --></help>
+        <label>Jährliche Gesamtliste</label>
+        <name>YearlyValueBeforeDiscount_F__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>MnContractItemLayout19</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnContractItemLayout20</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Id --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>Der Einkaufspreis sollte größer oder gleich null sein</errorMessage>
+        <name>VMnCostPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Der Listenpreis sollte größer oder gleich null sein</errorMessage>
+        <name>VMnListPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Der Stückpreis sollte größer oder gleich null sein</errorMessage>
+        <name>VMnUnitPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Die Menge kann nicht null oder negativ sein</errorMessage>
+        <name>VmnQuantityValValidity</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Browse_Catalog --></label>
+        <name>Browse_Catalog</name>
+    </webLinks>
+</CustomObjectTranslation>

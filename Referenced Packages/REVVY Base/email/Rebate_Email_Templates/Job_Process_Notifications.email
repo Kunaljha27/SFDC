@@ -1,0 +1,3 @@
+Description: {!MnRevvyJobRunDetail__c.Description__c}
+Error Message: {!MnRevvyJobRunDetail__c.ErrorMessage__c}
+For more details: {!MnRevvyJobRunDetail__c.Link}

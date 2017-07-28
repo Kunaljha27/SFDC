@@ -1,0 +1,13 @@
+<apex:page StandardController="REVVY__MnQuote__c" extensions="REVVY.CMnQuoteApprovalHistoryController" showheader="false" >
+<style>
+.pbButton{
+display:none;
+}
+.actionColumn{
+display:none;
+}
+</style>
+<div style="padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px;">
+<apex:relatedList list="ProcessSteps"  pageSize="1000"></apex:relatedList>
+</div>
+</apex:page>

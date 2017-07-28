@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sofon Proposal Organizer - Desktop Connector</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <description>This package takes care of the communication between your Salesforce org and your installed Sofon Proposal Organizer.
+It will send the opportunity ID over the clipboard to a .NET listener service that will launch the Sofon Proposal Organizer and load the correct opportunity information.</description>
+    <namespacePrefix>sofonDesktopCon</namespacePrefix>
+    <types>
+        <members>TestSofonAttachmentsTrigger</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>CopyOppInfoToClipboardByApplet</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>SofonAttachmentsTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>Opportunity.Sofon_Quote_Number__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Sofon_Web_URL</members>
+        <name>CustomLabel</name>
+    </types>
+    <types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
+    </types>
+    <types>
+        <members>SofonClipboardApplet</members>
+        <name>StaticResource</name>
+    </types>
+    <types>
+        <members>Opportunity.Copy_to_clipboard</members>
+        <members>Opportunity.Link_Quote</members>
+        <members>Opportunity.Start_Sofon_Web</members>
+        <name>WebLink</name>
+    </types>
+    <version>36.0</version>
+</Package>

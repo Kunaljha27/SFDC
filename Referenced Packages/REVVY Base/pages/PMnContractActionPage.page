@@ -1,0 +1,2 @@
+<apex:page controller="REVVY.CMnContractActionCtrl" action="{!url}">
+</apex:page>

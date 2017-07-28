@@ -1,0 +1,82 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnRemoter" docType="html-5.0" standardStylesheets="false" showheader="false" sidebar="false">
+<link href="{!$Resource.revvymobile}/revvy-mobile/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<style>
+    body{
+    /*border: 1px solid rgb(207, 212, 217);*/
+    background-color:transparent;
+    /*height:200px;*/
+  }
+.status{
+    text-transform: uppercase;
+  color: white;
+}
+.Draft{
+  background-color:#b0bdc6;
+}
+.Ready{
+  background-color:#1498cb;
+}
+.Ordered{
+  background-color:#44d6bc;
+}
+.Submitted{
+  background-color:#c3bc41
+}
+
+
+</style>
+
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/jquery.js"></script>
+<script type='text/javascript' src='/canvas/sdk/js/publisher.js'></script>
+
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/underscore-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone.geppetto.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/handlebars.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/bootstrap.min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/Backbone.ModelBinder.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/accounting.js"></script>
+<script id="status-view-template" type="text/template">
+ <span class="label label-primary status {{quoteStatus}}">{{quoteStatus}}</span>
+</script>
+<script>
+  //construct global namespaces
+var MyApp = {};
+var CMnNamespacePrefix = "{!namespacePrefix}";
+var CMnNamespacePrefixUS = "";
+var CMnNamespacePrefixDT = "";
+if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+    CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+    CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+}
+var currentQuoteStatus = "{!JSENCODE(MnQuote__c.Current_Status__c)}";
+var currentQuoteId = '<apex:outputText value="{!REVVY__MnQuote__c.Id}"/>';
+
+var ApexRemoteControllerNameDT = "CMnRemoter.";
+
+//views
+MyApp.StatusView = Backbone.View.extend({
+    template: Handlebars.compile($("#status-view-template").html()),
+    initialize: function () {
+        _.bindAll.apply(_, [this].concat(_.functions(this)));
+    },
+
+    render: function () {
+        var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+    }
+});
+
+$(function(){
+    var statusViewInstance = new MyApp.StatusView({
+        model : new Backbone.Model({
+            quoteId : currentQuoteId,
+            quoteStatus : currentQuoteStatus
+        })
+    });
+    statusViewInstance.render();
+    $("body").append(statusViewInstance.$el);
+});
+
+</script>
+</apex:page>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Revvy Goal</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Revvy Goals</value>
+    </caseValues>
+    <fields>
+        <label><!-- Configuration --></label>
+        <name>Configuration__c</name>
+        <picklistValues>
+            <masterLabel>Multiple Qualifications</masterLabel>
+            <translation><!-- Multiple Qualifications --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Qualification</masterLabel>
+            <translation><!-- No Qualification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single Qualification</masterLabel>
+            <translation><!-- Single Qualification --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- DataSource --></label>
+        <name>DataSource__c</name>
+        <relationshipLabel><!-- Revvy Goals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- External ID --></label>
+        <name>ExternalID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Program ID --></label>
+        <name>IncentiveProgram__c</name>
+        <relationshipLabel><!-- Revvy Goals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- RMCloudModifiedDate --></label>
+        <name>RMCloudModifiedDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target Earnings --></label>
+        <name>Target_Earnings__c</name>
+    </fields>
+    <layouts>
+        <layout>Incentive Program Line Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

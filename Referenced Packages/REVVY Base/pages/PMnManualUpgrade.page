@@ -1,0 +1,22 @@
+<apex:page controller="REVVY.CMnManualUpgradeController" sidebar="false">
+
+    <script>
+    function upgrading() {
+            document.querySelectorAll('input[value=Upgrade]')[0].setAttribute('value', 'Upgrading...');
+    }
+    </script>
+
+    <apex:form >
+        <br/><br/>
+        <h1>
+            <apex:outputPanel layout="block" id="currVersion" style="color:green">Current Version : {!currentVersion}</apex:outputPanel>
+        </h1>
+        <br/><br/>
+        <apex:pageBlock title="Revvy Manual Upgrade">
+            <apex:commandButton action="{!upgrade}" id="upgradeButton"
+                    onClick="upgrading()" value="Upgrade" reRender="upgradeButton,upgradeResult,currVersion"/>
+            <br/><br/>
+            <h1><apex:outputPanel layout="block" style="color:green" id="upgradeResult">{!upgradeResult}</apex:outputPanel></h1>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

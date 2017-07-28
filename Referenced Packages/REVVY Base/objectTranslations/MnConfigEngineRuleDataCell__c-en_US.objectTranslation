@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rule Data Cell</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rule Data Cells</value>
+    </caseValues>
+    <fields>
+        <help><!-- Specifies whether a rule condition should be based on the selection of any option in the option group. --></help>
+        <label><!-- Any Value --></label>
+        <name>Any_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Entered Attribute Max Value --></label>
+        <name>AttributeMaxValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Entered Attribute Value --></label>
+        <name>AttributeValue__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the attribute. --></help>
+        <label><!-- Attribute Id --></label>
+        <name>Attribute_Id__c</name>
+        <relationshipLabel><!-- Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Name of the attribute. --></help>
+        <label><!-- Attribute Name --></label>
+        <name>Attribute_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Operator for the attribute value. --></help>
+        <label><!-- Attribute Operator --></label>
+        <name>Attribute_Operator__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the attribute value. --></help>
+        <label><!-- Attribute Value --></label>
+        <name>Attribute_Value__c</name>
+        <relationshipLabel><!-- Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the product/category. --></help>
+        <label><!-- Category/Product target/condition --></label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel><!-- Catalog Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the product. --></help>
+        <label><!-- Category Option Value --></label>
+        <name>Category_Option_Value__c</name>
+        <relationshipLabel><!-- Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Whether the cell is a target or a condition of the rule. --></help>
+        <label><!-- Cell Type --></label>
+        <name>Cell_Type__c</name>
+        <picklistValues>
+            <masterLabel>Condition</masterLabel>
+            <translation><!-- Condition --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Target</masterLabel>
+            <translation><!-- Target --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TargetOG</masterLabel>
+            <translation><!-- TargetOG --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Whether the option is a regular option, category option, or a product attribute value. --></help>
+        <label><!-- Cell Value Type --></label>
+        <name>Cell_Value_Type__c</name>
+        <picklistValues>
+            <masterLabel>Attribute</masterLabel>
+            <translation><!-- Attribute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalog Node</masterLabel>
+            <translation><!-- Catalog Node --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Category Option</masterLabel>
+            <translation><!-- Category Option --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Field Value</masterLabel>
+            <translation><!-- Field Value --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Object</masterLabel>
+            <translation><!-- Object --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regular Option</masterLabel>
+            <translation><!-- Regular Option --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Column number used to identify a cell in the rule table. --></help>
+        <label><!-- Data Column Id --></label>
+        <name>ColNumber__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total discount off of list price (e.g., $100 off). --></help>
+        <label><!-- Discount (Absolute) --></label>
+        <name>Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off). --></help>
+        <label><!-- Discount Type --></label>
+        <name>Discount_Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percentage discount off of list price (e.g., 20% off). --></help>
+        <label><!-- Discount (Percent) --></label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expression --></label>
+        <name>Expression__c</name>
+        <relationshipLabel><!-- Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Field Value --></label>
+        <name>Field_Value__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Unique Identifier --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies whether the condition is based on target option. --></help>
+        <label><!-- Target Option --></label>
+        <name>IsTargetOption__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Target Selected --></label>
+        <name>Is_Target_Selected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label for target --></label>
+        <name>Label__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the option group. --></help>
+        <label><!-- Option Group --></label>
+        <name>OptionGroup_id__c</name>
+        <relationshipLabel><!-- Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Option --></label>
+        <name>Option__c</name>
+        <relationshipLabel><!-- Rule Data Cells (Option) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The quantity of the target option set by an auto-select rule. --></help>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of an option that belongs to a regular option group. --></help>
+        <label><!-- Regular Option Value --></label>
+        <name>Regular_Option_Value__c</name>
+        <relationshipLabel><!-- Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Row number of this condition cell in the rule table. --></help>
+        <label><!-- Data Row Id --></label>
+        <name>RowNumber__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the rule associated with this cell. --></help>
+        <label><!-- Rule --></label>
+        <name>Rule__c</name>
+        <relationshipLabel><!-- Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the set attribute. --></help>
+        <label><!-- Set Attribute Id --></label>
+        <name>Set_Attribute_Id__c</name>
+        <relationshipLabel><!-- Set Rule Data Cells --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Set name of the attribute. --></help>
+        <label><!-- Set Attribute Name --></label>
+        <name>Set_Attribute_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula that calculates the display value of a cell based on whether the cell is a regular option, category option, or attribute --></help>
+        <label><!-- Value Formula --></label>
+        <name>Value_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies whether an option group should be displayed or hidden when a visibility rule is triggered. --></help>
+        <label><!-- Visible --></label>
+        <name>Visible__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

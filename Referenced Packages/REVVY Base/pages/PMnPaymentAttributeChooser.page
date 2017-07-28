@@ -1,0 +1,37 @@
+<apex:page controller="REVVY.CMnPaymentAttributeChooserCntlr">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:PageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value=""/>
+                    <apex:outputText value="{!message}" style="font-size:9pt;"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockTable value="{!attributeWrapper}"  var="att">
+
+                    <apex:column headerValue="Payment Attribute" value="{!att.rollupAttribute.REVVY__Label__c}"></apex:column>
+                    <apex:column headerValue="Value"><apex:inputText value="{!att.rollupAttributeValue}"/></apex:column>
+                </apex:pageBlockTable>
+                <apex:pageBlockSectionItem />
+                <!-- US24989: Payment Roll-Up changes
+                <apex:pageBlockSectionItem>
+                    <apex:outputText value="Virtual SKU"/>
+                    <apex:selectList value="{!selectedVSKU}" size="1" label="Virtual SKU" multiselect="false">
+                        <apex:selectOptions value="{!vSKUNames}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem/>
+                <apex:pageBlockSectionItem>
+                    <apex:outputText value="Geography"/>
+                    <apex:selectList value="{!selectedGeo}" size="1" label="Geography" multiselect="false">
+                        <apex:selectOptions value="{!geoNames}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem> -->
+                <apex:pageBlockSectionItem />
+            </apex:PageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!cancelAction}" value="Cancel"/>
+                <apex:commandButton action="{!createPayment}" value="Continue"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

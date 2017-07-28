@@ -1,0 +1,327 @@
+<apex:page id="ERMassApprovalPage" tabStyle="pse__Expense_Report__c" title="{!$Label.manageERtoapprove_title}" controller="pse.ManageERToApproveController" action="{!init}">
+    <apex:includeScript value="{!$Resource.pse__YUI3MinCombo}"/>
+    <script type="text/javascript">
+    /*
+    * although is is copy of jsComponents's code, but the only difference is, it uses old YUI version.
+    * The old version use "WidgetPositionExt" for overlay positioning but new YUI version has changed it to WidgetPositionAlign, which causes some issues with SG ui
+    */
+    var _TooltipHandler = {
+        toolTipOverlay : null,
+        
+        onMouseOver : function (e)
+        {   
+            if(this.hasClass('infoImageOff')){
+                this.replaceClass('infoImageOff','infoImageOn');
+            }
+            _TooltipHandler.toolTipOverlay.set("bodyContent", this.get('alt'));
+            _TooltipHandler.toolTipOverlay.set("align", {node:this, 
+                     points:[_yui.WidgetPositionExt.BL, _yui.WidgetPositionExt.TR]});
+            _TooltipHandler.toolTipOverlay.show();
+            e.preventDefault();
+        },
+        onMouseOut : function (e)
+        {
+            if(this.hasClass('infoImageOn')){
+                this.replaceClass('infoImageOn','infoImageOff');
+            }
+            _TooltipHandler.toolTipOverlay.hide();
+            e.preventDefault();
+        },
+    
+        prepare : function() {
+            _yui.one('body').append(_yui.Node.create('<div id="toolTipDiv" class="toolTipOverlay"></div>'));
+            _TooltipHandler.toolTipOverlay = new _yui.Overlay({
+                contentBox:"#toolTipDiv",
+                visible:false
+            });
+            _TooltipHandler.toolTipOverlay.render();
+        },
+        bindTooltip : function() {
+            _yui.on("mouseover", _TooltipHandler.onMouseOver, ".infoImage");
+            _yui.on("mouseout", _TooltipHandler.onMouseOut, ".infoImage");
+        }
+    }
+    function selectAll(comp, checkBoxId) {
+        var inputElem = document.getElementsByTagName("input");
+        for ( var i = 0; i < inputElem.length; i++) {
+            if (inputElem[i].id.indexOf(checkBoxId) != -1)
+                inputElem[i].checked = comp.checked;
+        }
+    }
+
+    function selectExpenseReport(comp) {
+        var allchecked = true;
+        var lstindex = comp.id.lastIndexOf(':') + 1;
+        var compID = comp.id.substring(lstindex, comp.id.length);
+        var inputElem = document.getElementsByTagName("input");
+        for ( var i = 0; i < inputElem.length; i++) {
+            if (inputElem[i].id.indexOf(compID) != -1) {
+                if (!inputElem[i].checked)
+                    allchecked = false;
+            }
+        }
+        if (allchecked)
+            document.getElementById('selectAllER').checked = true;
+        else
+            document.getElementById('selectAllER').checked = false;
+    }
+</script>
+    <apex:stylesheet value="{!URLFOR($Resource.pse__timecard2, 'YUI_TC_CSS.css')}" />
+    <style>
+        .sortingClass {
+            width: 21px;
+            height: 14px;
+            vertical-align: sub;
+        }
+        
+        .ascImage {
+            background: url('/img/sort_asc_arrow.gif');
+        }
+        
+        .descImage {
+            background: url('/img/sort_desc_arrow.gif');
+        }
+        .infoImage{margin-left: 2px; margin-right: 2px; height: 16px;}
+            .toolTipOverlay {color: #000; padding: .45em; background : url("{!URLFOR($Resource.jsComponentsResources, '/popupMenuBg.gif')}") repeat-x scroll left bottom #FFFFFF; border: 1px solid #7EABCD;/*margin-left : 25px;*/}
+    </style>
+
+    <c:WaitComponent />
+    <apex:sectionHeader title="{!$Label.manage_expense_reports_to_approve}" help="{!$Page.pse__ManageERToApproveHelp}" />
+    <apex:pageBlock rendered="{!NOT(isEverythingOk)}">
+        <apex:pageMessages />
+    </apex:pageBlock>
+    <apex:form id="MassERAppForm" rendered="{!isEverythingOk}">
+        <apex:actionStatus id="ajaxStatus" onstart="wait(true)" onstop="wait(false)" />
+        
+        <apex:actionRegion >
+        <apex:actionFunction name="jsOnProjectChange" action="{!onProjectChange}" rerender="milestoneListOP" oncomplete="onProjectChangeDone();updateAnchorTargetAttribute();">
+            <apex:param name="selectedProjFilter" assignTo="{!selectedProjFilter}" value="" />
+        </apex:actionFunction>
+        </apex:actionRegion>
+        
+        <apex:actionFunction name="sortData" action="{!Sort}" rerender="ERPageBlock" status="ajaxStatus" oncomplete="onSortDataDone();updateAnchorTargetAttribute();">
+            <apex:param name="sortField" assignTo="{!sortField}" value="" />
+        </apex:actionFunction>
+
+        <apex:pageblock id="FilterBlock">
+            <apex:pageblockSection columns="2" title="Filter Approval Requests" id="erFilterByTable">
+                <apex:pageBlockSectionItem id="projectListPSI">
+                    <apex:outputLabel >{!$Label.timecard_entry_label_proj_assign} </apex:outputLabel>
+                    <apex:selectList size="1" value="{!selectedProjFilter}" multiselect="false" id="projectLst" onchange="onAssignmentChange(this)">
+                        <apex:selectOptions value="{!filterByProjORAssigOptions}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$Label.common_label_resource} </apex:outputLabel>
+                    <apex:selectList size="1" value="{!selectedResourceFilter}" multiselect="false">
+                        <apex:selectOptions value="{!filterByResourceOptions }" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="milestoneListPSI">
+                <apex:outputLabel for="milestoneList" value="{!$Label.common_label_milestone}" />
+                <apex:outputPanel id="milestoneListOP">
+                <select id="milestoneList" onchange="document.getElementById('{!$Component.milestoneListHidden}').value = this.value;">
+                    <option value="none">--None--</option>
+                    <apex:repeat value="{!filterByMilestoneOptions}" var="msOptionList">
+                        <apex:repeat value="{!msOptionList}" var="msOption">
+                        <option value="{!msOption.value}" >{!HTMLENCODE(msOption.label)}</Option>
+                        </apex:repeat>
+                    </apex:repeat>
+                </select>
+                <apex:inputHidden value="{!selectedmilestoneFilter}" id="milestoneListHidden"/>
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel for="billableList" value="{!$Label.common_label_billable}" />
+                <apex:selectList id="billableList" value="{!selectedBillableFilter}" multiselect="false" size="1">
+                    <apex:selectOptions value="{!filterByBillableOptions}" />
+                </apex:selectList>
+            </apex:pageBlockSectionItem>
+            </apex:pageblockSection>
+            
+            <apex:pageblockButtons location="bottom">
+                <apex:commandButton value="Filter" action="{!filterRecords}" status="ajaxStatus" rerender="ERPageBlock" oncomplete="onFilterRecordsDone();updateAnchorTargetAttribute();"/>
+                <apex:commandButton value="List All" action="{!listAll}" status="ajaxStatus" rerender="ERPageBlock, FilterBlock" oncomplete="onListAllDone();updateAnchorTargetAttribute();"/>
+            </apex:pageblockButtons>
+        </apex:pageblock>
+
+
+        <apex:pageBlock title="{!$Label.expense_label_expense_report_header}" id="ERPageBlock">
+            <apex:pageMessages />
+            <apex:outputPanel rendered="{!foundItemsToApprove}">
+                <apex:pageblockTable value="{!paginator.currentItems}" var="itemToApproveWrapper" width="100%" columnswidth="50px,50px" cellpadding="4" id="ERList">
+                    <apex:column width="20px">
+                        <apex:facet name="header">
+                            <input type="checkbox" id="selectAllER" onclick="selectAll(this, 'selectSingleER')" />
+                        </apex:facet>
+                        <apex:inputCheckbox id="selectSingleER" value="{!itemToApproveWrapper.isSelected}" onclick="selectExpenseReport(this)" styleclass="singleERStyleClass" />
+                    </apex:column>
+                    
+                    <apex:column width="165px" >
+                        <apex:facet name="header">
+                            <apex:outputPanel >
+                                <apex:outputLink value="javascript:void(0);" onclick="sortData('Name');">
+                                     <apex:outputText value="{!$Label.expense_label_expense_report_header}" />
+                                     <img src="/s.gif" class="sortingClass {!IF(paginator.dataSource.sortField = 'Name',IF(paginator.dataSource.isAscending , 'ascImage','descImage'),'')}" />
+                                 </apex:outputLink>
+                            </apex:outputPanel>
+                        </apex:facet>
+                        <a href="/{!itemToApproveWrapper.expenseReport.id}" target="_blank">
+                            <apex:outputField value="{!itemToApproveWrapper.expenseReport.Name}" />
+                        </a>
+                    </apex:column>
+                    
+                    <apex:column width="20px" rendered="{!renderTooltip}">
+                        <apex:facet name="header"></apex:facet>
+                        <div style="white-space:nowrap;" align="center">
+                            <apex:image id="infoImage" value="{!URLFOR($Resource.pse__appirioCommon, 'info_2.png')}" styleClass="infoImage" alt="{!itemToApproveWrapper.tooltip}" />
+                        </div>
+                    </apex:column>
+                 
+                    <!-- Code changes done for agile task : AT20232 -->
+		             <apex:repeat value="{!eRColumns}" var="f" >   
+		                	<apex:column >
+			                    <apex:facet name="header">
+			                        <apex:outputLink value="javascript:void(0);" styleClass="sort" onclick="sortData('{!f.fieldPath}');">
+										<apex:outputText value="{!f.Label}" />
+										<img src="/s.gif" class="sortingClass {!IF(sortField = f.fieldPath,IF(paginator.dataSource.isAscending , 'ascImage','descImage'),'')}" />
+			                        </apex:outputLink>
+			                    </apex:facet>
+			                    <apex:outputfield value="{!itemToApproveWrapper.expenseReport[f.fieldPath]}" />
+			                </apex:column>
+	                </apex:repeat> 
+                
+                    <apex:column rendered="{!showNumberOfExpenseLines}">
+                        <apex:facet name="header">
+                            <apex:outputText value="{!$Label.expense_approval_ui_label_number_of_expense_lines}" />
+                        </apex:facet>
+                        <apex:outputText value="{!itemToApproveWrapper.noOfExpenseLines}"/> 
+                    </apex:column>
+                    
+                     <!-- Changes done for Agile Task: AT6965   Dated: 22 Oct, 2012 -->
+	                <apex:column >
+	                	<apex:facet name="header"></apex:facet>
+	                    <apex:outputPanel rendered="{!itemToApproveWrapper.isError}" >
+	                        <img height="14px" style="padding-left: 2px;padding-right: 5px;" src="/img/msg_icons/error24.png" title="{!itemToApproveWrapper.errorMessage}"/>
+	                    </apex:outputPanel>
+	                </apex:column>
+                    
+                </apex:pageblockTable>
+
+            <table class="list">
+            <tfoot>
+                <tr class="totalRow">
+                    <th class="totalRow" scope="col" align="left" >
+                        <apex:outputText value="{!paginator.statusMessage}" />
+                        &nbsp;&nbsp;&nbsp;
+                        <apex:commandButton action="{!paginator.first}"  value="First" disabled="{!NOT(paginator.hasFirst)}" rerender="ERPageBlock" status="ajaxStatus" oncomplete="onPageChangeDone();updateAnchorTargetAttribute();"/>
+                        <apex:commandButton action="{!paginator.previous}"  value="Previous" disabled="{!NOT(paginator.hasPrevious)}" rerender="ERPageBlock" status="ajaxStatus" oncomplete="onPageChangeDone();updateAnchorTargetAttribute();"/>
+                        <apex:commandButton action="{!paginator.next}"  value="Next" disabled="{!NOT(paginator.hasNext)}" rerender="ERPageBlock" status="ajaxStatus" oncomplete="onPageChangeDone();updateAnchorTargetAttribute();"/>
+                        <apex:commandButton action="{!paginator.last}"  value="Last" disabled="{!NOT(paginator.hasLast)}" rerender="ERPageBlock" status="ajaxStatus" oncomplete="onPageChangeDone();updateAnchorTargetAttribute();"/>
+                    </th>
+                </tr>
+            </tfoot>
+            </table>
+
+
+                <br />
+                <apex:pageBlockSection showHeader="true" title="{!$Label.common_label_comments}" collapsible="false" columns="2">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >{!$Label.common_label_comments} </apex:outputLabel>
+                        <apex:inputTextarea cols="60" rows="5" value="{!approverComment}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                </apex:outputpanel>
+                <apex:pageblockButtons location="bottom">
+                    <apex:commandButton value="{!$Label.common_label_approve}" action="{!approveRecords}" status="ajaxStatus" rerender="ERPageBlock, FilterBlock" rendered="{!foundItemsToApprove}" oncomplete="onApproveRecordsDone();updateAnchorTargetAttribute();" />
+                    <apex:commandButton value="{!$Label.common_label_reject}" action="{!rejectRecords}" status="ajaxStatus" rerender="ERPageBlock, FilterBlock" rendered="{!foundItemsToApprove}" oncomplete="onRejectRecordsDone();updateAnchorTargetAttribute();" />
+                    <apex:commandButton value="{!$Label.common_label_cancel}" action="{!cancel}" />
+                </apex:pageblockButtons>
+        </apex:pageBlock>
+
+
+    </apex:form>
+    
+    <script>
+        function onAssignmentChange(projDOM){
+            var milestoneListDOM = document.getElementById('milestoneList');
+            milestoneListDOM.disabled = (projDOM.value == 'none');
+            
+            if (milestoneListDOM.options) milestoneListDOM.options.length = 0;
+            if(!milestoneListDOM.disabled){
+                milestoneListDOM.options[0] = new Option('Loading...', 'none');
+            }else{
+                milestoneListDOM.options[0] = new Option('--None--', 'none');
+            } 
+            jsOnProjectChange(projDOM.value);
+        }
+        
+        
+        var yuiControlledOnDomReady = function () {
+            if({!renderTooltip}){
+                _TooltipHandler.prepare();
+                _TooltipHandler.bindTooltip();
+            }
+        }
+        
+        
+        YUI({combine: false, fetchCSS : false, timeout: 10000}).use("node", "NodeList","overlay", "anim", function(Y) {
+            _yui = Y;
+            _yui.on('domready', yuiControlledOnDomReady, _yui); 
+        });
+        
+        function onSortDataDone(){
+            bindAll();
+        }
+        function onFilterRecordsDone(){
+            bindAll();
+        } 
+        function onListAllDone(){
+            document.getElementById('milestoneList').disabled = true;
+            bindAll();
+        }  
+        function onPageChangeDone(){
+            bindAll();
+        }
+        function onApproveRecordsDone(){
+        	document.getElementById('milestoneList').disabled = true;
+            bindAll();
+        }
+        function onRejectRecordsDone(){
+        	document.getElementById('milestoneList').disabled = true;
+            bindAll();
+        }
+        function bindAll() {
+            if({!renderTooltip}){
+                _TooltipHandler.bindTooltip();
+            }
+        }
+        function setFocusOnLoad() {}
+        
+        document.getElementById('milestoneList').disabled = true;
+        function onProjectChangeDone(){
+            var milestoneListDOM = document.getElementById('milestoneList');
+            var projectListDOM = document.getElementById('{!$Component.ERMassApprovalPage.MassERAppForm.FilterBlock.erFilterByTable.projectListPSI.projectLst}');
+            milestoneListDOM.disabled = (projectListDOM.value == 'none');   
+        }
+        
+        function updateAnchorTargetAttribute() {
+			// This is to set the anchor tag target as _blank to open in new tab.
+			var parentDiv = document.getElementById('{!$Component.ERMassApprovalPage.MassERAppForm.ERPageBlock.ERList}');
+			var inputElem = parentDiv.getElementsByTagName("a"); 
+	    	for ( var i = 0; i < inputElem.length; i++) {
+    			if(inputElem[i].className.indexOf('sort') == -1){
+		        	inputElem[i].target = '_blank';
+		        	inputElem[i].onmouseover = '';
+	        	}
+	    	} 
+		}
+		
+		window.onload = function() {
+			updateAnchorTargetAttribute();
+			}
+    </script>
+    
+</apex:page>

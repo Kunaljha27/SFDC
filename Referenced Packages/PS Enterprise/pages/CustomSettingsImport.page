@@ -1,0 +1,35 @@
+<apex:page controller="pse.CustomSettingsImportController">
+<script type="text/javascript">
+function confirmRestoreDefault(value) 
+{
+    if (!value){return true;}
+    if (confirm('Are you sure you want to delete all Custom Settings data and reload from the chosen file?')) 
+    {
+      return true;
+    }
+    return false;
+}
+</script>
+
+    <h1>Use this page to import Custom Settings from an XML file</h1>
+    <br/>
+    <apex:outputText rendered="{!devMode}">Development Import Activated! The Namespace will be removed from all Custom Settings values.</apex:outputText>
+    <br/>
+    <p/>    
+    <apex:form >
+    
+       <apex:selectList value="{!selectedConfig}" multiselect="false"  size="1">
+            <apex:selectOptions value="{!configurationFileSelectOptions}"/>
+       </apex:selectList>
+      &nbsp;&nbsp;
+      <apex:commandButton action="{!LoadCustomSettings}" value="Import Custom Settings"  />
+      &nbsp;&nbsp;
+      <apex:inputCheckbox id="restoreToDefault" value="{!restoreDefault}" immediate="true" onclick="return confirmRestoreDefault(this.checked);"/>
+      <apex:outputLabel value="Replace All Values from File" for="restoreToDefault" />
+      
+
+    <br/>
+        <apex:InputTextArea rows="30" cols="1000" style="width:100%;white-space:pre;" readonly="true" value="{!results}"  />
+    </apex:form>
+
+</apex:page>

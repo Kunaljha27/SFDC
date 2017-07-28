@@ -1,0 +1,243 @@
+<apex:page standardController="pse__Proj__c" extensions="ffps_philips.PsaMarginSummaryController">
+<style type="text/css">
+
+.left {
+  border-left: black solid thin !important;
+  width: 300px;
+}
+
+.right{
+  border-right: black solid thin !important;
+  width: 300px;
+  text-align: right;
+}
+
+.topLeftBottom{
+  border-left: black solid thin !important;
+  border-top: black solid thin !important;
+  border-bottom: black solid thin !important;
+  width: 300px;
+}
+
+.topRightBottom{ 
+  border-right: black solid thin !important;
+  border-top: black solid thin !important;
+  border-bottom: black solid thin !important;
+  width: 300px;
+  text-align: right;
+}
+
+</style>
+  <apex:form >
+    <apex:pageBlock rendered="{!$ObjectType.pse__Proj__c.fields.pse__Margin__c.Accessible}">
+      <apex:pageBlockSection columns="3">
+         <apex:pageBlockSectionItem > 
+            <apex:outputPanel >
+               <table cellpadding="5"  cellspacing="0">
+                 <tr bgcolor="#CBCBCB">
+                   <td class="topLeftBottom"><font color="white"><B>Billings</B></font></td>
+                   <td class="topRightBottom"></td>
+                 </tr>
+                 <tr >
+                   <th class="left"><apex:outputLabel value="Actual Billings"></apex:outputLabel></th>
+                   <td class="right">
+                     <apex:outputText value="{!DynamicFormatStringNoDec}">
+                       <apex:param value="{!wrProject.billings}" />
+                     </apex:outputText>
+                     <apex:outputText value=" {!wrProject.currencyCode}" />
+                   </td>
+                 </tr>
+                 <tr>
+                   <th class="left"><apex:outputLabel value="Actual Pass-Through Billings"></apex:outputLabel></th>
+                   <td class="right">
+                     <apex:outputText value="{!DynamicFormatStringNoDec}">
+                       <apex:param value="{!wrProject.passThroughBillings}" />
+                     </apex:outputText>
+                     <apex:outputText value=" {!wrProject.currencyCode}" />
+                   </td>
+                 </tr>
+                 <tr>
+                   <th class="left"><apex:outputLabel value="Future Billings Internal"></apex:outputLabel></th>
+                   <td class="right">
+                     <apex:outputText value="{!DynamicFormatStringNoDec}">
+                       <apex:param value="{!wrProject.futureBillingsInternal}" />
+                     </apex:outputText>
+                     <apex:outputText value=" {!wrProject.currencyCode}" />
+                   </td>
+                 </tr>
+                 <tr>
+                   <th class="left"><apex:outputLabel value="Future Billings External"></apex:outputLabel></th>
+                   <td class="right">
+                     <apex:outputText value="{!DynamicFormatStringNoDec}">
+                       <apex:param value="{!wrProject.futureBillingsExternal}" />
+                     </apex:outputText>
+                     <apex:outputText value=" {!wrProject.currencyCode}" />
+                   </td>
+                 </tr>
+                 <tr>
+                   <th class="left"><apex:outputLabel value="Unscheduled Billings"></apex:outputLabel></th>
+                   <td class="right">
+                     <apex:outputText value="{!DynamicFormatStringNoDec}">
+                       <apex:param value="{!wrProject.unscheduledBillings}" />
+                     </apex:outputText>
+                     <apex:outputText value=" {!wrProject.currencyCode}" />
+                   </td>
+                 </tr>
+                 <tr >
+                   <th class="left"><apex:outputLabel value="Future Pass-Through Billings"></apex:outputLabel></th>
+                   <td class="right">
+                     <apex:outputText value="{!DynamicFormatStringNoDec}">
+                       <apex:param value="{!getFuturePassThroughBillings}" />
+                     </apex:outputText>
+                     <apex:outputText value=" {!wrProject.currencyCode}" />
+                   </td>
+                 </tr>
+                 <tr>
+                   <th class="topLeftBottom"><apex:outputLabel value="Total Billings at Completion"></apex:outputLabel></th>
+                   <td class="topRightBottom">
+                     <apex:outputText value="{!DynamicFormatStringNoDec}">
+                       <apex:param value="{!wrProject.totalBillingsAtCompletion}" />
+                     </apex:outputText>
+                     <apex:outputText value=" {!wrProject.currencyCode}" />
+                   </td>
+                 </tr>
+               </table>  
+             </apex:outputPanel>
+         </apex:pageBlockSectionItem> 
+
+         <apex:pageBlockSectionItem > 
+          <apex:outputPanel >
+            <table  cellpadding="5"  cellspacing="0">
+               <tr bgcolor="#CBCBCB">
+                 <td class="topLeftBottom"><font color="white"><B>Cost</B></font></td>
+                 <td class="topRightBottom"></td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Actual Costs"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!getNonExpCost}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Actual Expense Costs"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!wrProject.expenseCosts}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Future Cost Internal"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!wrProject.futureCostInternal}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Future Cost External"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!wrProject.futureCostExternal}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Unscheduled Costs"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!wrProject.unscheduledCost}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Future Expense Cost"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!wrProject.futureExpenseCosts}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="topLeftBottom"><apex:outputLabel value="Total Cost at Completion"></apex:outputLabel></th>
+                 <td class="topRightBottom">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!wrProject.totalCostAtCompletion}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+             </table>  
+            </apex:outputPanel>
+         </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem > 
+          <apex:outputPanel >
+            <table cellpadding="5"  cellspacing="0">
+               <tr bgcolor="#CBCBCB">
+                 <td class="topLeftBottom"><font color="white"><B>Margin</B></font></td>
+                 <td class="topRightBottom"></td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Margin % at Completion"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatString}">
+                     <apex:param value="{!wrProject.marginPctAtCompletion}" />
+                   </apex:outputText>
+                   <apex:outputText value=" %" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Planned Margin %"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatString}">
+                     <apex:param value="{!wrProject.plannedMargin}" />
+                   </apex:outputText>
+                   <apex:outputText value=" %" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left"><apex:outputLabel value="Margin Variance %"></apex:outputLabel></th>
+                 <td class="right">
+                   <apex:outputText value="{!DynamicFormatString}">
+                     <apex:param value="{!wrProject.marginVariancePct}" />
+                   </apex:outputText>
+                   <apex:outputText value=" %" />
+                 </td>
+               </tr>
+               <tr>
+                 <th class="left" style="height: 43px !important"></th>
+                 <td class="right" style="height: 43px !important"></td>
+               </tr>
+               <tr>
+                 <th class="left"></th>
+                 <td class="right"></td>
+               </tr>
+               <tr>
+                 <th class="left"></th>
+                 <td class="right"></td>
+               </tr>
+               <tr>
+                 <th class="topLeftBottom"><apex:outputLabel value="Margin at Completion"></apex:outputLabel></th>
+                 <td class="topRightBottom">
+                   <apex:outputText value="{!DynamicFormatStringNoDec}">
+                     <apex:param value="{!wrProject.marginAtCompletion}" />
+                   </apex:outputText>
+                   <apex:outputText value=" {!wrProject.currencyCode}" />
+                 </td>
+               </tr>
+             </table>   
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem> 
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

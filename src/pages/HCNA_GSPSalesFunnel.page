@@ -1,0 +1,188 @@
+<apex:page controller="HCNA_GSPSalesFunnelController" sidebar="false">
+        <!-- Google API inclusion -->
+        <apex:includeScript id="GoogleAPI" value="https://www.google.com/jsapi" />
+        <apex:sectionHeader title="For Internal Use Only. Not for compensation purposes. Values are shown in USD." subtitle="Sales Funnel"/>
+        <apex:outputText >This is a current snapshot of the Sales Funnel : {!Now()}</apex:outputText>
+        <!-- Google Charts will be drawn in this DIV -->
+        <html>
+        <table>        
+            <tr>
+                <td width="50%" id="chartBlockIS"></td>              
+                <td width="50%" id="chartBlockUS"></td>
+            </tr>               
+            <tr>
+                <td width="50%" id="chartBlockPCMS"></td>            
+                <td width="50%" id="chartBlockHISS"></td>
+            </tr>
+            <tr>
+                <td width="50%" id="chartBlockPOS"></td>            
+            </tr>
+        </table>
+        </html>
+        
+        <script type="text/javascript">
+            // Load the Visualization API and the piechart package.
+            google.load('visualization', '1.0', {'packages':['corechart']});
+            
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.setOnLoadCallback(initCharts);
+        
+            function initCharts() {        
+                           
+               HCNA_GSPSalesFunnelController.loadImagingSystemsData(
+                     '{!$CurrentPage.parameters.AccountId}',
+                     function(result, event){ 
+                         // load the chart
+                         var visualization = new google.visualization.PieChart(document.getElementById('chartBlockIS'));
+                         // Prepare table model for chart with columns
+                         var data = new google.visualization.DataTable();
+                         data.addColumn('string', 'IS');
+                         data.addColumn('number', 'Value');                            
+                         // add rows from the remoting results
+                         for(var row = 0; row < result.length; row++){
+                            var record = result[row];                           
+                            data.addRow([record.name, Math.round(record.value)]);
+                          }
+                          //Format data for display 
+                        var formatter = new google.visualization.NumberFormat({pattern: '###,###'});
+                        formatter.format(data, 1);
+                        
+                        // draw the chart with some options to make it look nice.
+                        //visualization.draw(data, {title: 'Imaging System', legend : {position: 'right', textStyle: {color: 'blue', fontSize: 10}}, width:window.innerWidth,vAxis:{textStyle:{fontSize: 10}},hAxis:{textStyle:{fontSize: 10},showTextEvery:1,slantedText:false}, pieHole: 0.4, sliceVisibilityThreshold : 0});
+                        visualization.draw(data, {title: 'Imaging System', pieHole: 0.4, pieSliceText: 'value', sliceVisibilityThreshold : 0});
+                  }, {escape:true});    
+                  
+                  HCNA_GSPSalesFunnelController.loadUltrasoundData(
+                     '{!$CurrentPage.parameters.AccountId}',
+                     function(result, event){ 
+                         // load the chart
+                         var visualization = new google.visualization.PieChart(document.getElementById('chartBlockUS'));
+                         // Prepare table model for chart with columns
+                         var data = new google.visualization.DataTable();
+                         data.addColumn('string', 'US');
+                         data.addColumn('number', 'Value');                            
+                         // add rows from the remoting results
+                         for(var row = 0; row < result.length; row++){
+                            var record = result[row];                           
+                            data.addRow([record.name, Math.round(record.value)]);
+                          }
+                          //Format data for display 
+                        var formatter = new google.visualization.NumberFormat({pattern: '###,###'});
+                        formatter.format(data, 1);
+                        
+                        // draw the chart with some options to make it look nice.
+                        //visualization.draw(data, {title: 'Ultrasound', legend : {position: 'right', textStyle: {color: 'blue', fontSize: 10}}, width:window.innerWidth,vAxis:{textStyle:{fontSize: 10}},hAxis:{textStyle:{fontSize: 10},showTextEvery:1,slantedText:false}, pieHole: 0.4, sliceVisibilityThreshold : 0});
+                        visualization.draw(data, {title: 'Ultrasound', pieHole: 0.4, pieSliceText: 'value', sliceVisibilityThreshold : 0});
+                  }, {escape:true}); 
+                  
+                  HCNA_GSPSalesFunnelController.loadPCMSData(
+                     '{!$CurrentPage.parameters.AccountId}',
+                     function(result, event){ 
+                         // load the chart
+                         var visualization = new google.visualization.PieChart(document.getElementById('chartBlockPCMS'));
+                         // Prepare table model for chart with columns
+                         var data = new google.visualization.DataTable();
+                         data.addColumn('string', 'PCMS');
+                         data.addColumn('number', 'Value');                            
+                         // add rows from the remoting results
+                         for(var row = 0; row < result.length; row++){
+                            var record = result[row];                           
+                            data.addRow([record.name, Math.round(record.value)]);
+                          }
+                          //Format data for display 
+                        var formatter = new google.visualization.NumberFormat({pattern: '###,###'});
+                        formatter.format(data, 1);
+                        
+                        // draw the chart with some options to make it look nice.
+                        //visualization.draw(data, {title: 'PCMS', legend : {position: 'right', textStyle: {color: 'blue', fontSize: 10}}, width:window.innerWidth,vAxis:{textStyle:{fontSize: 10}},hAxis:{textStyle:{fontSize: 10},showTextEvery:1,slantedText:false}, pieHole: 0.4, sliceVisibilityThreshold : 0});
+                        visualization.draw(data, {title: 'PCMS', pieHole: 0.4, pieSliceText: 'value', sliceVisibilityThreshold : 0});
+                  }, {escape:true}); 
+                  
+                  HCNA_GSPSalesFunnelController.loadHISSData(
+                     '{!$CurrentPage.parameters.AccountId}',
+                     function(result, event){ 
+                         // load the chart
+                         var visualization = new google.visualization.PieChart(document.getElementById('chartBlockHISS'));
+                         // Prepare table model for chart with columns
+                         var data = new google.visualization.DataTable();
+                         data.addColumn('string', 'HISS');
+                         data.addColumn('number', 'Value');                            
+                         // add rows from the remoting results
+                         for(var row = 0; row < result.length; row++){
+                            var record = result[row];                           
+                            data.addRow([record.name, Math.round(record.value)]);
+                          }
+                          //Format data for display 
+                        var formatter = new google.visualization.NumberFormat({pattern: '###,###'});
+                        formatter.format(data, 1);
+                        
+                        // draw the chart with some options to make it look nice.
+                        //visualization.draw(data, {title: 'HISS', legend : {position: 'right', textStyle: {color: 'blue', fontSize: 10}}, width:window.innerWidth,vAxis:{textStyle:{fontSize: 10}},hAxis:{textStyle:{fontSize: 10},showTextEvery:1,slantedText:false}, pieHole: 0.4, sliceVisibilityThreshold : 0});
+                        visualization.draw(data, {title: 'HISS', pieHole: 0.4, pieSliceText: 'value', sliceVisibilityThreshold : 0});
+                  }, {escape:true});
+                  
+                  HCNA_GSPSalesFunnelController.loadPOSData(
+                     '{!$CurrentPage.parameters.AccountId}',
+                     function(result, event){ 
+                         // load the chart
+                         var visualization = new google.visualization.PieChart(document.getElementById('chartBlockPOS'));
+                         // Prepare table model for chart with columns
+                         var data = new google.visualization.DataTable();
+                         data.addColumn('string', 'POS');
+                         data.addColumn('number', 'Value');                            
+                         // add rows from the remoting results
+                         for(var row = 0; row < result.length; row++){
+                            var record = result[row];                           
+                            data.addRow([record.name, Math.round(record.value)]);
+                          }
+                          //Format data for display 
+                        var formatter = new google.visualization.NumberFormat({pattern: '###,###'});
+                        formatter.format(data, 1);
+                        
+                        // draw the chart with some options to make it look nice.
+                        //visualization.draw(data, {title: 'POS',legend : {position: 'right', textStyle: {color: 'blue', fontSize: 10}}, width:window.innerWidth,vAxis:{textStyle:{fontSize: 10}},hAxis:{textStyle:{fontSize: 10},showTextEvery:1,slantedText:false}, pieHole: 0.4, sliceVisibilityThreshold : 0});
+                        visualization.draw(data, {title: 'POS', pieHole: 0.4, pieSliceText: 'value', sliceVisibilityThreshold : 0});
+                  }, {escape:true});                                                  
+              }
+        </script>
+        
+        <apex:pageBlock >
+        <apex:pageblockSection columns="5">
+            <apex:pageblockSection columns="1" title="IS">
+                <apex:pageblockTable value="{!ImagingSystemsTableData}" var="records" id="ISTable" style="background:#FFFF99;">
+                    <apex:column headerValue="ProductFamily" value="{!records['name']}"/>
+                    <apex:column headerValue="Amount" value="{!records['value']}" style="text-align:right"/>                     
+                </apex:pageblockTable>
+            </apex:pageblockSection>
+            
+            <apex:pageblockSection columns="1" title="US">
+                <apex:pageblockTable value="{!UltrasoundTableData}" var="records" style="background:#FFFF99;">
+                    <apex:column headerValue="ProductFamily" value="{!records['name']}"/>
+                    <apex:column headerValue="Amount" value="{!records['value']}" style="text-align:right"/>                     
+                </apex:pageblockTable>
+            </apex:pageblockSection>
+            
+            <apex:pageblockSection columns="1" title="PCMS">
+                <apex:pageblockTable value="{!PCMSTableData}" var="records" style="background:#FFFF99;"> 
+                    <apex:column headerValue="ProductFamily" value="{!records['name']}"/>
+                    <apex:column headerValue="Amount" value="{!records['value']}" style="text-align:right"/>                     
+                </apex:pageblockTable>
+            </apex:pageblockSection>
+            
+            <apex:pageblockSection columns="1" title="HISS">
+                <apex:pageblockTable value="{!HISSTableData}" var="records" style="background:#FFFF99;">
+                    <apex:column headerValue="ProductFamily" value="{!records['name']}"/>
+                    <apex:column headerValue="Amount" value="{!records['value']}" style="text-align:right"/>                     
+                </apex:pageblockTable>
+            </apex:pageblockSection>
+            
+            <apex:pageblockSection columns="1" title="POS">
+                <apex:pageblockTable value="{!POSTableData}" var="records" style="background:#FFFF99;">
+                    <apex:column headerValue="ProductFamily" value="{!records['name']}"/>
+                    <apex:column headerValue="Amount" value="{!records['value']}" style="text-align:right"/>                     
+                </apex:pageblockTable>
+            </apex:pageblockSection>
+            
+        </apex:pageblockSection>
+        </apex:pageBlock>
+    </apex:page>

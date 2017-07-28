@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Contract Item Sub Line --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Absolute value of Adjustment 1 --></help>
+        <label>Mark-up (abs)</label>
+        <name>Adjustment1Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Adjustment 1 is based on percentage (e.g., 20%) or on an absolute amount (e.g., $100). --></help>
+        <label>Mark-up-Typ</label>
+        <name>Adjustment1Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of Adjustment 1 --></help>
+        <label><!-- Mark-up (%) --></label>
+        <name>Adjustment1__c</name>
+    </fields>
+    <fields>
+        <help><!-- How often the customer is charged for a product. Options are one-time, weekly, monthly, and yearly. --></help>
+        <label>Abrechnungshäufigkeit</label>
+        <name>BillingFrequency_WF__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique Salesforce ID for the product that this price list line refers to. --></help>
+        <label>Produkt</label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel>Vertragsobjekt Unterzeile</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the line item (i.e., the contract item) in the contract item. --></help>
+        <label>Vertragsobjekt</label>
+        <name>ContractItem__c</name>
+        <relationshipLabel>Vertragsobjekt Unterzeile</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Cost Price of a product in contract sub line --></help>
+        <label>Kosten</label>
+        <name>CostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value of the absolute discount that is applied to the product (e.g., $20 off). --></help>
+        <label>Rabatt(abs)</label>
+        <name>DiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the discount is an absolute discount (e.g., $20 off) or a percentage discount (e.g., 20% off). --></help>
+        <label>Rabatttyp</label>
+        <name>DiscountType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Value of the percentage discount that is applied to the product (e.g., 20% off). --></help>
+        <label>Rabatt (%)</label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Vertragsobjekt Unterzeilen-ID</label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <label>Erw. Preis</label>
+        <name>ExtendedPriceDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of product multiplied by the quantity of products. (Unit price x quantity) --></help>
+        <label>Erw. Preis</label>
+        <name>ExtendedPrice_F__c</name>
+    </fields>
+    <fields>
+        <label>Linientyp</label>
+        <name>LineType__c</name>
+        <picklistValues>
+            <masterLabel>Not tracked on contract</masterLabel>
+            <translation><!-- Not tracked on contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Absolute value of the margin --></help>
+        <label>Marge (absolut)</label>
+        <name>MarginAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Margin is based on percentage (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label>Margentyp</label>
+        <name>MarginType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of the margin --></help>
+        <label>Marge ( % )</label>
+        <name>Margin__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag is set by the system when the workflow suggests an approval is needed for the underlying contract item sub line. --></help>
+        <label><!-- Approval Required --></label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <label>Preisanzeige</label>
+        <name>PriceDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- List price of product. --></help>
+        <label>Preis</label>
+        <name>Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Quantity of products. --></help>
+        <label>Menge</label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Source quote item subline from which this contract item subline was created. --></help>
+        <label>Ausgangsangebotsobjekt Unterzeile</label>
+        <name>SourceQuoteItemSubLine__c</name>
+        <relationshipLabel>Vertragsobjekt Unterzeilen</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Aggregate price before any discounts are applied. --></help>
+        <label>Gesamtlistenpreis</label>
+        <name>TotalPriceBeforeDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of product (list price less the discount) --></help>
+        <label>Stückpreis</label>
+        <name>UnitPrice__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>MnContractItemSubLineLayout20</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Id --></nameFieldLabel>
+</CustomObjectTranslation>

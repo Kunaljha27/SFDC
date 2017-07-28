@@ -1,0 +1,30 @@
+<apex:page standardController="Strategic_Account_Plan__c" showHeader="false" extensions="M2O_AccountPlanExtensionController" readOnly="true" >
+<apex:pageMessages ></apex:pageMessages>
+<apex:form target="_parent">
+<apex:variable var="c" value="CF00Nd00000077erF" /> 
+<apex:pageBlock >
+    <apex:pageBlockButtons location="top" >
+        <apex:commandButton value="New Category analysis" rendered="{!Hasaccess.HasEditAccess}" action="{!URLFOR($Action.Category_Analysis__c.New,null,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),CF00Nd00000077erF_lkid=Strategic_Account_Plan__c.Id,CF00Nd00000077erF=sapName],true)}"/ >
+
+    </apex:pageBlockButtons>
+    <apex:outputText rendered="{!categoryAnalysis.size=0}" value="{!$Label.M2O_No_Records_To_Display}"></apex:outputText>
+        <apex:pageBlockTable value="{!categoryAnalysis}" var="ca" rendered="{!categoryAnalysis.size>0}">
+            <apex:column >
+                <apex:facet name="header">Action</apex:facet>
+                    <apex:outputLink value="{!URLFOR($Action.Category_Analysis__c.Edit,ca.id,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),saveURL=URLFOR($Action.Strategic_Account_Plan__c.View, Strategic_Account_Plan__c.Id)],false)}" target="_parent">Edit</apex:outputLink> &nbsp;&nbsp;
+                    <apex:outputLink value="{!URLFOR($Action.Category_Analysis__c.Delete,ca.id,[retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id)],true)}" target="_parent" onclick="return window.confirm('Are you sure?');">Del</apex:outputLink>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Category analysis name</apex:facet>
+                   <!-- <apex:outputLink value="/Id" target="_parent">{!ca.Name}</apex:outputLink>-->
+                    <apex:outputLink value="{!URLFOR($Action.Category_Analysis__c.View,ca.id,null,true)}" target="_parent">{!ca.Name}</apex:outputLink>
+            </apex:column> 
+            <apex:column value="{!ca.Category_Analysis__c}"/>
+            <apex:column value="{!ca.Philips_Category_Vision__c}"/>
+            <apex:column value="{!ca.Role_Of_The_Channel__c}"/>
+            <apex:column value="{!ca.Role_Of_The_Customer__c}"/>
+            <apex:column value="{!ca.Conclusions__c}"/>
+        </apex:pageBlockTable><br></br>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

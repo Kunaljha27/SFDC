@@ -1,0 +1,2032 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies info about the products that are listed in the agreement, such as product name, quantity, price, and discounts.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>Contract_Line_Cols</fullName>
+        <description>Columns for contract item table.</description>
+        <displayedFields>
+            <field>ProductType_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>CatalogNode__r.LocaleName_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>CatalogNode__r.Billing_Frequency__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>OneTimeDiscount_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDisc__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDiscAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>UnitPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ExtendedPrice_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Contract Line Cols</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Contract_Line_Item_Additional_Fields</fullName>
+        <description>Fields for contract item additional fields, both columns.</description>
+        <displayedFields>
+            <field>LineType__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Contract Line Item Additional Fields</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Contract_Line_Item_Pricing</fullName>
+        <description>Fields for contract item pricing detail, left column.</description>
+        <displayedFields>
+            <field>CostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Adjustment1Absolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDiscAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>AutoDiscountAbsolute__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>OneTimeDiscountAbsolute_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>UnitPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Quantity__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ExtendedPrice_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Contract Line Item Pricing</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Contract_Line_Item_Pricing_2</fullName>
+        <description>Fields for contract item pricing detail, right column.</description>
+        <displayedFields>
+            <field>BillingFrequency_WF__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Adjustment1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VolDisc__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>AutoDiscount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>OneTimeDiscount_F__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Margin__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Contract Line Item Pricing 2</label>
+    </fieldSets>
+    <fields>
+        <fullName>Adjustment1Absolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Absolute value of Adjustment 1</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Absolute value of Adjustment 1</inlineHelpText>
+        <label>Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Adjustment1Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether the Adjustment 1 is based on percentage  (e.g., 20%) or on an absolute amount (e.g., $100).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the Adjustment 1 is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100).</inlineHelpText>
+        <label>Mark-up Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Adjustment1__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Percent value of Adjustment 1</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percent value of Adjustment 1</inlineHelpText>
+        <label>Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>AutoDiscountAbsolute__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Auto discount off of list price (e.g., $100 off), calculated by adjustment rules.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Auto discount off of list price with manual adjustment (e.g., $100 off auto discount + $100 manual so total $200), calculated by adjustment rules.</inlineHelpText>
+        <label>Auto Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AutoDiscountType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether the auto discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the auto discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off).</inlineHelpText>
+        <label>Auto Discount Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>AutoDiscount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Percentage auto discount off of list price (e.g., 20% off), calculated by adjustment rules.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percentage auto discount off of list price (e.g., 20% off), calculated by adjustment rules.</inlineHelpText>
+        <label>Auto Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>BillingFrequency_WF__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Whether the product is charged on a recurring basis. A product can be charged one-time, weekly, monthly, or yearly.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether the product is charged on a recurring basis. A product can be charged one-time, weekly, monthly, or yearly.</inlineHelpText>
+        <label>Billing Frequency</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CatalogNode__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the product associated with this contract item.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the product associated with this contract item.</inlineHelpText>
+        <label>Product</label>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>Contract Items</relationshipLabel>
+        <relationshipName>ContractItems</relationshipName>
+        <required>true</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ContractItemSubLinesNeedApprovalCount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>ContractItemSubLines Need Approval Count</label>
+        <summaryFilterItems>
+            <field>MnContractItemSubLine__c.NeedsApproval__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>MnContractItemSubLine__c.ContractItem__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>ContractSolution__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the solution that this contract item belongs to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the solution that this quote item belongs to.</inlineHelpText>
+        <label>Contract Solution</label>
+        <referenceTo>MnContractSolution__c</referenceTo>
+        <relationshipLabel>Solution Line Items</relationshipLabel>
+        <relationshipName>Solution_Line_Items</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the contract that this contract item belongs to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the contract that this contract item belongs to.</inlineHelpText>
+        <label>Contract</label>
+        <referenceTo>MnContract__c</referenceTo>
+        <relationshipLabel>Contract Items</relationshipLabel>
+        <relationshipName>ContractItems</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>CostPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Cost Price of a product in contract  item</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Cost Price of a product in contract  item</inlineHelpText>
+        <label>Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DiscountAbsolute__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Total discount off of list price (e.g., $100 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total discount off of list price (e.g., $100 off).</inlineHelpText>
+        <label>Discount (Absolute)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DiscountType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the discount is based on percentage off (e.g., 20% off) or on an absolute amount off (e.g., $100 off).</inlineHelpText>
+        <label>Discount Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Discount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Percentage discount off of list price (e.g., 20% off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percentage discount off of list price (e.g., 20% off).</inlineHelpText>
+        <label>Discount in %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract Item End Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ExtId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Contract Item ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ExtendedPriceDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>UnitPrice__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Extended Price (Display)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ExtendedPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Price after discount multiplied by quantity.</description>
+        <externalId>false</externalId>
+        <formula>UnitPrice__c * Quantity__c</formula>
+        <inlineHelpText>Price after discount multiplied by quantity.</inlineHelpText>
+        <label>Extended Price(Calculated)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>IsSystemCostPrice__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered.</inlineHelpText>
+        <label>Is Cost Price System populated</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSystemListPrice__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered.</inlineHelpText>
+        <label>Is List Price System populated</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LineType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Tracked On</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not tracked on contract</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>MarginAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Absolute value of the margin</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Absolute value of the margin</inlineHelpText>
+        <label>Margin (Absolute)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MarginType__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines whether the Margin is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the Margin is based on percentage  (e.g., 20%) or on an absolute amount(e.g., $100).</inlineHelpText>
+        <label>Margin Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Percent</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Absolute</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Margin__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Percent value of the margin</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percent value of the margin</inlineHelpText>
+        <label>Margin ( % )</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate adjustment1 on products that are billed on a Monthly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>MonthlyPriceBeforeDiscount_F__c - MonthlyCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate adjustment1 on products that are billed on a Monthly basis, shown in currency.</inlineHelpText>
+        <label>Monthly Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Adjustment that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Monthly, including the adjustment on the main line if the main line is billed Monthly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(MonthlyCostPriceBeforeAdjustment_F__c,0)==0, 0,(MonthlyPriceBeforeDiscount_F__c - MonthlyCostPriceBeforeAdjustment_F__c)/MonthlyCostPriceBeforeAdjustment_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Adjustment that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly adjustment field is the adjustment on all sub-lines that are billed Monthly, including the adjustment on the main line</inlineHelpText>
+        <label>Monthly Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyCostPriceBeforeAdjustment_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Monthly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Monthly&apos;, BLANKVALUE(CostPrice__c, 0) + MonthlyCostPriceBeforeAdjustment_S__c, MonthlyCostPriceBeforeAdjustment_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Monthly basis.</inlineHelpText>
+        <label>Monthly Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate cost price of all sub-lines in a configurable product that are billed on a Monthly basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate cost price of all sub-lines in a configurable product that are billed on a Monthly basis.</inlineHelpText>
+        <label>Monthly Cost including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyDiscountAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate absolute discount on products that are billed on a monthly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>MonthlyPriceBeforeDiscount_F__c - MonthlyExtendedPrice_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate absolute discount on products that are billed on a monthly basis, shown in currency.</inlineHelpText>
+        <label>Monthly Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Discount that is applied to a regular product that is billed monthly. If the product is configurable, then the monthly discount field is the discount on all sub-lines (e.g., the components) that are billed monthly, including the discount on the main line if the main line is billed monthly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(MonthlyPriceBeforeDiscount_F__c,0)==0, 0,(MonthlyPriceBeforeDiscount_F__c - MonthlyExtendedPrice_F__c)/MonthlyPriceBeforeDiscount_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Discount applied to a regular product that is billed monthly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed monthly, including the discount on the main line if the main line is billed monthly.</inlineHelpText>
+        <label>Monthly Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyExtendedPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sum of the aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed monthly, and the unit price of the configurable product, if the configurable product is billed monthly.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Monthly&apos;,  BLANKVALUE(UnitPrice__c, 0)  +  MonthlyExtendedPrice_S__c  , MonthlyExtendedPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Sum of the aggregate extended price of all components of a configurable product, where the components are billed monthly, and the unit price of the configurable product, if the configurable product is billed monthly.</inlineHelpText>
+        <label>Monthly Extended Price incl. sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyExtendedPrice_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed monthly.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed monthly.</inlineHelpText>
+        <label>Monthly Extended Price all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate margin on products that are billed on a Monthly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>MonthlyUnitPrice_F__c - MonthlyCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate margin on products that are billed on a Monthly basis, shown in currency.</inlineHelpText>
+        <label>Monthly Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyMargin_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Margin that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Monthly, including the margin on the main line if the main line is billed Monthly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(MonthlyUnitPrice_F__c,0)==0, 0,(MonthlyUnitPrice_F__c - MonthlyCostPriceBeforeAdjustment_F__c)/MonthlyUnitPrice_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Margin that is applied to a regular product that is billed Monthly. If the product is configurable, then the Monthly margin field is the adjustment on all sub-lines that are billed Monthly, including the margin on the main line</inlineHelpText>
+        <label>Monthly Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyPriceBeforeDiscountDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>MonthlyPriceBeforeDiscount_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Monthly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyPriceBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a monthly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Monthly&apos;,  BLANKVALUE(Price__c, BLANKVALUE(UnitPrice__c, 0))  +  MonthlyPriceBeforeDiscount_S__c,  MonthlyPriceBeforeDiscount_S__c)</formula>
+        <inlineHelpText>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a monthly basis.</inlineHelpText>
+        <label>Monthly List including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyPriceBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate list price of all sub-lines in a configurable product that are billed on a monthly basis, before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate list price of all sub-lines in a configurable product that are billed on a monthly basis, before any discounts are applied.</inlineHelpText>
+        <label>Monthly List all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyTotalValueDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>MonthlyTotalValue_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Monthly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyTotalValue_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis after discounts have been applied.</description>
+        <externalId>false</externalId>
+        <formula>MonthlyExtendedPrice_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis after discounts have been applied.</inlineHelpText>
+        <label>Monthly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyUnitPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Monthly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Monthly&apos;, BLANKVALUE(UnitPrice__c, 0) + MonthlyUnitPrice_S__c, MonthlyUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Monthly basis.</inlineHelpText>
+        <label>Monthly Unit Price including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate unit price of all sub-lines in a configurable product that are billed on a Monthly basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate unit price of all sub-lines in a configurable product that are billed on a Monthly basis.</inlineHelpText>
+        <label>Monthly Unit Price all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MonthlyValueBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <formula>MonthlyPriceBeforeDiscount_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a monthly basis before any discounts are applied.</inlineHelpText>
+        <label>Monthly Total Value List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NeedsApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This flag is set by the system when the workflow suggests an approval is needed for the underlying contract item.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This flag is set by the system when the workflow suggests an approval is needed for the underlying contract item.</inlineHelpText>
+        <label>Approval Required</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate adjustment1 on products that are billed on a one-time basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>OneTimePriceBeforeDiscount_F__c - OneTimeCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate adjustment1 on products that are billed on a one-time basis, shown in currency.</inlineHelpText>
+        <label>One-time Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Adjustment that is applied to a regular product that is billed one time. If the product is configurable, then the one time adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed one time, including the adjustment on the main line if the main line is billed one time.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(OneTimeCostPriceBeforeAdjustment_F__c,0)==0, 0,(OneTimePriceBeforeDiscount_F__c - OneTimeCostPriceBeforeAdjustment_F__c)/OneTimeCostPriceBeforeAdjustment_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Adjustment that is applied to a regular product that is billed one time. If the product is configurable, then the one time adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed one time plus main line</inlineHelpText>
+        <label>One-time Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeCostPriceBeforeAdjustment_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Cost price of this product before adjustment. If the product is configurable, the cost  price includes all sub-lines that are billed on a one-time basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;One Time&apos;, BLANKVALUE(CostPrice__c,  0) + OneTimeCostPriceBeforeAdjustment_S__c, OneTimeCostPriceBeforeAdjustment_S__c)</formula>
+        <inlineHelpText>Cost price of this product before adjustment. If the product is configurable, the cost  price includes all sub-lines that are billed on a one-time basis.</inlineHelpText>
+        <label>One-time Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate cost price of all sub-lines in a configurable product that are billed on a one-time basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate cost price of all sub-lines in a configurable product that are billed on a one-time basis.</inlineHelpText>
+        <label>One-time Cost including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeDiscountAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate discount on products that are billed on a one-time basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>OneTimePriceBeforeDiscount_F__c - OneTimeExtendedPrice_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate discount on products that are billed on a one-time basis, shown in currency.</inlineHelpText>
+        <label>One-time Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Discount that is applied to a regular product that is billed one time. If the product is configurable, then the one time discount field is the discount on all sub-lines (e.g., the components) that are billed one time, including the discount on the main line if the main line is billed one time.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(OneTimePriceBeforeDiscount_F__c,0)==0, 0,(OneTimePriceBeforeDiscount_F__c - OneTimeExtendedPrice_F__c)/OneTimePriceBeforeDiscount_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Discount applied to a regular product that is billed one time. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed one time, including the discount on the main line if the main line is billed one time.</inlineHelpText>
+        <label>One-time Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeExtendedPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sum of the aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed one time, and the unit price of the configurable product, if the configurable product is billed one time.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;One Time&apos;, BLANKVALUE(UnitPrice__c, 0) +  OneTimeExtendedPrice_S__c, OneTimeExtendedPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Sum of the aggregate extended price of all components of a configurable product, where the components are billed one time, and the unit price of the configurable product, if the configurable product is billed one time.</inlineHelpText>
+        <label>One-time Extended Price incl. sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeExtendedPrice_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed one time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed one time.</inlineHelpText>
+        <label>One-time Extended Price all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate margin on products that are billed on a one-time basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>OneTimeUnitPrice_F__c - OneTimeCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate margin on products that are billed on a one-time basis, shown in currency.</inlineHelpText>
+        <label>One-time Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeMargin_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Margin that is applied to a regular product that is billed one time. If the product is configurable, then the one time margin field is the adjustment on all sub-lines (e.g., the components) that are billed one time, including the margin on the main line if the main line is billed one time.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(OneTimeUnitPrice_F__c,0)==0, 0,(OneTimeUnitPrice_F__c - OneTimeCostPriceBeforeAdjustment_F__c)/OneTimeUnitPrice_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Margin that is applied to a regular product that is billed one time. If the product is configurable, then the one time margin field is the adjustment on all sub-lines (e.g., the components) that are billed one time, including the margin on the main line i</inlineHelpText>
+        <label>One-time Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OneTimePriceBeforeDiscountDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OneTimePriceBeforeDiscount_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>One-time List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimePriceBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a one-time basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;One Time&apos;,  BLANKVALUE(Price__c, BLANKVALUE(UnitPrice__c, 0))  +  OneTimePriceBeforeDiscount_S__c,  OneTimePriceBeforeDiscount_S__c)</formula>
+        <inlineHelpText>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a one-time basis.</inlineHelpText>
+        <label>One-time List including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimePriceBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate list price of all sub-lines in a configurable product that are billed on a one-time basis, before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate list price of all sub-lines in a configurable product that are billed on a one-time basis, before any discounts are applied.</inlineHelpText>
+        <label>One-time List all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeTotalValueDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>OneTimeTotalValue_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>One-time Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeTotalValue_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis after discounts have been applied.</description>
+        <externalId>false</externalId>
+        <formula>OneTimeExtendedPrice_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis after discounts have been applied.</inlineHelpText>
+        <label>One-time Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeUnitPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a one-time basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;One Time&apos;, BLANKVALUE(UnitPrice__c, 0) + OneTimeUnitPrice_S__c, OneTimeUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a one-time basis.</inlineHelpText>
+        <label>One-time Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate unit price of all sub-lines in a configurable product that are billed on a one-time basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate unit price of all sub-lines in a configurable product that are billed on a one-time basis.</inlineHelpText>
+        <label>One-time Unit Price including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OneTimeValueBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <formula>OneTimePriceBeforeDiscount_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a one-time basis before any discounts are applied.</inlineHelpText>
+        <label>One-time Total List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PriceDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Price__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>List Price (Display)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PriceListLine__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the Price List Line object used to derive the List Price for this product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the Price List Line object used to derive the List Price for this product.</inlineHelpText>
+        <label>Price List Line</label>
+        <referenceTo>MnPriceListLine__c</referenceTo>
+        <relationshipLabel>ContractLineItem</relationshipLabel>
+        <relationshipName>ContractLineItem</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PriceType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Price Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>List</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Price__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price of product for this contract.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>List price of product for this contract.</inlineHelpText>
+        <label>List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PricingSource__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Denotes the contract subtype / pricing list ID from medtech</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Denotes the contract subtype / pricing list ID from medtech</inlineHelpText>
+        <label>Pricing Source</label>
+        <length>32</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductName_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>CatalogNode__r.Name</formula>
+        <label>Product Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProductType_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF (CatalogNode__r.Configurable__c, &apos;Config&apos;,
+IF (TEXT(CatalogNode__r.Type__c) = &apos;Bundle&apos;, &apos;Bundle&apos;,
+IF (TEXT(CatalogNode__r.Billing_Frequency__c) != &apos;One Time&apos;, &apos;Services&apos;, &apos;Product&apos;
+)
+)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Product Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_ID_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>CatalogNode__r.Id__c</formula>
+        <label>Product ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <defaultValue>1</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Number of units.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of units.</inlineHelpText>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RecordNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Position number for this contract item.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Position number for this contract item.</inlineHelpText>
+        <label>Contract Item Position</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Solution_Name_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>ContractSolution__r.Solution_Name_F__c</formula>
+        <label>Solution Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SourceQuoteItem__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Source quote item from which this contract item was created.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Source quote item from which this contract item was created.</inlineHelpText>
+        <label>Source Quote Item</label>
+        <referenceTo>MnQuoteItem__c</referenceTo>
+        <relationshipLabel>Contract Items</relationshipLabel>
+        <relationshipName>ContractItems</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contract Item Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Term__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Number of Months.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of units.</inlineHelpText>
+        <label>Term (Months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalDiscountAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>DiscountAbsolute__c + AutoDiscountAbsolute__c+ VolDiscAbsolute__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TotalDiscount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Discount__c + AutoDiscount__c+ VolDisc__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>TotalPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price multiplied by quantity.</description>
+        <externalId>false</externalId>
+        <formula>Price__c  *  Quantity__c</formula>
+        <inlineHelpText>List price multiplied by quantity.</inlineHelpText>
+        <label>Total List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TotalValueDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF
+(
+BillingFrequency_WF__c = &apos;Monthly&apos;, MonthlyTotalValueDisplay_F__c ,
+IF (BillingFrequency_WF__c = &apos;Yearly&apos;, YearlyTotalValueDisplay_F__c ,
+IF (BillingFrequency_WF__c = &apos;Weekly&apos;, WeeklyTotalValueDisplay_F__c ,
+OneTimeTotalValueDisplay_F__c
+)
+)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UnitPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>UnitPrice__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unit Price (Display)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UnitPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of product (list price less the discount)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unit price of product (list price less the discount)</inlineHelpText>
+        <label>Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>VolDiscAbsolute__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Total volume discount off of list price (e.g., $100 off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total volume discount off of list price (e.g., $100 off).</inlineHelpText>
+        <label>Vol. Disc. (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>VolDisc__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Percentage volume discount off of list price (e.g., 20% off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Percentage volume discount off of list price (e.g., 20% off).</inlineHelpText>
+        <label>Vol. Disc. (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate adjustment1 on products that are billed on a Weekly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>WeeklyPriceBeforeDiscount_F__c - WeeklyCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate adjustment1 on products that are billed on a Weekly basis, shown in currency.</inlineHelpText>
+        <label>Weekly Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Adjustment that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the adjustment on the main line if the main line is billed Weekly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(WeeklyCostPriceBeforeAdjustment_F__c,0)==0, 0,(WeeklyPriceBeforeDiscount_F__c - WeeklyCostPriceBeforeAdjustment_F__c)/WeeklyCostPriceBeforeAdjustment_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Adjustment that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the adjustment on the main</inlineHelpText>
+        <label>Weekly Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyCostPriceBeforeAdjustment_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Weekly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Weekly&apos;, BLANKVALUE(CostPrice__c, 0) + WeeklyCostPriceBeforeAdjustment_S__c, WeeklyCostPriceBeforeAdjustment_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Weekly basis.</inlineHelpText>
+        <label>Weekly Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate cost price of all sub-lines in a configurable product that are billed on a Weekly basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate cost price of all sub-lines in a configurable product that are billed on a Weekly basis.</inlineHelpText>
+        <label>Weekly Cost including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyDiscountAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate discount on products that are billed on a weekly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>WeeklyPriceBeforeDiscount_F__c - WeeklyExtendedPrice_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate discount on products that are billed on a weekly basis, shown in currency.</inlineHelpText>
+        <label>Weekly Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Discount that is applied to a regular product that is billed weekly. If the product is configurable, then the weekly discount field is the discount on all sub-lines (e.g., the components) that are billed weekly, including the discount on the main line if the main line is billed weekly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(WeeklyPriceBeforeDiscount_F__c,0)==0, 0,(WeeklyPriceBeforeDiscount_F__c - WeeklyExtendedPrice_F__c)/WeeklyPriceBeforeDiscount_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Discount applied to a regular product that is billed weekly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed weekly, including the discount on the main line if the main line is billed weekly.</inlineHelpText>
+        <label>Weekly Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyExtendedPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sum of the aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed weekly, and the unit price of the configurable product, if the configurable product is billed weekly.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Weekly&apos;,  BLANKVALUE(UnitPrice__c, 0) + WeeklyExtendedPrice_S__c , WeeklyExtendedPrice_S__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Sum of the aggregate extended price of all components of a configurable product, where the components are billed weekly, and the unit price of the configurable product, if the configurable product is billed weekly.</inlineHelpText>
+        <label>Weekly Extended Price incl. sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyExtendedPrice_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed weekly.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed weekly.</inlineHelpText>
+        <label>Weekly Extended Price all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate margin on products that are billed on a Weekly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>WeeklyUnitPrice_F__c - WeeklyCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate margin on products that are billed on a Weekly basis, shown in currency.</inlineHelpText>
+        <label>Weekly Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyPriceBeforeDiscountDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>WeeklyPriceBeforeDiscount_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Weekly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyPriceBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a weekly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Weekly&apos;,  BLANKVALUE(Price__c, BLANKVALUE(UnitPrice__c, 0))  +  WeeklyPriceBeforeDiscount_S__c,  WeeklyPriceBeforeDiscount_S__c)</formula>
+        <inlineHelpText>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a weekly basis.</inlineHelpText>
+        <label>Weekly List including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyPriceBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate list price of all sub-lines in a configurable product that are billed on a weekly basis, before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate list price of all sub-lines in a configurable product that are billed on a weekly basis, before any discounts are applied.</inlineHelpText>
+        <label>Weekly List all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyTotalValueDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>WeeklyTotalValue_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Weekly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyTotalValue_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis after discounts have been applied.</description>
+        <externalId>false</externalId>
+        <formula>WeeklyExtendedPrice_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis after discounts have been applied.</inlineHelpText>
+        <label>Weekly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyUnitPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Weekly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Weekly&apos;, BLANKVALUE(UnitPrice__c, 0) + WeeklyUnitPrice_S__c, WeeklyUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Weekly basis.</inlineHelpText>
+        <label>Weekly Unit Price including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate unit price of all sub-lines in a configurable product that are billed on a Weekly basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate unit price of all sub-lines in a configurable product that are billed on a Weekly basis.</inlineHelpText>
+        <label>Weekly Unit Price all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WeeklyValueBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <formula>WeeklyPriceBeforeDiscount_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a weekly basis before any discounts are applied.</inlineHelpText>
+        <label>Weekly Total List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Weekly_Margin_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Margin that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the margin on the main line if the main line is billed Weekly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(WeeklyUnitPrice_F__c,0)==0, 0,(WeeklyUnitPrice_F__c - WeeklyCostPriceBeforeAdjustment_F__c)/WeeklyUnitPrice_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Margin that is applied to a regular product that is billed Weekly. If the product is configurable, then the Weekly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Weekly, including the margin on the main line if the</inlineHelpText>
+        <label>Weekly Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyAdjustment1Absolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate adjustment1 on products that are billed on a Yearly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>YearlyPriceBeforeDiscount_F__c - YearlyCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate adjustment1 on products that are billed on a Yearly basis, shown in currency.</inlineHelpText>
+        <label>Yearly Mark-up (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyAdjustment1_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Adjustment that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the adjustment on the main line if the main line is billed Yearly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(YearlyCostPriceBeforeAdjustment_F__c,0)==0, 0,(YearlyPriceBeforeDiscount_F__c - YearlyCostPriceBeforeAdjustment_F__c)/YearlyCostPriceBeforeAdjustment_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Adjustment that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly adjustment field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the adjustment on the main</inlineHelpText>
+        <label>Yearly Mark-up (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyCostPriceBeforeAdjustment_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Yearly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Yearly&apos;, BLANKVALUE(CostPrice__c, 0) + YearlyCostPriceBeforeAdjustment_S__c, YearlyCostPriceBeforeAdjustment_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Cost price of this product before adjustment. If the product is configurable, the cost price includes all sub-lines that are billed on a Yearly basis.</inlineHelpText>
+        <label>Yearly Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyCostPriceBeforeAdjustment_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate cost price of all sub-lines in a configurable product that are billed on a Yearly basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate cost price of all sub-lines in a configurable product that are billed on a Yearly basis.</inlineHelpText>
+        <label>Yearly Cost including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyDiscountAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate discount on products that are billed on a yearly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>YearlyPriceBeforeDiscount_F__c - YearlyExtendedPrice_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate discount on products that are billed on a yearly basis, shown in currency.</inlineHelpText>
+        <label>Yearly Discount (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Discount that is applied to a regular product that is billed yearly. If the product is configurable, then the yearly discount field is the discount on all sub-lines (e.g., the components) that are billed yearly, including the discount on the main line if the main line is billed yearly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(YearlyPriceBeforeDiscount_F__c,0)==0, 0,(YearlyPriceBeforeDiscount_F__c - YearlyExtendedPrice_F__c)/YearlyPriceBeforeDiscount_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Discount applied to a regular product that is billed yearly. If the product is configurable, this is the discount on all sub-lines (e.g., components) that are billed yearly, including the discount on the main line if the main line is billed yearly.</inlineHelpText>
+        <label>Yearly Discount (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyExtendedPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Sum of the aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed yearly, and the unit price of the configurable product, if the configurable product is billed yearly.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Yearly&apos;,  BLANKVALUE(UnitPrice__c, 0) + YearlyExtendedPrice_S__c, YearlyExtendedPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Sum of the aggregate extended price of all components of a configurable product, where the components are billed yearly, and the unit price of the configurable product, if the configurable product is billed yearly.</inlineHelpText>
+        <label>Yearly Extended Price incl. sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyExtendedPrice_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed yearly.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate extended price (extended price = unit price x quantity) of all components of a configurable product, where the components are billed yearly.</inlineHelpText>
+        <label>Yearly Extended Price all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyMarginAbsolute_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate margin on products that are billed on a Yearly basis, shown in currency.</description>
+        <externalId>false</externalId>
+        <formula>YearlyUnitPrice_F__c - YearlyCostPriceBeforeAdjustment_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate margin on products that are billed on a Yearly basis, shown in currency.</inlineHelpText>
+        <label>Yearly Margin (Abs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyMarginF__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Margin that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the margin on the main line if the main line is billed Yearly.</description>
+        <externalId>false</externalId>
+        <formula>IF (BLANKVALUE(YearlyUnitPrice_F__c,0)==0, 0,(YearlyUnitPrice_F__c - YearlyCostPriceBeforeAdjustment_F__c)/YearlyUnitPrice_F__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Margin that is applied to a regular product that is billed Yearly. If the product is configurable, then the Yearly margin field is the adjustment on all sub-lines (e.g., the components) that are billed Yearly, including the margin on the main line if the</inlineHelpText>
+        <label>Yearly Margin (%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>YearlyPriceBeforeDiscountDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>YearlyPriceBeforeDiscount_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Yearly List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyPriceBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a yearly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Yearly&apos;,  BLANKVALUE(Price__c, BLANKVALUE(UnitPrice__c, 0))  +  YearlyPriceBeforeDiscount_S__c,  YearlyPriceBeforeDiscount_S__c)</formula>
+        <inlineHelpText>List price of this product before discount. If the product is configurable, the list price includes all sub-lines that are billed on a yearly basis.</inlineHelpText>
+        <label>Yearly List including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyPriceBeforeDiscount_S__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Aggregate list price of all sub-lines in a configurable product that are billed on a yearly basis, before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate list price of all sub-lines in a configurable product that are billed on a yearly basis, before any discounts are applied.</inlineHelpText>
+        <label>Yearly List all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyTotalValueDisplay_F__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>YearlyTotalValue_F__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Yearly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyTotalValue_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis after discounts have been applied.</description>
+        <externalId>false</externalId>
+        <formula>YearlyExtendedPrice_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis after discounts have been applied.</inlineHelpText>
+        <label>Yearly Total Unit Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyUnitPrice_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Yearly basis.</description>
+        <externalId>false</externalId>
+        <formula>CASE( BillingFrequency_WF__c , &apos;Yearly&apos;, BLANKVALUE(UnitPrice__c, 0) + YearlyUnitPrice_S__c, YearlyUnitPrice_S__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Unit price of this product. If the product is configurable, the unit price includes all sub-lines that are billed on a Yearly basis.</inlineHelpText>
+        <label>Yearly Unit Price including sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyUnitPrice_S__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate unit price of all sub-lines in a configurable product that are billed on a Yearly basis.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Aggregate unit price of all sub-lines in a configurable product that are billed on a Yearly basis.</inlineHelpText>
+        <label>Yearly Unit Price all sub-lines</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>YearlyValueBeforeDiscount_F__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis before any discounts are applied.</description>
+        <externalId>false</externalId>
+        <formula>YearlyPriceBeforeDiscount_F__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Aggregate extended price (unit price x quantity) of all products that are billed on a yearly basis before any discounts are applied.</inlineHelpText>
+        <label>Yearly Total List</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Contract Item</label>
+    <nameField>
+        <displayFormat>CI{00000}</displayFormat>
+        <label>Id</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Contract Line Items</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>VMnCostPriceValidity</fullName>
+        <active>true</active>
+        <description>Cost Price should be greater than or equal to zero</description>
+        <errorConditionFormula>CostPrice__c &lt; 0</errorConditionFormula>
+        <errorDisplayField>CostPrice__c</errorDisplayField>
+        <errorMessage>Cost Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnListPriceValidity</fullName>
+        <active>true</active>
+        <errorConditionFormula>Price__c &lt; 0</errorConditionFormula>
+        <errorDisplayField>Price__c</errorDisplayField>
+        <errorMessage>List Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnUnitPriceValidity</fullName>
+        <active>true</active>
+        <description>Unit Price should be greater than or equal to zero</description>
+        <errorConditionFormula>UnitPrice__c &lt; 0</errorConditionFormula>
+        <errorDisplayField>UnitPrice__c</errorDisplayField>
+        <errorMessage>Unit Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VmnQuantityValValidity</fullName>
+        <active>true</active>
+        <errorConditionFormula>Quantity__c &lt;= 0</errorConditionFormula>
+        <errorDisplayField>Quantity__c</errorDisplayField>
+        <errorMessage>Quantity cannot be zero or negative</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Browse_Catalog</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Browse Catalog</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>var namespaceprefix = &quot;{!$Setup.MnHierarchicalProperty__c.Revvy_Namespace__c}&quot;;
+window.top.location = &quot;{!$Site.Prefix}&quot; + &quot;/apex/&quot; + namespaceprefix + &quot;PMnContractDetailPage?id=&quot; + &quot;{!MnContract__c.Id}&quot;</url>
+    </webLinks>
+</CustomObject>

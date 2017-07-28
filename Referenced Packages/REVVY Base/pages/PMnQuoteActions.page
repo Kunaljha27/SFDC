@@ -1,0 +1,707 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnRemoter" docType="html-5.0" standardStylesheets="false" showheader="false" sidebar="false">
+
+<link href="{!$Resource.revvymobile}/revvy-mobile/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<style>
+    body{
+    padding:5px;
+    background-color: transparent;
+  }
+
+  .display-element{
+  display:inline;
+}
+.hide-element{
+   display:none;
+}
+</style>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/jquery.js"></script>
+<script type='text/javascript' src='/canvas/sdk/js/publisher.js'></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/underscore-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone.geppetto.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/handlebars.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/bootstrap.min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/Backbone.ModelBinder.js"></script>
+
+<script id="container-view-template" type="text/template">
+           <div class="form-group">
+            <label >Name : </label>
+            <p>{{quoteName}}</p>
+           </div>
+           <div class="form-group">
+            <label >Status : </label>
+            <p>{{quoteStatus}}</p>
+           </div>
+</script>
+<script id="actions-view-template" type="text/template">
+          {{#each options}}
+            <div class="radio input-lg">
+              <label>
+                <input type="radio" name="quoteStatus" value="{{status}}" >
+                {{text}}
+              </label>
+             </div>
+          {{/each}}
+          <textarea class="form-control" rows="3" name="approvalComments" placeholder="Add note"></textarea>
+</script>
+<script id="info-view-template" type="text/template">
+        <div class="alert alert-{{messageType}}">
+          {{message}}
+        </div>
+</script>
+      <script>
+var MyApp = {};
+var CMnNamespacePrefix = "{!namespacePrefix}";
+var CMnNamespacePrefixUS = "";
+var CMnNamespacePrefixDT = "";
+if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+    CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+    CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+}
+
+var ApexRemoteControllerNameDT = "CMnRemoter.";
+
+//current quote information
+
+var currentQuoteStatus = "{!JSENCODE(MnQuote__c.Current_Status__c)}";
+var currentQuoteName = '{!MnQuote__c.Name}';
+var currentQuoteId = '<apex:outputText value="{!REVVY__MnQuote__c.Id}"/>';
+var currentQuoteItems = '{!REVVY__MnQuote__c.QuoteItems__r}';
+
+
+var QuoteUtil = {};
+QuoteUtil.QUOTE_READY = 'Ready';
+QuoteUtil.QUOTE_ORDERED = 'Ordered';
+QuoteUtil.QUOTE_SUBMITTED = 'Submitted';
+QuoteUtil.QUOTE_DRAFT = 'Draft';
+
+
+MyApp.QuoteNeedsConfigurationCommand = function(){};
+MyApp.QuoteNeedsConfigurationCommand.prototype.execute = function(){
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.quoteNeedsConfiguration',
+        this.eventData.quoteId,
+        function (result, event) {
+            if (event.status) {
+               var eventData ={needsConfiguration : false, message: ""};
+               if(result === 'needs-config'){
+                   eventData.needsConfiguration = true;
+                   eventData.message = "One or more quote items have a incomplete configuration. No actions are are available at this time.";
+               }else if( result === 'no-price'){
+                   eventData.needsConfiguration = true;
+                   eventData.message = "One or more products have missing prices. No actions are are available at this time.";
+               }
+               that.context.dispatch("onConfigurationStatusLoaded",eventData);
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Could not get the configuration status for the quote. Please try again"
+                });
+            }
+        });
+}
+
+//commands
+MyApp.QuoteNeedsApprovalCommand = function () {
+};
+MyApp.QuoteNeedsApprovalCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.quoteNeedsApproval',
+        this.eventData.quoteId,
+        function (result, event) {
+            if (event.status) {
+                that.context.dispatch("onApprovalStatusFetched", {
+                    needsApproval: result
+                });
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Could not get the approval status for the quote. Please try again"
+                });
+            }
+        });
+};
+
+MyApp.UpdateQuoteStatusCommand = function () {
+};
+MyApp.UpdateQuoteStatusCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var that = this;
+    var quoteId = this.eventData.quoteId;
+    var quoteStatus = this.eventData.quoteStatus;
+
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.updateQuoteStatus',
+        quoteId, quoteStatus, function (result, event) {
+            if (event.status) {
+                Sfdc.canvas.publisher.publish({
+                    name: "publisher.close",
+                    payload: {
+                        refresh: "true"
+                    }
+                });
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Could not update the quote status. Please try again"
+                });
+            }
+        });
+};
+
+
+MyApp.SubmitQuoteForApprovalCommand = function () {
+};
+MyApp.SubmitQuoteForApprovalCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var quoteId = this.eventData.quoteId;
+    var comments = this.eventData.comments;
+    if(!comments){
+        comments = "";
+    }
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.submitQuoteForApproval',
+        quoteId, comments,
+        function (result, event) {
+            if (event.status) {
+                Sfdc.canvas.publisher.publish({
+                    name: "publisher.close",
+                    payload: {
+                        refresh: "true"
+                    }
+                });
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Could not submit the quote for approval. Please try again"
+                });
+            }
+        });
+};
+
+
+MyApp.CheckQuoteIsApproverCommand = function () {
+};
+MyApp.CheckQuoteIsApproverCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var quoteId = this.eventData.quoteId;
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.userIsApprover',
+        quoteId,
+
+        function (result, event) {
+            if (event.status) {
+                if (result) {
+                    that.context.dispatch("YouAreTheQuoteApproverEvent");
+                } else {
+                    that.context.dispatch("YouAreNotTheQuoteApproverEvent");
+                }
+
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Something went wrong. Please try again"
+                });
+            }
+        });
+}
+
+
+MyApp.CheckQuoteIsSubmitterCommand = function () {
+};
+MyApp.CheckQuoteIsSubmitterCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var quoteId = this.eventData.quoteId;
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.userIsSubmitter',
+        quoteId,
+
+        function (result, event) {
+            if (event.status) {
+                if (result) {
+                    that.context.dispatch("YouAreTheQuoteSubmitterEvent");
+                } else {
+                    that.context.dispatch("YouAreNotTheQuoteSubmitterEvent");
+                }
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Something went wrong. Please try again"
+                });
+            }
+        });
+}
+
+MyApp.RecallQuoteCommand = function () {
+};
+MyApp.RecallQuoteCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var quoteId = this.eventData.quoteId;
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.recallQuote',
+        quoteId,
+
+        function (result, event) {
+            if (event.status) {
+                Sfdc.canvas.publisher.publish({
+                    name: "publisher.close",
+                    payload: {
+                        refresh: "true"
+                    }
+                });
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Could not update the quote status. Please try again"
+                });
+            }
+        });
+}
+
+MyApp.ApproveQuoteCommand = function () {
+};
+MyApp.ApproveQuoteCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var quoteId = this.eventData.quoteId;
+    var comments = this.eventData.comments;
+    if(!comments){
+        comments = "";
+    }
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.approveQuote',
+        quoteId, comments,
+
+        function (result, event) {
+            if (event.status) {
+                Sfdc.canvas.publisher.publish({
+                    name: "publisher.close",
+                    payload: {
+                        refresh: "true"
+                    }
+                });
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Could not approve the quote. Please try again"
+                });
+            }
+        });
+};
+
+MyApp.RejectQuoteCommand = function () {
+};
+MyApp.RejectQuoteCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var quoteId = this.eventData.quoteId;
+    var comments = this.eventData.comments;
+    if(!comments){
+        comments = "";
+    }
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.rejectQuote',
+        quoteId, comments,
+
+        function (result, event) {
+            if (event.status) {
+                Sfdc.canvas.publisher.publish({
+                    name: "publisher.close",
+                    payload: {
+                        refresh: "true"
+                    }
+                });
+            } else {
+                that.context.dispatch("QuoteActionsErrorEvent", {
+                    message: "Could not approve the quote. Please try again"
+                });
+            }
+        });
+};
+
+
+MyApp.CheckIfQuoteHasQuoteItemsCommand = function () {
+};
+MyApp.CheckIfQuoteHasQuoteItemsCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var hasQuoteItems = false;
+    var currentQuoteItems = this.eventData.currentQuoteItems;
+    //currentQuoteItems come back as a string, not sure how to
+    //convert it yet and JSON.parse() is failing as the
+    //contents inside this array are not stringified, until then
+    //simply check if the string length is greater than 2 i.e. not this '[]' then we have quote items inside array.
+    if (currentQuoteItems && currentQuoteItems.length > 2) {
+        hasQuoteItems = true;
+    }
+    this.context.dispatch("onQuoteItemsLoaded", {hasQuoteItems: hasQuoteItems});
+};
+
+MyApp.StatusEventsMap = {
+    'submitForApproval': 'SubmitQuoteForApprovalEvent',
+    'recall': 'RecallQuoteEvent',
+    'approve': 'ApproveQuoteEvent',
+    'reject': 'RejectQuoteEvent',
+    'Ready': 'UpdateQuoteStatusEvent',
+    'Ordered': 'UpdateQuoteStatusEvent',
+    'Submitted': 'UpdateQuoteStatusEvent',
+    'Draft': 'UpdateQuoteStatusEvent'
+}
+//context
+MyApp.ApplicationContext = Backbone.Geppetto.Context.extend({
+    initialize: function () {
+        this.quoteActionsPageModel = new Backbone.Model();
+
+        this.quoteActionsPageModel.bind('change:quoteStatus', function (model, status) {
+            model.set({
+                'triggeringEvent': MyApp.StatusEventsMap[status]
+            });
+
+            Sfdc.canvas.publisher.publish({
+                name: "publisher.setValidForSubmit",
+                payload: "true"
+            });
+        });
+
+        //command mappings
+        this.mapCommand("QuoteNeedsApprovalEvent", MyApp.QuoteNeedsApprovalCommand);
+        this.mapCommand("UpdateQuoteStatusEvent", MyApp.UpdateQuoteStatusCommand);
+        this.mapCommand("SubmitQuoteForApprovalEvent", MyApp.SubmitQuoteForApprovalCommand);
+        this.mapCommand("CheckQuoteIsApproverEvent", MyApp.CheckQuoteIsApproverCommand);
+        this.mapCommand("CheckQuoteIsSubmitterEvent", MyApp.CheckQuoteIsSubmitterCommand);
+        this.mapCommand("RecallQuoteEvent", MyApp.RecallQuoteCommand);
+        this.mapCommand("ApproveQuoteEvent", MyApp.ApproveQuoteCommand);
+        this.mapCommand("RejectQuoteEvent", MyApp.RejectQuoteCommand);
+        this.mapCommand("CheckIfQuoteHasQuoteItemsEvent", MyApp.CheckIfQuoteHasQuoteItemsCommand);
+        this.mapCommand("CheckIfQuoteNeedsConfiguration",MyApp.QuoteNeedsConfigurationCommand);
+    }
+});
+
+
+//views
+MyApp.ActionsView = Backbone.View.extend({
+    template: Handlebars.compile($("#actions-view-template").html()),
+    _modelBinder: undefined,
+    initialize: function () {
+        _.bindAll.apply(_, [this].concat(_.functions(this)));
+        this._modelBinder = new Backbone.ModelBinder();
+        this.context = this.options.context;
+    },
+    close: function () {
+        this._modelBinder.unbind();
+    },
+    commentsConverter: function (direction, value) {
+        if (value === "submitForApproval" || value === "approve" || value === "reject") {
+            return "display-element";
+        } else {
+            return "hide-element";
+        }
+    },
+    render: function () {
+        var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+
+        var bindings = {
+            quoteStatus: [
+                {selector: '[name="quoteStatus"]'},
+                {selector: '[name="approvalComments"]', elAttribute: 'class', converter: this.commentsConverter}
+            ],
+            approvalComments: [
+                {selector: '[name="approvalComments"]'}
+            ]
+        };
+
+
+        this._modelBinder.bind(this.context.quoteActionsPageModel, this.el, bindings);
+    }
+});
+
+
+MyApp.InfoView = Backbone.View.extend({
+    template: Handlebars.compile($("#info-view-template").html()),
+    render: function () {
+        var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+    }
+});
+
+
+MyApp.ContainerView = Backbone.View.extend({
+    template: Handlebars.compile($("#container-view-template").html()),
+    initialize: function () {
+        _.bindAll.apply(_, [this].concat(_.functions(this)));
+        Backbone.Geppetto.bindContext({
+            view: this,
+            context: MyApp.ApplicationContext
+        });
+        this.context.listen(this, "onApprovalStatusFetched", this.onApprovalStatusFetched);
+        this.context.listen(this, "QuoteActionsErrorEvent", this.onError);
+        this.context.listen(this, "YouAreNotTheQuoteSubmitterEvent", this.handleNotSubmitter);
+        this.context.listen(this, "YouAreTheQuoteSubmitterEvent", this.handleSubmitter);
+        this.context.listen(this, "YouAreNotTheQuoteApproverEvent", this.handleNotApprover);
+        this.context.listen(this, "YouAreTheQuoteApproverEvent", this.handleApprover);
+        this.context.listen(this, "onQuoteItemsLoaded", this.onQuoteItemsLoaded);
+        this.context.listen(this,"onConfigurationStatusLoaded",this.onConfigurationLoaded);
+    },
+    onConfigurationLoaded : function(eventData){
+        // var eventData ={needConfiguration : false, message: ""};
+        if(eventData.needsConfiguration){
+           var currentView = new MyApp.InfoView({
+                    model: new Backbone.Model({
+                        "message": eventData.message,
+                        "messageType": "info"
+                    })
+                });
+           currentView.render();
+           this.$el.append(currentView.$el);
+        }else{
+            this.context.dispatch("QuoteNeedsApprovalEvent", {
+             quoteId: this.model.get("quoteId")
+            });
+        }
+    },
+    onQuoteItemsLoaded: function (eventData) {
+        var currentView;
+        if (eventData.hasQuoteItems) {
+            //show ready for customer option
+            currentView = new MyApp.ActionsView({
+                context: this.context,
+                model: new Backbone.Model({
+                    options: [
+                        {
+                            text: "Ready for customer",
+                            status: QuoteUtil.QUOTE_READY
+                        }
+                    ]
+                })
+            });
+        } else {
+            currentView = new MyApp.InfoView({
+                model: new Backbone.Model({
+                    "message": "There are no quote items for this quote, please add a quote item before proceeding to an action.",
+                    "messageType": "danger"
+                })
+            });
+        }
+        currentView.render();
+        this.$el.append(currentView.$el);
+    },
+    handleNotSubmitter: function () {
+        //no op for now
+    },
+    handleSubmitter: function () {
+        var quoteStatus = this.model.get("quoteStatus");
+        var options = [];
+        if (quoteStatus === QuoteUtil.QUOTE_SUBMITTED) {
+            options.push({
+                text: "Withdraw from Approval",
+                status: 'recall'
+            });
+        }
+
+        if (quoteStatus === QuoteUtil.QUOTE_READY) {
+            options.push({
+                text: 'Amend Quote',
+                status: QuoteUtil.QUOTE_DRAFT
+            });
+
+            options.push({
+                text: "Mark as Ordered",
+                status: QuoteUtil.QUOTE_ORDERED
+            });
+        }
+
+        var currentView = new MyApp.ActionsView({
+            context: this.context,
+            model: new Backbone.Model({
+                options: options
+            })
+        });
+
+        currentView.render();
+        this.$el.append(currentView.$el);
+
+
+    },
+    handleNotApprover: function () {
+        //no op for now
+    },
+    handleApprover: function () {
+        var options = [];
+        options.push({
+            text: 'Approve',
+            status: 'approve'
+        });
+        options.push({
+            text: 'Reject',
+            status: 'reject'
+        });
+
+        var currentView = new MyApp.ActionsView({
+            context: this.context,
+            model: new Backbone.Model({
+                options: options
+            })
+        });
+
+        currentView.render();
+        this.$el.append(currentView.$el);
+    },
+    onError: function (event) {
+        var errorView = new MyApp.InfoView({
+            model: new Backbone.Model({
+                "message": "Unknown status, Please contact your administrator before proceeding.",
+                "messageType": "danger"
+            })
+        });
+        errorView.render();
+        this.$el.empty();
+        this.$el.prepend(errorView.$el);
+    },
+    onApprovalStatusFetched: function (result) {
+        var quoteStatus = this.model.get("quoteStatus");
+        if (!result.needsApproval) {
+            var currentView;
+            if (quoteStatus === QuoteUtil.QUOTE_DRAFT) {
+                this.context.dispatch("CheckIfQuoteHasQuoteItemsEvent", {currentQuoteItems: this.model.get('currentQuoteItems'),
+                    quoteId: this.model.get("quoteId")});
+            } else if (quoteStatus === QuoteUtil.QUOTE_READY) {
+                //show make changes and mark ordered options
+                currentView = new MyApp.ActionsView({
+                    context: this.context,
+                    model: new Backbone.Model({
+                        options: [
+                            {
+                                text: "Make Changes",
+                                status: QuoteUtil.QUOTE_DRAFT
+                            },
+                            {
+                                text: "Mark as Ordered",
+                                status: QuoteUtil.QUOTE_ORDERED
+                            }
+                        ]
+                    })
+                });
+            } else if (quoteStatus === QuoteUtil.QUOTE_ORDERED) {
+                currentView = new MyApp.InfoView({
+                    model: new Backbone.Model({
+                        "message": "Quote is ordered, no actions are available at this time.",
+                        "messageType": "info"
+                    })
+                });
+            } else if (quoteStatus === QuoteUtil.QUOTE_SUBMITTED) {
+                this.context.dispatch("CheckQuoteIsApproverEvent", {
+                    quoteId: this.model.get('quoteId')
+                });
+                this.context.dispatch("CheckQuoteIsSubmitterEvent", {
+                    quoteId: this.model.get('quoteId')
+                });
+            } else {
+                currentView = new MyApp.InfoView({
+                    model: new Backbone.Model({
+                        "message": "Unknown status, Please contact your administrator before proceeding.",
+                        "messageType": "danger"
+                    })
+                });
+            }
+            if (currentView) {
+                currentView.render();
+                this.$el.append(currentView.$el);
+            }
+        } else {
+            //if quote is not submitted for approval show the submit for approval
+            //button
+            var currentView = new MyApp.ActionsView({
+                context: this.context,
+                model: new Backbone.Model({
+                    options: [
+                        {
+                            text: "Submit for Approval",
+                            status: 'submitForApproval'
+                        }
+                    ]
+                })
+            });
+            currentView.render();
+            this.$el.append(currentView.$el);
+
+        }
+    },
+    render: function () {
+    var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+    this.context.dispatch("CheckIfQuoteNeedsConfiguration", {
+            quoteId: this.model.get("quoteId")
+        });
+    }
+
+});
+
+
+$(function () {
+
+    //define an empty console
+    if (typeof console === "undefined" || typeof console.log === "undefined") {
+        console = {};
+        console.log = function () {
+        };
+    }
+
+    //disable the submit button
+    Sfdc.canvas.publisher.publish({
+        name: "publisher.setValidForSubmit",
+        payload: "false"
+    });
+
+    var containerView = new MyApp.ContainerView({
+        model: new Backbone.Model({
+            quoteId: currentQuoteId,
+            quoteStatus: currentQuoteStatus,
+            quoteName: currentQuoteName,
+            currentQuoteItems: currentQuoteItems
+        })
+    });
+    containerView.render();
+    containerView.$el.appendTo('body');
+
+
+    Sfdc.canvas.publisher.subscribe({
+        name: "publisher.post",
+        onData: function (e) {
+            //disable the submit button
+            Sfdc.canvas.publisher.publish({
+                  name: "publisher.setValidForSubmit",
+                  payload: "false"
+            });
+            var currentPageModel = containerView.context.quoteActionsPageModel;
+            var triggeringEvent = currentPageModel.get("triggeringEvent");
+            var eventData;
+            if (triggeringEvent === "UpdateQuoteStatusEvent") {
+                eventData = {
+                    quoteId: currentQuoteId,
+                    quoteStatus: currentPageModel.get("quoteStatus")
+                };
+            } else if (triggeringEvent === 'RecallQuoteEvent') {
+                eventData = {
+                    quoteId: currentQuoteId
+                };
+            } else {
+
+                eventData = {
+                    quoteId: currentQuoteId,
+                    comments: currentPageModel.get("approvalComments")
+                };
+
+            }
+            containerView.context.dispatch(triggeringEvent, eventData)
+
+        }
+    });
+
+});
+
+
+
+      </script>
+
+
+</apex:page>

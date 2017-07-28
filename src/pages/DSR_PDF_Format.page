@@ -1,0 +1,53 @@
+<apex:page standardController="Deal_Support_Request_del__c" showHeader="false" renderAs="PDF" >
+
+ <apex:pageBlock >
+
+        <apex:pageBlockSection title="Discount DSR Approval">
+                    <apex:outputField value="{!Deal_Support_Request_del__c.Name}" />
+                      <br>&nbsp;</br>
+                      
+                   <apex:outputField value="{!Deal_Support_Request_del__c.Account__c}"/>
+                       <br>&nbsp;</br>
+                  
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Account_Address__c}"/>
+                   <br>&nbsp;</br>
+                   
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Discount_Authorization_Number__c}"/>
+                    <br>&nbsp;</br>
+                    
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Created_Date__c}" />
+                  <br>&nbsp;</br>
+                  
+                   <apex:outputField value="{!Deal_Support_Request_del__c.DA_Number_Valid_Date__c}" />
+                  <br>&nbsp;</br>
+                  
+                  <apex:outputField value="{!Deal_Support_Request_del__c.DAR_Total_Discount_Percent__c}" />
+                  <br>&nbsp;</br>
+                  
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Total_Demo_Percent__c}" />
+                  <br>&nbsp;</br>
+                  
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Additional_Demo_Requested_Dollars__c}" />
+                  <br>&nbsp;</br>
+                  
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Supplies_to_receive_Equipment_Disct__c}" />
+                  <br>&nbsp;</br>
+                   
+                  <apex:outputField value="{!Deal_Support_Request_del__c.DAR_Discount_Justification_Reasoning__c}" />
+                  <br>&nbsp;</br>
+                  
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Sales_Market_Specialist__c}" />
+                  <br>&nbsp;</br>
+                  
+                  <apex:outputField value="{!Deal_Support_Request_del__c.Status__c}" />
+                  <br>&nbsp;</br>
+                  
+                  <apex:relatedList list="ProcessSteps" ></apex:relatedList>
+<br>&nbsp;</br>
+                  <apex:outputText > * Total discount will be honored regardless of any GPO discount changes. <br></br>
+* Expired discount approvals are considered valid for the purpose of applying PO Modifications to previously 
+booked orders, without further approval from Marketing, excluding rebates and dollar amounts (Y72A).</apex:outputText>
+                  
+           </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

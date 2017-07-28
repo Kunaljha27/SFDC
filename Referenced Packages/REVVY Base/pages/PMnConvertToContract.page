@@ -1,0 +1,22 @@
+<apex:page standardcontroller="REVVY__MnContract__c" extensions="REVVY.CMnConvertToContractCtrl">
+
+  <apex:pageMessages id="showmsg"/>
+  <apex:form >
+    <apex:pageBlock title="Convert Quote to Contract">
+      <apex:pageBlockButtons >
+        <apex:commandButton action="{!convert}" value="Convert"/>
+        <apex:commandButton action="{!cancel}" value="Cancel" immediate="true"/>
+      </apex:pageBlockButtons>
+
+      <apex:pageBlockSection showHeader="false" columns="1" id="block1">
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!$Label.revvy__MnQuote_Label_ConvertToContractPage_SelectRecordType}" for="recordTypeId"/>
+            <apex:selectList value="{!selectedRecordTypeId}" size="1">
+                <apex:selectOptions value="{!selectableRecordTypes}"/>
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+
+</apex:page>

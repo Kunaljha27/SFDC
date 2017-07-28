@@ -1,0 +1,147 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnRemoter" docType="html-5.0" standardStylesheets="false" showheader="false" sidebar="false">
+
+<link href="{!$Resource.revvymobile}/revvy-mobile/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<style>
+    body{
+    /*border: 1px solid rgb(207, 212, 217);*/
+    background-color:transparent;
+    /*height:200px;*/
+  }
+  .firstYearTotal{
+      /*color:#10a8d3;*/
+      color:#0e7abd;
+  }
+  .firstYearTotalLabel{
+     padding-right:0;
+  }
+  .priceSegmentMobileCard{
+     /*background-color:#fff;*/
+     padding:15px;
+     padding-left:0;
+     padding-top:0;
+  }
+</style>
+
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/jquery.js"></script>
+<script type='text/javascript' src='/canvas/sdk/js/publisher.js'></script>
+
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/underscore-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone.geppetto.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/handlebars.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/bootstrap.min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/Backbone.ModelBinder.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/accounting.js"></script>
+<script id="pricesegments-view-template" type="text/template">
+      <div class="row firstYearTotal">
+        <div class="col-xs-6 firstYearTotalLabel"><h4>{{total.label}}:</h4></div>
+        <div class="col-xs-6 text-right"><h4>{{formatPrice total.value total.priceTag}}</h4></div>
+      </div>
+      {{#each priceSegmentDetailedPrices}}
+          {{#if this.value}}
+          <div class="row">
+            <div class="col-xs-6 ">{{this.label}}:</div>
+            <div class="col-xs-6 text-right">{{formatPrice this.value this.priceTag}}</div>
+          </div>
+          {{/if}}
+      {{/each}}
+      </script>
+  <script>
+
+  //construct global namespaces
+var MyApp = {};
+var CMnNamespacePrefix = "{!namespacePrefix}";
+var CMnNamespacePrefixUS = "";
+var CMnNamespacePrefixDT = "";
+if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+    CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+    CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+}
+
+var ApexRemoteControllerNameDT = "CMnRemoter.";
+
+//current quote information
+var quoteId = '<apex:outputText value="{!REVVY__MnQuote__c.Id}"/>';
+var quoteValue = '{!REVVY__MnQuote__c.REVVY__Quote_Value__c}';
+var oneTimeTotal = '{!REVVY__MnQuote__c.REVVY__One_Time_Total_Value_S__c}';
+var weeklyTotal = '{!REVVY__MnQuote__c.REVVY__Weekly_Total_Value_S__c}';
+var monthlyTotal = '{!REVVY__MnQuote__c.REVVY__Monthly_Total_Value_S__c}';
+var yearlyTotal= '{!REVVY__MnQuote__c.REVVY__Yearly_Total_Value_S__c}';
+
+var MyApp = {};
+
+//todo this method should be a call to CMnFormatUtil.formatValue
+//when refactored
+MyApp.getFormattedPrice = function (  value, priceTag) {
+        var formatString = "$#,##0.00;($#,##0.00)";
+        if (priceTag === undefined || priceTag === null) {
+            priceTag = "";
+        }
+
+        if (value === undefined || value === null) {
+            return "";
+        }
+        else {
+            return  accounting.formatMoney(value, "$", 2) + priceTag;
+        }
+};
+
+Handlebars.registerHelper('formatPrice', function(value, priceTag) {
+    return MyApp.getFormattedPrice(value,priceTag);
+});
+
+var PriceSegmentsView = Backbone.View.extend({
+  className : "priceSegmentMobileCard",
+  template: Handlebars.compile($("#pricesegments-view-template").html()),
+  initialize: function () {
+        _.bindAll.apply(_, [this].concat(_.functions(this)));
+    },
+  render: function () {
+    var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+
+  }
+});
+$(function(){
+
+  var priceSegmentDetailedPrices = [];
+  priceSegmentDetailedPrices.push({
+          label : "One-Time Total",
+          value: parseInt(oneTimeTotal),
+          priceTag:""
+      });
+  priceSegmentDetailedPrices.push({
+          label : "Weekly Total",
+          value:parseInt(weeklyTotal),
+          priceTag:"/wk"
+      });
+  priceSegmentDetailedPrices.push({
+          label : "Monthly Total",
+          value:parseInt(monthlyTotal),
+          priceTag:"/mo"
+      })
+  priceSegmentDetailedPrices.push({
+          label:"Yearly Total",
+          value:parseInt(yearlyTotal),
+          priceTag:"/yr"
+      });
+
+  var priceSegmentViewModel = new Backbone.Model({
+    total:{
+        value:parseInt(quoteValue),
+        priceTag :"",
+        label:"First Year Total"
+    },
+    priceSegmentDetailedPrices : priceSegmentDetailedPrices
+  });
+
+  var priceSegmentViewInstance = new PriceSegmentsView({
+    model : priceSegmentViewModel
+  });
+
+  priceSegmentViewInstance.render();
+  priceSegmentViewInstance.$el.appendTo('body');
+});
+  </script>
+
+</apex:page>

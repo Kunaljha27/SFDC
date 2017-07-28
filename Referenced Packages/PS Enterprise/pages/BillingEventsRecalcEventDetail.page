@@ -1,0 +1,8 @@
+<apex:page standardController="pse__Billing_Event__c" 
+           extensions="pse.BillingEventsController" 
+           action="{!recalcEvent}">
+<apex:pageMessages />
+<apex:form >
+<apex:commandButton action="{!cancel}" value="Go back" />
+</apex:form>
+</apex:page>

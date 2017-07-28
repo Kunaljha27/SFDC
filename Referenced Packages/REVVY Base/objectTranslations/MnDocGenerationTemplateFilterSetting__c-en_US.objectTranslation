@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Revvy Doc Generation Template Filters</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Revvy Doc Generation Template Filters</value>
+    </caseValues>
+    <fields>
+        <label><!-- Show selection for single template --></label>
+        <name>AlwaysShowTemplateSelectionScreen__c</name>
+    </fields>
+    <fields>
+        <label><!-- ContentType --></label>
+        <name>ContentType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Show Active Templates only --></label>
+        <name>FilterActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- Define additional custom static filters in the form [content field]=[value] with each new filter on a new line. Use {!quote.[fieldname]} to access field values on quote object. --></help>
+        <label><!-- Custom Static Filter Definition --></label>
+        <name>StaticFilterCustomDef__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

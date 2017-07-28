@@ -1,0 +1,30 @@
+<apex:page standardController="Strategic_Account_Plan__c"  showHeader="false" extensions="M2O_AccountPlanExtensionController" readOnly="true" >
+<apex:form target="_parent" >
+<apex:pageBlock >
+    <apex:pageBlockButtons location="top" >
+        <apex:commandButton value="New Contact" rendered="{!Hasaccess.HasEditAccess}" action="{!URLFOR($Action.Contact_Matrix__c.New,null,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),CF00Nd0000007dMTt_lkid=Strategic_Account_Plan__c.Id,CF00Nd0000007dMTt=sapName],true)}"/ >
+    </apex:pageBlockButtons>   
+    <apex:outputText rendered="{!ContactMatrix.size=0}" value="{!$Label.M2O_No_Records_To_Display}"></apex:outputText>
+        <apex:pageBlockTable value="{!ContactMatrix}" var="element" rendered="{!ContactMatrix.size>0}">
+            <apex:column >
+                <apex:facet name="header">Action</apex:facet>
+                    <apex:outputLink value="{!URLFOR($Action.Contact_Matrix__c.Edit,element.id,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),saveURL=URLFOR($Action.Strategic_Account_Plan__c.View, Strategic_Account_Plan__c.Id)],true)}" target="_parent">Edit</apex:outputLink> &nbsp;&nbsp;
+                    <apex:outputLink value="{!URLFOR($Action.Contact_Matrix__c.Delete,element.id,[retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id)],true)}" target="_parent" onclick="return window.confirm('Are you sure?');">Del</apex:outputLink>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Contact Name</apex:facet>
+                    <apex:outputLink value="{!URLFOR($Action.Contact_Matrix__c.View,element.id)}" target="_parent">{!element.name}</apex:outputLink>
+            </apex:column> 
+            <apex:column value="{!element.Country__c}"/>
+            <apex:column >
+                <apex:facet name="header">Name</apex:facet>
+                <apex:outputLink value="/{!element.Contact__c}" target="_parent">{!element.contact__r.name}</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!element.Role__c}"/>
+            <apex:column value="{!element.Responsibility__c}"/>
+            <apex:column value="{!element.Local_customer_contacts__c}"/>
+            <apex:column value="{!element.Job_title_of_contact__c}"/>
+            </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

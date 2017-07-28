@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Expression Condition</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Expression Conditions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Catalog Attribute Value --></label>
+        <name>Catalog_Attribute_Value__c</name>
+        <relationshipLabel><!-- Expression Conditions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Catalog Node --></label>
+        <name>Catalog_Node__c</name>
+        <relationshipLabel><!-- Expression Conditions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Condition Key --></label>
+        <name>Condition_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Condition Value --></label>
+        <name>Condition_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expression --></label>
+        <name>Expression__c</name>
+        <relationshipLabel><!-- Expression Conditions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Field Name --></label>
+        <name>Field_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Value --></label>
+        <name>Field_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Id --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Attribute</masterLabel>
+            <translation><!-- Attribute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catalog Field</masterLabel>
+            <translation><!-- Catalog Field --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Category</masterLabel>
+            <translation><!-- Category --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

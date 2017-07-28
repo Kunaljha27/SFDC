@@ -1,0 +1,46 @@
+<apex:page showHeader="false" sidebar="false">
+    <apex:includeScript value="{!URLFOR($Resource.CometD, 'js/jquery/jquery-1.5.1.js')}"/> 
+    <apex:includeScript value="{!URLFOR($Resource.CometD, 'js/jquery/json2.js')}"/> 
+    <apex:includeScript value="{!URLFOR($Resource.CometD, 'js/cometd.js')}"/> 
+    <apex:includeScript value="{!URLFOR($Resource.CometD, 'js/jquery/jquery.cometd.js')}"/> 
+    <script type="text/javascript">
+    (function($){
+        $(document).ready(function() {
+            // Connect to the CometD endpoint
+            $.cometd.init({
+               url: window.location.protocol+'//'+window.location.hostname+'/cometd/24.0/',
+               requestHeaders: { Authorization: 'OAuth {!$Api.Session_ID}'}
+           });
+
+
+           // Subscribe to a topic. JSON-encoded update will be returned
+           // in the callback
+           $.cometd.subscribe('/topic/RXExportImportProcess', function(message) {
+               $('#content').append('<p>Notification: ' +
+                    'Channel: ' + JSON.stringify(message.channel) + '<br>' +
+                    'Record name: ' + JSON.stringify(message.data.sobject.Name) +
+                    '<br>' + 'ID: ' + JSON.stringify(message.data.sobject.Id) + 
+                    '<br>' + 'ID__c: ' + JSON.stringify(message.data.sobject.ID__c) +
+                    '<br>' + 'Finished: ' + JSON.stringify(message.data.event.Finished__c)+
+                    '<br>' + 'Job_ID__c: ' + JSON.stringify(message.data.sobject.Job_ID__c) + 
+                    '<br>' + 'Submitted__c: ' + JSON.stringify(message.data.sobject.Submitted__c) + 
+                    '<br>' + 'Status__c: ' + JSON.stringify(message.data.sobject.Status__c) + 
+                    '<br>' + 'Note__c: ' + JSON.stringify(message.data.sobject.Note__c) +
+                    '</p>');
+            });
+        });
+   })(jQuery)
+   function disconnect() {
+       $.cometd.disconnect();
+   }
+   window.onbeforeunload = disconnect;
+   </script>
+   <body>
+   <div id="content">
+   <h1>Streaming API Test Page</h1>
+   <p>This is a demonstration page for Streaming API. Notifications from the 
+       InvoiceStatementUpdates channel will appear here...</p>
+    
+   </div>
+   </body>
+</apex:page>

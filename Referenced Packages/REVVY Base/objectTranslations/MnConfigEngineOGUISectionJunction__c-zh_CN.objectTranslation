@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique identifier of a section in a model. --></help>
+        <label>配置引擎 UI 部分</label>
+        <name>Config_Engine_UI_Section__c</name>
+        <relationshipLabel>配置发动机 OG UISection 关联</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Order of the option groups displayed in the section. --></help>
+        <label>该部分的 OG 顺序</label>
+        <name>OG_Section_Order__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique identifier of an option group. --></help>
+        <label>选项组</label>
+        <name>Option_Group_Id__c</name>
+        <relationshipLabel>配置发动机 OG UISection 关联</relationshipLabel>
+    </fields>
+    <nameFieldLabel><!-- Display Name --></nameFieldLabel>
+</CustomObjectTranslation>

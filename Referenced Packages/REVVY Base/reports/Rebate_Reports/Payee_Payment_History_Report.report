@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>MnIncentiveProgram__c$Payee__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$Name</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$PaymentDue__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$PeriodStart__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$PeriodEnd__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$Status__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$Payment__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$Adjustment__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r.Payment__r$NetPayment__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c$Name</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c$IncentiveProgramName__c</field>
+    </columns>
+    <description>Show me payments by categorized by payee</description>
+    <format>Tabular</format>
+    <name>Payee Payment History Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Rebate_Programs_Earnings_Payments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>MnIncentiveProgram__c$Payee__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>MnIncentiveProgram__c.Settlements__r.Payment__r$PaymentDue__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

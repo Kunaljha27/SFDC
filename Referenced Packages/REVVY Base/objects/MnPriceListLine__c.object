@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>PMnCreatePriceListLine</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <comment>Custom Visual force page</comment>
+        <content>PMnCreatePriceListLine</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <comment>Custom Visual force page</comment>
+        <content>PMnPriceListLineHome</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <content>PMnViewPriceListLine</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Specifies the list price for individual products.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>PriceListLine_ContainedList_FS</fullName>
+        <availableFields>
+            <field>Product__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Pricelist Line Table on PriceList Detail Page</description>
+        <displayedFields>
+            <field>Product_Id__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Product_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ListedPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>CostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>TargetPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PAT1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PAT2__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>RecurringPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Start_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>End_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Warnings__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>PriceListLine_ContainedList_FS</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>PriceListLine_CustomEditList_FS</fullName>
+        <description>Price List Line edit page</description>
+        <displayedFields>
+            <field>TargetPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PAT1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PAT2__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>PriceListLine_CustomEditList_FS</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>PriceListLine_List_FS</fullName>
+        <availableFields>
+            <field>CostPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>PriceList__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Product__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Pricelist Line Tab</description>
+        <displayedFields>
+            <field>Price_List_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Product_Id__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Product_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ListedPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>RecurringPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Start_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>End_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Warnings__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PAT1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PAT2__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>TargetPrice__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>PriceListLine_List_FS</label>
+    </fieldSets>
+    <fields>
+        <fullName>CostPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Stores the cost of a product</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores the cost of a product</inlineHelpText>
+        <label>Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Date when this price list line expires.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when this price list line expires.</inlineHelpText>
+        <label>Effective End Date</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Price List Line ID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ListedPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Price charged for the product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Price charged for the product.</inlineHelpText>
+        <label>List Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OverrideWarnings__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Checkbox that lets you override the warnings when the effective dates of a price list line item is out of sync with the effective dates of the price list.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checkbox that lets you override the warnings when the effective dates of a price list line item is out of sync with the effective dates of the price list.</inlineHelpText>
+        <label>OverrideWarnings</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PriceListLineNum__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Internal field that is used to make a price list line ID.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Internal field that is used to make a price list line ID.</inlineHelpText>
+        <label>Price List Line Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PriceList__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID of the price list that this price list line belongs to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID of the price list that this price list line belongs to.</inlineHelpText>
+        <label>Price List Name</label>
+        <referenceTo>MnPriceList__c</referenceTo>
+        <relationshipLabel>Price List Lines</relationshipLabel>
+        <relationshipName>PriceListLines</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Price_List_ID__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>false</externalId>
+        <formula>PriceList__r.Id__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Price List ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Price_List_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the price list.</description>
+        <externalId>false</externalId>
+        <formula>PriceList__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Name of the price list.</inlineHelpText>
+        <label>Price List Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PricingTier__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique ID for the Pricing Tier that this price list line refers to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique ID for the Pricing Tier that this price list line refers to.</inlineHelpText>
+        <label>Volume Pricing</label>
+        <referenceTo>MnTieredPricing__c</referenceTo>
+        <relationshipLabel>Volume Pricing</relationshipLabel>
+        <relationshipName>Tiered_Pricing</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Product_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique external ID of the product that this price list line refers to.</description>
+        <externalId>false</externalId>
+        <formula>Product__r.Id__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Unique external ID of the product that this price list line refers to.</inlineHelpText>
+        <label>Product Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the product.</description>
+        <externalId>false</externalId>
+        <formula>Product__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Name of the product.</inlineHelpText>
+        <label>Product Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Unique Salesforce ID for the product that this price list line refers to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique Salesforce ID for the product that this price list line refers to.</inlineHelpText>
+        <label>Product Name</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>MnCatalogNode__c.AllowPricing__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>MnCatalogNode__c</referenceTo>
+        <relationshipLabel>Price List Lines</relationshipLabel>
+        <relationshipName>Price_List_Lines</relationshipName>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RecurringPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>How often the customer is charged for a product. Options are one-time, weekly, monthly, and yearly.</description>
+        <externalId>false</externalId>
+        <formula>text(Product__r.Billing_Frequency__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>How often the customer is charged for a product. Options are one-time, weekly, monthly, and yearly.</inlineHelpText>
+        <label>Billing Frequency</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SourceQuoteItem__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Source quote item from which this contract price line was created.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Source quote item from which this contract price line was created.</inlineHelpText>
+        <label>Source Quote Item</label>
+        <referenceTo>MnQuoteItem__c</referenceTo>
+        <relationshipLabel>Contract Price Lines</relationshipLabel>
+        <relationshipName>ContractPriceLines</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Date when this price list line goes into effect.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when this price list line goes into effect.</inlineHelpText>
+        <label>Effective Start Date</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>WarningCodes__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma-separated list of warning messages on this price list line.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma-separated list of warning messages on this price list line.</inlineHelpText>
+        <label>WarningCodes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Warnings__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Warning messages that appear when the price list line&apos;s effective dates are out of sync with the price list&apos;s effective dates.</description>
+        <externalId>false</externalId>
+        <formula>if ( CONTAINS(WarningCodes__c, &apos;DATES_OUTOF_SYNC&apos;), IMAGE(&apos;/img/msg_icons/error16.png&apos;, &apos;Warning&apos;,14,14) + &apos; Effective Dates are not in range specified at Header&apos;, if (CONTAINS(WarningCodes__c,&apos;START_DATE_PRIOR_END_DATE&apos;), IMAGE(&apos;/img/msg_icons/error16.png&apos;, &apos;Warning&apos;,14,14) + &apos;Start Date Prior End Date&apos;, &apos;&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Warning messages that appear when the price list line&apos;s effective dates are out of sync with the price list&apos;s effective dates.</inlineHelpText>
+        <label>Warnings</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Price List Line</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>PriceList__c</columns>
+        <columns>Product__c</columns>
+        <columns>ListedPrice__c</columns>
+        <columns>Start_Date__c</columns>
+        <columns>End_Date__c</columns>
+        <columns>RecurringPrice__c</columns>
+        <columns>Warnings__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Price List Line ID</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Price List Lines</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>PriceList__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Product__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ListedPrice__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Start_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>End_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RecurringPrice__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Warnings__c</customTabListAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>Product__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PriceList__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ListedPrice__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Start_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>End_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RecurringPrice__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PriceList__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Product__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ListedPrice__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Start_Date__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>End_Date__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>RecurringPrice__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>PriceList__c</searchFilterFields>
+        <searchFilterFields>Product__c</searchFilterFields>
+        <searchFilterFields>Start_Date__c</searchFilterFields>
+        <searchFilterFields>End_Date__c</searchFilterFields>
+        <searchFilterFields>ListedPrice__c</searchFilterFields>
+        <searchFilterFields>RecurringPrice__c</searchFilterFields>
+        <searchResultsAdditionalFields>PriceList__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Product__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ListedPrice__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Start_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>End_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RecurringPrice__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>VMnCostPriceValidity</fullName>
+        <active>true</active>
+        <description>Cost Price should be greater than or equal to zero</description>
+        <errorConditionFormula>CostPrice__c &lt; 0</errorConditionFormula>
+        <errorMessage>Cost Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>VMnPriceValidity</fullName>
+        <active>true</active>
+        <errorConditionFormula>ListedPrice__c &lt; 0</errorConditionFormula>
+        <errorMessage>Price should be greater than or equal to zero</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>New_Price_List_Line</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Price List Line</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!URLFOR($Action.MnPriceListLine__c.New,null,[returnUrl=&apos;/&apos; + MnPriceList__c.Id, plId=MnPriceList__c.Id, plUniqueName=MnPriceList__c.Id__c, plstdate= text(month(MnPriceList__c.Start_Date__c)) + &apos;/&apos; + text(day(MnPriceList__c.Start_Date__c)) + &apos;/&apos; + text(year(MnPriceList__c.Start_Date__c)) , plenddate=text(month(MnPriceList__c.End_Date__c)) + &apos;/&apos; + text(day(MnPriceList__c.End_Date__c)) + &apos;/&apos; + text(year(MnPriceList__c.End_Date__c))], false)}</url>
+    </webLinks>
+</CustomObject>

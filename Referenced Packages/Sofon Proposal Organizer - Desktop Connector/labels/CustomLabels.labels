@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Sofon_Web_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sofon Web URL</shortDescription>
+        <value>172.25.0.14</value>
+    </labels>
+</CustomLabels>

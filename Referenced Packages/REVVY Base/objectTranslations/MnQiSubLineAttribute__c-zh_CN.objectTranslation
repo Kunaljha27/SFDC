@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- QiSubLineAttribute --></value>
+    </caseValues>
+    <fields>
+        <label>实际值</label>
+        <name>ActualValue__c</name>
+    </fields>
+    <fields>
+        <label>属性值</label>
+        <name>AttributeValue__c</name>
+    </fields>
+    <fields>
+        <label>目录属性</label>
+        <name>CatalogAttribute__c</name>
+        <relationshipLabel>Qi 子行属性</relationshipLabel>
+    </fields>
+    <fields>
+        <label>报价项目子行</label>
+        <name>QuoteItemSubLine__c</name>
+        <relationshipLabel>Qi 子行属性</relationshipLabel>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

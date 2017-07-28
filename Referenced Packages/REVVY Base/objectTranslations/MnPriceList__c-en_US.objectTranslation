@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Price List</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Price Lists</value>
+    </caseValues>
+    <fields>
+        <help><!-- Currency used for this price list. --></help>
+        <label><!-- Currency --></label>
+        <name>Currency__c</name>
+        <picklistValues>
+            <masterLabel>USD</masterLabel>
+            <translation><!-- USD --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list expires. --></help>
+        <label><!-- Effective End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Price List ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- The type of price stored in this pricelist --></help>
+        <label><!-- Price Type --></label>
+        <name>PriceType__c</name>
+        <picklistValues>
+            <masterLabel>Contract Price</masterLabel>
+            <translation><!-- Contract Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price List</masterLabel>
+            <translation><!-- Price List --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Defines the customer segment that this price list is applied to. --></help>
+        <label><!-- Price Segment --></label>
+        <name>Segment__c</name>
+        <picklistValues>
+            <masterLabel>Education</masterLabel>
+            <translation><!-- Education --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Government</masterLabel>
+            <translation><!-- Government --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care</masterLabel>
+            <translation><!-- Health Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Media</masterLabel>
+            <translation><!-- Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Process Industry</masterLabel>
+            <translation><!-- Process Industry --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the Quote object used to generate this pricelist. --></help>
+        <label><!-- Group Quote --></label>
+        <name>SourceQuote__c</name>
+        <relationshipLabel><!-- Contract Price List --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list takes effect. --></help>
+        <label><!-- Effective Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Controls whether the price list is in effect. If the price list is in draft, then it is not in effect. If the price list is active, then it is in effect. --></help>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Segment is mandatory and cannot be blank --></errorMessage>
+        <name>VMnSegmentDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Start Date cannot be after End Date --></errorMessage>
+        <name>VMnStartAndEndDatesValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Currency cannot be &quot;None&quot;. Please select a valid value. --></errorMessage>
+        <name>VmnCurrencyDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Status cannot be &quot;None&quot;. Please select a valid value. --></errorMessage>
+        <name>VmnStatusDefaultValValidity</name>
+    </validationRules>
+</CustomObjectTranslation>

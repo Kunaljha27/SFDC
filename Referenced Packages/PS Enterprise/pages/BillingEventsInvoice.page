@@ -1,0 +1,27 @@
+<apex:page standardController="pse__Billing_Event__c" 
+           extensions="pse.BillingEventsController"
+           recordSetVar="events">
+<apex:form >
+<apex:pageBlock title="Invoice Billing Events">
+<apex:pageMessages />
+<apex:pageBlockButtons >
+<apex:commandButton action="{!invoiceEvents}" value="Invoice" />
+<apex:commandButton action="{!cancel}" value="Cancel" />
+</apex:pageBlockButtons>
+
+<apex:pageBlockSection title="Billing Events to Invoice" columns="1">
+<apex:pageBlockTable value="{!eventsToInvoice}" var="e">
+<apex:column headerValue="Name"><a href="/{!e.Id}">{!e.Name}</a></apex:column>
+<apex:column value="{!e.pse__Date__c}" />
+<apex:column value="{!e.pse__Project__c}" />
+<apex:column value="{!e.pse__Summary_Amount__c}" />
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Invoice Information" columns="1">
+<apex:inputField value="{!inv.pse__Invoice_Date__c}" />
+<apex:inputField value="{!inv.pse__Invoice_Number__c}" />
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

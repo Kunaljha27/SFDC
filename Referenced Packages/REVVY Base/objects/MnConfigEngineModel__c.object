@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <comment>Model Detail</comment>
+        <content>PMnModelDetailPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <comment>Create New Model</comment>
+        <content>PMnModelDetailPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Model Detail</comment>
+        <content>PMnModelDetailPage</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Contains the structure and rules for a configurable product, and contains info about how the product is configured in a quote.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>Model_List_FS</fullName>
+        <description>Used in model home page</description>
+        <displayedFields>
+            <field>Id__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Compile_Date__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>LastModifiedById</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>LastModifiedDate</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <label>Model List FS</label>
+    </fieldSets>
+    <fields>
+        <fullName>AttrIDs__c</fullName>
+        <deprecated>false</deprecated>
+        <description>JSON representation of the list of unique attribute IDs used by this model.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>JSON representation of the list of attribute IDs used by this model.</inlineHelpText>
+        <label>Attribute IDs</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Compile_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Date when the model was last published.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when the model was last published.</inlineHelpText>
+        <label>Last Compile Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Compiled_Model_Attachment_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>ID of the model JSON that is used to transport values to the Configuration Engine.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>ID of the model JSON that is used to transport values to the Configuration Engine.</inlineHelpText>
+        <label>Compiled Model Attachment Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Compiled_Version__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Version of the compiled model.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Version of the compiled model.</inlineHelpText>
+        <label>Compiled Version</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExportedModelAttachmentId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>ID of the exported model JSON that is stored for Install Base Configuration purposes.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>ID of the exported model JSON that is stored for Install Base Configuration purposes.</inlineHelpText>
+        <label>Exported Model Attachment Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>HasExportedOG__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Has Exported OG</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Model ID</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>IsSolution__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is Solution</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ModelLocale__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Model Locale</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Model_definition_id__c</fullName>
+        <deprecated>false</deprecated>
+        <description>ID of the original model from which this model instance was created.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>ID of the original model from which this model instance was created.</inlineHelpText>
+        <label>model definition ID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Product_IDs__c</fullName>
+        <deprecated>false</deprecated>
+        <description>JSON representation of the list of product IDs used by this model. This is used when regenerating the pricing information.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>JSON representation of the list of product IDs used by this model. This is used when regenerating the pricing information.</inlineHelpText>
+        <label>Product IDs</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Defines the state of the model. The model can be either in draft or in production (i.e., published).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defines the state of the model. The model can be either in draft or in production (i.e., published).</inlineHelpText>
+        <label>Life Cycle Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Production</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>User_id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Name of the user who is configuring a product using this instance of the model.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the user who is configuring a product using this instance of the model.</inlineHelpText>
+        <label>User Id</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Models</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Model</label>
+    <listViews>
+        <fullName>All_Global_Models</fullName>
+        <columns>NAME</columns>
+        <columns>Compile_Date__c</columns>
+        <columns>Compiled_Model_Attachment_Id__c</columns>
+        <columns>Compiled_Version__c</columns>
+        <columns>Model_definition_id__c</columns>
+        <columns>Id__c</columns>
+        <columns>User_id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>User_id__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>All Global Models</label>
+        <language>en_US</language>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Models</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>IsSolution__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>AttachCompileModel</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Attach Compile Model</masterLabel>
+        <openType>noSidebar</openType>
+        <page>PMnConfigAttachModelPage</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>CompileModel</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Compile Model</masterLabel>
+        <openType>noSidebar</openType>
+        <page>PMnConfigModelCompilePage</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

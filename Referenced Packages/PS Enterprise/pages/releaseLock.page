@@ -1,0 +1,3 @@
+<apex:page showHeader="false" controller="pse.LockingController" action="{!releaseLock}" cache="false">
+	This page is for system use only.
+</apex:page>

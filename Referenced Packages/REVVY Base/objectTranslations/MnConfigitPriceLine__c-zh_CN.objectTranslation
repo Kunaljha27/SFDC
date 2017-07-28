@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quote item Pricing Condition --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Condition Type --></label>
+        <name>CondType__c</name>
+    </fields>
+    <fields>
+        <help><!-- Condition value for this type --></help>
+        <label><!-- Condition Value --></label>
+        <name>CondValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Currency --></label>
+        <name>Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is this value changed? --></help>
+        <label><!-- Is this value changed? --></label>
+        <name>IsChanged__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is this Subtotal Type Condition? --></help>
+        <label><!-- Is this Subtotal Condition? --></label>
+        <name>IsSubTotal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition Line Id --></label>
+        <name>PLId__c</name>
+    </fields>
+    <fields>
+        <label><!-- QuoteItem --></label>
+        <name>QuoteItem__c</name>
+        <relationshipLabel><!-- QiPriceConditions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Variant Condition --></label>
+        <name>VCondition__c</name>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

@@ -1,0 +1,36 @@
+<apex:page controller="appirio_core.ConfigExportController" >
+  
+  <h1>Use this page to export configuration </h1>
+  <apex:pageMessages />
+  <apex:form rendered="{!canUsePage}">
+      <!-- <apex:commandButton action="{!exportData}" value="Get Config"/> -->
+      
+      <apex:outputText value="{!saveMessage}" /> 
+      
+      <apex:pageBlock title="Config XML for you organization"  rendered="{! configXML!= null }" >
+       
+       <apex:pageBlockSection columns="1" >
+           <apex:pageBlockSectionItem >
+           
+          <apex:inputText value="{!fileName}" id="fileName" title="File Name:" />
+           
+          <apex:commandButton action="{!saveFile}" value="Save File" id="saveFileButton"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+          <apex:inputText value="{!emailAddress}" id="emailAddress" /> 
+          <apex:commandButton action="{!emailFile}" value="Email me this file" id="emailFileButton"/>
+          </apex:pageBlockSectionItem>
+         
+          
+       </apex:pageBlockSection>
+      
+       <apex:InputTextArea rows="30" cols="1000" style="width:100%;white-space:pre;" readonly="true" value="{!configXML}"  />
+
+      </apex:pageBlock>
+      
+  </apex:form>
+   
+  
+
+  
+</apex:page>

@@ -1,0 +1,410 @@
+<apex:page standardController="Account" showHeader="false" sidebar="false" extensions="M2O_AccountHierarchyController">
+    <html>
+        <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=8" />
+            <style type="text/css">
+                ul.dynatree-container span.td {
+                    position: absolute;
+                    display:inline-block;
+                    overflow: hidden;
+                    background-color: #ffffff;
+                 }
+    a:visited {
+        color: #ffffff;
+    }   
+
+  .c1
+  {
+     position: static;
+     color: black;
+  }
+  .c2
+  {  position: static;
+     color: red;
+     left: 320px;
+     width: 100px;
+    
+    display : block
+  }
+  .c3
+  { position: absolute;
+   color: black;
+     left : 420px;
+     width: 80px;
+     word-wrap: break-word;
+     display : block
+  }
+  .c4
+  { position: absolute;
+     color: black;
+     left: 950px;
+     width: 180px;
+     display : block
+  }
+  .c5
+  { 
+    color: black;
+     left: 850px;
+     width: 250px;
+     display : block;
+      position: absolute 
+  }
+    .c6
+  { 
+    color: black;
+     left: 870px;
+     width: 150px;
+     display : block;
+      position: absolute 
+  }
+  .c7
+  { 
+    color: black;
+     left: 820px;
+     width: 150px;
+     display : block;
+      position: absolute 
+  }
+  .c8
+  { 
+    color: black;
+     left: 970px;
+     width: 150px;
+     display : block;
+      position: absolute 
+  }
+  ul.dynatree-container span.td:nth-child(1) {   
+     position: static;
+     color: black;
+  }
+  ul.dynatree-container span.td:nth-child(2) {
+     color: black;
+     left: 340px;
+     width: 370px;
+  }
+  ul.dynatree-container span.td:nth-child(3) {
+     color: black;
+     left : 600px;
+     width: 190px;
+     word-wrap: break-word;  
+  }
+  ul.dynatree-container span.td:nth-child(4) {
+     color: black;
+     left: 760px;
+     width: 190px;    
+  }
+  ul.dynatree-container span.td:nth-child(5) {
+     color: black;
+     left: 910px;
+     width: 200px;
+  }     
+  ul.dynatree-container span.td:nth-child(6) {
+     color: black;
+     left: 1110px;
+     width: 300px;   
+  }
+  ul.dynatree-container span.td:nth-child(7) {
+     color: black;
+     left: 1260px;
+     width: 200px;   
+  }
+  ul.dynatree-container span.td:nth-child(8) {
+     color: black;
+    left: 1430px;
+     width: 430px;   
+  }
+  .col1
+  {
+   width: 600px;  
+  }
+  .col2
+  {
+   width: 400px;
+  }
+  .col3
+  {
+   width: 410px;
+  }
+  .col4
+  {
+   width: 400px;
+  }
+  .col5
+  {
+   width: 300px;
+  }
+   .col6
+  {
+   width: 250px;
+  }
+  .col7
+  {
+   width: 300px;
+  }
+  .col8
+  {
+   width: 450px;
+  }
+  .col9
+  {
+  margin-left:1480px;
+   width: 200px;
+  }
+</style>
+</head>
+<body>
+    <apex:form id="formId" >
+    
+        <!-- Including Static Resource for enabling DynaTree JSquery  -->
+        <apex:includeScript value="{!URLFOR($Resource.Dynatree, 'jquery/jquery.js' )}" />
+        <apex:includeScript value="{!URLFOR($Resource.Dynatree, 'jquery/jquery-ui.custom.js' )}" />
+        <apex:includeScript value="{!URLFOR($Resource.Dynatree, 'jquery/jquery.cookie.js' )}" />
+        <apex:includeScript value="{!URLFOR($Resource.Dynatree, 'src/jquery.dynatree.js' )}" />    
+        <apex:stylesheet value="{!URLFOR($Resource.Dynatree, 'src/skin/ui.dynatree.css')}" />
+        
+        <!-- On VF page load , below script gets executed which displays the tree structure. -->
+        <script type="text/javascript">
+            var currentNode = '{!currentAccountId}';
+            var find=0;
+            $("#tree").dynatree({                
+                onActivate: function(node) {              
+                },
+                onCustomRender: function(node) {     
+                    // Render title as columns
+                    if(node.data.title.indexOf("@") == -1){
+                          // Default rendering
+                          return false;
+                    }
+                    var cols = node.data.title.split("@");        
+                    
+                    html = "<a class='dynatree-title' href='javascript:void(0)' style='text-decoration:none !important' >";
+                    
+                    //html = "<div class='dynatree-title' >";
+                    for(var i=0; i<cols.length; i++){
+                      if (i==0)
+                      {
+                          if(cols[i+1].substring(0,15) == currentNode){                              
+                              html += "<span class='td c1' style='cursor: pointer' onclick=redirectToNode('"+(cols[i+1])+"')><font size='2'><strong>" + cols[i] + "</strong></font></span>";
+                          }else{
+                              html += "<span class='td c1' style='cursor: pointer' onclick=redirectToNode('"+(cols[i+1])+"')><font size='2'>"  +cols[i] + "</font></span>";
+                          }
+                      }if (i==2)
+                      {
+                      html += "<span class='td c2' style='cursor:text;' title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                      }
+                      if (i==3)
+                      {
+                      html += "<span class='td c3' style='cursor:text;' title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                      }
+                      if (i==4)
+                      {
+                      html += "<span class='td c4' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                      }
+                      if (i==5)
+                      {
+                      html += "<span class='td c5' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                      }
+                      if (i==6)
+                      {
+                      html += "<span class='td c6' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                      }
+                      if (i==7)
+                      {
+                      html += "<span class='td c7' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                      }
+                      if (i==8)
+                      {
+                      html += "<span class='td c8' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                      }
+                    }
+                    var k = html + "</a>";        
+                    return k;
+                },
+                children: {!accountNodesList}
+            });
+            
+            // This function expands all the nodes of tree on click of "Expand All" link available on VF page.
+            function Expand(value){             
+                $("#tree").dynatree("getRoot").visit(function(node){                   
+                    if(node.data.title.toLowerCase().trim().indexOf(value.toLowerCase().trim())>=0 && value!=''){
+                        node.data.title="<font size='5'>"+node.data.title +"</font>";
+                        node.makeVisible();
+                        node.render();
+                    }
+                    if((node.data.title).indexOf('<')!=-1){
+                         node.data.title= (node.data.title).substring(8,(node.data.title).length-9);
+                    }                     
+                    node.render();
+                    node.expand(true);
+                });
+    
+            }    
+                
+            // This function collapses all the nodes of tree on click of "Collapse All" link available on VF page.   
+            function Collapse(value){       
+                $("#tree").dynatree("getRoot").visit(function(node){
+                    if(node.data.title.toLowerCase().trim().indexOf(value.toLowerCase().trim())>=0 ){
+                       node.data.title="<font size='5' color='red'>"+node.data.title +"<font>";                    
+                        node.render();
+                    }
+                    if((node.data.title).indexOf('<')!=-1){
+                         node.data.title= (node.data.title).substring(8,(node.data.title).length-9);
+                    }               
+                    node.render();               
+                    node.expand(false);
+                });         
+            }
+            
+            // This function is used to search the entered keyword in tree
+            function Search(value){
+               find=0;
+               $("#tree").dynatree("getRoot").visit(function(node){
+                    node.expand(false);               
+                    // If the keyword is found , the desired nodes are highlighted.         
+                    if(node.data.title.toLowerCase().trim().indexOf(value.toLowerCase().trim())>=0 && value!=''){
+                        //   node.data.title="<strong>"+node.data.title +"</strong>";
+                        if(node.data.title.indexOf("@") == -1){
+                          // Default rendering
+                          return false;   
+                        }                                              
+                            var cols = node.data.title.split("@");                                                    
+                             html = "<a class='dynatree-title' href='javascript:void(0)' style='text-decoration:none !important' >";                   
+                            
+                            for(var i=0; i<cols.length; i++){
+                              if (i==0)
+                              {
+                              html += "<span class='td c1' style='cursor:text;' title="+cols[i]+"><font size='2' color='red'>" + cols[i] + "</font></span>";    
+                              }if (i==2)
+                              {
+                              html += "<span class='td c3' style='cursor:text;' title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                              }
+                              if (i==3)
+                              {
+                              html += "<span class='td c4' style='cursor:text;' title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                              }
+                              if (i==4)
+                              {
+                              html += "<span class='td c5' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                              }
+                              if (i==5)
+                              {
+                              html += "<span class='td c6' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                              }
+                              if (i==6)
+                              {
+                              html += "<span class='td c6' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                              }
+                              if (i==7)
+                              {
+                              html += "<span class='td c6' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                              }
+                              if (i==8)
+                              {
+                              html += "<span class='td c6' style='cursor:text;'title="+cols[i]+"><font size='2'>" + cols[i] + "</font></span>";
+                              }
+                            }
+                            html += "</a>"; 
+                            node.data.title=html;
+                            find=1;
+                            node.makeVisible();
+                            node.render();   
+                                                                                                                                                            
+                        }                                          
+                     // If the keyword is not found , the desired nodes appear in normal fashion. 
+                    else if(node.data.title.toLowerCase().trim().indexOf(value.toLowerCase().trim())<0 || value=='' ){
+                      node.render();                              
+                    }
+                });
+            }   
+        
+            //This function takes to account detail page
+            function redirectToNode(nodeId){
+                window.location.replace("/"+nodeId);
+            }          
+        </script>
+        
+        <!-- Below line displayes the image and header title displayed on VF page.-->      
+        <apex:PageBlock id="treeBlock">
+          <!--  <apex:outputPanel rendered="{!showIDN}">
+                <table>
+                    <tr><td colspan="4">Please select one below to see corresponding hierarchy</td>
+                    </tr>
+                    <tr><td colspan="4">
+                        <apex:selectRadio id="hierarchyTypeRadio" value="{!hierarchyType}" onchange="getHierarchy('{!hierarchyType}');return false;">
+                            <apex:selectOptions value="{!hierarchyOptions}" id="hierarchyOptions" /> 
+                        </apex:selectRadio> </td>
+                    </tr>
+                </table>
+            </apex:outputPanel> -->
+            <table>              
+                <tr><td>Search : </td>
+                    <td><apex:inputText id="searchText" value="{!searchString}" onkeypress="return pressEnter(event);" /></td>    
+                    <td><apex:commandButton reRender="tree" value="Search"  oncomplete="hasFind();" onClick="Search(document.getElementById('{!$Component.formId.treeBlock.searchText}').value);"/></td>
+                    <td><apex:commandButton id="cancelBtn" value="Cancel" action="{!Cancel}"/></td>
+                    <td><apex:commandButton id="exportButton" value="Export To Excel" action="{!ExportToExcel}" immediate="true" oncomplete="window.close();"/></td>
+                </tr>
+            </table><br/>
+            <div>
+                <apex:pagemessages />
+            </div>
+            <!-- Below div is rendered on loading of VF page with help of DynaTree JSQuery.--> 
+                <div id="header" style="width:1500px;background-color:#C0C0C0;">
+                <table width="110%"><tr height="20px" width="160px"><td class="col1"><b>Account Name</b></td>
+                    <td class="col2"><b>Account Name (Global)</b></td>
+                    <td class="col3"><b>Golden Record Key</b></td>                    
+                    <td class="col4"><b>House Number</b></td>
+                    <td class="col5"><b>Street 1</b></td>
+                    <td class="col6"><b>City</b></td>
+                    <td class="col7"><b>Zip Postal Code</b></td>
+                    <td class="col8"><b>Organization Level</b></td></tr></table>
+                </div>
+                <apex:outputPanel id="panelTree">
+                    <div id="tree" />                                               
+                  </apex:outputPanel>
+                
+        </apex:PageBlock> 
+        
+        <apex:actionStatus id="nextPageStatus" >
+            <apex:facet name="stop">
+                <apex:outputPanel layout="none" rendered="true" ></apex:outputPanel>
+            </apex:facet>
+            <apex:facet name="start">
+                <apex:outputPanel layout="none" style="float:center;">
+                    <apex:image value="/img/loading.gif" style="position:fixed;top:50%;right:50%;" />
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus> 
+        
+       <!-- <apex:actionFunction action="{!getHierarchy}" name="getHierarchy" reRender="formId, panelTree, tree" status="nextPageStatus"/>  -->
+        <apex:actionFunction name="getTreeStructure" status="nextPageStatus" action="{!generateTreeStructureForAccounts}" reRender="formId"/>       
+    
+    </apex:form>
+    
+    <script>
+        getTreeStructure();
+        function pressEnter(e){
+           if (window.event) {
+               key = window.event.keyCode; //IE
+           } else {
+               key = e.which; //firefox
+           }
+           if (key == 13) {
+               Search(document.getElementById('{!$Component.formId.treeBlock.searchText}').value);
+               hasFind();
+               return false;
+           } else {
+               return true;
+           }
+       }
+       
+       // Below function displays an error message , if keyword is not found in the tree.
+        function hasFind(){
+            if(find==0){
+                alert('No Match found.');        
+            }
+            
+        }         
+    </script>
+    </body>
+    </html>
+</apex:page>

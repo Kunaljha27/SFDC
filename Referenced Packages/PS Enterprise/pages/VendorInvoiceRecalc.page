@@ -1,0 +1,23 @@
+<apex:page standardController="pse__Vendor_Invoice__c" 
+           extensions="pse.VendorInvoiceManager" 
+           recordSetVar="invoices"
+           action="{!recalcInvoices}">
+<apex:pageMessages />
+
+<apex:pageBlock title="Items Recalculated">
+  <apex:pageBlockTable value="{!RecalcInvoices}" var="i">
+     <apex:column headerValue="Name" value="{!i.Name}"/>
+     <apex:column headerValue="Description" value="{!i.pse__Description__c}"/>
+     <apex:column headerValue="Amount" value="{!i.pse__Amount__c}"/>
+     <apex:column headerValue="Quantity" value="{!i.pse__Quantity__c}"/>
+     <apex:column headerValue="Unit Price" value="{!i.pse__Unit_Price__c}"/>
+     <apex:column headerValue="Vendor Invoice" value="{!i.pse__Vendor_Invoice__c}"/>
+     <apex:column headerValue="Resource" value="{!i.pse__Resource__c}"/>
+     <apex:column headerValue="Milestone" value="{!i.pse__Milestone__c}"/>
+     <apex:column headerValue="Misc Adj" value="{!i.pse__Miscellaneous_Adjustment__c}"/>
+     <apex:column headerValue="Expense" value="{!i.pse__Expense__c}"/>
+     <apex:column headerValue="Timecard" value="{!i.pse__Timecard__c}"/>
+  </apex:pageBlockTable> 
+</apex:pageBlock>
+
+</apex:page>

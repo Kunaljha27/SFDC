@@ -1,0 +1,72 @@
+<apex:page showHeader="true" sidebar="true" controller="ErrorsControllerD">
+    <apex:form >
+        <apex:sectionHeader subtitle="Erros page" title="Erros page"/>
+        <apex:pageBlock title="Errors">
+
+            <apex:actionFunction name="empty" action="{!empty}" reRender="runPanel" oncomplete="console.log('empty completed')" />
+
+
+
+
+            <apex:pageBlockSection collapsible="false" columns="6"> 
+             <b> {!$Label.dfgErr_SelectObj} </b>  
+              <apex:selectList value="{!sObjectType}" multiselect="false" size="1" onchange="empty();">
+                  <apex:selectOptions value="{!SObjectsList}"/>
+              </apex:selectList> 
+              &nbsp;   
+
+               <b> {!$Label.dfgErr_OperType}</b>  
+                  <apex:selectList value="{!selectedObject}" multiselect="false" size="1" onchange="empty();">
+                      <apex:selectOptions value="{!soList}"/>
+                  </apex:selectList> 
+
+                  <apex:outputPanel ></apex:outputPanel>
+                  <apex:outputPanel ></apex:outputPanel>
+
+
+               <b> {!$Label.dfgErr_ShowMessage} </b>   
+                    <apex:inputCheckbox value="{!showText}" /> 
+            </apex:pageBlockSection>  
+
+
+             
+             <div align="center">
+             <apex:outputPanel id="runPanel">
+                <apex:commandButton id="runButton" value="show" 
+                    disabled="{! selectedObject == '' || sObjectType == ''}" 
+                    action="{!empty}" 
+                    reRender="errorsPanel, none"> 
+                </apex:commandButton>  
+             </apex:outputPanel>  
+            </div>
+
+             <apex:outputPanel id="errorsPanel">
+             <br />
+             {!$Label.dfgErr_TotalTokenErr} <b>{!eTotalTok}</b> <br />
+             {!$Label.dfgErr_TotalDeTokenErr} <b>{!eTotalDeTok}</b> <br />
+             <apex:outputPanel rendered="{! selectedObject!='' && sObjectType!='' }">
+                {!$Label.dfgErr_ErrorsForSelObject} <b>{!eSelectedObj}</b> 
+             </apex:outputPanel>
+            <br />
+            <apex:pageBlockTable value="{!errors}" var="err" rendered="{! selectedObject!='' && sObjectType!='' }">  
+                    <apex:column >
+                        <apex:facet name="header">{!sObjectType}</apex:facet>
+                        <apex:facet name="footer">{!sObjectType}</apex:facet>
+                        <apex:outputLink value="{!err.Failed__c}"> {!$Label.dfgErr_link} ({!err.Failed__c}) </apex:outputLink>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.dfgErr_Error}</apex:facet>
+                        <apex:facet name="footer">{!$Label.dfgErr_Error}</apex:facet>
+                        <apex:outputLink value="{!err.Id}"> {!$Label.dfgErr_link} ({!err.Id}) </apex:outputLink>
+                    </apex:column>
+                    <apex:column rendered="{!showText}">
+                        <apex:facet name="header">{!$Label.dfgErr_message}</apex:facet>
+                        <apex:facet name="footer">{!$Label.dfgErr_message}</apex:facet>
+                        <apex:outputText value=" {!err.Message__c}"/>
+                    </apex:column>
+            </apex:pageBlockTable>  
+             </apex:outputPanel>
+  
+        </apex:pageBlock>  
+    </apex:form>
+</apex:page>

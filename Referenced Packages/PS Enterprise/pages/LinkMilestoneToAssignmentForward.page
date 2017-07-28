@@ -1,0 +1,2 @@
+<!-- This page is forwarding to linkMilestone from milestones  --> 
+<apex:page standardController="pse__Assignment_Milestone__c" recordsetvar="milestones" action="{!URLFOR($Page.LinkMilestone)+'?id='+$CurrentPage.parameters.id}" />

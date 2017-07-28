@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Option --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Reference to the product that this option is associated with. --></help>
+        <label>Katalogknoten</label>
+        <name>Catalog_Node__c</name>
+        <relationshipLabel>Optionen</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Duplizierung erlaubt</label>
+        <name>Duplication_Allowed__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID number for this option within a particular option group. --></help>
+        <label>ID-Nummer</label>
+        <name>Id_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Options-ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Label for this option. --></help>
+        <label>Bezeichnung</label>
+        <name>Label__c</name>
+    </fields>
+    <fields>
+        <label>Name Sprachversion</label>
+        <name>LocaleName_F__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 10)</label>
+        <name>Name_L10__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 11)</label>
+        <name>Name_L11__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 12)</label>
+        <name>Name_L12__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 13)</label>
+        <name>Name_L13__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 14)</label>
+        <name>Name_L14__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 15)</label>
+        <name>Name_L15__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 16)</label>
+        <name>Name_L16__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 17)</label>
+        <name>Name_L17__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 18)</label>
+        <name>Name_L18__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 19)</label>
+        <name>Name_L19__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 1)</label>
+        <name>Name_L1__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 20)</label>
+        <name>Name_L20__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 2)</label>
+        <name>Name_L2__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 3)</label>
+        <name>Name_L3__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 4)</label>
+        <name>Name_L4__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 5)</label>
+        <name>Name_L5__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 6)</label>
+        <name>Name_L6__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 7)</label>
+        <name>Name_L7__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 8)</label>
+        <name>Name_L8__c</name>
+    </fields>
+    <fields>
+        <label>Name (Sprache 9)</label>
+        <name>Name_L9__c</name>
+    </fields>
+    <fields>
+        <help><!-- Custom Option ID for this record. --></help>
+        <label><!-- Custom Option ID --></label>
+        <name>OptId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the option group that this option belongs to. --></help>
+        <label>Optionsgruppe</label>
+        <name>Option_Group__c</name>
+        <relationshipLabel>Optionen</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Order in which this option appears in the option group (e.g., option #1, option #2, option #3). --></help>
+        <label>Optionsreihenfolge</label>
+        <name>Option_Order__c</name>
+    </fields>
+    <fields>
+        <help><!-- Option that is selected by default. --></help>
+        <label>Ausgewählt</label>
+        <name>Selected__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Config Engine Option Name --></nameFieldLabel>
+</CustomObjectTranslation>

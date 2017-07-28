@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Payment Rollup</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Payment Rollups</value>
+    </caseValues>
+    <fields>
+        <label><!-- Payment Rollup Label --></label>
+        <name>PaymentRollupLabel__c</name>
+    </fields>
+    <layouts>
+        <layout>Payment Rollup Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Entity Selector Config --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Advanced Search Field Set --></label>
+        <name>AdvancedSearchFieldSet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Entity --></label>
+        <name>Entity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fields To Search --></label>
+        <name>FieldsToSearch__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fields To Show --></label>
+        <name>FieldsToShow__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hierarchy Selector --></label>
+        <name>HierarchySelector__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Field1 --></label>
+        <name>InitialSearchCriteriaField1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Field2 --></label>
+        <name>InitialSearchCriteriaField2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Field3 --></label>
+        <name>InitialSearchCriteriaField3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Field4 --></label>
+        <name>InitialSearchCriteriaField4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Field5 --></label>
+        <name>InitialSearchCriteriaField5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Value1 --></label>
+        <name>InitialSearchCriteriaValue1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Value2 --></label>
+        <name>InitialSearchCriteriaValue2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Value3 --></label>
+        <name>InitialSearchCriteriaValue3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Value4 --></label>
+        <name>InitialSearchCriteriaValue4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria Value5 --></label>
+        <name>InitialSearchCriteriaValue5__c</name>
+    </fields>
+    <layouts>
+        <layout>Entity Selector Config Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Entity Selector Config Name --></nameFieldLabel>
+</CustomObjectTranslation>

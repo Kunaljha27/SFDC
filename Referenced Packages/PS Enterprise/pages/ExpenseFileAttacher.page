@@ -1,0 +1,32 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="true"
+    tabStyle="pse__Expense__c" action="{!initAction}" controller="pse.ExpenseFileAttacherController">
+
+<head>
+    <title>{!$Label.expense_label_attach_file}</title>
+</head>
+
+
+<body class="Custom20Tab">
+
+<apex:sectionHeader title="{!$Label.expense_label_attach_file}" />
+
+<apex:pageMessages id="messages"/>
+
+<apex:form >
+<apex:pageBlock title="{!$Label.expense_label_file_information}" id="attachBlock" mode="edit" rendered="{!displayContent}">
+    <apex:pageBlockButtons >
+        <!-- NOTE: getting weird error with the action method not being called if trying to use rerender or onclick+oncomplete methods for wait screen -->
+        <apex:commandButton value="{!$Label.expense_label_attach_file}" action="{!attachFile}"/>
+        <apex:commandButton value="{!$Label.common_label_done}" action="{!gotoReturnPage}" immediate="true"/>
+    </apex:pageBlockButtons>
+    <apex:pageBlockSection title=" " columns="1">
+        <apex:pageBlockSectionItem >
+	        <apex:outputLabel for="fileField" value="{!$Label.expense_label_file}"/>
+	        <apex:inputFile id="fileField" value="{!fileAttachment.Body}" 
+	           filename="{!fileAttachment.Name}" contentType="{!fileAttachment.ContentType}"/>
+        </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>    
+</body>
+</apex:page>

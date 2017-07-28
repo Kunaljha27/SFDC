@@ -1,0 +1,3 @@
+Please note that the Quote "{!MnQuote__c.Name}" you submitted for approval is now approved. Please follow the link below to re-visit the quote:
+
+ {!MnQuote__c.Link}

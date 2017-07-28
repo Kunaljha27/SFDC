@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Defines the content of print templates, which are used to generate sales proposals.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>PT_Images_FS</fullName>
+        <description>Used in the pages fir image upload fields</description>
+        <displayedFields>
+            <field>imgConclusionURL__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>imgCoverLetterURL__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>imgOpeningURL__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>imgPricingURL__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>imgTermsOfServiceURL__c</field>
+            <isFieldManaged>true</isFieldManaged>
+            <isRequired>true</isRequired>
+        </displayedFields>
+        <label>PT Images FS</label>
+    </fieldSets>
+    <fields>
+        <fullName>Edit_T_C__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that controls whether the terms and conditions can be edited on the print proposal page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Flag that controls whether the terms and conditions can be edited on the print proposal page.</inlineHelpText>
+        <label>Allow Editing of Terms and Conditions</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Unique ID for each record that can be used as an external ID for importing and exporting data.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique ID for this record.</inlineHelpText>
+        <label>Unique Identifier</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>IsDefault__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Flag that controls whether the current template is the default template.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Flag that controls whether the current template is the default template.</inlineHelpText>
+        <label>Is Default Template</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermsOfService__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Text field where the admin can add terms of service or other boilerplate info.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Text field where the admin can add terms of service or other boilerplate info.</inlineHelpText>
+        <label>Terms and Conditions</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>VisualforcePageName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the Visualforce page that is used to generate the proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the Visualforce page that is used to generate the proposal.</inlineHelpText>
+        <label>Visualforce Page Name</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>closingComments__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Supplies default text that is used in the quote when the sales rep generates a proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Supplies default text that is used in the quote when the sales rep generates a proposal.</inlineHelpText>
+        <label>Closing Comments</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>imgConclusionURL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Preview of the sample conclusion page that is shown in the proposal page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Preview of the sample conclusion page that is shown in the proposal page.</inlineHelpText>
+        <label>Conclusion Thumbnail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>imgCoverLetterURL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Preview of the sample cover letter page that is shown in the proposal page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Preview of the sample cover letter page that is shown in the proposal page.</inlineHelpText>
+        <label>Cover Letter Thumbnail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>imgOpeningURL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Preview of the sample opening comments page that is shown in the proposal page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Preview of the sample opening comments page that is shown in the proposal page.</inlineHelpText>
+        <label>Opening Comments Thumbnail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>imgPricingURL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Preview of the quote that is used on the print proposal page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Preview of the quote that is used on the print proposal page.</inlineHelpText>
+        <label>Quote Details Thumbnail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>imgTermsOfServiceURL__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Preview of the sample conclusion page that is shown in the proposal page.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Preview of the sample conclusion page that is shown in the proposal page.</inlineHelpText>
+        <label>Terms and Conditions Thumbnail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>openingComments__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Supplies default text that is used in the quote when the sales rep generates a proposal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Supplies default text that is used in the quote when the sales rep generates a proposal.</inlineHelpText>
+        <label>Opening Comments</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <label>Proposal Template</label>
+    <nameField>
+        <label>Proposal Template Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Revvy Proposal Templates</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

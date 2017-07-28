@@ -1,0 +1,7 @@
+<apex:page sidebar="false" showHeader="true" controller="pse.StafferController">
+
+    <c:flexcontrol src="{!$Resource.pse__Staffer}" height="950" targetPlayerVersion="9.0.124"
+        flashvars="session_id={!$Api.Session_ID}&server_url={!$Api.Partner_Server_URL_140}"
+        rendered="{!showStaffer}"/>
+    <apex:pageMessages ></apex:pageMessages>
+</apex:page>

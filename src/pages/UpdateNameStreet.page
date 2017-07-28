@@ -1,0 +1,35 @@
+<apex:page standardController="Account" sidebar="false" showHeader="false" extensions="M2O_UpdateNameStreet">
+    <script language="JavaScript" type="text/javascript">
+        function CloseAndRefresh(){
+        //window.opener.location.href="https://cs9.salesforce.com/{!$CurrentPage.parameters.id}";
+          window.top.close();
+        
+        }
+    </script>
+    <apex:pageMessage summary="Please validate the Name and Street fields for this account as they will appear on the Quote documents. The other address components (e.g. City, Postal code, etc) will be picked up from the account." severity="info" strength="3" />
+
+    <Apex:form >
+        <apex:pageBlock id="mainBlock">
+            <apex:messages />
+            <apex:pageblockSection rendered="{!!editMode}" >
+                <apex:repeat value="{!$ObjectType.Account.FieldSets.Non_MDM_fields}" var="f" >
+                    <apex:outputField value="{!Account[f]}" rendered="{!f!= 'Name'}"/>
+                    <apex:outputText value="" rendered="{!f== 'Name'}"/>
+                </apex:repeat>
+            </apex:pageblockSection>
+            <apex:pageblockSection rendered="{!editMode}" >
+                <apex:repeat value="{!$ObjectType.Account.FieldSets.Non_MDM_fields}" var="f" >
+                <apex:outputtext rendered="{!(f=="Name")}"/>
+                <apex:inputField value="{!Account[f]}" rendered="{!(f!="Name")}"/>
+                </apex:repeat>
+            </apex:pageblockSection>
+            <apex:pageblockButtons >
+                <apex:commandButton action="{!toggleMode}" value="Edit" rendered="{!!editMode}" reRender="mainBlock"/>
+                <apex:commandButton action="{!saveandreturn}" value="Update" rendered="{!editMode}"/>
+                <apex:commandButton action="{!toggleMode}"  value="Cancel" rendered="{!editMode}"/>
+                <apex:commandButton onclick="javascript:CloseAndRefresh()" value="Start Sofon" rendered="{!!editmode}"/>
+                <apex:outputlink value="/{!Account.ID}/e?retURL=apex/UpdateNameStreet?ID={!Account.ID}" >[Goto Account page]</apex:outputLink>
+            </apex:pageblockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

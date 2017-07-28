@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Price List --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Currency used for this price list. --></help>
+        <label>Währung</label>
+        <name>Currency__c</name>
+        <picklistValues>
+            <masterLabel>USD</masterLabel>
+            <translation><!-- USD --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list expires. --></help>
+        <label>Effektives Enddatum</label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Preislisten-ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- The type of price stored in this pricelist --></help>
+        <label><!-- Price Type --></label>
+        <name>PriceType__c</name>
+        <picklistValues>
+            <masterLabel>Contract Price</masterLabel>
+            <translation><!-- Contract Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price List</masterLabel>
+            <translation><!-- Price List --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Defines the customer segment that this price list is applied to. --></help>
+        <label>Preissegment</label>
+        <name>Segment__c</name>
+        <picklistValues>
+            <masterLabel>Education</masterLabel>
+            <translation><!-- Education --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Government</masterLabel>
+            <translation><!-- Government --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care</masterLabel>
+            <translation><!-- Health Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Media</masterLabel>
+            <translation><!-- Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Process Industry</masterLabel>
+            <translation><!-- Process Industry --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the Quote object used to generate this pricelist. --></help>
+        <label><!-- Group Quote --></label>
+        <name>SourceQuote__c</name>
+        <relationshipLabel><!-- Contract Price List --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date when this price list takes effect. --></help>
+        <label>Effektives Startdatum</label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Controls whether the price list is in effect. If the price list is in draft, then it is not in effect. If the price list is active, then it is in effect. --></help>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Price List Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>Das Segment ist zwingend erforderlich und darf nicht leer sein</errorMessage>
+        <name>VMnSegmentDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Das Startdatum darf nicht nach dem Enddatum liegen</errorMessage>
+        <name>VMnStartAndEndDatesValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>&quot;Die Währung darf nicht &quot;&quot;Keine&quot;&quot; sein. Wählen Sie einen gültigen Wert aus.&quot;</errorMessage>
+        <name>VmnCurrencyDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>&quot;Der Status darf nicht &quot;&quot;Keine&quot;&quot; sein. Wählen Sie einen gültigen Wert aus.&quot;</errorMessage>
+        <name>VmnStatusDefaultValValidity</name>
+    </validationRules>
+</CustomObjectTranslation>

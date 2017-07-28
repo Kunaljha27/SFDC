@@ -1,0 +1,67 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnQuoteLifeCycleDetailCtrl,REVVY.CMnLifeCycleRemoter,REVVY.CMnVFPageGenericCtrl,REVVY.CMnLifeCycleActionCtrl" standardStylesheets="false">
+    <apex:variable var="jsrUrl" value="{!URLFOR($Resource.REVVY__contractProgressBarJSR)}"/>
+    <apex:stylesheet value="{!jsrUrl}/pBarButtons.css" />
+    <apex:includeScript value="{!$Resource.REVVY__lifeCycleRender}" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/messi.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/uifw/ui/libs/css/overrides/messioverride.css" />
+    <script>
+        (function(){
+
+            var namespace = "{!JSENCODE(namespace)}";
+            var namespaceDT = namespace.length > 0 ? namespace.slice(0, -2)+"." : "";
+            var remotingObj = Visualforce.remoting;
+            var quoteId = '{!id}';
+            var recordType = '{!recordType}';
+            var objectName = '{!objectName}';
+            var lifecycleRecordId = '{!lifecycleRecordId}';
+            var currentPhase = '{!currentPhase}';
+            var currentSubPhase = '{!currentSubPhase}';
+            var status = '{!status}';
+
+            var lifecycleObj = {"lifeCycleId": lifecycleRecordId, "objectId": quoteId};
+            if(lifecycleRecordId !='' && lifecycleRecordId != null ){
+                getLifeCycleInformation(remotingObj, namespaceDT, lifecycleObj, currentPhase, currentSubPhase);
+            }
+        })();
+    </script>
+
+    <div id="barContainer">
+        <form id="msform">
+            <div id="lifecycle">
+                <ul class="progressbar" id="progressbar">
+
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <div id="commentPopup">
+        <div id="commentModal" class="messi modal-small" style='display: none; border: 1px solid #dddddd; left: 20%; top: 0px !important;'>
+            <div class="messi-box">
+            <div class="messi-wrapper">
+            <div class="messi-content">
+                <div class="lifecycleCommentsContainer">
+                    <textarea id="commentsText" placeholder='Add comments here...' class="commentsTextFields"
+                    style="width: 100%; resize: none; overflow: auto; height: 80px;"
+                    onfocus="this.placeholder=''" onblur="this.placeholder='Add comments here...'"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="messi-footbox" style="padding: 5px 0;">
+            <div class="messi-actions" style="padding-right: 5px;">
+            <div class="btnbox">
+                <button id="submitComments" class="btn primary">Ok</button></div>
+            <div class="btnbox">
+                <button id="closeModal" class="btn default"
+                 onclick="javascript:closePopUp()">
+                 Cancel
+                 </button></div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+</apex:page>

@@ -1,0 +1,174 @@
+<apex:page id="thePage" standardController="REVVY__MnPriceListLine__c" tabstyle="MnAdmin__tab" extensions="REVVY.CMnPriceListLineController"
+            action="{!doOnload}" sidebar="false">
+    <apex:variable var="mode" value="view" />
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+<c:CMnZenDesk />
+<div  class="slds">
+    <div  class="colWrapper slds-grid">
+        <div class="collwrp slds-col" >
+            <div class="coll" >
+                <c:CMnAdminLeftNav />
+            </div>
+        </div>
+        <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+          <apex:sectionHeader title="Price List Lines" subtitle="{!PageSubTitle}"/>
+          <apex:form id="theForm" styleclass="mn-form">
+            <apex:pageBlock title="Price List Line">
+              <apex:pagemessages />
+              <apex:pageBlockButtons >
+                <apex:commandButton action="{!editView}" rendered="{!allowEdit}" value="{!$Label.revvy__List_Action_Basic_Update}"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+              </apex:pageBlockButtons>
+
+              <apex:pageBlockSection showHeader="false" columns="2">
+                <apex:outputField value="{!REVVY__MnPriceListLine__c.Name}" />
+                <apex:outputField value="{!REVVY__MnPriceListLine__c.REVVY__PriceList__c}" />
+                <apex:outputField value="{!REVVY__MnPriceListLine__c.REVVY__Product__c}" />
+                <apex:outputText value="{0, number, $###,##0.00}" label="{!$ObjectType.REVVY__MnPriceListLine__c.Fields.REVVY__ListedPrice__c.Label}">
+                  <apex:param value="{!REVVY__MnPriceListLine__c.REVVY__ListedPrice__c}" />
+                </apex:outputText>
+                <apex:outputField value="{!REVVY__MnPriceListLine__c.REVVY__Start_Date__c}" />
+                <apex:outputField value="{!REVVY__MnPriceListLine__c.REVVY__End_Date__c}" />
+              </apex:pageBlockSection>
+
+            </apex:pageBlock>
+
+  <!-- Tiered Pricing Info  -->
+    <apex:outputPanel id="divManageTiers" rendered="{!allowEdit}">
+      <apex:pageBlock title="{!$ObjectType.REVVY__MnPriceListLine__c.Fields.REVVY__PricingTier__c.Label}" id="pbTable">
+          <apex:pageBlockSection id="pbSectionTierType">
+        <apex:outputPanel id="panelE" rendered="{!isEditType}" >
+                    <apex:outputLabel style="font-weight:bold" value="{!$ObjectType.REVVY__MnTieredPricing__c.Fields.REVVY__Type__c.Label}" for="ddlDiscountTypeE"/>&nbsp;&nbsp;
+          <apex:actionRegion >
+            <apex:selectList id="ddlDiscountTypeE" size="1" rendered="{!isEditType}" value="{!pt.REVVY__Type__c}">
+              <apex:selectOptions value="{!discountTypeOptions}"/>
+              <apex:actionSupport event="onchange" action="{!setTierTypeValue}" focus="txtMinQty" rerender="pbTable"/>
+            </apex:selectList>
+          </apex:actionRegion>
+        </apex:outputPanel>
+        <apex:outputPanel id="panelV" rendered="{!!isEditType}" >
+                    <apex:outputLabel style="font-weight:bold" value="{!$ObjectType.REVVY__MnTieredPricing__c.Fields.REVVY__Type__c.Label}" for="ddlDiscountTypeV"/>&nbsp;&nbsp;
+                    <apex:outputLabel id="ddlDiscountTypeV" value="{!pt.REVVY__Type__c}" rendered="{!!isEditType}"/>
+        </apex:outputPanel>
+        </apex:pageBlockSection>
+      <apex:actionRegion >
+          <apex:actionFunction action="{!updateTierValue}" name="updateTierValue" status="updateStatus" rerender="pbTable">
+            <apex:param name="nodeId" value="" assignTo="{!id2Update}"/>
+          </apex:actionFunction>
+          <apex:actionFunction name="addNewValue" action="{!addNewValue}"
+                             reRender="pbTable, pbSectionTierType, valueMessages"
+                             status="updateStatus" focus="txtMinQty" />
+
+                <apex:pageMessages id="valueMessages"/>
+                <apex:outputPanel id="divNewSection">
+                <script>
+
+            function noenter(ev)  {
+                if (!ev || window.event && window.event.keyCode == 13 || ev.which == 13) {
+                    addNewValue();
+          clearNewValues();
+                    return false;
+                } else {
+                    return true;
+                 }
+            }
+            function clearNewValues() {
+                    var newValueDOMId1 = 'thePage:theForm:pbTable:pbSectionNewValue:txtMinQty'
+                    var newValueDOMId2 = 'thePage:theForm:pbTable:pbSectionNewValue:txtMaxQty'
+                    var newValueDOMId3 = 'thePage:theForm:pbTable:pbSectionNewValue:txtTierValue'
+                    if(document.getElementById(newValueDOMId1)){
+                        document.getElementById(newValueDOMId1).value = '';
+                    }
+                    if(document.getElementById(newValueDOMId2)){
+                        document.getElementById(newValueDOMId2).value = '';
+                    }
+                    if(document.getElementById(newValueDOMId3)){
+                        document.getElementById(newValueDOMId3).value = '';
+                    }
+            }
+
+            </script>
+            <apex:pageBlockSection id="pbSectionNewValue" columns="1" rendered="{!allowAdd}">
+                <apex:outputPanel >
+                    <apex:outputLabel id="minQtyLbl" style="font-weight:bold" value="{!$ObjectType.REVVY__MnTier__c.Fields.REVVY__MinQuantity__c.Label}" for="txtMinQty"/>&nbsp;&nbsp;
+                    <apex:inputField value="{!newValue.REVVY__MinQuantity__c}" id="txtMinQty" onkeypress="return noenter(event);"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputLabel id="maxQtyLbl" style="font-weight:bold" value="{!$ObjectType.REVVY__MnTier__c.Fields.REVVY__MaxQuantity__c.Label}" for="txtMaxQty"/>&nbsp;&nbsp;
+                    <apex:inputField value="{!newValue.REVVY__MaxQuantity__c}" id="txtMaxQty" onkeypress="return noenter(event);"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputLabel id="tierValLbl" style="font-weight:bold" value="{!valueLabel}" for="txtTierValue"/>&nbsp;&nbsp;
+                    <apex:inputField value="{!newValue.REVVY__TierValue__c}" id="txtTierValue" onkeypress="return noenter(event);"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:commandButton id="btnNewValue" onclick="return noenter()" value="Add" />
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+                </apex:outputPanel>
+
+                <apex:outputPanel id="divTableSection">
+
+                <div class="slds-scrollable--x">
+                <apex:pageBlockTable value="{!tierRecords}" var="item" id="pbExistingTiers" rendered="{!records.size>0}" styleClass="slds-table">
+                <apex:column >
+                      <apex:commandLink value="{!$Label.revvy__List_Action_Delete}"  rerender="pbTable, pbSectionTierType" onclick="clearNewValues()" action="{!deleteTier}" status="deleteStatus">
+                           <apex:param name="nodeId" value="{!item.id}" assignTo="{!id2Delete}"/>
+                      </apex:commandLink>
+                      <apex:facet name="header">
+                        <apex:outputText value="Action" />
+                      </apex:facet>
+                </apex:column>
+                <apex:column >
+                      <apex:facet name="header">
+                        <apex:outputText >
+                              {!$ObjectType.REVVY__MnTier__c.Fields.REVVY__MinQuantity__c.Label}
+                        </apex:outputText>
+                      </apex:facet>
+                      <apex:outputField value="{!item.REVVY__MinQuantity__c}"/>
+                </apex:column>
+                <apex:column >
+                      <apex:facet name="header">
+                        <apex:outputText >
+                              {!$ObjectType.REVVY__MnTier__c.Fields.REVVY__MaxQuantity__c.Label}
+                        </apex:outputText>
+                      </apex:facet>
+                      <apex:outputField value="{!item.REVVY__MaxQuantity__c}"/>
+                </apex:column>
+                <apex:column >
+                      <apex:facet name="header">
+                        <apex:outputText >
+                              {!valueLabel}
+                        </apex:outputText>
+                      </apex:facet>
+                      <apex:inputText value="{!item.REVVY__TierValue__c}" onchange="updateTierValue('{!item.Id}')" />
+                </apex:column>
+                </apex:pageBlockTable>
+                </div>
+
+                <apex:panelGrid columns="7" rendered="{!records.size>0}" styleClass="slds-grid mn-nav-panel">
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value="|<" action="{!first}" disabled="{!!hasPrevious}" title="{!$Label.revvy__MnFirstPage}"/>
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value="<" action="{!previous}" disabled="{!!hasPrevious}" title="{!$Label.revvy__MnPreviousPage}"/>
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value=">" action="{!next}" disabled="{!!hasNext}" title="{!$Label.revvy__MnNextPage}"/>
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value=">|" action="{!last}" disabled="{!!hasNext}" title="{!$Label.revvy__MnLastPage}"/>
+                <apex:commandButton status="fetchStatus" reRender="pbTable" value="Refresh" action="{!refresh}" title="Refresh Page"/>
+                <apex:outputPanel style="color:#4AA02C;font-weight:bold">
+                    <apex:actionStatus id="fetchStatus" startText="{!$Label.revvy__Action_Status_Retrieve}" stopText=""/>
+                </apex:outputPanel>
+
+                <apex:outputPanel style="color:#4AA02C;font-weight:bold">
+                    <apex:actionStatus id="deleteStatus" startText="{!$Label.revvy__Action_Status_Delete}" stopText=""/>
+                </apex:outputPanel>
+                </apex:panelGrid>
+                </apex:outputPanel>
+
+      </apex:actionRegion>
+      </apex:pageBlock>
+    </apex:outputPanel>
+        <!-- ---------- -->
+          </apex:form>
+
+      </div>
+    </div>
+    </div>
+
+
+</apex:page>

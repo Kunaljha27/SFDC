@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Volume Pricing</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Volume Pricings</value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Pricing Tier ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines the type of Volume Pricing. --></help>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Discount Absolute</masterLabel>
+            <translation><!-- Discount Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Discount Percent</masterLabel>
+            <translation><!-- Discount Percent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price Override</masterLabel>
+            <translation><!-- Price Override --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

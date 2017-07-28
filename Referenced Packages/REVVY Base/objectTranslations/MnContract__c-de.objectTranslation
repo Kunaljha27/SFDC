@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- REVVY Contract --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID of the account that is associated with the contract. --></help>
+        <label>Account</label>
+        <name>Account__c</name>
+        <relationshipLabel>Verträge</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Aktion</label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label>ΓåæΓåô</label>
+        <name>AdjustmentArrow__c</name>
+    </fields>
+    <fields>
+        <label>Anpassung %</label>
+        <name>Adjustment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amended From --></label>
+        <name>AmendedFrom__c</name>
+        <relationshipLabel><!-- Amendments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Amendment ID Prefix --></label>
+        <name>AmendmentIdPrefix__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amendment # --></label>
+        <name>AmendmentNumber__c</name>
+    </fields>
+    <fields>
+        <label>Verfügbare Gutschrift</label>
+        <name>AvailableCredit__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the contact person associated with this contract. --></help>
+        <label>Account-Kontakt</label>
+        <name>Contact__c</name>
+        <relationshipLabel>Verträge</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Contract ID --></label>
+        <name>ContractId__c</name>
+    </fields>
+    <fields>
+        <label><!-- ContractItemSubLines Need Approval Count --></label>
+        <name>ContractItemSubLinesNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Items Need Approval Count --></label>
+        <name>ContractItemsNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Vertragsnummer</label>
+        <name>ContractNum__c</name>
+    </fields>
+    <fields>
+        <label><!-- eSignature Date --></label>
+        <name>ContractSignDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- eSignature Status --></label>
+        <name>ContractSignStatus__c</name>
+        <picklistValues>
+            <masterLabel>Not Signed</masterLabel>
+            <translation><!-- Not Signed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signed</masterLabel>
+            <translation><!-- Signed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Wert erstes Jahr</label>
+        <name>ContractValueDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Contract value is the total cost of ownership for the first year. --></help>
+        <label>Wert erstes Jahr</label>
+        <name>ContractValue__c</name>
+    </fields>
+    <fields>
+        <help><!-- Currency used in the contract. --></help>
+        <label>Währung</label>
+        <name>Currency__c</name>
+        <picklistValues>
+            <masterLabel>USD</masterLabel>
+            <translation><!-- USD --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Internal description or note about the contract. This field is not displayed on the proposal for customers. --></help>
+        <label>Interne Hinweise</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label>Vertrag Enddatum</label>
+        <name>EndDateContract__c</name>
+    </fields>
+    <fields>
+        <label>Vertrag Enddatum (veraltet)</label>
+        <name>EndDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Contract ID from external system. --></help>
+        <label>Externe Vertrags-ID</label>
+        <name>ExtContractId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique External ID for this record. --></help>
+        <label>Vertrag ext. ID</label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <label>Wert Folgejahre</label>
+        <name>FollowingYearsValue_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Amendment --></label>
+        <name>IsAmendment_F__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Skip Document Assembly --></label>
+        <name>IsSkipDocumentAssembly__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Third Party Paper --></label>
+        <name>IsThirdPartyPaper__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lifecycle Config --></label>
+        <name>LifecycleConfig__c</name>
+        <relationshipLabel><!-- Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lebenszyklus</label>
+        <name>Lifecycle__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ended</masterLabel>
+            <translation><!-- Ended --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Monthly products --></help>
+        <label>Monatliches Mark-up (abs)</label>
+        <name>MonthlyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Monthly products --></help>
+        <label>Monatliches Mark-up (%)</label>
+        <name>MonthlyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Monthly cost prices before adjustment from Contract Lines --></help>
+        <label>Monatliche Gesamtkosten</label>
+        <name>MonthlyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a monthly basis. --></help>
+        <label>Monatlicher Rabatt (abs)</label>
+        <name>MonthlyLineDiscountAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered for products that are billed on a monthly basis. --></help>
+        <label>Monatlicher Rabatt (%)</label>
+        <name>MonthlyLineDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Monthly products --></help>
+        <label>Monatliche Marge (abs)</label>
+        <name>MonthlyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Monthly products --></help>
+        <label>Monatliche Marge (%)</label>
+        <name>MonthlyMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>Monatliche Rabatte</label>
+        <name>MonthlyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Monatlicher Gesamtbetrag</label>
+        <name>MonthlyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Monatliche Liste</label>
+        <name>MonthlyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a monthly basis after the discounts are applied. --></help>
+        <label>Monatlicher Gesamtbetrag</label>
+        <name>MonthlyTotalValue_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Monthly unit prices of sub lines --></help>
+        <label>Monatlicher Gesamtstückpreis</label>
+        <name>MonthlyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a monthly basis before the discounts are applied. --></help>
+        <label>Monatliche Liste</label>
+        <name>MonthlyValueBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag is set by the system when the workflow suggests an approval is needed for the underlying contract. --></help>
+        <label><!-- Approval Required --></label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for one time products --></help>
+        <label>Einmaliges Mark-up (abs)</label>
+        <name>OneTimeAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for one time products --></help>
+        <label>Einmaliges Mark-up (%)</label>
+        <name>OneTimeAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all one time cost prices before adjustment from Contract Lines --></help>
+        <label>Einmalige Gesamtkosten</label>
+        <name>OneTimeCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a one-time basis. --></help>
+        <label>Einmaliger Rabatt (abs)</label>
+        <name>OneTimeLineDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered for products that are billed on a one-time basis. --></help>
+        <label>Einmaliger Rabatt (%)</label>
+        <name>OneTimeLineDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for one time products --></help>
+        <label>Einmalige Marge (abs)</label>
+        <name>OneTimeMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for one time products --></help>
+        <label>Einmalige Marge (%)</label>
+        <name>OneTimeMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>Einmaliger Rabatt</label>
+        <name>OneTimeTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Einmaliger Gesamtbetrag</label>
+        <name>OneTimeTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Einmalige Liste</label>
+        <name>OneTimeTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a one-time basis after the discounts are applied. --></help>
+        <label>Einmaliger Gesamtbetrag</label>
+        <name>OneTimeTotalValue_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all one time unit prices of sub lines --></help>
+        <label>Einmaliger Gesamtstückpreis</label>
+        <name>OneTimeUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a one-time basis before the discounts are applied. --></help>
+        <label>Einmalige Liste</label>
+        <name>OneTimeValueBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the sales opportunity associated with this contract. --></help>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Revvy Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Total first tier discount, shown as a percentage of the total list price. --></help>
+        <label>Gesamtrabatt</label>
+        <name>OverallDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether this contract is perpetual based or not --></help>
+        <label>Unbefristet</label>
+        <name>Perpetual__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase --></label>
+        <name>Phase__c</name>
+        <picklistValues>
+            <masterLabel>Activation</masterLabel>
+            <translation><!-- Activation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approval</masterLabel>
+            <translation><!-- Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Authoring</masterLabel>
+            <translation><!-- Authoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collaboration</masterLabel>
+            <translation><!-- Collaboration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiration</masterLabel>
+            <translation><!-- Expiration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final Review and Approval</masterLabel>
+            <translation><!-- Final Review and Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal Review and Approval</masterLabel>
+            <translation><!-- Internal Review and Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Negotiation</masterLabel>
+            <translation><!-- Negotiation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signature</masterLabel>
+            <translation><!-- Signature --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signing</masterLabel>
+            <translation><!-- Signing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Termination</masterLabel>
+            <translation><!-- Termination --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Customer segment that is used in this contract. The segment is based on the account that is associated with this contract. --></help>
+        <label>Preissegment</label>
+        <name>Segment__c</name>
+        <picklistValues>
+            <masterLabel>Education</masterLabel>
+            <translation><!-- Education --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Government</masterLabel>
+            <translation><!-- Government --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care</masterLabel>
+            <translation><!-- Health Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Media</masterLabel>
+            <translation><!-- Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Process Industry</masterLabel>
+            <translation><!-- Process Industry --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Source quote from which this Contract was created. --></help>
+        <label>Ausgangsangebot</label>
+        <name>SourceQuote__c</name>
+        <relationshipLabel>Verträge</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Vertrag Startdatum</label>
+        <name>StartDateContract__c</name>
+    </fields>
+    <fields>
+        <label>Vertrag Startdatum(veraltet)</label>
+        <name>StartDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Where the contract is in the life cycle --></help>
+        <label>Ist-Status</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Amended</masterLabel>
+            <translation><!-- Amended --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implemented</masterLabel>
+            <translation><!-- Implemented --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Renewal</masterLabel>
+            <translation><!-- In Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewed</masterLabel>
+            <translation><!-- Renewed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terminated</masterLabel>
+            <translation><!-- Terminated --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sub Phase --></label>
+        <name>SubPhase__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Amendment</masterLabel>
+            <translation><!-- In Amendment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Approvals</masterLabel>
+            <translation><!-- In Approvals --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Effect</masterLabel>
+            <translation><!-- In Effect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Process</masterLabel>
+            <translation><!-- In Process --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Recalled</masterLabel>
+            <translation><!-- Recalled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Superseded</masterLabel>
+            <translation><!-- Superseded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terminated</masterLabel>
+            <translation><!-- Terminated --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Term (Year) --></label>
+        <name>TermYear__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label>Laufzeit (Monate)</label>
+        <name>Term__c</name>
+    </fields>
+    <fields>
+        <label>Kündigungstermin</label>
+        <name>TerminationDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price for all products before any discounts are applied for the first year. --></help>
+        <label>Gesamtlistenpreis</label>
+        <name>TotalListPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Version Number of this contract --></help>
+        <label>Vertragsversionsnummer</label>
+        <name>VersionNum__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Weekly products --></help>
+        <label>Wöchentliches Mark-up (abs)</label>
+        <name>WeeklyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Weekly products --></help>
+        <label>Wöchentliches Mark-up (%)</label>
+        <name>WeeklyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Weekly cost prices before adjustment from Contract Lines --></help>
+        <label>Wöchentliche Gesamtkosten</label>
+        <name>WeeklyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a weekly basis. --></help>
+        <label>Wöchentlicher Rabatt (abs)</label>
+        <name>WeeklyLineDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered on products that are billed on a weekly basis. --></help>
+        <label>Wöchentlicher Rabatt (%)</label>
+        <name>WeeklyLineDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Weekly products --></help>
+        <label>Wöchentliche Marge (abs)</label>
+        <name>WeeklyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Weekly products --></help>
+        <label>Wöchentliche Marge (%)</label>
+        <name>WeeklyMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>Wöchentliche Rabatte</label>
+        <name>WeeklyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Wöchentlicher Gesamtbetrag</label>
+        <name>WeeklyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Wöchentliche Liste</label>
+        <name>WeeklyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a weekly basis after the discounts are applied. --></help>
+        <label>Wöchentlicher Gesamtbetrag</label>
+        <name>WeeklyTotalValue_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Weekly unit prices of sub lines --></help>
+        <label>Wöchentlicher Gesamtstückpreis</label>
+        <name>WeeklyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a weekly basis before the discounts are applied. --></help>
+        <label>Wöchentliche Liste</label>
+        <name>WeeklyValueBeforeDiscount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Yearly products --></help>
+        <label>Jährliches Mark-up (abs)</label>
+        <name>YearlyAdjustment1Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Yearly products --></help>
+        <label>Jährliches Mark-up (%)</label>
+        <name>YearlyAdjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Yearly cost prices before adjustment from Contract Lines --></help>
+        <label>Jährliche Gesamtkosten</label>
+        <name>YearlyCostPriceBeforeAdjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a yearly basis. --></help>
+        <label>Jährlicher Rabatt (abs)</label>
+        <name>YearlyLineDiscountAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered on products that are billed on a yearly basis. --></help>
+        <label>Jährlicher Rabatt (%)</label>
+        <name>YearlyLineDiscount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Yearly products --></help>
+        <label>Jährliche Marge (abs)</label>
+        <name>YearlyMarginAbsolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Yearly products --></help>
+        <label>Jährliche Marge (%)</label>
+        <name>YearlyMargin_F__c</name>
+    </fields>
+    <fields>
+        <label>Jährliche Rabatte</label>
+        <name>YearlyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Jährlicher Gesamtbetrag</label>
+        <name>YearlyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>Jährliche Liste</label>
+        <name>YearlyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a yearly basis after the discounts are applied. --></help>
+        <label>Jährlicher Gesamtbetrag</label>
+        <name>YearlyTotalValue_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Yearly unit prices of sub lines --></help>
+        <label>Jährlicher Gesamtstückpreis</label>
+        <name>YearlyUnitPrice_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a yearly basis before the discounts are applied. --></help>
+        <label>Jährliche Liste</label>
+        <name>YearlyValueBeforeDiscount_S__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>MnContractLayout20</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnContractNDALayout23_2</layout>
+        <sections>
+            <label><!-- Contract Progress --></label>
+            <section>Contract Progress</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnContractNDALayout24_1</layout>
+        <sections>
+            <label><!-- Contract Progress --></label>
+            <section>Contract Progress</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnContractSalesContractLayout23_4</layout>
+        <sections>
+            <label><!-- Contract Progress --></label>
+            <section>Contract Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Contract Totals --></label>
+            <section>Contract Totals</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnContractSalesContractLayout24</layout>
+        <sections>
+            <label><!-- Contract Progress --></label>
+            <section>Contract Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Contract Totals --></label>
+            <section>Contract Totals</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnContractSalesContractLayout24_2</layout>
+        <sections>
+            <label><!-- Contract Progress --></label>
+            <section>Contract Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Contract Totals --></label>
+            <section>Contract Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Contract Name --></nameFieldLabel>
+    <recordTypes>
+        <label><!-- NDA --></label>
+        <name>NDA</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Sales Contract --></label>
+        <name>SalesContract</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Service Contract --></label>
+        <name>ServiceContract</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage>Verträge können nicht unbefristet sein und gleichzeitig ein Enddatum haben</errorMessage>
+        <name>VMnPerpetualAndEndDateCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>&quot;Enddatum und &quot;&quot;Unbefristet&quot;&quot; können nicht beide leer sein Geben Sie entweder ein Enddatum an oder aktivieren Sie &quot;&quot;Unbefristet&quot;&quot;&quot;</errorMessage>
+        <name>VMnPerpetualAndEndDateCheck2</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>&quot;Sie können einen Vertrag nicht als unbefristet kennzeichnen und gleichzeitig eine Laufzeit angeben. Lassen Sie die Laufzeit leer oder deaktivieren Sie &quot;&quot;Unbefristet&quot;&quot;.&quot;</errorMessage>
+        <name>VMnPerpetualAndTermCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Das Segment darf nicht leer sein</errorMessage>
+        <name>VMnSegmentDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Die Währung darf nicht leer sein</errorMessage>
+        <name>VmnCurrencyDefaultValValidity</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Clone_Contract_Detail --></label>
+        <name>Clone_Contract_Detail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- ImportThirdPartyPaperButton --></label>
+        <name>ImportThirdPartyPaperButton</name>
+    </webLinks>
+</CustomObjectTranslation>

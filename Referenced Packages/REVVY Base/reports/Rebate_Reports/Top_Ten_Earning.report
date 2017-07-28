@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <chart>
+        <chartSummaries>
+            <column>MnEarning__c$Earned__c</column>
+        </chartSummaries>
+        <chartType>None</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>false</expandOthers>
+        <groupingColumn>MnEarning__c$Name</groupingColumn>
+        <showAxisLabels>false</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+    </chart>
+    <columns>
+        <field>MnEarning__c$Name</field>
+    </columns>
+    <columns>
+        <field>MnEarning__c$Status__c</field>
+    </columns>
+    <columns>
+        <field>MnEarning__c$Closing__c</field>
+    </columns>
+    <columns>
+        <field>MnEarning__c$PaymentDue__c</field>
+    </columns>
+    <columns>
+        <field>MnEarning__c$Earned__c</field>
+    </columns>
+    <columns>
+        <field>MnEarning__c$Released__c</field>
+    </columns>
+    <columns>
+        <field>MnEarning__c$LastModifiedBy</field>
+    </columns>
+    <description>Top Ten Earnings Report</description>
+    <format>Tabular</format>
+    <name>Top Ten Earnings</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Rebate_Earnings__c</reportType>
+    <rowLimit>10</rowLimit>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>MnEarning__c$Earned__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>MnEarning__c$Closing__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,25 @@
+<apex:page sidebar="false" title="{!$Label.projplanner_title}" action="{!initResourceOnly}" 
+    controller="pse.PlannerControllerExtension">
+	
+	<apex:variable var="v2PlannerURL" value="{!URLFOR($Page.PlannerScheduler, null, [
+				isProjectPlanner=true,
+				dimensionType='pm',
+				dimensionId=userResource.id
+			])}" 
+	/>
+
+    <apex:outputPanel layout="none" rendered="{!useNewProjectPlanner}">
+		<script>
+			window.location.href = '{!v2PlannerURL}';
+		</script>
+	</apex:outputPanel>
+
+    <apex:outputPanel layout="none" rendered="{!!useNewProjectPlanner}">
+    	<apex:pageMessages />
+    	<div style="float: right;">
+    		<apex:outputLink value="{!v2PlannerURL}">{!$Label.planners_navigate_to_v2}</apex:outputLink>
+    	</div>
+	    <c:flexcontrol rendered="{!showPlugin}" src="{!$Resource.pse__schedulerSWF}" targetPlayerVersion="10.2"
+	        flashvars="configType=project&projectManagerId={!userResource.Id}&dimensionId={!userResource.Id}&dimensionType=region&userResourceId={!userResource.Id}&userCalendarId={!userResource.pse__Work_Calendar__c}&sessionId={!$Api.Session_ID}&serverUrl={!$Api.Partner_Server_URL_160}"/>
+	</apex:outputPanel>
+</apex:page>

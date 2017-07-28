@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Config Engine OG UISection Junction --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique identifier of a section in a model. --></help>
+        <label>Konfig.-Engine UI-Bereich</label>
+        <name>Config_Engine_UI_Section__c</name>
+        <relationshipLabel>Konfig.-Engine OG UISection Junctions</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Order of the option groups displayed in the section. --></help>
+        <label>OG-Reihenfolge im Bereich</label>
+        <name>OG_Section_Order__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique identifier of an option group. --></help>
+        <label>Optionsgruppe</label>
+        <name>Option_Group_Id__c</name>
+        <relationshipLabel>Konfig.-Engine OG UISection Junctions</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Display Name --></nameFieldLabel>
+</CustomObjectTranslation>

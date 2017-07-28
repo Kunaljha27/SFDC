@@ -1,0 +1,247 @@
+<apex:page standardController="pse__Resource_Request__c" extensions="pse.ResourceStafferController" id="SingleStafferPage">
+<style>
+div#wait { width: 100%; height: 100% }
+div#loading { width: 100%; height: 100%; position: fixed; top: 0px;}
+div#waitingHolder { width: 113px; }
+img.sortIndicator { padding-left: 5px; }
+span.modified { color: red; }
+span.pinned { color: blue; }
+img.info {
+  height:16px;
+  width:16px;
+  margin-bottom:2px;
+  margin-left:5px;
+  margin-top:0;
+  vertical-align:top;
+}
+</style>
+<script type="text/javascript">
+var prevSearchTerm = null;
+var timer = null;
+function setVisible(name, visible) {
+  var e = document.getElementById(name);
+  if (e != null) {
+    if (visible) {
+      e.setAttribute("style", "display: block");
+      e.style.cssText = "display: block";
+    } else {
+      e.setAttribute("style", "display: none");
+      e.style.cssText = "display: none";
+    }
+  }
+}
+function wait(val) {
+  setVisible('loading', val);
+  setVisible('wait', val);
+}
+
+</script>
+<apex:detail showChatter="true"/>
+<div id="wait" class="waitingSearchDiv waitingSearchDivOpacity" style="display: none"></div>
+<div id="loading" class="waitingSearchDiv" style="display: none">
+ <div id="waitingHolder" class="waitingHolder">
+  <img class="waitingImage" src="/img/loading.gif"/>
+  <span class="waitingDescription">Loading...</span>
+ </div>
+</div>
+
+<apex:pageMessages id="msgs" />
+<apex:form id="form" >
+<apex:pageBlock title="Assign Resource" rendered="{!NOT isDisabled}" id="assignResourcePageBlock">
+<apex:pageBlockButtons >
+<apex:commandButton onclick="wait(true);" action="{!refreshAll}" value="Refresh" oncomplete="wait(false);" rerender="resources, msgs" />
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Search">
+
+<apex:pageBlockSectionItem >
+ <apex:outputLabel value="Name" />
+ <apex:inputText value="{!selectedName}" />
+</apex:pageBlockSectionItem>
+<apex:outputPanel >
+<table class="detailList" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td class="labelCol">
+ <apex:outputLabel value="Start Date" for="selectedStartDate" />
+</td>
+<td class="dataCol" style="width: 10%">
+  <apex:inputField id="selectedStartDate" value="{!criteria.pse__Start_Date__c}" required="true" />
+</td>
+<td class="labelCol">
+ <apex:outputLabel value="End Date" for="selectedEndDate" />
+</td>
+<td class="dataCol">
+  <apex:inputField id="selectedEndDate" value="{!criteria.pse__End_Date__c}" required="true" />
+</td>
+</tr>
+</table>
+</apex:outputPanel>
+<apex:pageBlockSectionItem >
+ <apex:outputLabel value="Skills" />
+ <apex:selectList value="{!selectedSkills}" size="5" multiselect="true" title="Search by Skill">
+  <apex:selectOptions value="{!skillOptions}" />
+ </apex:selectList>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!REGION_FILTER_ENABLED}">
+ <apex:outputLabel value="Regions" />
+ <apex:selectList value="{!selectedRegions}" size="5" multiselect="true" title="Search by Region">
+  <apex:selectOptions value="{!regionOptions}" />
+ </apex:selectList>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!PRACTICE_FILTER_ENABLED}">
+ <apex:outputLabel value="Practices" />
+ <apex:selectList value="{!selectedPractices}" size="5" multiselect="true" title="Search by Practice">
+  <apex:selectOptions value="{!practiceOptions}" />
+ </apex:selectList>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!GROUP_FILTER_ENABLED}">
+ <apex:outputLabel value="Groups" />
+ <apex:selectList value="{!selectedGroups}" size="5" multiselect="true" title="Search by Group">
+  <apex:selectOptions value="{!groupOptions}" />
+ </apex:selectList>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+ <apex:outputLabel value="Unassigned Resources Only" />
+ <apex:inputCheckbox value="{!unassignedOnly}" />
+</apex:pageBlockSectionItem>
+
+<!-- Added as a fix for agile task : AT19312    shankar -->
+<apex:pageBlockSectionItem >
+ <apex:outputLabel value="Role" />
+ <apex:selectList value="{!selectedRoles}" size="5" multiselect="true" title="Search by Role">
+  <apex:selectOptions value="{!resourceRoleOptions}" />
+ </apex:selectList>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+ <apex:outputLabel value="My Resources Only" />
+ <apex:inputCheckbox value="{!mineOnly}" />
+</apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>
+
+<apex:outputPanel id="resources">
+<table class="list" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr class="headerRow">
+ <th></th>
+ <th>Action</th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_NAME}');">Name</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_NAME}" />
+ </th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_RATING}');">Primary Skill<br />Rating</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_RATING}" />
+ </th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_ROLE}');">Role</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_ROLE}" />
+ </th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_UNIT}');">{!UNIT_TYPE_LABEL}</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_UNIT}" />
+ </th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_COSTRATE}');">Cost Rate</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_COSTRATE}" />
+ </th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_ASSIGNMENTCOUNT}');"># Assignments</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_ASSIGNMENTCOUNT}" />
+ </th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_REQUESTCOUNT}');"># Requests</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_REQUESTCOUNT}" />
+ </th>
+ <th>
+  <a class="link" onclick="wait(true); sort('{!SORT_COL_EXTERNAL}');">External</a>
+  <apex:image styleClass="sortIndicator" value="/img/{!sortState.sortIndicatorImage}" rendered="{!sortState.sortColumn == SORT_COL_EXTERNAL}" />
+ </th>
+
+</tr>
+<apex:repeat value="{!resourceList.resources}" var="r">
+<tr class="dataRow" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);} " onmouseover="if (window.hiOn){hiOn(this);}">
+ <td nowrap="true">
+  <a href="" onclick="wait(true); collapse('{!r.Data.Id}'); return false;"><apex:image url="{!URLFOR($Resource.pse__appirioCommon, 'collapse.gif')}" rendered="{!r.expanded}" /></a>
+  <a href="" onclick="wait(true); expand('{!r.Data.Id}'); return false;"><apex:image url="{!URLFOR($Resource.pse__appirioCommon, 'expand.gif')}" rendered="{!NOT r.expanded}" /></a>
+ </td>
+ <td class="actionColumn" nowrap="true">
+  <apex:outputPanel rendered="{!resourceRequest.pse__Project__c != null && resourceRequest.pse__Assignment__c == null}">
+      <apex:commandLink action="{!assign}" value="Assign" styleClass="actionLink">
+        <apex:param id="assign1" name="assign1" value="{!r.Data.Id}" assignTo="{!selectedResourceId}" />
+      </apex:commandLink>&nbsp;|&nbsp;
+    </apex:outputPanel>
+  <apex:commandLink action="{!hold}" value="Hold" styleClass="actionLink" rendered="{!resourceRequest.pse__Assignment__c == null}">
+    <apex:param id="hold1" name="hold1" value="{!r.Data.Id}" assignTo="{!selectedResourceId}" />
+  </apex:commandLink>    
+  <apex:outputText rendered="{!resourceRequest.pse__Assignment__c == null && r.Data.pse__Exclude_from_Resource_Planner__c == false}">&nbsp;|&nbsp;<a class="actionLink" href="{!URLFOR($Page.ResourcePlannerForResourceId)}?resourceId={!r.Data.Id}" target="_blank">View in Planner</a></apex:outputText>
+ </td>
+ <td class="dataCell" nowrap="true">
+  <apex:outputText value="{!r.Data.name}" styleClass="{!IF(r.Pinned,'pinned','')}" style="vertical-align: top;" />
+ </td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!r.SkillRating}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!r.Data.pse__Resource_Role__c}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!r.UnitTypeName}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!r.DefaultCostRateFormatted}" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!r.AssignmentCount}" /><apex:outputText rendered="{!r.AssignmentCount == MAX_ASSIGNMENT_RESULTS}" value="+" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputText value="{!r.RequestCount}" /><apex:outputText rendered="{!r.RequestCount == MAX_RESOURCE_REQUEST_RESULTS}" value="+" /></td>
+ <td class="dataCell" nowrap="true"><apex:outputField value="{!r.Data.pse__External_Resource__c}" /></td>
+</tr>
+<tr style="display: {!IF(r.expanded, '', 'none')}" class="dataRow">
+<td colspan="10" nowrap="true" style="padding-left: 50px;">
+
+<apex:pageBlockSection title="Skills and Certifications for {!r.Data.Name}" columns="1" collapsible="false">
+<apex:pageBlockTable value="{!r.ratings}" var="rating">
+<apex:column headerValue="Type" value="{!rating.Skill_Certification__r.pse__Type__c}" />
+<apex:column headerValue="Name" value="{!rating.Skill_Certification__r.Name}" />
+<apex:column headerValue="Rating" value="{!rating.pse__Rating__c}" />
+<apex:column headerValue="Notes" value="{!rating.pse__Notes__c}" />
+<apex:column headerValue="Evaluation Date" value="{!rating.pse__Evaluation_Date__c}" />
+<apex:column headerValue="Expiration Date" value="{!rating.pse__Expiration_Date__c}" />
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Availability for {!r.Data.Name}" columns="1" collapsible="false">
+<apex:pageBlockTable value="{!r.availability}" var="a">
+<apex:column headerValue="Action">
+    <apex:outputPanel rendered="{!a.Assigned}">
+        <a href="/{!a.Id}">View</a>
+	    <apex:image styleClass="info" value="/img/msg_icons/info16.png" title="{!a.Notes}" />
+    </apex:outputPanel>
+</apex:column>
+<apex:column headerValue="Account" value="{!a.Account}" />
+<apex:column headerValue="Project" value="{!a.Project}" />
+<apex:column headerValue="Start Date" value="{!a.StartDate}" />
+<apex:column headerValue="End Date" value="{!a.EndDate}" />
+<apex:column headerValue="Hours Scheduled" value="{!a.Hours}" />
+<apex:column headerValue="Assigned">
+  <apex:image styleClass="checkImg" width="21" height="16" value="/img/checkbox_{!IF(a.Assigned,'','un')}checked.gif" />
+</apex:column>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Schedule for {!r.Data.Name}" columns="1" collapsible="false" rendered="{!r.expanded}">
+<c:ScheduleBuilder resourceIdAttribute="{!r.Data.Id}" resourceListAttribute="{!resourceList}" isEditModeAttribute="{!isEditMode}" autoChangeStrategyAttribute="true" resourceWorkCalendar="{!resourceWCMap[r.Data.Id]}"/>
+</apex:pageBlockSection>
+</td>
+</tr>
+</apex:repeat>
+</table>
+</apex:outputPanel>
+
+</apex:pageBlock>
+
+<apex:actionFunction id="sort" name="sort" action="{!sortResources}" rerender="resources" immediate="true" oncomplete="wait(false);">
+ <apex:param id="sortColumn" name="sortColumn" value="" assignTo="{!sortState.sortColumn}" />
+</apex:actionFunction>
+<apex:actionFunction id="expand" name="expand" action="{!expand}" rerender="resources, msgs" immediate="true" oncomplete="wait(false);">
+ <apex:param id="expandParam" name="expandParam" value="" assignTo="{!selectedResourceId}" />
+</apex:actionFunction>
+<apex:actionFunction id="collapse" name="collapse" action="{!collapse}" rerender="resources, msgs" immediate="true" oncomplete="wait(false);">
+ <apex:param id="collapseParam" name="collapseParam" value="" assignTo="{!selectedResourceId}" />
+</apex:actionFunction>
+</apex:form>
+</apex:page>

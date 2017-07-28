@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r$Name</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r$Status__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r$Closing__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r$PaymentDue__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>MnIncentiveProgram__c.Settlements__r$Earned__c</field>
+    </columns>
+    <columns>
+        <field>MnIncentiveProgram__c.Settlements__r$Released__c</field>
+    </columns>
+    <description>Top Ten Earnings by Payee Report</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>MnIncentiveProgram__c$Payee__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Top Ten Earnings by Payee</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Rebate_Programs_Earnings__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>MnIncentiveProgram__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

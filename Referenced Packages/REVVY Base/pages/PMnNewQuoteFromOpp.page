@@ -1,0 +1,18 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnQuoteDetailCtrl" action="{!newAutoQuoteFromOpportunityOrAcc}">
+    <apex:form >
+        <apex:sectionHeader title="New Revvy Quote" subtitle="Select Revvy Quote Record Type"/>
+        <apex:outputText value="{!$Label.revvy__New_Quote_From_Opp}"/>
+        <br/><br/>
+        <apex:pageBlock title="Select Revvy Quote Record Type">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Continue" action="{!newQuoteFromOpportunityOrAcc}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2">
+            	<apex:selectList label="Record Type of new record" value="{!REVVY__MnQuote__c.RecordTypeId}" size="1" required="true">
+            		<apex:selectOptions value="{!AvailableQuoteRecordTypeNames}"/>
+            	</apex:selectList>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

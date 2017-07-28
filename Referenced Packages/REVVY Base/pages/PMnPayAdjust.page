@@ -1,0 +1,35 @@
+<apex:page standardController="REVVY__MnPayment__c" extensions="REVVY.CMnPayAdjustCntlr" tabStyle="REVVY__MnPayment__c">
+	<apex:pageMessages />
+    <apex:form >
+        <apex:pageBlock title="Adjust Payment" >
+            <apex:outputText escape="false" 
+                             value="The Net Payment replaces the Payment amount and gets allocated across all the underlying transactions."
+                             style="color:#DF013A" rendered="{!renderBlock}"/>           
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton action="{!adjust}" value="Save" rendered="{!renderBlock}"/>
+                <apex:commandButton action="{!cancel}" value="Back" immediate="true" />
+            </apex:pageBlockButtons>           
+            <apex:pageBlockSection columns="1" rendered="{!renderBlock}">
+                <apex:pageBlockSectionItem />
+                <apex:pageBlockSectionItem >
+            		<apex:outputLabel value="Payment ID"/>
+					<apex:outputLink value="/{pay.Id}">{!pay.Name}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+            	<apex:outputField value="{!pay.REVVY__Payment__c}" label="Payment"/>
+                <apex:inputField value="{!pay.REVVY__AdjustmentInput__c}" label="Adjustment" >
+                	<apex:actionSupport event="onchange" action="{!add}" rerender="blockToRerender" />
+                </apex:inputField>
+                <apex:inputField value="{!pay.REVVY__AdjustmentReasonInput__c}" label="Adjustment Reason"/>
+                <apex:outputPanel id="blockToRerender"  layout="block">
+                	<apex:outputPanel >
+                           <apex:pageBlockSection columns="1" rendered="{!renderBlock}">
+                        		<apex:outputText value="${0, number, ###,##0.00}" label="Net Payment">
+									<apex:param value="{!netPayment}" />
+								</apex:outputText>
+                           </apex:pageBlockSection>   
+                    </apex:outputPanel>
+                </apex:outputPanel>                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

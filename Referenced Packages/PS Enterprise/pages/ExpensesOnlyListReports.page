@@ -1,0 +1,193 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="true" title="{!$Label.expense_label_view_expense_reports}"
+    tabStyle="pse__Expense__c" 
+    controller="pse.ExpensesOnlyListReportsController" action="{!initAction}">
+
+<head>
+    <title>{!$Label.expense_label_view_expense_reports}</title>
+</head>
+    
+<body class="Custom20Tab">    
+    
+<style type="text/css">
+.headerLink
+{
+    text-decoration:underline;
+}
+
+.list .headerRow th div
+{
+    line-height:20px; /* fix alignment when icon is showing */
+}
+
+.list .headerRow th div a
+{
+    color: #333333;
+}
+</style>
+    
+  <c:WaitComponent />
+  
+  <script type="text/javascript">
+  function doSubmitConfirm()
+  {
+      return confirm("{!$Label.common_message_approval_confirm}");
+  }
+  </script>
+  
+  <apex:sectionHeader title="{!$Label.expense_label_my_expense_reports}"/>
+  
+  <apex:pageMessages id="messages"/>
+  
+  <apex:form rendered="{!displayContent}">
+  
+  <apex:pageBlock mode="detail" id="detailBlock">
+      <h3>{!$Label.expense_label_view_expense_reports_with}:</h3>&nbsp;
+      <table border="0" style="margin-top:10px;margin-bottom:20px;">
+           <tr>
+               <td style="padding-right:20px;"><apex:outputText style="font-weight:bold;color:#333333;margin-right:5px;" value="{!$Label.common_label_status}"/> <apex:inputField value="{!reportCriteria.pse__Status__c}"/></td>
+               <td style="padding-right:20px;"><apex:outputText style="font-weight:bold;color:#333333;margin-right:5px;" value="{!$Label.common_label_start_date}"/><apex:inputField value="{!startDateObj.pse__Expense_Date__c}" required="false"/></td>
+               <td style="padding-right:5px;"><apex:outputText style="font-weight:bold;color:#333333;margin-right:5px;" value="{!$Label.common_label_end_date}"/><apex:inputField value="{!endDateObj.pse__Expense_Date__c}" required="false"/></td>
+               <td><apex:commandButton value="{!$Label.expense_label_go}" reRender="detailBlock,messages" action="{!doFilter}" style="margin-left:5px;" onclick="wait(true);" oncomplete="wait(false);"/></td>
+           </tr>
+      </table>
+      
+      <apex:outputText value="{!$Label.expense_label_no_reports}" rendered="{!NOT(showReports)}"/>
+      <apex:outputPanel id="rptPanel" rendered="{!showReports}">
+      <apex:pageBlockTable rowClasses="even, odd" value="{!listReports}" var="rpt" >
+          
+          <apex:column headerValue="{!$Label.common_label_action}">
+            <apex:commandLink value="{!$Label.expense_label_attach_file}" action="{!attachFile}">
+                <apex:param name="rptId" value="{!rpt.report.Id}" assignTo="{!selectedReportId}"/>
+            </apex:commandLink>
+            <apex:outputText value=" | " rendered="{!rpt.showEditLink}"/>
+            <apex:commandLink value="{!$Label.common_label_submit}" onclick="return doSubmitConfirm();" action="{!submitExpenseReport}" rendered="{!rpt.showEditLink}">
+                <apex:param name="rptId" value="{!rpt.report.Id}" assignTo="{!selectedReportId}"/>
+            </apex:commandLink>
+          </apex:column>
+          
+          <apex:column >
+              <apex:facet name="header">
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortName}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.expensereport_label_expense_report_name}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!nameSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!nameSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>
+              <apex:commandLink value="{!rpt.report.Name}" action="{!editReport}" rendered="{!rpt.showEditLink}">
+                  <apex:param name="rptId" value="{!rpt.report.Id}" assignTo="{!selectedReportId}"/>
+              </apex:commandLink>
+              <apex:outputText value="{!rpt.report.Name}" rendered="{!NOT(rpt.showEditLink)}"/>
+          </apex:column>
+          
+          <apex:column value="{!rpt.report.Project__r.Name}">
+              <apex:facet name="header">
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortProject}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.common_label_project}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!projectSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!projectSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>
+          </apex:column>
+          <apex:column value="{!rpt.report.Assignment__r.Name}">
+              <apex:facet name="header">
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortAssignment}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.common_label_assignment}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!assignmentSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!assignmentSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>  
+          </apex:column>
+          <apex:column value="{!rpt.report.Milestone__r.Name}">
+              <apex:facet name="header">
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortMilestone}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.common_label_milestone}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!milestoneSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!milestoneSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>
+          </apex:column>
+          <apex:column value="{!rpt.report.pse__Status__c}">
+              <apex:facet name="header">
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortStatus}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.common_label_status}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!statusSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!statusSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>
+          </apex:column>
+          <apex:column value="{!rpt.report.pse__Last_Expense_Date__c}">
+              <apex:facet name="header" >
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortLastExpenseDate}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.expense_label_last_expense_date}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!lastExpenseDateSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!lastExpenseDateSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>
+          </apex:column>
+          <apex:column >
+              <apex:facet name="header" >
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortReimbursementAmount}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.expense_label_reimbursement_amount}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!reimbursementAmountSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!reimbursementAmountSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>
+              <apex:outputText value="{!rpt.reimbursementAmount}"/>
+          </apex:column>
+          <!-- NOTE: LastModifiedDate cannot be used directly b/c an security error appears. Presumably b/c it also contains user information. -->
+          <apex:column >
+              <apex:facet name="header">
+                  <apex:commandLink styleClass="headerLink" title="{!$Label.txviewer_message_click_to_sort}" action="{!sortLastModified}" rerender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);">
+                      {!$Label.common_label_last_modified}&nbsp;
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_asc_arrow.gif" rendered="{!lastModifiedSortType=1}"/>
+                      <apex:image style="marign-bottom:0px;" value="/img/sort_desc_arrow.gif" rendered="{!lastModifiedSortType=2}"/>
+                  </apex:commandLink>
+              </apex:facet>
+              <apex:outputText value="{!rpt.lastModified}"/>
+          </apex:column>
+      </apex:pageBlockTable>
+              
+              
+              <p/>
+      <apex:outputPanel rendered="{!numRecords > 0}">
+          <table width="100%" border="0">
+          <tr>
+          <td width="33%">{!$Label.common_label_page}&nbsp;<apex:inputText value="{!pageNumber}" size="3"><apex:actionSupport action="{!pageUpdated}" reRender="rptPanel,messages" event="onchange" onsubmit="wait(true);" oncomplete="wait(false);"/></apex:inputText> {!$Label.txviewer_message_of} {!numPages}</td>
+          
+          <td align="center" width="34%">
+              <table cellspacing="5" border="0" cellpadding="0">
+                  <tr>
+                            <td>
+                    <apex:commandLink action="{!firstPage}" onclick="wait(true);" oncomplete="wait(false);" rendered="{!previousEnabled}" value="<<" reRender="rptPanel,messages"/>
+                    <apex:outputText value="<<" rendered="{!NOT(previousEnabled)}" style="color:#A8A8A8;"/>
+                            </td>
+                            <td>
+                    <apex:commandLink action="{!previousPage}" rendered="{!previousEnabled}" value="< {!$Label.common_label_previous}" onclick="wait(true);" oncomplete="wait(false);" reRender="rptPanel,messages"/>
+                    <apex:outputText value="< {!$Label.common_label_previous}" rendered="{!NOT(previousEnabled)}" style="color:#A8A8A8;"/>
+                            </td>
+                            <td>
+                    <apex:commandLink action="{!nextPage}" rendered="{!nextEnabled}" value="{!$Label.common_label_next} >" reRender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);"/>
+                    <apex:outputText rendered="{!NOT(nextEnabled)}" value="{!$Label.common_label_next} >" style="color:#A8A8A8;"/>
+                            </td>
+                            <td>
+                    <apex:commandLink action="{!lastPage}" rendered="{!nextEnabled}" value=">>" reRender="rptPanel,messages" onclick="wait(true);" oncomplete="wait(false);"/> 
+                    <apex:outputText rendered="{!NOT(nextEnabled)}" value=">>" style="color:#A8A8A8;"/>
+                            </td>
+                        </tr>
+                    </table>
+          </td>
+          <td align="right" width="33%">{!$Label.txviewer_message_showing} {!currentPageStart}-{!currentPageEnd} {!$Label.txviewer_message_of} {!numRecords}
+          </td>
+          </tr>
+          </table>
+      </apex:outputPanel>
+      
+      </apex:outputPanel>
+          </apex:pageBlock>
+          </apex:form>
+          <!-- 
+          <div align="center">
+	  <apex:actionStatus startText="{!$Label.common_message_processing_wait}" stopText="" id="aStatus"/>
+	</div>-->
+</body>	
+</apex:page>

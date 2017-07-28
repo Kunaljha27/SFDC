@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Revvy Incentives Properties --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Calc Batch Size --></label>
+        <name>CalcBatchSize__c</name>
+    </fields>
+    <fields>
+        <label><!-- Certificate Name --></label>
+        <name>CertificateName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Earning Status Batch Size --></label>
+        <name>EarningStatusBatchSize__c</name>
+    </fields>
+    <fields>
+        <label><!-- Edit Rebate --></label>
+        <name>EditRebate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enable Automatic EarlyPayment Creation --></label>
+        <name>EnableAutomaticEarlyPaymentCreation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revvy Job Monitor Reschedule Interval --></label>
+        <name>JobMonitorRescheduleInterval__c</name>
+    </fields>
+    <fields>
+        <label><!-- Role Based Data Visibility Supported --></label>
+        <name>RoleBasedDataVisibilitySupported__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time Out Value for HTTP callout --></label>
+        <name>TimeOutValueForHTTPCallout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Web Service End Point URL --></label>
+        <name>WebServiceEndPointURL__c</name>
+    </fields>
+    <fields>
+        <label><!-- webAppuri --></label>
+        <name>webAppuri__c</name>
+    </fields>
+</CustomObjectTranslation>

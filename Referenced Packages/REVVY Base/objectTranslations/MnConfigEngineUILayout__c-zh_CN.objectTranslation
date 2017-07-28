@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Config Engine UI Layout --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>UI 布局 ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique identifier of the model. --></help>
+        <label>模型</label>
+        <name>Model__c</name>
+        <relationshipLabel>配置引擎 UI 布局</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Version of the template used for a model. --></help>
+        <label>版本</label>
+        <name>Version__c</name>
+    </fields>
+    <nameFieldLabel><!-- UI Layout Name --></nameFieldLabel>
+</CustomObjectTranslation>

@@ -1,0 +1,39 @@
+<apex:page standardcontroller="REVVY__MnContract__c" extensions="REVVY.CMnImportThirdPartyPaperFromPluginCtrl" tabstyle="REVVY__MnContract__c" sidebar="false" showHeader="false" showChat="false">
+  <apex:sectionHeader title="Import Third Party Paper"/>
+  <apex:pageMessages id="showmsg" rendered="{!isShowPageMessages}"></apex:pageMessages>
+  <apex:form enctype="multipart/form-data">
+    <apex:pageBlock >
+
+      <apex:pageBlockButtons >
+        <apex:commandButton action="{!upload}" value="Save"/>
+        <apex:commandButton action="{!cancel}" value="Cancel" immediate="true"/>
+      </apex:pageBlockButtons>
+
+      <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!$ObjectType.REVVY__MnContract__c.fields.Name.label}" for="contractName"/>
+          <apex:inputField value="{!contract.Name}" id="contractName" required="true"/>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!$ObjectType.REVVY__MnContract__c.fields.REVVY__Account__c.label}" for="account"/>
+          <apex:inputField value="{!contract.REVVY__Account__c}" id="account"/>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!$Label.revvy__MnContract_Label_3rdPartyPaperImportPage_RecordType}" for="recordTypeId"/>
+            <apex:selectList value="{!selectedRecordTypeId}" size="1">
+                <apex:selectOptions value="{!selectableRecordTypes}"/>
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+
+        <apex:repeat value="{!$ObjectType.REVVY__MnContract__c.FieldSets.REVVY__ThirdPartyPaperFields}" var="f">
+          <apex:inputField value="{!REVVY__MnContract__c[f]}" required="{!f.required}"/>
+        </apex:repeat>
+
+      </apex:pageBlockSection>
+
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,31 @@
+<apex:page >
+  <apex:sectionHeader title="{!$Label.revvy__MnGroupAccountAssignMembersLabel}"
+         subtitle=" {!$CurrentPage.parameters.Name}" description="{!$Label.revvy__MnGroupAccountAssignMembersDescr}"/>
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    
+    <div class="slds">             
+<!--        <c:VMnAssignMembers objId="{!$CurrentPage.parameters.Id}"
+            objType="Account"
+            junctionObjType="MnAccountMembership__c"
+            title="{!$Label.revvy__MnGroupAccountAssignMembersLabel}"
+            fieldSetName="REVVY__AssignMemberAccounts_FS"
+        />-->
+
+        <c:VMnListNodes relId="{!$CurrentPage.parameters.Id}"
+                        nodeType="Account"
+                        newButtonLabel=""
+                        deleteLinkConfirm=""
+                        sectionTitle="{!$Label.revvy__MnGroupAccountAssignMembersLabel}"
+                        fieldSetName="REVVY__AssignMemberAccounts_FS"
+                        relType="MnAccountMembership__c"
+                        singleSelection="false"
+                        allowSelection="true"
+        />
+    </div>
+    
+
+
+</apex:page>

@@ -1,0 +1,71 @@
+<!--
+    @author         Sneha Chail <Wipro Technologies>.
+    @page           MergeAccount.
+    @abstract       Merging two accounts.
+    @since          2012.03.18
+    @discussion     Getting option to merge related object from source and Destination.
+-->
+
+<apex:page standardController="Account" extensions="MergeAccount" >
+<style>
+    .activeTab {color:Red;
+    background-image:none}
+     </style>
+     <script>
+var newWin=null;
+function openLookupPopup(name, id)
+{
+var url="/apex/LookupExamplePopup?namefield=" + name + "&idfield=" + id;
+newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+if (window.focus) 
+{
+newWin.focus();
+}
+
+   return false;
+    }
+ 
+function closeLookupPopup()
+{
+  if (null!=newWin)
+  {
+     newWin.close();
+  }  
+}
+</script>
+<apex:form >
+
+<apex:pageBlock title="Merge Two Accounts" mode="edit" id="block" rendered="{!(!checkDuContact)}">
+
+<apex:outputLabel >Source Account Name:&nbsp;</apex:outputLabel>
+<apex:outputfield value="{!acc.Name}" /><br/><br/>
+
+<Apex:outputLabel >Destination Account Name:&nbsp;</Apex:outputLabel>
+ <apex:outputPanel >
+       <apex:inputHidden value="{!accountId}" id="targetId" />
+            <apex:inputText size="40" value="{!accountName}" id="targetName" onFocus="this.blur()" disabled="false"/> <a href="#" onclick="openLookupPopup('{!$Component.targetName}', '{!$Component.targetId}'); return false">Lookup</a>
+          </apex:outputPanel>
+<apex:messages styleClass="activeTab" />
+<apex:pageBlockButtons >
+<apex:commandButton action="{!transfer}" value="Merge" />
+<apex:commandButton action="{!Cancel}" value="Cancel"/>
+</apex:pageBlockButtons>
+</apex:pageBlock>
+<apex:pageBlock >
+<apex:outputpanel rendered="{!checkDuContact}" >
+<apex:pageBlockSection columns="1">
+As a result of the merge you will have duplicate contacts on the destination account.
+ The user will need to manually delete or adjust the duplicate contact.<br/>
+ Please Click on the Continue Button to complete the process.
+</apex:pageBlockSection><br/>
+<apex:pageBlockSection columns="1">
+<apex:outputfield value="{!acc.Name}" />
+<!--<apex:outputfield value="{!acc.Destination_Account_Name__c}" /><br/>-->
+</apex:pageBlockSection>
+<apex:commandButton action="{!Merge1}" value="Continue"/>
+<apex:commandButton action="{!Cancel}" value="Cancel"/>
+
+</apex:outputpanel>
+</apex:pageBlock>
+</apex:form>  
+</apex:page>

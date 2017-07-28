@@ -1,0 +1,6 @@
+<apex:page standardController="REVVY__MnPrintTemplate__c" extensions="REVVY.CMnPrintTemplateImgPageCtrl">
+<apex:form id="form">
+<!--  Custom component to upload images: rendered for all 4 pages (catalog/category/product/bundle detail) -->
+<c:CMnPrintTemplateImageUploadCmp customObject="{!printTemplate}" cmpTitle="Images"/>
+</apex:form>
+</apex:page>

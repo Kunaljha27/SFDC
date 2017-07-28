@@ -1,0 +1,16 @@
+<apex:page standardController="REVVY__MnConfigEngineRule__c" extensions="REVVY.CMnVFPageGenericCtrl" sidebar="false">
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <script>
+        var namespaceLowerCase = "{!namespaceLowerCase}";
+        var referer = "{!referer}";
+
+        var url = '';
+        if (referer.indexOf('PMnPricingRuleHome') > -1) {
+            url = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/pricingrule/global/new';
+        } else if (referer.indexOf('PMnSetValueRule') > -1){
+            url = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/setvaluerule/global/new';
+        }
+
+        mnNavigateToUrl(url);
+    </script>
+</apex:page>

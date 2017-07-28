@@ -1,0 +1,126 @@
+<apex:page Standardcontroller="Strategic_Account_Plan__c" Extensions="M2O_StrategicAccountPlan" action="{!redirect}">
+  <apex:form >
+    <apex:pageblock title="{!$Label.M2O_SAPAccountLinktoAccountPlan}">
+      <apex:pageblocksection title="{!$Label.M2O_SAPSearchAccounts}">
+       <apex:repeat value="{!SearchFields}" var="fl">
+        <apex:inputField value="{!account[fl.fieldPath]}"/>
+       </apex:repeat>
+       <apex:inputText label="{!$Label.M2O_SAP_GRK}" value="{!goldenRecordKey}"/>
+      </apex:pageblocksection>
+      <center><apex:commandButton action="{!search}" value="{!$Label.M2O_SAP_Search}" id="searchbutton"/></center>
+     <apex:pagemessages ></apex:pagemessages>
+    </apex:pageblock>
+   </apex:form>
+   <apex:form >
+    <apex:pageblock title="{!$Label.M2O_Search_Results}" id="pg" rendered="{!IF(SearchResultsListSize>0,TRUE,FALSE)}">
+     <apex:pageBlocktable value="{!WrappedSearchResultsList}" var="rec">
+      <apex:column >
+       <apex:inputCheckbox value="{!rec.selected}" label="{!$Label.M2O_SAPSelectAccountToAdd}"/>
+      </apex:column>
+      <apex:repeat value="{!Fields}" var="fl">
+       <apex:column value="{!rec.wrapAccount[fl]}"/>
+      </apex:repeat>
+     </apex:pageBlocktable>
+     <center> 
+     <apex:panelGrid columns="7">
+     
+     
+      <apex:commandLink status="fetchStatus" value="{!$Label.M2O_SAPFirst}" action="{!setPaginationSearchResults.first}" reRender="pg" rendered="{!setPaginationSearchResults.HasPrevious}"/>
+        <apex:outputtext value="{!$Label.M2O_SAPFirst}" rendered="{!!setPaginationSearchResults.HasPrevious}"/>
+      <apex:commandLink status="fetchStatus" value="{!$Label.M2O_SAPPrevious}" action="{!setPaginationSearchResults.previous}" reRender="pg" rendered="{!setPaginationSearchResults.HasPrevious}"/>
+        <apex:outputtext value="{!$Label.M2O_SAPPrevious}" rendered="{!!setPaginationSearchResults.HasPrevious}"/>        
+      <apex:commandLink status="fetchStatus" value="{!$Label.M2O_SAPNext}" action="{!setPaginationSearchResults.next}" reRender="pg" rendered="{!setPaginationSearchResults.HasNext}"/>
+        <apex:outputtext value="{!$Label.M2O_SAPNext}" rendered="{!!setPaginationSearchResults.HasNext}"/> 
+      <apex:commandLink status="fetchStatus" value="{!$Label.M2O_SAPLast}" action="{!setPaginationSearchResults.last}" reRender="pg" rendered="{!setPaginationSearchResults.HasNext}"/>
+        <apex:outputtext value="{!$Label.M2O_SAPLast}" rendered="{!!setPaginationSearchResults.HasNext}"/>       
+      
+       <apex:outputPanel style="color:green;">  
+       <apex:actionStatus id="fetchStatus" startText="{!$Label.M2O_SAPFetching}" stopText=""/>
+      </apex:outputPanel>
+     </apex:panelGrid>
+     <apex:commandButton value="{!$Label.M2O_SAPAddtoSelectedList}" action="{!addtoselectedlist}"/></center>
+    </apex:pageblock>
+    <apex:pageblock title="{!$Label.M2O_SAPSelectedAccounts}" id="pg1" rendered="{!IF(SelectedAccountListSize>0,TRUE,FALSE)}">
+     <apex:pageBlocktable value="{!WrappedSelectedAccountList}" var="rec">
+      <apex:column >
+       <apex:inputCheckbox value="{!rec.selected}" label="{!$Label.M2O_SAPSelectAccountToAdd}"/>
+      </apex:column>
+      <apex:repeat value="{!Fields}" var="fl">
+       <apex:column value="{!rec.wrapAccount[fl]}"/>
+      </apex:repeat>
+     </apex:pageBlocktable>
+     <center>
+     <apex:panelGrid columns="7">
+      <apex:commandlink status="fetchStatus" reRender="pg1" value="{!$Label.M2O_SAPFirst}" action="{!setPaginationSelectedAccounts.first}" rendered="{!setPaginationSelectedAccounts.HasPrevious}"/>
+          <apex:outputtext value="{!$Label.M2O_SAPFirst}" rendered="{!!setPaginationSelectedAccounts.HasPrevious}"/>
+      <apex:commandlink status="fetchStatus" reRender="pg1" value="{!$Label.M2O_SAPPrevious}" action="{!setPaginationSelectedAccounts.previous}" rendered="{!setPaginationSelectedAccounts.HasPrevious}"/>
+          <apex:outputtext value="{!$Label.M2O_SAPPrevious}" rendered="{!!setPaginationSelectedAccounts.HasPrevious}" />
+      <apex:commandlink status="fetchStatus" reRender="pg1" value="{!$Label.M2O_SAPNext}" action="{!setPaginationSelectedAccounts.next}" rendered="{!setPaginationSelectedAccounts.HasNext}"/>
+          <apex:outputtext value="{!$Label.M2O_SAPNext}" rendered="{!!setPaginationSelectedAccounts.HasNext}"/>
+      <apex:commandlink status="fetchStatus" reRender="pg1" value="{!$Label.M2O_SAPLast}" action="{!setPaginationSelectedAccounts.last}" rendered="{!setPaginationSelectedAccounts.HasNext}"/>
+          <apex:outputtext value="{!$Label.M2O_SAPLast}" rendered="{!!setPaginationSelectedAccounts.HasNext}"/>
+      <apex:outputPanel style="color:green;">
+       <apex:actionStatus id="fetchStatus" startText="{!$Label.M2O_SAPFetching}" stopText=""/>
+      </apex:outputPanel>
+     </apex:panelGrid>
+     <apex:commandButton value="{!$Label.M2O_SAPRemoveFromSelectedList}" action="{!removeentries}" /></center>
+    </apex:pageblock>
+   </apex:form>
+   <apex:form >
+    <apex:pageBlock rendered="{!IF((SelectedAccountListSize>0),TRUE,FALSE)}">    
+     <apex:pageBlockSection dir="ltr" title="{!$Label.M2O_SAPAccountPlanName}" rendered="{!IF(!(SelectedAccountListSizeboolean) ,TRUE,FALSE)}" columns="2" id="createSAPPageBlckSectn">
+      <apex:pagemessages /> 
+      <apex:actionStatus id="actStatusId" >
+                <apex:facet name="start" >
+                  <img src="/img/loading.gif" />                    
+                </apex:facet>
+          </apex:actionStatus> 
+      <apex:outputPanel >
+      <apex:outputLabel title="Name of account plan, e.g. Euronics 2014" value="{!$Label.M2O_SAPAccountPlanName}" for="AccountPlanName"/>
+          <apex:outputPanel styleClass="requiredInput" layout="block">
+          <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+          <apex:inputtext value="{!accountPlanName}" required="True" label="{!$Label.M2O_SAPAccountPlanName}" id="AccountPlanName"/>
+          </apex:outputPanel>
+      </apex:outputPanel>      
+      <apex:outputPanel >
+      <apex:outputLabel title="{!$ObjectType.Strategic_Account_Plan__c.fields.Business_Type__c.InlineHelpText}" value="{!$Label.M2O_SAPBusinessType}" for="RecordType"/>
+      <apex:outputPanel styleClass="requiredInput" layout="block">
+          <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+          <apex:selectList multiselect="false" size="1" value="{!RecordTypeSelected}" label="{!$Label.M2O_SAPBusinessType}" required="True" id="RecordType">
+              <apex:selectOptions value="{!recordTypeSAPPickList}"></apex:selectOptions>
+          </apex:selectList>
+      </apex:outputPanel>
+      </apex:outputPanel>
+      <apex:pageBlockSectionItem rendered="{!!nonSectorProfile}"/>
+      <apex:actionRegion > 
+      <apex:outputPanel rendered="{!nonSectorProfile}">
+      <apex:outputLabel value="{!$Label.M2O_SAPSector}" for="sector" rendered="{!nonSectorProfile}"/> 
+      <apex:outputPanel styleClass="requiredInput" layout="block" rendered="{!nonSectorProfile}">
+          <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+          <apex:inputfield value="{!strategicAccountPlan.Philips_Sector__c}" id="sector" required="True" />
+      </apex:outputPanel>      
+      </apex:outputPanel> 
+      </apex:actionRegion>    
+ 
+      <apex:outputPanel >
+       <apex:outputLabel value="{!$Label.M2O_SAPFromDate}"/>
+      <apex:outputPanel styleClass="requiredInput" layout="block">
+          <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+          <apex:inputfield value="{!strategicAccountPlan.From_Date__c}" id="strategicAccountPlanFromDate" required="True"/> 
+      </apex:outputPanel>
+      </apex:outputPanel>
+      <apex:outputPanel >
+      <apex:outputLabel title="Currency applicable in the entire plan" value="{!$Label.M2O_SAPCurrency}"/>
+      <apex:outputPanel styleClass="requiredInput" layout="block">
+          <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+          <apex:inputfield value="{!strategicAccountPlan.CurrencyIsoCode}" id="strategicAccountPlancurrency" required="True"/>
+      </apex:outputPanel>
+      </apex:outputPanel>
+     </apex:pageBlockSection>
+
+     <center><apex:commandButton value="{!$Label.M2O_SAPCreateAccountPlan}" action="{!createaccountplan}" rendered="{!IF(!(SelectedAccountListSizeboolean) ,TRUE,FALSE)}"/>
+     <apex:commandButton value="{!$Label.M2O_SAPSave}" action="{!save}" rendered="{!SelectedAccountListSizeboolean}"/>
+     <apex:commandButton value="{!$Label.M2O_SAPCancel}" action="{!cancel}" /></center>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,42 @@
+<apex:page standardController="REVVY__MnLifeCycle__c"  extensions="REVVY.CMnLifeCycleRemoter,REVVY.CMnVFPageGenericCtrl"
+    standardStylesheets="false">
+    <apex:variable var="jsrUrl" value="{!URLFOR($Resource.REVVY__contractProgressBarJSR)}"/>
+    <apex:stylesheet value="{!jsrUrl}/pBarButtons.css" />
+    <apex:includeScript value="{!$Resource.REVVY__lifeCycleRender}" />
+
+    <script>
+
+        (function(){
+            var namespace = "{!JSENCODE(namespace)}";
+            var namespaceDT = namespace.length > 0 ? namespace.slice(0, -2)+"." : "";
+            var remotingObj = Visualforce.remoting;
+
+            var lifecycleRecordId = '{!REVVY__MnLifeCycle__c.Id}';
+
+            var lifecycleObj = {"lifeCycleId": lifecycleRecordId};
+
+            var status = '{!REVVY__MnLifeCycle__c.REVVY__Status__c}';
+            var numOfPhases = {!REVVY__MnLifeCycle__c.REVVY__NumberOfPhases__c};
+            if(status !== "Cloning in progress..." && numOfPhases.length !== 0){
+                  getLifeCycleInformation(remotingObj, namespaceDT, lifecycleObj, null, null);
+             }
+
+
+        })();
+
+    </script>
+
+
+    <div id="barContainer">
+        <form id="msform">
+            <div id="lifecycle">
+            <ul class="progressbar" id="progressbar">
+
+
+
+            </ul>
+            </div>
+        </form>
+    </div>
+
+</apex:page>

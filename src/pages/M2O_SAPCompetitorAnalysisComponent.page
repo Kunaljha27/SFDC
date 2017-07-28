@@ -1,0 +1,28 @@
+<apex:page standardController="Strategic_Account_Plan__c"  showHeader="false" extensions="M2O_AccountPlanExtensionController" readOnly="true" >
+<apex:form target="_parent">
+<apex:pageBlock >
+    <apex:pageBlockButtons location="top" >
+        <apex:commandButton value="New Competitor analysis" rendered="{!Hasaccess.HasEditAccess}" action="{!URLFOR($Action.Competitor_Analysis__c.New,null,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),CF00Nd00000077erG=sapName,CF00Nd00000077erG_lkid=Strategic_Account_Plan__c.Id],true)}" />
+    </apex:pageBlockButtons>
+    <apex:outputText rendered="{!ComAnalysis.size=0}" value="{!$Label.M2O_No_Records_To_Display}"></apex:outputText>
+        <apex:pageBlockTable value="{!ComAnalysis}" var="compa" rendered="{!ComAnalysis.size>0}">
+            <apex:column >
+                <apex:facet name="header">Action</apex:facet>
+                    <apex:outputLink value="{!URLFOR($Action.Competitor_Analysis__c.Edit,compa.id,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),saveURL=URLFOR($Action.Strategic_Account_Plan__c.View, Strategic_Account_Plan__c.Id)],true)}" target="_parent">Edit</apex:outputLink> &nbsp;&nbsp;
+                    <apex:outputLink value="{!URLFOR($Action.Competitor_Analysis__c.Delete,compa.id,[retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id)],true)}" target="_parent" onclick="return window.confirm('Are you sure?');">Del</apex:outputLink>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Competitor analysis name</apex:facet>
+                   <!-- <apex:outputLink value="/Id" target="_parent">{!ca.Name}</apex:outputLink>-->
+                    <apex:outputLink value="{!URLFOR($Action.Competitor_Analysis__c.View,compa.id)}" target="_parent">{!compa.Name}</apex:outputLink>
+            </apex:column> 
+            <apex:column value="{!compa.Key_Mag__c}"/>
+            <apex:column value="{!compa.Brand_1__c}"/>
+            <apex:column value="{!compa.Brand_2__c}"/>
+            <apex:column value="{!compa.Brand_3__c}"/>
+            <apex:column value="{!compa.Brand_4__c}"/>
+            <apex:column value="{!compa.Brand_5__c}"/>
+        </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

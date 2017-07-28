@@ -1,0 +1,267 @@
+<apex:page standardController="pse__Resource_Request__c" extensions="pse.SearchResourcesController" sidebar="false" showHeader="false" standardStylesheets="false" action="{!initMap}">
+
+<html >
+ 
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css" >
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
+
+</style>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+
+
+<script type="text/javascript">
+var cm_map;
+var cm_openInfowindow;
+var cm_mapMarkers = [];
+var cm_mapHTMLS = [];
+
+// Change these parameters to customize map
+var param_idColumn = "id";
+var param_rankColumn = "id";
+
+var param_titleColumn = "name";
+var param_addressColumn = "address";
+var param_urlColumn = "link";
+var param_costRate = "costRate";
+var param_currencyIsoCode = "currencyIsoCode";
+
+var param_descriptionColumn = "description";
+var param_latColumn = "lat";
+var param_lngColumn = "lng";
+var param_distanceColumn = "distance";
+var param_iconType = "green";
+var param_RRiconType = "red";
+
+/**
+ * Loads map and calls function to load in worksheet data.
+ */
+function cm_load() {  
+  //var myLatlng = new google.maps.LatLng(148,-32);
+  var rrLat = {!resourceRequest.Latitude_PSA__c};
+  var rrLng = {!resourceRequest.Longitude_PSA__c};
+  if((rrLat == null || isNaN(rrLat)) || (rrLng == null || isNaN(rrLng))){return ;}
+  var myLatlng = new google.maps.LatLng(rrLat,rrLng);
+  var myOptions = {
+    zoom: 8,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  cm_map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  cm_loadMapJSON();
+  
+}
+
+/**
+ * Function called when marker on the map is clicked.
+ * Opens an info window (bubble) above the marker.
+ * @param {Number} markerNum Number of marker in global array
+ */
+function cm_markerClicked(markerNum) {
+  var infowindowOptions = {
+    content: cm_mapHTMLS[markerNum]
+  }
+  var infowindow = new google.maps.InfoWindow(infowindowOptions);
+  infowindow.open(cm_map, cm_mapMarkers[markerNum]);
+  cm_setInfowindow(infowindow);
+}
+
+/**
+ * Function that sorts 2 worksheet rows from JSON feed
+ * based on their rank column. Only called if column is defined.
+ * @param {rowA} Object Represents row in JSON feed
+ * @param {rowB} Object Represents row in JSON feed
+ * @return {Number} Difference between row values
+ */
+
+function cm_sortRows(rowA, rowB) {
+  var rowAValue = parseFloat(rowA[param_distanceColumn]);
+  var rowBValue = parseFloat(rowB[param_distanceColumn]);
+  if(isNaN(rowAValue)){rowAValue = 0;}  
+  if(isNaN(rowBValue)){rowBValue = 0;}
+  return rowAValue - rowBValue;
+}
+
+
+var _staffingPageUrl = "{!$Page.SearchResources}";
+var _distanceUnit = "{!JSENCODE(distanceUnit)}";
+var resourceJSON = { "dataToMap" :[
+    <apex:repeat value="{!resourceListForMap}" var="result">
+        
+        {
+            "id": "{!result.indexOfResource}", 
+            "lat": "{!result.resource.Latitude_PSA__c}", 
+            "lng": "{!result.resource.Longitude_PSA__c}",
+            "distance": "{!result.distance}", 
+            "address": "{!JSENCODE(result.resource.MailingStreet + ' ' + result.resource.MailingCity + '<br/>' + result.resource.MailingState + ', ' + result.resource.MailingCountry)}",
+            "name": "{!JSENCODE(result.resource.name)}", 
+            "link": "/{!JSENCODE(result.resource.id)}", 
+            "description": "",
+            "costRate" : "{!result.resource.Default_Cost_Rate__c}",
+            "currencyIsoCode" : "{!result.resource.CurrencyIsoCode}",
+
+            <apex:repeat value="{!pushPinAddedFields}" var="field">
+            	"{!field}" : "{!result.resource[pushPinAddedFields[field]]}",
+            </apex:repeat>
+        },
+    </apex:repeat>
+        {
+            "id": "-1",
+            "lat": "{!resourceRequest.Latitude_PSA__c}", 
+            "lng": "{!resourceRequest.Longitude_PSA__c}", 
+            "distance":-1,
+            "address": "{!JSENCODE(resourceRequest.Work_Street_PSA__c + ' ' + resourceRequest.Work_City_PSA__c + '<br/>' + resourceRequest.Work_State_PSA__c + ' ' + resourceRequest.Work_Country_PSA__c + '<br/>' + resourceRequest.Work_PostalCode_PSA__c)}",
+            "name": "{!JSENCODE(resourceRequest.name)}", 
+            "link": _staffingPageUrl + "?id={!JSENCODE(resourceRequest.id)}", 
+            "description": "(Location Of Resource Request {!JSENCODE(resourceRequest.name)})",
+            "costRate" : "none"
+        }
+    ],
+  };
+
+//We can have distnace and later sort json here OR we can supply sorted json
+resourceJSON.dataToMap.sort(cm_sortRows);
+
+function cm_loadMapJSON() {
+  var bounds = new google.maps.LatLngBounds();
+  var isGeneric = {!isCalledForGenericSearch};
+  var markPostionOnMap = true;
+
+  /*Add resources to display*/
+  var currentMarkerRank = 0;
+  var markerRank = 0;
+  for (var i = 0; i < resourceJSON.dataToMap.length; i++) {
+    var entry = resourceJSON.dataToMap[i];
+    
+    var lat = parseFloat(entry[param_latColumn]);
+    var lng = parseFloat(entry[param_lngColumn]);
+    var isGeoFound = ((lat != null && lat != 0 && !isNaN(lat)) && (lng != null && lng != 0 && !isNaN(lng))); 
+    if(isGeoFound) {
+      var point = new google.maps.LatLng(lat,lng);
+      
+      var infoHtml = "<div style=\"font-size:12px\">";
+      infoHtml += "<a target=\"_blank\" href=\"" + entry[param_urlColumn] + "\">" + "<strong>" + entry[param_titleColumn] + "</strong> </a>";
+      var label = entry[param_titleColumn];
+      
+      
+      if(entry[param_idColumn]) {
+      	markPostionOnMap = true;
+        //Add the description and a link to this park's page        
+        if(entry[param_idColumn] != -1){
+            currentMarkerRank++;
+            markerRank = currentMarkerRank; 
+            infoHtml += "<br/>" + entry[param_addressColumn] + "...<br/>";
+            infoHtml += "Distance: " + entry[param_distanceColumn] + " " +_distanceUnit + "<br/>"  ;
+            infoHtml += "Cost rate: " + entry[param_costRate] +" (" +entry[param_currencyIsoCode] + ")<br/>"  ;
+           	<apex:repeat value="{!pushPinAddedFields}" var="field">
+           		infoHtml += "{!field}" + ": " + entry["{!field}"] + "<br/>";
+           	</apex:repeat>
+        }else{
+        	if (!isGeneric) {
+            	infoHtml += "<br/>" + entry[param_descriptionColumn] + "...<br/>";
+            } else {
+            	if (entry[param_addressColumn] != " \u003Cbr/\u003E \u003Cbr/\u003E") {
+					infoHtml += "<B>Address : </B>" + entry[param_addressColumn] + "<br/>";
+				} else {
+					infoHtml += "<B>Latitude: </B>" + lat + "<br/>";
+					infoHtml += "<B>Longitude: </B>" + lng + "<br/>";
+				}
+            }
+            markerRank = -1;
+        }
+
+      }
+      infoHtml += "</div>";
+      
+      // create the marker, add it to the array
+      var marker = cm_createMarker(cm_map,point,label,infoHtml,markerRank);
+      cm_mapMarkers.push(marker);
+      cm_mapHTMLS.push(infoHtml);
+      bounds.extend(point);
+    }
+  }
+
+  cm_map.fitBounds(bounds);
+  cm_map.setCenter(bounds.getCenter());
+
+}
+
+function cm_setInfowindow(newInfowindow) {
+  if (cm_openInfowindow != undefined) {
+    cm_openInfowindow.close();
+  }
+
+  cm_openInfowindow = newInfowindow;
+}
+
+/**
+ * Creates marker with ranked Icon or blank icon,
+ * depending if rank is defined. Assigns onclick function.
+ * @param {GLatLng} point Point to create marker at
+ * @param {String} title Tooltip title to display for marker
+ * @param {String} html HTML to display in InfoWindow
+ * @param {Number} rank Number rank of marker, used in creating icon
+ * @return {GMarker} Marker created
+ */
+function cm_createMarker(map, latlng, title, html, rank) {
+  var iconSize = new google.maps.Size(20, 34);
+  var iconShadowSize = new google.maps.Size(37, 34);
+  var iconHotSpotOffset = new google.maps.Point(9, 0); // Should this be (9, 34)?
+  var iconPosition = new google.maps.Point(0, 0);
+  var infoWindowAnchor = new google.maps.Point(9, 2);
+  var infoShadowAnchor = new google.maps.Point(18, 25);
+
+  var iconShadowUrl = "http://www.google.com/mapfiles/shadow50.png";
+  var iconImageUrl;
+
+  if(rank > 0 && rank < 100) {
+    iconImageUrl = "http://gmaps-samples.googlecode.com/svn/trunk/" + "markers/" + param_iconType + "/marker" + rank + ".png";
+  } 
+  else if (rank > 100) {
+    iconImageUrl = "http://gmaps-samples.googlecode.com/svn/trunk/" + "markers/" + param_iconType + "/blank.png";
+  }else if(rank == -1){ 
+    iconImageUrl = "http://gmaps-samples.googlecode.com/svn/trunk/" + "markers/" + param_RRiconType + "/blank.png";
+  }
+
+  var markerShadow =
+      new google.maps.MarkerImage(iconShadowUrl, iconShadowSize, iconPosition, iconHotSpotOffset);
+
+  var markerImage =
+      new google.maps.MarkerImage(iconImageUrl, iconSize, iconPosition, iconHotSpotOffset);
+
+  var markerOptions = {
+    title: title,
+    icon: markerImage,
+    shadow: markerShadow,
+    position: latlng,
+    map: map
+  }
+
+  var marker = new google.maps.Marker(markerOptions);
+
+  google.maps.event.addListener(marker, "click", function() {
+    var infowindowOptions = {
+      content: html
+    }
+    var infowindow = new google.maps.InfoWindow(infowindowOptions);
+    cm_setInfowindow(infowindow);
+    infowindow.open(map, marker);
+  });
+
+  return marker;
+}
+
+
+</script>
+</head>
+
+<body onload="cm_load()">
+<div id="map_canvas" style="width:100%; height:100%"></div>
+
+</body> 
+</html>
+
+</apex:page>

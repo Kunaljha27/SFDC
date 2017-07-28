@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- UI Component Config --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Fields To Search --></label>
+        <name>FieldsToSearch__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fields To Show --></label>
+        <name>FieldsToShow__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Search Criteria --></label>
+        <name>InitialSearchCriteria__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object --></label>
+        <name>Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- UI Component --></label>
+        <name>UIComponent__c</name>
+        <picklistValues>
+            <masterLabel>Enumeration Selector</masterLabel>
+            <translation><!-- Enumeration Selector --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hierarchy Selector</masterLabel>
+            <translation><!-- Hierarchy Selector --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>List Selector</masterLabel>
+            <translation><!-- List Selector --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Component Config Name --></nameFieldLabel>
+</CustomObjectTranslation>

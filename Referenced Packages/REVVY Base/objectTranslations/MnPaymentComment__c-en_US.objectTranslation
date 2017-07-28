@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Payment Comment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Payment Comments</value>
+    </caseValues>
+    <fields>
+        <label><!-- Display Name --></label>
+        <name>DisplayName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Comment --></label>
+        <name>PaymentComment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment ID --></label>
+        <name>PaymentID__c</name>
+        <relationshipLabel><!-- Payment Comments --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Payment Comment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Comment --></label>
+            <section>Payment Comment</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

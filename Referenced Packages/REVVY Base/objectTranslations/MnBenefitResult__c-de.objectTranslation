@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Benefit Result --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Actual Amount --></label>
+        <name>ActualAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Benefit Result ID --></label>
+        <name>BRIDRead__c</name>
+    </fields>
+    <fields>
+        <label><!-- Benefit Earned (Override) --></label>
+        <name>BenefitEarnedOverride__c</name>
+    </fields>
+    <fields>
+        <label><!-- Benefit Earned --></label>
+        <name>BenefitEarned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Benefit Per Unit --></label>
+        <name>BenefitPerUnit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Projected --></label>
+        <name>BenefitProjected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Benefit --></label>
+        <name>Benefit__c</name>
+        <relationshipLabel><!-- Benefit Results --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Count of Benefit Lines --></label>
+        <name>CountofBenefitLines__c</name>
+    </fields>
+    <fields>
+        <label><!-- Goal Earnings ID --></label>
+        <name>GoalEarning__c</name>
+        <relationshipLabel><!-- Benefit Results --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Tier Applied --></label>
+        <name>TierApplied__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Benefit Result Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Benefit Result ID --></nameFieldLabel>
+</CustomObjectTranslation>

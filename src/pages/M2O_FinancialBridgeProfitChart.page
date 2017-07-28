@@ -1,0 +1,86 @@
+<!--
+@VF page:     M2O_FinancialBridgeProfitChart
+@Description: It will show the Financial Bridge Profit in a graph .
+-->
+
+<apex:page standardController="Strategic_Account_Plan__c"  extensions="M2O_FinancialBridgeProfitController" >
+
+  <apex:stylesheet value="{!$Resource.M2O_FinancialBridge_VF_Css}"/>  
+   
+ 
+  <c:M2O_FinancialChart />
+   <apex:form >  
+   <center>
+   
+     <apex:commandButton dir="RTL" value="{!$Label.M2O_FinacialBridgeEdit}" action="{!editGrid}" rendered="{!displayChart && Hasaccess.haseditaccess}" />  
+         <apex:commandButton dir="RTL" value="{!$Label.M2O_FinacialBridgeSave}"  rendered="{!displayChart=false}" action="{!saveData}"/>
+         <apex:commandButton dir="RTL" value="{!$Label.M2O_FinacialBridgeCancel}"  rendered="{!displayChart=false}" action="{!cancelGrid}"/>
+     </center>
+         <apex:pagemessages ></apex:pagemessages>
+  
+    <table style="table-layout:fixed;" id="finacialBridgeBlock">
+        <tr>
+       
+           <apex:variable var="index" value="{!1}" />
+           <apex:variable var="Hiddenindex" value="{!0}" />
+           <apex:repeat value="{!FinancialBridgeListQ1Q2}" var="Q1Q2">
+                
+                <td style="vertical-align:top">
+                 <apex:outputPanel rendered="{!displayChart}" id="ChartPanelQ1Q2">
+                   <center> <p><b>{!Q1Q2.Quarter__c}</b></P><div class="divborder" id="chart_div{!index}">
+                    
+                      <input type='Hidden' id="Y{!Hiddenindex}" value="{!Q1Q2.Landing_Year_Profit__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+1}" value="{!Q1Q2.Profit_For_Business_Group_1__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+2}" value="{!Q1Q2.Profit_For_Business_Group_2__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+3}" value="{!Q1Q2.Profit_For_Business_Group_3__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+4}" value="{!Q1Q2.Profit_For_Business_Group_4__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+5}" value="{!Q1Q2.Current_Year_Objective_Profit__c}"/>
+                          
+                        <script>
+                            google.setOnLoadCallback(drawVisualization);
+                        </script>
+                        
+                    </div></center>
+                   </apex:outputPanel> 
+                  <span id="tableGridSpanQ1Q2">
+                       <c:M2O_FinancialBridgeGrid chartGrid="{!Q1Q2}" FinBusinessGrp="{!FinBusinessGrp}" displayChart="{!displayChart}" lastyear="{!lastyear}" currentyear="{!currentyear}" currencyvalue="{!currencyvalue}" financialBridgeRecordtype="{!profitRecordtypename}"/> 
+                    
+                    </span> 
+                    <apex:variable var="index" value="{!index + 1}"/>
+                    <apex:variable var="Hiddenindex" value="{!Hiddenindex+6}" />
+                </td>
+            </apex:repeat>
+        </tr>
+        <tr>
+            
+            <apex:repeat value="{!financialBridgeListQ2Q3}" var="Q2Q3">
+                <td style="vertical-align:top">
+                  <apex:outputPanel rendered="{!displayChart}" id="ChartPanelQ2Q3">
+                    <center><p><b>{!Q2Q3.Quarter__c}</b></p><div class="divborder" id="chart_div{!index}">
+                        
+                         <input type='Hidden' id="Y{!Hiddenindex}" value="{!Q2Q3.Landing_Year_Profit__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+1}" value="{!Q2Q3.Profit_For_Business_Group_1__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+2}" value="{!Q2Q3.Profit_For_Business_Group_2__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+3}" value="{!Q2Q3.Profit_For_Business_Group_3__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+4}" value="{!Q2Q3.Profit_For_Business_Group_4__c}"/>
+                         <input type='Hidden' id="Y{!Hiddenindex+5}" value="{!Q2Q3.Current_Year_Objective_Profit__c}"/>
+                        <script>
+                            google.setOnLoadCallback(drawVisualization);
+                        </script>
+                    
+                    </div></center>
+                   </apex:outputPanel> 
+                    <span id="tableGridSpanQ2Q3"> 
+                  
+                          <c:M2O_FinancialBridgeGrid chartGrid="{!Q2Q3}" FinBusinessGrp="{!FinBusinessGrp}" displayChart="{!displayChart}" lastyear="{!lastyear}" currentyear="{!currentyear}" currencyvalue="{!currencyvalue}" financialBridgeRecordtype="{!profitRecordtypename}"/> 
+                    </span>
+                    <apex:variable var="index" value="{!index + 1}"/>
+                    <apex:variable var="Hiddenindex" value="{!Hiddenindex+6}" />
+                </td>
+     
+            </apex:repeat>
+           </tr>
+     
+         </table>
+     </apex:form> 
+  </apex:page>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Revvy Quote Record Type-FieldSet Mapping --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Quote Item Add Info Field Set Name --></label>
+        <name>QuoteItemAddInfoFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Item Pricing Tab Column 2 FS Name --></label>
+        <name>QuoteItemPricingTabFldSet2Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Item Pricing Tab Column 1 FS Name --></label>
+        <name>QuoteItemPricingTabFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Line Additional Info Field Set Name --></label>
+        <name>QuoteItemSLAddInfoFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Line Table Field Set for Bundle Prod --></label>
+        <name>QuoteItemSLBundleProdTableFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Line Table Field Set for Config Prod --></label>
+        <name>QuoteItemSLConfigProdTableFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Line Pricing Tab Column 2 FS Name --></label>
+        <name>QuoteItemSLPricingTabFldSet2Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Line Pricing Tab Column 1 FS Name --></label>
+        <name>QuoteItemSLPricingTabFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Item Table Field Set Name --></label>
+        <name>QuoteItemTableFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Solution Table Field Set Name --></label>
+        <name>QuoteSolutionTableFldSetName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Summary Column 1 --></label>
+        <name>QuoteSummaryColumn1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Summary Column 2 --></label>
+        <name>QuoteSummaryColumn2__c</name>
+    </fields>
+</CustomObjectTranslation>

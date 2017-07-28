@@ -1,0 +1,98 @@
+<apex:page standardController="REVVY__MnPriceListLine__c" extensions="REVVY.CMnPriceListLineController" tabstyle="MnAdmin__tab" sidebar="false" id="thePage">
+    <apex:variable var="mode" value="new" />
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script>
+        var namespace = "{!namespace}";
+        var CMnNamespacePrefix = namespace.length > 0 ? namespace.slice(0, -2) : "";
+        var CMnNamespacePrefixUS = "";
+        var CMnNamespacePrefixDT = "";
+        if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+            CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+            CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+        }
+
+        var productIDC = "{!$Component.thePage.theForm.thePageBlock.theSection.productID}";
+        var productID = "{!$Component.thePage.theForm.thePageBlock.theSection.productName}_lkid";
+
+        function updateProductID(e){
+            var idcEl = $(document.getElementById(productIDC));
+            var idEl = $(document.getElementById(productID));
+            var prodID = idEl.val();
+            if(prodID.trim() !== ""){
+                Visualforce.remoting.Manager.invokeAction(
+                    CMnNamespacePrefixDT + 'CMnPriceListLineController.getProductIDC',
+                    prodID, 
+                    function(result, event){
+                        if(event.status && result != null) {
+                            idcEl.text(result);
+                        }
+                    }
+                );
+            }
+        }
+    </script>
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+        <!--- Actual VF code goes here -->
+
+          <apex:sectionHeader title="Price List Lines" subtitle="{!PageSubTitle}"/>
+          <apex:form id="theForm" styleClass="mn-form">
+            <apex:pageBlock title="Price List Line" id="thePageBlock">
+              <apex:pagemessages id="pageMessages"/>
+              <apex:actionFunction action="{!save}" name="saveRecord" rerender="pageMessages, theSection"/>
+
+              <script>
+                $(document).ready(function(){
+                  var isEdit = {!isEdit};
+
+                  if(isEdit){
+                    $(".mn-form").on("keypress", "input:text", function(ev)  {
+                      if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+                          saveRecord();
+                          return false;
+                       } else {
+                          return true;
+                       }
+                    });
+                  }
+                })
+              </script>
+              <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save" rerender="pageMessages, theSection"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+              </apex:pageBlockButtons>
+
+              <apex:pageBlockSection showHeader="false" columns="2" id="theSection">
+                <apex:outputText label="Price List ID" value="{!priceListID}" rendered="{!$ObjectType.REVVY__MnPriceList__c.fields.REVVY__Id__c.Accessible}" />
+                <apex:outputField value="{!REVVY__MnPriceListLine__c.REVVY__PriceList__c}"/>
+                <apex:outputField id="productID" label="Product ID" value="{!REVVY__MnPriceListLine__c.Product__r.REVVY__Id__c}"  />
+                <apex:inputField id="productName" value="{!REVVY__MnPriceListLine__c.REVVY__Product__c}" onchange="updateProductID()"/>
+                <apex:inputField value="{!REVVY__MnPriceListLine__c.REVVY__Start_Date__c}" />
+                <apex:inputField value="{!REVVY__MnPriceListLine__c.REVVY__End_Date__c}" />
+                <apex:inputfield value="{!REVVY__MnPriceListLine__c.REVVY__ListedPrice__c}" />
+                <apex:inputfield value="{!REVVY__MnPriceListLine__c.REVVY__CostPrice__c}" />
+              </apex:pageBlockSection>
+
+              <apex:pageBlockSection showHeader="false">
+                <apex:repeat value="{!customEditFields}" var="f">
+                  <apex:inputField value="{!REVVY__MnPriceListLine__c[f]}"/>
+                </apex:repeat>
+              </apex:pageBlockSection>
+            </apex:pageBlock>
+          </apex:form>
+
+        <!-- ---------- -->
+      </div>
+    </div>
+    </div>
+
+</apex:page>

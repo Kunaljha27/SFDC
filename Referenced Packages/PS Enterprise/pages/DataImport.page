@@ -1,0 +1,13 @@
+<apex:page controller="pse.DataImportController" >
+   <apex:form >
+       <apex:commandButton action="{!LoadWorkCalendars}" value="Import Work Calendar"/>
+       <br/><br/>
+        <apex:commandButton action="{!LoadTimePeriods}" value="Import Time Periods"/>
+        <br/><br/>
+        <apex:commandButton action="{!LoadRegions}" value="Import Regions"/>
+        <br/><br/>
+        <apex:commandButton action="{!LoadPractices}" value="Import Practices"/>
+        <br/><br/>
+        <apex:commandButton action="{!LoadGroups}" value="Import Groups"/>
+   </apex:form>
+</apex:page>

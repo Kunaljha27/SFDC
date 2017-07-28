@@ -1,0 +1,266 @@
+<apex:page standardController="Commercial_Policy__c" extensions="M2O_CommercialPolicyPrintController" showHeader="false" sidebar="false">   
+<script>
+
+
+</script>
+<style>
+.activeTab {background-color: #236FBD; color:white; background-image:none}
+.inactiveTab { background-color: lightgrey; color:black; background-image:none}
+.outerTable
+{
+    border: 1px solid blue;
+    border-color :blue;
+    width: 100%;
+}
+.outerTable td{
+    border: 1px solid blue;
+}
+
+.subHeading
+{
+    height:40px;
+    width:60px;
+    text-align: center;
+}
+.dataCell
+{
+    height:25px;
+    
+    
+}
+.headingCurrentFY
+{
+    height:20px;
+    width:60px;
+    text-align: center;
+    
+}
+
+.headingCurrent
+{
+    height:20px;
+    width:60px;
+    text-align: center;
+    background-color:#F0F095;
+}
+.lastHeading{
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: center;}
+
+.heading
+{   
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: center;
+    
+}
+.headingTotal
+{   
+    font-weight:bold; 
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: center;
+    background-color:#A5C6D1;
+    
+}
+.finalTotal
+{
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: center;
+    background-color:#5391A6;
+    font-weight:bold;
+}
+.firstTable
+{
+    font-size:12px;
+    font-weight:bold;
+    
+}
+
+.firstRow
+{
+    color:white;
+    border-color :blue;
+}
+
+</style>    
+  <apex:form >
+  <BR/>
+  <center>
+   <a href="#" onclick="window.print();return false;">Print this page</a> 
+   </center>  
+   <Br/>
+   <BR/>     
+              
+                    <apex:outputpanel id="FY">
+                         <table class="outerTable">
+                         <tr id="subHeadingFY2"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">FY</td></tr>
+                         <tr id="subHeadingFY1"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                         
+                         <tr id="subHeadingFY" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                            <apex:repeat id="dataTableFY" value="{!finalListOfFYSelectedRecords}" var="c">
+                                <tr class="dataCell" id="dataCellFY">
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Code__c}"/></td>  
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Name__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Code__c}"/>    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Name__c}"/>   </td> 
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Upselling_Investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Retailer_promotion_STTI__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Consumer_promotion__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Brand_investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Cooperative_advertising_KAM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Other__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Total_Investments__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.Invoiced_Sales__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrentFY')}" ><apex:outputText value="{!c.X3N_Sales__c}"/></td>
+                                   </tr> 
+                                   
+                            </apex:repeat>
+                            <tr class="finalTotal">
+                                   <td colspan="4" class="firstRow">TOTAL</td><td class="firstRow">{!upsellingTotalFY}</td><td class="firstRow">{!retailerTotalFY}</td><td class="firstRow">{!consumerTotalFY}</td><td class="firstRow">{!brandTotalFY}</td><td class="firstRow">{!cooperativeTotalFY}</td><td class="firstRow">{!tradeTotalFY}</td><td class="firstRow">{!otherTotalFY}</td><td class="firstRow">{!verticalTotalFY}</td><td class="firstRow">{!invoicedTotalFY}</td><td class="firstRow">{!nSalesTotalFY}</td>
+                                 </tr>
+                        </table>
+                    </apex:outputpanel>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:outputpanel id="Q1">
+                         <table class="outerTable">
+                         <tr id="subHeadingQ12"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">Q1</td></tr>
+                         <tr id="subHeadingQ11"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                         
+                         <tr id="subHeadingQ1" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                            <apex:repeat id="dataTableQ1" value="{!finalListOfQ1SelectedRecords}" var="c">
+                                <tr class="dataCell" id="dataCellQ1">
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Code__c}"/>  </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Name__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Code__c}"/>   </td> 
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Name__c}"/>    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Upselling_Investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Retailer_promotion_STTI__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Consumer_promotion__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Brand_investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Cooperative_advertising_KAM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Other__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','lastHeading')}" ><apex:outputText value="{!c.Total_Investments__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Invoiced_Sales__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.X3N_Sales__c}"/></td>
+                                   </tr> 
+                                   
+                            </apex:repeat>
+                            <tr class="finalTotal">
+                                   <td class="firstRow" colspan="4">TOTAL</td><td class="firstRow">{!upsellingTotalQ1}</td><td class="firstRow">{!retailerTotalQ1}</td><td class="firstRow">{!consumerTotalQ1}</td><td class="firstRow">{!brandTotalQ1}</td><td class="firstRow">{!cooperativeTotalQ1}</td><td class="firstRow">{!tradeTotalQ1}</td><td class="firstRow">{!otherTotalQ1}</td><td class="firstRow">{!verticalTotalQ1}</td><td class="firstRow">{!invoicedTotalQ1}</td><td class="firstRow">{!nSalesTotalQ1}</td>
+                                 </tr>
+                        </table>
+                    </apex:outputpanel>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:outputpanel id="Q2">
+                         <table class="outerTable">
+                         <tr id="subHeadingQ22"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">Q2</td></tr>
+                         <tr id="subHeadingQ21"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                         
+                         <tr id="subHeadingQ2" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                            <apex:repeat id="dataTableQ2" value="{!finalListOfQ2SelectedRecords}" var="c">
+                                <tr class="dataCell" id="dataCellQ2">
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Code__c}"/>  </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Name__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Code__c}"/>   </td> 
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Name__c}"/> </td>   
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Upselling_Investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Retailer_promotion_STTI__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Consumer_promotion__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Brand_investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Cooperative_advertising_KAM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Other__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','lastHeading')}" ><apex:outputText value="{!c.Total_Investments__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Invoiced_Sales__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.X3N_Sales__c}"/></td>
+                                   </tr> 
+                                   
+                            </apex:repeat>
+                            <tr class="finalTotal">
+                                   <td colspan="4" class="firstRow">TOTAL</td><td class="firstRow">{!upsellingTotalQ2}</td><td class="firstRow">{!retailerTotalQ2}</td><td class="firstRow">{!consumerTotalQ2}</td><td class="firstRow">{!brandTotalQ2}</td><td class="firstRow">{!cooperativeTotalQ2}</td><td class="firstRow">{!tradeTotalQ2}</td><td class="firstRow">{!otherTotalQ2}</td><td class="firstRow">{!verticalTotalQ2}</td><td class="firstRow">{!invoicedTotalQ2}</td><td class="firstRow">{!nSalesTotalQ2}</td>
+                                 </tr>
+                        </table>
+                    </apex:outputpanel>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:outputpanel id="Q3">
+                         <table class="outerTable">
+                         <tr id="subHeadingQ32"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">Q3</td></tr>
+                         <tr id="subHeadingQ31"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                         
+                         <tr id="subHeadingQ3" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                            <apex:repeat id="dataTableQ3" value="{!finalListOfQ3SelectedRecords}" var="c">
+                                <tr class="dataCell" id="dataCellQ3">
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Code__c}"/>  </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Name__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Code__c}"/>  </td>  
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Name__c}"/>    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Upselling_Investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Retailer_promotion_STTI__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Consumer_promotion__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Brand_investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Cooperative_advertising_KAM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Other__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','lastHeading')}" ><apex:outputText value="{!c.Total_Investments__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Invoiced_Sales__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.X3N_Sales__c}"/></td>
+                                   </tr> 
+                                   
+                            </apex:repeat>
+                            <tr class="finalTotal">
+                                   <td colspan="4" class="firstRow">TOTAL</td><td class="firstRow">{!upsellingTotalQ3}</td><td class="firstRow">{!retailerTotalQ3}</td><td class="firstRow">{!consumerTotalQ3}</td><td class="firstRow">{!brandTotalQ3}</td><td class="firstRow">{!cooperativeTotalQ3}</td><td class="firstRow">{!tradeTotalQ3}</td><td class="firstRow">{!otherTotalQ3}</td><td class="firstRow">{!verticalTotalQ3}</td><td class="firstRow">{!invoicedTotalQ3}</td><td class="firstRow">{!nSalesTotalQ3}</td>
+                                 </tr>
+                        </table>
+                    </apex:outputpanel>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:outputpanel id="Q4">
+                         <table class="outerTable">
+                         <tr id="subHeadingQ42"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">Q4</td></tr>
+                         <tr id="subHeadingQ41"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                         
+                         <tr id="subHeadingQ4" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                            <apex:repeat id="dataTableQ4" value="{!finalListOfQ4SelectedRecords}" var="c">
+                                <tr class="dataCell" id="dataCellQ4">
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Code__c}"/>  </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.BG_Name__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Code__c}"/>    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','heading')}" ><apex:outputText value="{!c.Category_Name__c}"/>   </td> 
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Upselling_Investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Retailer_promotion_STTI__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Consumer_promotion__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Brand_investment__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Cooperative_advertising_KAM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Other__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','lastHeading')}" ><apex:outputText value="{!c.Total_Investments__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.Invoiced_Sales__c}"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','headingCurrent')}" ><apex:outputText value="{!c.X3N_Sales__c}"/></td>
+                                   </tr> 
+                                   
+                            </apex:repeat>
+                            <tr class="finalTotal">
+                                   <td colspan="4" class="firstRow">TOTAL</td><td class="firstRow">{!upsellingTotalQ4}</td><td class="firstRow">{!retailerTotalQ4}</td><td class="firstRow">{!consumerTotalQ4}</td><td class="firstRow">{!brandTotalQ4}</td><td class="firstRow">{!cooperativeTotalQ4}</td><td class="firstRow">{!tradeTotalQ4}</td><td class="firstRow">{!otherTotalQ4}</td><td class="firstRow">{!verticalTotalQ4}</td><td class="firstRow">{!invoicedTotalQ4}</td><td class="firstRow">{!nSalesTotalQ4}</td>
+                                 </tr>
+                        </table>
+                    </apex:outputpanel>
+                
+             </apex:form>
+      
+</apex:page>

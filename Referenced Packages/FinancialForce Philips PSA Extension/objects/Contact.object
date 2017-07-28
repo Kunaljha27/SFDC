@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Employee_ID__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The employee ID of the resource.  Used for matching expenses from concur.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The employee ID of the resource.  Used for matching expenses from concur.</inlineHelpText>
+        <label>Employee ID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

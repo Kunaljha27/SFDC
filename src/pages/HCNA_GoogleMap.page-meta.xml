@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>HCNA.ICEBERG.R1.US49631.Used to Display the Account location using Google API</description>
+    <label>HCNA_GoogleMap</label>
+</ApexPage>

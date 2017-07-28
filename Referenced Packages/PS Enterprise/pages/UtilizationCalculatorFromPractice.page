@@ -1,0 +1,10 @@
+<apex:page standardController="pse__Practice__c" action="{!initForPractice}" extensions="pse.UtilizationCalculatorController"
+    title="{!$Label.utilization_label_utilization_calc}">
+
+    <apex:composition template="pse__UtilizationCalculator">
+        <apex:define name="sectionHeader">
+            <apex:sectionHeader title="{!$Label.utilization_label_utilization_calc}" subtitle="{!pse__Practice__c.Name}" help="{!$Page.pse__UtilizationCalculationHelp}" />
+        </apex:define>
+    </apex:composition>
+
+</apex:page>

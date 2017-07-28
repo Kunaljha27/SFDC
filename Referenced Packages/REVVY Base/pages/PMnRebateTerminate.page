@@ -1,0 +1,16 @@
+<apex:page controller="REVVY.CMnRebateTerminateController" tabStyle="REVVY__MnIncentiveProgram__c">
+    <apex:pageMessages />
+    <apex:form >
+        <apex:commandButton action="{!backToList}" value="Back" immediate="true" rendered="{!isURLError}"/>
+        <apex:commandButton action="{!cancel}" value="Back" immediate="true" rendered="{!isCodeError}"/>
+        <apex:pageBlock mode="edit" title="Rebate {!rebateToProcess.REVVY__IncentiveProgramName__c}" rendered="{!AND(NOT(isURLError),NOT(isCodeError))}">
+            <apex:pageBlockSection title="Please provide the following details">
+                <apex:inputField value="{!rebateToProcess.REVVY__CancellationReason__c}" required="true"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!processRebate}" value="{!IF(mode=="Terminate","Terminate","Amend")}"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" immediate="true"/>
+            </apex:pageBlockButtons>   
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

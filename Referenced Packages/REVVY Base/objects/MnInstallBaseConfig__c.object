@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Captures Config information about config products (and/or sublines of config products) that are marked as &apos;Install Base Relevant&apos; when they are ordered through a Quote</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AttributeFormat__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Data format of an attribute. The format can be Boolean, decimal, integer, or text.</description>
+        <externalId>false</externalId>
+        <label>Format</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Boolean</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Decimal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Integer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>JSON</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Text</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>true</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>AttributeId__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Unique ID of catalog attribute (or non-catalog attribute) associated with this Install Base Config item.</description>
+        <externalId>true</externalId>
+        <label>Attribute UID</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttributeValue__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value of the attribute associated with this Install Base Config item.</description>
+        <externalId>false</externalId>
+        <label>Value</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Attribute__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The catalog attribute (if exists) associated with this Install Base Config item.</description>
+        <externalId>false</externalId>
+        <label>Catalog Attribute</label>
+        <referenceTo>MnCatalogAttribute__c</referenceTo>
+        <relationshipLabel>Install Base Config Items</relationshipLabel>
+        <relationshipName>IBConfigItems</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ConfigProductInstallBase__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The Install Base Record of the Main Config Product that is associated with this Install Base Config item.</description>
+        <externalId>false</externalId>
+        <label>Config Product Install Base</label>
+        <referenceTo>MnInstallBase__c</referenceTo>
+        <relationshipLabel>Install Base Config Items For Main Config Product</relationshipLabel>
+        <relationshipName>IBConfigItemsForMainConfigProd</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OptionGroup__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The Option Group of the Product (Option) that is associated with this Install Base Config item.</description>
+        <externalId>false</externalId>
+        <label>Option Group</label>
+        <referenceTo>MnConfigEngineOptionGroup__c</referenceTo>
+        <relationshipLabel>Install Base Config Items</relationshipLabel>
+        <relationshipName>IBConfigItems</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Option__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The Option of the Product (Option) that is associated with this Install Base Config item.</description>
+        <externalId>false</externalId>
+        <label>Option</label>
+        <referenceTo>MnConfigEngineOption__c</referenceTo>
+        <relationshipLabel>Install Base Config Items</relationshipLabel>
+        <relationshipName>IBConfigItems</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProductInstallBase__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The Install Base Record of the Product (Option) that is associated with this Install Base Config item.</description>
+        <externalId>false</externalId>
+        <label>Product Install Base</label>
+        <referenceTo>MnInstallBase__c</referenceTo>
+        <relationshipLabel>Install Base Config Items For Product (Option)</relationshipLabel>
+        <relationshipName>IBConfigItemsForProd</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Install Base Config Item</label>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Install Base Config Items</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

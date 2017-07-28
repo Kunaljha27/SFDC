@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>This expression represents a formula to be used in different areas of an incentive program:
+- Tier Qualification expression - the formula that represent how to measure that qualifies for a given tier in the program qualification. For example: &quot;sum([Sale Lines].[Qty])&quot;. Attrs: AggrFunction, Fact, Measure
+- Rebate expression - the formula the indicates how to calculate the benefit. For example: &quot;50&quot; or &quot;3%&quot; or &quot;sum([QualName].[Lines].[Quantity])&quot;. Attrs: Amount, Percentage, AggrFunction, Fact, Measure
+- Tier Attained Expression - this expression indicates what qualifications are required for this benefit. Attr: QualificationTier (lookup)
+- Filter Expression - represents a filter of the form: &quot;[Dim].[Attr]=&apos;&apos;value&quot;, lookup to Customer and Product
+- Filter Join Expression - represents how to join a filter expression on a dim to the specific attr in the fact. This is represented in the from: &quot;[Dim].[Pk]=[Fact].[RelId]&quot;
+- Qualification Eval Expression - ((Q1 &amp; Q2) | Q3) &amp; Q4</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Aggregation_Function__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Aggregation Function</label>
+        <picklist>
+            <picklistValues>
+                <fullName>SUM</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MAX</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NONE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CalcType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Calc Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>FIXED</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BUNDLE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NONE</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CapabilityExpression__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>this Field denotes if the record is for capability OR for actual Qual and Benefit</description>
+        <externalId>false</externalId>
+        <label>Capability Expression</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExpressionLabel__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Expression Label</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Expression__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(TEXT(Aggregation_Function__c)),MeasureExpression__c,TEXT(Aggregation_Function__c)+&quot;(&quot;+MeasureExpression__c+&quot;)&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Expression</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MeasureExpression__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Measure Expression</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuantityColumnName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Quantity Column Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sub Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>NONE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Tier Attained - attrs: lookup to QualificationTier
+Fixed Amount Rebate - attrs: Amount
+Fixed % Rebate - attrs: Percentage
+Rebate Expression - attrs: AggrFunction, LineType, Measure
+Qualification Rebate Expression - attrs: lookup to QualificationTier, Measure, Multiplier</description>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Benefit Expression</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Qualification-Tier Basis Expression</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Benefit-Tier Attained Expression</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Allocate Expression</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>CalcEngineExpression</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Aggregation_Function__c</columns>
+        <columns>CapabilityExpression__c</columns>
+        <columns>MeasureExpression__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Expressions</fullName>
+        <columns>Type__c</columns>
+        <columns>NAME</columns>
+        <columns>Aggregation_Function__c</columns>
+        <columns>MeasureExpression__c</columns>
+        <columns>QuantityColumnName__c</columns>
+        <columns>CalcType__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CapabilityExpression__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>MeasureExpression__c</field>
+            <operation>notEqual</operation>
+            <value>Q1.TierAttend</value>
+        </filters>
+        <label>Expressions</label>
+    </listViews>
+    <nameField>
+        <label>Expression Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>CalcEngineExpressions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>QuantityColumnNameRequiredForBundle</fullName>
+        <active>true</active>
+        <description>QuantityColumnName field is required when CalcType is BUNDLE</description>
+        <errorConditionFormula>IF(ISPICKVAL(CalcType__c,&apos;BUNDLE&apos;)&amp;&amp;ISBLANK(QuantityColumnName__c ), true,false)</errorConditionFormula>
+        <errorMessage>Quantity Column Name cannot be NULL when Calc Type is &apos;BUNDLE&apos;.</errorMessage>
+    </validationRules>
+</CustomObject>

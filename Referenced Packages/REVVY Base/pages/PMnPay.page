@@ -1,0 +1,48 @@
+<apex:page standardController="REVVY__MnPayment__c" extensions="REVVY.CMnPayCntlrExtn">
+    <style>
+    .msg {
+        font-size: 12pt;
+        font-family: Arial,Helvetica,sans-serif;
+    }
+    .detail {
+        font-size: 10pt;
+        font-family: Arial,Helvetica,sans-serif;
+    }
+    .errmsg {
+        font-size: 12pt;
+        font-family: Arial,Helvetica,sans-serif;
+        color: red;
+    }
+    .button{
+        min-width: 100px;
+    }
+    </style>
+
+    <apex:pageMessages id="errorMessage"/>
+    <apex:form id="paymentRelease" style="padding-left:5px; padding-right:20px; padding-top:10px;">
+      <apex:pageBlock title="Release Payment" rendered="{!NOT(hasMessage)}">
+        <div style="height: 12px;"></div>
+        <apex:outputPanel styleclass="msg">{!$Label.revvy__MnConfirmPaymentRelease}</apex:outputPanel>
+        <div style="height: 12px;"></div>
+        <apex:outputPanel styleclass="detail">
+          <apex:pageBlockSection columns="2">
+            <apex:repeat value="{!$ObjectType.REVVY__MnPayment__c.fieldsets.REVVY__Payment_VF_FS}" var="fieldValue">
+              <apex:outputfield value="{!payment[fieldValue]}">
+              </apex:outputfield>
+            </apex:repeat>
+          </apex:pageBlockSection>
+        </apex:outputPanel>
+        <div style="height: 12px;"></div>
+        <apex:outputPanel >
+            <apex:commandButton value="Ok" styleClass="button" action="{!pay}">
+            </apex:commandButton> &nbsp;&nbsp;
+            <apex:commandButton value="Cancel" styleClass="button" action="{!backToDetail}">
+            </apex:commandButton>
+        </apex:outputPanel>
+      </apex:pageBlock>
+      <apex:pageBlock rendered="{!hasMessage}">
+        <apex:commandButton value="Back" styleClass="button" action="{!backToDetail}" rendered="{!hasMessage}">
+        </apex:commandButton>
+      </apex:pageBlock>
+    </apex:form>
+</apex:page>

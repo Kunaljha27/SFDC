@@ -1,0 +1,32 @@
+<apex:page standardController="pse__Project_Task__c" extensions="pse.ProjectTaskController" recordSetVar="recs"
+  showHeader="{!hasError}" standardStylesheets="true" sidebar="false">
+<html>
+<title>Project Task Complete</title>
+<body>
+<apex:pageMessages />
+
+<apex:form >
+<apex:outputPanel rendered="{!hasError}">
+<div align="center"><apex:commandButton action="{!cancel}" value="Back"/></div>
+</apex:outputPanel>
+    <apex:actionFunction action="{!completeMultiAction}" name="jsFormAction"/>
+</apex:form>
+
+<apex:outputText rendered="{!NOT(hasError)}">
+<script type="text/javascript">
+    var confirmAction = function (){
+        var userRes = confirm("Complete Tasks?");
+        if (userRes == true){
+            jsFormAction();
+        }else {
+            /*Send back*/
+            window.history.back();
+        }
+    }
+
+    setTimeout('confirmAction()',500);
+</script>
+</apex:outputText>
+</body>
+</html>
+</apex:page>

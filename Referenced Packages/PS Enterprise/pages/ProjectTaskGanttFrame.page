@@ -1,0 +1,77 @@
+<apex:page showHeader="false" standardController="pse__Proj__c" extensions="pse.HelpLoaderController" standardStylesheets="false">
+	<apex:outputText rendered="false">
+        {!pse__Proj__c.id}{!pse__Proj__c.Project_Manager__r.pse__Salesforce_User__c}{!pse__Proj__c.name}
+    </apex:outputText>
+    <head>
+        <!-- if chrome frame for IE is installed make use of it -->
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+        <script>
+            window.labels = {
+               "ProjectTaskGantt_unsavedDataExit": "{!JSINHTMLENCODE($Label.ProjectTaskGantt_unsavedDataExit)}",
+               "ProjectTaskGantt_unsavedDataReload": "{!JSINHTMLENCODE($Label.ProjectTaskGantt_unsavedDataReload)}",
+               "ProjectTaskGantt_unsavedDataChangeProject": "{!JSINHTMLENCODE($Label.ProjectTaskGantt_unsavedDataChangeProject)}",
+               "Gantt_Invalid_Session": "{!JSINHTMLENCODE($Label.Gantt_Invalid_Session)}",
+               "Gantt_Security_Error": "{!JSINHTMLENCODE($Label.Gantt_Security_Error)}"
+            };
+
+            window.iconURLs = {
+                "ok" : "{!JSINHTMLENCODE(URLFOR($Resource.ProjectTaskGanttDependencyBundle, '/resources/css/images/FForce/ok.png'))}",
+                "alert" : "{!JSINHTMLENCODE(URLFOR($Resource.ProjectTaskGanttDependencyBundle, '/resources/css/images/FForce/alert.png'))}",
+                "error" : "{!JSINHTMLENCODE(URLFOR($Resource.ProjectTaskGanttDependencyBundle, '/resources/css/images/FForce/error.png'))}",
+                "info" : "{!JSINHTMLENCODE(URLFOR($Resource.ProjectTaskGanttDependencyBundle, '/resources/css/images/FForce/info.png'))}"
+            };
+
+            window.initialProjectId = {!IF(Proj__c.Id == null, 'null', '"'+Proj__c.id+'"')};
+            window.intialProjectAllowed = {!IF(Proj__c.Project_Manager__r.Salesforce_User__c = $User.Id,'true', 'false')};
+            window.initialProjectName = "{!JSENCODE(Proj__c.name)}";
+            window.projectListURL = '{!JSENCODE(URLFOR($Action.Proj__c.Tab, $ObjectType.Proj__c))}';
+            window.helpURL = "{!JSENCODE(URLFOR($Page.ProjectTaskGanttHelp))}";
+
+            window.onbeforeunload = function(){
+                if(window.isDirty){
+                    return window.labels.ProjectTaskGantt_unsavedDataExit;
+                }
+            }
+        </script>
+        <apex:stylesheet value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'extjs/resources/ext-theme-neptune/ext-theme-neptune-all-debug.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'bryntum/resources/css/sch-gantt-all-debug.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'resources/css/gantt-styles-ff.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'extjs/ext-all.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/polyfills/console.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/polyfills/bind.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'bryntum/gnt-all.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'FForce/lib/overrides/DateFields.js')}" />   
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'FForce/lib/overrides/gnt-escape.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'FForce/lib/overrides/labels.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'FForce/lib/overrides/widget/DependencyGrid.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'FForce/lib/overrides/AssignmentField.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, 'FForce/lib/overrides/store/DependencyStore.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/model/Gantt_Models.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/store/Gantt_Stores.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/button/IconButton.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/Base.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/ManageDirty.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/ManageAncestors.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/AppendChild.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/ChangeDates.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/Insert.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/Move.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/PromoteChild.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/RemoveChild.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/UpdateNode.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/flatstore/Add.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/flatstore/Remove.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/flatstore/Update.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/Transaction.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/treestore/Treestore.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/transaction/flatstore/Flatstore.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/FForce/lib/undo/Manager.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/view/TaskContextMenu.js')}"/> 
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/view/DemoGanttPanel.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.pse__ProjectTaskGanttDependencyBundle, '/view/scheduling_modes.js')}"/>
+    </head>
+    <body>
+        <div id="AppContainer" class="appContainer">
+        </div>
+    </body>        
+</apex:page>

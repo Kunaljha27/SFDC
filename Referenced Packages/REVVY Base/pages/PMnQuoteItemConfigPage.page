@@ -1,0 +1,18 @@
+<apex:page standardController="REVVY__MnQuoteItem__c" extensions="REVVY.CMnVFPageGenericCtrl,REVVY.CMnBaseCtrl" docType="html-5.0" standardStylesheets="false" sidebar="false" showHeader="false">
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <script>
+
+        var prdCfg = "{!JSENCODE(MnQuoteItem__c.ProductConfig__c)}";
+        var isCfg = "{!MnQuoteItem__c.Catalog_Node__r.Configurable__c}";
+        if (isCfg === "true") {
+            var namespaceLowerCase = "{!JSENCODE(namespaceLowerCase)}";
+
+            //var newUrl = '{!sitePrefix}/apex/' + namespaceLowerCase + 'PMnMobileUIShell#mnconfig/config/' + "{!JSENCODE(MnQuoteItem__c.Quote__c)}" + '/' + "{!JSENCODE(MnQuoteItem__c.Id)}" + '/' + prdCfg + '/' + "{!JSENCODE(MnQuoteItem__c.Quote__r.Currency__c)}";
+            var newUrl = '{!sitePrefix}/apex/REVVY__PMnMobileUIShell#mnconfig/config/' + "{!JSENCODE(MnQuoteItem__c.Quote__c)}" + '/' + "{!JSENCODE(MnQuoteItem__c.Id)}" + '/' + prdCfg + '/' + "{!JSENCODE(MnQuoteItem__c.Quote__r.Currency__c)}";
+            mnNavigateToUrl(newUrl);
+        }
+
+    </script>
+
+    <h1 style="{!IF(MnQuoteItem__c.Catalog_Node__r.Configurable__c == false, '', 'display:none')}"> This is not a Configurable Product ! </h1>
+</apex:page>

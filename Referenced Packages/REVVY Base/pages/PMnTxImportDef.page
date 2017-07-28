@@ -1,0 +1,15 @@
+<apex:page standardController="REVVY__MnTxDataImportDef__c" extensions="REVVY.CMnTxImportDefController" >
+	<apex:pagemessages />
+	<apex:form >
+		<apex:pageBlock >
+				<apex:pageBlockButtons >
+					<apex:commandButton action="{!sendImportDef}" value="Send Import Def"></apex:commandButton>
+					<apex:commandButton action="{!cancel}" value="Back"></apex:commandButton>
+                </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Send This Definition ?" collapsible="false">
+				<apex:outputField value="{!REVVY__MnTxDataImportDef__c.REVVY__ImportDefinitionJSON__c}"></apex:outputField>
+
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+	</apex:form>
+</apex:page>

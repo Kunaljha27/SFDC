@@ -1,0 +1,9 @@
+<apex:page standardController="pse__Grp__c" action="{!initForGroup}" extensions="pse.CalculateBacklogController">
+
+    <apex:composition template="pse__CalculateBacklogTemplate">
+        <apex:define name="sectionHeader">
+            <apex:sectionHeader title="Calculate Backlog" subtitle="{!pse__Grp__c.Name}" help="{!$Page.pse__BacklogCalculationHelp}" />
+        </apex:define>
+    </apex:composition>
+    
+</apex:page>

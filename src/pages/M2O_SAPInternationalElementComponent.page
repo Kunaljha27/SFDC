@@ -1,0 +1,27 @@
+<apex:page standardController="Strategic_Account_Plan__c"  showHeader="false" extensions="M2O_AccountPlanExtensionController" readOnly="true" >
+<apex:form target="_parent" >
+<apex:pageBlock >
+    <apex:pageBlockButtons location="top" >
+        <apex:commandButton value="New International Agreed Condition" rendered="{!Hasaccess.HasEditAccess}" action="{!URLFOR($Action.International_Element__c.New,null,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),CF00Nd0000007dMJU_lkid=Strategic_Account_Plan__c.Id,CF00Nd0000007dMJU=sapName],true)}"/ >
+    </apex:pageBlockButtons>   
+    <apex:outputText rendered="{!InternationalElement.size=0}" value="{!$Label.M2O_No_Records_To_Display}"></apex:outputText>
+        <apex:pageBlockTable value="{!InternationalElement}" var="element" rendered="{!InternationalElement.size>0}">
+            <apex:column >
+                <apex:facet name="header">Action</apex:facet>
+                    <apex:outputLink value="{!URLFOR($Action.International_Element__c.Edit,element.id,[cancelURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id),saveURL=URLFOR($Action.Strategic_Account_Plan__c.View, Strategic_Account_Plan__c.Id)],true)}" target="_parent">Edit</apex:outputLink> &nbsp;&nbsp;
+                    <apex:outputLink value="{!URLFOR($Action.International_Element__c.Delete,element.id,[retURL=URLFOR($Action.Strategic_Account_Plan__c.View,Strategic_Account_Plan__c.Id)],true)}" target="_parent" onclick="return window.confirm('Are you sure?');">Del</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!element.Country__c}"/>
+            <apex:column >
+                <apex:facet name="header">International Agreed Performance</apex:facet>
+                   <!-- <apex:outputLink value="/Id" target="_parent">{!ca.Name}</apex:outputLink>-->
+                    <apex:outputLink value="{!URLFOR($Action.International_Element__c.View,element.id)}" target="_parent">{!element.International_agreed_performance__c}</apex:outputLink>
+            </apex:column> 
+            <apex:column value="{!element.Amount__c}"/>
+            <apex:column value="{!element.Timing__c}"/>
+            <apex:column value="{!element.Status__c}"/>
+            <apex:column value="{!element.Comments__c}"/>
+            </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Publisher Action for COP in mobile</description>
+    <height>200</height>
+    <icon>SAVO_App_Icon</icon>
+    <label>CRM Opportunity Pro</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <page>SAVO_Mobile_OpportunityCOP</page>
+    <type>VisualforcePage</type>
+    <width>-100</width>
+</QuickAction>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Config Engine OG UISection Junction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Config Engine OG UISection Junctions</value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique identifier of a section in a model. --></help>
+        <label><!-- Config Engine UI Section --></label>
+        <name>Config_Engine_UI_Section__c</name>
+        <relationshipLabel><!-- Config Engine OG UISection Junctions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Order of the option groups displayed in the section. --></help>
+        <label><!-- OG order in the Section --></label>
+        <name>OG_Section_Order__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique identifier of an option group. --></help>
+        <label><!-- Option Group --></label>
+        <name>Option_Group_Id__c</name>
+        <relationshipLabel><!-- Config Engine OG UISection Junctions --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

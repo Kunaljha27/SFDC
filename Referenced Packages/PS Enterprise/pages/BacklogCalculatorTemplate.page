@@ -1,0 +1,72 @@
+<!-- NOTE: the standard controller will be overriden -->
+<apex:page controller="pse.BacklogCalculatorController" title="{!$Label.backlog_label_calculate_backlog}">
+
+<style type="text/css">
+img.percentImage1 {
+ background: white url({!URLFOR($Resource.progressImages, 'percentImage_back1.png')}) top left no-repeat;
+ padding: 0;
+ margin: 5px 0 0 0;
+ background-position: 1px 0;
+}
+
+</style>
+
+    <apex:insert name="sectionHeader"/>
+
+    <apex:outputText value="{!$Label.backlog_message_instructions}" rendered="{!showEntryMode}"/>
+    <p />
+
+    <apex:pageMessages id="messages"/>
+    <p />
+
+    <c:WaitComponent />
+
+    <apex:form >
+        <apex:actionFunction name="jsOnStartCalculatingFromChange" action="{!onStartCalculatingFromChange}" oncomplete="wait(false);" rerender="messages,calcBlock" />
+
+        <apex:pageBlock title="{!$Label.backlog_label_calculate_backlog}" mode="edit" id="calcBlock"
+            rendered="{!showEntryMode}" tabStyle="{!IF(isRegion,'Region__c',IF(isPractice,'Practice__c','Grp__c'))}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.common_label_calculate}" action="{!calculate}"/>
+                <apex:commandButton value="{!$Label.common_label_schedule}" action="{!schedule}" />
+                <apex:commandButton value="{!$Label.common_label_cancel}" action="{!cancel}" immediate="true"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.common_label_information}" columns="2">
+                <apex:inputField value="{!criteria.Name}" required="true"/>
+                <apex:outputField value="{!criteria.pse__Region__c}" rendered="{!isRegion}"/>
+                <apex:outputField value="{!criteria.pse__Practice__c}" rendered="{!isPractice}"/>
+                <apex:outputField value="{!criteria.pse__Group__c}" rendered="{!isGroup}"/>
+
+                <apex:inputField value="{!criteria.pse__Start_Calculating_From__c}" onchange="wait(true);jsOnStartCalculatingFromChange();"/>
+                <apex:pageBlockSectionItem />
+
+                <apex:inputField value="{!criteria.pse__Start_Date__c}" required="true"/>
+                <apex:inputField value="{!criteria.pse__End_Date__c}"/>
+
+                <apex:inputField value="{!criteria.pse__Include_Sublevels__c}"/>
+                <apex:inputField value="{!criteria.pse__Calculate_Project_Backlog__c}"/>
+
+                <apex:inputField value="{!criteria.pse__Reuse_Detail_Objects__c}"/>
+                <apex:inputField value="{!criteria.pse__Copy_Fields_for_Current_Time_Period__c}"/>
+
+                <apex:inputField value="{!criteria.pse__Time_Period_Types__c}" required="true"/>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.utilization_label_schedule}" columns="1">
+		        <c:ApexSchedule schedPattern="{!schedulePattern}"/>
+		    </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:outputPanel rendered="{!NOT(showEntryMode)}" id="progressPanel">
+		    <div align="center">
+		        <!-- percent images taken from http://www.webappers.com/progressBar/ -->
+		        <img src="{!URLFOR($Resource.progressImages, 'percentImage.png')}" alt="{!percentComplete}%" class="percentImage1" style="background-position: {!percentWidth}px 0pt;"/>
+		        <p />
+		        <apex:outputText value="{!statusString}"/>
+		    </div>
+		</apex:outputPanel>
+
+		<apex:actionPoller action="{!checkProgress}" id="poller" interval="5" rerender="progressPanel,messages,poller"
+		    rendered="{!AND(NOT(showEntryMode),NOT(isComplete))}"/>
+    </apex:form>
+</apex:page>

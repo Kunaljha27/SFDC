@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Revvy Quote --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID of the account that is associated with the quote. --></help>
+        <label>帐户</label>
+        <lookupFilter>
+            <errorMessage><!-- You should assign only group accounts to group quotes --></errorMessage>
+        </lookupFilter>
+        <name>Account__c</name>
+        <relationshipLabel>报价</relationshipLabel>
+    </fields>
+    <fields>
+        <label>操作</label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label>ΓåæΓåô</label>
+        <name>AdjustmentArrow__c</name>
+    </fields>
+    <fields>
+        <label>调整 %</label>
+        <name>Adjustment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amended From --></label>
+        <name>AmendedFrom__c</name>
+        <relationshipLabel><!-- Amendments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Amendment ID Prefix --></label>
+        <name>AmendmentIdPrefix__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amendment # --></label>
+        <name>AmendmentNumber__c</name>
+    </fields>
+    <fields>
+        <help><!-- Configit Quote ID for this record. --></help>
+        <label><!-- Configit Quote ID --></label>
+        <name>ConfigitId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the contact person associated with this quote. --></help>
+        <label>帐户联系人</label>
+        <name>Contact__c</name>
+        <relationshipLabel>报价</relationshipLabel>
+    </fields>
+    <fields>
+        <label>合同结束日期（不建议）</label>
+        <name>ContractEndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract ID --></label>
+        <name>ContractId__c</name>
+    </fields>
+    <fields>
+        <label>合同开始日期（不建议）</label>
+        <name>ContractStartDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Currency used in the quote. --></help>
+        <label>Revvy 币种</label>
+        <name>Currency__c</name>
+        <picklistValues>
+            <masterLabel>USD</masterLabel>
+            <translation><!-- USD --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>状态</label>
+        <name>Current_Status__c</name>
+    </fields>
+    <fields>
+        <help><!-- Internal description or note about the quote. This field is not displayed on the proposal for customers. --></help>
+        <label>内部注释</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label>合同结束日期</label>
+        <name>EndDateContract__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;Error Messages related to quote --></help>
+        <label>错误信息</label>
+        <name>ErrorMessage__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when the quote expires. --></help>
+        <label>报价失效</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>报价扩展 ID</label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <label>第一年后值</label>
+        <name>Following_Years_Value_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Term in years for Gross Profit Analysis calculations --></help>
+        <label><!-- Gross Profit Analysis Term (Years) --></label>
+        <name>GPTerm__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Version --></label>
+        <name>IsActiveVersion__c</name>
+    </fields>
+    <fields>
+        <label>为更新报价</label>
+        <name>IsRenewalQuote__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Skip Document Assembly --></label>
+        <name>IsSkipDocumentAssembly__c</name>
+    </fields>
+    <fields>
+        <label>为第三方文件</label>
+        <name>IsThirdPartyPaper__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Aggregation Date --></label>
+        <name>LastAggregationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lifecycle Config --></label>
+        <name>LifecycleConfig__c</name>
+        <relationshipLabel><!-- Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>每月折扣 (%)</label>
+        <name>MonthlyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>每月总计</label>
+        <name>MonthlyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>每月列表</label>
+        <name>MonthlyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Monthly products --></help>
+        <label>每月加价（绝对金额）</label>
+        <name>Monthly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Monthly products --></help>
+        <label>每月加价 (%)</label>
+        <name>Monthly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Monthly cost prices before adjustment from Quote Lines --></help>
+        <label>每月总成本</label>
+        <name>Monthly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a monthly basis. --></help>
+        <label>每月折扣（绝对金额）</label>
+        <name>Monthly_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered for products that are billed on a monthly basis. --></help>
+        <label>每月折扣 (%)</label>
+        <name>Monthly_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Monthly products --></help>
+        <label>每月毛利（绝对金额）</label>
+        <name>Monthly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Monthly products --></help>
+        <label>每月毛利 (%)</label>
+        <name>Monthly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a monthly basis after the discounts are applied. --></help>
+        <label>每月总计</label>
+        <name>Monthly_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Monthly unit prices of sub lines --></help>
+        <label>每月总单位价格</label>
+        <name>Monthly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a monthly basis before the discounts are applied. --></help>
+        <label>每月列表</label>
+        <name>Monthly_Value_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag is set by the system when the workflow suggests an approval is needed for the underlying quote. --></help>
+        <label>需要批准</label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <label>一次性折扣 (%)</label>
+        <name>OneTimeTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>一次性总计</label>
+        <name>OneTimeTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>一次性列表</label>
+        <name>OneTimeTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for one time products --></help>
+        <label>一次性加价（绝对金额）</label>
+        <name>One_Time_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for one time products --></help>
+        <label>一次性加价 (%)</label>
+        <name>One_Time_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all one time cost prices before adjustment from Quote Lines --></help>
+        <label>一次性总成本</label>
+        <name>One_Time_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a one-time basis. --></help>
+        <label>一次性折扣（绝对金额）</label>
+        <name>One_Time_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered for products that are billed on a one-time basis. --></help>
+        <label>一次性折扣 (%)</label>
+        <name>One_Time_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for one time products --></help>
+        <label>一次性毛利（绝对金额）</label>
+        <name>One_Time_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for one time products --></help>
+        <label>一次性毛利 (%)</label>
+        <name>One_Time_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a one-time basis after the discounts are applied. --></help>
+        <label>一次性总计</label>
+        <name>One_Time_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all one time unit prices of sub lines --></help>
+        <label>一次性总单位价格</label>
+        <name>One_Time_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a one-time basis before the discounts are applied. --></help>
+        <label>一次性列表</label>
+        <name>One_Time_Value_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the sales opportunity associated with this quote. --></help>
+        <label>销售机会</label>
+        <name>Opportunity__c</name>
+        <relationshipLabel>Revvy 报价</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Original quote from which this quote was cloned. --></help>
+        <label>原始报价</label>
+        <name>OriginalQuote__c</name>
+        <relationshipLabel>克隆报价</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Total first tier discount, shown as a percentage of the total list price. --></help>
+        <label>总折扣</label>
+        <name>Overall_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether this quote is perpetual based or not --></help>
+        <label>永久</label>
+        <name>Perpetual__c</name>
+    </fields>
+    <fields>
+        <label>生命周期阶段</label>
+        <name>PhaseDisplay__c</name>
+    </fields>
+    <fields>
+        <label>阶段</label>
+        <name>Phase__c</name>
+        <picklistValues>
+            <masterLabel>Activation</masterLabel>
+            <translation><!-- Activation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approval</masterLabel>
+            <translation><!-- Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Authoring</masterLabel>
+            <translation><!-- Authoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collaboration</masterLabel>
+            <translation><!-- Collaboration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disapproved</masterLabel>
+            <translation><!-- Disapproved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiration</masterLabel>
+            <translation><!-- Expiration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finalized</masterLabel>
+            <translation><!-- Finalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal Review</masterLabel>
+            <translation><!-- Internal Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Negotiation</masterLabel>
+            <translation><!-- Negotiation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent to customer</masterLabel>
+            <translation><!-- Sent to customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signature</masterLabel>
+            <translation><!-- Signature --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Termination</masterLabel>
+            <translation><!-- Termination --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date used to determine which price to apply to products. --></help>
+        <label>价格日期</label>
+        <name>Price_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether this quote is the main quote for the opportunity. --></help>
+        <label>主要报价</label>
+        <name>Primary__c</name>
+    </fields>
+    <fields>
+        <label>电子签名日期</label>
+        <name>ProposalSignDate__c</name>
+    </fields>
+    <fields>
+        <label>电子签名状态</label>
+        <name>ProposalSignStatus__c</name>
+        <picklistValues>
+            <masterLabel>Not Signed</masterLabel>
+            <translation><!-- Not Signed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signed</masterLabel>
+            <translation><!-- Signed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the model used to configure this quote. --></help>
+        <label>报价配置 ID</label>
+        <name>QuoteConfig__c</name>
+        <relationshipLabel>报价</relationshipLabel>
+    </fields>
+    <fields>
+        <label>需要批准计数的报价项目子行</label>
+        <name>QuoteItemSubLinesNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <label>需要批准计数的报价项目</label>
+        <name>QuoteItemsNeedApprovalCount__c</name>
+    </fields>
+    <fields>
+        <label>报价行</label>
+        <name>QuoteLinesEditUrl__c</name>
+    </fields>
+    <fields>
+        <label>价格追踪</label>
+        <name>QuotePricingDetailDebugUrl__c</name>
+    </fields>
+    <fields>
+        <label>进度</label>
+        <name>Quote_Status_Image__c</name>
+    </fields>
+    <fields>
+        <label>第一年值</label>
+        <name>Quote_Value_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Quote value is the total cost of ownership for the first year. --></help>
+        <label>第一年值</label>
+        <name>Quote_Value__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Order Num --></help>
+        <label><!-- SAP Order Num --></label>
+        <name>SAPOrderNum__c</name>
+    </fields>
+    <fields>
+        <label><!-- SalesforceId --></label>
+        <name>SalesforceId__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Bom Usage --></help>
+        <label><!-- SAP Bom Usage --></label>
+        <name>SapBomUsage__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;Sap Disti Channel --></help>
+        <label><!-- SAP Disti. Channel --></label>
+        <name>SapDistiChannel__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Sales Division --></help>
+        <label><!-- SAP Sales Division --></label>
+        <name>SapDivision__c</name>
+    </fields>
+    <fields>
+        <label><!-- Partner Country --></label>
+        <name>SapPartnerCountry_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date used to determine which price to apply to products. --></help>
+        <label><!-- Delivery Date --></label>
+        <name>SapReqDeliveryDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- &gt;SAP Sales Doc Type --></help>
+        <label><!-- SAP Sales Doc Type --></label>
+        <name>SapSalesDocumentType__c</name>
+    </fields>
+    <fields>
+        <help><!-- SAP Sales Org --></help>
+        <label><!-- SAP Sales Org --></label>
+        <name>SapSalesOrg__c</name>
+    </fields>
+    <fields>
+        <help><!-- Customer segment that is used in this quote. The segment is based on the account that is associated with this quote. --></help>
+        <label>价格段</label>
+        <name>Segment__c</name>
+        <picklistValues>
+            <masterLabel>Education</masterLabel>
+            <translation><!-- Education --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Government</masterLabel>
+            <translation><!-- Government --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care</masterLabel>
+            <translation><!-- Health Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Media</masterLabel>
+            <translation><!-- Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Process Industry</masterLabel>
+            <translation><!-- Process Industry --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Set Price As --></label>
+        <name>SetPriceAs__c</name>
+        <picklistValues>
+            <masterLabel>Member Quote Final Price</masterLabel>
+            <translation><!-- Member Quote Final Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Member Quote Starting Price</masterLabel>
+            <translation><!-- Member Quote Starting Price --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>源合同</label>
+        <name>SourceContract__c</name>
+        <relationshipLabel>Revvy 报价</relationshipLabel>
+    </fields>
+    <fields>
+        <label>合同开始日期</label>
+        <name>StartDateContract__c</name>
+    </fields>
+    <fields>
+        <help><!-- Where the quote is in the sales cycle. The status can be draft, ready, submitted, or ordered. --></help>
+        <label>实际状态</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Cloning in progress...</masterLabel>
+            <translation><!-- Cloning in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Creating lines in progress...</masterLabel>
+            <translation><!-- Creating lines in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft in progress...</masterLabel>
+            <translation><!-- Draft in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Importing Quote Lines</masterLabel>
+            <translation><!-- Importing Quote Lines --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ordered</masterLabel>
+            <translation><!-- Ordered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ready</masterLabel>
+            <translation><!-- Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Target Price in progress...</masterLabel>
+            <translation><!-- Target Price in progress... --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>分阶段</label>
+        <name>SubPhase__c</name>
+        <picklistValues>
+            <masterLabel>Accepted</masterLabel>
+            <translation><!-- Accepted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cloning in progress...</masterLabel>
+            <translation><!-- Cloning in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Contract Created</masterLabel>
+            <translation><!-- Contract Created --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Converted to Contract</masterLabel>
+            <translation><!-- Converted to Contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disapproved</masterLabel>
+            <translation><!-- Disapproved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft in progress...</masterLabel>
+            <translation><!-- Draft in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Amendment</masterLabel>
+            <translation><!-- In Amendment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Approvals</masterLabel>
+            <translation><!-- In Approvals --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Effect</masterLabel>
+            <translation><!-- In Effect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Process</masterLabel>
+            <translation><!-- In Process --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Order Failed</masterLabel>
+            <translation><!-- Order Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ordered</masterLabel>
+            <translation><!-- Ordered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Processing Order</masterLabel>
+            <translation><!-- Processing Order --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re-Configure in progress...</masterLabel>
+            <translation><!-- Re-Configure in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ready</masterLabel>
+            <translation><!-- Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Recalled</masterLabel>
+            <translation><!-- Recalled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Revision in progress...</masterLabel>
+            <translation><!-- Revision in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Superseded</masterLabel>
+            <translation><!-- Superseded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Target Price in progress...</masterLabel>
+            <translation><!-- Target Price in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terminated</masterLabel>
+            <translation><!-- Terminated --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>条款（年）</label>
+        <name>TermYear__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Number of units. --></help>
+        <label>期限（月份）</label>
+        <name>Term__c</name>
+    </fields>
+    <fields>
+        <label>已终止阶段</label>
+        <name>TerminatedPhase__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate list price for all products before any discounts are applied for the first year. --></help>
+        <label>总标价</label>
+        <name>Total_List_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Number --></label>
+        <name>Version_Number__c</name>
+    </fields>
+    <fields>
+        <label>每周折扣 (%)</label>
+        <name>WeeklyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>按周总计</label>
+        <name>WeeklyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>每周列表</label>
+        <name>WeeklyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Weekly products --></help>
+        <label>每周加价（绝对金额）</label>
+        <name>Weekly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Weekly products --></help>
+        <label>每周加价 (%)</label>
+        <name>Weekly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Weekly cost prices before adjustment from Quote Lines --></help>
+        <label>按周总成本</label>
+        <name>Weekly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a weekly basis. --></help>
+        <label>每周折扣（绝对金额）</label>
+        <name>Weekly_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered on products that are billed on a weekly basis. --></help>
+        <label>每周折扣 (%)</label>
+        <name>Weekly_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Weekly products --></help>
+        <label>每周毛利（绝对金额）</label>
+        <name>Weekly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Weekly products --></help>
+        <label>每周毛利 (%)</label>
+        <name>Weekly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a weekly basis after the discounts are applied. --></help>
+        <label>按周总计</label>
+        <name>Weekly_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Weekly unit prices of sub lines --></help>
+        <label>每周总单位价格</label>
+        <name>Weekly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a weekly basis before the discounts are applied. --></help>
+        <label>每周列表</label>
+        <name>Weekly_Value_Before_Discount_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Yearly Cost Increase Rate for Gross Profit Analysis calculations --></help>
+        <label><!-- Yearly Cost Increase Rate --></label>
+        <name>YearlyCostIncRate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Yearly Price Increase Rate for Gross Profit Analysis calculations --></help>
+        <label><!-- Yearly Price Increase Rate --></label>
+        <name>YearlyPriceIncRate__c</name>
+    </fields>
+    <fields>
+        <label>每年折扣 (%)</label>
+        <name>YearlyTotalAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>按年总计</label>
+        <name>YearlyTotalAfterAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <label>每年列表</label>
+        <name>YearlyTotalBeforeAdjustmentDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of Adjustment 1 absolute for Yearly products --></help>
+        <label>每年加价（绝对金额）</label>
+        <name>Yearly_Adjustment1_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of Adjustment 1 in percent for Yearly products --></help>
+        <label>每年加价 (%)</label>
+        <name>Yearly_Adjustment1_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Yearly cost prices before adjustment from Quote Lines --></help>
+        <label>按年总成本</label>
+        <name>Yearly_Cost_Price_Before_Adjustment_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of the discounts offered on products that are billed on a yearly basis. --></help>
+        <label>每年折扣（绝对金额）</label>
+        <name>Yearly_Line_Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate percentage discount offered on products that are billed on a yearly basis. --></help>
+        <label>每年折扣 (%)</label>
+        <name>Yearly_Line_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of all margin values as absolute for Yearly products --></help>
+        <label>每年毛利（绝对金额）</label>
+        <name>Yearly_Margin_Absolute_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of margin percent for Yearly products --></help>
+        <label>每年毛利 (%)</label>
+        <name>Yearly_Margin_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a yearly basis after the discounts are applied. --></help>
+        <label>按年总计</label>
+        <name>Yearly_Total_Value_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate of all Yearly unit prices of sub lines --></help>
+        <label>每年总单位价格</label>
+        <name>Yearly_Unit_Price_S__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate value of products that are billed on a yearly basis before the discounts are applied. --></help>
+        <label>每年列表</label>
+        <name>Yearly_Value_Before_Discount_S__c</name>
+    </fields>
+    <layouts>
+        <layout>MnGroupQuoteLayout24_1</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnGroupQuoteLayout25_1</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteCMLayout22_2</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteLayout22_4</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteLayout24_1</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteLayout25_4</layout>
+        <sections>
+            <label><!-- Error --></label>
+            <section>Error</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteSalesContractLayout22</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>MnQuoteWithServiceContractLayout19</layout>
+        <sections>
+            <label><!-- Quote Progress --></label>
+            <section>Quote Progress</section>
+        </sections>
+        <sections>
+            <label><!-- Quote Totals --></label>
+            <section>Quote Totals</section>
+        </sections>
+        <sections>
+            <label><!-- Reports --></label>
+            <section>Reports</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quote Layout Mobile</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <quickActions>
+        <label>添加报价行项目</label>
+        <name>Add_a_Product</name>
+    </quickActions>
+    <quickActions>
+        <label>编辑报价</label>
+        <name>Edit_Quote</name>
+    </quickActions>
+    <quickActions>
+        <label>通过电子邮件发送建议</label>
+        <name>Email_Proposal</name>
+    </quickActions>
+    <quickActions>
+        <label>更新报价状态</label>
+        <name>Update_Quote_Status</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Group Quote --></label>
+        <name>Group_Quote</name>
+    </recordTypes>
+    <recordTypes>
+        <label>报价</label>
+        <name>Quote</name>
+    </recordTypes>
+    <recordTypes>
+        <label>销售合同</label>
+        <name>SalesContract</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage>合同不能为永久的同时具有结束日期</errorMessage>
+        <name>VMnPerpetualAndEndDateCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>结束日期和永久不能同时为空请设置结束日期或勾选永久</errorMessage>
+        <name>VMnPerpetualAndEndDateCheck2</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>您不能在将合同标记为永久的同时提供期限。请将期限设置为空，或取消永久选项。</errorMessage>
+        <name>VMnPerpetualAndTermCheck</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>段不可为空</errorMessage>
+        <name>VMnSegmentDefaultValValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>币种不可为空</errorMessage>
+        <name>VmnCurrencyDefaultValValidity</name>
+    </validationRules>
+    <webLinks>
+        <label>帐户历史</label>
+        <name>Account_History</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Activate_Version --></label>
+        <name>Activate_Version</name>
+    </webLinks>
+    <webLinks>
+        <label>生成建议</label>
+        <name>Assemble_Proposal</name>
+    </webLinks>
+    <webLinks>
+        <label>克隆报价</label>
+        <name>Clone_Quote</name>
+    </webLinks>
+    <webLinks>
+        <label>克隆</label>
+        <name>Clone_Quote_Detail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Convert_To_Contract --></label>
+        <name>Convert_To_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_New_Version --></label>
+        <name>Create_New_Version</name>
+    </webLinks>
+    <webLinks>
+        <label>创建报价</label>
+        <name>Create_Quote</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DeleteActiveVersion --></label>
+        <name>DeleteActiveVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- EditActiveVersion --></label>
+        <name>EditActiveVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Gross_Profit_Analysis --></label>
+        <name>Gross_Profit_Analysis</name>
+    </webLinks>
+    <webLinks>
+        <label>导入第三方文件</label>
+        <name>ImportThirdPartyPaper</name>
+    </webLinks>
+    <webLinks>
+        <label>导入报价行</label>
+        <name>Import_Quote_Lines</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Manage_Lines --></label>
+        <name>Manage_Lines</name>
+    </webLinks>
+    <webLinks>
+        <label>标记为主要报价</label>
+        <name>Mark_As_Main_Quote</name>
+    </webLinks>
+    <webLinks>
+        <label>标记为已订购</label>
+        <name>Mark_As_Ordered</name>
+    </webLinks>
+    <webLinks>
+        <label>文档电子签名</label>
+        <name>MnDocusignESign</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MnDownloadGPExcel --></label>
+        <name>MnDownloadGPExcel</name>
+    </webLinks>
+    <webLinks>
+        <label>Drawloop 建议</label>
+        <name>MnDrawloopProposal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MnGenerateDMProposal --></label>
+        <name>MnGenerateDMProposal</name>
+    </webLinks>
+    <webLinks>
+        <label>Sertifi 电子签名</label>
+        <name>MnSertifiESign</name>
+    </webLinks>
+    <webLinks>
+        <label>新建</label>
+        <name>New</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Quote_Comparison --></label>
+        <name>Quote_Comparison</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_To_Contract --></label>
+        <name>Send_To_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SharingActiveVersion --></label>
+        <name>SharingActiveVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SubmitForApprovalActiveVersion --></label>
+        <name>SubmitForApprovalActiveVersion</name>
+    </webLinks>
+</CustomObjectTranslation>

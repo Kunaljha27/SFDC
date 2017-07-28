@@ -1,0 +1,2 @@
+<!-- This page is forwarding to linkMethodologyToAssignments from methodologies  --> 
+<apex:page standardController="pse__Assignment_Project_Methodology__c" recordsetvar="methodologies" action="{!URLFOR($Page.LinkMethodologyToAssignments)+'?id='+$CurrentPage.parameters.id}" />

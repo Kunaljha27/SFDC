@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Attribute Value --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Pointer to the attribute that this value belongs to. --></help>
+        <label>Katalogattribut</label>
+        <name>Catalog_Attribute__c</name>
+        <relationshipLabel>Katalogattributwerte</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 10)</label>
+        <name>DName_L10__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 11)</label>
+        <name>DName_L11__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 12)</label>
+        <name>DName_L12__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 13)</label>
+        <name>DName_L13__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 14)</label>
+        <name>DName_L14__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 15)</label>
+        <name>DName_L15__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 16)</label>
+        <name>DName_L16__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 17)</label>
+        <name>DName_L17__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 18)</label>
+        <name>DName_L18__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 19)</label>
+        <name>DName_L19__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 1)</label>
+        <name>DName_L1__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 20)</label>
+        <name>DName_L20__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 2)</label>
+        <name>DName_L2__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 3)</label>
+        <name>DName_L3__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 4)</label>
+        <name>DName_L4__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 5)</label>
+        <name>DName_L5__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 6)</label>
+        <name>DName_L6__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 7)</label>
+        <name>DName_L7__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 8)</label>
+        <name>DName_L8__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename (Sprache 9)</label>
+        <name>DName_L9__c</name>
+    </fields>
+    <fields>
+        <help><!-- How the value is displayed to the end user. --></help>
+        <label>Attributwertname</label>
+        <name>Display_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Attributwert-ID</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <label>Anzeigename Sprachversion</label>
+        <name>LocaleDName_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the value for an attribute where the attribute value is Boolean. The value can be Yes or No. --></help>
+        <label>Boolescher Wert</label>
+        <name>Value_Boolean__c</name>
+    </fields>
+    <fields>
+        <help><!-- Contains a formula that is used to determine the proper display for the value of an attribute. --></help>
+        <label>Wertanzeige</label>
+        <name>Value_Display__c</name>
+    </fields>
+    <fields>
+        <label>Max. Wert</label>
+        <name>Value_Max__c</name>
+    </fields>
+    <fields>
+        <label>Min. Wert</label>
+        <name>Value_Min__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the value for an attribute where the attribute value is Number. The value must be in numeric format. --></help>
+        <label>Zahlenwert</label>
+        <name>Value_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the value for an attribute where the attribute value is Text. The value must be in text format. --></help>
+        <label>Wert</label>
+        <name>Value__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- CatalogAttributeValue Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>Der Minimalwert kann nicht größer sein als der Maximalwert.</errorMessage>
+        <name>Min_Value_Greater_Than_Max_Value</name>
+    </validationRules>
+</CustomObjectTranslation>

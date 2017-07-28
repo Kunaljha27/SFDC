@@ -1,0 +1,7 @@
+<apex:page standardController="Account" title="Account Billing" sidebar="false">
+
+    <apex:composition template="pse__BillingTemplate">
+    </apex:composition>
+
+
+</apex:page>

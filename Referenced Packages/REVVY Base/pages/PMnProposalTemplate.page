@@ -1,0 +1,1380 @@
+<apex:page controller="REVVY.CMnProposalTemplateCtrl" sidebar="false" renderAs="pdf">
+
+  <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnquote/ui/src/css/proposal.css" />
+
+<div class="{!IF(printStatus=='DRAFT','watermark','')}">
+
+   <c:CMnPDFHeader type="header" position="left" rendered="{!IF(printStatus=='DRAFT','true','false')}">
+       <span class="statusHeader"><apex:outputText value="{!printStatusDisplay}" /></span>
+   </c:CMnPDFHeader>
+
+   <c:CMnPDFHeader type="header" position="right">
+       <span class="titleHeader"><apex:outputText value="{!quoteParams.REVVY__proposalTitle__c}"/></span>
+   </c:CMnPDFHeader>
+
+  <!--- Cover Letter -->
+  <br />
+  <br />
+  <div class="mainTitle">
+     <img src="{!quoteParams.companyLogoURL__c}" style="display:{!displayCompanyLogo}"
+      class="companyLogo logoDimensions"/>
+     <div class="right companyName">{!quote.Account__r.Name}</div>
+  </div>
+  <br/><br/>
+  <br/><br/>
+  <br/>
+  <div class="mainTitle">
+     <hr />
+     <div class="right proposalTitle" >{!quoteParams.REVVY__proposalTitle__c}</div>
+  </div>
+  <br/><br/>
+  <br/><br/>
+  <br/><br/>
+  <br/><br/>
+  <br/><br/>
+
+  <table class="coverPrpTbl" >
+    <tr>
+      <td class="subTitleWidth1">&nbsp;</td>
+      <td class="subTitleWidth2" colspan="2"><h2 class="subTitlePad">{!$Label.MnProposalPreparedFor}</h2></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td class="subDetailPad">&nbsp;</td>
+      <td>
+            <p class="coverInfo">{!quote.Contact__r.Name}</p>
+            <p class="coverInfo">{!quote.Account__r.Name}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="2"><h2 class="subTitlePad">{!$Label.MnProposalCreatedBy}</h2></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td class="subDetailPad">&nbsp;</td>
+      <td class="subDetailWidth" >
+            <p class="coverInfo">{!quote.CreatedBy.Name}</p>
+            <p class="coverInfo">{!quote.CreatedBy.Phone}</p>
+            <p class="coverInfo">{!quote.CreatedBy.Email}</p>
+            <br/>
+            <p class="coverInfo">{!$Label.MnProposalCompany}</p>
+            <p class="coverInfo">{!$Label.MnProposalAddr1}</p>
+            <p class="coverInfo">{!$Label.MnProposalAddr2}</p>
+      </td>
+    </tr>
+  </table>
+<!--- Opening comments -->
+ <div class="{!IF(renderOpeningComments, 'pageBreakAfter', '')}"/>
+ <h1 class="openingCommentsTitle"
+   style="display:{!IF((quoteParams.openingCommentsTitle__c == null || !renderOpeningComments || quoteParams.openingComments__c == null), 'none', 'inline')}">
+   {!quoteParams.openingCommentsTitle__c}
+ </h1>
+ <br/>
+  <apex:outputPanel rendered="{!renderOpeningComments}">
+    <apex:outputField value="{!quoteParams.REVVY__openingComments__c}" />
+  </apex:outputPanel>
+
+  <!--- Pricing Summary -->
+  <div class="pageBreakAfter"/>
+
+  <h1 class="prcHeader">{!$Label.MnProposalPricingSummary}</h1>
+  <br/>
+
+  <!-- Quote Header -->
+  <div class="qHeader">
+    <table >
+      <tr>
+        <td class="label">{!$Label.MnProposalPricingDate}</td>
+        <td>{!pricingDate}</td>
+        <td>&nbsp;</td>
+        <td class="label">{!$Label.MnProposalAttn}</td>
+        <td>{!quote.Contact__r.Name}</td>
+      </tr>
+      <tr>
+        <td class="label">{!$Label.MnProposalExpDate}</td>
+        <td>{!expDate}</td>
+        <td>&nbsp;</td>
+        <td class="label">{!$Label.MnProposalPhone}</td>
+        <td>{!quote.Contact__r.Phone}</td>
+      </tr>
+      <tr>
+        <td class="label">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td class="label">{!$Label.MnProposalEmail}</td>
+        <td>{!quote.Contact__r.Email}</td>
+      </tr>
+    </table>
+  </div>
+  <br/><br/>
+
+  <!-- Products Quote Detail-->
+  <table class="QITable">
+      <!--  ********************* Products TR ****************************** -->
+      <tr style="display:{!displayProducts};">
+        <td class="QIPadHdr thead thfcell" >&nbsp;</td>
+        <td class="QINameHdr thead hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalProducts}</td>
+        <td class="QIPriceHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr thead">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr thead">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPadHdr thead thlcell" >&nbsp;</td>
+      </tr>
+
+      <apex:repeat value="{!quoteProdItems}" var="qi">
+        <tr style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+          <td class="QIPad tfcell" >&nbsp;</td>
+          <td class="QIImage tcell" style="display:{!displayquoteImage}">
+            <img src="{!qi.QIImage}" style="display:{!IF(qi.QIImage == null, 'none', 'block')}" class="imageDimensions" />
+            <br/></td>
+          <td class="QIName tcell">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderProductTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+          <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+          <td class="QIBillFreq tcell"></td>
+          <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIListPrice2}</td>
+          <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIDiscount_Str}%<span class="{!IF(qi.QIDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIDiscountImage}"/></td>
+          <td class="QIDiscountQty tcell">{!qi.QIQuantity}</td>
+          <td class="QIPrice tcell">{!qi.QIExtPrice2}</td>
+          <td class="QIPad tlcell">&nbsp;</td>
+        </tr>
+      </apex:repeat>
+      <tr style="display:{!displayProducts};">
+        <td colspan="{!summTotalColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalTotal}</td>
+        <td></td>
+        <td class="QIPrice hdrTotalFontColor">
+            <apex:outputText value="{!prodTotalStr}" />
+        </td>
+        <td class="tlcell" >&nbsp;</td>
+      </tr>
+
+      <tr style="display:{!displayProducts}">
+        <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Recommended Products TR ****************************** -->
+      <tr style="display:{!IF(belowTheLineProducts == 0, 'none', '')}">
+        <td class="QIPadHdr theadRec thfcell" >&nbsp;</td>
+        <td class="QINameHdr theadRec hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalRecoProducts}</td>
+        <td class="QIPriceHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr theadRec">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr theadRec">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPadHdr theadRec thlcell" >&nbsp;</td>
+      </tr>
+
+      <apex:repeat value="{!quoteProdItems}" var="qi">
+        <tr style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+          <td class="QIPad tfcell" >&nbsp;</td>
+          <td class="QIImage tcell" style="display:{!displayquoteImage}">
+            <img src="{!qi.QIImage}" style="display:{!IF(qi.QIImage == null, 'none', 'block')}" class="imageDimensions" />
+            <br/></td>
+          <td class="QIName tcell">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderProductTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+          <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+          <td class="QIBillFreq tcell"></td>
+          <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIListPrice2}</td>
+          <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIDiscount_Str}%<span class="{!IF(qi.QIDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIDiscountImage}"/></td>
+          <td class="QIDiscountQty tcell">{!qi.QIQuantity}</td>
+          <td class="QIPrice tcell">{!qi.QIExtPrice2}</td>
+          <td class="QIPad tlcell">&nbsp;</td>
+        </tr>
+      </apex:repeat>
+
+      <tr style="display:{!IF(belowTheLineProducts == 0, 'none', '')}">
+        <td colspan="2" class="tfcell"></td>
+        <td colspan="{!summColSpanVar}"  class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!IF(belowTheLineProducts == 0, 'none', '')}">
+        <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Services TR ****************************** -->
+      <tr style="display:{!displayServices}">
+        <td class="QIPad thead thfcell" ></td>
+        <td class="QINameHdr thead hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalServices}</td>
+        <td class="QIPriceHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr thead">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr thead">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPad thead thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!quoteServiceItems}" var="qi">
+        <tr style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+          <td class="pad tfcell" ></td>
+          <td class="QIImage tcell" style="display:{!displayquoteImage}">
+            <img src="{!qi.QIImage}" style="display:{!IF(qi.QIImage == null, 'none', 'block')}" class="imageDimensions"/>
+            <br/></td>
+          <td class="QIName tcell">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderServiceTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+          <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+          <td class="QIBillFreq tcell">{!qi.QIBillFreq}</td>
+          <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIListPrice2}</td>
+          <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIDiscount_Str}%<span class="{!IF(qi.QIDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIDiscountImage}"/></td>
+          <td class="QIDiscountQty tcell">{!qi.QIQuantity}</td>
+          <td class="QIPrice tcell">{!qi.QIExtPrice2}</td>
+          <td class="QIPad tlcell">&nbsp;</td>
+        </tr>
+      </apex:repeat>
+
+      <tr style="display:{!displayOneTimeServicesTotal}">
+        <td colspan="{!summTotalColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalTotal}</td>
+        <td class="QIDiscountQty hdrTotalFontColor"></td>
+        <td class="QIPrice hdrTotalFontColor">
+            <apex:outputText value="{!servicesTotalStr}"/>
+        </td>
+        <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayWeeklyServicesTotal}">
+        <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalWeekly}</td>
+        <td class="QIPrice hdrTotalFontColor">
+            <apex:outputText value="{!weeklyServicesTotalStr}"/>
+        </td>
+        <td class="tlcell" >&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayMonthlyServicesTotal}">
+        <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalMonthly}</td>
+        <td class="QIPrice hdrTotalFontColor">
+            <apex:outputText value="{!monthlyServicesTotalStr}"/>
+        </td>
+        <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayYearlyServicesTotal}">
+        <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalYearly}</td>
+        <td class="QIPrice hdrTotalFontColor">
+            <apex:outputText value="{!yearlyServicesTotalStr}"/>
+        </td>
+        <td class="tlcell">&nbsp;</td>
+      </tr>
+
+      <tr style="display:{!displayServices}">
+        <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Recommended Services TR ****************************** -->
+      <tr style="display:{!IF(belowTheLineServices == 0, 'none', '')}">
+        <td class="QIPad theadRec thfcell" ></td>
+        <td class="QINameHdr theadRec hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalRecoServices}</td>
+        <td class="QIPriceHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr theadRec">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr theadRec">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPad theadRec thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!quoteServiceItems}" var="qi">
+        <tr style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+          <td class="pad tfcell" ></td>
+          <td class="QIImage tcell" style="display:{!displayquoteImage}">
+            <img src="{!qi.QIImage}" style="display:{!IF(qi.QIImage == null, 'none', 'block')}" class="imageDimensions"/>
+            <br/></td>
+          <td class="QIName tcell">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderServiceTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+          <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+          <td class="QIBillFreq tcell">{!qi.QIBillFreq}</td>
+          <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIListPrice2}</td>
+          <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIDiscount_Str}%<span class="{!IF(qi.QIDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIDiscountImage}"/></td>
+          <td class="QIDiscountQty tcell">{!qi.QIQuantity}</td>
+          <td class="QIPrice tcell">{!qi.QIExtPrice2}</td>
+          <td class="QIPad tlcell">&nbsp;</td>
+        </tr>
+      </apex:repeat>
+
+      <tr style="display:{!IF(belowTheLineServices == 0, 'none', '')}">
+        <td colspan="2" class="tfcell"></td>
+        <td colspan="{!summColSpanVar}"  class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!IF(belowTheLineServices == 0, 'none', '')}">
+        <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Fixed Bundles TR ****************************** -->
+      <tr style="display:{!displayFixedBundles}">
+        <td class="QIPad thead thfcell" ></td>
+        <td class="QINameHdr thead hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalFixedBundle}</td>
+        <td class="QIPriceHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr thead">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr thead">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPad thead thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!quoteFixedBundleItems}" var="qi">
+        <tr style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+          <td class="QIPad tfcell" ></td>
+          <td class="QIImage tcell" style="display:{!displayquoteImage}">
+            <img src="{!qi.QIImage}" style="display:{!IF(qi.QIImage == null, 'none', 'block')}" class="imageDimensions" />
+            <br/></td>
+          <td class="QIName tcell">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderBundleTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+          <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+          <td class="QIBillFreq tcell">{!qi.QIBillFreq}</td>
+          <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIListPrice2}</td>
+          <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIDiscount_Str}%<span class="{!IF(qi.QIDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIDiscountImage}"/></td>
+          <td class="QIDiscountQty tcell">{!qi.QIQuantity}</td>
+          <td class="QIPrice tcell">{!qi.QIExtPrice2}</td>
+          <td class="QIPad tlcell">&nbsp;</td>
+        </tr>
+
+        <apex:repeat value="{!qi.BundleSublineItems}" var="qis">
+          <tr class="subRow" style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+            <td class="QIPad tfcell"></td>
+            <td class="QIImage" style="display:{!displayquoteImage}"></td>
+            <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.Catalog_Node__r.Name}</td>
+            <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.Catalog_Node__r.Id__c}</td>
+            <td class="QIBillFreq subRowBackground"></td>
+            <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">included</td>
+            <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!zeroDiscount}%</td>
+            <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.Quantity__c)}</td>
+            <td class="QIPrice"></td>
+            <td class="QIPad tlcell">&nbsp;</td>
+          </tr>
+        </apex:repeat>
+      </apex:repeat>
+
+      <tr style="display:{!displayOneTimeBundleTotal}">
+         <td colspan="{!summTotalColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalTotal}</td>
+         <td></td>
+         <td class="QIPrice hdrTotalFontColor">
+         <apex:outputText value="{!bundleTotalStr}"/>
+         </td>
+         <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayWeeklyBundleTotal}">
+         <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalWeekly}</td>
+         <td class="QIPrice hdrTotalFontColor">
+             <apex:outputText value="{!weeklyBundleTotalStr}"/>
+         </td>
+         <td class="tlcell" >&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayMonthlyBundleTotal}">
+         <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalMonthly}</td>
+         <td class="QIPrice hdrTotalFontColor">
+             <apex:outputText value="{!monthlyBundleTotalStr}"/>
+         </td>
+         <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayYearlyBundleTotal}">
+         <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalYearly}</td>
+         <td class="QIPrice hdrTotalFontColor">
+             <apex:outputText value="{!yearlyBundleTotalStr}"/>
+         </td>
+         <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayFixedBundles}">
+         <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Recommended Fixed Bundles TR ****************************** -->
+      <tr style="display:{!IF(belowTheLineBundles == 0, 'none', '')}">
+        <td class="QIPad theadRec thfcell" ></td>
+        <td class="QINameHdr theadRec hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalRecoFixedBundle}</td>
+        <td class="QIPriceHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr theadRec">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr theadRec">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPad theadRec thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!quoteFixedBundleItems}" var="qi">
+        <tr style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+          <td class="QIPad tfcell" ></td>
+          <td class="QIImage tcell" style="display:{!displayquoteImage}">
+            <img src="{!qi.QIImage}" style="display:{!IF(qi.QIImage == null, 'none', 'block')}" class="imageDimensions" />
+            <br/></td>
+          <td class="QIName tcell">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderBundleTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+          <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+          <td class="QIBillFreq tcell">{!qi.QIBillFreq}</td>
+          <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIListPrice2}</td>
+          <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIDiscount_Str}%<span class="{!IF(qi.QIDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIDiscountImage}"/></td>
+          <td class="QIDiscountQty tcell">{!qi.QIQuantity}</td>
+          <td class="QIPrice tcell">{!qi.QIExtPrice2}</td>
+          <td class="QIPad tlcell">&nbsp;</td>
+        </tr>
+
+        <apex:repeat value="{!qi.BundleSublineItems}" var="qis">
+          <tr class="subRow" style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+            <td class="QIPad tfcell"></td>
+            <td class="QIImage" style="display:{!displayquoteImage}"></td>
+            <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.Catalog_Node__r.Name}</td>
+            <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.Catalog_Node__r.Id__c}</td>
+            <td class="QIBillFreq subRowBackground"></td>
+            <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">included</td>
+            <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!zeroDiscount}%</td>
+            <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.Quantity__c)}</td>
+            <td class="QIPrice"></td>
+            <td class="QIPad tlcell">&nbsp;</td>
+          </tr>
+        </apex:repeat>
+      </apex:repeat>
+
+      <tr style="display:{!IF(belowTheLineBundles == 0, 'none', '')}">
+        <td colspan="2" class="tfcell"></td>
+        <td colspan="{!summColSpanVar}"  class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!IF(belowTheLineBundles == 0, 'none', '')}">
+        <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Configurable Products TR ****************************** -->
+      <tr style="display:{!displayConfigurables}">
+        <td class="QIPad thead thfcell" ></td>
+        <td class="QINameHdr thead hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalConfigurable}</td>
+        <td class="QIPriceHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr thead">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr thead">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPad thead thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!quoteConfigWrapperItems}" var="qi">
+
+          <apex:repeat value="{!qi.BillFreqHdrItems}" var="qis">
+            <tr style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+              <td class="pad tfcell"></td>
+              <td class="QIImage" style="display:{!displayquoteImage}">
+                <img src="{!qis.QISLImage}" style="display:{!qis.QISLdisplayImage}" class="imageDimensions" />
+              <br/></td>
+              <td class="QIName">{!qis.QISLName}<sup><apex:outputtext value="{!IF(renderConfigTerms = false, '', IF(qis.QISLId !=null && termCount[qis.QISLId] > 0, '(' + TEXT(termCount[qis.QISLId]) + ')' ,''))}"/></sup></td>
+              <td class="QIId" style="display:{!displayquoteId}">{!qis.QISLId}</td>
+              <td class="QIBillFreq ">{!qis.QISLBillFreq}</td>
+              <td class="QIPrice " style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+              <td class="QIDiscountQty " style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+              <td class="QIDiscountQty">{!qis.QISLQuantity}</td>
+              <td class="QIPrice">{!qis.QISLExtPrice}</td>
+              <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+          </apex:repeat>
+
+          <!-- Baseline for configurable product -->
+          <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+          <tr style="display:{!IF(qi.QIBelowLine == false, 'table-row', 'none')}">
+            <td class="tfcell" ></td>
+            <td style="display:{!displayquoteImage}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tlcell"></td>
+          </tr>
+
+          <!-- below TR is actual configurable item base line -->
+          <tr class="subRow" style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+            <td class="QIPad tfcell" ></td>
+            <td class="QIImage" style="display:{!displayquoteImage}"></td>
+            <td class="QIName indentText leftBorderSubRow subRowBackground">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderConfigTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+            <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qi.QIId}</td>
+            <td class="QIBillFreq subRowBackground">{!qi.QIBillFreq}</td>
+            <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLinePrice_Str}</td>
+            <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLineDiscount_Str}%<span class="{!IF(qi.QIBaseLineDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIBaseLineDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIBaseLineDiscountImage}"/></td>
+            <td class="QIDiscountQty rightBorderSubRow subRowBackground">1</td>
+            <td class="QIPrice subRowBackground">{!qi.QIBaseLineUnitPrice_Str}</td>
+            <td class="QIPad tlcell">&nbsp;</td>
+          </tr>
+
+          <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+          <tr style="display:{!IF(qi.QIBelowLine == false, 'table-row', 'none')}">
+            <td class="tfcell" ></td>
+            <td style="display:{!displayquoteImage}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tlcell"></td>
+          </tr>
+
+          <!-- Sub line items if exists -->
+          <apex:repeat value="{!qi.ConfigSublineItems}" var="qis">
+            <!-- To add the visual line breaks after each group of identical section numbers -->
+            <tr style="display:{!IF(qi.QIBelowLine == false && qis.QISLBelowLine == false, '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="tfcell" ></td>
+              <td style="display:{!displayquoteImage}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tlcell"></td>
+            </tr>
+
+            <!--  Actual subline item in this config product -->
+            <tr class="subRow" style="display:{!IF(qi.QIBelowLine == false && qis.QISLBelowLine == false, '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="QIPad tfcell" ></td>
+              <td class="QIImage" style="display:{!displayquoteImage}"></td>
+              <!--<td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>-->
+              <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}<sup><apex:outputtext value="{!IF(renderConfigTerms = false, '', IF(termCount[qis.subline.Catalog_Node__r.REVVY__Id__c] > 0, '(' + TEXT(termCount[qis.subline.Catalog_Node__r.REVVY__Id__c]) + ')', ''))}"/></sup></td>
+              <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+              <td class="QIBillFreq subRowBackground">{!qis.QISLBillFreq}</td>
+              <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+              <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+              <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+              <td class="QIPrice subRowBackground">{!qis.QISLExtPrice}</td>
+              <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+          </apex:repeat>
+
+          <!-- Recommended subline items for this config product -->
+          <apex:variable var="recoHdrPrinted" value="false"/>
+          <apex:repeat value="{!qi.ConfigSublineItems}" var="qis">
+            <!-- To add the visual line breaks after each group of identical section numbers -->
+            <tr style="display:{!IF(qi.QIBelowLine == false && qi.belowTheLineConfigSublineItems > 0 && recoHdrPrinted == 'false', '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="tfcell" ></td>
+              <td style="display:{!displayquoteImage}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tlcell"></td>
+            </tr>
+
+            <!-- Recommended Configurable Items Header -->
+            <!-- <tr class="subRow" style="display:{!IF(qi.QIBelowLine == false && qi.belowTheLineConfigSublineItems > 0 && recoHdrPrinted == 'false', '{!qis.addLineBreakBefore}', 'none')}"> -->
+            <tr class="subRow" style="display:{!IF(qi.QIBelowLine == false && qi.belowTheLineConfigSublineItems > 0 && recoHdrPrinted == 'false', '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="QIPad tfcell" ></td>
+              <td class="QIImage"></td>
+              <td class="QIName indentText leftBorderSubRow recommendedBackground hdrTotalFontColor" colspan="2">{!$Label.MnProposalRecoConfigurableSubline}</td>
+              <td class="QIId recommendedBackground"></td>
+              <td class="QIBillFreq recommendedBackground"></td>
+              <td class="QIPrice recommendedBackground"></td>
+              <td class="QIDiscountQty recommendedBackground"></td>
+              <td class="QIDiscountQty rightBorderSubRow recommendedBackground"></td>
+             <!--<td class="QIPrice recommendedBackground"></td>-->
+              <td class="QIPad tlcell">&nbsp;</td>
+              <apex:variable var="recoHdrPrinted" value="true"/>
+            </tr>
+
+            <!-- To add the visual line breaks after each group of identical section numbers -->
+            <tr style="display:{!IF(qi.QIBelowLine == false && qis.QISLBelowLine == true, '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="tfcell" ></td>
+              <td style="display:{!displayquoteImage}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tlcell"></td>
+            </tr>
+
+            <!--  Actual recommended subline item in this config product -->
+            <tr class="subRow" style="display:{!IF(qi.QIBelowLine == false && qis.QISLBelowLine == true, '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="QIPad tfcell" ></td>
+              <td class="QIImage" style="display:{!displayquoteImage}"></td>
+              <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+              <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+              <td class="QIBillFreq subRowBackground">{!qis.QISLBillFreq}</td>
+              <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+              <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+              <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+              <td class="QIPrice subRowBackground">{!qis.QISLExtPrice}</td>
+              <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+          </apex:repeat>
+
+          <!-- just for the border -->
+          <tr style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+            <td class="tfcell" ></td>
+            <td class="tcell" style="display:{!displayquoteImage}"></td>
+            <td class="tcell"></td>
+            <td class="tcell" style="display:{!displayquoteId}"></td>
+            <td class="tcell"></td>
+            <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell"></td>
+            <td class="tcell"></td>
+            <td class="tlcell"></td>
+          </tr>
+
+      </apex:repeat>
+
+
+      <tr style="display:{!displayConfigurables}">
+          <td colspan="{!summTotalColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalTotal}</td>
+          <td class="QIDiscountQty hdrTotalFontColor"></td>
+          <td class="QIPrice hdrTotalFontColor">
+              <apex:outputText value="{!configTotalStr}"/>
+          </td>
+          <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayWeeklyConfigTotal}">
+          <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalWeekly}</td>
+          <td class="QIPrice hdrTotalFontColor">
+              <apex:outputText value="{!weeklyConfigTotalStr}"/>
+          </td>
+          <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayMonthlyConfigTotal}">
+          <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalMonthly}</td>
+          <td class="QIPrice hdrTotalFontColor">
+              <apex:outputText value="{!monthlyConfigTotalStr}"/>
+          </td>
+          <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayYearlyConfigTotal}">
+          <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalYearly}</td>
+          <td class="QIPrice hdrTotalFontColor">
+              <apex:outputText value="{!yearlyConfigTotalStr}"/>
+          </td>
+          <td class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!displayConfigurables}">
+          <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Recommended Configurable Products TR ****************************** -->
+      <tr style="display:{!IF(belowTheLineConfig == 0, 'none', '')}">
+        <td class="QIPad theadRec thfcell" ></td>
+        <td class="QINameHdr theadRec hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalRecoConfigurable}</td>
+        <td class="QIPriceHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+        <td class="QIDiscountHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+        <td class="QIQtyHdr theadRec">{!$Label.MnProposalQty}</td>
+        <td class="QIPriceHdr theadRec">{!$Label.MnProposalExtPrice}</td>
+        <td class="QIPad theadRec thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!quoteConfigWrapperItems}" var="qi">
+
+          <apex:repeat value="{!qi.BillFreqHdrItems}" var="qis">
+            <tr style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+              <td class="pad tfcell"></td>
+              <td class="QIImage" style="display:{!displayquoteImage}">
+                <img src="{!qis.QISLImage}" style="display:{!qis.QISLdisplayImage}" class="imageDimensions" />
+              <br/></td>
+              <td class="QIName">{!qis.QISLName}<sup><apex:outputtext value="{!IF(renderConfigTerms = false, '', IF(qis.QISLId !=null && termCount[qis.QISLId] > 0, '(' + TEXT(termCount[qis.QISLId]) + ')' ,''))}"/></sup></td>
+              <td class="QIId" style="display:{!displayquoteId}">{!qis.QISLId}</td>
+              <td class="QIBillFreq ">{!qis.QISLBillFreq}</td>
+              <td class="QIPrice " style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+              <td class="QIDiscountQty " style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+              <td class="QIDiscountQty">{!qis.QISLQuantity}</td>
+              <td class="QIPrice">{!qis.QISLExtPrice}</td>
+              <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+          </apex:repeat>
+
+          <!-- Baseline for configurable product -->
+          <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+          <tr style="display:{!IF(qi.QIBelowLine == true, 'table-row', 'none')}">
+            <td class="tfcell" ></td>
+            <td style="display:{!displayquoteImage}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tlcell"></td>
+          </tr>
+
+          <!-- below TR is actual configurable item base line -->
+          <tr class="subRow" style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+            <td class="QIPad tfcell" ></td>
+            <td class="QIImage" style="display:{!displayquoteImage}"></td>
+            <td class="QIName indentText leftBorderSubRow subRowBackground">{!qi.QIName}<sup><apex:outputtext value="{!IF(renderConfigTerms = false, '', IF(termCount[qi.QIId] > 0, '(' + TEXT(termCount[qi.QIId]) + ')' ,''))}"/></sup></td>
+            <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qi.QIId}</td>
+            <td class="QIBillFreq subRowBackground">{!qi.QIBillFreq}</td>
+            <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLinePrice_Str}</td>
+            <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLineDiscount_Str}%<span class="{!IF(qi.QIBaseLineDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIBaseLineDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIBaseLineDiscountImage}"/></td>
+            <td class="QIDiscountQty rightBorderSubRow subRowBackground">1</td>
+            <td class="QIPrice subRowBackground">{!qi.QIBaseLineUnitPrice_Str}</td>
+            <td class="QIPad tlcell">&nbsp;</td>
+          </tr>
+
+          <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+          <tr style="display:{!IF(qi.QIBelowLine == true, 'table-row', 'none')}">
+            <td class="tfcell" ></td>
+            <td style="display:{!displayquoteImage}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tcell subRowBackground configSubRowDivider"></td>
+            <td class="tlcell"></td>
+          </tr>
+
+          <!-- Sub line items if exists -->
+          <apex:repeat value="{!qi.ConfigSublineItems}" var="qis">
+            <!-- To add the visual line breaks after each group of identical section numbers -->
+            <tr style="display:{!IF(qi.QIBelowLine == true && qis.QISLBelowLine == true, '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="tfcell" ></td>
+              <td style="display:{!displayquoteImage}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tcell subRowBackground configSubRowDivider"></td>
+              <td class="tlcell"></td>
+            </tr>
+
+            <!--  Actual subline item in this config product -->
+            <tr class="subRow" style="display:{!IF(qi.QIBelowLine == true && qis.QISLBelowLine == true, '{!qis.addLineBreakBefore}', 'none')}">
+              <td class="QIPad tfcell" ></td>
+              <td class="QIImage" style="display:{!displayquoteImage}"></td>
+              <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+              <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+              <td class="QIBillFreq subRowBackground">{!qis.QISLBillFreq}</td>
+              <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+              <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+              <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+              <td class="QIPrice subRowBackground">{!qis.QISLExtPrice}</td>
+              <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+          </apex:repeat>
+
+          <!-- just for the border -->
+          <tr style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+            <td class="tfcell" ></td>
+            <td class="tcell" style="display:{!displayquoteImage}"></td>
+            <td class="tcell"></td>
+            <td class="tcell" style="display:{!displayquoteId}"></td>
+            <td class="tcell"></td>
+            <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+            <td class="tcell"></td>
+            <td class="tcell"></td>
+            <td class="tlcell"></td>
+          </tr>
+
+      </apex:repeat>
+
+      <tr style="display:{!IF(belowTheLineConfig == 0, 'none', '')}">
+        <td colspan="2" class="tfcell"></td>
+        <td colspan="{!summColSpanVar}"  class="tlcell">&nbsp;</td>
+      </tr>
+      <tr style="display:{!IF(belowTheLineConfig == 0, 'none', '')}">
+        <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  ********************* Solutions TR ****************************** -->
+      <apex:repeat value="{!quoteSolutions}" var="qsol">
+        <tr style="display:{!qsol.displaySolutions}">
+          <td class="QIPad thead thfcell" ></td>
+          <td class="QINameHdr thead hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalSolution} - {!qsol.qtSolution.CatalogNode__r.LocaleName_F__c}</td>
+          <td class="QIPriceHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+          <td class="QIDiscountHdr thead" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+          <td class="QIQtyHdr thead">{!$Label.MnProposalQty}</td>
+          <td class="QIPriceHdr thead">{!$Label.MnProposalExtPrice}</td>
+          <td class="QIPad thead thlcell" ></td>
+        </tr>
+
+        <apex:repeat value="{!qsol.quoteSolutionWrapperItems}" var="qi">
+            <!-- below tr will be displayed for bundles and regular products -->
+            <tr style="display:{!IF((qi.QIDisplayBillFreqItems = false && qi.QIBelowLine == false), '', 'none')}">
+                <td class="QIPad tfcell" ></td>
+                <td class="QIImage tcell" style="display:{!displayquoteImage}">
+                    <img src="{!qi.QIImage}" style="display:{!IF(qi.QIImage == null, 'none', 'block')}" class="imageDimensions"/>
+                    <br/></td>
+                <td class="QIName tcell">{!qi.QIName}</td>
+                <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+                <td class="QIBillFreq tcell">{!qi.QIBillFreq}</td>
+                <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIBaseLinePrice_Str}</td>
+                <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIBaseLineDiscount_Str}%<span class="{!IF(qi.QIBaseLineDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIBaseLineDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIBaseLineDiscountImage}"/></td>
+                <td class="QIDiscountQty tcell">1</td>
+                <td class="QIPrice tcell">{!qi.QIBaseLineUnitPrice_Str}</td>
+                <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+
+            <!-- the below section is only for configurable products within a solution -->
+            <!-- display the bill frequency header items only for configurable products within solutions -->
+            <apex:repeat value="{!qi.BillFreqHdrItems}" var="qis">
+                <tr style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+                  <td class="pad tfcell"></td>
+                  <td class="QIImage" style="display:{!displayquoteImage}">
+                    <img src="{!qis.QISLImage}" style="display:{!qis.QISLdisplayImage}" class="imageDimensions" />
+                  <br/></td>
+                  <td class="QIName">{!qis.QISLName}</td>
+                  <td class="QIId" style="display:{!displayquoteId}">{!qis.QISLId}</td>
+                  <td class="QIBillFreq ">{!qis.QISLBillFreq}</td>
+                  <td class="QIPrice " style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+                  <td class="QIDiscountQty " style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+                  <td class="QIDiscountQty">{!qis.QISLQuantity}</td>
+                  <td class="QIPrice">{!qis.QISLExtPrice}</td>
+                  <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+            </apex:repeat>
+
+            <!-- Baseline for configurable product -->
+            <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+            <tr style="display:{!IF((qi.QIDisplayBillFreqItems = true && qi.QIBelowLine == false), 'table-row', 'none')}">
+                <td class="tfcell" ></td>
+                <td style="display:{!displayquoteImage}"></td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tlcell"></td>
+            </tr>
+
+            <!-- below TR is actual configurable item base line -->
+            <tr class="subRow" style="display:{!IF((qi.QIDisplayBillFreqItems = true && qi.QIBelowLine == false), '', 'none')}">
+                  <td class="QIPad tfcell" ></td>
+                  <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                  <td class="QIName indentText leftBorderSubRow subRowBackground">{!qi.QIName}</td>
+                  <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qi.QIId}</td>
+                  <td class="QIBillFreq subRowBackground">{!qi.QIBillFreq}</td>
+                  <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLinePrice_Str}</td>
+                  <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLineDiscount_Str}%<span class="{!IF(qi.QIBaseLineDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIBaseLineDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIBaseLineDiscountImage}"/></td>
+                  <td class="QIDiscountQty rightBorderSubRow subRowBackground">1</td>
+                  <td class="QIPrice subRowBackground">{!qi.QIBaseLineUnitPrice_Str}</td>
+                  <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+
+            <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+            <tr style="display:{!IF((qi.QIDisplayBillFreqItems = true && qi.QIBelowLine == false), 'table-row', 'none')}">
+                  <td class="tfcell" ></td>
+                  <td style="display:{!displayquoteImage}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tlcell"></td>
+            </tr>
+
+            <!-- Sub line items if exists, for both bundles and configurable products-->
+            <apex:repeat value="{!qi.ConfigSublineItems}" var="qis">
+                <!-- To add the visual line breaks after each group of identical section numbers -->
+                <tr style="display:{!IF(qi.QIBelowLine == false && qis.QISLBelowLine == false, '{!qis.addLineBreakBefore}', 'none')}">
+                    <td class="tfcell" ></td>
+                    <td style="display:{!displayquoteImage}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tlcell"></td>
+                </tr>
+
+                <!-- below tr will be displayed for bundle subline -->
+                <tr class="subRow" style="display:{!IF((qi.QIType == 'Bundle' && qi.QIBelowLine == false && qis.QISLBelowLine == false), '', 'none')}">
+                    <td class="QIPad tfcell"></td>
+                    <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                    <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+                    <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+                    <td class="QIBillFreq subRowBackground"></td>
+                    <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">included</td>
+                    <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}</td>
+                    <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+                    <td class="QIPrice"></td>
+                    <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+
+                <!-- below tr will be displayed for configurable product subline -->
+                <tr class="subRow" style="display:{!IF((qi.QIType <> 'Bundle' && qi.QIBelowLine == false && qis.QISLBelowLine == false), '', 'none')}">
+                    <td class="QIPad tfcell" ></td>
+                    <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                    <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+                    <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+                    <td class="QIBillFreq subRowBackground">{!qis.QISLBillFreq}</td>
+                    <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+                    <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+                    <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+                    <td class="QIPrice subRowBackground">{!qis.QISLExtPrice}</td>
+                    <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+            </apex:repeat>
+
+            <!-- Recommended Sub line items if exists, for both bundles and configurable products-->
+            <apex:variable var="recoHdrPrinted" value="false"/>
+            <apex:repeat value="{!qi.ConfigSublineItems}" var="qis">
+                <!-- To add the visual line breaks after each group of identical section numbers -->
+                <tr style="display:{!IF(qi.belowTheLineConfigSublineItems > 0 && recoHdrPrinted == 'false', '{!qis.addLineBreakBefore}', 'none')}">
+                    <td class="tfcell" ></td>
+                    <td style="display:{!displayquoteImage}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tlcell"></td>
+                </tr>
+
+                <!-- Recommended Configurable Items Header -->
+                <tr class="subRow" style="display:{!IF(qi.belowTheLineConfigSublineItems > 0 && recoHdrPrinted == 'false', '{!qis.addLineBreakBefore}', 'none')}">
+                    <td class="QIPad tfcell" ></td>
+                    <td class="QIImage"></td>
+                    <td class="QIName indentText leftBorderSubRow recommendedBackground hdrTotalFontColor" colspan="2">{!$Label.MnProposalRecoConfigurableSubline}</td>
+                    <td class="QIId recommendedBackground"></td>
+                    <td class="QIBillFreq recommendedBackground"></td>
+                    <td class="QIPrice recommendedBackground"></td>
+                    <td class="QIDiscountQty recommendedBackground"></td>
+                    <td class="QIDiscountQty rightBorderSubRow recommendedBackground"></td>
+                    <!--<td class="QIPrice recommendedBackground"></td>-->
+                    <td class="QIPad tlcell">&nbsp;</td>
+                    <apex:variable var="recoHdrPrinted" value="true"/>
+                </tr>
+
+                <!-- To add the visual line breaks after each group of identical section numbers -->
+                <tr style="display:{!IF(qi.QIBelowLine == false && qis.QISLBelowLine == true, '{!qis.addLineBreakBefore}', 'none')}">
+                  <td class="tfcell" ></td>
+                  <td style="display:{!displayquoteImage}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tlcell"></td>
+                </tr>
+
+                <!-- below tr will be displayed for recommended bundle subline -->
+                <tr class="subRow" style="display:{!IF((qi.QIType == 'Bundle' && qi.QIBelowLine == false && qis.QISLBelowLine == true), '', 'none')}">
+                    <td class="QIPad tfcell"></td>
+                    <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                    <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+                    <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+                    <td class="QIBillFreq subRowBackground"></td>
+                    <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">included</td>
+                    <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}</td>
+                    <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+                    <td class="QIPrice"></td>
+                    <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+
+                <!-- below tr will be displayed for recommended configurable product subline -->
+                <tr class="subRow" style="display:{!IF((qi.QIType <> 'Bundle' && qi.QIBelowLine == false && qis.QISLBelowLine == true), '', 'none')}">
+                    <td class="QIPad tfcell" ></td>
+                    <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                    <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+                    <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+                    <td class="QIBillFreq subRowBackground">{!qis.QISLBillFreq}</td>
+                    <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+                    <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+                    <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+                    <td class="QIPrice subRowBackground">{!qis.QISLExtPrice}</td>
+                    <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+            </apex:repeat>
+
+            <!-- just for the border -->
+            <tr style="display:{!IF(qi.QIBelowLine == false, '', 'none')}">
+                <td class="tfcell" ></td>
+                <td class="tcell" style="display:{!displayquoteImage}"></td>
+                <td class="tcell"></td>
+                <td class="tcell" style="display:{!displayquoteId}"></td>
+                <td class="tcell"></td>
+                <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell"></td>
+                <td class="tcell"></td>
+                <td class="tlcell"></td>
+            </tr>
+
+        </apex:repeat>
+
+        <tr style="display:{!qsol.displaySolutions}">
+            <td colspan="{!summTotalColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalTotal}</td>
+            <td class="QIDiscountQty hdrTotalFontColor"></td>
+            <td class="QIPrice hdrTotalFontColor">
+                <apex:outputText value="{!solutionTotalStr}"/>
+            </td>
+            <td class="tlcell">&nbsp;</td>
+        </tr>
+        <tr style="display:{!qsol.displayWeeklySolutionTotal}">
+            <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalWeekly}</td>
+            <td class="QIPrice hdrTotalFontColor">
+                <apex:outputText value="{!weeklySolutionTotalStr}" />
+            </td>
+            <td class="tlcell">&nbsp;</td>
+        </tr>
+        <tr style="display:{!qsol.displayMonthlySolutionTotal}">
+          <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalMonthly}</td>
+          <td class="QIPrice hdrTotalFontColor">
+              <apex:outputText value="{!monthlySolutionTotalStr}"/>
+          </td>
+          <td class="tlcell">&nbsp;</td>
+        </tr>
+        <tr style="display:{!qsol.displayYearlySolutionTotal}">
+          <td colspan="{!summColSpanVar}" class="QITotal tfcell hdrTotalFontColor">{!$Label.MnProposalYearly}</td>
+          <td class="QIPrice hdrTotalFontColor">
+              <apex:outputText value="{!yearlySolutionTotalStr}"/>
+          </td>
+          <td class="tlcell">&nbsp;</td>
+        </tr>
+        <tr style="display:{!qsol.displaySolutions}">
+          <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+        </tr>
+
+      </apex:repeat>
+
+      <!--  ********************* Recommended Products For Solutions TR ****************************** -->
+      <apex:repeat value="{!quoteSolutions}" var="qsol">
+        <tr style="display:{!IF(qsol.belowTheLineSolItems == 0, 'none', '')}">
+          <td class="QIPad theadRec thfcell" ></td>
+          <td class="QINameHdr theadRec hdrTotalFontColor" colspan="{!headerColSpanVar}">{!$Label.MnProposalRecoSolution} - {!qsol.qtSolution.CatalogNode__r.LocaleName_F__c}</td>
+          <td class="QIPriceHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalListPrice}</td>
+          <td class="QIDiscountHdr theadRec" style="display:{!displayquoteDiscount}">{!$Label.MnProposalAdjustment}</td>
+          <td class="QIQtyHdr theadRec">{!$Label.MnProposalQty}</td>
+          <td class="QIPriceHdr theadRec">{!$Label.MnProposalExtPrice}</td>
+          <td class="QIPad theadRec thlcell" ></td>
+        </tr>
+
+        <apex:repeat value="{!qsol.quoteSolutionWrapperItems}" var="qi">
+            <!-- below tr will be displayed for bundles and regular products -->
+            <tr style="display:{!IF((qi.QIDisplayBillFreqItems = false && qi.QIBelowLine == true), '', 'none')}">
+                <td class="QIPad tfcell" ></td>
+                <td class="QIImage tcell" style="display:{!displayquoteImage}"></td>
+                <td class="QIName tcell">{!qi.QIName}</td>
+                <td class="QIId tcell" style="display:{!displayquoteId}">{!qi.QIId}</td>
+                <td class="QIBillFreq tcell">{!qi.QIBillFreq}</td>
+                <td class="QIPrice tcell" style="display:{!displayquoteDiscount}">{!qi.QIBaseLinePrice_Str}</td>
+                <td class="QIDiscountQty tcell" style="display:{!displayquoteDiscount}">{!qi.QIBaseLineDiscount_Str}%<span class="{!IF(qi.QIBaseLineDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIBaseLineDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIBaseLineDiscountImage}"/></td>
+                <td class="QIDiscountQty tcell">1</td>
+                <td class="QIPrice tcell">{!qi.QIBaseLineUnitPrice_Str}</td>
+                <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+
+            <!-- the below section is only for configurable products within a solution -->
+            <!-- display the bill frequency header items only for configurable products within solutions -->
+            <apex:repeat value="{!qi.BillFreqHdrItems}" var="qis">
+                <tr style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+                  <td class="pad tfcell"></td>
+                  <td class="QIImage" style="display:{!displayquoteImage}">
+                    <img src="{!qis.QISLImage}" style="display:{!qis.QISLdisplayImage}" class="imageDimensions" />
+                  <br/></td>
+                  <td class="QIName">{!qis.QISLName}</td>
+                  <td class="QIId" style="display:{!displayquoteId}">{!qis.QISLId}</td>
+                  <td class="QIBillFreq ">{!qis.QISLBillFreq}</td>
+                  <td class="QIPrice " style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+                  <td class="QIDiscountQty " style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+                  <td class="QIDiscountQty">{!qis.QISLQuantity}</td>
+                  <td class="QIPrice">{!qis.QISLExtPrice}</td>
+                  <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+            </apex:repeat>
+
+            <!-- Baseline for configurable product -->
+            <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+            <tr style="display:{!IF((qi.QIDisplayBillFreqItems = true && qi.QIBelowLine == true), 'table-row', 'none')}">
+                <td class="tfcell" ></td>
+                <td style="display:{!displayquoteImage}"></td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tcell subRowBackground configSubRowDivider"></td>
+                <td class="tlcell"></td>
+            </tr>
+
+            <!-- below TR is actual configurable item base line -->
+            <tr class="subRow" style="display:{!IF((qi.QIDisplayBillFreqItems = true && qi.QIBelowLine == true), '', 'none')}">
+                  <td class="QIPad tfcell" ></td>
+                  <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                  <td class="QIName indentText leftBorderSubRow subRowBackground">{!qi.QIName}</td>
+                  <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qi.QIId}</td>
+                  <td class="QIBillFreq subRowBackground">{!qi.QIBillFreq}</td>
+                  <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLinePrice_Str}</td>
+                  <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qi.QIBaseLineDiscount_Str}%<span class="{!IF(qi.QIBaseLineDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qi.QIBaseLineDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qi.QIBaseLineDiscountImage}"/></td>
+                  <td class="QIDiscountQty rightBorderSubRow subRowBackground">1</td>
+                  <td class="QIPrice subRowBackground">{!qi.QIBaseLineUnitPrice_Str}</td>
+                  <td class="QIPad tlcell">&nbsp;</td>
+            </tr>
+
+            <!-- below TR is to have a linebreak similar to what we are giving between subline ui sections -->
+            <tr style="display:{!IF((qi.QIDisplayBillFreqItems = true && qi.QIBelowLine == true), 'table-row', 'none')}">
+                  <td class="tfcell" ></td>
+                  <td style="display:{!displayquoteImage}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tcell subRowBackground configSubRowDivider"></td>
+                  <td class="tlcell"></td>
+            </tr>
+
+            <!-- Sub line items if exists, for both bundles and configurable products-->
+            <apex:repeat value="{!qi.ConfigSublineItems}" var="qis">
+                <!-- To add the visual line breaks after each group of identical section numbers -->
+                <tr style="display:{!IF(qi.QIBelowLine == true && qis.QISLBelowLine == true, '{!qis.addLineBreakBefore}', 'none')}">
+                    <td class="tfcell" ></td>
+                    <td style="display:{!displayquoteImage}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteId}"> </td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider" style="display:{!displayquoteDiscount}"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tcell subRowBackground configSubRowDivider"></td>
+                    <td class="tlcell"></td>
+                </tr>
+
+                <!-- below tr will be displayed for bundle subline -->
+                <tr class="subRow" style="display:{!IF((qi.QIType == 'Bundle' && qi.QIBelowLine == true && qis.QISLBelowLine == true), '', 'none')}">
+                    <td class="QIPad tfcell"></td>
+                    <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                    <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+                    <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+                    <td class="QIBillFreq subRowBackground"></td>
+                    <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">included</td>
+                    <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}</td>
+                    <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+                    <td class="QIPrice"></td>
+                    <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+
+                <!-- below tr will be displayed for configurable product subline -->
+                <tr class="subRow" style="display:{!IF((qi.QIType <> 'Bundle' && qi.QIBelowLine == true && qis.QISLBelowLine == true), '', 'none')}">
+                    <td class="QIPad tfcell" ></td>
+                    <td class="QIImage" style="display:{!displayquoteImage}"></td>
+                    <td class="QIName indentText leftBorderSubRow subRowBackground">{!qis.subline.Catalog_Node__r.LocaleName_F__c}</td>
+                    <td class="QIId subRowBackground" style="display:{!displayquoteId}">{!qis.subline.Catalog_Node__r.Id__c}</td>
+                    <td class="QIBillFreq subRowBackground">{!qis.QISLBillFreq}</td>
+                    <td class="QIPrice subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLListPrice}</td>
+                    <td class="QIDiscountQty subRowBackground" style="display:{!displayquoteDiscount}">{!qis.QISLDiscount_Str}%<span class="{!IF(qis.QISLDiscountImage == null,'discountZero','')}"></span><apex:image rendered="{!IF(qis.QISLDiscountImage == null,'false','true')}" styleClass="discountImage" value="{!$Resource.REVVY__staticui}/uifw/ui/images/icons/{!qis.QISLDiscountImage}"/></td>
+                    <td class="QIDiscountQty rightBorderSubRow subRowBackground">{!CEILING(qis.subline.Quantity__c)}</td>
+                    <td class="QIPrice subRowBackground">{!qis.QISLExtPrice}</td>
+                    <td class="QIPad tlcell">&nbsp;</td>
+                </tr>
+            </apex:repeat>
+
+            <!-- just for the border -->
+            <tr style="display:{!IF(qi.QIBelowLine == true, '', 'none')}">
+                <td class="tfcell" ></td>
+                <td class="tcell" style="display:{!displayquoteImage}"></td>
+                <td class="tcell"></td>
+                <td class="tcell" style="display:{!displayquoteId}"></td>
+                <td class="tcell"></td>
+                <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell" style="display:{!displayquoteDiscount}"></td>
+                <td class="tcell"></td>
+                <td class="tcell"></td>
+                <td class="tlcell"></td>
+            </tr>
+
+        </apex:repeat>
+        <tr style="display:{!IF(qsol.belowTheLineSolItems == 0, 'none', '')}">
+            <td colspan="2" class="tfcell"></td>
+            <td colspan="{!summColSpanVar}"  class="tlcell">&nbsp;</td>
+          </tr>
+          <tr style="display:{!IF(qsol.belowTheLineSolItems == 0, 'none', '')}">
+            <td colspan="{!totalColSpanVar}" class="bottomSpacer">&nbsp;</td>
+          </tr>
+      </apex:repeat>
+
+
+  </table>
+
+  <br/><br/><br/>
+
+
+  <table class="grandSummaryTable">
+      <tr>
+        <td colspan="{!totalColSpanVar}">&nbsp;</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayOneTimeSummary}">{!$Label.MnProposalOneTimeSummary}</td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayWklySummary}">{!$Label.MnProposalWeeklySummary}</td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayMtlySummary}">{!$Label.MnProposalMonthlySummary}</td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayYrlySummary}">{!$Label.MnProposalYearlySummary}</td>
+          <td class="grandSummaryTotalColumn" style="display:{!displayTotalCostofOwner}">{!$Label.MnProposalTotalCostOfOwnership}</td>
+          <td class="grandSummaryTotalColumn" style="display:{!displayOneTimeOnlySummary}">{!$Label.MnProposalTotalSummary}</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayOneTimeSummary}">
+              <apex:outputText value="{!oneTimeSummaryStr}"/>
+          </td>
+
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayWklySummary}">
+              <apex:outputText value="{!wklySummaryStr}"/>
+          </td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayMtlySummary}">
+              <apex:outputText value="{!mtlySummaryStr}"/>
+          </td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayYrlySummary}">
+              <apex:outputText value="{!yrlySummaryStr}"/>
+          </td>
+          <td class="grandSummaryTotalColumn" style="display:{!displayTotalCostofOwner}">
+              <apex:outputText value="{!$Label.revvy__MnProposalFirstYearSummary} {!firstYearTotalStr}"/>
+          </td>
+          <td class="grandSummaryColumn rightBorderSubRow" style="display:{!displayOneTimeOnlySummary}">
+              <apex:outputText value="{!oneTimeSummaryStr}"/>
+          </td>
+      </tr>
+      <tr>
+          <!-- very weird but if the first column has display:none,
+               then PDF generation fails! hence a dummy column -->
+          <td></td>
+          <td class="grandSummaryColumn" style="display:{!displayOneTimeSummary}"></td>
+          <td class="grandSummaryColumn" style="display:{!displayWklySummary}"></td>
+          <td class="grandSummaryColumn" style="display:{!displayMtlySummary}"></td>
+          <td class="grandSummaryColumn" style="display:{!displayYrlySummary}"></td>
+          <td class="grandSummaryTotalColumn" style="display:{!displayTotalCostofOwner}">
+              <apex:outputText value="{!$Label.revvy__MnProposalFollowingYearsSummary} {!followingYearsTotalStr}"/>
+          </td>
+      </tr>
+  </table><br/>
+
+  <!--- Individual Product Terms and Conditions -->
+
+  <div style = "display:{!displayAllTerms};">
+
+  <div class="pageBreakAfter"/>
+
+  <h1 class="prodterms">{!$Label.MnProposalProductTerms}</h1>
+  <br/>
+
+  <!-- Products Terms and Conditions-->
+  <table class="QITable">
+      <!--  Products TR -->
+      <tr style="display:{!displayProductTerms};">
+          <td class="QIPadHdr thead thfcell" >&nbsp;</td>
+          <td class="QINameHdr thead hdrTotalFontColor"  width="35%">{!$Label.MnProposalProducts}</td>
+          <td class="QITermsHdr thead">{!$Label.MnProposalProductTerms}</td>
+          <td class="QIPadHdr thead thlcell" >&nbsp;</td>
+      </tr>
+
+      <apex:repeat value="{!prodTerms}" var="qi">
+          <tr style="display:{!IF(qi.termsandconditions__c == null, 'none', 'table-row')}">
+              <td class="QIPad tfcell thlcell tcell" >{!termCount[qi.Id__c]}</td>
+              <td class="QIName tcell thlcell" >{!qi.Name}</td>
+              <td class="QITerms tcell"><apex:outputField value="{!qi.REVVY__TermsAndConditions__c}"/></td>
+              <td class="QIPad tlcell">&nbsp;&nbsp;</td>
+          </tr>
+      </apex:repeat>
+
+      <tr style="display:{!displayProductTerms}">
+          <td colspan="10" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <tr style="display:{!displayServiceTerms}">
+          <td class="QIPad thead thfcell" ></td>
+          <td class="QINameHdr thead hdrTotalFontColor">{!$Label.MnProposalServices}</td>
+          <td class="QITermsHdr thead">{!$Label.MnProposalServiceTerms}</td>
+          <td class="QIPad thead thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!serviceTerms}" var="qi">
+          <tr style="display:{!IF(qi.termsandconditions__c == null, 'none', 'table-row')}">
+              <td class="QIPad tfcell thlcell tcell" >{!termCount[qi.Id__c]}</td>
+              <td class="QIName tcell thlcell">{!qi.Name}</td>
+              <td class="QITerms tcell"><apex:outputField value="{!qi.REVVY__TermsAndConditions__c}"/></td>
+              <td class="QIPad tlcell">&nbsp;&nbsp;</td>
+          </tr>
+      </apex:repeat>
+
+
+      <tr style="display:{!displayServiceTerms}">
+           <td colspan="10" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  Fixed Bundles TR -->
+      <tr style="display:{!displayBundleTerms}">
+          <td class="QIPad thead thfcell" ></td>
+          <td class="QINameHdr thead hdrTotalFontColor" >{!$Label.MnProposalFixedBundle}</td>
+          <td class="QITermsHdr thead" >{!$Label.MnProposalBundleTerms}</td>
+          <td class="QIPad thead thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!bundleTerms}" var="qi">
+          <tr style="display:{!IF(qi.termsandconditions__c == null, 'none', 'table-row')}">
+              <td class="QIPad tfcell thlcell tcell" >{!termCount[qi.Id__c]}</td>
+              <td class="QIName tcell thlcell">{!qi.Name}</td>
+              <td class="QITerms tcell"><apex:outputField value="{!qi.REVVY__TermsAndConditions__c}"/></td>
+              <td class="QIPad tlcell">&nbsp;&nbsp;</td>
+          </tr>
+      </apex:repeat>
+
+      <tr style="display:{!displayBundleTerms}">
+          <td colspan="10" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+      <!--  Configurables Terms -->
+      <tr style="display:{!displayConfigTerms}">
+          <td class="QIPad thead thfcell" ></td>
+          <td class="QINameHdr thead hdrTotalFontColor" >{!$Label.MnProposalConfigurable}</td>
+          <td class="QITermsHdr thead" >{!$Label.MnProposalConfigTerms}</td>
+          <td class="QIPad thead thlcell" ></td>
+      </tr>
+
+      <apex:repeat value="{!configTerms}" var="qi">
+          <tr style="display:{!IF(qi.termsandconditions__c == null, 'none', 'table-row')}">
+              <td class="QIPad tfcell thlcell tcell" >{!termCount[qi.Id__c]}</td>
+              <td class="QIName tcell thlcell" >{!qi.Name}</td>
+              <td class="QITerms tcell"><apex:outputField value="{!qi.REVVY__TermsAndConditions__c}"/></td>
+              <td class="QIPad tlcell">&nbsp;&nbsp;</td>
+          </tr>
+      </apex:repeat>
+
+      <tr style="display:{!displayBundleTerms}">
+          <td colspan="10" class="bottomSpacer">&nbsp;</td>
+      </tr>
+
+  </table>
+
+</div>
+
+<!--</apex:outputPanel> -->
+
+<div class="{!IF(renderTermsOfService, 'pageBreakAfter', '')}"/>
+<h1 class="termsOfServiceTitle"
+    style="display:{!IF((quoteParams.termsOfServiceTitle__c == null || !renderTermsOfService || quoteParams.termsOfService__c == null), 'none', 'inline')}">
+    {!quoteParams.termsOfServiceTitle__c}
+</h1>
+<br/>
+<apex:outputPanel rendered="{!renderTermsOfService}">
+    <apex:outputField value="{!quoteParams.REVVY__termsOfService__c}" />
+</apex:outputPanel>
+
+<div class="{!IF(renderClosingComments, 'pageBreakAfter', '')}"/>
+<h1 class="closingCommentsTitle"
+    style="display:{!IF((quoteParams.closingCommentsTitle__c == null || !renderClosingComments || quoteParams.closingComments__c == null), 'none', 'inline')}">
+    {!quoteParams.closingCommentsTitle__c}
+</h1>
+<br/>
+<apex:outputPanel rendered="{!renderClosingComments}">
+    <apex:outputField value="{!quoteParams.REVVY__closingComments__c}"/>
+</apex:outputPanel>
+<div class="signatureDiv avoidPageBreak">
+    <br/>
+    <br/>
+    <br/>
+    {!$Label.revvy__MnProposalSignedBy}
+    <br/>
+    <br/>
+    <br/>
+    <table width="100%">
+        <tr>
+            <td width="50%">___________________________</td>
+            <td width="50%">___________________________</td>
+        </tr>
+        <tr>
+            <td width="50%">{!quote.Account__r.Name}</td>
+            <td width="50%">{!$Label.revvy__MnProposalSignedDate}</td>
+        </tr>
+    </table>
+   </div>
+</div>
+
+</apex:page>

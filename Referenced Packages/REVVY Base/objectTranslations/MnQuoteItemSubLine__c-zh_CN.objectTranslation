@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quote Item Sub Line --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Absolute value of Adjustment 1 --></help>
+        <label>加价（绝对金额）</label>
+        <name>Adjustment1Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Adjustment 1 is based on percentage (e.g., 20%) or on an absolute amount (e.g., $100). --></help>
+        <label>加价类型</label>
+        <name>Adjustment1Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of Adjustment 1 --></help>
+        <label>加价 (%)</label>
+        <name>Adjustment1__c</name>
+    </fields>
+    <fields>
+        <help><!-- How often the customer is charged for a product. Options are one-time, weekly, monthly, and yearly. --></help>
+        <label>结账频率</label>
+        <name>Billing_Frequency_WF__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique Salesforce ID for the product that this price list line refers to. --></help>
+        <label>产品</label>
+        <name>Catalog_Node__c</name>
+        <relationshipLabel>报价项目子行</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Cost Price of a product in quote sub line --></help>
+        <label>成本</label>
+        <name>CostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Value of the absolute discount that is applied to the product (e.g., $20 off). --></help>
+        <label>折扣（绝对金额）</label>
+        <name>Discount_Absolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether the discount is an absolute discount (e.g., $20 off) or a percentage discount (e.g., 20% off). --></help>
+        <label>折扣类型</label>
+        <name>Discount_Type__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Value of the percentage discount that is applied to the product (e.g., 20% off). --></help>
+        <label>手动折扣(%)</label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies If manual discount can be applied as defined in the Catalog. --></help>
+        <label><!-- Discountable --></label>
+        <name>Discountable__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>报价项目子行 ID</label>
+        <name>ExtId__c</name>
+    </fields>
+    <fields>
+        <label>总价</label>
+        <name>Extended_Price_Display_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of product multiplied by the quantity of products. (Unit price x quantity) --></help>
+        <label>总价</label>
+        <name>Extended_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Freezes the pricing and prevents manual discounts on this line --></help>
+        <label><!-- Freeze Pricing --></label>
+        <name>FreezePricing__c</name>
+    </fields>
+    <fields>
+        <help><!-- Controls if manual discount is allowed.. --></help>
+        <label><!-- Frozen --></label>
+        <name>Frozen__c</name>
+    </fields>
+    <fields>
+        <help><!-- The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort sub-lines of a configurable product. --></help>
+        <label>组号</label>
+        <name>GroupNumber__c</name>
+    </fields>
+    <fields>
+        <help><!-- Deprecated --></help>
+        <label>不建议</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Flag indicates whether the quote item is a below-the-line recommendation. Items flagged shouldn&apos;t be included with final calculations. --></help>
+        <label>低于一般标准</label>
+        <name>IsBelowLine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Install Base Relevant --></label>
+        <name>IsInstallBase__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the Cost price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label>成本价格系统是否填入</label>
+        <name>IsSystemCostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the List price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label>标价系统是否填入</label>
+        <name>IsSystemListPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- This attribute is to track if the Unit price was calculated by system or user entered. Value is false for user entered. --></help>
+        <label>单位价格系统是否填入</label>
+        <name>IsSystemUnitPrice__c</name>
+    </fields>
+    <fields>
+        <label>行类型</label>
+        <name>LineType__c</name>
+        <picklistValues>
+            <masterLabel>Not tracked on contract</masterLabel>
+            <translation><!-- Not tracked on contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Absolute value of the margin --></help>
+        <label>毛利（绝对金额）</label>
+        <name>MarginAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the Margin is based on percentage (e.g., 20%) or on an absolute amount(e.g., $100). --></help>
+        <label>毛利类型</label>
+        <name>MarginType__c</name>
+        <picklistValues>
+            <masterLabel>Absolute</masterLabel>
+            <translation><!-- Absolute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percent</masterLabel>
+            <translation><!-- Percent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Percent value of the margin --></help>
+        <label>毛利 (%)</label>
+        <name>Margin__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag is set by the system when the workflow suggests an approval is needed for the underlying quote. --></help>
+        <label>需要批准</label>
+        <name>NeedsApproval__c</name>
+    </fields>
+    <fields>
+        <help><!-- The SectionNumber, OptionNumber, and GroupNumber fields are used internally to sort sub-lines of a configurable product. --></help>
+        <label>选项号</label>
+        <name>OptionNumber__c</name>
+    </fields>
+    <fields>
+        <label>价格显示</label>
+        <name>PriceDisplay_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the Price List Line object used to derive the List Price for this product. --></help>
+        <label><!-- Price List Line --></label>
+        <name>PriceListLine__c</name>
+        <relationshipLabel><!-- QuoteSubLineItem --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- List price of product. --></help>
+        <label>标价</label>
+        <name>Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Quantity of products. --></help>
+        <label>数量</label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the line item (i.e., the quote item) in the quote. --></help>
+        <label>报价项目</label>
+        <name>QuoteItem__c</name>
+        <relationshipLabel>报价项目子行</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The SectionNumber, OptionNumber, and GroupNumber fields  are used internally to sort sub-lines of a configurable product. --></help>
+        <label>部分号</label>
+        <name>SectionNumber__c</name>
+    </fields>
+    <fields>
+        <label>源合同项目子行</label>
+        <name>SourceContractItemSubLine__c</name>
+        <relationshipLabel>报价项目子行</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Total Cost (taking quantity into account). --></help>
+        <label>总成本价格</label>
+        <name>TotalCostPrice__c</name>
+    </fields>
+    <fields>
+        <help><!-- Aggregate price before any discounts are applied. --></help>
+        <label>总标价</label>
+        <name>Total_Price_Before_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the BOM from the Configuration Engine. --></help>
+        <label>配置 UID 的 BOM</label>
+        <name>UID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the UI section that is returned by the product configuration. --></help>
+        <label>部分</label>
+        <name>UISection__c</name>
+    </fields>
+    <fields>
+        <label>（不建议）单位价格</label>
+        <name>Unit_Price_F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unit price of product (list price less the discount) --></help>
+        <label>单位价格</label>
+        <name>Unit_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total volume discount off of list price (e.g., $100 off). --></help>
+        <label><!-- Vol. Disc. (Abs) --></label>
+        <name>VolDiscAbsolute__c</name>
+    </fields>
+    <fields>
+        <help><!-- Percentage volumn discount off of list price (e.g., 20% off). --></help>
+        <label><!-- Vol. Disc. (%) --></label>
+        <name>VolDisc__c</name>
+    </fields>
+    <layouts>
+        <layout>QuoteItemSubLine Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Id --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>成本价格必须大于或等于零</errorMessage>
+        <name>VMnCostPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>标价必须大于或等于零</errorMessage>
+        <name>VMnListPriceValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Manual Discount/ Unit Price Cannot be changed if Product is not discountable or line is marked as frozen. --></errorMessage>
+        <name>VMnManDiscountValidity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Unit Price should be greater than or equal to zero --></errorMessage>
+        <name>VMnUnitPriceValidity1</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>数量不能为零或负数</errorMessage>
+        <name>VmnQuantityValValidity</name>
+    </validationRules>
+</CustomObjectTranslation>

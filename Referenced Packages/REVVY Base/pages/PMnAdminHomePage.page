@@ -1,0 +1,54 @@
+<apex:page sidebar="false" tabstyle="MnAdmin__tab">
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/admin.js"></script>
+
+    <style>
+        .adminhome {
+            padding: 16px;
+        }
+    </style>
+
+    <div  class="colWrapper">
+      <div class="collwrp" >
+        <div class="coll" >
+          <c:CMnAdminLeftNav />
+        </div>
+      </div>
+      <div class="colr">
+        <!--- Actual VF code goes here -->
+
+          <div class="adminhome">
+            <!--
+              <br/>
+              <br/>
+              <h1><font size="4">Quote Force Admin Page</font></h1>
+              <br/>
+              <br/>
+              <h2>Under Construction...</h2>
+
+              <br/>
+              <br/>
+              <h2>Test Config Engine Apis..</h2>
+              <br/>
+              <a href="/apex/PMnConfigEngineTestData">Config Engine Test Data Page</a>
+              -->
+
+              <img src="{!URLFOR($Resource.AdminHomePageImage_Resources, 'AdminHomePage.jpg')}" usemap="#navmap"
+                width="1015" height="957"
+              />
+
+              <map name="navmap">
+                <area shape="rect" coords="30,30,330,295" href="/apex/PMnProductHome" alt="Products"/>
+                <area shape="rect" coords="360,30,660,295" href="/apex/PMnCatalogHome" alt="Catalogs"/>
+                <area shape="rect" coords="690,30,990,295" href="/apex/PMnAttributeHome" alt="Attributes"/>
+                <area shape="rect" coords="30,355,330,620" href="/apex/PMnModelHome" alt="Config"/>
+                <area shape="rect" coords="360,355,660,620" href="/apex/PMnPriceListHome" alt="Pricing"/>
+                <area shape="rect" coords="690,355,990,620" href="/apex/PMnSetDataRuleHome" alt="Set Data Rule"/>
+              </map>
+
+          </div>
+        <!-- ---------- -->
+      </div>
+    </div>
+</apex:page>

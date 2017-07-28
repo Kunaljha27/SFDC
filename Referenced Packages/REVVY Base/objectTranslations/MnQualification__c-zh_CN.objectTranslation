@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Qualification --></value>
+    </caseValues>
+    <fields>
+        <label><!-- External ID --></label>
+        <name>ExternalID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incentive Program Line --></label>
+        <name>Goal__c</name>
+        <relationshipLabel><!-- Qualifications --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- RMCloudModifiedDate --></label>
+        <name>RMCloudModifiedDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier10 High Value --></label>
+        <name>Tier10HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier10 Low Value --></label>
+        <name>Tier10LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier10 Name --></label>
+        <name>Tier10Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier1 High Value --></label>
+        <name>Tier1HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier1 Low Value --></label>
+        <name>Tier1LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier1 Name --></label>
+        <name>Tier1Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier2 High Value --></label>
+        <name>Tier2HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier2 Low Value --></label>
+        <name>Tier2LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier2 Name --></label>
+        <name>Tier2Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier3 High Value --></label>
+        <name>Tier3HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier3 Low Value --></label>
+        <name>Tier3LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier3 Name --></label>
+        <name>Tier3Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier4 High Value --></label>
+        <name>Tier4HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier4 Low Value --></label>
+        <name>Tier4LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier4 Name --></label>
+        <name>Tier4Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier5 High Value --></label>
+        <name>Tier5HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier5 Low Value --></label>
+        <name>Tier5LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier5 Name --></label>
+        <name>Tier5Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier6 High Value --></label>
+        <name>Tier6HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier6 Low Value --></label>
+        <name>Tier6LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier6 Name --></label>
+        <name>Tier6Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier7 High Value --></label>
+        <name>Tier7HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier7 Low Value --></label>
+        <name>Tier7LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier7 Name --></label>
+        <name>Tier7Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier8 High Value --></label>
+        <name>Tier8HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier8 Low Value --></label>
+        <name>Tier8LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier8 Name --></label>
+        <name>Tier8Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier9 High Value --></label>
+        <name>Tier9HighValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier9 Low Value --></label>
+        <name>Tier9LowValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier9 Name --></label>
+        <name>Tier9Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier Basis Expression --></label>
+        <name>TierBasisExpression__c</name>
+        <relationshipLabel><!-- Qualifications --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

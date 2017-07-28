@@ -1,0 +1,49 @@
+<apex:page standardController="Opportunity" extensions="pse.CreateCRController" tabStyle="pse__Proj__c" action="{!initForAccountDetail}">
+
+  <script language="javascript">
+      function updateProjectId(newProjectId) {
+          document.getElementById('{!$Component.projSelFrm.projectId}').value = newProjectId;
+      }  
+  </script>
+    
+    <apex:sectionHeader title="Select Project" />
+    <apex:form id="projSelFrm">     
+        <apex:pageMessages />
+        <apex:inputHidden value="{!formBean.projectId}" id="projectId" />
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Filter Projects"  columns="1">
+                    <apex:pageBlockSectionItem labelStyle="left">
+                       <apex:outputLabel value="Project Name" for="filterProjectName" />                                  
+                       <apex:inputText value="{!formBean.filterProjectName}" id="filterProjectName"/>
+                    </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+              	<apex:commandButton value="Filter" action="{!filterProjectsForAccountDetails}" id="filterButton" status="filterStatus" />
+              	<apex:commandButton value="Clear" action="{!clearFilter}" status="filterStatus"  />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="" id="projSelBlk">
+            <apex:pageBlockButtons id="projSelBlkBtns">
+                <apex:commandButton value="Cancel" action="{!cancelFromAccountDetails}" immediate="true"/>
+                <apex:commandButton value="Next" action="{!nextFromAccountDetails}" id="nextButton"  />
+            </apex:pageBlockButtons>
+            
+           <apex:pageBlockSection title="Projects" columns="1" id="projListPBS">                                  
+               <apex:pageBlockTable value="{!formBean.projectsForAccount}" var="projAcc" >
+                   <apex:column rendered="{!IF(formBean.projectId == projAcc.Id, true, false)}">
+                        <input type="radio" name="justADummyForVF" onclick="updateProjectId('{!projAcc.Id}')" value="{!projAcc.Id}" checked="true"/>                        
+                   </apex:column>
+                   <apex:column rendered="{!IF(formBean.projectId == projAcc.Id, false, true)}">
+                        <input type="radio" name="justADummyForVF" onclick="updateProjectId('{!projAcc.Id}')" value="{!projAcc.Id}"/>                        
+                   </apex:column>
+                   <apex:column value="{!projAcc.Name}"/> 
+                   <apex:column value="{!projAcc.pse__Opportunity__c}"/>
+                   <apex:column value="{!projAcc.pse__Region__c}"/>
+                   <apex:column value="{!projAcc.pse__Group__c}"/>
+                   <apex:column value="{!projAcc.pse__Practice__c}"/>  
+               </apex:pageBlockTable>
+           </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>    
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page title="PSA Operations" tabStyle="PSE_Operations__tab">
+<br/>
+<apex:sectionHeader title="PSA Operations"/>
+  <apex:pageBlock title="Operations Functions">
+      <apex:outputLink value="{!URLFOR($Page.pse__MissingTimecard)}">Generate Missing Timecards</apex:outputLink>
+  </apex:pageBlock>
+  
+</apex:page>

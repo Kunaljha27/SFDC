@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>CurrencyHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>This core object is only used if you manage dated exchange rates using FinancialForce PSA instead of Salesforce advanced currency management. Associate every currency record (with matching currency code) to a currency defined by Salesforce multiple currencies (multi-currency enablement is required by PSA). Currencies have a master-detail relationship with dated exchange rates (currency exchange rates). One currency is designated as corporate.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Currency_Code__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <description>Represents the Currency Code abbreviation (e.g. USD, EUR, CAD) for the currency.  This is usually 3 characters.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Represents the Currency Code abbreviation (e.g. USD, EUR, CAD) for the currency.  This is usually 3 characters.</inlineHelpText>
+        <label>Currency Code</label>
+        <length>6</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Corporate_Currency__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates whether currency record is for Corporate Currency - i.e. currency to which all other currencies are compared for exchange rate purposes.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates whether currency record is for Corporate Currency - i.e. currency to which all other currencies are compared for exchange rate purposes.</inlineHelpText>
+        <label>Is Corporate Currency</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Test__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If checked, indicates that this currency record is only being used in test mode and is not to be used for &apos;real&apos; (production) exchange rate conversions, and that any exchange rates defined for this currency also should not be used for &apos;real&apos; conversions.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, indicates that this currency record is only being used in test mode and is not to be used for &apos;real&apos; (production) exchange rate conversions, and that any exchange rates defined for this currency also should not be used for &apos;real&apos; conversions.</inlineHelpText>
+        <label>Is Test</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Void__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If checked, indicates that this currency record is invalid and is not to be used, and that any exchange rates defined for this currency also should not be used.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, indicates that this currency record is invalid and is not to be used, and that any exchange rates defined for this currency also should not be used.</inlineHelpText>
+        <label>Is Void</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Currency</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Currency_Code__c</columns>
+        <columns>Is_Corporate_Currency__c</columns>
+        <columns>Is_Test__c</columns>
+        <columns>Is_Void__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Currency Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Currencies</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Currency_Code__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Is_Corporate_Currency__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Is_Test__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Is_Void__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Currency_Code__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Is_Corporate_Currency__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Is_Test__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Is_Void__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>LAST_UPDATE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Currency_Code__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Is_Corporate_Currency__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Is_Test__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Is_Void__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CREATEDBY_USER</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>LAST_UPDATE</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>Currency_Code__c</searchFilterFields>
+        <searchFilterFields>Is_Corporate_Currency__c</searchFilterFields>
+        <searchFilterFields>Is_Test__c</searchFilterFields>
+        <searchFilterFields>Is_Void__c</searchFilterFields>
+        <searchFilterFields>CREATED_DATE</searchFilterFields>
+        <searchFilterFields>LAST_UPDATE</searchFilterFields>
+        <searchResultsAdditionalFields>Currency_Code__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Is_Corporate_Currency__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Is_Test__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Is_Void__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

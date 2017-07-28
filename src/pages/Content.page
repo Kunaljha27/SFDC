@@ -1,0 +1,32 @@
+<apex:page standardController="Account" extensions="contentController">
+<apex:sectionHeader title="Content" subtitle="Upload Attachment"/>
+<apex:form enctype="multipart/form-data">
+    <apex:pageMessages />
+    <apex:pageBlock >   
+    <apex:pageBlockButtons >
+         
+         <apex:commandButton action="{!go}" value="Upload" status="status"/>
+       </apex:pageBlockButtons>
+       
+   <apex:actionStatus id="status" >
+                <apex:facet name="Uploading....">
+                        <apex:image url="/img/loading.gif"/>
+                    </apex:facet>
+               </apex:actionStatus>
+
+    <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+      
+       <apex:pageBlockSectionItem > 
+        <apex:outputLabel value="Title"/> 
+       <apex:inputText value="{!FileName}" />
+       </apex:pageBlockSectionItem>
+      
+       <apex:pageBlockSectionItem > 
+        <apex:outputLabel value="File" for="file"/> 
+       <apex:inputFile value="{!file.versionData}"  fileName="{!file.pathOnClient}" />
+       </apex:pageBlockSectionItem>
+ 
+     </apex:pageBlockSection>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

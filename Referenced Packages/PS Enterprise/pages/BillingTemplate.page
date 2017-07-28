@@ -1,0 +1,273 @@
+<apex:page controller="pse.ProjectBillingController" >
+
+<style type="text/css">
+    .selectCheckbox { width:35px; }
+    div#wait { width: 100%; height: 100% }
+    div#loading { width: 100%; height: 100%; position: fixed; top: 0px;}
+</style>
+
+<script type="text/javascript">
+function setVisible(name, visible) {
+  var e = document.getElementById(name);
+  if (e != null) {
+    if (visible) {
+      e.setAttribute("style", "display: block");
+      e.style.cssText = "display: block";
+    } else {
+      e.setAttribute("style", "display: none");
+      e.style.cssText = "display: none";
+    }
+  }
+}
+
+function wait(val) {
+  setVisible('loading', val);
+  setVisible('wait', val);
+}
+
+</script>
+
+<div id="wait" class="waitingSearchDiv waitingSearchDivOpacity" style="display: none"></div>
+<div id="loading" class="waitingSearchDiv" style="display: none">
+ <div id="waitingHolder" class="waitingHolder">
+  <img class="waitingImage" src="/img/loading.gif"/>
+  <span class="waitingDescription">Processing, please wait...</span>
+ </div>
+</div>
+
+  <apex:sectionHeader title="{!IF(project.Name=null,$Label.Billing_By_Account,$Label.Billing_By_Project)}" subtitle="{!IF(project.Name=null,project.Account__r.Name,project.Name)}" help="{!$Page.pse__ProjectBillingHelp}"/>
+  <apex:pageMessages id="messages"/>
+  <apex:form id="itemForm">
+      <script type="text/javascript">
+          function selectAll()
+          {
+              var inputs = document.getElementById("{!$Component.itemForm}").getElementsByTagName("input");
+              if (inputs == null || inputs.length == 0)
+                  return;
+              for (var i=0; i < inputs.length; i++)
+              {
+                  if (inputs[i].type != null && inputs[i].type.toLowerCase() == "checkbox"
+                   && inputs[i].id != null && inputs[i].id.indexOf("includedCBox") != -1)
+                      inputs[i].checked = true;
+              }
+          }
+      </script>
+
+      <apex:pageBlock title="Information">
+          <apex:pageBlockSection columns="2">
+              <apex:outputField value="{!project.Name}" rendered="{!project.Name!=null}"/>
+              <apex:outputField value="{!project.pse__Account__c}"/>
+              <apex:outputField value="{!project.CurrencyIsoCode}"/>
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+      <apex:pageBlock title="Billing Eligible Items" id="billingItemsBlock">
+          <apex:pageBlockButtons >
+              <apex:commandButton value="{!$Label.common_label_filter}" action="{!filter}" reRender="billingItemsPanel,messages" onclick="wait(true);" oncomplete="wait(false);"/>
+              <apex:commandButton value="{!$Label.common_label_clear_filters}" action="{!clearFilter}" reRender="billingItemsPanel,filterSection,advFilters,messages" onclick="wait(true);" oncomplete="wait(false);"/>
+              <input type="button" class="btn" onclick="selectAll()" value="Select All"></input>
+              <apex:commandButton value="Generate Billing Event" action="{!generate}" />
+              <apex:commandButton value="{!$Label.common_label_cancel}" action="{!cancel}"/>
+          </apex:pageBlockButtons>
+
+          <apex:pageBlockSection id="filterSection" title="Filter" columns="2">
+              <apex:pageBlockSectionItem rendered="{!includeTimecards}"><apex:outputLabel for="tcChx" value="Timecards"/><apex:inputCheckbox value="{!isTimecardsSelected}" /></apex:pageBlockSectionItem>
+              <apex:commandLink action="{!toggleFilterT}" value="{!IF(applyFilterT,'Hide','Show')} Filters" rendered="{!hasFilterT}" rerender="advFilters,filterSection"/>
+              <apex:outputText value=" " rendered="{!NOT(hasFilterT)}"/>
+              
+              <apex:pageBlockSectionItem rendered="{!includeExpenses}"><apex:outputLabel for="expChx" value="Expenses"/><apex:inputCheckbox value="{!isExpensesSelected}" /></apex:pageBlockSectionItem>
+              <apex:commandLink action="{!toggleFilterE}" value="{!IF(applyFilterE,'Hide','Show')} Filters" rendered="{!hasFilterE}" rerender="advFilters,filterSection"/>
+              <apex:outputText value=" " rendered="{!NOT(hasFilterE)}"/>
+              
+              <apex:pageBlockSectionItem rendered="{!includeMilestones}"><apex:outputLabel for="msChx" value="Milestones"/><apex:inputCheckbox value="{!isMilestonesSelected}" /></apex:pageBlockSectionItem>
+              <apex:commandLink action="{!toggleFilterM}" value="{!IF(applyFilterM,'Hide','Show')} Filters" rendered="{!hasFilterM}" rerender="advFilters,filterSection"/>
+              <apex:outputText value=" " rendered="{!NOT(hasFilterM)}"/>
+              
+              <apex:pageBlockSectionItem rendered="{!includeMiscAdj}"><apex:outputLabel for="adjChx" value="Miscellaneous Adjustments"/><apex:inputCheckbox value="{!isAdjSelected}" /></apex:pageBlockSectionItem>
+              <apex:commandLink action="{!toggleFilterA}" value="{!IF(applyFilterA,'Hide','Show')} Filters" rendered="{!hasFilterA}" rerender="advFilters,filterSection"/>
+              <apex:outputText value=" " rendered="{!NOT(hasFilterA)}"/>
+              
+              <apex:pageBlockSectionItem rendered="{!includeBudgets}"><apex:outputLabel for="budChx" value="Budgets"/><apex:inputCheckbox value="{!isBudgetsSelected}" /></apex:pageBlockSectionItem>
+              <apex:commandLink action="{!toggleFilterB}" value="{!IF(applyFilterB,'Hide','Show')} Filters" rendered="{!hasFilterB}" rerender="advFilters,filterSection"/>
+              <apex:outputText value=" " rendered="{!NOT(hasFilterB)}"/>
+              
+              <apex:inputField value="{!filterRef.pse__Resource__c}" required="false"/>
+              <apex:inputField value="{!filterRef.pse__Start_Date__c}" required="false"/>
+              <apex:inputField value="{!filterRef.pse__End_Date__c}" required="false"/>
+          </apex:pageBlockSection>
+          
+      
+      <apex:outputPanel id="advFilters">    
+          <apex:pageBlock title="Advanced Filters" rendered="{! applyFilterT || applyFilterE || applyFilterB || applyFilterA || applyFilterM}">
+      
+	          <apex:pageBlockSection id="timecardFilters" title="Timecard Filters" columns="2" rendered="{!applyFilterT}">
+	              <apex:repeat value="{!filterFieldsT}" var="f">
+	                  <apex:inputField value="{!filterT[f.fieldPath]}" required="false" label="{!f.Label}"/>
+	              
+	                  <apex:selectList value="{!filterTypeT[f.fieldPath]}" size="1">
+						  <apex:selectOptions value="{!IF(f.Type='boolean' || f.Type='reference',filterTypes2,filterTypes)}" />				  
+					  </apex:selectList>
+	              
+	              </apex:repeat>
+	          </apex:pageBlockSection>
+
+	          <apex:pageBlockSection id="expenseFilters" title="Expense Filters" columns="2" rendered="{!applyFilterE}">
+	              <apex:repeat value="{!filterFieldsE}" var="f">
+	                  <apex:inputField value="{!filterE[f.fieldPath]}" required="false" label="{!f.Label}"/>
+	              
+	                  <apex:selectList value="{!filterTypeE[f.fieldPath]}" size="1">
+						  <apex:selectOptions value="{!IF(f.Type='boolean' || f.Type='reference',filterTypes2,filterTypes)}" />				  
+					  </apex:selectList>
+	              </apex:repeat>
+	          </apex:pageBlockSection>
+
+	          <apex:pageBlockSection id="milestoneFilters" title="Milestone Filters" columns="2" rendered="{!applyFilterM}">
+	              <apex:repeat value="{!filterFieldsM}" var="f">
+	                  <apex:inputField value="{!filterM[f.fieldPath]}" required="false" label="{!f.Label}"/>
+	              
+	                  <apex:selectList value="{!filterTypeM[f.fieldPath]}" size="1">
+						  <apex:selectOptions value="{!IF(f.Type='boolean' || f.Type='reference',filterTypes2,filterTypes)}" />				  
+					  </apex:selectList>
+	              </apex:repeat>
+	          </apex:pageBlockSection>
+
+	          <apex:pageBlockSection id="miscadjFilters" title="Misc Adj Filters" columns="2" rendered="{!applyFilterA}">
+	              <apex:repeat value="{!filterFieldsA}" var="f">
+	                  <apex:inputField value="{!filterA[f.fieldPath]}" required="false" label="{!f.Label}"/>
+	              
+	                  <apex:selectList value="{!filterTypeA[f.fieldPath]}" size="1">
+						  <apex:selectOptions value="{!IF(f.Type='boolean' || f.Type='reference',filterTypes2,filterTypes)}" />				  
+					  </apex:selectList>
+	              </apex:repeat>
+	          </apex:pageBlockSection>
+
+	          <apex:pageBlockSection id="budgetFilters" title="Budget Filters" columns="2" rendered="{!applyFilterB}">
+	              <apex:repeat value="{!filterFieldsB}" var="f">
+	                  <apex:inputField value="{!filterB[f.fieldPath]}" required="false" label="{!f.Label}"/>
+	              
+	                  <apex:selectList value="{!filterTypeB[f.fieldPath]}" size="1">
+						  <apex:selectOptions value="{!IF(f.Type='boolean' || f.Type='reference',filterTypes2,filterTypes)}" />				  
+					  </apex:selectList>
+	              </apex:repeat>
+	          </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:outputPanel>
+
+<apex:outputPanel id="billingItemsPanel">
+          <apex:pageBlockSection title="Timecards" id="tcSection" rendered="{!includeTimecards}" columns="1">
+          <apex:outputText rendered="{!warnT!=null}">{!MsgT}</apex:outputText>
+
+          <apex:pageBlockTable value="{!timecards}" var="tc" rendered="{!renderTimecards}">
+              <apex:column ><apex:inputCheckbox id="includedCBox" styleClass="selectCheckbox" value="{!tc.selected}" /></apex:column>
+              <apex:column headerValue="Name">
+                  <a href="{!URLFOR($Action.Timecard__c.View, tc.tc.Id)}" target="_blank">{!tc.tc.Name}</a>
+              </apex:column>
+              <apex:column value="{!tc.tc.pse__Project__c}" rendered="{!showProjColumn}"/>
+              <apex:column headerValue="{!$Label.common_label_resource}" value="{!tc.tc.Resource__r.Name}" />
+
+              <apex:column value="{!tc.tc.pse__Total_Billable_Amount__c}"              rendered="{!NOT(hasDisplayT)}"/>
+              <apex:column value="{!tc.tc.pse__Total_Hours__c}"                        rendered="{!NOT(hasDisplayT)}"/>
+              <apex:column value="{!tc.tc.pse__Total_Days_Worked__c}"                  rendered="{!NOT(hasDisplayT)}"/>
+              <apex:column value="{!tc.tc.Timecard_Header__r.pse__Bill_Rate__c}"       rendered="{!NOT(hasDisplayT)}"/>
+              <apex:column value="{!tc.tc.Timecard_Header__r.pse__Daily_Bill_Rate__c}" rendered="{!NOT(hasDisplayT)}"/>
+              <apex:column value="{!tc.tc.pse__Start_Date__c}"                         rendered="{!NOT(hasDisplayT)}"/>
+              <apex:column value="{!tc.tc.pse__End_Date__c}"                           rendered="{!NOT(hasDisplayT)}"/>
+
+	          <apex:repeat value="{!displayFieldsT}" var="f">
+	                  <apex:column value="{!tc.tc[f.fieldPath]}" headerValue="{!f.Label}"/>
+	          </apex:repeat>
+
+          </apex:pageBlockTable>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="Expenses" id="expSection" rendered="{!includeExpenses}" columns="1">
+          <apex:outputText rendered="{!warnE!=null}">{!MsgE}</apex:outputText>
+          <apex:pageBlockTable value="{!expenses}" var="exp" rendered="{!renderExpenses}">
+              <apex:column ><apex:inputCheckbox id="includedCBox" styleClass="selectCheckbox" value="{!exp.selected}" /></apex:column>
+              <apex:column headerValue="Name">
+                  <a href="{!URLFOR($Action.Expense__c.View, exp.exp.Id)}" target="_blank" >{!exp.exp.Name}</a>
+              </apex:column>
+              <apex:column value="{!exp.exp.pse__Project__c}" rendered="{!showProjColumn}"/>
+              <apex:column headerValue="{!$Label.common_label_resource}" value="{!exp.exp.Resource__r.Name}" />
+              
+              
+              <apex:column value="{!exp.exp.pse__Type__c}"             rendered="{!NOT(hasDisplayE)}"/>
+              <apex:column value="{!exp.exp.pse__Expense_Date__c}"     rendered="{!NOT(hasDisplayE)}"/>
+              <apex:column value="{!exp.exp.pse__Billing_Currency__c}" rendered="{!NOT(hasDisplayE)}"/>
+              <apex:column value="{!exp.exp.pse__Billing_Amount__c}"   rendered="{!NOT(hasDisplayE)}"/>
+              
+              <apex:repeat value="{!displayFieldsE}" var="f">
+	                  <apex:column value="{!exp.exp[f.fieldPath]}" headerValue="{!f.Label}"/>
+	          </apex:repeat>
+              
+              
+          </apex:pageBlockTable>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="Milestones" id="msSection" rendered="{!includeMilestones}" columns="1">
+          <apex:outputText rendered="{!warnM!=null}">{!MsgM}</apex:outputText>
+          <apex:pageBlockTable value="{!milestones}" var="ms" rendered="{!renderMilestones}">
+              <apex:column ><apex:inputCheckbox id="includedCBox" value="{!ms.selected}" /></apex:column>
+              <apex:column headerValue="Name">
+                  <a href="{!URLFOR($Action.Milestone__c.View, ms.ms.Id)}" target="_blank">{!ms.ms.Name}</a>
+              </apex:column>
+              <apex:column value="{!ms.ms.pse__Project__c}" rendered="{!showProjColumn}"/>
+
+              <apex:column value="{!ms.ms.pse__Actual_Date__c}"      rendered="{!NOT(hasDisplayM)}"/>
+              <apex:column value="{!ms.ms.pse__Description__c}"      rendered="{!NOT(hasDisplayM)}"/>
+              <apex:column value="{!ms.ms.pse__Milestone_Amount__c}" rendered="{!NOT(hasDisplayM)}"/>
+
+	          <apex:repeat value="{!displayFieldsM}" var="f">
+	                  <apex:column value="{!ms.ms[f.fieldPath]}" headerValue="{!f.Label}"/>
+	          </apex:repeat>
+
+          </apex:pageBlockTable>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="Miscellaneous Adjustments" rendered="{!includeMiscAdj}" columns="1">
+          <apex:outputText rendered="{!warnA!=null}">{!MsgA}</apex:outputText>
+          <apex:pageBlockTable value="{!miscAdj}" var="misc" rendered="{!renderMiscAdj}">
+              <apex:column ><apex:inputCheckbox id="includedCBox" value="{!misc.selected}" /></apex:column>
+              <apex:column headerValue="Name">
+                  <a href="{!URLFOR($Action.Miscellaneous_Adjustment__c.View, misc.misc.Id)}" target="_blank">{!misc.misc.Name}</a>
+              </apex:column>
+              <apex:column value="{!misc.misc.pse__Project__c}" rendered="{!showProjColumn}"/>
+
+              <apex:column value="{!misc.misc.pse__Effective_Date__c}" rendered="{!NOT(hasDisplayA)}"/>
+              <apex:column value="{!misc.misc.pse__Description__c}"    rendered="{!NOT(hasDisplayA)}"/>
+              <apex:column value="{!misc.misc.pse__Amount__c}"         rendered="{!NOT(hasDisplayA)}"/>
+
+	          <apex:repeat value="{!displayFieldsA}" var="f">
+	                  <apex:column value="{!misc.misc[f.fieldPath]}" headerValue="{!f.Label}"/>
+	          </apex:repeat>
+
+          </apex:pageBlockTable>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="Budgets" rendered="{!includeBudgets}" columns="1">
+          <apex:outputText rendered="{!warnB!=null}">{!MsgB}</apex:outputText>
+          <apex:pageBlockTable value="{!budgets}" var="b" rendered="{!renderBudgets}">
+              <apex:column ><apex:inputCheckbox id="includedCBox" value="{!b.selected}" /></apex:column>
+              <apex:column headerValue="Name">
+                  <a href="{!URLFOR($Action.Budget__c.View, b.budget.Id)}" target="_blank">{!b.budget.Name}</a>
+              </apex:column>
+              <apex:column value="{!b.budget.pse__Project__c}" rendered="{!showProjColumn}"/>
+
+              <apex:column value="{!b.budget.pse__Effective_Date__c}" rendered="{!NOT(hasDisplayB)}"/>
+              <apex:column value="{!b.budget.pse__Description__c}"    rendered="{!NOT(hasDisplayB)}"/>
+              
+              <apex:column headerValue="{!$ObjectType.pse__Budget__c.fields.pse__Pre_Billed_Amount__c.label}" rendered="{!NOT(hasDisplayB)}" >
+                 <apex:outputField value="{!b.budget.pse__Pre_Billed_Amount__c}" rendered="{!UseNewPreBillField && b.budget.pse__Pre_Billed_Amount__c!=null}"/>
+                 <apex:outputField value="{!b.budget.pse__PreBilledAmount__c}"   rendered="{!NOT(UseNewPreBillField) || b.budget.pse__Pre_Billed_Amount__c=null}"/>
+              </apex:column>
+              
+              <apex:repeat value="{!displayFieldsB}" var="f">
+	                  <apex:column value="{!b.budget[f.fieldPath]}" headerValue="{!f.Label}"/>
+	          </apex:repeat>
+             
+          </apex:pageBlockTable>
+          </apex:pageBlockSection>
+</apex:outputPanel>
+      </apex:pageBlock>
+  </apex:form>
+
+</apex:page>

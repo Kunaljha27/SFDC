@@ -1,0 +1,34 @@
+<!--This page lets user enter incentive programs line header info
+-->
+<apex:page standardController="REVVY__MnIncentiveProgram__c" extensions="REVVY.CMnCreateIPLController">
+    <apex:pageMessages />
+    <apex:form >
+        <apex:pageBlock title="{!$Label.revvy__MnGoalPageHeader}"  >
+            <apex:pageBlockSection columns="2" rendered="{!renderSave}">
+               
+                <apex:repeat value="{!$ObjectType.REVVY__MnGoal__c.fieldsets.REVVY__Goal_Selection_Page_Fields}" var="fieldValue">
+                 <apex:inputfield value="{!incPrgmLine[fieldValue]}"></apex:inputfield>
+                 </apex:repeat>
+                   <!--<apex:outputLabel value="Data Source"/>-->
+                    <apex:selectList label="Data Source" value="{!selectedDataSource}" size="1">
+                        <apex:selectOptions value="{!dataSources}"/>
+                    </apex:selectList>
+           <!-- <apex:pageBlockSection columns="2" >
+                  <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Rebate Type"></apex:outputLabel>
+                   <apex:inputField value="{!incPrgmLine.Type__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Data Source"/>
+                    <apex:selectList value="{!selectedDataSource}" size="1">
+                        <apex:selectOptions value="{!dataSources}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem> -->
+            </apex:pageBlockSection>   
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Next" action="{!next}" rendered="{!renderSave}"/>
+                <apex:commandButton value="Back" action="{!back}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>    
+    </apex:form>
+</apex:page>

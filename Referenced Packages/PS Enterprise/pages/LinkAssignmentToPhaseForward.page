@@ -1,0 +1,2 @@
+<!-- This page is forwarding to linkAssignmentToPhases from assignments  --> 
+<apex:page standardController="pse__Assignment_Project_Phase__c" recordsetvar="assignments" action="{!URLFOR($Page.LinkAssignmentToPhases)+'?id='+$CurrentPage.parameters.id}" />

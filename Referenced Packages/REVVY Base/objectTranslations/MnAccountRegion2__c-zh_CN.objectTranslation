@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Account Region --></value>
+    </caseValues>
+    <fields>
+        <label>帐户</label>
+        <name>Account__c</name>
+        <relationshipLabel>帐户区域</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Defines account region as a branch. Checking this box means that the region is branch also. --></help>
+        <label>是分支？</label>
+        <name>IsBranch__c</name>
+    </fields>
+    <fields>
+        <label>父帐户区域</label>
+        <name>Parent__c</name>
+        <relationshipLabel>子区域</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Account Region Layout23</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Account Region Name --></nameFieldLabel>
+</CustomObjectTranslation>

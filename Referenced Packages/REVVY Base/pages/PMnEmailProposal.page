@@ -1,0 +1,374 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnRemoter" docType="html-5.0" standardStylesheets="false" showheader="false" sidebar="false">
+
+<link href="{!$Resource.revvymobile}/revvy-mobile/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<style>
+    body{
+    padding:5px;
+    background-color: transparent;
+  }
+</style>
+
+
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/jquery.js"></script>
+<script type='text/javascript' src='/canvas/sdk/js/publisher.js'></script>
+
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/underscore-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone-min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/backbone.geppetto.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/handlebars.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/bootstrap.min.js"></script>
+<script src="{!$Resource.revvymobile}/revvy-mobile/js/Backbone.ModelBinder.js"></script>
+
+
+
+
+      <script id="print-view-template" type="text/template">
+         <form role="form">
+          <div class="form-group">
+            <label for="proposalTitle">Proposal Title</label>
+            <input type="text" class="form-control" name="proposalTitle" placeholder="title" value="{{title}}"></input>
+          </div>
+          <div class="form-group">
+             <label for="accountName">Account Name</label>
+             <p name="accountName"></p>
+          </div>
+         <div class="form-group">
+            <label for="proposalTemplate">Proposal Template</label>
+            <select class="form-control input-lg" name="proposalTemplates">
+              {{#each proposalTemplates}}
+              <option value="{{id}}">{{name}}</option>
+              {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Draft or Final</label>
+            <div class="radio input-lg">
+              <label>
+                  <input type="radio" name="proposalStatus" value="Draft">      </input>Draft</label>
+            </div>
+            <div class="radio input-lg">
+              <label>
+              <input type="radio" name="proposalStatus"  value="Final"></input>Final</label>
+            </div>
+      </div>
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" name="email" placeholder="email"></input>
+      </div>
+            <div class="form-group">
+          <label for="pricingSummary">Pricing Summary</label>
+          <div class="checkbox">
+        <label>
+          <input type="checkbox" name="displayAdjustments"> Display Adjustments
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="displayProductImages" > Display Product Images
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="displayProductIds"> Display Product IDs
+        </label>
+      </div>
+      </div>
+  </form>
+      </script>
+      <script id="error-view-template" type="text/template">
+        <div class="alert alert-danger">
+          {{errorMessage}}
+        </div>
+
+      </script>
+
+<script>
+
+
+//construct global namespaces
+var MyApp = {};
+var CMnNamespacePrefix = "{!namespacePrefix}";
+var CMnNamespacePrefixUS = "";
+var CMnNamespacePrefixDT = "";
+if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+    CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+    CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+}
+
+var ApexRemoteControllerNameDT = "CMnRemoter.";
+
+//current quote information
+var currentQuote = '{!JSENCODE(MnQuote__c.Id__c)}';
+var currentQuoteName = '{!JSENCODE(MnQuote__c.Name)}';
+var currentQuoteStatus = '{!JSENCODE(MnQuote__c.Current_Status__c)}';
+var quoteId = '<apex:outputText value="{!REVVY__MnQuote__c.Id}"/>';
+var quoteAccountName = '{!JSENCODE(REVVY__MnQuote__c.Account__r.Name)}';
+
+
+//public methods
+//"true" for enabling, "false" for disabling submit button
+MyApp.toggleSubmitButton = function(val){
+    Sfdc.canvas.publisher.publish({
+        name: "publisher.setValidForSubmit",
+        payload: val
+    });
+}
+
+
+//commands
+
+MyApp.LoadPrintTemplatesCommand = function () {
+};
+MyApp.LoadPrintTemplatesCommand.prototype.execute = function () {
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
+    var that = this;
+    var selCols = ['Id', 'Name', 'termsOfService__c', 'closingComments__c', 'openingComments__c', 'visualforcePageName__c',
+        'imgCoverLetterURL__c', 'imgOpeningURL__c', 'imgPricingURL__c', 'Edit_T_C__c',
+        'imgTermsOfServiceURL__c', 'imgConclusionURL__c']
+    Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnRemoter.getObjects',
+        'MnPrintTemplate__c', null,
+        selCols, function (result, event) {
+            if (event.status) {
+                that.handleTemplateLoaded(result);
+            } else {
+                that.context.dispatch("ErrorLoadingTemplates",{message:"No print template found. Please contact your administrator before proceeding."});
+            }
+        });
+
+};
+
+MyApp.LoadPrintTemplatesCommand.prototype.handleTemplateLoaded = function (response) {
+    console.log(response);
+    var quoteTemplates = _.map(response, function (template, key) {
+        template["id"] = template.Id;
+        template["name"] = template.Name;
+        return template;
+    });
+
+    this.context.printTemplatesCollection = new Backbone.Collection(quoteTemplates);
+
+    var currentTemplateName = currentQuoteName.toUpperCase() + "-Template";
+    var accountName = this.eventData.accountName;
+    this.context.printTemplatePageModel = new Backbone.Model({
+        "proposalTitle": currentTemplateName,
+        "proposalStatus": "Draft",
+        "email": "nkatakam@modeln.com",
+        "proposalTemplate": this.context.printTemplatesCollection.at(0),
+        "displayAdjustments":true,
+        "displayProductImages":true,
+        "displayProductIds":true,
+        "accountName" : accountName
+    });
+
+    this.context.printTemplatePageModel.bind("change",function(){
+        console.log(this.toJSON());
+    });
+    this.context.dispatch('onPrintTemplatesLoaded', {
+        data: quoteTemplates
+    });
+
+};
+
+MyApp.LoadPrintTemplatesCommand.prototype.handleError = function (e) {
+    this.context.dispatch("ErrorLoadingTemplates",{message:"No print template found. Please contact your administrator before proceeding."});
+};
+
+
+
+MyApp.SaveProposalTemplateCommand = function () {
+};
+MyApp.SaveProposalTemplateCommand.prototype.execute = function () {
+    var newModel = this.eventData.data;
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.saveProposal',
+        JSON.stringify(newModel.toJSON()),
+        function (result, event) {
+            if (event.status) {
+                that.context.dispatch("EmailProposalTemplateEvent",{data:newModel});
+            } else {
+                that.context.dispatch("ErrorLoadingTemplates",{message:"Error Saving Template"});
+            }
+        });
+};
+
+MyApp.EmailProposalTemplateCommand = function () {
+};
+MyApp.EmailProposalTemplateCommand.prototype.execute = function () {
+    var newModel = this.eventData.data;
+    var that = this;
+    Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnRemoter.emailProposal',
+        JSON.stringify(newModel.toJSON()),
+        function (result, event) {
+            if (event.status) {
+                Sfdc.canvas.publisher.publish({
+                    name: "publisher.close",
+                    payload: {
+                        refresh: "true"
+                    }
+                });
+            } else {
+                that.context.dispatch("ErrorLoadingTemplates",{message:"Error emailing template"});
+            }
+        });
+};
+
+
+//context
+MyApp.ApplicationContext = Backbone.Geppetto.Context.extend({
+    initialize: function () {
+        this.mapCommand('LoadPrintTemplatesEvent', MyApp.LoadPrintTemplatesCommand);
+        this.mapCommand('EmailProposalTemplateEvent',MyApp.EmailProposalTemplateCommand);
+        this.mapCommand('SaveProposalTemplateEvent',MyApp.SaveProposalTemplateCommand);
+    }
+});
+
+
+//views
+MyApp.PrintTemplateView = Backbone.View.extend({
+    template: Handlebars.compile($("#print-view-template").html()),
+    _modelBinder: undefined,
+    initialize: function () {
+        _.bindAll.apply(_, [this].concat(_.functions(this)));
+        this._modelBinder = new Backbone.ModelBinder();
+        this.context = this.options.context;
+    },
+    close: function () {
+        this._modelBinder.unbind();
+    },
+    render: function () {
+        var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+
+        var bindings = {
+            proposalTitle: '[name="proposalTitle"]',
+            proposalTemplate: {
+                selector: '[name="proposalTemplates"]',
+                converter: (new Backbone.ModelBinder.CollectionConverter(this.context.printTemplatesCollection)).convert
+            },
+            proposalStatus: '[name="proposalStatus"]',
+            email: '[name="email"]',
+            displayAdjustments:'[name="displayAdjustments"]',
+            displayProductImages:'[name="displayProductImages"]',
+            displayProductIds:'[name="displayProductIds"]',
+            accountName:'[name="accountName"]'
+        };
+
+
+        this._modelBinder.bind(this.context.printTemplatePageModel, this.el, bindings);
+
+        this.$('input[name="proposalTemplates"]').first().change();
+
+        console.log(this.context.printTemplatePageModel.toJSON());
+
+    }
+});
+
+
+MyApp.ErrorView = Backbone.View.extend({
+    template: Handlebars.compile($("#error-view-template").html()),
+    render: function () {
+        var html = this.template(this.model.toJSON());
+        this.$el.append(html);
+    }
+});
+
+
+MyApp.ContainerView = Backbone.View.extend({
+    initialize: function () {
+        _.bindAll.apply(_, [this].concat(_.functions(this)));
+        Backbone.Geppetto.bindContext({
+            view: this,
+            context: MyApp.ApplicationContext
+        });
+        this.context.listen(this, 'onPrintTemplatesLoaded', this.onPrintTemplatesLoaded);
+        this.context.listen(this, "ErrorLoadingTemplates", this.showErrorTemplate);
+    },
+
+
+    showErrorTemplate: function (data) {
+        MyApp.toggleSubmitButton("false");
+        var msg;
+        if (!data || !data.hasOwnProperty("message")) {
+            msg = "No print template found. Please contact your administrator before proceeding.";
+        } else {
+            msg = data.messsage;
+        }
+        var errorView = new MyApp.ErrorView({
+            model: new Backbone.Model({
+                "errorMessage": msg
+            })
+        });
+
+        errorView.render();
+        this.$el.append(errorView.$el);
+    },
+    onPrintTemplatesLoaded: function (result) {
+        if (result.data.length > 0) {
+            var printTemplateViewModel = new Backbone.Model();
+            printTemplateViewModel.set({
+                'proposalTemplates': result.data
+            });
+
+
+            var printTemplateView = new MyApp.PrintTemplateView({
+                model: printTemplateViewModel,
+                context: this.context
+            });
+
+
+            printTemplateView.render();
+            this.$el.append(printTemplateView.$el);
+        } else {
+            this.showErrorTemplate();
+        }
+
+    },
+    render: function () {
+        var eventData = this.model.toJSON();
+        console.log(eventData);
+        this.context.dispatch("LoadPrintTemplatesEvent",eventData);
+    }
+});
+
+
+
+
+$(function () {
+    //define an empty console
+    if (typeof console === "undefined" || typeof console.log === "undefined") {
+        console = {};
+        console.log = function () {
+        };
+    }
+
+    MyApp.toggleSubmitButton("true");
+
+    var containerView = new MyApp.ContainerView({
+        model: new Backbone.Model({
+            quoteId :quoteId,
+            accountName : quoteAccountName
+        })
+    });
+    containerView.render();
+    containerView.$el.appendTo('body');
+
+    Sfdc.canvas.publisher.subscribe({
+        name: "publisher.post",
+        onData: function (e) {
+            MyApp.toggleSubmitButton("false");
+            var currentPageModel = containerView.context.printTemplatePageModel;
+            var newModel = new Backbone.Model();
+            newModel.set(currentPageModel.toJSON());
+            newModel.set({
+                quoteId: quoteId
+            });
+            containerView.context.dispatch("SaveProposalTemplateEvent", {data: newModel});
+
+        }
+    });
+
+});
+</script>
+</apex:page>

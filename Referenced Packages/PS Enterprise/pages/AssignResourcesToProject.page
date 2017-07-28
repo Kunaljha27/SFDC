@@ -1,0 +1,301 @@
+<apex:page title="{!$Label.mass_assign_proj_resources_label_title}"
+    standardController="pse__Assignment__c" recordsetvar="assignments"
+    extensions="pse.AssignResourcesToProjectController" sidebar="false">
+    <c:ajaxStatusMessageCSS />
+    <!-- Render the javascript function to create JS function to select all resources -->
+    <c:selectAllCheckboxes functionName="selectAllResources" />
+
+    <apex:sectionHeader title="{!$Label.mass_assign_proj_resources_label_title}"
+        subTitle="{!bean.project.Name}" help="{!$Page.pse__AssignResourcesToProjectHelp}" />
+
+    <apex:actionStatus id="ajaxStatus">
+        <apex:facet name="start">
+            <div class="ajaxstatus">{!$Label.common_message_processing_wait}</div>
+        </apex:facet>
+    </apex:actionStatus>
+	
+	<apex:pageMessages id="messageSection" rendered="{!!bean.onlyShowError}"/>
+	
+    <apex:outputPanel layout="block" id="error-panel"
+        rendered="{!bean.onlyShowError}">
+        <apex:form >
+            <apex:pageBlock >
+                <apex:pageMessages />
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="{!$Label.common_label_cancel}"
+                        style="align:center" action="{!cancel}" />
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>
+
+    <apex:outputPanel layout="none" id="everything"
+        rendered="{!NOT(bean.onlyShowError)}">
+        <apex:form >
+            <apex:pageMessages />
+            <apex:outputPanel layout="none" id="shortListedResources">
+                <apex:pageBlock title="{!$Label.common_label_selected} {!$Label.common_label_resources}"
+                    rendered="{!bean.hasShortListedResources}">
+
+                    <apex:pageBlockButtons >
+                        <apex:commandButton value="{!$Label.mass_assign_proj_resources_label_create_assignments}"
+                            status="ajaxStatus" action="{!onCreateAssignments}"
+                            rendered="{!bean.hasShortListedResources}" />
+                        <apex:commandButton value="{!$Label.common_label_cancel}"
+                            action="{!cancel}" />
+                    </apex:pageBlockButtons>
+
+                    <apex:pageBlockSection columns="1" collapsible="true">
+                        <i>{!$Label.mass_assign_proj_resources_label_selected_resources_msg}</i>
+                        <apex:pageBlockTable value="{!bean.shortListedResPaginator.visible}" var="wrapper">
+                            <apex:column >
+                                <apex:commandLink status="ajaxStatus"
+                                    style="text-decoration:none" immediate="true"
+                                    action="{!onDeleteShortListedResource}"
+                                    reRender="shortListedResources">
+                                    <apex:param name="selectedShortListedResource"
+                                        value="{!wrapper.res.Id}"
+                                        assignTo="{!bean.shortListedResourceToDelete}" />
+                                    <apex:image id="theImage"
+                                        value="{!$Resource.pse__timecard}/timecard/delete_icon.gif" />
+                                </apex:commandLink>
+                            </apex:column>
+
+
+                            <apex:column style="width:125px">
+                                <apex:facet name="header">
+                                    <apex:outputPanel >
+                                        <a class="link" style="cursor: pointer;"
+                                            onclick="sortShortListedResources('{!bean.SORT_COL_NAME}', 'string');">
+                                        {!$Label.common_label_name}</a>&nbsp;
+                                    <apex:image styleClass="sortIndicator"
+                                            value="/img/{!bean.shortListedResPaginator.sortState.sortIndicatorImage}"
+                                            rendered="{!bean.shortListedResPaginator.sortState.sortColumn == bean.SORT_COL_NAME}" />
+                                    </apex:outputPanel>
+                                </apex:facet>
+
+                                <apex:outputLink value="/{!wrapper.res.Id}">                      
+                                {!wrapper.res.Name}
+                            </apex:outputLink>
+                            </apex:column>
+						
+                            <apex:repeat value="{!AssignMultiResourceSearchColumnsAfterFilter}" var="f" >
+								<apex:column value="{!wrapper.res[f]}">
+	                                <apex:facet name="header">
+	                                    <apex:outputPanel >
+	                                        <a class="link" style="cursor: pointer;" onclick="sortShortListedResources('{!f.fieldPath}', '{!f.type}');">
+	                                        	{!f.label}
+	                                        </a>
+	                                    &nbsp;<apex:image styleClass="sortIndicator"
+	                                            value="/img/{!bean.shortListedResPaginator.sortState.sortIndicatorImage}"
+	                                            rendered="{!bean.shortListedResPaginator.sortState.sortColumn == f.fieldPath}" />
+	                                    </apex:outputPanel>
+	                                </apex:facet>
+	                            </apex:column>
+							</apex:repeat>
+                        </apex:pageBlockTable>
+
+                        <apex:pageBlockSectionItem rendered="{!bean.shortListedResPaginator.showNavigators}">
+                            <apex:outputPanel style="text-align:center">
+                                <apex:commandLink action="{!bean.shortListedResPaginator.showMore}"
+                                    reRender="shortListedResources" status="ajaxStatus"
+                                    immediate="true">
+                        {!bean.shortListedResPaginator.showMoreLabel}</apex:commandLink> &nbsp;|&nbsp;  <apex:commandLink action="{!bean.shortListedResPaginator.showAll}"
+                                    immediate="true" reRender="shortListedResources"
+                                    status="ajaxStatus"> {!bean.shortListedResPaginator.showListLabel}</apex:commandLink>
+
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </apex:outputPanel>
+
+            <apex:pageBlock title="{!$Label.common_label_filter_options}">
+                <apex:pageBlockSection >
+                    <apex:panelGrid columns="5" id="filterGrid">
+                        <apex:panelGroup >
+                            <apex:outputLabel value="{!$Label.common_label_resource_name}"
+                                for="resourceName" /><br/>
+                            <apex:inputText value="{!bean.filterByResName}" id="resourceName" />
+                        </apex:panelGroup>
+
+                        <apex:panelGroup >
+                            <apex:outputLabel value="{!$Label.common_label_region}"
+                                for="regionOptions" /><br/>
+                            <apex:selectList value="{!bean.filterByRegion}" size="1"
+                                style="width:125px" id="regionOptions">
+                                <apex:selectOptions value="{!bean.regionOptions}" />
+                            </apex:selectList>
+                        </apex:panelGroup>
+
+                        <apex:panelGroup >
+                            <apex:outputLabel value="{!$Label.common_label_practice}"
+                                for="practiceOptions" /><br/>
+                            <apex:selectList value="{!bean.filterByPractice}" size="1"
+                                id="practiceOptions">
+                                <apex:selectOptions value="{!bean.practiceOptions}" />
+                            </apex:selectList>
+                        </apex:panelGroup>
+
+
+                        <apex:panelGroup >
+                            <apex:outputLabel value="{!$Label.common_label_group}"
+                                for="groupOptions" /><br/>
+                            <apex:selectList value="{!bean.filterByGroup}" size="1"
+                                id="groupOptions">
+                                <apex:selectOptions value="{!bean.groupOptions}" />
+                            </apex:selectList>
+                        </apex:panelGroup>
+
+
+                        <apex:panelGroup >
+                            <apex:outputLabel value="{!$Label.common_label_role}"
+                                for="roleOptions" /><br/>
+                            <apex:inputField value="{!bean.filterByRole.pse__Resource_Role__c}" />
+
+                        </apex:panelGroup>
+                        
+                        <apex:outputlabel value=""/>
+                        <apex:outputlabel value=""/>
+                        <apex:outputlabel value=""/>
+                        <apex:outputlabel value=""/>
+                        <apex:panelGroup >
+                            <apex:outputLabel value="{!$Label.mass_assign_proj_resources_label_include_child_rpg}"
+                                for="includeChildRPG" />
+                            <apex:inputCheckbox value="{!bean.filterByChildRPG}"
+                                id="includeChildRPG" />
+                        </apex:panelGroup>
+
+                    </apex:panelGrid>
+                </apex:pageBlockSection>
+                <br/><br/>
+				<apex:pageBlockSection > 
+                   <apex:repeat value="{!AssignMultiResourceFilterOptionsAfterFilter}" var="f">
+			   		<apex:inputField value="{!bean.filterByRole[f]}" required="false" id="filterInputField">
+			   		<script>
+			   			var fieldType = '{!f.type}' ;
+			   			if( fieldType == 'double' || fieldType == 'currency' || fieldType == 'integer' || fieldType == 'string' || fieldType == 'percent') {
+			   				document.getElementById('{!$Component.filterInputField}').innerHTML = '' ;
+			   				document.getElementById('{!$Component.filterInputField}').value = '' ;
+			   			}
+			   		</script>
+			   		</apex:inputField>
+			    </apex:repeat>	
+			    </apex:pageBlockSection> 
+                
+
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton action="{!onFilterResources}"
+                        value="{!$Label.common_label_filter}" id="filterButton"
+                        rerender="resourceSelector, messageSection" status="ajaxStatus" />
+
+                    <apex:commandButton action="{!onClearFilter}"
+                        value="{!$Label.common_label_clear}" id="filterClearButton"
+                        rerender="resourceSelector,filterGrid" status="ajaxStatus" />
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+            <apex:pageBlock title="{!$Label.mass_assign_proj_resources_label_select_resources}"
+                id="resourceSelector">
+                <apex:pageBlockButtons >                    
+                    <apex:commandButton value="{!$Label.mass_assign_proj_resources_label_create_assignments}"
+                        status="ajaxStatus" action="{!onAddSelectedResources}"
+                        id="filterButton2"  rendered="{!bean.hasMatchingResources}" />
+                    <apex:commandButton value="{!$Label.common_label_cancel}"
+                        action="{!cancel}" />
+                </apex:pageBlockButtons>
+
+                <apex:pageBlockSection columns="1" id="availableResources">
+                    <apex:outputPanel rendered="{!bean.hasMatchingResources}">
+                    <table border="0" cellspacing="0" cellpadding="0" class="list">
+						<thead>
+						<tr class="headerRow">
+							<th class="headerRow"  colspan="1" scope="col" >
+								<input type="checkbox" onclick="selectAllResources(this, 'matchingResourceSelector')" />
+							</th>
+							<th class="headerRow"  colspan="1" scope="col"  width="125px;">
+								<apex:outputPanel >
+                                    <a class="link" style="cursor: pointer;"
+                                        onclick="sortMatchingResources('{!bean.SORT_COL_NAME}');">
+                                    {!$Label.common_label_name}</a>&nbsp;
+                                    <apex:image styleClass="sortIndicator"
+                                        value="/img/{!bean.matchingResPaginator.sortState.sortIndicatorImage}"
+                                        rendered="{!bean.matchingResPaginator.sortState.sortColumn == bean.SORT_COL_NAME}" />
+                                </apex:outputPanel>
+							</th>
+							
+							<apex:repeat value="{!AssignMultiResourceSearchColumnsAfterFilter}" var="f" >
+								<th class="headerRow"  colspan="1" scope="col" >
+									<apex:outputPanel >
+	                                    <a class="link" style="cursor: pointer;" onclick="sortMatchingResources('{!f.fieldPath}', '{!f.type}');">
+	                                    	{!f.label}
+	                                    </a>
+	                                    &nbsp;<apex:image styleClass="sortIndicator"
+	                                        value="/img/{!bean.matchingResPaginator.sortState.sortIndicatorImage}"
+	                                        rendered="{!bean.matchingResPaginator.sortState.sortColumn == f.fieldPath}" />
+	                                </apex:outputPanel>
+								</th>
+							</apex:repeat>
+							
+						</tr>
+						</thead> 
+						<tbody>
+						<apex:repeat value="{!bean.matchingResPaginator.visibleExtended}" var="wrapperOuter">
+						<apex:repeat value="{!wrapperOuter}" var="wrapper">
+							<tr onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onmouseover="if (window.hiOn){hiOn(this);}" class="dataRow">
+								<td class="dataCell"><apex:inputCheckbox value="{!wrapper.selected}" id="matchingResourceSelector" /></td>
+								<td class="dataCell"><apex:outputLink value="/{!wrapper.res.Id}">{!wrapper.res.Name}</apex:outputLink></td>
+								
+								<apex:repeat value="{!AssignMultiResourceSearchColumnsAfterFilter}" var="f" >
+									<td class="dataCell">
+										<apex:outputField rendered="{!(f.type == 'date' || f.type == 'datetime')}" value=" {!wrapper.res[f]}" />
+										<apex:outputField rendered="{! NOT(f.type == 'date' || f.type == 'datetime')}" value="{!wrapper.res[f]}" />
+									</td>
+								</apex:repeat>
+							</tr>
+						</apex:repeat>
+						</apex:repeat>
+						</tbody>
+                        </table>
+                    </apex:outputPanel>    
+                    <apex:pageBlockSectionItem rendered="{!bean.matchingResPaginator.showNavigators}">
+                        <apex:outputPanel style="text-align:center">
+                            <apex:commandLink action="{!bean.matchingResPaginator.showMore}"
+                                reRender="availableResources" status="ajaxStatus">
+                        {!bean.matchingResPaginator.showMoreLabel} </apex:commandLink> &nbsp;|&nbsp;  <apex:commandLink action="{!bean.matchingResPaginator.showAll}"
+                                reRender="availableResources" status="ajaxStatus"> {!bean.matchingResPaginator.showListLabel}</apex:commandLink>
+						<apex:outputPanel style="text-align: left; display:inline; padding-left:10px;" rendered="{!bean.showResultLimitMessage}">
+							(Maximum Resources shown: {!bean.resourceLoadLimit})
+                        </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem rendered="{!AND(NOT(bean.matchingResPaginator.showNavigators), bean.showResultLimitMessage)}">
+						<apex:outputPanel style="text-align: left; display:inline;">
+							Maximum Resources shown: {!bean.resourceLoadLimit}
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+
+            </apex:pageBlock>
+
+            <apex:actionFunction id="sortMatchingResources"
+                name="sortMatchingResources"
+                action="{!bean.matchingResPaginator.sort}"
+                rerender="availableResources" immediate="true" status="ajaxStatus">
+                <apex:param id="sortColumn" name="sortColumn" value=""
+                    assignTo="{!bean.matchingResPaginator.sortState.sortColumn}" />
+                <apex:param name="sortColumnType" value="" />
+            </apex:actionFunction>
+
+            <apex:actionFunction id="sortShortListedResources"
+                name="sortShortListedResources"
+                action="{!bean.shortListedResPaginator.sort}"
+                rerender="shortListedResources" immediate="true" status="ajaxStatus">
+                <apex:param id="sortCol" name="sortCol" value=""
+                    assignTo="{!bean.shortListedResPaginator.sortState.sortColumn}" />
+                <apex:param name="sortColumnType" value="" />
+            </apex:actionFunction>
+
+        </apex:form>
+    </apex:outputPanel>
+</apex:page>

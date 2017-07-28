@@ -1,0 +1,156 @@
+<apex:page controller="REVVY.CMnConfigitConfigCtrl" sidebar="false" tabstyle="REVVY__MnQuote__c">
+
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+
+    <script>
+        function returnBackToRevvyQuote() {
+            var spinner = document.getElementsByClassName("loadingSpinner");
+            spinner[0].style.display = 'block';
+            saveconfigitQuote();
+        }
+
+        function saveconfigitQuote() {
+            Visualforce.remoting.Manager.invokeAction(
+                    '{!JSENCODE(namespaceDt)}CMnConfigitConfigCtrl.saveConfigitQuote', '{!JSENCODE(configitQtId)}',
+                    '{!JSENCODE(revvyQtId)}', '{!JSENCODE(mainConfigitQiId)}', '{!JSENCODE(mainQiId)}',
+                    handleSaveComplete, {escape:false});
+        }
+
+        function handleSaveComplete(result, event) {
+            if(event.type == 'exception') {
+            } else {
+                var namespaceLowerCase = "{!JSENCODE(namespaceLowerCase)}";
+                mnNavigateToUrl('{!JSENCODE(sitePrefix)}/apex/' + namespaceLowerCase + 'PMnUIShell#mnquote/detail/{!JSENCODE(RevvyQtUrlParams)}');
+            }
+        }
+
+    </script>
+    <style>
+
+        #quoteDetailPageHeader {
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ebebeb;
+            height:48px;
+        }
+
+        #backToQuotesLink {
+            margin-right: 10px;
+            height: 48px;
+            cursor: pointer;
+        }
+        /* line 19, ../scss/section/quotes/_quoteDetailPage.scss */
+        #backToQuotesLink .fa-times {
+            float: left;
+            line-height: 47px;
+            color: #9b9b9b;
+        }
+        /* line 24, ../scss/section/quotes/_quoteDetailPage.scss */
+        #backToQuotesLink .fa-times:hover {
+            color: #d0021b;
+        }
+        /* line 29, ../scss/section/quotes/_quoteDetailPage.scss */
+        #backToQuotesLink .text {
+            display: none;
+        }
+        /* line 34, ../scss/section/quotes/_quoteDetailPage.scss */
+        #quoteTitleContainer {
+            float: left;
+            width: 610px;
+            height: 48px;
+            padding-left: 10px;
+        }
+        /* line 40, ../scss/section/quotes/_quoteDetailPage.scss */
+        #quoteTitleContainer .fa-usd {
+            float: left;
+            line-height: 48px;
+            color: #ff8300;
+        }
+        /* line 46, ../scss/section/quotes/_quoteDetailPage.scss */
+        #quoteTitleContainer #quoteLabel {
+            display: block;
+            margin: 9px 0 0 25px;
+            line-height: 10px;
+        }
+        /* line 52, ../scss/section/quotes/_quoteDetailPage.scss */
+        #quoteTitleContainer #quoteName {
+            display: block;
+            margin-left: 25px;
+            line-height: 20px;
+            font: normal 20px Helvetica Neue, Helvetica, Arial;
+            color: #444444;
+        }
+
+
+        #uishell .mn-config #mn-primary-header #button-container button {
+            margin: 0px 5px;
+        }
+
+        #addToQuoteBtn{
+            background: #00a5d9;
+            color: white;
+            border: 1px solid #cccccc;
+            display: inline-block;
+            font-weight: 400;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 1em;
+            line-height: normal;
+            padding: 8px;
+            letter-spacing: 0.0625em;
+            font-size: 1.177em;
+            outline: none;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            border-radius: 4px;
+            font-family: "ProximaNova-Regular" sans-serif;
+        }
+        
+        .loadingSpinner {
+        	width: 100%;
+        	height: 100%;
+        	position: absolute;
+        	left: 0;
+        	top: 0;
+        	z-index: 999;
+        	background-color: rgba(255,255,255,0.7);
+        	display: none;
+        }
+        
+        .loadingSpinner img {
+        	margin: 25% 0 0 50%;
+        }
+
+    </style>
+
+    <div id="quoteDetailPageHeader" class="quoteDetailPageHeader" data-status="draft" data-error="true" data-role="submitter" data-editable="false" data-needapproval="false">
+
+        <span class="fa fa-times fa-2x"></span>
+        <div id="quoteTitleContainer">
+            <span class="fa fa-usd fa-2x"></span>
+            <span id="quoteLabel">Quote</span>
+            <h1 id="quoteName" class="ellipsis" data-hasqtip="0" aria-describedby="qtip-0">{!Name}</h1>
+        </div>
+
+        <a id="backToQuotesLink" onclick="returnBackToRevvyQuote(); return false;" style="float:right;">
+            <div id="button-container">
+                <button id="addToQuoteBtn" class="primary add-to-quote">Update Quote</button>
+            </div>
+        </a>
+
+    </div>
+	
+	<div class="loadingSpinner">
+        <img src="{!$Resource.staticui}/uifw/ui/images/spinner.gif"/>
+    </div>
+	<apex:canvasApp applicationName="{!canvasAppName}" scrolling="auto" width="100%" parameters="{!appParams}" namespacePrefix="{!canvasNameSpace}"/>
+<!--
+     <apex:composition template="PMnCanvasApp">
+        <apex:define name="variables">
+            <apex:variable var="appParam"
+                           value="{'quoteId':'{!configitQtId}', 'revision' : '0', 'quoteItemId' : '{!qiId}', 'page' : '{!viewPage}'}"/>
+        </apex:define>
+    </apex:composition>
+-->
+</apex:page>

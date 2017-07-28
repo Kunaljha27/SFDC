@@ -1,0 +1,72 @@
+<apex:page controller="pse.DataExportController" >
+  
+  <apex:sectionHeader title="Data Export" />
+  <apex:form >
+     <apex:outputText value="{!saveMessage}" /> 
+     <apex:pageBlock title="Data export for you organization" >
+       <apex:pageBlockSection columns="2">
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportAll}" id="allChkBx" title="Checkbox" onclick="selectAll(this)" />
+               <apex:outputLabel value="All"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportWorkCalendars}" id="workCalendarsChkBx" title="Checkbox" /> 
+               <apex:outputLabel value="Work Calendars"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportTimePeriods}" id="timePeriodsChkBx" title="Checkbox" /> 
+               <apex:outputLabel value="Time Periods"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportHolidays}" id="holidaysChkBx" title="Checkbox" /> 
+               <apex:outputLabel value="Holidays"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportRegions}" id="regionsChkBx" title="Checkbox" />  
+               <apex:outputLabel value="Regions"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportPractices}" id="practicesChkBx" title="Checkbox" />  
+               <apex:outputLabel value="Practices"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportGroups}" id="groupsChkBx" title="Checkbox" />  
+               <apex:outputLabel value="Groups"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:inputCheckbox value="{!exportAssignments}" id="assignmentsChkBx" title="Checkbox" />  
+               <apex:outputLabel value="Assignments"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+                <apex:inputCheckbox value="{!exportSkillRatings}" id="skillRatingsChkBx" title="Checkbox" />  
+                <apex:outputLabel value="Skill Ratings"/>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+                <apex:inputCheckbox value="{!exportSkillsAndCertifications}" id="skillsAndCertificatoinsChkBx" title="Checkbox" />
+               <apex:outputLabel value="Skills and Certifications"/>
+          </apex:pageBlockSectionItem>
+       </apex:pageBlockSection>
+      
+       <apex:pageBlockSection columns="1">
+          <apex:pageBlockSectionItem >
+               <apex:commandButton action="{!saveFile}" value="Save File" id="saveFileButton"/>
+               <apex:inputText value="{!fileName}" id="fileName" />
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+               <apex:commandButton action="{!emailFile}" value="Email" id="emailFileButton"/>
+               <apex:inputText value="{!emailAddress}" id="emailAddress" />
+          </apex:pageBlockSectionItem>
+          <apex:outputText value="{!configXML}" id="configOutput"  />
+       </apex:pageBlockSection>
+        
+       <apex:pageBlockSection columns="1">
+          <apex:outputText value="{!configXML}"  />
+       </apex:pageBlockSection>
+      
+     </apex:pageBlock>
+      
+  </apex:form>
+  <apex:image url="{!URLFOR($Resource.pse__appirioCommon, 'progress-rotation.gif')}" rendered="false"/>
+  
+  
+</apex:page>

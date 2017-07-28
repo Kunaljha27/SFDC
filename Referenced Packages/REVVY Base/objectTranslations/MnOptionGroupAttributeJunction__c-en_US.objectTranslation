@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Option Group Attribute</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Option Group Attributes</value>
+    </caseValues>
+    <fields>
+        <help><!-- This flag to specify if the user can override the value of the attribute. If true user can provide a value which will always override system calculated value. --></help>
+        <label><!-- Allow Override --></label>
+        <name>AllowOverride__c</name>
+    </fields>
+    <fields>
+        <help><!-- Possible values for user defined attributes --></help>
+        <label><!-- Allowed Attribute Values --></label>
+        <name>AllowedValues__c</name>
+    </fields>
+    <fields>
+        <help><!-- Order of the attributes to be displayed to end user --></help>
+        <label><!-- Attribute Order --></label>
+        <name>Attribute_Order__c</name>
+    </fields>
+    <fields>
+        <help><!-- Defines which attributes are assigned to a product or category. --></help>
+        <label><!-- Catalog Attribute --></label>
+        <name>Catalog_Attribute__c</name>
+        <relationshipLabel><!-- Option Group Attributes --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Default Attribute Value --></help>
+        <label><!-- Default Att --></label>
+        <name>DefaultValue__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique identifier of an option group. --></help>
+        <label><!-- Option Group --></label>
+        <name>Option_Group_Id__c</name>
+        <relationshipLabel><!-- Option Group Attributes --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

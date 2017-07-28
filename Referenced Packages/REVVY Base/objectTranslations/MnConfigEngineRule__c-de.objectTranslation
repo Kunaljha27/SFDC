@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Rule --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Custom rule conditions specified in JSON format. --></help>
+        <label>Daten (JSON)</label>
+        <name>Data__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies whether the option groups used in a compatibility rule are compatible by default. --></help>
+        <label>Standard</label>
+        <name>Default__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of the rule. --></help>
+        <label>Beschreibung</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label>Typ</label>
+        <name>Display_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when the pricing rule expires. --></help>
+        <label>Effektives Enddatum</label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- JSON representation of the filters used in custom rules. --></help>
+        <label>Filter (JSON)</label>
+        <name>Filters__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies whether the options used in a compatibility rule are visible by default. --></help>
+        <label><!-- Hide Incompatible Options --></label>
+        <name>HideOption__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label>Eindeutiger Bezeichner</label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies the level of rule. --></help>
+        <label>Stufe</label>
+        <name>Level__c</name>
+        <picklistValues>
+            <masterLabel>Configuration</masterLabel>
+            <translation><!-- Configuration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quote</masterLabel>
+            <translation><!-- Quote --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Solution</masterLabel>
+            <translation><!-- Solution --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date when the pricing rule start. --></help>
+        <label>Effektives Startdatum</label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Specifies rule status. --></help>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Specifies the type of rule. --></help>
+        <label>Typ</label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>adjustment</masterLabel>
+            <translation><!-- adjustment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>attribute</masterLabel>
+            <translation><!-- attribute --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>compatibility</masterLabel>
+            <translation><!-- compatibility --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>complexExpression</masterLabel>
+            <translation><!-- complexExpression --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pricing</masterLabel>
+            <translation><!-- pricing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>required</masterLabel>
+            <translation><!-- required --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>select</masterLabel>
+            <translation><!-- select --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>visibility</masterLabel>
+            <translation><!-- visibility --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Rule Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>Das Enddatum darf nicht vor dem Startdatum liegen!</errorMessage>
+        <name>VMnStartDateBeforeEnddate</name>
+    </validationRules>
+</CustomObjectTranslation>

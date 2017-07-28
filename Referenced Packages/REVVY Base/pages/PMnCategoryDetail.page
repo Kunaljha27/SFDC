@@ -1,0 +1,22 @@
+<apex:page tabstyle="MnAdmin__tab" sidebar="false">
+
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/admin.js"></script>
+    <c:CMnZenDesk />
+    <div  class="colWrapper">
+      <div class="collwrp" >
+        <div class="coll" >
+          <c:CMnAdminLeftNav />
+        </div>
+      </div>
+      <div class="colr">
+        <!--- Actual VF code goes here -->
+
+        <apex:include pageName="REVVY__PMnRecordDetail"/>
+
+        <!-- ---------- -->
+      </div>
+    </div>
+
+</apex:page>

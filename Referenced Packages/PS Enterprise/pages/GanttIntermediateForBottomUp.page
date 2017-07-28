@@ -1,0 +1,35 @@
+<apex:page id="GanttIntermediate" title="{!$Label.Gantt_Intermediate_Page_Title}" sidebar="false" 
+standardController="pse__Proj__c" recordSetVar="projects" extensions="pse.GanttIntermediateForBottomUpController">
+	<style>
+		.buttonStyle { height:40px; width:70%; text-align:center; padding-top:40px; }
+	</style>
+	<apex:form id="BottomUpOptions_form">
+		<apex:sectionHeader title="{!$Label.Gantt_Intermediate_Page_Title}" subtitle="{!project.name}" help="{!$Page.pse__GanttIntermediateForBottomUpHelp}"/>
+		<apex:pageMessages />
+		<apex:pageBlock id="pageBlock" >
+		 	<table width="100%">
+		 	   <tr>
+		 	    	<td><br/></td>
+		 	   </tr>
+			   <tr>
+			      <td align="center"><apex:commandButton value="{!$Label.Gantt_Intermediate_RR_Button_Label}" action="{!createRR}" styleClass="buttonStyle" style="font-size:17px;" disabled="{!NOT(displayContent)}" /></TD>
+			   </tr>
+			   <tr>
+		 	    	<td><br/></td>
+		 	   </tr>
+			   <tr>
+			      <td align="center"><apex:commandButton value="{!$Label.Gantt_Intermediate_Held_RR_Button_Label}" action="{!createHeldRR}" styleClass="buttonStyle" style="font-size:17px;" disabled="{!NOT(displayContent)}" /></TD>
+			   </tr>
+			   <tr>
+		 	    	<td><br/></td>
+		 	   </tr>
+			   <tr>
+			      <td align="center"><apex:commandButton value="{!$Label.Gantt_Intermediate_Assignment_Button_Label}" action="{!createASN}" styleClass="buttonStyle" style="font-size:17px;" disabled="{!NOT(displayContent)}" /></TD>
+			   </tr>
+			   <tr>
+		 	    	<td><br/></td>
+		 	   </tr>
+		 	</table>
+	 	</apex:pageBlock>
+ 	</apex:form>
+</apex:page>

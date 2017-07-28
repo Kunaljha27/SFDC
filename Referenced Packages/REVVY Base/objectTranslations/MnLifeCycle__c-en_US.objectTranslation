@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Revvy LifeCycle</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Revvy LifeCycles</value>
+    </caseValues>
+    <fields>
+        <label><!-- Apply To --></label>
+        <name>ApplyTo__c</name>
+        <picklistValues>
+            <masterLabel>Amendment</masterLabel>
+            <translation><!-- Amendment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Original</masterLabel>
+            <translation><!-- Original --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal</masterLabel>
+            <translation><!-- Renewal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Concurrent Amendment? --></label>
+        <name>ConcurrentAmendment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- LifeCycle External Id --></label>
+        <name>ExternalId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Stage --></label>
+        <name>InitialStage__c</name>
+        <relationshipLabel><!-- Revvy LifeCycles --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Number of Phases --></label>
+        <name>NumberOfPhases__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object --></label>
+        <name>Object__c</name>
+        <picklistValues>
+            <masterLabel>MnContract__c</masterLabel>
+            <translation><!-- MnContract__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MnQuote__c</masterLabel>
+            <translation><!-- MnQuote__c --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Record Type --></label>
+        <name>RecordType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- System Generated --></label>
+        <name>SystemGenerated__c</name>
+    </fields>
+    <layouts>
+        <layout>RevvyLifeCycleLayout23_1</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Clone_LifeCycle --></label>
+        <name>Clone_LifeCycle</name>
+    </webLinks>
+</CustomObjectTranslation>

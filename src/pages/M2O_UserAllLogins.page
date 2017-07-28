@@ -1,0 +1,39 @@
+<apex:page controller="M2O_UserLoginInfoController1"  showHeader="true" sidebar="true">
+<br/>
+<style>
+     .header {
+        font-style: bold;
+        font-family: "Arial";
+        font-size: 88;
+    }
+</style>
+ <Apex:pageBlock >
+  <apex:outputText styleClass="header"><br/> <b>All LOGINS</b> <br/></apex:outputText><br></br>
+  <apex:pageBlockTable var="a" value="{!allLoginList}">
+   <apex:column >
+  <apex:facet name="header">LoginTime</apex:facet>
+  {!a.LoginTime}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">LoginType</apex:facet>
+  {!a.LoginType}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">SourceIp</apex:facet>
+  {!a.SourceIp}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">ApiType</apex:facet>
+  {!a.ApiType}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">Status</apex:facet>
+  {!a.Status}
+  </apex:column>
+  <apex:column >
+  <apex:facet name="header">Browser</apex:facet>
+  {!a.Browser}
+  </apex:column>
+  </apex:pageBlockTable>
+  </Apex:pageBlock> 
+</apex:page>

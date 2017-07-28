@@ -1,0 +1,67 @@
+<!-- Page: -->
+<apex:page standardcontroller="User" extensions="M2O_TerritoryManagemntService" standardStylesheets="false" sidebar="true" showHeader="false" pageStyle="customPopup" >
+<div class="customPopup">
+<apex:form >
+<apex:pageBlock >
+    <apex:pageBlockSection >
+        <apex:Outputlabel >Please Add Territory And Sub-Territory</apex:Outputlabel><t></t>
+     </apex:pageBlockSection>  
+        <apex:pageBlockSection >
+        <apex:outputLabel >Territory</apex:outputLabel><t></t>
+        <apex:selectList value="{!territoryList}"  title="Choose a Territory" size="1"  >
+        <apex:selectOptions value="{!items}"/>
+        </apex:selectList><br/><t></t>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection >
+        <apex:outputLabel >Sub-Territory</apex:outputLabel><t></t>
+         <apex:selectList value="{!subterritoryList}"  title="Choose a SubTerritory" size="1">
+            <apex:selectOptions value="{!itemsSub}"/><t></t>
+        </apex:selectList><t></t><t></t>
+        <apex:commandButton value="Add" action="{!subTerritoryAddition}" oncomplete="javascript:CloseAndRefresh()" / >
+        
+        </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+    </apex:form>
+        
+
+<script language="JavaScript" type="text/javascript">
+function CloseAndRefresh(){
+window.opener.location.href="/{!$CurrentPage.parameters.id}?noredirect=1";
+      window.top.close();
+    
+  }
+
+</script>
+    <style type="text/css">
+
+       .customPopup{
+
+            background-color: white;
+            left: 0%;
+
+            padding:10px;
+
+            position: absolute;
+
+            z-index: 9999;
+
+            /* These are the 3 css properties you will need to tweak so the pop
+
+            up displays in the center of the screen. First set the width. Then set
+
+            margin-left to negative half of what the width is. You can also add
+
+            the height property for a fixed size pop up.*/
+
+            width: 250px;
+            hieght:250px
+            margin-left: -250px;
+
+            top:10px;
+
+        }
+
+    </style>
+</div>
+</apex:page>

@@ -1,0 +1,2 @@
+<apex:page standardController="pse__Proj__c" recordSetVar="proj" action="{!URLFOR($Page.PSATasks)}">
+</apex:page>

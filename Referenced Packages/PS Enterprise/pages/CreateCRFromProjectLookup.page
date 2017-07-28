@@ -1,0 +1,15 @@
+<apex:page standardController="Opportunity" extensions="pse.CreateCRController" tabStyle="pse__Proj__c" action="{!initForProjectLookup}">
+    <apex:sectionHeader title="Select Project" />
+    <apex:form id="projSelFrm">
+        <apex:pageBlock >
+            <apex:pageBlockButtons > 
+                <apex:commandButton value="Cancel" action="{!list}" immediate="true"/>
+                <apex:commandButton value="Next" action="{!nextForProjectLookup}" id="nextButton" />
+            </apex:pageBlockButtons>
+                <apex:pagemessages ></apex:pagemessages>            
+            <apex:pageBlockSection title="Project Details" >
+                <apex:inputField value="{!formBean.proxyForProjLookup.pse__Project__c}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>     
+</apex:page>

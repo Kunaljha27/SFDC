@@ -1,0 +1,11 @@
+Please review the following rebate earnings {!MnEarning__c.Name}
+
+Closing Date: {!MnEarning__c.Closing__c}
+Payment Due Date: {!MnEarning__c.PaymentDue__c}
+
+Period Start: {!MnEarning__c.PeriodStart__c}
+Period End: {!MnEarning__c.PeriodEnd__c}
+
+Earned Amount: {!MnEarning__c.Earned__c}
+
+Link to Earnings {!MnEarning__c.Link}

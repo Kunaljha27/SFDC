@@ -1,0 +1,65 @@
+<apex:page standardcontroller="REVVY__MnLifeCycle__c" extensions="REVVY.CMnLifeCycleNewLifeCycleCtrl">
+  <apex:sectionHeader title="{!$ObjectType.REVVY__MnLifeCycle__c.Label} Edit" subtitle="New {!$ObjectType.REVVY__MnLifeCycle__c.Label}"/>
+  <apex:form >
+        <apex:pageBlock id="pb">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!createLifeCycle}" value="Save"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" immediate="true"/>
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="2">
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.REVVY__MnLifeCycle__c.fields.Name.label}"/>
+                    <apex:inputField label="Life Cycle Name" value="{!REVVY__MnLifeCycle__c.Name}" required="true">
+                        <apex:actionSupport event="onchange" reRender="pb"/>
+                    </apex:inputField>
+                </apex:pageblockSectionItem>
+
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.REVVY__MnLifeCycle__c.fields.REVVY__Description__c.label}"/>
+                    <apex:inputField label="Life Cycle Name" value="{!REVVY__MnLifeCycle__c.REVVY__Description__c}"/>
+                </apex:pageblockSectionItem>
+
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.REVVY__MnLifeCycle__c.fields.REVVY__Object__c.label}"/>
+                    <apex:outputPanel styleClass="requiredInput" layout="block">
+                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                        <apex:selectList size="1" value="{!selectedObject}">
+                            <apex:selectOptions value="{!ObjectTypes}"/>
+                            <apex:actionSupport event="onchange" reRender="pb"/>
+                        </apex:selectList>
+                        <div class="errorMsg">
+                            <strong>{!noSelectedObjectErrorMsg}</strong>
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem>
+
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.REVVY__MnLifeCycle__c.fields.REVVY__RecordType__c.label}"/>
+                    <apex:outputPanel styleClass="requiredInput" layout="block">
+                        <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                        <apex:selectList size="1" value="{!selectedRecordType}" id="rt">
+                            <apex:selectOptions value="{!RecordTypes}"/>
+                        </apex:selectList>
+                        <div class="errorMsg">
+                            <strong>{!noSelectedRecordTypeErrorMsg}</strong>
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem>
+
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.REVVY__MnLifeCycle__c.fields.REVVY__ApplyTo__c.label}"/>
+                    <apex:inputField value="{!REVVY__MnLifeCycle__c.REVVY__ApplyTo__c}" required="true">
+                        <apex:actionSupport event="onchange" reRender="pb"/>
+                    </apex:inputField>
+                </apex:pageblockSectionItem>
+
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.REVVY__MnLifeCycle__c.fields.REVVY__ConcurrentAmendment__c.label}"/>
+                    <apex:inputField value="{!REVVY__MnLifeCycle__c.REVVY__ConcurrentAmendment__c}"/>
+                </apex:pageblockSectionItem>
+
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

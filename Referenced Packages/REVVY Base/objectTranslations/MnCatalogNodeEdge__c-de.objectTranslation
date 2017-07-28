@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Pointer to a child node in the catalog tree (e.g., category to catalog, subcategory to category, or product to category). --></help>
+        <label>Untergeordnetes Element</label>
+        <name>Child__c</name>
+        <relationshipLabel>Katalogknotenkanten (untergeordnet)</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Assigns or un-assigns parent-child relationships between categories and catalog; between sub-categories and categories; and between products and categories. --></help>
+        <label>Importvorgang</label>
+        <name>ImportAction__c</name>
+        <picklistValues>
+            <masterLabel>Assign</masterLabel>
+            <translation><!-- Assign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UnAssign</masterLabel>
+            <translation><!-- UnAssign --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Is Primary --></label>
+        <name>IsPrimary__c</name>
+    </fields>
+    <fields>
+        <help><!-- Pointer to a parent node in the catalog tree (e.g., category to catalog, subcategory to category, or product to category). --></help>
+        <label>Übergeordnetes Element</label>
+        <name>Parent__c</name>
+        <relationshipLabel>Katalogknotenkanten (übergeordnet)</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The quantity of each product that is contained in a bundle (e.g., 1 remote control, 2 AAA batteries). --></help>
+        <label>Menge</label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Field used internally to determine the position of a node relative to parent categories and child categories. --></help>
+        <label>Relative Ebene</label>
+        <name>Relative_Level__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- CatalogNodeEdgeId --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>Die Menge muss größer oder gleich 1 sein!</errorMessage>
+        <name>Quantity_Less_Than_1</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Einem Paket kann kein konfigurierbares Produkt hinzugefügt werden.</errorMessage>
+        <name>VMnBundleAddConfigurableProduct</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,243 @@
+<apex:page standardController="REVVY__MnCatalogNode__c" extensions="REVVY.CMnNewProductHomePageCtrl"  standardStylesheets="false" sidebar="false" tabstyle="REVVY__MnCatalogNode__c"  docType="html-5.0">
+
+<apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+
+<!--
+<div  class="colWrapper">
+    <div class="collwrp" >
+        <div class="coll" >
+            <c:VMnAdminLeftNav />
+        </div>
+    </div>
+    <div class="colr">
+        --- Actual VF code goes here -->
+
+<!--
+    <c:VMnListCmp pComponentId="1" pTitle="Revvy Product Home" pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pSelectionType="Multiple"
+
+                  pNamespace="{!namespace}"
+                  pShowActionButtons="true"
+                  pShowNewButton="true" pNewButtonLabel="New Product"
+
+                  pShowActionColumn="true"
+                  pShowEditLink="true" pShowDeleteLink="true"
+
+                  pViewNameAsLinkToDetail="true"
+
+                  pLabelMap="{!labelOverrideMap}"
+                  pInLineEditMap="{!inLineEditMap}"
+
+                  pMassActionController="{!this}"
+                  pMassActionLabels="{!massActionLabels}"
+                  pMassActionNeedValidations="{!massActionValidations}"
+
+                  pSelectionController="{!this}"
+
+                  pIsInLineEdit="true"
+                  pIsInLineEditOnSelect="false"
+                  pPaginationCtrlPos="Both"
+
+                  pCustomActionLabels="{!customActionLabels}"
+                  pCustomActionNeedValidations="{!customActionValidations}"
+                  pCustomActions="{!customActions}"
+                  pMassActionMsgOnNoSelection="Select Records to Edit"
+                  pListSize="2"
+
+                  pShowSaveCancelAction="true"
+                  pShowMassActionsAlways="true"
+
+                  rendered="{!showComp=='1'}"
+    />
+
+
+      -->
+
+<!-- 1) very basic : no title, no filter , just list with pagination based on the custom object and the column field set-->
+<!--
+    <c:VMnListCmp pComponentId="2" pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pShowGenericFilter="false"
+                  pShowStatusFilter="false"
+                  pNamespace="{!namespace}"
+                  rendered="{!showComp=='2'}"
+    />
+
+
+    <c:VMnListCmp pComponentId="3" pTitle="New Product Home" pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pShowGenericFilter="true" pGenericFilterColumns="{!gFColNames}"
+                  pShowStatusFilter="true" pStatusFilterFieldName="Type__c"
+                  pSelectionType="Single"
+                  pNamespace="{!namespace}"
+                  rendered="{!showComp=='3'}"
+            />
+
+
+    <c:VMnListCmp pComponentId="4" pTitle="New Product Home" pSObjectType="MnCatalogNode__c" psubTitle="Revvy Products"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pShowGenericFilter="true" pGenericFilterColumns="{!gFColNames}"
+                  pShowStatusFilter="true" pStatusFilterFieldName="Type__c"
+                  pSelectionType="Multiple"
+                  pNamespace="{!namespace}"
+                  rendered="{!showComp=='4'}"
+            />
+
+    <c:VMnListCmp pComponentId="5" pTitle="New Product Home" pSObjectType="MnCatalogNode__c" psubTitle="Revvy Products"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pShowGenericFilter="true" pGenericFilterColumns="{!gFColNames}"
+                  pShowStatusFilter="true" pStatusFilterFieldName="Type__c"
+                  pSelectionType="Single"
+                  pShowActionButtons="true" pShowNewButton="true" pNewButtonLabel="New Product"
+                  pShowActionColumn="true" pShowEditLink="true"
+                  pNamespace="{!namespace}"
+                  rendered="{!showComp=='5'}"
+            />
+
+
+    <c:VMnListCmp pComponentId="6" pTitle="New Product Home" pSObjectType="MnCatalogNode__c" psubTitle="Revvy Products"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pShowGenericFilter="true" pGenericFilterColumns="{!gFColNames}"
+                  pShowStatusFilter="true" pStatusFilterFieldName="Type__c"
+                  pSelectionType="Single"
+                  pShowActionButtons="true" pShowNewButton="true" pNewButtonLabel="New Product"
+                  pShowActionColumn="true" pShowEditLink="true" pShowDeleteLink="true"
+                  pViewNameAsLinkToDetail="true"
+                  pNamespace="{!namespace}"
+                  rendered="{!showComp=='6'}"
+            />
+
+
+    <c:VMnListCmp pComponentId="7" pTitle="Revvy Product Home" pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pShowGenericFilter="true" pGenericFilterColumns="{!gFColNames}"
+                  pShowStatusFilter="true" pStatusFilterFieldName="Type__c"
+                  pNamespace="{!namespace}"
+                  pShowCustomFilter="true" pCustomFilterOptions="{!prdCustomFilterOptions}"
+                  pSelectionType="Single"
+                  pShowActionButtons="true" pShowNewButton="true" pNewButtonLabel="New Product"
+                  pShowActionColumn="true" pShowEditLink="true" pShowDeleteLink="true"
+                  pViewNameAsLinkToDetail="true"
+                  pLabelMap="{!labelOverrideMap}"
+                  rendered="{!showComp=='7'}"
+            />
+
+
+    <c:VMnListCmp pComponentId="8" pTitle="Revvy Product Table" pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pSObjectList="{!productList}"
+                  pSelectionType="Multiple"
+
+                  pNamespace="{!namespace}"
+                  pShowActionButtons="true"
+                  pShowNewButton="true" pNewButtonLabel="New Product"
+
+                  pViewNameAsLinkToDetail="false"
+
+                  pLabelMap="{!labelOverrideMap}"
+
+                  pMassActionController="{!this}"
+                  pMassActionLabels="{!massActionLabels}"
+
+                  pSelectionController="{!this}"
+
+                  pIsInLineEdit="true"
+
+                  pCustomActionLabels="{!customActionLabels}"
+                  pCustomActions="{!customActions}"
+
+                  rendered="{!showComp=='8'}"
+            />
+
+
+
+    <c:VMnListCmp pComponentId="9"
+                  pTitle="Recommended Parts"
+                  pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pSObjectList="{!productList}"
+                  pSelectionType="Multiple"
+                  pShowActionButtons="false"
+                  pNamespace="{!namespace}"
+                  pIsInLineEdit="true"
+
+                  rendered="{!showComp=='9'}"
+    />
+
+
+-->
+
+    <c:VMnListCmp pComponentId="1"
+                  pTitle="Recommended Parts"
+                  pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pSObjectList="{!newProductList}"
+                  pSelectionType="Multiple"
+                  pShowActionButtons="true"
+                  pNamespace="{!namespace}"
+                  pIsInLineEdit="true"
+                  pUniqueColName="Id__c"
+                  pSelectionController="{!this}"
+                  pMassActionController="{!this}"
+                  pMassActionLabels="{!massActionLabels}"
+                  pCustomActionLabels="{!customActionLabels}"
+                  pCustomActions="{!customActions}"
+
+                  pShowSaveCancelAction="true"
+                  pShowMassActionsAlways="true"
+                  pMassActionNeedValidations="{!massActionValidations}"
+
+
+                  rendered="{!showComp=='1'}"
+            />
+
+<!--
+
+    <c:VMnListCmp pComponentId="13" pTitle="Revvy Product Home" pSObjectType="MnCatalogNode__c"
+                  pColumnFieldSetName="{!productListFSName}"
+                  pSelectionType="Multiple"
+
+                  pNamespace="{!namespace}"
+                  pShowActionButtons="true"
+                  pShowNewButton="true" pNewButtonLabel="New Product"
+
+                  pShowActionColumn="true"
+                  pShowEditLink="true" pShowDeleteLink="true"
+
+                  pViewNameAsLinkToDetail="true"
+
+                  pLabelMap="{!labelOverrideMap}"
+                  pInLineEditMap="{!inLineEditMap}"
+
+                  pMassActionController="{!this}"
+                  pMassActionLabels="{!massActionLabels}"
+
+                  pSelectionController="{!this}"
+
+                  pIsInLineEdit="true"
+                  pPaginationCtrlPos="Both"
+
+                  pCustomActionLabels="{!customActionLabels}"
+                  pCustomActions="{!customActions}"
+                  pMassActionMsgOnNoSelection="Select Records to Edit"
+
+                  pCompCss="mnadmin/ui/src/css/myListComp.css"
+
+                  pListSize="10"
+
+                  pShowSaveCancelAction="true"
+
+                  rendered="{!showComp=='13'}"
+            />
+
+                 -->
+
+        <!-- ---------- -->
+
+<!--
+    </div>
+</div>
+
+-->
+</apex:page>

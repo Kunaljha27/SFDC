@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>PermissionControlHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Grants a set of stand-alone or cascading permissions to a single Salesforce user, with reference to either a resource, region, practice, group, or project. Controls whether the user can carry out specific processes including: logging time on behalf of other resources, entering expenses, staffing, and viewing and editing projects in Project Task Gantt.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Billing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to generate and release Billing Events for Projects belonging to specified Regions/Practices/Groups, and to edit Billing-related fields (Billed checkbox and Billing Event Item) for Resources&apos; business records.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to generate and release Billing Events for Projects belonging to specified Regions/Practices/Groups, and to edit Billing-related fields (Billed checkbox and Billing Event Item) for Resources&apos; business records.</inlineHelpText>
+        <label>Billing</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Cascading_Permission__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Checking this box for Permission Controls associated with a hierarchy (e.g. Region, Practice, or Group) means that the Permission also applies to (Resources belonging to) all nodes lower in the hierarchy, in addition to the specified node.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checking this box for Permission Controls associated with a hierarchy (e.g. Region, Practice, or Group) means that the Permission also applies to (Resources belonging to) all nodes lower in the hierarchy, in addition to the specified node.</inlineHelpText>
+        <label>Cascading Permission</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Edit_Task_Manager__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates whether the selected user can use Project Task Gantt in edit mode if they are not the project manager of the selected project.</inlineHelpText>
+        <label>Project Task Gantt Edit</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Expense_Entry__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to enter/edit Expenses and Expense Reports for Resources other than their own.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to enter/edit Expenses and Expense Reports for Resources other than their own.</inlineHelpText>
+        <label>Expense Entry</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Expense_Ops_Edit__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to edit Expenses and Expense Reports for Resources after they have been approved but before they have been billed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to edit Expenses and Expense Reports for Resources after they have been approved but before they have been billed.</inlineHelpText>
+        <label>Expense Ops Edit</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Forecast_Edit__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Allowed to perform editing on the Forecasts page for the Region/Practice/Group</inlineHelpText>
+        <label>Forecast Edit</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Forecast_View__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Allowed to view the Forecasts page for the Region/Practice/Group</inlineHelpText>
+        <label>Forecast View</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Group__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>This is the Group containing Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the Group containing Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Group.</inlineHelpText>
+        <label>Group</label>
+        <referenceTo>Grp__c</referenceTo>
+        <relationshipLabel>Permission Controls</relationshipLabel>
+        <relationshipName>Permission_Controls</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Invoicing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to  to edit Invoicing-related fields (Invoiced checkbox, Invoice Date, Invoice Number) for a Project&apos;s business records.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to  to edit Invoicing-related fields (Invoiced checkbox, Invoice Date, Invoice Number) for Project&apos;s business records.</inlineHelpText>
+        <label>Invoicing</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Practice__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>This is the Practice containing Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Practice.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the Practice containing Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Practice.</inlineHelpText>
+        <label>Practice</label>
+        <referenceTo>Practice__c</referenceTo>
+        <relationshipLabel>Permission Controls</relationshipLabel>
+        <relationshipName>Permission_Controls</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>This is the Project containing Assignments for Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Project, only in relation to the Project.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the Project containing Assignments for Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Project, only in relation to the Project.</inlineHelpText>
+        <label>Project</label>
+        <referenceTo>Proj__c</referenceTo>
+        <relationshipLabel>Permission Controls</relationshipLabel>
+        <relationshipName>Permission_Controls</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>This is the Region containing Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Region.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the Region containing Resources that are the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of Resources in this Region.</inlineHelpText>
+        <label>Region</label>
+        <referenceTo>Region__c</referenceTo>
+        <relationshipLabel>Permission Controls</relationshipLabel>
+        <relationshipName>Permission_Controls</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Resource_Request_Entry__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to enter/edit Resource Requests for specified Regions/Practices/Groups.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to enter/edit Resource Requests for specified Regions/Practices/Groups.</inlineHelpText>
+        <label>Resource Request Entry</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Resource__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>This is the Resource who is the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of this Resource.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the Resource who is the target of the specified action(s) - e.g. delegated Timecard Entry on behalf of this Resource.</inlineHelpText>
+        <label>Resource</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Contact.Is_Resource__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <filterItems>
+                <field>Contact.Is_Resource_Active__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <infoMessage>Only active resources are shown. To display all resources, click Show all results.</infoMessage>
+            <isOptional>true</isOptional>
+        </lookupFilter>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Permission Controls</relationshipLabel>
+        <relationshipName>Permission_Controls</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Skills_And_Certifications_Entry__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to enter/edit Skills and Certifications for Resources other than their own.</description>
+        <externalId>false</externalId>
+        <label>Skills And Certifications Entry</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Skills_And_Certifications_View__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to view Expenses for Resources other than their own. If a user has Edit permission, they implicitly also have View permission.</description>
+        <externalId>false</externalId>
+        <label>Skills And Certifications View</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Staffing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to staff Resources from specified Regions/Practices/Groups.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to staff Resources from specified Regions/Practices/Groups.</inlineHelpText>
+        <label>Staffing</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Timecard_Entry__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to enter/edit Timecards for Resources other than their own.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to enter/edit Timecards for Resources other than their own.</inlineHelpText>
+        <label>Timecard Entry</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Timecard_Ops_Edit__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This checkbox governs the User&apos;s ability to edit Timecards for Resources after they have been approved but before they have been billed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox governs the User&apos;s ability to edit Timecards for Resources after they have been approved but before they have been billed.</inlineHelpText>
+        <label>Timecard Ops Edit</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Permission_Controls</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>View_Task_Manager__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates whether the selected user can use Task Manager in read-only mode if they are not the project manager of the selected project.</inlineHelpText>
+        <label>Project Task Gantt View</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Permission Control</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>User__c</columns>
+        <columns>Resource__c</columns>
+        <columns>Region__c</columns>
+        <columns>Practice__c</columns>
+        <columns>Group__c</columns>
+        <columns>Project__c</columns>
+        <columns>Cascading_Permission__c</columns>
+        <columns>Resource_Request_Entry__c</columns>
+        <columns>Staffing__c</columns>
+        <columns>Timecard_Entry__c</columns>
+        <columns>Expense_Entry__c</columns>
+        <columns>Billing__c</columns>
+        <columns>Skills_And_Certifications_Entry__c</columns>
+        <columns>Skills_And_Certifications_View__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>PC-{0}</displayFormat>
+        <label>Permission Control Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Permission Controls</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>User__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Resource__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Region__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Practice__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Group__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Resource_Request_Entry__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Staffing__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Timecard_Entry__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>User__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Resource__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Region__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Practice__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Group__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Resource_Request_Entry__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Staffing__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Timecard_Entry__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>User__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Resource__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Region__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Practice__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Group__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Resource_Request_Entry__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Staffing__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Timecard_Entry__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>User__c</searchFilterFields>
+        <searchFilterFields>Resource__c</searchFilterFields>
+        <searchFilterFields>Region__c</searchFilterFields>
+        <searchFilterFields>Practice__c</searchFilterFields>
+        <searchFilterFields>Group__c</searchFilterFields>
+        <searchResultsAdditionalFields>User__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Resource__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Region__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Practice__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Group__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Resource_Request_Entry__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Staffing__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Timecard_Entry__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Permission_Control_User_Required</fullName>
+        <active>true</active>
+        <description>Permission Controls must specify a User.</description>
+        <errorConditionFormula>OR(ISNULL(User__c),(User__c=&apos;&apos;))</errorConditionFormula>
+        <errorDisplayField>User__c</errorDisplayField>
+        <errorMessage>Permission Controls must specify a User.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Permission_May_Not_Have_Multiple_Targets</fullName>
+        <active>true</active>
+        <description>Permission Control must not reference more than one of the following:  Resource, Region, Practice, Group, or Project.</description>
+        <errorConditionFormula>OR(AND(NOT(OR(ISNULL(Resource__c),(Resource__c=&apos;&apos;))),NOT(AND(OR(ISNULL(Region__c),(Region__c=&apos;&apos;)),OR(ISNULL(Practice__c),(Practice__c=&apos;&apos;)),OR(ISNULL(Group__c),(Group__c=&apos;&apos;)),OR(ISNULL(Project__c),(Project__c=&apos;&apos;))))),AND(NOT(OR(ISNULL(Region__c),(Region__c=&apos;&apos;))),NOT(AND(OR(ISNULL(Resource__c),(Resource__c=&apos;&apos;)),OR(ISNULL(Practice__c),(Practice__c=&apos;&apos;)),OR(ISNULL(Group__c),(Group__c=&apos;&apos;)),OR(ISNULL(Project__c),(Project__c=&apos;&apos;))))),AND(NOT(OR(ISNULL(Practice__c),(Practice__c=&apos;&apos;))),NOT(AND(OR(ISNULL(Region__c),(Region__c=&apos;&apos;)),OR(ISNULL(Resource__c),(Resource__c=&apos;&apos;)),OR(ISNULL(Group__c),(Group__c=&apos;&apos;)),OR(ISNULL(Project__c),(Project__c=&apos;&apos;))))),AND(NOT(OR(ISNULL(Group__c),(Group__c=&apos;&apos;))),NOT(AND(OR(ISNULL(Region__c),(Region__c=&apos;&apos;)),OR(ISNULL(Practice__c),(Practice__c=&apos;&apos;)),OR(ISNULL(Resource__c),(Resource__c=&apos;&apos;)),OR(ISNULL(Project__c),(Project__c=&apos;&apos;))))),AND(NOT(OR(ISNULL(Project__c),(Project__c=&apos;&apos;))),NOT(AND(OR(ISNULL(Region__c),(Region__c=&apos;&apos;)),OR(ISNULL(Practice__c),(Practice__c=&apos;&apos;)),OR(ISNULL(Group__c),(Group__c=&apos;&apos;)),OR(ISNULL(Resource__c),(Resource__c=&apos;&apos;))))))</errorConditionFormula>
+        <errorMessage>Permission Control must not reference more than one of the following:  Resource, Region, Practice, Group, or Project.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Permission_Must_Have_Target_Entity</fullName>
+        <active>true</active>
+        <description>Permission Control must reference either a Resource or a Region/Practice/Group or Project.</description>
+        <errorConditionFormula>AND(OR(ISNULL(Resource__c),(Resource__c=&apos;&apos;)),OR(ISNULL(Region__c),(Region__c=&apos;&apos;)),OR(ISNULL(Practice__c),(Practice__c=&apos;&apos;)),OR(ISNULL(Group__c),(Group__c=&apos;&apos;)),OR(ISNULL(Project__c),(Project__c=&apos;&apos;)))</errorConditionFormula>
+        <errorMessage>Permission Control must reference either a Resource or a Region/Practice/Group or Project.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Start_Date_may_not_be_After_End_Date</fullName>
+        <active>true</active>
+        <description>The Permission Control Start Date may not be later than the End Date.</description>
+        <errorConditionFormula>AND(NOT(ISNULL(Start_Date__c)),NOT(ISNULL(End_Date__c)),(Start_Date__c&gt;End_Date__c))</errorConditionFormula>
+        <errorMessage>The Permission Control Start Date may not be later than the End Date.</errorMessage>
+    </validationRules>
+</CustomObject>

@@ -1,0 +1,21 @@
+<apex:page controller="REVVY.CMnDataSyncServiceController" >
+    <apex:form >
+    <apex:pageBlock title="MasterDataSync" tabStyle="Account">
+     <apex:pagemessages />
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!sendToserver}" id="theButton" value="Sync Now"/>
+            </apex:pageBlockButtons>
+     <apex:pageBlockSection title="Select Object And Press Sync Now" collapsible="false" columns="1"  >
+         <apex:pageBlockTable value="{!WrapperList}" var="singlerecord">
+            <!-- <apex:column >
+                 <apex:inputCheckbox id="theCheckbox" value="{!singlerecord.isSelected}">
+                 </apex:inputCheckbox>
+             </apex:column> -->
+             <apex:column title="ObjectName" headerValue="Object Name" value="{!singleRecord.objectName}" width="75%" />
+             <!--apex:column headerValue="Last Sync" value="{!singleRecord.LastSync}"/-->
+             <apex:column headerValue="Type" value="{!singleRecord.Type}" width="25%" />
+         </apex:pageBlockTable>
+     </apex:pageBlockSection>   
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

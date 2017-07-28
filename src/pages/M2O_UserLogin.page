@@ -1,0 +1,25 @@
+<Apex:page controller="M2O_UserLoginInfoController1"  showHeader="false" sidebar="false" >
+<style> 
+    .myBackground { 
+    
+        background-color: #CFEEF8;    
+    
+    }
+    .linkStyle {
+        color: #1474CA;
+        text-decoration: none;
+        font-family: "Arial";
+        font-size: 9;
+    }
+</style>
+<!--
+<body class="myBackground">   
+    <apex:form >
+        <Apex:outputText value="MY PREVIOUS LOGIN :"/><br></br>
+        <Apex:outputText value="{!lastLogin.LastLoginDate}"/><br/><br/>
+        <Apex:outputLink styleClass="linkStyle" title="All Logins" value="{!allLogins}" target="_parent">All Logins</apex:outputLink><br/><br/>
+        <Apex:outputLink styleClass="linkStyle"  title="Active Sessions" value="{!activeLogins}" target="_parent">Active Sessions</apex:outputLink><br/>
+    </apex:form> 
+</body>
+-->
+</Apex:page>

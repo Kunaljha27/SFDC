@@ -1,0 +1,349 @@
+<apex:page id="thePage" Controller="REVVY.CMnDevImportUtilController" sidebar="false">
+<html>
+<script>
+
+    var CMnNamespacePrefix = "{!namespacePrefix}";
+    var CMnNamespacePrefixUS = "";
+    var CMnNamespacePrefixDT = "";
+    if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+        CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+        CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+    }
+
+function addProducts() {
+  alert('adding Products');
+  Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestProducts', handleResult);
+}
+
+function addCatalogHierarchy() {
+  alert('Click Ok to start adding CatalogHierarchy');
+  document.getElementById("addCtgHierBtnMsg").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestCatalogHierarchy',
+                   'CtgPerf', 'PrdPerf', 5, 2, 10, 20, handleResult);
+}
+
+function addBigCatalogHierarchy1() {
+  alert('Click Ok to start adding BigCatalogHierarchy1');
+  document.getElementById("addBigCtgHierBtnMsg1").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy1', 'BigCtgPerf', 5, 2, 10, handleResult);
+  document.getElementById("addBigCtgHierBtn1").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy21() {
+  alert('Click Ok to start adding BigCatalogHierarchy21');
+  document.getElementById("addBigCtgHierBtnMsg2").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy2', 'BigCtgPerf', 10, 0, 20, handleResult);
+  document.getElementById("addBigCtgHierBtn21").innerText = 'Done..';
+}
+
+
+function addBigCatalogHierarchy22() {
+  alert('Click Ok to start adding BigCatalogHierarchy22');
+  document.getElementById("addBigCtgHierBtnMsg2").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy2', 'BigCtgPerf', 10, 20, 40, handleResult);
+  document.getElementById("addBigCtgHierBtn22").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy23() {
+  alert('Click Ok to start adding BigCatalogHierarchy23');
+  document.getElementById("addBigCtgHierBtnMsg2").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy2', 'BigCtgPerf', 10, 40, 60, handleResult);
+  document.getElementById("addBigCtgHierBtn23").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy24() {
+  alert('Click Ok to start adding BigCatalogHierarchy24');
+  document.getElementById("addBigCtgHierBtnMsg2").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy2', 'BigCtgPerf', 10, 60, 80, handleResult);
+  document.getElementById("addBigCtgHierBtn24").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy25() {
+  alert('Click Ok to start adding BigCatalogHierarchy25');
+  document.getElementById("addBigCtgHierBtnMsg2").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy2', 'BigCtgPerf', 10, 80, 100, handleResult);
+  document.getElementById("addBigCtgHierBtn25").innerText = 'Done..';
+}
+
+
+
+function addBigCatalogHierarchy31() {
+  alert('Click Ok to start adding BigCatalogHierarchy31');
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy3', 'BigPrdPerf', 20, 0, 150, handleResult);
+  document.getElementById("addBigCtgHierBtn31").innerText = 'Done..';
+}
+
+
+function addBigCatalogHierarchy32() {
+  alert('Click Ok to start adding BigCatalogHierarchy32');
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy3', 'BigPrdPerf', 20, 150, 300, handleResult);
+  document.getElementById("addBigCtgHierBtn32").innerText = 'Done..';
+}
+
+
+function addBigCatalogHierarchy33() {
+  alert('Click Ok to start adding BigCatalogHierarchy33');
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy3', 'BigPrdPerf', 20, 300, 450, handleResult);
+  document.getElementById("addBigCtgHierBtn33").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy34() {
+  alert('Click Ok to start adding BigCatalogHierarchy34');
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy3', 'BigPrdPerf', 20, 450, 600, handleResult);
+  document.getElementById("addBigCtgHierBtn34").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy35() {
+  alert('Click Ok to start adding BigCatalogHierarchy34');
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy3', 'BigPrdPerf', 20, 600, 750, handleResult);
+  document.getElementById("addBigCtgHierBtn35").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy36() {
+  alert('Click Ok to start adding BigCatalogHierarchy34');
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy3', 'BigPrdPerf', 20, 750, 900, handleResult);
+  document.getElementById("addBigCtgHierBtn36").innerText = 'Done..';
+}
+
+function addBigCatalogHierarchy37() {
+  alert('Click Ok to start adding BigCatalogHierarchy34');
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "block";
+
+  Visualforce.remoting.Manager.invokeAction(
+      CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestBigCatalogHierarchy3', 'BigPrdPerf', 20, 900, 1000, handleResult);
+  document.getElementById("addBigCtgHierBtn37").innerText = 'Done..';
+}
+
+
+function addPriceLists() {
+  alert('adding PriceLists');
+  Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestPriceLists', handleResult);
+}
+function addPriceListLines() {
+  alert('adding PriceList Lines');
+  Visualforce.remoting.Manager.invokeAction(
+        CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestPriceListLines', handleResult);
+}
+
+function addQuote() {
+    alert('adding Quote');
+    Visualforce.remoting.Manager.invokeAction(
+          CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestQuote', handleResult);
+}
+
+function addQuoteLines(noOfLines) {
+
+    alert('adding Quote Lines ' + noOfLines);
+    for (var i = 0 ; i< noOfLines ;i++) {
+        Visualforce.remoting.Manager.invokeAction(
+              CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestQuoteLine', handleQuoteResult);
+    }
+}
+
+function addQuoteSubLines(noOfLines) {
+
+    alert('adding Quote Sub Lines ' + noOfLines);
+        Visualforce.remoting.Manager.invokeAction(
+              CMnNamespacePrefixDT + 'CMnDevImportUtilController.addTestQuoteSubLines', noOfLines,handleQuoteResult);
+}
+
+    function setTrialInstance() {
+        Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.setTrialInstance', addPluginSuccess);
+    }
+
+    function resetTrialInstance() {
+        Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.resetTrialInstance', addPluginSuccess);
+    }
+
+
+
+function setDisplayCfgDetailStatus(value) {
+    Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.setDisplayCfgDetailStatus', value, addPluginSuccess);
+}
+
+function setAppSecretProperties() {
+    Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.setAppSecretForHeroku', addPluginSuccess);
+}
+
+function resetAppSecretProperties() {
+    Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.resetAppSecretForHeroku', addPluginSuccess);
+}
+
+
+
+function setDisplayAdvExpLink(value) {
+    Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.setDisplayAdvExpLink', value, addPluginSuccess);
+}
+
+function enableQuoteHomeDashboard() {
+    Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.enableQuoteHomeDashboard', addPluginSuccess);
+}
+
+function disableQuoteHomeDashboard() {
+    Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnDevImportUtilController.disableQuoteHomeDashboard', addPluginSuccess);
+}
+
+function addPluginSuccess() {
+    alert('Done');
+}
+
+function handleResult(result, event) {
+  if(event.type == 'exception') {
+    alert('----- ' + event.message);
+  } else {
+    alert('---- Done');
+  }
+  document.getElementById("addCtgHierBtnMsg").style.display = "none";
+  document.getElementById("addBigCtgHierBtnMsg1").style.display = "none";
+  document.getElementById("addBigCtgHierBtnMsg2").style.display = "none";
+  document.getElementById("addBigCtgHierBtnMsg3").style.display = "none";
+}
+
+function handleQuoteResult(result, event) {
+  if(event.type == 'exception') {
+    alert('------' + event.message);
+  } else {
+    console.log('Done creating quote lines');
+  }
+}
+
+</script>
+<style>
+.revvy-dev-import-util {
+    border: 1px solid #cccccc;
+    padding: 5px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.revvy-dev-import-util span {
+    position: absolute;
+    top: -9px;
+    background: white;
+    font-size: 14px;
+}
+
+.revvy-dev-import-util button {
+    padding: 5px;
+    min-width: 200px;
+    margin: 5px;
+}
+
+</style>
+<div class="revvy-dev-import-util">
+    <span>Content Creation Helpers</span>
+    <button onclick="addProducts()">Add Products</button>
+    <button onclick="addPriceLists()">Add Price Lists</button>
+    <button onclick="addPriceListLines()">Add Price List Lines</button>
+    <button onclick="addQuote()">Add Quote</button>
+    <button onclick="addQuoteLines(15)">Add 15 Quote Lines</button>
+    <button onclick="addQuoteSubLines(100)">Add 100 Quote Sub Lines</button>
+    <button onclick="addQuoteLines(80)">Add 80 Quote Lines</button>
+    <button onclick="addCatalogHierarchy()" id="addCtgHierBtn">Add CatalogHierarchy</button>
+    <button onclick="addBigCatalogHierarchy1()" id="addBigCtgHierBtn1">Add Big CatalogHierarchy1</button>
+    <button onclick="addBigCatalogHierarchy21()" id="addBigCtgHierBtn21">Add Big CatalogHierarchy21</button>
+    <button onclick="addBigCatalogHierarchy22()" id="addBigCtgHierBtn22">Add Big CatalogHierarchy22</button>
+    <button onclick="addBigCatalogHierarchy23()" id="addBigCtgHierBtn23">Add Big CatalogHierarchy23</button>
+    <button onclick="addBigCatalogHierarchy24()" id="addBigCtgHierBtn24">Add Big CatalogHierarchy24</button>
+    <button onclick="addBigCatalogHierarchy25()" id="addBigCtgHierBtn25">Add Big CatalogHierarchy25</button>
+    <button onclick="addBigCatalogHierarchy31()" id="addBigCtgHierBtn31">Add Big CatalogHierarchy31</button>
+    <button onclick="addBigCatalogHierarchy32()" id="addBigCtgHierBtn32">Add Big CatalogHierarchy32</button>
+    <button onclick="addBigCatalogHierarchy33()" id="addBigCtgHierBtn33">Add Big CatalogHierarchy33</button>
+    <button onclick="addBigCatalogHierarchy34()" id="addBigCtgHierBtn34">Add Big CatalogHierarchy34</button>
+    <button onclick="addBigCatalogHierarchy35()" id="addBigCtgHierBtn35">Add Big CatalogHierarchy35</button>
+    <button onclick="addBigCatalogHierarchy36()" id="addBigCtgHierBtn36">Add Big CatalogHierarchy36</button>
+    <button onclick="addBigCatalogHierarchy37()" id="addBigCtgHierBtn37">Add Big CatalogHierarchy37</button>
+</div>
+<br/><br/><br/>
+<div class="revvy-dev-import-util">
+    <span>Toggle Custom Settings</span>
+    <button onclick="setDisplayCfgDetailStatus('true')" id="setDisplayCfgDetailStatus">Set Display Config Detail Status</button>
+    <button onclick="setDisplayCfgDetailStatus('false')" id="resetDisplayCfgDetailStatus">Reset Display Config Detail Status</button>
+
+    <button onclick="setAppSecretProperties()" id="setAppSecretProperties">Set App Secret For Heroku</button>
+    <button onclick="resetAppSecretProperties()" id="resetAppSecretProperties">Reset App Secret</button>
+
+    <button onclick="setDisplayAdvExpLink('true')" id="setDisplayAdvExpLink">Set Display Advanced Exp Link</button>
+    <button onclick="setDisplayAdvExpLink('false')" id="resetDisplayAdvExpLink">Reset Display Advanced Exp Link</button>
+    <button onclick="enableQuoteHomeDashboard()" id="enableQuoteHomeDashboard">Enable Quote Home Dashboard</button>
+    <button onclick="disableQuoteHomeDashboard()" id="disableQuoteHomeDashboard">Disable Quote Home Dashboard</button>
+    <button onclick="setTrialInstance()" id="setTrialInstance">Set Trial Instance</button>
+    <button onclick="resetTrialInstance()" id="resetTrialInstance">Reset Trial Instance</button>
+</div>
+
+<div id="addCtgHierBtnMsg" style="display:none;">
+<p> Creating Catalog Hierarchy with     <br/>
+<br/>
+5 first level categories.<br/>
+10 second level categories (2 per first level categories).<br/>
+100 third level categories (10 per secind level categories).<br/>
+2000 products (20 per third level categories).<br/>
+<br/>
+Please wait....<br/>
+</p>
+</div>
+
+<div id="addBigCtgHierBtnMsg1" style="display:none;">
+<p> Creating Big Catalog Hierarchy 1 with     <br/>
+<br/>
+5 first level categories.<br/>
+10 second level categories (2 per first level categories).<br/>
+100 third level categories (10 per secind level categories).<br/>
+<br/>
+Please wait....<br/>
+</p>
+</div>
+
+<div id="addBigCtgHierBtnMsg2" style="display:none;">
+<p> Creating Big Catalog Hierarchy 2 with     <br/>
+<br/>
+1000 fourth level categories (10 per third level 100 categories).<br/>
+<br/>
+Please wait....<br/>
+</p>
+</div>
+
+<div id="addBigCtgHierBtnMsg3" style="display:none;">
+<p> Creating Big Catalog Hierarchy 3 with     <br/>
+<br/>
+20000 products (20 per fourth level 1000 categories).<br/>
+<br/>
+Please wait....<br/>
+</p>
+</div>
+</html>
+</apex:page>

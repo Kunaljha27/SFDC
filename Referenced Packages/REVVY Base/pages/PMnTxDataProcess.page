@@ -1,0 +1,31 @@
+<!--
+ - Created by vigupta on 3/8/2016.
+ -->
+
+<apex:page id="PMnTxDataProcess" standardController="REVVY__MnTxDataSubmission__c" recordSetVar="submissions" extensions="REVVY.CMnTxDataProcessCntrl">
+    <style>
+        .msg {
+            font-size: 12pt;
+            font-family: Arial,Helvetica,sans-serif;
+        }
+        .errmsg {
+            font-size: 12pt;
+            font-family: Arial,Helvetica,sans-serif;
+            color: red;
+        }
+        .button{
+            min-width: 100px;
+        }
+    </style>
+    <apex:form >
+        <apex:pageMessages id="errorMessage" escape="false"/>
+        <apex:pageBlock title="Following Submissions Will be Processed" rendered="{!NOT(isProcessed)}" >
+            <apex:pageBlockTable value="{!selectedSubmissions}" var="submission" >
+                <apex:column value="{!submission.Name}"></apex:column>
+                <apex:column value="{!submission.REVVY__Status__c}"></apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        <apex:commandButton id="theProcessSubmissionButton" action="{!processSelectedSubmissions}" value="Continue" styleClass="button" rendered="{!AND(NOT(hasError),NOT(isProcessed))}"></apex:commandButton>
+        <apex:commandButton action="{!backToList}" value="Back" styleClass="button" />
+    </apex:form>
+</apex:page>

@@ -1,0 +1,402 @@
+<apex:page id="thePage" Controller="REVVY.CMnConfigEngineTestDataController" sidebar="false" tabstyle="MnAdmin__tab">
+
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+
+<script>
+
+    var CMnNamespacePrefix = "{!namespacePrefix}";
+    var CMnNamespacePrefixUS = "";
+    var CMnNamespacePrefixDT = "";
+    if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+        CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+        CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+    }
+
+    var stdt;
+    function compileModel(modelStr, instanceId) {
+        stdt = new Date();
+        document.getElementById('cmpT').value = '';
+        document.getElementById('cmpTime').innerHTML = 'Compiling...';
+        if (instanceId == null || instanceId == '') instanceId='MyInstanceId';
+
+        //alert('compiling model:  ' + modelStr);
+        Visualforce.remoting.Manager.invokeAction(
+              CMnNamespacePrefixDT + 'CMnConfigEngineTestDataController.compileModel', modelStr, instanceId, handleCompileResult, {escape:false});
+    }
+
+
+    function evalModel(modelStr, instanceId, fullJSON) {
+        stdt = new Date();
+        document.getElementById('evalT').value = '';
+        document.getElementById('evlTime').innerHTML = 'Evaluating...';
+        if (instanceId == null || instanceId == '') instanceId='MyInstanceId';
+
+        //alert('evaluating model:  ' + modelId);
+        Visualforce.remoting.Manager.invokeAction(
+              CMnNamespacePrefixDT + 'CMnConfigEngineTestDataController.evalModel', modelStr, instanceId, fullJSON, handleEvalResult, {escape:false});
+    }
+
+    function handleCompileResult(result, event) {
+      if(event.type == 'exception') {
+        alert('------' + event.message);
+        //alert('------' + event.toJSON());
+      } else {
+        console.log('Done compiling model');
+        //alert('Done compiling model in : ' + (new Date() - stdt) + ' milisec : check compiled JSON');
+        document.getElementById('cmpTime').innerHTML  = 'Compilation done in : ' + (new Date() - stdt) + ' milliseconds...';
+        document.getElementById('cmpT').value =  JSON.stringify(JSON.parse(result),null,2);
+      }
+    }
+
+    function handleEvalResult(result, event) {
+      if(event.type == 'exception') {
+        alert('------' + event.message);
+      } else {
+        console.log('Done evaluate Model');
+        //alert('Done evaluate Model in : ' + (new Date() - stdt) + ' milisec check Evaluated JSON');
+        document.getElementById('evlTime').innerHTML  = 'Evaluation done in : ' + (new Date() - stdt) + ' milliseconds...';
+        document.getElementById('evalT').value = JSON.stringify(JSON.parse(result),null,2);
+      }
+    };
+
+    var generateModel = function () {
+        var nbOGs       = $('#nbOGs').val();       
+        var nbOptPerOG  = $('#nbOptPerOG').val();       
+        var nbRules     = $('#nbRules').val();       
+        var modelUId    = $('#modelUId').val();       
+
+        if(isNaN(nbOGs)) {
+            alert('please specify the number of options group to generate.');
+            return;
+        }
+        if(isNaN(nbOptPerOG)) {
+            alert('please specify the number of options per option group to generate.');
+            return;
+        }
+        if(isNaN(nbRules)) {
+            alert('please specify the number of rules to generate.');
+            return;
+        }
+        if(modelUId === null || modelUId.length === 0) {
+            alert('please specify a model ID');
+            return;
+        }
+
+        $('#generateButton').attr('disabled', 'disabled');
+            Visualforce.remoting.Manager.invokeAction(
+                CMnNamespacePrefixDT + 'CMnConfigEngineTestDataController.generateModel', nbOGs, nbOptPerOG, nbRules, modelUId, function(res) {
+            if(res === null) {
+                alert('oops, something went wrong during model generation, please try again.');
+            }
+            else {
+                alert(res);
+            }
+            $('#generateButton').removeAttr('disabled');
+        });
+    };
+
+    var perfResults;
+    var randomSessionId;
+    var cumulativeEvalTime;
+    var nbEvalRuns;
+    var performDiffTest = function(jsonOutput, nbRuns) {
+        var randOGname  = Object.keys(jsonOutput.groups);
+        randOGname      = randOGname[Math.floor(Math.random() * randOGname.length)];
+        var randOG      = jsonOutput.groups[randOGname];
+
+        var randOpt     = randOG.options[Math.floor(Math.random() * randOG.options.length)];
+        randOpt._selected = true;
+
+        var diff        = {groups : {} };
+        diff.groups[randOGname] = randOG;
+
+        console.log('changed ' + randOGname + ': selected option ' + randOpt.label + ', diff : ' + JSON.stringify(diff, null, 4));
+        var totalEvalTime = Date.now();
+            Visualforce.remoting.Manager.invokeAction(
+                   CMnNamespacePrefixDT + 'CMnConfigEngineTestDataController.evalModel', JSON.stringify(diff, null, 4), randomSessionId, function(res) {
+            totalEvalTime = Date.now() - totalEvalTime;
+            jsonOutput = JSON.parse(res);
+            if(!jsonOutput) {
+                console.log(res);
+            }
+
+            console.log('eval #' + (nbEvalRuns - nbRuns) + ' took ' + totalEvalTime + ' ms (' + jsonOutput.perf.evalTime +
+                    ' ms in configengine)');
+            perfResults += 'eval #' + (nbEvalRuns - nbRuns) + ' took ' + totalEvalTime + ' ms (' + jsonOutput.perf.evalTime +
+                            ' ms in configengine)\n';
+            cumulativeEvalTime += totalEvalTime;
+
+            if(nbRuns-- > 0)
+                performDiffTest(jsonOutput, nbRuns);
+            else {
+                perfResults += '\nOn average, eval took ' + cumulativeEvalTime / nbEvalRuns + 'ms';
+                console.log('perf test result : \n' + perfResults);
+                alert(perfResults);
+                $('#runStatsButton').removeAttr('disabled');
+            }
+        }, {escape: false});
+    }
+
+    var runAndGetStatistics = function() {
+        perfResults     = '--------------------------------------------------------------------------\n';
+        $('#runStatsButton').attr('disabled', 'disabled');
+        cumulativeEvalTime  = 0;
+        var modelUId        = $('#modelUId').val();       
+        nbEvalRuns          = $('#nbEvalRuns').val();       
+        randomSessionId     = Math.random();
+        if(modelUId == null || modelUId.length == 0) {
+            alert('please specify a model ID');
+            $('#runStatsButton').removeAttr('disabled');
+            return;
+        }
+        if(nbEvalRuns === null || isNaN(nbEvalRuns)) {
+            alert('Please specify the number of Evaluate runs.');
+            $('#runStatsButton').removeAttr('disabled');
+        }
+
+        var totalCompileTime = Date.now();
+        var totalEvalTime;
+            Visualforce.remoting.Manager.invokeAction(
+              CMnNamespacePrefixDT + 'CMnConfigEngineTestDataController.runCompile', modelUId, function(res) {
+            totalCompileTime = Date.now() - totalCompileTime;
+            //console.log(res);
+            var jsonOutput = JSON.parse(res);
+            if(!jsonOutput) {
+                console.log(res);
+            }
+            console.log('compile took ' + totalCompileTime + ' ms (' 
+                            + (jsonOutput.perf.compileTime + jsonOutput.perf.evalTime) + 
+                            ' ms in configengine)');
+            perfResults += 'compile took ' + totalCompileTime + ' ms (' 
+                            + (jsonOutput.perf.compileTime + jsonOutput.perf.evalTime) + 
+                            ' ms in configengine)\n';
+
+            randomSessionId     = Math.random();
+            totalLoadTime   = Date.now();
+                Visualforce.remoting.Manager.invokeAction(
+                  CMnNamespacePrefixDT + 'CMnConfigEngineTestDataController.runLoadModel', modelUId, randomSessionId, function(res) {
+                totalLoadTime = Date.now() - totalLoadTime;
+                console.log(res);
+                var jsonOutput = JSON.parse(res);
+                if(!jsonOutput) {
+                    console.log(res);
+                    $('#runStatsButton').removeAttr('disabled');
+                    return;
+                }
+                console.log('load took ' + totalLoadTime + ' ms (' + jsonOutput.perf.evalTime +
+                            ' ms in configengine)');
+                perfResults += 'load took ' + totalLoadTime + ' ms (' + jsonOutput.perf.evalTime +
+                                ' ms in configengine)\n';
+                console.log('model perf stats : ' + JSON.stringify(jsonOutput.perf, null, 4));
+
+                performDiffTest(jsonOutput, nbEvalRuns);
+
+            }, {escape: false});
+        }, {escape: false});
+    };
+
+    var deleteModel = function() {
+        var modelUId        = $('#modelUId').val();
+        if(modelUId == null || modelUId.length == 0) {
+            alert('please specify a model ID');
+            return;
+        }
+
+        Visualforce.remoting.Manager.invokeAction(
+           CMnNamespacePrefixDT + 'CMnConfigEngineTestDataController.deleteModel', modelUId, function(res) {
+            alert(res);
+        }, {escape:false});
+    };
+
+</script>
+
+<!--
+<table border="0" cellspacing="6" cellpadding="0">
+
+<tr>
+
+<td> <b>Model Id:</b> </td><td> <input type="text" id="mNameT" value="MyInstanceId"/> </td>
+
+</tr>
+<tr>
+
+<td><b>Pre compiled model JSON:</b> </td><td>
+<textarea rows="10" cols="150" id="inT" /> </td>
+
+</tr>
+<tr>
+
+<td width="260"> <p id="cmpTime">&nbsp;</p> </td>
+<td>
+<button onclick="compileModel(document.getElementById('inT').value, document.getElementById('mNameT').value);">Compile</button> </td>
+
+</tr>
+<tr>
+<td>
+<b>Compiled JSON:</b> </td><td> <textarea rows="10" cols="150" id="cmpT" /></td>
+
+</tr>
+<tr>
+
+<td width="260"> <p id="evlTime">&nbsp;</p> </td>
+<td>
+<button onclick="evalModel(document.getElementById('cmpT').value, document.getElementById('mNameT').value)">Evaluate</button> </td>
+
+</tr>
+<tr>
+
+<td>
+<b>Evaluated JSON:</b> </td><td> <textarea rows="10" cols="150" id="evalT" /> </td>
+
+</tr>
+</table>
+-->
+    <c:CMnZenDesk />
+    <div  class="slds">
+        <div  class="colWrapper slds-grid">
+            <div class="collwrp slds-col" >
+                <div class="coll" >
+                    <c:CMnAdminLeftNav />
+                </div>
+            </div>
+            <div class="colr slds-col">
+                <!--- Actual VF code goes here -->
+
+<div class="slds-tabs--default mn-top-nav">
+    <ul class="slds-tabs--default__nav" role="tablist">
+        <li class="slds-tabs__item slds-text-heading--label" title="{!$Label.MnModelHomeLink}" role="presentation">
+            <!-- <a href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1">Item One</a> -->
+            <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefixUS}PMnModelHome');"
+               alt="ModelHome">
+                {!$Label.MnModelHomeLink}</a>
+        </li>
+        <li class="slds-tabs__item slds-text-heading--label " title="{!$Label.MnOptionGroupHomeLink}" role="presentation">
+            <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefixUS}PMnOptionGroupHome');"
+               alt="OptionGroupHome">
+                {!$Label.MnOptionGroupHomeLink}</a>
+        </li>
+        <li class="slds-tabs__item slds-text-heading--label " title="{!$Label.MnConfigRuleHomeLink}" role="presentation">
+            <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefixUS}PMnConfigRuleHome');"
+               alt="ConfigRuleHome">
+                {!$Label.MnConfigRuleHomeLink}</a>
+        </li>
+        <li class="slds-tabs__item slds-text-heading--label" title="{!$Label.MnConfigEngineStatusLink}" role="presentation">
+            <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefixUS}PMnConfigStatus');"
+               alt="ConfigEngineStatus">
+                {!$Label.MnConfigEngineStatusLink}</a>
+        </li>
+        <li class="slds-tabs__item slds-text-heading--label slds-active" title="Test" role="presentation">
+            <a href="javascript:void(0);" onclick="return mnNavigateToUrl('/apex/{!namespacePrefixUS}PMnConfigEngineTestData');"
+               alt="ConfigEngineTestData">
+                Test</a>
+        </li>
+    </ul>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+    <td> <b>Model Id:</b>
+         <input id="mNameT" type="text" value="MyInstanceId"/>
+    </td>
+    <td>
+         <p id="cmpTime">&nbsp;</p>
+    </td>
+    <td>
+         <p id="evlTime">&nbsp;</p>
+    </td>
+</tr>
+<tr>
+    <td>
+         <b>Pre compiled model JSON:</b>   &nbsp;&nbsp;&gt;&gt;&gt;&gt;&gt;&nbsp;&nbsp;
+         <button onclick="compileModel(document.getElementById('inT').value,  document.getElementById('mNameT').value);">Compile</button>
+    </td>
+    <td>
+        <b>Compiled JSON:</b>   &nbsp;&nbsp;&gt;&gt;&gt;&gt;&gt;&nbsp;&nbsp;
+        <button onclick="evalModel(document.getElementById('cmpT').value, document.getElementById('mNameT').value, document.getElementById('fullJ').checked)">Evaluate</button>
+        <input id="fullJ" type="checkbox" /> <b>get full JSON </b>
+    </td>
+    <td>
+        <b>Evaluated JSON:</b>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <textarea cols="76" id="inT" rows="40"></textarea>
+    </td>
+    <td>
+        <textarea cols="76" id="cmpT" rows="40"></textarea>
+    </td>
+    <td>
+        <textarea cols="76" id="evalT" rows="40"></textarea>
+    </td>
+    <td>
+        <br /> <br />
+            <div style="border:1px;border-style: solid; padding:1em; width:20em;" >
+                <div style="padding:3px;">
+                    <div style="float:left;">Model id : </div>
+                    <div style="float:right;">
+                        <input type='text' id='modelUId' style="width:10em; float:right;" value="bigModel"/>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <hr />
+                <div style="padding:3px;">
+                    <div style="float:left;"> Number of OGroups : </div>
+                    <div style="float:right;">
+                        <input type='text' id='nbOGs' style='width:5em;float:right;' value='10'/>
+                    </div>
+                </div>
+                <br />
+                <div style="padding:3px;">
+                    <div style="float:left;"> Number of Options : </div>
+                    <div style="float:right;">
+                        <input type='text' id='nbOptPerOG' style='width:5em;float:right;' value='10'/>
+                    </div>
+                </div>
+                <br />
+                <div style="padding:3px;">
+                    <div style="float:left;"> Number of Rules : </div>
+                    <div style="float:right;">
+                        <input type='text' id='nbRules' style="width:5em;float:right;" value="10" />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div style="padding:3px;">
+                    <div style="float:left;">
+                        <input type="button" onClick="javascript:generateModel();" id='generateButton' value="Generate" />
+                    </div>
+                    <div style="float:right;">
+                        <input type="button" onClick="javascript:deleteModel();" id='deleteButton' value="Delete" />
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <div style="padding:3px;">
+                    <div style="float:left;"> Number of Eval runs : </div>
+                    <div style="float:right;">
+                        <input type='text' id='nbEvalRuns' style="width:5em;float:right;" value="10" />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <input type="button" onClick="javascript:runAndGetStatistics();" id='runStatsButton' value="Compile and Evaluate" />
+                <br />
+            </div>
+        <br/>
+        <br/>
+    </td>
+</tr>
+</tbody>
+</table>
+            </div>
+        </div>
+    </div>
+
+</apex:page>

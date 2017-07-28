@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Account Distributor --></value>
+    </caseValues>
+    <fields>
+        <label>客户</label>
+        <lookupFilter>
+            <errorMessage>您无法添加分销商至分销商帐户。</errorMessage>
+        </lookupFilter>
+        <name>Account__c</name>
+        <relationshipLabel>分销商</relationshipLabel>
+    </fields>
+    <fields>
+        <label>分销商</label>
+        <lookupFilter>
+            <errorMessage>选择合作伙伴帐户</errorMessage>
+        </lookupFilter>
+        <name>Distributor__c</name>
+        <relationshipLabel>链接帐户</relationshipLabel>
+    </fields>
+    <fields>
+        <label>唯一关键字</label>
+        <name>UniqueKey__c</name>
+    </fields>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

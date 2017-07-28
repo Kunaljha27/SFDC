@@ -1,0 +1,218 @@
+<apex:page standardController="Strategic_Account_Plan__c" extensions="M2O_TargetTrackingController">
+<apex:stylesheet value="{!$Resource.M2O_TargetTrackingCss}"/>
+
+    <apex:form >
+        <apex:pageblock id="targetTracking">
+            <apex:variable id="BGCount" var="BGCount" value="{!0}"/>
+            <apex:pagemessages ></apex:pagemessages>
+            <center >
+                <apex:commandButton id="editButton" value="Edit" action="{!enableEditing}" rendered="{!(!editMode) && Hasaccess.haseditaccess}"/>
+                <apex:commandButton id="saveButton" value="Save" action="{!save}" rendered="{!editMode}"/>
+                <apex:commandButton id="CancelButton" value="Cancel" action="{!enableEditing}" rendered="{!editMode}"/>
+            </center>
+            <table class="pageTable" id="pageTable" >
+                <col class="colBusiness" id="business"/>
+                <col class="colTarAct" id="targetActuals"/>
+                <col class="colStoreData" id="columnJan"/>
+                <col class="colStoreData" id="columnFeb"/>
+                <col class="colStoreData" id="columnMar"/>
+                <col class="colStoreData" id="columnApr"/>
+                <col class="colStoreData" id="columnMay"/>
+                <col class="colStoreData" id="columnJun"/>            
+                <col class="colStoreData" id="columnJul"/>
+                <col class="colStoreData" id="columnAug"/>            
+                <col class="colStoreData" id="columnSept"/>
+                <col class="colStoreData" id="columnOct"/>            
+                <col class="colStoreData" id="columnNov"/>
+                <col class="colStoreData" id="columnDec"/>
+                
+                <tr id="tableHeading">
+                    <td class="whiteCell" id="whiteCell"></td>
+                    <td class="header" colspan="13" id="header">
+                        <center>
+                            <apex:outputText id="labelBusinessBalanceScoreCard" value="{!$Label.M2O_Target_Tracking_VF_Business_Balance_Score_Card}" style="font-weight:bold; color:white;"/>
+                        </center>
+                    </td>
+                </tr>
+                
+                <tr id="tableMonths">
+                    <td class="whiteCell" id="business"></td>
+                    <td class="whiteCell" id="tagetActuals"></td>
+                    <td class="whiteCell" id="labelJan">{!$Label.M2O_TargetTracking_VF_Jan}</td>
+                    <td class="whiteCell" id="labelFeb">{!$Label.M2O_TargetTracking_VF_Feb}</td>
+                    <td class="whiteCell" id="labelMar">{!$Label.M2O_TargetTracking_VF_Mar}</td>
+                    <td class="whiteCell" id="labelApr">{!$Label.M2O_TargetTracking_VF_Apr}</td>
+                    <td class="whiteCell" id="labelMay">{!$Label.M2O_TargetTracking_VF_May}</td>
+                    <td class="whiteCell" id="labelJun">{!$Label.M2O_TargetTracking_VF_Jun}</td>
+                    <td class="whiteCell" id="labelJul">{!$Label.M2O_TargetTracking_VF_Jul}</td>
+                    <td class="whiteCell" id="labelAug">{!$Label.M2O_TargetTracking_VF_Aug}</td>
+                    <td class="whiteCell" id="labelSep">{!$Label.M2O_TargetTracking_VF_Sep}</td>
+                    <td class="whiteCell" id="labelOct">{!$Label.M2O_TargetTracking_VF_Oct}</td>
+                    <td class="whiteCell" id="labelNov">{!$Label.M2O_TargetTracking_VF_Nov}</td>
+                    <td class="whiteCell" id="labelJul">{!$Label.M2O_TargetTracking_VF_Dec}</td>
+                </tr>
+                
+                <apex:repeat value="{!relatedtargetTrack}" var="targetTrack" id="repeatTargetTrack">
+                
+                    <apex:variable var="condHighJan" id="condHighJan" value="{!if(((Isnull(targetTrack.Jan_Actual__c) && Isnull(targetTrack.Jan_Target__c)) || (targetTrack.Jan_Target__c=0 && targetTrack.Jan_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.jan_actual__c <= (targetTrack.jan_target__C*1.05) && targetTrack.jan_actual__c >= (targetTrack.jan_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.jan_actual__c >targetTrack.jan_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighFeb" id="condHighFeb" value="{!if(((Isnull(targetTrack.feb_Actual__c) && Isnull(targetTrack.feb_Target__c)) || (targetTrack.feb_Target__c=0 && targetTrack.feb_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.feb_actual__c <= (targetTrack.feb_target__C*1.05) && targetTrack.feb_actual__c >= (targetTrack.feb_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.feb_actual__c >targetTrack.feb_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighMar" id="condHighMar" value="{!if(((Isnull(targetTrack.mar_Actual__c) && Isnull(targetTrack.mar_Target__c)) || (targetTrack.mar_Target__c=0 && targetTrack.mar_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.mar_actual__c <= (targetTrack.mar_target__C*1.05) && targetTrack.mar_actual__c >= (targetTrack.mar_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.mar_actual__c >targetTrack.mar_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighApr" id="condHighApr" value="{!if(((Isnull(targetTrack.apr_Actual__c) && Isnull(targetTrack.apr_Target__c)) || (targetTrack.apr_Target__c=0 && targetTrack.apr_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.apr_actual__c <= (targetTrack.apr_target__C*1.05) && targetTrack.apr_actual__c >= (targetTrack.apr_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.apr_actual__c >targetTrack.apr_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighMay" id="condHighMay" value="{!if(((Isnull(targetTrack.may_Actual__c) && Isnull(targetTrack.may_Target__c)) || (targetTrack.may_Target__c=0 && targetTrack.may_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.may_actual__c <= (targetTrack.may_target__C*1.05) && targetTrack.may_actual__c >= (targetTrack.may_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.may_actual__c >targetTrack.may_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighJun" id="condHighJun" value="{!if(((Isnull(targetTrack.jun_Actual__c) && Isnull(targetTrack.jun_Target__c)) || (targetTrack.jun_Target__c=0 && targetTrack.jun_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.jun_actual__c <= (targetTrack.jun_target__C*1.05) && targetTrack.jun_actual__c >= (targetTrack.jun_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.jun_actual__c >targetTrack.jun_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighJul" id="condHighJul" value="{!if(((Isnull(targetTrack.jul_Actual__c) && Isnull(targetTrack.jul_Target__c)) || (targetTrack.jul_Target__c=0 && targetTrack.jul_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.jul_actual__c <= (targetTrack.jul_target__C*1.05) && targetTrack.jul_actual__c >= (targetTrack.jul_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.jul_actual__c >targetTrack.jul_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighAug" id="condHighAug" value="{!if(((Isnull(targetTrack.aug_Actual__c) && Isnull(targetTrack.aug_Target__c)) || (targetTrack.aug_Target__c=0 && targetTrack.aug_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.aug_actual__c <= (targetTrack.aug_target__C*1.05) && targetTrack.aug_actual__c >= (targetTrack.aug_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.aug_actual__c >targetTrack.aug_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighSep" id="condHighSep" value="{!if(((Isnull(targetTrack.sep_Actual__c) && Isnull(targetTrack.sep_Target__c)) || (targetTrack.sep_Target__c=0 && targetTrack.sep_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.sep_actual__c <= (targetTrack.sep_target__C*1.05) && targetTrack.sep_actual__c >= (targetTrack.sep_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.sep_actual__c >targetTrack.sep_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighOct" id="condHighOct" value="{!if(((Isnull(targetTrack.oct_Actual__c) && Isnull(targetTrack.oct_Target__c)) || (targetTrack.oct_Target__c=0 && targetTrack.oct_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.oct_actual__c <= (targetTrack.oct_target__C*1.05) && targetTrack.oct_actual__c >= (targetTrack.oct_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.oct_actual__c >targetTrack.oct_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighNov" id="condHighNov" value="{!if(((Isnull(targetTrack.nov_Actual__c) && Isnull(targetTrack.nov_Target__c)) || (targetTrack.nov_Target__c=0 && targetTrack.nov_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.nov_actual__c <= (targetTrack.nov_target__C*1.05) && targetTrack.nov_actual__c >= (targetTrack.nov_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.nov_actual__c >targetTrack.nov_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                    <apex:variable var="condHighDec" id="condHighDec" value="{!if(((Isnull(targetTrack.dec_Actual__c) && Isnull(targetTrack.dec_Target__c)) || (targetTrack.dec_Target__c=0 && targetTrack.dec_Actual__c=0)),"whiteCell"
+                    ,if((targetTrack.dec_actual__c <= (targetTrack.dec_target__C*1.05) && targetTrack.dec_actual__c >= (targetTrack.dec_target__C*0.95) ),"actualOnTarget",
+                    if((targetTrack.dec_actual__c >targetTrack.dec_target__C),"actualAboveTarget","actualBelowTarget")))}"/>
+                         
+                
+               
+                <tr id="business">
+                    <td class="{!if((Mod(BGCount,5)==0),"businessName","whiteCell")}" colspan="14" height="10px"><apex:outputText id="targetTrackBusiness" value="{!targetTrack.Business__c}" rendered="{!if((Mod(BGCount,5)==0),True,False)}"/></td>
+                </tr>
+                <tr>
+                    <td class="whiteCell" id="labelTargetTrackStores">{!$Label.M2O_Target_Tracking_VF_Stores} </td>
+                    <td class="whiteCell" id="labelTargetTrackingTarget">{!$Label.M2O_TargetTracking_VF_Target}</td>
+                    <td class="whiteCell" id="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Jan_Target__c}" rendered="{!!editMode}" id="targetTrackJan"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Jan_Target__c}" rendered="{!editMode}" id="inputTargetTrackJan"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Feb_Target__c}" rendered="{!!editMode}" id="targetTrackFeb"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Feb_Target__c}" rendered="{!editMode}" id="inputTargetTrackFeb"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Mar_Target__c}" rendered="{!!editMode}" id="targetTrackMar"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Mar_Target__c}" rendered="{!editMode}" id="inputTargetTrackMar"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Apr_Target__c}" rendered="{!!editMode}" id="targetTrackApr"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Apr_Target__c}" rendered="{!editMode}" id="inputTargetTrackApr"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.May_Target__c}" rendered="{!!editMode}" id="targetTrackMay"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.May_Target__c}" rendered="{!editMode}" id="inputTargetTrackMay"/>
+                    </td>
+                    <td class="whiteCell" >
+                        <apex:outputtext value="{!targetTrack.Jun_Target__c}" rendered="{!!editMode}" id="targetTrackJun"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Jun_Target__c}" rendered="{!editMode}" id="inputTargetTrackJun"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Jul_Target__c}" rendered="{!!editMode}" id="targetTrackJul"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Jul_Target__c}" rendered="{!editMode}" id="inputTargetTrackJul"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Aug_Target__c}" rendered="{!!editMode}" id="targetTrackAug"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Aug_Target__c}" rendered="{!editMode}" id="inputTargetTrackAug" />
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Sep_Target__c}" rendered="{!!editMode}" id="targetTrackSep"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Sep_Target__c}" rendered="{!editMode}" id="inputTargetTrackSep"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Oct_Target__c}" rendered="{!!editMode}" id="targetTrackOct"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Oct_Target__c}" rendered="{!editMode}" id="inputTargetTrackOct"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Nov_Target__c}" rendered="{!!editMode}" id="targetTrackNov"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Nov_Target__c}" rendered="{!editMode}" id="inputTargetTrackNov"/>
+                    </td>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Dec_Target__c}" rendered="{!!editMode}" id="targetTrackDec"/>
+                        <apex:inputtext styleClass="storesInputText" value="{!targetTrack.Dec_Target__c}" rendered="{!editMode}" id="inputTargetTrackDec"/>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="whiteCell">
+                        <apex:outputtext value="{!targetTrack.Key_Product__c}" id="targetTrackKeyProduct" rendered="{!!editMode}"/><apex:inputtext value="{!targetTrack.Key_Product__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="whiteCell" id="labelTargetTrackVfActual">{!$Label.M2O_TargetTracking_VF_Actual}</td>
+                    <td class="{!condHighJan}" id="condHighJan">
+                        <apex:outputtext id="targetTrackingJan" style="color : {!if((condHighJan="actualOnTarget" || condHighJan="actualAboveTarget" || condHighJan="actualBelowTarget"),"white","black")};" value="{!targetTrack.Jan_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingJanActual" styleClass="storesInputText" value="{!targetTrack.Jan_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighFeb}" id="condHighFeb">
+                        <apex:outputtext id="targetTrackingFeb" style="color : {!if((condHighFeb="actualOnTarget" || condHighFeb="actualAboveTarget" || condHighFeb="actualBelowTarget"),"white","black")};" value="{!targetTrack.Feb_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingFebActual" styleClass="storesInputText" value="{!targetTrack.Feb_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighMar}" id="condHighMar">
+                        <apex:outputtext id="targetTrackingMar" style="color : {!if((condHighMar="actualOnTarget" || condHighMar="actualAboveTarget" || condHighMar="actualBelowTarget"),"white","black")};" value="{!targetTrack.Mar_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingMarActual" styleClass="storesInputText" value="{!targetTrack.Mar_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighApr}" id="condHighApr">
+                        <apex:outputtext id="targetTrackingApr" style="color : {!if((condHighApr="actualOnTarget" || condHighApr="actualAboveTarget" || condHighApr="actualBelowTarget"),"white","black")};" value="{!targetTrack.Apr_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingAprActual" styleClass="storesInputText" value="{!targetTrack.Apr_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighMay}" id="condHighMay">
+                        <apex:outputtext id="targetTrackingMay" style="color : {!if((condHighMay="actualOnTarget" || condHighMay="actualAboveTarget" || condHighMay="actualBelowTarget"),"white","black")};" value="{!targetTrack.May_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingMayActual" styleClass="storesInputText" value="{!targetTrack.May_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighJun}" id="condHighJun">
+                        <apex:outputtext id="targetTrackingJun" style="color : {!if((condHighJun="actualOnTarget" || condHighJun="actualAboveTarget" || condHighJun="actualBelowTarget"),"white","black")};" value="{!targetTrack.Jun_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingJunActual" styleClass="storesInputText" value="{!targetTrack.Jun_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighJul}" id="condHighJul">
+                        <apex:outputtext id="targetTrackingJul" style="color : {!if((condHighJul="actualOnTarget" || condHighJul="actualAboveTarget" || condHighJul="actualBelowTarget"),"white","black")};" value="{!targetTrack.Jul_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingJulActual" styleClass="storesInputText" value="{!targetTrack.Jul_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighAug}" id="condHighAug">
+                        <apex:outputtext id="targetTrackingAug" style="color : {!if((condHighAug="actualOnTarget" || condHighAug="actualAboveTarget" || condHighAug="actualBelowTarget"),"white","black")};" value="{!targetTrack.Aug_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingAugActual" styleClass="storesInputText" value="{!targetTrack.Aug_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighSep}" id="condHighSep"> 
+                        <apex:outputtext id="targetTrackingSep" style="color : {!if((condHighSep="actualOnTarget" || condHighSep="actualAboveTarget" || condHighSep="actualBelowTarget"),"white","black")};" value="{!targetTrack.Sep_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingSepActual" styleClass="storesInputText" value="{!targetTrack.Sep_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighOct}" id="condHighOct">
+                        <apex:outputtext id="targetTrackingOct" style="color : {!if((condHighOct="actualOnTarget" || condHighOct="actualAboveTarget" || condHighOct="actualBelowTarget"),"white","black")};" value="{!targetTrack.Oct_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingOctActual" styleClass="storesInputText" value="{!targetTrack.Oct_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighNov}" id="condHighNov">
+                        <apex:outputtext id="targetTrackingNov" style="color : {!if((condHighNov="actualOnTarget" || condHighNov="actualAboveTarget" || condHighNov="actualBelowTarget"),"white","black")};" value="{!targetTrack.Nov_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingNovActual" styleClass="storesInputText" value="{!targetTrack.Nov_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                    <td class="{!condHighDec}" id="condHighDec">
+                        <apex:outputtext id="targetTrackingDec" style="color : {!if((condHighDec="actualOnTarget" || condHighDec="actualAboveTarget" || condHighJan="actualBelowTarget"),"white","black")};" value="{!targetTrack.Dec_Actual__c}" rendered="{!!editMode}"/>
+                        <apex:inputtext id="targetTrackingDecActual" styleClass="storesInputText" value="{!targetTrack.Dec_Actual__c}" rendered="{!editMode}"/>
+                    </td>
+                </tr>
+                
+                <apex:variable var="BGCount" value="{!BGCount + 1}" id="BGCount"/>
+                </apex:repeat>
+            </table>
+            <center >
+                <apex:commandButton id="editButtonTargetTrackingVF" value="{!$Label.M2O_TargetTracking_VF_Edit}" action="{!enableEditing}" rendered="{!(!editMode) && Hasaccess.haseditaccess}"/>
+                <apex:commandButton id="saveButtonTargetTrackingVF" value="{!$Label.M2O_TargetTracking_VF_Save}" action="{!save}" rendered="{!editMode}"/>
+                <apex:commandButton id="cancelButtonTargetTrackingVF" value="{!$Label.M2O_TargetTracking_VF_Cancel}" rendered="{!editMode}"/>
+            </center>            
+       </apex:pageblock>
+    </apex:form>
+    <c:M2O_SAPAttachmentComponent attachmentRecordID="{!if((relatedtargetTrack[0].id = null || relatedtargetTrack[0].id = ''),SAPID,relatedtargetTrack[0].id)}" rendered="{!(relatedtargetTrack[0].id != null && relatedtargetTrack[0].id != '')}" id="sapAttachmentComponent" /> 
+</apex:page>

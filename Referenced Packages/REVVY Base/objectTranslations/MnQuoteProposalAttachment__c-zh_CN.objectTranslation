@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quote Proposal Attachment --></value>
+    </caseValues>
+    <fields>
+        <label>附件</label>
+        <name>AttachmentId__c</name>
+    </fields>
+    <fields>
+        <label>文件大小（字节）</label>
+        <name>BodyLength__c</name>
+    </fields>
+    <fields>
+        <label>文件名称</label>
+        <name>FileName__c</name>
+    </fields>
+    <fields>
+        <label>文件大小</label>
+        <name>FileSizeKB__c</name>
+    </fields>
+    <fields>
+        <label>报价</label>
+        <name>Quote__c</name>
+        <relationshipLabel>报价建议附件</relationshipLabel>
+    </fields>
+    <fields>
+        <label>创建人</label>
+        <name>UploadedBy__c</name>
+    </fields>
+    <nameFieldLabel><!-- Quote Proposal Attachment Name --></nameFieldLabel>
+</CustomObjectTranslation>

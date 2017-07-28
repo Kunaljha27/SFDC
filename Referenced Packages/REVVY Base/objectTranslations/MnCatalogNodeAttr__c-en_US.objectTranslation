@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Catalog Node Attribute</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Catalog Node Attributes</value>
+    </caseValues>
+    <fields>
+        <help><!-- Defines which attributes are assigned to a product or category. --></help>
+        <label><!-- Catalog Attribute --></label>
+        <name>Catalog_Attribute__c</name>
+        <relationshipLabel><!-- Catalog Node Attributes --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The relationship between a category and an attribute or between a product and an attribute. --></help>
+        <label><!-- Catalog Node --></label>
+        <name>Catalog_Node__c</name>
+        <relationshipLabel><!-- Catalog Node Attributes --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- Attribute Value ID --></label>
+        <name>Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- The value of an attribute on a specific product, or value of an attribute of the product that is associated with the attribute. --></help>
+        <label><!-- Value --></label>
+        <name>Value__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

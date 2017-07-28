@@ -1,0 +1,10 @@
+<apex:page standardController="pse__Grp__c" action="{!initForGroup}" extensions="pse.UtilizationSchedulerController" 
+    title="{!$Label.utilization_label_schedule_calc_ute}">
+
+    <apex:composition template="pse__UtilizationSchedulerTemplate">
+        <apex:define name="sectionHeader">
+            <apex:sectionHeader title="{!$Label.utilization_label_schedule_calc_ute}" subtitle="{!pse__Grp__c.Name}"/>
+        </apex:define>
+    </apex:composition>
+    
+</apex:page>

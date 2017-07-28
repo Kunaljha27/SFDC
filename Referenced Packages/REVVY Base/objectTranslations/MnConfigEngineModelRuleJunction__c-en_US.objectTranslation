@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Model Rule Junction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Model Rule Junctions</value>
+    </caseValues>
+    <fields>
+        <help><!-- Unique ID of the model. --></help>
+        <label><!-- Model --></label>
+        <name>Model_Id__c</name>
+        <relationshipLabel><!-- Model Rule Junctions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Unique ID of the rule. --></help>
+        <label><!-- Rule --></label>
+        <name>Rule_Id__c</name>
+        <relationshipLabel><!-- Model Rule Junctions --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

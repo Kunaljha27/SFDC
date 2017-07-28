@@ -1,0 +1,46 @@
+<!-- NOTE: the standard controller will be overriden -->
+<apex:page standardController="pse__Region__c" title="Calculate Scheduled Backlog" extensions="pse.CalculateBacklogController">
+
+    <apex:insert name="sectionHeader"/>
+    
+    Click Calculate to calculate scheduled backlog. The scheduled backlog fields will be updated on actuals, projects, and regions.
+    <i>NOTE: do not close this page until the calculation is complete</i>
+    <p />
+    
+    <apex:pageMessages id="messages"/>
+    <p />
+    
+    <apex:form >
+        <apex:actionFunction name="jsCalculateBacklog" action="{!calculateBacklog}" rerender="messages,submitPanel" status="status"/> 
+        
+        <apex:pageBlock title="Calculate Backlog" mode="edit" tabStyle="{!IF(isRegion,'Region__c',IF(isPractice,'Practice__c','Grp__c'))}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Calculate" action="{!calculateBacklog}" rerender="messages,submitPanel" status="status"/>
+                <apex:commandButton value="{!$Label.common_label_cancel}" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2">
+                <apex:outputField value="{!region.Name}" rendered="{!isRegion}"/>
+                <apex:outputField value="{!region.OwnerId}" rendered="{!isRegion}"/>
+                <apex:outputField value="{!practice.Name}" rendered="{!isPractice}"/>
+                <apex:outputField value="{!practice.OwnerId}" rendered="{!isPractice}"/>
+                <apex:outputField value="{!grp.Name}" rendered="{!isGroup}"/>
+                <apex:outputField value="{!grp.OwnerId}" rendered="{!isGroup}"/>
+                <apex:inputField value="{!timePeriod.pse__Start_Date__c}"/>
+                <apex:inputField value="{!timePeriod.pse__End_Date__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:outputPanel id="submitPanel">
+            <apex:outputPanel rendered="{!resubmitBacklog}">
+                <script type="text/javascript">
+                    jsCalculateBacklog();
+                </script>
+            </apex:outputPanel>
+            
+            <p />
+            <div align="center">
+                <apex:actionStatus id="status" startText="{!progressMessage}"/>
+            </div>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

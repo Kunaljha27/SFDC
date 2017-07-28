@@ -1,0 +1,390 @@
+<apex:page controller="REVVY.CMnQuotePricingDetailInfoCtrl" sidebar="false">
+
+    <apex:stylesheet value="{!$Resource.REVVY__staticui}/mnadmin/ui/src/css/admin.css" />
+    <link rel="stylesheet" href="{!$Resource.staticui}/mnadmin/ui/libs/css/jquery-ui.css" />
+    <link rel="stylesheet" href="{!$Resource.staticui}/mnadmin/ui/libs/css/dataTables.jqueryui.css" />
+
+    <style>
+        td.details-control {
+            background: url('{!$Resource.staticui}/mnadmin/ui/libs/css/images/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+        tr.shown td.details-control {
+            background: url('{!$Resource.staticui}/mnadmin/ui/libs/css/images/details_close.png') no-repeat center center;
+        }
+    </style>
+
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.dataTables.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/dataTables.jqueryui.js"></script>
+
+
+    <script>
+
+    function processAllRules(allRules) {
+        allRules = nonull(allRules);
+        if (allRules === '') {
+            return allRules;
+        }
+
+
+        var rules = $.parseJSON(allRules);
+        var ruleId, rule, retVal = '', counter = 1;
+        for (ruleId in rules) {
+            if (rules.hasOwnProperty(ruleId)) {
+                rule = rules[ruleId];
+
+                retVal += ('<b>' + counter + ') ' + rule.RuleName + '</b>');
+                retVal += '<br/>';
+
+                var ruleConditionList = (rule.conditionsList != null) ? rule.conditionsList: [];
+                //loop through reason and add value set by that rule row
+                if (ruleConditionList.length > 0) {
+                    retVal += ('&nbsp;&nbsp;&nbsp;&nbsp;<b>Rows: Conditions</b> ==> <b>Targets</b></br>');
+                }
+
+                for (var i=0; i< ruleConditionList.length; i++) {
+                    var rConds = ruleConditionList[i].c;
+                    var rTrgts = ruleConditionList[i].t;
+                    retVal += '&nbsp;&nbsp;&nbsp;&nbsp;<b>' + (i+1) + ': </b>';
+                    for (var j=0; j< rConds.length; j++) {
+                        retVal += (' [<b>attr:</b> ' + nonull(rConds[j].a) +
+                                ' - <b>val:</b> ' + nonull(rConds[j].v) +'] '
+                                );
+                    }
+                    retVal += ' ==>> ';
+                    for (var j=0; j< rTrgts.length; j++) {
+                        retVal += (' [<b>attr:</b> ' + nonull(rTrgts[j].a) +
+                                ' - <b>val:</b> ' + nonull(rTrgts[j].v)
+                                );
+
+                        if (rTrgts[j].set) {
+                            retVal += (' - <b>set:</b> ' +  (rTrgts[j].set._price ? ('List Price: ' + nonull(rTrgts[j].set._price.v)) :
+                                    (rTrgts[j].set.autoadj1 ?  (rTrgts[j].set.autoadj1.label + ': ' + rTrgts[j].set.autoadj1.v + (rTrgts[j].set.autoadj1.t=='perc' ? '%': '$')) : '')));
+                        }
+
+                        retVal += '] ';
+
+                    }
+
+                    retVal += '</br>';
+                }
+
+                counter ++;
+            }
+        }
+
+
+        return retVal;
+    }
+
+    function processRuleMapping(rulesMapping) {
+
+        rulesMapping = nonull(rulesMapping);
+        if (rulesMapping === '') {
+            return rulesMapping;
+        }
+
+        var rulesMap = $.parseJSON(rulesMapping);
+        var rulesVotes = rulesMap.votes;
+        if (!rulesVotes) {
+            return '';
+        }
+
+        var ruleId, rule, retVal = '', counter = 1;
+        for (ruleId in rulesVotes) {
+            if (rulesVotes.hasOwnProperty(ruleId)) {
+                rule = rulesVotes[ruleId];
+
+                retVal += ('<b>' + counter + ') ' + nonull(rule.RuleName) + '</b>');
+                retVal += '<br/>';
+
+                var condId, cond;
+                for (condId in rule) {
+                    if (rule.hasOwnProperty(condId)) {
+                        cond = rule[condId];
+                        var ctkns = condId.split(".");
+                        retVal += ('&nbsp;&nbsp;&nbsp;&nbsp;<b>- attr:</b> ' +ctkns[1] + ' - <b>selected vals:</b> [ ');
+
+                        var opc = 0;
+                        for (opId in cond.vals) {
+                            if (cond.vals.hasOwnProperty(opId)) {
+                                if (opc > 0) {
+                                    retVal += ', ';
+                                }
+                                retVal += cond.vals[opId];
+                                opc++;
+                            }
+                        }
+
+                        retVal += ' ]';
+
+                    }
+                }
+
+                counter ++;
+            }
+        }
+
+
+        //retVal = rulesMapping;
+
+
+        return retVal;
+    }
+
+    function processReason(reason) {
+        reason = nonull(reason);
+        if (reason === '') {
+            return '';
+        }
+
+        var rulesReasons = $.parseJSON(reason);
+        var ruleName, ruleReason, retVal = '', counter = 1;
+        for (ruleName in rulesReasons) {
+            if (rulesReasons.hasOwnProperty(ruleName)) {
+                ruleReasonList = rulesReasons[ruleName];
+                if (!ruleReasonList || ruleReasonList.length == 0) {
+                    continue;
+                }
+
+                retVal += ('<b>' + counter + ') ' + ruleName + '</b>');
+                retVal += '<br/>';
+
+                //loop through reason and add value set by that rule row
+                for (var i=0; i< ruleReasonList.length; i++) {
+                    if (ruleReasonList[i]['listPrice']) {
+                        retVal += ( '&nbsp;&nbsp;&nbsp;&nbsp;- List Price: ' + ruleReasonList[i]['listPrice']['v'] + '<br/>');
+                    } else if (ruleReasonList[i]['autoadj1']) {
+                        var adj = ruleReasonList[i]['autoadj1'];
+                        var reason = (adj['label'] != undefined || adj['label'] != null) ? adj['label'] : 'Auto Adj'
+
+                        retVal += ( '&nbsp;&nbsp;&nbsp;&nbsp;- ' + reason + ' : ' + adj['v'] + ((adj['t'] == 'perc') ? '%': '$') + '<br/>');
+                    }
+                }
+
+                counter ++;
+            }
+        }
+
+        return retVal;
+    }
+
+    function nonull(data, suffix) {
+        return (data !== undefined  && data !== null) ? data + (suffix != null ?suffix :'') :'';
+    }
+
+    function getDiscountData(data, type) {
+        if (data === undefined || data === null) {
+            return '';
+        }
+
+        var retVal = '';
+        if (type === 'man') {
+            retVal = '(' + nonull(data[namespace + 'Discount__c']) + '%)' + nonull(data[namespace + 'Discount_Absolute__c'], '$');
+        } else if (type === 'auto') {
+            var reason = nonull(data[namespace + 'AutoDiscountReason__c']);
+            if (reason != null) reason = '<b>' + reason + '</b><br/>';
+
+
+            retVal = reason + ' (' + nonull(data[namespace + 'AutoDiscount__c']) + '%)' + nonull(data[namespace + 'AutoDiscountAbsolute__c'],'$');
+        } else if (type === 'tot') {
+            var manDisc = 0, autoDisc = 0;
+
+            if (data[namespace + 'Discount_Absolute__c'] != null)  {
+                manDisc = data[namespace + 'Discount_Absolute__c']
+            }
+
+            if (data[namespace + 'AutoDiscountAbsolute__c'] != null)  {
+                autoDisc = data[namespace + 'AutoDiscountAbsolute__c']
+            }
+            var totDisc = manDisc + autoDisc;
+            var totDiscPerc = (data[namespace+'Price__c'] == null || data[namespace+'Price__c'] == 0 ) ? '' :
+                    totDisc/data[namespace+'Price__c']*100;
+
+            retVal = '(' + totDiscPerc + '%)' + nonull(totDisc, '$');
+        }
+
+        return retVal;
+    }
+
+
+    /* Formatting function for row details - modify as you need */
+    function format ( d ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" style="border:1px solid #dddddd;padding-left:50px;">'+
+                '<tr>'+
+                '<td>List Price</td>'+
+                '<td>' + nonull(d[namespace + 'Price__c'], '$') + '</td>'+
+                '<td>Auto Discount:</td>'+
+                '<td>'+ getDiscountData(d, 'auto') + '</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Pricing Rules Applied:</td>'+
+                '<td>'+processReason(d[namespace + 'PricingRuleReason__c'])+'</td>'+
+                '<td>Adjustment Rules Applied:</td>'+
+                '<td>'+processReason(d[namespace + 'AdjustmentRuleReason__c'])+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Pricing Rules condition matched:</td>'+
+                '<td>'+processRuleMapping(d[namespace + 'PricingRuleMapping__c'])+'</td>'+
+                '<td>Adjustment Rules condition matched:</td>'+
+                '<td>'+processRuleMapping(d[namespace + 'AdjustmentRuleMapping__c'])+'</td>'+
+                '</tr>'+
+                '<td>All Pricing Rules Picked:</td>'+
+                '<td>'+processAllRules(d[namespace + 'AllPricingRules__c'])+'</td>'+
+                '<td>All Adjustment Rules Picked:</td>'+
+                '<td>'+processAllRules(d[namespace + 'AllAdjustmentRules__c'])+'</td>'+
+                '</tr>'+
+                '</table>';
+        //TODO: also add all rules names, row : conditions, target and set
+        //TODO: also add rules map, current votes against condition
+    }
+
+    var recJson = {!recordsJson};
+    var namespace = '{!JSENCODE(namespace)}';
+    console.log('--recJson: ' + JSON.stringify(recJson));
+    $(document).ready(function() {
+        var table = $('#example').DataTable( {
+            "data": recJson,
+            "jQueryUI": true,
+            "pagingType": "full_numbers",
+            "deferRender": true,
+            "defaultContent": '',
+            "columns": [
+                {
+                    "class":          'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
+                { "data": "Name",
+                    "render": function ( data, type, full, meta ) {
+                        return '<b>' + data +'</b>';
+                    }
+                },
+                { "data": namespace + "Id__c"
+                },
+                { "data": namespace + "Catalog_Node__r.Name" },
+                { "data": namespace + "Catalog_Node__r." + namespace+ "Billing_Frequency__c" },
+                { "data": namespace + "Price__c", "defaultContent": '' },
+                { "data": null,
+                  "defaultContent": '',
+                  "render": function ( data, type, full, meta ) {
+                        return getDiscountData(full, 'man');
+                  }
+                },
+                { "data": null,
+                    "defaultContent": '',
+                    "render": function ( data, type, full, meta ) {
+                        return getDiscountData(full, 'auto');
+                    }
+                },
+                { "data": null,
+                    "defaultContent": '',
+                    "render": function ( data, type, full, meta ) {
+                        return getDiscountData(full, 'tot');
+                    }
+                },
+
+                { "data": namespace + "Unit_Price__c", "defaultContent": ''},
+                { "data": namespace + "Quantity__c", "defaultContent": '' },
+                { "data": namespace + "Extended_Price_F__c", "defaultContent": '' }
+            ],
+            "order": [[1, 'asc']]
+        } );
+
+        // Add event listener for opening and closing details
+        $('#example tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        } );
+    } );
+
+    </script>
+
+
+
+<c:CMnZenDesk />
+<div  class="colWrapper">
+<div class="collwrp" >
+<div class="coll" >
+<c:CMnQuoteLeftNav />
+</div>
+</div>
+<div class="colr">
+<!--- Actual VF code goes here -->
+    <!--
+      <chatter:feedWithFollowers  entityId ="{!recordId}" showHeader="true"/>
+    -->
+
+
+    <table id="example" class="cell-border stripe hover" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Id</th>
+            <th>Product</th>
+            <th>Billing Freq.</th>
+            <th>Price</th>
+            <th>Man. Disc.</th>
+            <th>Auto Disc.</th>
+            <th>Total Disc.</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Ext. Price</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Id</th>
+            <th>Product</th>
+            <th>Billing Freq.</th>
+            <th>Price</th>
+            <th>Man. Disc.</th>
+            <th>Auto Disc.</th>
+            <th>Total Disc.</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Ext. Price</th>
+        </tr>
+        </tfoot>
+    </table>
+
+<!--
+<c:VMnList sectionTitle="{!$Label.MnQuoteHomeTitle}" fieldSetName="{!quoteItemListFSName}"
+                   isNewButtonVisible="false"
+                   newButtonLabel="{!$Label.MnNewQuoteButton}"
+                   deleteLinkConfirm="{!$Label.MnQuoteDeleteLinkConfirm}"
+                   retUrl="" singleSelection="true"
+                   sObjTypeStr="MnQuoteItem__c" filterCols="Name, Id__c" showFilter="true"
+                   showStatusFilter="false" statusFilterCol="" statusValues=""
+                   allowSelection="false" displayActionColumn="true"/>
+                   -->
+<!-- ---------- -->
+    <!--
+
+    <br/><br/><br/>
+
+    <apex:relatedList subject="{!recordId}" list="CombinedAttachments" />
+
+    -->
+</div>
+</div>
+<!-- <script> toggleMnDashboardFrame(); </script> -->
+</apex:page>

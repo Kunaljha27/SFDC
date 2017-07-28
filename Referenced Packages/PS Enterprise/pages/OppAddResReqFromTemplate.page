@@ -1,0 +1,83 @@
+<apex:page standardController="pse__Resource_Request__c"
+    extensions="pse.OppAddResReqFromTemplateController" action="{!init}"
+    tabStyle="Opportunity" recordSetVar="tempRRs">
+    
+    <c:projectPicker modelAttribute="{!projectPickerModel}"
+        rendered="{!showProjectPicker}" />
+
+    <apex:form rendered="{!NOT(showProjectPicker)}" id="RRM_Form">
+        <apex:actionFunction name="masterDateChange" reRender="RRM_PBS,msg" 
+            action="{!onResReqMasterDateChange}" status="rrDateChangeStatus" />
+        <apex:sectionHeader title="{!$Label.opp_add_res_req_from_template_label_Add_Resource_Requests}"
+            subtitle="{!subTitle}" help="{!$Page.pse__OppAddResReqFromTemplateHelp}"/>
+        <apex:pageMessages />
+        <apex:pageBlock id="RRM_PB">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!$Label.opp_add_res_req_from_template_label_Back_to_Templates}"
+                    action="{!onBackToTemplates}" immediate="true" />
+                <apex:commandButton value="{!$Label.opp_add_res_req_from_template_label_Add_To_Opportunity}"
+                    action="{!onAddToOpportunity}" rendered="{!AND(isReqFromOpportunity,hasResourceRequests)}" />
+                <apex:commandButton value="{!$Label.opp_add_res_req_from_template_label_Add_To_Project}"
+                    action="{!onAddToProject}" rendered="{!AND(isReqFromProject,hasResourceRequests)}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.opp_add_res_req_from_template_label_Resource_Request_Mappings}" columns="1"
+                rendered="{!NOT(hasResourceRequests)}">
+                <h1>{!$Label.opp_add_res_req_from_template_message_No_Resource_Requests_available}</h1>
+            </apex:pageBlockSection>
+            
+            <!-- Opportunity Details section -->
+            <apex:pageBlockSection title="{!$Label.opp_add_res_req_from_template_label_Opportunity_Details}" rendered="{!isReqFromOpportunity}">
+                <apex:repeat value="{!oppDetailOnRRFromTemplateFields}" var="fName">
+                <apex:outputField value="{!opportunity[fName]}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            
+            <!-- Done changes as fix for agile task:000009208     By:Ashok  Dated: 10/13/2010 -->
+            <!-- Project Details section -->
+            <apex:pageBlockSection title="{!$Label.create_project_details}" rendered="{!isReqFromProject}">
+                <apex:repeat value="{!projectDetailOnRRFromTemplateFields}" var="fName">
+                <apex:outputField value="{!project[fName]}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection rendered="{!hasResourceRequests}"
+                title="{!$Label.opp_add_res_req_from_template_label_Quick_Adjust_Dates}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.opp_add_res_req_from_template_label_Master_Date}" for="RR_Master_Date" />
+                    <apex:inputField value="{!resourceRequestMaster.pse__End_Date__c}"
+                        onchange="masterDateChange();" id="RR_Master_Date" />
+                </apex:pageBlockSectionItem>
+                <apex:actionStatus id="rrDateChangeStatus"
+                    startText="{!$Label.opp_add_res_req_from_template_label_Changing_Dates}" />
+            </apex:pageBlockSection>
+
+            <!-- Resource request mappings to be copied from Opportunity to Project-->
+            <!-- Below code changes done for Agile Task AT23446 -->
+            <apex:pageBlockSection title="{!$Label.create_project_rr_header}" columns="1"	
+				rendered="{!hasResourceRequests}" id="RRM_PBS">
+				<apex:pageBlockTable value="{!resourceRequests}" var="resReqWrapper"
+					id="RRM_Table">
+					<apex:column ><apex:inputcheckbox value="{!resReqWrapper.isSelected}"
+							id="RR_Select" />
+					</apex:column>
+					<apex:repeat value="{!resReqFromTemplateReadOnlyColumnFieldSet}" var="fName">
+						<apex:column value="{!resReqWrapper.resourceRequest[fName]}" />
+					</apex:repeat>
+					<apex:repeat value="{!resReqFromTemplateEditableColumnFieldSet}" var="editfName">
+						<apex:column headerValue="{!editfName.Label}">	<apex:inputField value="{!resReqWrapper.resourceRequest[editfName]}" required="{!OR(editfName.required,editfName.DBRequired)}" />
+						</apex:column>
+					</apex:repeat>
+	</apex:pageBlockTable>
+</apex:pageBlockSection>
+            
+
+        </apex:pageBlock>
+    </apex:form>
+
+    <script>
+    //Code to move focus from date field
+    function setFocusOnLoad() {
+    }
+</script>
+
+</apex:page>

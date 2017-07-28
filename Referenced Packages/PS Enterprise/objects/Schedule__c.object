@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <customHelpPage>ScheduleHelp</customHelpPage>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>Represents start and end dates and weekly working hours for an assignment. You enter schedule details when you create an assignment, which also creates an associated schedule record. Although schedule records have the fields Scheduled Hours and Scheduled Days, these are not intended for users to enter time directly. Their values are system-generated based on schedule dates, patterns, and exceptions. Specific deviations from schedules are represented as schedule exceptions.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Action_Force_Schedule_Refresh__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If checked on save, refreshes Scheduled Hours, Assignment Projected Revenue and Est Vs Actuals records related to Schedule/Assignment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked on save, refreshes Scheduled Hours, Assignment Projected Revenue and Est Vs Actuals records related to Schedule/Assignment.</inlineHelpText>
+        <label>Action: Force Schedule Refresh</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Friday_Hours__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Friday Hours</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Monday_Hours__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Monday Hours</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Saturday_Hours__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Saturday Hours</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Days__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Number of days scheduled</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of days scheduled</inlineHelpText>
+        <label>Scheduled Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>6</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Hours__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>The total number of hours scheduled</inlineHelpText>
+        <label>Scheduled Hours</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Sunday_Hours__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sunday Hours</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Thursday_Hours__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Thursday Hours</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tuesday_Hours__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Tuesday Hours</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wednesday_Hours__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Wednesday Hours</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Week_Total_Hours__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The total of the daily hours</description>
+        <externalId>false</externalId>
+        <formula>Sunday_Hours__c + Monday_Hours__c + Tuesday_Hours__c + Wednesday_Hours__c + Thursday_Hours__c + Friday_Hours__c + Saturday_Hours__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Week Total Hours</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Schedule</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Start_Date__c</columns>
+        <columns>End_Date__c</columns>
+        <columns>Sunday_Hours__c</columns>
+        <columns>Monday_Hours__c</columns>
+        <columns>Tuesday_Hours__c</columns>
+        <columns>Wednesday_Hours__c</columns>
+        <columns>Thursday_Hours__c</columns>
+        <columns>Friday_Hours__c</columns>
+        <columns>Saturday_Hours__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>Schedule{000000}</displayFormat>
+        <label>Schedule Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Schedules</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Start_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>End_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sunday_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Monday_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Tuesday_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Wednesday_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Thursday_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Friday_Hours__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Saturday_Hours__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Start_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>End_Date__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Start_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>End_Date__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <sharingReasons>
+        <fullName>PSE_Member_Share__c</fullName>
+        <label>PSE Member Share</label>
+    </sharingReasons>
+    <sharingReasons>
+        <fullName>PSE_PM_Share__c</fullName>
+        <label>PSE PM Share</label>
+    </sharingReasons>
+    <validationRules>
+        <fullName>Check_End_Date</fullName>
+        <active>true</active>
+        <errorConditionFormula>End_Date__c &lt;  Start_Date__c</errorConditionFormula>
+        <errorDisplayField>End_Date__c</errorDisplayField>
+        <errorMessage>End date cannot occur before start date.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Check_Hours</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(Sunday_Hours__c &lt; 0, Sunday_Hours__c &gt; 24, Monday_Hours__c &lt; 0, Monday_Hours__c &gt; 24, Tuesday_Hours__c &lt; 0, Tuesday_Hours__c &gt; 24, Wednesday_Hours__c &lt; 0, Wednesday_Hours__c &gt; 24, Thursday_Hours__c &lt; 0, Thursday_Hours__c &gt; 24, Friday_Hours__c &lt; 0, Friday_Hours__c &gt; 24, Saturday_Hours__c &lt; 0, Saturday_Hours__c &gt; 24)</errorConditionFormula>
+        <errorMessage>Hours cannot be negative or greater than 24.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Zero_Schedule</fullName>
+        <availability>online</availability>
+        <description>Click to zero out the hours on the schedule associated with the assignment.</description>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Zero Schedule</masterLabel>
+        <openType>sidebar</openType>
+        <page>AssignmentScheduleZeroFromSchedule</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

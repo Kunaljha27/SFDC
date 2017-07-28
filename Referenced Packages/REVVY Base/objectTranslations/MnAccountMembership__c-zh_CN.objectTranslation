@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Membership --></value>
+    </caseValues>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>EndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Billing State/Province --></label>
+        <name>GroupAccountBillingState__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Owner Alias --></label>
+        <name>GroupAccountOwnerAlias__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>GroupAccountPhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>GroupAccountType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Group Account --></label>
+        <name>GroupAccount__c</name>
+        <relationshipLabel><!-- Member Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Billing State/Province --></label>
+        <name>MemberAccountBillingState__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Owner Alias --></label>
+        <name>MemberAccountOwnerAlias__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>MemberAccountPhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>MemberAccountType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Name --></label>
+        <name>MemberAccount__c</name>
+        <relationshipLabel><!-- Group Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>StartDate__c</name>
+    </fields>
+    <layouts>
+        <layout>MnAccountMembershipLayout24</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Membership Information --></label>
+            <section>Membership Information</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Account Membership Id --></nameFieldLabel>
+    <webLinks>
+        <label><!-- AssignMemberAccounts --></label>
+        <name>AssignMemberAccounts</name>
+    </webLinks>
+</CustomObjectTranslation>

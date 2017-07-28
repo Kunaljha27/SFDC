@@ -1,0 +1,7 @@
+{!MnQuote__c.OwnerFullName} has requested your approval for the quote "{!MnQuote__c.Name}".
+
+Comments from {!MnQuote__c.OwnerFullName} : {!NullValue(ApprovalRequest.Comments,"None")}
+
+Click this link:
+ 
+ {!MnQuote__c.Link}

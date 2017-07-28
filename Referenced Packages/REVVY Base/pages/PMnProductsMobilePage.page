@@ -1,0 +1,92 @@
+<apex:page standardController="REVVY__MnQuote__c" extensions="REVVY.CMnRemoter" docType="html-5.0" standardStylesheets="false" showheader="false" sidebar="false">
+
+    <div>
+    <button id="btnLoadProducts">Load Products</button>
+    <ul class="test"></ul>
+    </div>
+
+    <script src="{!$Resource.revvymobile}/revvy-mobile/js/jquery.js"></script>
+    <script src="{!$Resource.revvymobile}/revvy-mobile/js/fastclick.js"></script>
+
+
+    <script type='text/javascript' src='/canvas/sdk/js/publisher.js'></script>
+
+    <script>
+     $(function(){
+        //define an empty console
+        if (typeof console === "undefined" || typeof console.log === "undefined") {
+            console = {};
+            console.log = function() {};
+        }
+
+        //configure fast click
+
+         FastClick.attach(document.body);
+
+        //construct global namespaces
+        var CMnNamespacePrefix = "{!namespacePrefix}";
+        var CMnNamespacePrefixUS = "";
+        var CMnNamespacePrefixDT = "";
+        if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+            CMnNamespacePrefixUS = CMnNamespacePrefix + "__";
+            CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+        }
+
+        var ApexRemoteControllerNameDT = "CMnRemoter.";
+
+        console.log(Sfdc.canvas.publisher);
+        //current quote information
+        var quoteId = '<apex:outputText value="{!REVVY__MnQuote__c.Id}"/>';
+        $(".test").append("<li>Current quote Id is :"+ " "+ quoteId+"</li>");
+
+        var productId;
+
+        //make a test call to db to load products
+        $("#btnLoadProducts").click(function(){
+            Visualforce.remoting.Manager.invokeAction(CMnNamespacePrefixDT + 'CMnRemoter.getProductsForGrid',
+            [], new Date(),"USD",
+               "General", "", "Name",
+               1, 60,function(result,event){
+               if(event.status){
+                   console.log(result);
+                   var products = result.prodsList;
+                   var firstProduct = products[0];
+                   productId = firstProduct.id;
+                   Sfdc.canvas.publisher.publish({name: "publisher.setValidForSubmit", payload:"true"});
+               }else{
+                   console.log("error loading products");
+               }
+             });
+             $(".test").append("<li>products loaded</li>");
+
+        });
+
+
+       Sfdc.canvas.publisher.subscribe({
+           name:"publisher.post",
+           onData: function(e){
+               Visualforce.remoting.Manager.invokeAction(
+                   CMnNamespacePrefixDT + 'CMnRemoter.getNewQuoteItem',
+                   productId,
+                   1,
+                   quoteId,
+                   function(result,event){
+                       if(event.status){
+                            Sfdc.canvas.publisher.publish({
+                                name:"publisher.close",
+                                payload:{
+                                    refresh : "true"
+                                }
+                            });
+                       }else{
+                           console.log('Error adding product');
+                       }
+                   }
+               );
+           }
+       });
+
+     });
+</script>
+
+</apex:page>

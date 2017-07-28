@@ -1,0 +1,36 @@
+<apex:page standardController="pse__Assignment__c" recordSetVar="assignRecs" title="{!$Label.assignment_label_close_assignment}" extensions="pse.AssignmentCloserController">
+
+<apex:pageMessages id="messages"/>
+
+<apex:sectionHeader title="{!$Label.assignment_label_close_assignment}s" help="{!$Page.pse__ClosingAssignmentsHelp}" />
+
+<apex:form >
+
+<apex:pageBlock >
+    <apex:pageBlockButtons >
+        <apex:commandButton action="{!doSave}" value="{!$Label.common_label_save}" rendered="{!displayContent}"/>
+        <apex:commandButton action="{!cancel}" value="{!$Label.common_label_cancel}" immediate="true"/>
+    </apex:pageBlockButtons>
+    <apex:pageBlockSection title="{!$Label.common_label_information}" columns="2" collapsible="false" rendered="{!displayContent}">
+        <apex:inputField value="{!templateAssignment.pse__Status__c}"/>
+        <apex:inputField value="{!templateSchedule.pse__End_Date__c}"/>
+        <apex:inputField value="{!templateAssignment.pse__Closed_for_Time_Entry__c}"/>
+        <apex:inputField value="{!templateAssignment.pse__Closed_for_Expense_Entry__c}"/>
+        <apex:pageBlockSectionItem ><apex:outputText value=""/>{!$Label.assignment_message_closed_note}</apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+
+</apex:pageBlock>
+
+<apex:pageBlock tabStyle="Assignment__c" title="{!$Label.assignment_label_assignments_to_close}" rendered="{!displayContent}">
+    <apex:pageBlockTable value="{!selectedAssignments}" var="ar">
+        <apex:column value="{!ar.Name}"/>
+        <apex:column value="{!ar.pse__Status__c}"/>
+        <apex:column value="{!ar.Schedule__r.pse__End_Date__c}"/>
+        <apex:column value="{!ar.pse__Closed_for_Time_Entry__c}"/>
+        <apex:column value="{!ar.pse__Closed_for_Expense_Entry__c}"/>
+    </apex:pageBlockTable>
+</apex:pageBlock>
+
+</apex:form>
+
+</apex:page>

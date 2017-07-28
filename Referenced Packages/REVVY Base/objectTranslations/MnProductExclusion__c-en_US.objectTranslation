@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Revvy Product Exclusion</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Revvy Product Exclusions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Type --></label>
+        <name>AccountType__c</name>
+        <picklistValues>
+            <masterLabel>Channel Partner / Reseller</masterLabel>
+            <translation><!-- Channel Partner / Reseller --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer</masterLabel>
+            <translation><!-- Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer - Channel</masterLabel>
+            <translation><!-- Customer - Channel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer - Direct</masterLabel>
+            <translation><!-- Customer - Direct --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Installation Partner</masterLabel>
+            <translation><!-- Installation Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prospect</masterLabel>
+            <translation><!-- Prospect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Technology Partner</masterLabel>
+            <translation><!-- Technology Partner --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Billing Country --></label>
+        <name>BillingCountry__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exclusion End Date --></label>
+        <name>ExEndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exclusion Start Date --></label>
+        <name>ExStartDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product / Category --></label>
+        <name>Product__c</name>
+        <relationshipLabel><!-- Revvy Product Exclusions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Shipping Country --></label>
+        <name>ShippingCountry__c</name>
+    </fields>
+    <layouts>
+        <layout>Product Exclusion Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Start Date cannot be after End Date --></errorMessage>
+        <name>VMnStartAndEndDatesValidity</name>
+    </validationRules>
+</CustomObjectTranslation>

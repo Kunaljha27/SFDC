@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Install Base Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Install Base Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Install Base Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>CatalogNode__c</name>
+        <relationshipLabel><!-- Install Base Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Expiration Date --></label>
+        <name>ExpirationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exported Model Attachment Id --></label>
+        <name>ExportedModelAttachmentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Install Date --></label>
+        <name>InstallDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- List Price --></label>
+        <name>ListPrice__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>LocCity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>LocCountry__c</name>
+    </fields>
+    <fields>
+        <label><!-- Postal Code --></label>
+        <name>LocPostalCode__c</name>
+    </fields>
+    <fields>
+        <help><!-- Location State. --></help>
+        <label><!-- State --></label>
+        <name>LocState__c</name>
+    </fields>
+    <fields>
+        <label><!-- Street --></label>
+        <name>LocStreet__c</name>
+    </fields>
+    <fields>
+        <help><!-- Product associated with this Install Base Item.Set Only for Bundle or Config Product. --></help>
+        <label><!-- Parent Product --></label>
+        <name>ParentCatalogNode__c</name>
+        <relationshipLabel><!-- Child Install Base Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Install Base of the parent. Set only for products which are part of a configurable product or bundle. --></help>
+        <label><!-- Parent Install Base --></label>
+        <name>ParentInstallBase__c</name>
+        <relationshipLabel><!-- Child Install Base Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Qty --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- The subline (i.e., the quote item subline) in the quote with which this install base item is associated. --></help>
+        <label><!-- Quote Item Subline --></label>
+        <name>QuoteItemSubline__c</name>
+        <relationshipLabel><!-- Install Base Item --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The main line (i.e., the quote item) in the quote with which this install base item is associated. --></help>
+        <label><!-- Quote Item --></label>
+        <name>QuoteItem__c</name>
+        <relationshipLabel><!-- Install Base Item --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quote Solution --></label>
+        <name>QuoteSolution__c</name>
+        <relationshipLabel><!-- Solution Install Base Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quote --></label>
+        <name>Quote__c</name>
+        <relationshipLabel><!-- Install Base Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Installed</masterLabel>
+            <translation><!-- Installed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sold</masterLabel>
+            <translation><!-- Sold --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unit Price --></label>
+        <name>UnitPrice__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

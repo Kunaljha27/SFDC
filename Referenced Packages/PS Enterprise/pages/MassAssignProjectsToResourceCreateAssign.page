@@ -1,0 +1,10 @@
+<apex:page title="{!$Label.mass_assign_resource_projects_label_page_title}"
+	standardController="pse__Assignment__c" recordsetvar="assignments"
+	extensions="pse.MassAssignProjectsToResourceController" sidebar="false">
+
+	<apex:sectionHeader title="{!$Label.mass_assign_resource_projects_label_page_title}"
+		subTitle="{!bean.resource.Name}" help="{!$Page.pse__AssignProjectsToResourceHelp}" />
+
+	<c:massCreateAssignments seedAttribute="{!bean.seedData}" />
+
+</apex:page>

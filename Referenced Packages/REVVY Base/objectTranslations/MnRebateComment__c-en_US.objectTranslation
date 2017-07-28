@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Comment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Comments</value>
+    </caseValues>
+    <fields>
+        <label><!-- Display Name --></label>
+        <name>DisplayName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Program ID --></label>
+        <name>ProgramID__c</name>
+        <relationshipLabel><!-- Rebate Comments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rebate Comment --></label>
+        <name>RebateComment__c</name>
+    </fields>
+    <layouts>
+        <layout>Rebate Comment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Rebate Comments --></label>
+            <section>Rebate Comments</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

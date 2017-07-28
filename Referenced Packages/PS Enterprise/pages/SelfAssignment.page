@@ -1,0 +1,453 @@
+<apex:page controller="pse.SelfAssignmentController" tabStyle="pse__Assignment__c">
+<!-- will see if only needed styles can be included -->
+<apex:stylesheet value="{!URLFOR($Resource.pse__jsComponentsResources, 'componentStyles.css')}" />
+
+<apex:stylesheet value="{!URLFOR($Resource.pse__yui3_1, 'YUIcombo_3_3_0.css')}"/>
+
+
+    <apex:sectionHeader title="{!$Label.assignment_label_self_assignment}" help="{!$Page.pse__SelfAssignmentHelp}"/>
+    
+    <apex:pageMessages id="messages"/> 
+
+    <apex:form id="mainForm">
+    
+        <apex:pageBlock title="{!$Label.assignment_label_assignment_info}" mode="edit" id="mainPB">
+ 
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!saveAssignment}" value="{!$Label.common_label_save}" rendered="{!displayContent}"/>
+                <apex:commandButton action="{!doneAction}" value="{!$Label.common_label_cancel}" immediate="true"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="{!$Label.common_label_assignment}" columns="2" rendered="{!displayContent}" id="mainPBS">
+                <apex:inputField value="{!assignmentSchedule.pse__Start_Date__c}" required="true"/>
+                <apex:inputField value="{!assignmentSchedule.pse__End_Date__c}" required="true"/>
+                <apex:pageBlockSectionItem id="pbsi1">
+                    <apex:outputLabel for="projSelect" value="{!$Label.common_label_project}"/>
+                    <apex:outputPanel layout="block" style="white-space:nowrap;text-align:left;cursor:pointer;">
+                    	<!-- 
+                    	<apex:outputPanel layout="block"  style="background-color: #CC0000;margin-right: 1px;display: inline;width: 3px;float: left;min-height: 19px; margin-top:1px;" >&nbsp;</apex:outputPanel>
+                    	-->
+                    	<div class="requiredInput">
+                    		<div class="requiredBlock"></div>
+                    		<select id="projSelect" size="1" onchange="onProjectSelected(this.value)">
+                            <apex:repeat value="{!projectOptions}" var="projectOptionList">
+                            	<option value=""></option>
+                                <apex:repeat value="{!projectOptionList}" var="projectOption">
+                                    <option value="{!projectOption.value}">{!projectOption.label}</option>
+                                </apex:repeat>
+                            </apex:repeat>
+                        </select>
+                    		                       
+                        <apex:actionRegion >
+                        	<apex:inputHidden value="{!selectedProject}" id="selectedProjectIDHidden"/>
+                        	<apex:actionFunction name="jsOnProjectSelect" reRender="hiddenSelectedProj" action="{!onProjectSelect}"  />
+                        </apex:actionRegion>
+                        
+                        <apex:image title="{!$Label.common_label_project}" id="projectLookup" 
+                            onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" 
+                            onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" 
+                            style="margin-left:1px;" 
+                            styleClass="lookupIcon" alt="{!$Label.common_label_project}" value="/s.gif" onclick="javascript:_ProjectLookupHandler.show(this);"/>
+                            </div>
+                         
+                         <apex:outputPanel id="hiddenSelectedProj" >   
+                            <div style="display:none;" ><apex:inputField value="{!assignment.pse__Project__c}" /> </div>
+                         </apex:outputPanel>
+                         
+                    </apex:outputPanel>                                        
+                </apex:pageBlockSectionItem>                
+				
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!$Label.common_label_resource}"/>
+					<apex:outputLabel value="{!resourceName}"/>
+				</apex:pageBlockSectionItem>
+				
+				<apex:repeat value="{!filterOutAssignmentFields}" var="f" > 					
+					<apex:inputField value="{!assignment[f.fieldPath]}" rendered="{! IF(f.Label != $ObjectType.Assignment__c.Fields.Cost_Rate_Amount__c.Label,true,IF(copyDefaultCostRateToSelfAssignment,false,true))}"/>
+					<apex:pageBlockSectionItem rendered="{! IF(f.Label ==$ObjectType.Assignment__c.Fields.Cost_Rate_Amount__c.Label && copyDefaultCostRateToSelfAssignment,true,false)}">
+						<apex:outputLabel value="{!f.Label}"/>
+						<apex:outputLabel value="{!resourceDefaultCostRate}"/>
+					</apex:pageBlockSectionItem>
+				</apex:repeat>								
+            
+            </apex:pageBlockSection>
+            <!-- 
+            <apex:pageBlockSection title="{!$Label.common_label_schedule}" columns="1">
+                <apex:inputField value="{!assignmentSchedule.pse__Start_Date__c}" required="true"/>
+                <apex:inputField value="{!assignmentSchedule.pse__End_Date__c}" required="true"/>
+                <apex:inputField value="{!assignmentSchedule.Sunday_Hours__c}"/>
+                <apex:inputField value="{!assignmentSchedule.Monday_Hours__c}"/>
+                <apex:inputField value="{!assignmentSchedule.Tuesday_Hours__c}"/>
+                <apex:inputField value="{!assignmentSchedule.Wednesday_Hours__c}"/>
+                <apex:inputField value="{!assignmentSchedule.Thursday_Hours__c}"/>
+                <apex:inputField value="{!assignmentSchedule.Friday_Hours__c}"/>
+                <apex:inputField value="{!assignmentSchedule.Saturday_Hours__c}"/>
+            </apex:pageBlockSection>
+-->
+            <apex:pageBlockSection title="Schedule Pattern"/>
+            <table class="detailList" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr><td class="labelCol first last">Pattern</td>
+                <td class="data2Col first last">
+                Enter a pattern for the number of hours per day for this assignment.
+                <table border="0" cellpadding="0" cellspacing="2">
+                    <thead>
+                        <tr>
+                        <apex:repeat value="{!weekdays}" var="wd">
+                            <td align="left" style="color:#333333;font-weight:bold;">{!wd.label}</td>
+                        </apex:repeat>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <apex:repeat value="{!weekdays}" var="wd">
+                            <td><apex:inputText value="{!wd.hours}" style="width:35px"/></td>
+                        </apex:repeat>
+                        </tr>
+                    </tbody>
+                </table>
+                </td></tr></tbody>
+            </table>
+            <p />
+            
+
+        
+        </apex:pageBlock>
+    
+    </apex:form>
+
+
+
+
+<!-- The project selection overlay  -->
+<!-- @todo change the labels  -->
+<div id="projectOverlayContainer" class="overlayContainer" >
+    <div id="projectOverlay">
+        <div class="yui-widget-hd overlarCaptionBar" onclick="javascript:_ProjectLookupHandler.hide();"></div>
+        <div class="yui-widget-bd overlayBody">
+                <apex:sectionHeader title="{!$Label.self_assignment_label_project_lookup}"/>
+                <apex:panelGrid columns="4" >
+                        <label for="projectSearchString">{!$Label.common_label_search}</label>
+                        <input type="text" id="projectSearchString"/>
+                        <button id="projectOverlay_Go_Button" onclick="_ProjectLookupHandler.search(true); return false;" class="btn"> {!$Label.expense_label_go} </button>
+                        <button id="projectOverlay_All_Button" onclick="_ProjectLookupHandler.search(false); return false;" class="btn"> {!$Label.common_label_all} </button>                        
+                        <img align="middle" src="{!URLFOR($Resource.appirioCommon, 'progress-rotation.gif')}" height="24" width="24" style="visibility: hidden;" id='projectLoadWaitImageID'/>
+                    <apex:facet name="footer">
+                        <div class="bDescription">{!$Label.timecard_entry_message_search_description}</div> 
+                    </apex:facet>
+                </apex:panelGrid>
+                <div class="scrollable" style="overflow: auto !important;">
+                <apex:pageBlock id="resLookupDelegatedRes">
+                <div id="yuiRequestResultPanel">
+                    <table id="projectResultsTable"><tr><td>
+                    <i>{!$Label.self_assignment_message_enter_project_name_to_search} !</i>
+                    </td></tr>
+                    </table>
+                </div>
+                </apex:pageBlock>
+                </div>
+        </div>
+    </div>          
+</div>
+
+
+
+
+
+
+<script src="{!$Resource.yui_combo}/yui-min.js" type="text/javascript"></script>
+<script src="{!$Resource.yui_combo}/loader-min.js" type="text/javascript"></script>
+<script src="{!$Resource.yui_combo}/combo.js" type="text/javascript"></script>
+<script src="{!$Resource.jsComponents}" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+var _yui;
+var _Label = {
+    name : "{!$Label.common_label_name}",
+    noResultsFound : "{!$Label.timecard_entry_label_no_matching_results_found}"
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//---------------------------Resource Lookup Handler STARTS----------------------------//
+/////////////////////////////////////////////////////////////////////////////////////////
+var _ProjectLookupHandler = {
+    overlay : null,
+    overlayContainer : null, 
+    overlayEscKeyHandle : null,
+    lastSearchString : null,
+    prepare : function () {
+        /* Create Overlay from script, this time. With no footer */
+        _ProjectLookupHandler.overlay = new _yui.Overlay({
+            contentBox : "#projectOverlay", 
+            width : "100%",
+            zIndex:5
+        });
+        
+        /* Center overlay in viewport */
+        _ProjectLookupHandler.overlay.set("centered", true);
+        _ProjectLookupHandler.overlay.render();
+        _ProjectLookupHandler.overlay.show();
+    
+        _yui.on('key', function (e) { e.preventDefault(); _ProjectLookupHandler.search(true);}, '#projectSearchString', 'down:13', _yui);
+        
+        _ProjectLookupHandler.overlayContainer = _yui.one('#projectOverlayContainer'); 
+    },
+    
+    attachEscKey : function ()
+    {
+       _ProjectLookupHandler.overlayEscKeyHandle = _yui.on('key', _ProjectLookupHandler.hide, document, 'down:27', _yui);
+    },
+    
+    detachEscKey : function ()
+    {
+       _ProjectLookupHandler.overlayEscKeyHandle.detach();
+    },
+    
+    show : function () {
+        //#TODO see if we need this
+        validateZIndexForOverlay(true);
+        //@TODO FIXME: This makes overlay open slow
+        _ProjectLookupHandler.overlayContainer.setStyle('display', 'block');
+        _ProjectLookupHandler.overlay.set("centered", true);
+         stablizeOverlay(_ProjectLookupHandler.overlay);
+        _ProjectLookupHandler.attachEscKey();
+        /*Set focus to the search field.*/
+        _yui.one('#projectSearchString').focus();
+    },
+    
+    hide : function() {
+        _ProjectLookupHandler.overlayContainer.setStyle('display', 'none');
+        _ProjectLookupHandler.detachEscKey();
+        
+        validateZIndexForOverlay(false);
+    },
+    
+    search : function(listAll) {
+        var searchString = listAll ? _yui.one('#projectSearchString').get('value') : '';
+        if(_ProjectLookupHandler.lastSearchString == searchString){return;}
+        _ProjectLookupHandler.lastSearchString = searchString; 
+        _yui.one("#projectLoadWaitImageID").set('style.visibility', 'visible');
+        
+        /*Updating the Remote method invocation for issue on namespaced org with namespace other then pse */
+        {!$RemoteAction.SelfAssignmentController.getProjects}( searchString, function(result, event){
+		        if (event.status) {
+		            _ProjectLookupHandler.onProjectsLoad(result);
+		        } else if (event.type === 'exception') {    
+		             alert(event.message);
+		        } else {
+		           alert(event.message);
+		        }
+		    }, {escape:true});
+   }, 
+    
+    onProjectsLoad : function(result) {
+        /*This is to decide columns width*/
+        var nameColumn_Width = 100/(result.fields.length +1);
+        var otherColumn_Width = nameColumn_Width;    
+        
+        var table = _yui.Node.create('<table width="100%" id="projectResultsTable" cellspacing="0"></table>');
+        
+        var tbody = _yui.Node.create('<tbody></tbody>');
+        var isDataFound = true;
+        var fieldsToDisplay = result.fields;
+        if(result.records != null && result.records.length > 0){
+            for(i= 0 ; i < result.records.length ; i++){
+                var project = result.records[i];
+                var pid = project.Id; 
+                var pname = project.Name; 
+                
+                var tr = _yui.Node.create('<tr onmouseout="if (window.hiOff){hiOff(this);}" onmouseover="if (window.hiOn){hiOn(this);}"></tr>');
+                var nameTd = _yui.Node.create('<td width="'+nameColumn_Width+'%"></td>');
+                var projectSelectLink = _yui.Node.create('<a href="#" onclick="doSelectProject(\''+pid +'\',\''+escape(pname)+'\');return false;" class="YUIFakeSelectorClassForProjectSelection"></a>');
+                projectSelectLink.set('innerHTML',pname);
+                nameTd.appendChild(projectSelectLink);
+                
+                tr.appendChild(nameTd);
+                
+                for(j = 0 ; j < fieldsToDisplay.length ; j++){
+					var field = fieldsToDisplay[j];
+					if(field.relatedAPIName.toUpperCase() != 'NAME'){
+						
+						var fieldValue;
+						if(field.isRelatedTo){
+							var obj = project[field.relationshipName];
+							fieldValue = obj != null ? obj[field.name] : '--';
+						}else{
+							fieldValue = project[field.name];
+						}
+						fieldValue = ( fieldValue == null || fieldValue == 'null' || isStringEmpty(fieldValue)) ? '--' : fieldValue;
+						/*Special parseing for date/datetime*/
+						if(fieldValue != '--' && ('DATE' == field.fieldTypeString || 'DATETIME' == field.fieldTypeString)){
+							try{fieldValue = new Date(fieldValue).toLocaleDateString();}catch(err){}
+						}
+						var tdToAdd = _yui.Node.create('<td width="'+otherColumn_Width+'%">' + fieldValue + '</td>');
+						tr.appendChild(tdToAdd);  
+					} 
+                }        
+                
+                tr.addClass('dataRow');
+                tr.addClass(( i%2 == 0 ? 'even' : 'odd'));
+                if(i == 0){tr.addClass(' first');}
+                if(i == result.records.length-1){tr.addClass(' last');}
+                tbody.appendChild(tr);
+                    
+            }
+            var columnHeadLabels = new Array(_Label.name);
+			for(var i=0; i< result.fields.length; i++){
+				if(result.fields[i].label != 'NAME'){
+					columnHeadLabels[i+1] = result.fields[i].label;
+				}
+			}
+			
+            var thead = createThead(columnHeadLabels);
+            table.appendChild(thead);
+			
+			
+        }else{
+            var tr = _yui.Node.create('<tr onmouseout="if (window.hiOff){hiOff(this);}" onmouseover="if (window.hiOn){hiOn(this);}"></tr>');
+            tr.appendChild(_yui.Node.create('<td> '+_Label.noResultsFound+' </td>'));
+            tbody.appendChild(tr);
+            isDataFound = false;
+        }
+        
+        table.appendChild(tbody);
+        table.addClass('list')
+        _yui.all('#projectResultsTable td').addClass('dataCell');
+        
+        _yui.one('#yuiRequestResultPanel').set("innerHTML", '');
+        _yui.one('#yuiRequestResultPanel').appendChild(table);
+        
+        /*To sort the resources by name*/
+        if(isDataFound){
+            _TableSortHandler.sortTable(thead.all('th').item(0),0);
+        }
+        _yui.one("#projectLoadWaitImageID").set('style.visibility', 'hidden');
+        
+    } 
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------_Project Lookup Handler ENDS----------------------------------//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+YUI({fetchCSS : false}).use("node","event","event-key", "io",  "overlay", "anim", "node-event-simulate", function(Y) {
+    /*Recent release of Chrome (V7) have broken the UI. 
+      This is because YUI's NODE creation API is failing while creating some specific type of NODE. 
+      The cause of broken functionality is the YUI code [Y.Node.create()] which creates THEAD/TR/TD. 
+      In latest chrome release any call to Y.Node.create() which creates THEAD/TR/TD without TABLE tag fails.*/
+    Y.mix(Y.DOM.creators, {
+        tbody: function(html, doc) {
+            return Y.DOM.create('<table>' + html + '</table>', doc);
+        },
+        thead: function(html, doc) {
+            return Y.DOM.create('<table>' + html + '</table>', doc);
+        },
+        tr: function(html, doc) {
+            return Y.DOM.create('<tbody>' + html + '</tbody>', doc);
+        },
+        td: function(html, doc) {
+            return Y.DOM.create('<tr>' + html + '</tr>', doc);
+        }, 
+        th: function(html, doc) {
+            return Y.DOM.create('<tr>' + html + '</tr>', doc);
+        }
+        
+    });
+    
+    _yui = Y;
+    _ProjectLookupHandler.prepare();
+});  
+
+/////////////////move to the handle
+/*
+function doSelectProject(pid,pname){
+    _ProjectLookupHandler.hide();
+    onProjectSelected(pid);
+    //var projectSelectList = document.getElementById('{!$Component.mainForm.mainPB.mainPBS.pbsi1.projSelect}');
+    var projectSelectList = document.getElementById('projSelect');
+    
+    if(projectSelectList.options == null){
+        projectSelectList.options = new Array();
+        projectSelectList.options[0] = new Option(pname, pid);
+    }else{
+        var isAlreadyInList = false;
+        var projectOptions = new Array();
+        for(var i=0; i < projectSelectList.options.length; i++){
+            if(projectSelectList.options[i].value == pid){
+                projectSelectList.options[i].selected = true;
+                isAlreadyInList = true;
+            }
+            projectOptions[i+1] = (projectSelectList.options[i]);
+        }
+        if(!isAlreadyInList){
+            projectOptions[0] = new Option(unescape(pname), pid, true);
+            //projectSelectList.options[0] = new Option(unescape(pname), pid);
+            for(var i = 0; i<projectOptions.length;i++){
+                projectSelectList.options[i] = projectOptions[i];
+                if(projectSelectList.options[i].value == pid){
+                    projectSelectList.options[i].selected = true;
+                }
+            }
+        }       
+    }   
+}
+*/
+function doSelectProject(pid,pname){
+    _ProjectLookupHandler.hide();
+    onProjectSelected(pid);
+    var projectSelectList = document.getElementById('projSelect');
+    
+    if(projectSelectList.options == null){
+        projectSelectList.options = new Array();
+        projectSelectList.options[0] = new Option('', '');
+        projectSelectList.options[1] = new Option(pname, pid);
+    }else{
+        var isAlreadyInList = false;
+        var projectOptions = new Array();
+        for(var i=0; i < projectSelectList.options.length; i++){
+            if(projectSelectList.options[i].value == pid){
+                projectSelectList.options[i].selected = true;
+                isAlreadyInList = true;
+            }
+            projectOptions[i+1] = (projectSelectList.options[i]);
+        }
+        if(!isAlreadyInList){
+            var elOptNew = document.createElement('option');
+            elOptNew.text = unescape(pname);
+            elOptNew.value = pid;
+            var elOptOld = projectSelectList.options[1];  
+            try {
+              projectSelectList.add(elOptNew, elOptOld); // standards compliant; doesn't work in IE
+            }
+            catch(ex) {
+              projectSelectList.add(elOptNew, 1); // IE only
+            }
+            projectSelectList.options[1].selected = true;
+        }       
+    }   
+}
+function onProjectSelected(pid){
+    document.getElementById('{!$Component.mainForm.mainPB.mainPBS.pbsi1.selectedProjectIDHidden}').value = pid;
+    jsOnProjectSelect();
+}
+
+/*
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+*/
+
+String.prototype.capitalize = function() {
+    if(this.indexOf('pse__') != -1){
+        //return this.charAt(5).toUpperCase() + this.slice(1);
+        return this.slice(0,5) + this.charAt(5).toUpperCase() + this.slice(6)
+    }else{
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    }
+}
+</script>
+
+
+</apex:page>

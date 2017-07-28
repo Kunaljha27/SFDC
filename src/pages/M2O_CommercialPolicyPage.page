@@ -1,0 +1,857 @@
+<apex:page standardController="Commercial_Policy__c" extensions="M2O_CommercialPolicyController" showHeader="false" sidebar="false">    
+<script>
+    var newWin=null;
+    function printAOP(recordId){
+        var budgetType='Budget AOP';
+        var url ="/apex/M2O_BudgetPrintPage?Id=" + recordId + "&Type=" + budgetType;
+        newWin = window.open(url);
+        if(window.focus){
+                newWin.focus();
+        }
+    }
+    function printView(recordId){
+        var budgetType='Budget Latest View';
+        var url ="/apex/M2O_BudgetPrintPage?Id=" + recordId + "&Type=" + budgetType;
+        newWin = window.open(url);
+        if(window.focus){
+                newWin.focus();
+        }
+    }
+    function openCommit(recordId){
+        var url = "/"+recordId;
+        newWin = window.open(url);
+        if(window.focus){
+            newWin.focus();
+        }
+    }
+
+</script>
+<style>
+.activeTab {background-color: #236FBD; color:white; background-image:none}
+.inactiveTab { background-color: lightgrey; color:black; background-image:none}
+
+
+.outerTable
+{
+    border: 0px white ;
+    border-color : white;
+    width: 100%;
+}
+.outerTable td{
+    border: 1px solid blue;
+}
+.subHeading
+{
+    height:40px;
+    width:60px;
+    text-align: center;
+    font-size: 11px;
+}
+.dataCell
+{
+    height:25px;
+    text-align: center;
+    font-size: 12px;
+}
+.headingCurrent
+{
+    height:20px;
+    width:60px;
+    text-align: right;
+    background-color:#F0F095;
+}
+.lastHeading{
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: right;
+    
+}
+
+.heading
+{   
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: right;
+    
+}
+.headingBG
+{   
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: center;
+    
+}
+.headingTotal
+{
+    font-weight:bold; 
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: right;
+    background-color:#A5C6D1;
+}
+.headingTotalBG
+{
+    font-weight:bold; 
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: center;
+    background-color:#A5C6D1;
+}
+.headingTotalCom
+{
+    font-weight:bold; 
+    padding:2px;
+    height:20px;
+    width:40px;
+    text-align: right;
+    background-color:#A5C6D1;
+}
+.firstRow
+{
+    color:white !important;
+    border-color :blue;
+}
+.finalTotal
+{
+    padding:2px;
+    height:20px;
+    width:60px;
+    text-align: right;
+    background-color:#5391A6;
+    font-weight:bold;
+}
+</style>  
+       
+  <apex:form >
+   <apex:actionFunction action="{!getSelectedPeriodRecords}" reRender="main,button" name="getAllRecords"/>
+   <apex:actionFunction action="{!getSelectedControlRecords}" reRender="mainControl,buttonControl" name="getAllControlRecords"/>
+   <apex:actionFunction action="{!getSelectedPeriodViewRecords}" reRender="mainView,buttonView" name="getAllViewRecords"/>
+  
+  
+    <apex:actionFunction action="{!getChangedAOPValue}" reRender="main,button" name="getFilterAOPValue"/>
+    <apex:actionFunction action="{!getChangedViewValue}" reRender="mainView,buttonView" name="getFilterViewValue"/>  
+  
+   
+    <apex:tabPanel switchType="client" selectedTab="Budget" id="theTabPanel" height="400px" >
+        <apex:tab label="Budget" name="budget" id="budg">
+                <apex:tabPanel switchType="server" selectedTab="name12" value="{!filterCriteria}"  id="theTabPanel1" height="350px" tabClass="activeTab" 
+                  inactiveTabClass="inactiveTab">
+                    <apex:tab label="Budget AOP" name="budget1" id="budg1"  >
+                    <apex:pageMessages />
+                    <apex:pageBlock >
+                    <div style = "text-align:right; float:right">
+                    <a href="#" onclick="printAOP('{!recordId}');">Open Printable View</a>
+                    </div>
+                    <apex:pageBlockSection id="SelectList">
+                    <center>
+                        <apex:selectList value="{!SelectedQuarter}" label="Select a Budget Period:" size="1" onchange="getAllRecords();" >
+                            <apex:selectOptions value="{!ViewList}"></apex:selectOptions>
+                        </apex:selectList>
+                        
+                    </center>
+                    </apex:pageBlockSection>
+                    
+                    <br/>
+                    <apex:outputPanel id="button">
+                    <center>
+                        <apex:commandButton id="editAOP" value="Edit" action="{!enableEditing}" rendered="{!(!editMode && (SelectedQuarter != 'FY'))}" title="Budgets can only be edit by pricing officer"/>
+                        <apex:commandButton id="SaveAOP" value="Save" action="{!save}" rendered="{!editMode}"></apex:commandButton>
+                        <apex:commandButton id="cancelAOP" value="Cancel" action="{!cancel}" rendered="{!editMode}"/>
+                    </center>
+                    
+                    </apex:outputPanel>
+                    <br/>
+                    <apex:outputpanel id="main">
+                         <table class="outerTable" >
+                         <tr id="subHeading2"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">"{!SelectedQuarter}"</td></tr>
+                         <tr id="subHeading1"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16" title="SKU with /xx layout">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                        
+                         <tr id="subHeading" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                            <apex:repeat id="dataTable" value="{!finalListOfSelectedRecords}" var="c">
+                                <tr class="dataCell" id="dataCell">
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.BG_Code__c}"/>  
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.BG_Name__c}"/> 
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.Category_Code__c}"/>    
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.Category_Name__c}"/>    
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}" ><apex:outputText value="{!c.Upselling_Investment__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Upselling_Investment__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Retailer_promotion_STTI__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Retailer_promotion_STTI__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/>  </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Consumer_promotion__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Consumer_promotion__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/>   </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Brand_investment__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Brand_investment__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Cooperative_advertising_KAM__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Cooperative_advertising_KAM__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Trade_marketing_investments_TSM__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Other__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Other__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','lastHeading')}" ><apex:outputText value="{!c.Total_Investments__c}" rendered="{!(!editMode)}"/>
+                                    <!--<apex:inputText value="{!c.Total_Investments__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/>--></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Invoiced_Sales__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Invoiced_Sales__c}" rendered="{!(editMode  && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarter == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.X3N_Sales__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.X3N_Sales__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                   </tr> 
+                                   
+                            </apex:repeat>
+                            <tr class="finalTotal">
+                                 <td class="firstRow" colspan="4">TOTAL</td>
+                                 <td class="firstRow"><apex:outputText value="{!upsellingTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!retailerTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!consumerTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!brandTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!cooperativeTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!tradeTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!otherTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!verticalTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!invoicedTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!nSalesTotal}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+                </apex:pageBlock>
+            
+        </apex:tab>
+        <apex:tab label="Budget Latest View" name="budget2" id="budg2" reRender="mainView">
+        <apex:pageMessages />
+         <apex:pageBlock >
+         <div style = "text-align:right; float:right">
+                    <a href="#" onclick="printView('{!recordId}');">Open Printable View</a></div>
+                    <apex:pageBlockSection id="SelectListView">
+                    <center>
+                        <apex:selectList value="{!SelectedQuarterForView}" label="Select a Budget Period:" size="1" onchange="getAllViewRecords();" >
+                            <apex:selectOptions value="{!ViewList}"></apex:selectOptions>
+                        </apex:selectList>
+                    </center>
+                    </apex:pageBlockSection>
+                    <br/>
+                    
+                    <apex:outputPanel id="buttonView">
+                    <center>
+                        <apex:commandButton id="editView" value="Edit" action="{!enableEditing}" rendered="{!(!editMode && (SelectedQuarterForView != 'FY'))}"  title="Budgets can only be edit by pricing officer"/>
+                        <apex:commandButton id="SaveView" value="Save" action="{!save}" rendered="{!editMode}"></apex:commandButton>
+                        <apex:commandButton id="cancelView" value="Cancel" action="{!cancel}" rendered="{!editMode}"/>
+                    </center>
+                    </apex:outputPanel>
+                    
+                    <br/>
+                    <apex:outputpanel id="mainView">
+                         <table class="outerTable">
+                         <tr id="subHeadingView2"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">"{!SelectedQuarterForView}"</td></tr>
+                         <tr id="subHeadingView1"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16" title="SKU with /xx layout">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                        
+                         <tr id="subHeadingView" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                            <apex:repeat id="dataTableView" value="{!finalListOfSelectedRecords}" var="c">
+                                <tr class="dataCell" id="dataCellView">
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.BG_Code__c}"/>  
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.BG_Name__c}"/> 
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.Category_Code__c}"/>    
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.Category_Name__c}"/>    
+                                    </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Upselling_Investment__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Upselling_Investment__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Retailer_promotion_STTI__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Retailer_promotion_STTI__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/>  </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Consumer_promotion__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Consumer_promotion__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/>   </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Brand_investment__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Brand_investment__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Cooperative_advertising_KAM__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Cooperative_advertising_KAM__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Trade_marketing_investments_TSM__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/> </td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Other__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Other__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal','lastHeading')}" ><apex:outputText value="{!c.Total_Investments__c}" rendered="{!(!editMode)}"/>
+                                    <!--<apex:inputText value="{!c.Total_Investments__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/>--></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Invoiced_Sales__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.Invoiced_Sales__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                    <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterForView == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.X3N_Sales__c}" rendered="{!(!editMode)}"/>
+                                    <apex:inputText value="{!c.X3N_Sales__c}" rendered="{!(editMode && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                                   </tr> 
+                                   
+                            </apex:repeat>
+                            <tr class="finalTotal">
+                                 <td class="firstRow" colspan="4">TOTAL</td>
+                                 <td class="firstRow" bgcolor=""><apex:outputText value="{!upsellingTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!retailerTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!consumerTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!brandTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!cooperativeTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!tradeTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!otherTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!verticalTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!invoicedTotal}"/></td>
+                                 <td class="firstRow"><apex:outputText value="{!nSalesTotal}"/></td>
+                           </tr>
+                        </table>
+                    </apex:outputpanel>
+                </apex:pageBlock>    
+        </apex:tab>
+        </apex:tabPanel>
+        </apex:tab>
+
+        <apex:tab label="Commitment" name="commitment" id="comm">
+        <apex:pageMessages />
+        <script>
+            function saveAAction(){
+                document.getElementById('{!$Component.SaveA}').disabled = true;
+                savecommitment();
+            }
+        
+        </script>
+        <apex:actionFunction action="{!saveCommitment}" name="savecommitment" />
+        <apex:outputPanel id="buttonCommit">
+        
+            <center>
+                <apex:commandButton id="editA" value="Edit" action="{!editCommitment}" rendered="{!(!editModeCommit)}"/>
+                <apex:commandButton id="SaveA" value="Save" onclick="saveAAction();" rendered="{!editModeCommit}" disabled="false"></apex:commandButton>
+                <apex:commandButton id="cancelA" value="Cancel" action="{!cancelCommit}" rendered="{!editModeCommit}" rerender="sectionCommit,buttonCommit"/>
+            </center>
+            </apex:outputPanel>
+            <br/><br/>
+            <apex:pageBlock id="sectionCommit">
+            <table class="outerTable" id="tableCommit">
+            <tr id="subCommit" class="subHeading">
+                <td class="firstRow" width="40px" bgcolor="#5898CC">Commitment Type</td><td class="firstRow" width="40px" bgcolor="#5898CC">Investment Type</td><td class="firstRow" width="40px"  bgcolor="#5898CC" title="Select best fit">Activity short Description</td>
+                <td class="firstRow" width="100px" bgcolor="#5898CC" title="Free description of activity">Activity Description</td><td class="firstRow" width="40px" bgcolor="#5898CC">Category</td><td class="firstRow" width="40px" bgcolor="#5898CC" title="SKU with /xx layout">Product</td><td class="firstRow" width="40px" bgcolor="#5898CC" title="Measurement to determine if activity is delivered or not">Measurement Criteria</td>
+                <td class="firstRow" width="40px" bgColor="#5898CC">Activity Start Date</td><td width="40px" class="firstRow" bgColor="#5898CC">Activity Completion Date</td><td width="40px" class="firstRow" bgColor="#5898CC">Activity Amount</td>
+                <td width="40px" class="firstRow" bgColor="#5898CC">Commitment Status</td><td width="40px" class="firstRow" bgColor="#5898CC" title="e.g. PO, Rebate number">Budget Agreement Nr.</td><td width="40px" class="firstRow" bgColor="#5898CC">Expected Incremental 3N Sales</td>
+                <td width="40px" class="firstRow" bgColor="#5898CC">Commitment Reference</td><td width="40px" class="firstRow" bgColor="#5898CC">Budget Quarter</td><td width="40px" class="firstRow" bgColor="#5898CC">Completion Month</td><td width="40px" class="firstRow" bgColor="#5898CC">Submit for Approval</td></tr>
+            <apex:repeat id="dataTableComm" value="{!finalListOfCommRecords}" var="ct">
+            <tr class="dataCell" id="dataCommit">
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Commitment_Type__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/>
+            <div rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}">
+            <div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!ct.Commitment_Type__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></div></div></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Investment_Type__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/>
+            <div rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}">
+            <div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!ct.Investment_Type__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></div></div></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Activity_Short_Description__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/>
+            <div rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}">
+            <div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!ct.Activity_Short_Description__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></div></div></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Activity_Description__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/><apex:inputField style="width:100px; height:20px;" value="{!ct.Activity_Description__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Category__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/>
+            <div rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}">
+            <div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!ct.Category__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></div></div></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Product__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/><apex:inputField style="width:60px; height:20px;" value="{!ct.Product__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Measurement_Criteria__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/><apex:inputField style="width:60px; height:20px;" value="{!ct.Measurement_Criteria__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Acitivity_start_date__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}}"/>
+            <div rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}">
+            <div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!ct.Acitivity_start_date__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></div></div></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Activity_Completion_Date__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/>
+            <div rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}">
+            <div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!ct.Activity_Completion_Date__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></div></div></td>
+            <td width="40px" align="right" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputText value="{!ct.Activity_Amount__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"> </apex:outputText>
+            <div rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}">
+            <div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!ct.Activity_Amount__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></div></div></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Commitment_Status__c}"/></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Budget_Agreement_nr__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/><apex:inputField style="width:60px; height:20px;" value="{!ct.Budget_Agreement_nr__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></td>
+            <td width="40px" align="right" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputText value="{!FLOOR(ct.Expected_Incremental_3N_Sales__c)}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"></apex:outputText><apex:inputField style="width:60px; height:20px;" value="{!ct.Expected_Incremental_3N_Sales__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}">
+            <apex:outputLink value="/{!ct.id}" target="_blank">{!ct.Commitment_reference__c}</apex:outputLink>
+            </td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Budget_Quarter__c}"/></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Completion_month__c}"/></td>
+            <td width="40px" class="{!if(ct.Total__c == 'Total','headingTotalCom','')}"><apex:outputField value="{!ct.Approve__c}" rendered="{!OR(!editModeCommit,ct.Commitment_Status__c == 'Approved')}"/><apex:inputField style="width:60px; height:20px;" value="{!ct.Approve__c}" rendered="{!AND(editModeCommit,!(ct.Commitment_Status__c == 'Approved'),ct.Total__c != 'Total')}"/></td>
+            </tr>
+            </apex:repeat>
+            <apex:repeat id="CommitRep" value="{!newCommit}" var="newC" rendered="{!editModeCommit}">
+            <tr class="dataCell">
+            <td width="40px"><div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!newC.Commitment_Type__c}" rendered="{!editModeCommit}"/></div></td>
+            <td width="40px"><div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!newC.Investment_Type__c}" rendered="{!editModeCommit}"/></div></td>
+            <td width="40px"><div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!newC.Activity_Short_Description__c}" rendered="{!editModeCommit}"/></div></td>
+            <td width="100px"><apex:inputField style="width:100px; height:20px;" value="{!newC.Activity_Description__c}" rendered="{!editModeCommit}"/></td>
+            <td width="40px"><div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!newC.Category__c}" rendered="{!editModeCommit}"/></div></td>
+            <td width="40px"><apex:inputField style="width:60px; height:20px;" value="{!newC.Product__c}" rendered="{!editModeCommit}"/></td>
+            <td width="40px"><apex:inputField style="width:60px; height:20px;" value="{!newC.Measurement_Criteria__c}" rendered="{!editModeCommit}"/></td>
+            <td width="40px"><div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!newC.Acitivity_start_date__c}" rendered="{!editModeCommit}"/></div></td>
+            <td width="40px"><div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!newC.Activity_Completion_Date__c}" rendered="{!editModeCommit}"/></div></td>
+            <td width="40px" align="right"><div class="requiredInput" rendered="{!editModeCommit}">
+            <div class="requiredBlock" rendered="{!editModeCommit}"></div>            
+            <apex:inputField style="width:60px; height:20px;" value="{!newC.Activity_Amount__c}" rendered="{!editModeCommit}"/></div></td>
+            <td width="40px"><apex:outputField style="width:60px; height:20px;" value="{!newC.Commitment_Status__c}" rendered="{!editModeCommit}"/></td>
+            <td width="40px"><apex:inputField style="width:60px; height:20px;" value="{!newC.Budget_Agreement_nr__c}" rendered="{!editModeCommit}"/></td>
+            <td width="40px" align="right"><apex:inputField style="width:60px; height:20px;" value="{!newC.Expected_Incremental_3N_Sales__c}" rendered="{!editModeCommit}"/></td>
+            <td width="40px"></td><td width="40px"></td><td width="40px"></td><td width="40px"><apex:inputField style="width:60px; height:20px;" value="{!newC.Approve__c}" rendered="{!editModeCommit}"/></td>
+            
+            </tr>
+            </apex:repeat>  
+            <tr class="finalTotal">
+            <td width="40px" class="firstRow" colspan = "9">TOTAL</td>
+            <td width="40px"><apex:outputText value="{!totalActivity}"/></td>
+            <td width="40px" colspan = "2"></td>
+            <td width="40px"><apex:outputText value="{!totalExpected}"/></td>
+            <td width="40px" colspan = "4"></td>
+            </tr>
+            </table>
+            </apex:pageBlock>
+            <center>
+            <apex:commandButton id="AddM" value="Add more rows" action="{!addRows}" rendered="{!editModeCommit}" reRender="sectionCommit"></apex:commandButton>          
+            </center>
+        </apex:tab>
+        <apex:tab label="Payment" name="payment" id="payment" >
+        <apex:tabPanel switchType="server" selectedTab="paymentReview" id="theTabPanel3" height="350px" tabClass="activeTab" inactiveTabClass="inactiveTab">
+        <apex:tab label="Payment Review" name="paymentReview" id="paymentReview">
+        <apex:pageMessages />
+        
+        <apex:outputPanel id="buttonPay">
+            <center>
+                <apex:commandButton id="editP" value="Edit"  action="{!editPay}" rendered="{!(!editModePay)}"/>
+                <apex:commandButton id="SaveP" value="Save"  action="{!savePay}" rendered="{!editModePay}"></apex:commandButton>
+                <apex:commandButton id="cancelP" value="Cancel"  action="{!cancelPay}" rendered="{!editModePay}" immediate="true"
+                    html-formnovalidate="formnovalidate"/>
+            </center>
+            </apex:outputPanel>
+            <br/><br/>
+            <apex:pageBlock id="sectionPay">
+            <table class="outerTable" id="tablePay">
+            <tr id="subPay" class="subHeading"><td class="firstRow" width="40px" bgcolor="#5898CC">Commitment Status</td><td class="firstRow" width="40px" bgcolor="#5898CC">Commitment Reference</td><td class="firstRow" width="40px"  bgcolor="#5898CC">Investment Type</td><td class="firstRow" width="40px"  bgcolor="#5898CC" title="Select best fit">Activity short Description</td>
+            <td class="firstRow" width="100px" bgcolor="#5898CC" title="Free description of activity">Activity Description</td><td class="firstRow" width="40px" bgcolor="#5898CC">Category</td><td class="firstRow" width="40px" bgcolor="#5898CC" title="SKU with /xx layout">Product</td><td class="firstRow" width="40px" bgcolor="#5898CC" title="Measurement to determine if activity is delivered or not">Measurement Criteria</td>
+            <td class="firstRow" width="40px" bgColor="#5898CC">Activity Start Date</td><td width="40px" class="firstRow" bgColor="#5898CC">Activity Completion Date</td><td width="40px" class="firstRow" bgColor="#5898CC" title="External CN - sent to customer,Internal CN - not sent to customer">Settlement Method</td><td width="40px" class="firstRow" bgColor="#5898CC">Settlement Frequency</td><td width="40px" class="firstRow" bgColor="#5898CC">Activity Amount</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC">Counter performance Status</td><td width="40px" class="firstRow" bgColor="#5898CC">Entitled Amount</td><td width="40px" class="firstRow" bgColor="#5898CC">Expected Incremental 3N Sales</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC">Realized Incremental 3N Sales</td><td width="40px" class="firstRow" bgColor="#5898CC" title="Notes">Status Remark</td></tr>
+            <apex:repeat id="dataTablePay" value="{!paymentList}" var="pay">
+            <tr class="dataCell" id="dataPay">
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Commitment_Status__c}"/></td>
+            <td width="40px">
+            <apex:outputLink value="/{!pay.id}" target="_blank">{!pay.Commitment_Reference_Parent__c}</apex:outputLink>
+            </td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Investment_Type__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Activity_Short_Description__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Activity_Description__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Category__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Product__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Measurement_Criteria__c}"/></td>
+            <td width="40px">
+            <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                <apex:param value="{!pay.Acitivity_start_date__c}" /> 
+            </apex:outputtext>
+            </td>
+            <td width="40px">
+            <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                <apex:param value="{!pay.Activity_Completion_Date__c}" /> 
+            </apex:outputtext>
+            </td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Settlement_method__c}" rendered="{!(!editModePay)}"/>
+            <apex:inputField style="width:60px; height:20px;"  value="{!pay.Settlement_method__c}" rendered="{!editModePay}" required="true"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!pay.settlement_frequency__c}" rendered="{!(!editModePay)}"/>
+            <apex:inputField style="width:60px; height:20px;"  value="{!pay.settlement_frequency__c}" rendered="{!editModePay}" required="true"/></td>
+            <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Activity_Amount__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!pay.Counterperformance_Status__c}" rendered="{!(!editModePay)}"/>
+            <apex:inputField style="width:120px; height:20px;"  value="{!pay.Counterperformance_Status__c}" rendered="{!editModePay}"/></td>
+            <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;"  value="{!FLOOR(pay.Entitled_Amount__c)}" rendered="{!(!editModePay)}"></apex:outputText>
+            <apex:inputField style="width:60px; height:20px;"  value="{!pay.Entitled_Amount__c}" rendered="{!editModePay}"/></td>
+            <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;" value="{!pay.Expected_Incremental_3N_Sales__c}"></apex:outputText></td>
+            <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;"  value="{!FLOOR(pay.Realized_Incremental_3N_Sales__c)}" rendered="{!(!editModePay)}"></apex:outputText>
+            <apex:inputField style="width:60px; height:20px;"  value="{!pay.Realized_Incremental_3N_Sales__c}" rendered="{!editModePay}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!pay.Status_remark__c}" rendered="{!(!editModePay)}"/>
+            <apex:inputField style="width:60px; height:20px;"  value="{!pay.Status_remark__c}" rendered="{!editModePay}"/></td>
+            </tr>
+            
+            
+            </apex:repeat>
+            <tr class="finalTotal">
+            <td width="40px" class="firstRow" colspan = "12">TOTAL</td>
+            <td width="40px"><apex:outputText value="{!totalActivityP}"/></td>
+            <td width="40px" colspan = "1"></td>
+            <td width="40px"><apex:outputText value="{!totalEntitled}"/></td>
+            <td width="40px"><apex:outputText value="{!totalExpectedP}"/></td>
+            <td width="40px"><apex:outputText value="{!totalRealized}"/></td>
+            <td width="40px" colspan = "1"></td>
+            </tr></table>
+            </apex:pageBlock>
+        
+        
+        
+        </apex:tab>
+        <apex:tab label="Payment Request" name="paymentRequest" id="paymentRequest">
+        <apex:pageMessages /> 
+        
+        <apex:outputPanel id="buttonPayReview">
+            <center>
+                <apex:commandButton id="editPR" value="Edit"  action="{!EditPayReview}" rendered="{!(!editModePayR)}"/>
+                <apex:commandButton id="expandPR" value="Expand All"  action="{!expandAllChildren}" rendered="{!AND((!editModePayR),isExpandAllBtn)}"/>
+                <apex:commandButton id="SavePR" value="Save"  action="{!savePayReview}" rendered="{!editModePayR}"></apex:commandButton>
+                <apex:commandButton id="cancelPR" value="Cancel"  action="{!cancelPayReview}" rendered="{!editModePayR}"/>
+            </center>
+            </apex:outputPanel>
+                        <apex:actionFunction name="changeMandatory" rendered="sectionPayR"/>
+            <br/><br/>
+           
+            <apex:pageBlock id="sectionPayR">
+            <table class="outerTable" id="tablePayR">
+            <tr id="subPayR" class="subHeading">
+            <td class="firstRow" width="40px" bgcolor="#5898CC">Action</td>
+            <td class="firstRow" width="40px" bgcolor="#5898CC" title="Click when ready for payment">Request Settlement</td>
+            <td class="firstRow" width="40px" bgcolor="#5898CC">Counter Performance Status</td>
+            <td class="firstRow" width="40px" bgcolor="#5898CC">Commitment Reference</td>
+            <td class="firstRow" width="40px"  bgcolor="#5898CC">Investment Type</td>
+            <td class="firstRow" width="40px"  bgcolor="#5898CC" title="Select best fit">Activity short Description</td>
+            <td class="firstRow" width="40px" bgcolor="#5898CC">Category</td>
+            <td class="firstRow" width="40px" bgcolor="#5898CC" title="SKU with /xx layout">Product</td>
+            <td class="firstRow" width="40px" bgcolor="#5898CC" title="Measurement to determine if activity is delivered or not">Measurement Criteria</td>
+            <td class="firstRow" width="40px" bgColor="#5898CC">Activity Start Date</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC">Activity Completion Date</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC" title="External CN - sent to customer,Internal CN - not sent to customer">Settlement Method</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC">Settlement Frequency</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC">Activity Amount</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC">Entitled Amount</td>
+            <td width="80px" class="firstRow" bgColor="#5898CC">Paid Amount</td>
+            <td width="80px" class="firstRow" bgColor="#5898CC" title="Invoice number">Customer Doc number</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC" title="SAP billing doc number">SAP Doc number</td>
+            <td width="40px" class="firstRow" bgColor="#5898CC" title="When no further payments are expected for specific commitment">Close Commitment</td></tr>
+            
+            <apex:repeat id="dataTablePayR" value="{!finalListOfCommitments}" var="payReview">
+            <apex:outputLabel rendered="{!!(payReview.parentCommitment.Close_Commitment__c)}">
+            <tr class="dataCell" id="dataPayR">
+            <td width="40px"><apex:commandLink id="AddLink" value="Add" action="{!addNewChildren}">
+                <apex:param assignTo="{!parentCheck}" value="{!payReview.parentCommitment.id}" name="aDD" />
+            </apex:commandLink>&nbsp;&nbsp;&nbsp; <apex:outputText value="|"/>&nbsp;&nbsp;&nbsp; 
+            <apex:commandLink id="ExpandLink" value="Expand" rendered="{!!payReview.Expanded}" action="{!showAllChildren}">
+                <apex:param assignTo="{!parentCheck}" value="{!payReview.parentCommitment.id}" name="abs" />
+            </apex:commandLink>
+            <apex:commandLink id="CollapseLink" value="Collapse" rendered="{!payReview.Expanded}" action="{!showAllChildren}">
+                <apex:param assignTo="{!parentCheck}" value="{!payReview.parentCommitment.id}" name="abc" />
+            </apex:commandLink>
+            </td>
+            <td width="40px"></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!payReview.parentCommitment.Counterperformance_Status__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Commitment_Reference_Parent__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Investment_Type__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Activity_Short_Description__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Category__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Product__c}"/></td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Measurement_Criteria__c}"/></td>
+            <td width="40px">
+            <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                <apex:param value="{!payReview.parentCommitment.Acitivity_start_date__c}" /> 
+            </apex:outputtext>
+            </td>
+            <td width="40px">
+            <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                <apex:param value="{!payReview.parentCommitment.Activity_Completion_Date__c}" /> 
+            </apex:outputtext>
+            </td>
+            <td width="40px"></td>
+            <td width="40px"></td>
+            <!--<td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!payReview.parentCommitment.settlement_frequency__c}"/></td>-->
+            <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Activity_Amount__c}"/></td>
+            <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Entitled_Amount__c}"/></td>
+            <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;"  value="{!FLOOR(payReview.parentCommitment.Paid_Amount__c)}"/>
+            </td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.allDocsCust}"/>
+            </td>
+            <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.allDocs}"/></td>
+            <td width="40px"><apex:outputfield style="width:60px; height:20px;"  value="{!payReview.parentCommitment.Close_Commitment__c}" rendered="{!OR(!editModePayR, payReview.parentCommitment.Requested__c)}"/>
+            <apex:inputField style="width:60px; height:20px;"  value="{!payReview.parentCommitment.Close_Commitment__c}" rendered="{!(editModePayR && !payReview.parentCommitment.Requested__c)}"/></td>
+            </tr>
+                <apex:repeat id="dataTablePayRC" value="{!payReview.listChildCommitments}" var="payReviewC" rendered="{!payReview.Expanded}">
+                <apex:pageBlock rendered="{! OR(payReviewC.Parent_Commitment__c = parentCheck, isExpandAll)}" id="showOnlyChild" mode="maindetail">
+                <tr class="dataCell" id="dataPayR" bordercolor="white"  border = "0">
+                <td><i><apex:commandLink id="DeleteLink" value="Delete" action="{!deleteChildren}">
+                    <apex:param assignTo="{!deleteChild}" value="{!payReviewC.id}" name="del" />
+                </apex:commandlink>
+                </i></td>
+                <td width="40px"><i><apex:outputfield style="width:60px; height:20px;" value="{!payReviewC.Request_Settlement__c}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                <apex:inputField style="width:60px; height:20px;"  value="{!payReviewC.Request_Settlement__c}" rendered="{!(editModePayR && !payReviewC.Requested__c)}"  /></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;"  value="{!payReviewC.Counterperformance_Status__c}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Commitment_Reference_Parent__c}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Investment_Type__c}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Activity_Short_Description__c}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Category__c}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Product__c}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Measurement_Criteria__c}"/></i></td>
+                <td width="40px"><i>
+                <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!payReviewC.Acitivity_start_date__c}" /> 
+                </apex:outputtext>
+                </i></td>
+                <td width="40px"><i>
+                <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!payReviewC.Activity_Completion_Date__c}" /> 
+                </apex:outputtext>
+                </i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Settlement_method__c}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                <apex:inputField style="width:60px; height:20px;"  value="{!payReviewC.Settlement_method__c}" rendered="{!(editModePayR && !payReviewC.Requested__c)}"><!--<apex:actionSupport event="onchange" action="{!getcheck}" rerender="SectionPayR">
+                <apex:param assignTo="{!checkParam}" value="{!payReviewC.Settlement_method__c}" name="par" />
+                </apex:actionSupport>--></apex:inputField></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;"  value="{!payReviewC.settlement_frequency__c}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                <apex:inputField style="width:60px; height:20px;"  value="{!payReviewC.settlement_frequency__c}" rendered="{!(editModePayR && !payReviewC.Requested__c)}"/>
+                </i></td>
+                <td width="40px" align="right"></td>
+                <td width="40px" align="right"></td>
+                <td width="40px" align="right"><i><apex:outputtext style="width:60px; height:20px;"  value="{!FLOOR(payReviewC.Paid_Amount__c)}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                <apex:inputField style="width:60px; height:20px;"  value="{!payReviewC.Paid_Amount__c}" rendered="{!(editModePayR && !payReviewC.Requested__c)}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:79px; height:20px;"  value="{!payReviewC.Document_Number__c}" rendered="{!!editModePayR}"/>
+                <apex:inputField id="docNo" style="width:79px; height:20px;"  value="{!payReviewC.Document_Number__c}" rendered="{!editModePayR}"/></i></td>
+                <td width="40px"><i><apex:outputtext style="width:60px; height:20px;"  value="{!payReviewC.Value_Easy_Invoice_ref__c}" rendered="{!!editModePayR}"/>
+                <apex:inputField style="width:60px; height:20px;"  value="{!payReviewC.Value_Easy_Invoice_ref__c}" rendered="{!editModePayR}"/></i></td>
+                <td width="40px"></td>
+                </tr>
+                
+                </apex:pageBlock>
+
+                </apex:repeat>
+                                </apex:outputlabel>
+            </apex:repeat>
+            <tr class="finalTotal">
+            <td width="40px" class="firstRow" colspan = "13">TOTAL</td>
+            <td width="40px"><apex:outputText value="{!totalActivityR}"/></td>
+            <td width="40px"><apex:outputText value="{!totalEntitledR}"/></td>
+            <td width="40px"><apex:outputText value="{!totalPaidR}"/></td>
+            <td width="40px" colspan = "3"></td>
+            </tr></table>
+            </apex:pageBlock>
+      
+        </apex:tab>
+        <apex:tab label="Payment Settled" name="paymentSettled" id="paymentSettled">
+            <apex:pageMessages /> 
+            <apex:pageBlock id="sectionPayS">
+            <table class="outerTable" id="tablePayS">
+                <tr id="subPayS" class="subHeading">
+                    <td class="firstRow" width="40px" bgcolor="#5898CC">Action</td>
+                    <td class="firstRow" width="40px" bgcolor="#5898CC" title="Click when ready for payment">Request Settlement</td>
+                    <td class="firstRow" width="40px" bgcolor="#5898CC">Counter Performance Status</td>
+                    <td class="firstRow" width="40px" bgcolor="#5898CC">Commitment Reference</td>
+                    <td class="firstRow" width="40px"  bgcolor="#5898CC">Investment Type</td>
+                    <td class="firstRow" width="40px"  bgcolor="#5898CC" title="Select best fit">Activity short Description</td>
+                    <td class="firstRow" width="40px" bgcolor="#5898CC">Category</td>
+                    <td class="firstRow" width="40px" bgcolor="#5898CC" title="SKU with /xx layout">Product</td>
+                    <td class="firstRow" width="40px" bgcolor="#5898CC" title="Measurement to determine if activity is delivered or not">Measurement Criteria</td>
+                    <td class="firstRow" width="40px" bgColor="#5898CC">Activity Start Date</td>
+                    <td width="40px" class="firstRow" bgColor="#5898CC">Activity Completion Date</td>
+                    <td width="40px" class="firstRow" bgColor="#5898CC"  title="External CN - sent to customer,Internal CN - not sent to customer">Settlement Method</td>
+                    <td width="40px" class="firstRow" bgColor="#5898CC">Settlement Frequency</td>
+                    <td width="40px" class="firstRow" bgColor="#5898CC">Activity Amount</td>
+                    <td width="40px" class="firstRow" bgColor="#5898CC">Entitled Amount</td>
+                    <td width="80px" class="firstRow" bgColor="#5898CC">Paid Amount</td>
+                    <td width="80px" class="firstRow" bgColor="#5898CC" title="Invoice number">Customer Doc number</td>
+                    <td width="40px" class="firstRow" bgColor="#5898CC" title="SAP billing doc number">SAP Doc number</td>
+                    <td width="40px" class="firstRow" bgColor="#5898CC" title="When no further payments are expected for specific commitment">Close Commitment</td>
+                </tr>
+            
+                <apex:repeat id="dataTablePayRS" value="{!finalListOfCommitments}" var="payReview">
+                    <apex:outputLabel rendered="{!(payReview.parentCommitment.Close_Commitment__c)}">
+                    <tr class="dataCell" id="dataPayR">
+                    <td width="40px">
+                        <apex:commandLink id="ExpandLinkS" value="Expand" rendered="{!!payReview.Expanded}" action="{!showAllChildren}">
+                        <apex:param assignTo="{!parentCheck}" value="{!payReview.parentCommitment.id}" name="absS" />
+                        </apex:commandLink>
+                        <apex:commandLink id="CollapseLinkS" value="Collapse" rendered="{!payReview.Expanded}" action="{!showAllChildren}">
+                            <apex:param assignTo="{!parentCheck}" value="{!payReview.parentCommitment.id}" name="abcS" />
+                        </apex:commandLink>
+                    </td>
+                    <td width="40px"></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!payReview.parentCommitment.Counterperformance_Status__c}"/></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Commitment_Reference_Parent__c}"/></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Investment_Type__c}"/></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Activity_Short_Description__c}"/></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Category__c}"/></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Product__c}"/></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Measurement_Criteria__c}"/></td>
+                    <td width="40px">
+                    <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                        <apex:param value="{!payReview.parentCommitment.Acitivity_start_date__c}" /> 
+                    </apex:outputtext>
+                    </td>
+                    <td width="40px">
+                        <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!payReview.parentCommitment.Activity_Completion_Date__c}" /> 
+                        </apex:outputtext>
+                    </td>
+                    <td width="40px"></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!payReview.parentCommitment.settlement_frequency__c}"/></td>
+                    <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Activity_Amount__c}"/></td>
+                    <td width="40px" align="right"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.parentCommitment.Entitled_Amount__c}"/></td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;"  value="{!FLOOR(payReview.parentCommitment.Paid_Amount__c)}"/>
+                    </td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.allDocsCust}"/>
+                    </td>
+                    <td width="40px"><apex:outputtext style="width:60px; height:20px;" value="{!payReview.allDocs}"/></td>
+                    <td width="40px">
+                        <apex:outputfield style="width:60px; height:20px;"  value="{!payReview.parentCommitment.Close_Commitment__c}" rendered="{!OR(!editModePayR, payReview.parentCommitment.Requested__c)}"/>
+                    </td>
+                    </tr>
+                        <apex:repeat id="dataTablePayRCS" value="{!payReview.listChildCommitments}" var="payReviewC" rendered="{!payReview.Expanded}">
+                        <apex:pageBlock rendered="{!payReviewC.Parent_Commitment__c = parentCheck}" id="showOnlyChild" mode="maindetail">
+                        <tr class="dataCell" id="dataPayR" bordercolor="white"  border = "0">
+                        <td></td>
+                        <td width="40px"><i><apex:outputfield style="width:60px; height:20px;" value="{!payReviewC.Request_Settlement__c}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                        <apex:inputField style="width:60px; height:20px;"  value="{!payReviewC.Request_Settlement__c}" rendered="{!(editModePayR && !payReviewC.Requested__c)}"  /></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;"  value="{!payReviewC.Counterperformance_Status__c}"/></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Commitment_Reference_Parent__c}"/></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Investment_Type__c}"/></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Activity_Short_Description__c}"/></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Category__c}"/></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Product__c}"/></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Measurement_Criteria__c}"/></i></td>
+                        <td width="40px"><i>
+                        <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!payReviewC.Acitivity_start_date__c}" /> 
+                        </apex:outputtext>
+                        </i></td>
+                        <td width="40px"><i>
+                        <apex:outputtext style="width:60px; height:20px;" value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!payReviewC.Activity_Completion_Date__c}" /> 
+                        </apex:outputtext>
+                        </i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;" value="{!payReviewC.Settlement_method__c}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                        <apex:inputField style="width:60px; height:20px;"  value="{!payReviewC.Settlement_method__c}" rendered="{!(editModePayR && !payReviewC.Requested__c)}"><!--<apex:actionSupport event="onchange" action="{!getcheck}" rerender="SectionPayR">
+                        <apex:param assignTo="{!checkParam}" value="{!payReviewC.Settlement_method__c}" name="par" />
+                        </apex:actionSupport>--></apex:inputField></i></td>
+                        <td width="40px"><i><apex:outputtext style="width:60px; height:20px;"  value="{!payReviewC.settlement_frequency__c}"/></i></td>
+                        <td width="40px" align="right"></td>
+                        <td width="40px" align="right"></td>
+                        <td width="40px"><i>
+                            <apex:outputtext style="width:60px; height:20px;"  value="{!FLOOR(payReviewC.Paid_Amount__c)}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                        </i>
+                        </td>
+                        <td width="40px"><i>
+                            <apex:outputtext style="width:79px; height:20px;"  value="{!payReviewC.Document_Number__c}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                        </i></td>
+                        <td width="40px"><i>
+                        <apex:outputtext style="width:60px; height:20px;"  value="{!payReviewC.Value_Easy_Invoice_ref__c}" rendered="{!OR(!editModePayR, payReviewC.Requested__c)}"/>
+                        </i></td>
+                        <td width="40px"></td>
+                        </tr>
+                        </apex:pageBlock>
+                </apex:repeat>
+                </apex:outputlabel>
+            </apex:repeat>
+            <tr class="finalTotal">
+            <td width="40px" class="firstRow" colspan = "13">TOTAL</td>
+            <td width="40px"><apex:outputText value="{!totalActivityRClosed}"/></td>
+            <td width="40px"><apex:outputText value="{!totalEntitledRClosed}"/></td>
+            <td width="40px"><apex:outputText value="{!totalPaidRClosed}"/></td>
+            <td width="40px" colspan = "3"></td>
+            </tr>
+            </table>
+            </apex:pageBlock>
+      
+        </apex:tab>
+        </apex:tabPanel> 
+    </apex:tab>
+    <apex:tab label="SAP Accruals" name="control" id="control"  >
+            <apex:pageMessages />
+            <apex:pageBlock >
+            <apex:pageBlockSection id="SelectListControl">
+            <center>
+                <apex:selectList value="{!SelectedQuarterControl}" label="Select a Budget Period:" size="1" onchange="getAllControlRecords();" >
+                    <apex:selectOptions value="{!ViewList}"></apex:selectOptions>
+                </apex:selectList>
+                
+            </center>
+            </apex:pageBlockSection>
+            
+            <br/>
+            <apex:outputPanel id="buttonControl">
+            <center>
+                <apex:commandButton id="editControl" value="Edit" action="{!enableEditingControl}" rendered="{!(!editModeControl && (SelectedQuarterControl != 'FY'))}" title="Budgets can only be edit by pricing officer"/>
+                <apex:commandButton id="SaveControl" value="Save" action="{!saveControl}" rendered="{!editModeControl}"></apex:commandButton>
+                <apex:commandButton id="cancelControl" value="Cancel" action="{!cancelControl}" rendered="{!editModeControl}"/>
+            </center>
+            
+            </apex:outputPanel>
+            <br/>
+            <apex:outputpanel id="mainControl">
+                 <table class="outerTable">
+                 <tr id="subHeadingControl"><td class="firstRow" width="60px" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Code</B></td><td width="60px" class="firstRow" rowspan="3"  bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>BG Name</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Code</B></td><td width="60px" class="firstRow" rowspan="3" bgcolor="#5898CC" align="center" style="vertical-align:middle;"><B>Category Name</B></td><td class="firstRow" colspan="10" height="15px" align="center" bgcolor="#184F80">"{!SelectedQuarterControl}"</td></tr>
+                 <tr id="subHeadingControl1"><td class="firstRow" colspan="3" height="15px" bgcolor="#2B6294" align="center" size="16" title="SKU with /xx layout">Product</td><td class="firstRow" colspan="4" height="15px" bgcolor="#2B6294" align="center" size="16">Brand</td><td class="firstRow" colspan="1" height="15px" bgcolor="#2B6294"></td><td class="firstRow" colspan="2" height="15px" bgcolor="#2B6294"></td></tr>
+                
+                 <tr id="subHeadingControl2" class="subHeading"><td class="firstRow" width="60px" bgcolor="#5898CC">Upselling Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Retailer Promotion(STTI)</td><td class="firstRow" width="60px"  bgcolor="#5898CC">Consumer Promotion</td><td class="firstRow" width="60px" bgcolor="#5898CC">Brand Investment</td><td class="firstRow" width="60px" bgcolor="#5898CC">Cooperative Investment(KAM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Trade Marketing Investment(TSM)</td><td class="firstRow" width="60px" bgcolor="#5898CC">Other</td><td class="firstRow" width="60px" bgColor="#5898CC">Total Investments</td><td width="60px" class="firstRow" bgColor="#5898CC">Invoiced Sales</td><td width="60px" class="firstRow" bgColor="#5898CC">3N Sales</td></tr>
+                    <apex:repeat id="dataTableControl" value="{!finalListOfSelectedControlRecords}" var="c">
+                        <tr class="dataCell" id="dataCellControl">
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.BG_Code__c}"/>  
+                            </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.BG_Name__c}"/> 
+                            </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.Category_Code__c}"/>    
+                            </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotalBG','headingBG')}" ><apex:outputText value="{!c.Category_Name__c}"/>    
+                            </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}" ><apex:outputText value="{!c.Upselling_Investment__c}" rendered="{!(!editModeControl)}"></apex:outputText>
+                            <apex:inputText value="{!c.Upselling_Investment__c}" rendered="{!(editModeControl && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Retailer_promotion_STTI__c}" rendered="{!(!editModeControl)}"> </apex:outputText>
+                            <apex:inputText value="{!c.Retailer_promotion_STTI__c}" rendered="{!(editModeControl  && c.Category_Code__c != 'Total')}" style="width:90px"/>  </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Consumer_promotion__c}" rendered="{!(!editModeControl)}"></apex:outputText>
+                            <apex:inputText value="{!c.Consumer_promotion__c}" rendered="{!(editModeControl  && c.Category_Code__c != 'Total')}" style="width:90px"/>   </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Brand_investment__c}" rendered="{!(!editModeControl)}"> </apex:outputText>
+                            <apex:inputText value="{!c.Brand_investment__c}" rendered="{!(editModeControl  && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Cooperative_advertising_KAM__c}" rendered="{!(!editModeControl)}"></apex:outputText>
+                            <apex:inputText value="{!c.Cooperative_advertising_KAM__c}" rendered="{!(editModeControl  && c.Category_Code__c != 'Total')}" style="width:90px"/> </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Trade_marketing_investments_TSM__c}" rendered="{!(!editModeControl)}"></apex:outputText>
+                            <apex:inputText value="{!c.Trade_marketing_investments_TSM__c}" rendered="{!(editModeControl && c.Category_Code__c != 'Total')}" style="width:90px"/> </td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Other__c}" rendered="{!(!editModeControl)}"></apex:outputText>
+                            <apex:inputText value="{!c.Other__c}" rendered="{!(editModeControl  && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal','lastHeading')}" ><apex:outputText value="{!c.Total_Investments__c}" rendered="{!(!editModeControl && c.Total_Investments__c != null)}"></apex:outputText>
+                            <!--<apex:inputText value="{!c.Total_Investments__c}" rendered="{!(editModeControl && c.Category_Code__c != 'Total')}" style="width:90px"/>--></td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.Invoiced_Sales__c}" rendered="{!(!editModeControl)}"></apex:outputText>
+                            <apex:inputText value="{!c.Invoiced_Sales__c}" rendered="{!(editModeControl && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                            <td class="{!if(c.Category_Code__c == 'Total','headingTotal',if(SelectedQuarterControl == 'FY','heading','headingCurrent'))}"><apex:outputText value="{!c.X3N_Sales__c}" rendered="{!(!editModeControl)}"></apex:outputText>
+                            <apex:inputText value="{!c.X3N_Sales__c}" rendered="{!(editModeControl && c.Category_Code__c != 'Total')}" style="width:90px"/></td>
+                           </tr> 
+                           
+                    </apex:repeat>
+                    <tr class="finalTotal">
+                         <td class="firstRow" colspan="4">TOTAL</td>
+                         <td class="firstRow"><apex:outputText value="{!upsellingControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!retailerControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!consumerControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!brandControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!cooperativeControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!tradeControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!otherControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!verticalControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!invoicedControlTotal}"/></td>
+                         <td class="firstRow"><apex:outputText value="{!nSalesControlTotal}"/></td>
+                    </tr>
+                </table>
+            </apex:outputpanel>
+        </apex:pageBlock>
+            
+        </apex:tab>
+    </apex:tabPanel>
+    
+    </apex:form>
+      
+</apex:page>

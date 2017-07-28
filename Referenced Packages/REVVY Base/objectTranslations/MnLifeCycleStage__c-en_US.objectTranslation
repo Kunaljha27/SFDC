@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Stage</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Stages</value>
+    </caseValues>
+    <fields>
+        <label><!-- Editable --></label>
+        <name>Editable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expirable --></label>
+        <name>Expirable__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique ID for this record. --></help>
+        <label><!-- LifeCycle Stage External Id --></label>
+        <name>ExternalId__c</name>
+    </fields>
+    <fields>
+        <label><!-- LifeCycle --></label>
+        <name>LifeCycle__c</name>
+        <relationshipLabel><!-- Stages --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Number of Actions --></label>
+        <name>NumberOfActions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase Sequence --></label>
+        <name>PhaseSequence__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase --></label>
+        <name>Phase__c</name>
+        <picklistValues>
+            <masterLabel>Activation</masterLabel>
+            <translation><!-- Activation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approval</masterLabel>
+            <translation><!-- Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Authoring</masterLabel>
+            <translation><!-- Authoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collaboration</masterLabel>
+            <translation><!-- Collaboration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disapproved</masterLabel>
+            <translation><!-- Disapproved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiration</masterLabel>
+            <translation><!-- Expiration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final Review and Approval</masterLabel>
+            <translation><!-- Final Review and Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finalized</masterLabel>
+            <translation><!-- Finalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal Review</masterLabel>
+            <translation><!-- Internal Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal Review and Approval</masterLabel>
+            <translation><!-- Internal Review and Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Negotiation</masterLabel>
+            <translation><!-- Negotiation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent to customer</masterLabel>
+            <translation><!-- Sent to customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signature</masterLabel>
+            <translation><!-- Signature --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signing</masterLabel>
+            <translation><!-- Signing --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Reorder Phase --></label>
+        <name>ReorderPhase__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Phase --></label>
+        <name>SubPhase__c</name>
+        <picklistValues>
+            <masterLabel>Accepted</masterLabel>
+            <translation><!-- Accepted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cloning in progress...</masterLabel>
+            <translation><!-- Cloning in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Contract Created</masterLabel>
+            <translation><!-- Contract Created --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Converted to Contract</masterLabel>
+            <translation><!-- Converted to Contract --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Creating lines in progress...</masterLabel>
+            <translation><!-- Creating lines in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disapproved</masterLabel>
+            <translation><!-- Disapproved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft in progress...</masterLabel>
+            <translation><!-- Draft in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Amendment</masterLabel>
+            <translation><!-- In Amendment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Approval</masterLabel>
+            <translation><!-- In Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Approvals</masterLabel>
+            <translation><!-- In Approvals --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Effect</masterLabel>
+            <translation><!-- In Effect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Process</masterLabel>
+            <translation><!-- In Process --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Order Failed</masterLabel>
+            <translation><!-- Order Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ordered</masterLabel>
+            <translation><!-- Ordered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Processing Order</masterLabel>
+            <translation><!-- Processing Order --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re-Configure in progress...</masterLabel>
+            <translation><!-- Re-Configure in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ready</masterLabel>
+            <translation><!-- Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Revision in progress...</masterLabel>
+            <translation><!-- Revision in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signed</masterLabel>
+            <translation><!-- Signed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Supersceded</masterLabel>
+            <translation><!-- Supersceded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Superseded</masterLabel>
+            <translation><!-- Superseded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Target Price in progress...</masterLabel>
+            <translation><!-- Target Price in progress... --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terminated</masterLabel>
+            <translation><!-- Terminated --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>RevvyLifeCycleStageLayout24_2</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

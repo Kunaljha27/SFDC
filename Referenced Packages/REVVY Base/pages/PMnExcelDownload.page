@@ -1,0 +1,34 @@
+<apex:page sidebar="false" controller="REVVY.CMnStaticResourceController">
+    
+    <apex:stylesheet value="{!$Resource.REVVY__slds}/assets/styles/salesforce-lightning-design-system-vf.css" />
+
+    <script>
+        var CMnNamespacePrefix = "{!namespacePrefix}";
+        if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+            CMnNamespacePrefix = CMnNamespacePrefix + ".";            
+        } else {
+            CMnNamespacePrefix = "";
+        }
+    //console.log ('namespace ' + CMnNamespacePrefix);
+    </script>
+    
+    
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jszip.min.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jszip-utils.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/libs/js/FileSaver.js"></script>
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnExcelDownload.js"></script>
+
+    <div  class="slds">
+        
+        <br/>Downloading...<br/>
+        
+        <c:VMnExcelDownload excelTemplateName="{!$CurrentPage.parameters.templateName}" itemId="{!$CurrentPage.parameters.Id}" 
+        autoDownload="true" retURL="{!$CurrentPage.parameters.retURL}" 
+        compLabel="Download Excel"
+        />
+
+    </div>
+           
+</apex:page>

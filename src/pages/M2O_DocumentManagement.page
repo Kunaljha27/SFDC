@@ -1,0 +1,13 @@
+<apex:page standardController="Opportunity" extensions="M2O_DocumentManagementController">
+  <apex:pageBlock title="The Related Records">
+  <apex:pageblockTable value="{!rltdAttchmntList }" var="c">
+  <apex:column value="{!c.Name}"/>
+  <apex:column value="{!c.Type__c}"/>
+  </apex:pageblockTable>
+  <apex:pageblockTable value="{!pvtdAttchmntList}" var="d">
+  <apex:column value="{!d.Name}"/>
+  <apex:column value="{!d.Type__c}"/>
+  </apex:pageblockTable>
+
+  </apex:pageBlock>
+</apex:page>

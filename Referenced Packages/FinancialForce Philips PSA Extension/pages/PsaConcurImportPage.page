@@ -1,0 +1,8 @@
+<apex:page standardController="ffps_philips__ConcurExpense__c" 
+  extensions="ffps_philips.PsaConcurImportController" 
+  recordSetVar="concurExpenses"
+  action="{!processConcurExpenses}" 
+  showHeader="false" 
+  standardStylesheets="false" 
+  sidebar="false">
+</apex:page>

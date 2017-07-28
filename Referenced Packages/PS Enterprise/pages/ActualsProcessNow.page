@@ -1,0 +1,2 @@
+<apex:page standardController="pse__Transaction_Delta__c" extensions="pse.ActualsVerifierController" recordSetVar="deltas"
+  action="{!processDeltasNoRedirect}" showHeader="false" standardStylesheets="false" sidebar="false"></apex:page>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>M2O.R4.US AM 198 :- This table will give a high level representation of the data present in Targeting Tracking object.</description>
+    <label>M2O_TargetTracking</label>
+</ApexPage>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Node Edge --></value>
+    </caseValues>
+    <fields>
+        <help><!-- Pointer to a child node in the catalog tree (e.g., category to catalog, subcategory to category, or product to category). --></help>
+        <label>子层</label>
+        <name>Child__c</name>
+        <relationshipLabel>目录节点边缘（子层）</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Assigns or un-assigns parent-child relationships between categories and catalog; between sub-categories and categories; and between products and categories. --></help>
+        <label>导入操作</label>
+        <name>ImportAction__c</name>
+        <picklistValues>
+            <masterLabel>Assign</masterLabel>
+            <translation><!-- Assign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UnAssign</masterLabel>
+            <translation><!-- UnAssign --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Is Primary --></label>
+        <name>IsPrimary__c</name>
+    </fields>
+    <fields>
+        <help><!-- Pointer to a parent node in the catalog tree (e.g., category to catalog, subcategory to category, or product to category). --></help>
+        <label>父层</label>
+        <name>Parent__c</name>
+        <relationshipLabel>目录节点边缘（父层）</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The quantity of each product that is contained in a bundle (e.g., 1 remote control, 2 AAA batteries). --></help>
+        <label>数量</label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Field used internally to determine the position of a node relative to parent categories and child categories. --></help>
+        <label>相对水平</label>
+        <name>Relative_Level__c</name>
+    </fields>
+    <nameFieldLabel><!-- CatalogNodeEdgeId --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>数量必须大于或等于 1！</errorMessage>
+        <name>Quantity_Less_Than_1</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>无法添加可配置产品至包。</errorMessage>
+        <name>VMnBundleAddConfigurableProduct</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,43 @@
+<apex:page sidebar="false" standardStylesheets="false" cache="false">
+
+    <script type="text/javascript" src="{!$Resource.staticui}/uifw/ui/libs/js/testing/qunit/qunit.js"></script>
+    <script type="text/javascript" src="{!$Resource.staticui}/uifw/ui/libs/js/testing/pavlov/pavlov.js"></script>
+    <script type="text/javascript" src="{!$Resource.staticui}/uifw/ui/libs/js/testing/sinon-1.3.4.js"></script>
+
+    <script type="text/javascript" src="{!$Resource.staticui}/uifw/ui/libs/js/testing/inject.js"></script>
+
+    <script src="{!$Resource.staticui}/uifw/ui/libs/js/require.js"></script>
+
+    <link rel="stylesheet" href="{!$Resource.staticui}/uifw/ui/libs/js/testing/pavlov/lib/qunit.css" type="text/css" media="screen" />
+
+    <script>
+
+        QUnit.config.autostart = false;
+        
+        require.config({
+            // instruct RequireJS to use the SFDC static resource URL when loading dependencies 
+            baseUrl: "{!URLFOR($Resource.staticui, '')}"
+        });
+
+        require(["uifw/ui/src/main"], function(main) {
+
+            require(["uifw/ui/test/CMnTestLoader"], function(CMnTestLoader) {
+
+                CMnTestLoader.start();
+
+            });
+        });
+        
+    </script>
+    
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>    
+    </body>
+
+    <!--<script src="{!$Resource.staticui}/uifw/ui/test/test-wrapper.js"></script>-->
+    
+</apex:page>

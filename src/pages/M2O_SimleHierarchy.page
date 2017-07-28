@@ -1,0 +1,75 @@
+<apex:page standardController="Account" extensions="M2O_SimpleHierarchyController" sidebar="false">
+    <table>
+        <tr bgcolor="#1797C0">
+
+            <td width="500"><b><font size="2" color="white">Account Name</font></b></td>
+            <td width="250"><b><font size="2" color="white">Account Name(Global)</font></b></td>
+            <td width="150"><b><font size="2" color="white">Golden Record Key</font></b></td>
+            <td width="200"><b><font size="2" color="white">Organization Level</font></b></td>
+            <td width="200"><b><font size="2" color="white">Country</font></b></td>
+
+        </tr>
+        <apex:outputLabel rendered="{!isLevel1}">
+            <tr bgcolor="#E0EBFF">
+                <td> <apex:outputLink value="/{!level1ID}">{!Account.Level1_Parent_Report__c} </apex:outputLink></td>
+                <td> {!level1Global} </td>
+                <td> {!Account.Level_1_Parent_Golden_record_key__c} </td>
+                <td> {!Account.Level_1_Parent_Organisation_level__c} </td>
+                <td> {!level1Country} </td>
+            </tr>
+        </apex:outputLabel> 
+        <apex:outputLabel rendered="{!isLevel2}">
+            <tr bgcolor="#E0EBFF">
+                <td>&nbsp;&nbsp; <apex:outputLink value="/{!level2ID}">{!Account.Level_2_Parent__c} </apex:outputLink></td>
+                <td> {!level2Global} </td>                
+                <td> {!Account.Level_2_Parent_Golden_record_key__c} </td>
+                <td> {!Account.Level_2_Parent_Organisation_level__c} </td>
+                <td> {!level2Country} </td>
+            </tr>
+        </apex:outputLabel> 
+        <apex:outputLabel rendered="{!isLevel3}">
+            <tr bgcolor="#E0EBFF">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp; <apex:outputLink value="/{!level3ID}">{!Account.Level_3_Parent__c} </apex:outputLink></td>
+                <td> {!level3Global} </td>                
+                <td> {!Account.Level_3_Parent_Golden_record_key__c} </td>
+                <td> {!Account.Level_3_Parent_Organisation_level__c} </td>
+                <td> {!level3Country} </td>
+            </tr>
+        </apex:outputLabel> 
+        <apex:outputLabel rendered="{!isLevel4}">
+            <tr bgcolor="#E0EBFF">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <apex:outputLink value="/{!level4ID}">{!Account.Level_4_Parent__c} </apex:outputLink></td>
+                <td> {!level4Global} </td>                
+                <td> {!Account.Level_4_Parent_Golden_record_key__c} </td>
+                <td> {!Account.Level_4_Parent_Organisation_level__c} </td>
+                <td> {!level4Country} </td>
+            </tr>
+        </apex:outputLabel> 
+        <apex:outputLabel >
+            <tr bgcolor="#E0EBFF">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <apex:outputLink value="/{!Account.ID}"><b>{!Account.Name} </b></apex:outputLink></td>
+                <td> {!Account.Account_Name_Global__c} </td>
+                <td> <b>{!Account.Golden_Record_Key__c} </b></td>
+                <td> <b>{!Account.Organization_Level__c} </b></td>
+                <td> {!Account.Country__c} </td>
+            </tr>
+        </apex:outputLabel> 
+    </table>
+    <apex:form >
+    <apex:inputhidden value="{!Account.Parent.Parent.Parent.ParentID}"/>
+    <apex:inputhidden value="{!Account.Parent.Parent.Parent.Parent.Country__c}"/>
+    <apex:inputhidden value="{!Account.Country__c}"/>
+    <apex:inputhidden value="{!Account.Parent.Country__c}"/>
+    <apex:inputhidden value="{!Account.Parent.Parent.Country__c}"/>
+    <apex:inputhidden value="{!Account.Parent.Parent.Parent.Country__c}"/>
+    <apex:inputhidden value="{!Account.Parent.Parent.Parent.Parent.Account_Name_Global__c}"/>
+    <apex:inputhidden value="{!Account.Account_Name_Global__c}"/>
+    <apex:inputhidden value="{!Account.Parent.Account_Name_Global__c}"/>
+    <apex:inputhidden value="{!Account.Parent.Parent.Account_Name_Global__c}"/>
+    <apex:inputhidden value="{!Account.Parent.Parent.parent.Account_Name_Global__c}"/>
+    </apex:form>
+    <br/>
+    <apex:outputLink value="/apex/M2O_AccountHierachyPage?id={!Left(Account.ID,15)}">
+    View Entire Hierarchy
+    </apex:outputlink>
+</apex:page>

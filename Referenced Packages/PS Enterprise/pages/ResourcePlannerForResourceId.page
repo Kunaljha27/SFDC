@@ -1,0 +1,26 @@
+<apex:page sidebar="false" title="{!$Label.resplanner_title}" action="{!initResourceId}" standardController="Contact" extensions="pse.PlannerControllerExtension">
+    
+    <apex:variable var="v2PlannerURL" value="{!URLFOR($Page.PlannerScheduler, null, [
+				isProjectPlanner=false,
+				dimensionType='resource',
+				dimensionId=JSINHTMLENCODE(sourceIds)
+			])}"
+    />
+    
+    <apex:outputPanel layout="none" rendered="{!useNewResourcePlanner}">
+		<script>
+			window.location.href = '{!v2PlannerURL}';
+		</script>
+	</apex:outputPanel>
+
+    <apex:outputPanel layout="none" rendered="{!!useNewResourcePlanner}">
+    	<apex:pageMessages />
+    	<div style="float: right;">
+    		<apex:outputLink value="{!v2PlannerURL}">{!$Label.planners_navigate_to_v2}</apex:outputLink>
+    	</div>
+	    <!-- note: dimensionId is ignored in this case but needs to be set for validation purposes -->
+	    <c:flexcontrol src="{!$Resource.pse__schedulerSWF}" targetPlayerVersion="10.2"
+	        flashvars="configType=resource&sourceIds={!HTMLENCODE(sourceIds)}&userResourceId={!userResource.Id}&userCalendarId={!userResource.pse__Work_Calendar__c}&dimensionId={!userResource.pse__Region__c}&resourceId={!Contact.Id}&dimensionType=region&sessionId={!$Api.Session_ID}&serverUrl={!$Api.Partner_Server_URL_160}"/>
+	</apex:outputPanel>
+
+</apex:page>

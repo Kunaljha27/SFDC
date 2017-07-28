@@ -1,0 +1,649 @@
+<apex:page controller="REVVY.CMnPrintCtrl"
+           sidebar="false" standardStylesheets="false" tabStyle="REVVY__MnQuote__c" action="{!doDeleteEmailDocs}">
+
+<link rel="stylesheet" href="{!URLFOR($Resource.FontAwesomeIcons, 'css/font-awesome.min.css')}" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" src="/soap/ajax/26.0/connection.js"> </script>
+<script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jszip.min.js"></script>
+<style>
+
+    .proposalImages {
+        float: left !important;
+        background-color: #f0f0f0;
+    }
+
+    .proposalImage {
+        padding-left: 10px;
+        width: 125px;
+        height: 125px;
+    }
+
+    .companyLogo {
+        float:left;
+        padding:4px;
+        margin-left:4px;
+        margin-top:4px;
+        border:1px solid #cccccc;
+        border-radius:4px;
+        width:240px;
+    }
+
+    .companyLogoImg {
+        border:1px solid;
+        border-radius:4px;
+        margin-top:10px;
+    }
+
+    .companyLogoInput {
+        margin-top:10px;
+    }
+
+    .companyLogoButton {
+        margin-bottom:10px;
+    }
+
+    .cke_skin_sfdc {
+        margin-right: 3em !important;
+    }
+
+    td.pbTitle :nth-of-type(1) {
+        width: 60em !important;
+    }
+    .noSidebarCell {
+        padding: 0px !important;
+
+    }
+
+    .bPageBlock {
+        background-color: white !important;
+        border: 1px solid white !important;
+    }
+
+    .pbSubheader {
+        border-left: 1px solid #D6D6D6 !important;
+        border-right: 1px solid #D6D6D6 !important;
+        border-bottom: 1px solid #D6D6D6 !important;
+        background-color:#9cb5c3 !important;
+        margin-top:20px !important;
+    }
+
+    .pbSubsection {
+
+    }
+
+    .pbSubheader h3 {
+        color: white;
+    }
+
+    .pbBody
+    {
+        padding-top:0px !important;
+        margin: 0px !important;
+    }
+
+    .pbBody > div
+    {
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+    }
+
+    .buttonDiv {
+        float: right;
+    }
+
+    .buttons {
+        text-align:center;
+        vertical-align: middle;
+        min-width:75px;
+        min-height:30px;;
+        margin-right:10px !important;
+    }
+
+    .proposalIconLink {
+        text-decoration: none !important;
+        vertical-align: middle;
+        margin-right: 10px;
+
+    }
+
+    .proposalButtonLink {
+        text-decoration: none !important;
+        background: #82c341 !important;
+        color: white !important;
+        display: inline-block;
+        line-height: 30px;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    .emailButton {
+        background:#82c341 !important;
+        color: white !important;
+    }
+
+    .saveButton {
+        background:#12b7df !important;
+        color: white !important;
+    }
+
+    .cancelButton {
+        background:#e9ebe9 !important;
+    }
+
+    .titleContainer {
+        width:100%;
+        border-bottom:1px solid  #D6D6D6;
+        background-color: #f0f0f0;
+        min-height: 50px;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    .title {
+        font-size:20px;
+        padding-left:40px;
+        color:#6ABFDA;
+
+    }
+
+    .bPageBlock .detailList tr td,
+    .bPageBlock .detailList tr th {
+        /* removing line divider between fields */
+        border-bottom: 0px solid #e3deb8;
+    }
+
+    .attButtons {
+        width:100%;
+        text-align:right;
+
+    }
+
+    .generateProposal {
+        margin-top:-15px;
+    }
+
+    [id*="sectGeneratedProposals"] .pbHeader {
+        display : none;
+    }
+    [id*="sectAdHocDocuments"] .pbHeader {
+        display : none;
+    }
+    .disabled {
+        opacity: 0.3;
+        cursor: default !important;
+    }
+</style>
+
+<script src="{!$Resource.staticui}/mnadmin/ui/libs/js/jquery.js"></script>
+<script>
+    var savedForPrint = {!savedForPrint};
+    var isThirdPartyProposalEnabled = {!isThirdPartyProposalEnabled};
+    var disableBeforeSave = {!disableBeforeSave};
+
+    var isPageDirty = false;
+
+    function setPageDirty() {
+        isPageDirty = true;
+    }
+
+    function checkPageDirty() {
+        if (isPageDirty) {
+            alert('{!$Label.MnProposalUnsavedChangesErr}');
+            return false;
+        }
+        return true;
+    }
+
+    function createZip(adList){
+        if (!checkPageDirty()) return false;
+        var CMnNamespacePrefix = "{!JSENCODE(namespacePrefix)}";
+        var CMnNamespacePrefixDT = "";
+        if (CMnNamespacePrefix != null && CMnNamespacePrefix.length > 0) {
+            CMnNamespacePrefixDT = CMnNamespacePrefix + ".";
+        }
+
+        var adHOCCnt = '{!adHocDocCount}';
+        if(adHOCCnt > 0 ){
+            var count = 0;
+            adHOCCnt = parseInt(adHOCCnt);
+            adHOCCnt = adHOCCnt + 1;
+            //Instantiate JSZip
+            var zipFile = new JSZip();
+            var quoteId = '{!quote.id}';
+            var printtemplate =  '{!JSENCODE(printTemplate.VisualforcePageName__c)}';
+            var printStatus = '{!JSENCODE(quoteParams.printStatus__c)}';
+            var proposalTitle = '{!JSENCODE(quoteParams.proposalTitle__c)}';
+            Visualforce.remoting.Manager.invokeAction(
+                            CMnNamespacePrefixDT + 'CMnPrintCtrl.getAttachment',
+                    adList,printtemplate,quoteId,printStatus,proposalTitle,
+                    function(result, event){
+                        if (event.status) {
+                            for(filename in result)
+                            {
+                                count++;
+                                //Add the file
+                                compressFile(zipFile, filename, result[filename]);
+                            }
+                            //Once all the selected files have been compressed
+                            if (count == adHOCCnt) {
+                                //Send form
+                                sendZip(zipFile);
+                            }
+                        }
+                    },
+                    {escape: false}
+            );//End getAttachment
+        }
+        else {
+            return true;
+        }
+    }
+
+    //Compress one single file
+    function compressFile(zipFile, name, data) {
+        zipFile.file(name, data, {base64:true});
+    }
+
+    //Generate and upload zip file
+    function sendZip(zipFile) {
+        var data = zipFile.generate();
+        var zipContent = $('input[id$=zipContent]');
+        zipContent.val(data);
+        uploadZip();
+    }
+
+    //remove autofocus on first input element
+    function setFocusOnLoad() {}
+
+    var activeTabLs= new Array();
+    $(document).ready(function () {
+        var tabList = ["sectPropDetails","sectCoverLetter","sectOpeningComments","sectPricingSummary","sectTermsOfService","sectClosingComments","sectGeneratedProposals","sectAdHocDocuments"];
+        var tabId ='{!JSENCODE(tabStates)}';
+        var resTab = tabId.split(":");
+        for(var i=0;i<resTab.length;i++) {
+            if(resTab[i] != '') {
+                activeTabLs.push(resTab[i]);
+            }
+        }
+        initialTabState(activeTabLs,tabList); // Inital status set on tabs
+
+        $("[id$='sectPropDetails'] img,[id$='sectCoverLetter'] img,[id$='sectOpeningComments'] img,[id$='sectPricingSummary'] img,[id$='sectTermsOfService'] img,[id$='sectClosingComments'] img,[id$='sectGeneratedProposals'] img,[id$='sectAdHocDocuments'] img").click(function() {
+            var contentPanelList = jQuery(this).attr("id");
+            var res = contentPanelList.split(":");
+            setTabState(res[res.length-1]);     //Function call on every click
+        });
+
+        $("[id$='inputPropTitle']").attr('size', '45');
+        $("[id$='inputOpeningCommentsTitle']").attr('size', '45');
+        $("[id$='inputTermsOfServiceTitle']").attr('size', '45');
+        $("[id$='inputClosingCommentsTitle']").attr('size', '45');
+
+        if (savedForPrint) {
+            window.open('{!JSENCODE(sitePrefix)}/apex/{!JSENCODE(printTemplate.VisualforcePageName__c)}?quoteId={!URLENCODE(JSENCODE(quote.id))}',
+                    'printProposalPopup', 'width=800,height=800');
+        }
+        /* Saving for a rainy day :)
+         if (savedForAttach) {
+         saveAttach();
+         }
+         */
+    });
+
+    //Call to this function on every click and add or remove from final Tab List
+
+    function setTabState(curTab) {
+        if(curTab !='') {
+            if(jQuery.inArray(curTab, activeTabLs)==-1){
+                activeTabLs.push(curTab); //Add to List if not present
+            }
+            else {
+                activeTabLs.splice( $.inArray(curTab, activeTabLs), 1 );  //Remove from  List if  present
+            }
+            createTabStatus();
+        }
+    }
+
+    //Set status of expaned / collapsed on page reload
+
+    function initialTabState(activeTabList,tabLs) {
+        for(var i=0;i<tabLs.length;i++) {
+            if(jQuery.inArray(tabLs[i], activeTabList)==-1){
+                $("[id$='" + tabLs[i] + "'] img").trigger('click');
+            }
+        }
+    }
+
+    function createTabStatus(){
+        var tabSt = "";
+        for(var i=0;i < activeTabLs.length;i++) {
+            tabSt += activeTabLs[i] + ":";
+        }
+        tabSt = tabSt.substring(0, tabSt.length - 1);
+        var tabContent = $('input[id$=tabStates]');
+        tabContent.val(tabSt);
+        return true;
+    }
+</script>
+<c:CMnZenDesk />
+
+<!-- Not needed now but this is a good concept to save attachments
+     asynchronously Define the JavaScript to save attachment.
+<apex:form>
+    <apex:actionFunction  name="saveAttach" action="{!saveAttachment}" rerender="sectGeneratedProposals"/>
+</apex:form>
+-->
+
+<apex:form >
+    <apex:inputHidden id="zipContent" value="{!zipContent}" />
+    <apex:actionFunction name="uploadZip" action="{!uploadZip}"/>
+</apex:form>
+
+<apex:form >
+<apex:outputPanel layout="none">
+<apex:inputHidden id="tabStates" value="{!tabStates}" />
+
+<apex:pageMessages />
+<apex:pageBlock rendered="{!renderPage}" id="theBlock">
+<table class="titleContainer"><tr><td>
+    <apex:outputPanel styleClass="title">{!quoteParams.REVVY__proposalTitle__c}</apex:outputPanel>
+</td></tr></table>
+
+<br/>
+<div class="buttonDiv">
+    <apex:outputLink title="{!$Label.revvy__MnProposalThirdPartyProposalTooltip}"
+                     styleClass="fa fa-download fa-2x proposalIconLink"
+                     value="{!IF(isOOBDrawloop, URLFOR($Action.MnQuote__c.MnDrawloopProposal, quote.REVVY__SalesforceId__c), proposalUrl)}"
+                     rendered="{!isThirdPartyProposalEnabled}"
+                     id="thirdPartyProposal"
+                     disabled="{!disableBeforeSave}"
+                     onclick="if (!checkPageDirty()) return false;">
+    </apex:outputLink>
+    <apex:outputLink title="{!$Label.revvy__MnProposalThirdPartyESignTooltip}"
+                     styleClass="fa fa-pencil-square-o fa-2x  proposalIconLink"
+                     value="{!IF(isOOBDocuSign, URLFOR($Action.MnQuote__c.MnDocusignESign, quote.REVVY__SalesforceId__c), eSignUrl)}"
+                     rendered="{!isThirdPartyESignEnabled}"
+                     id="eSignProposal"
+                     disabled="{!disableBeforeSave}"
+                     onclick="if (!checkPageDirty()) return false;">
+    </apex:outputLink>
+    <apex:commandLink title="{!$Label.revvy__MnProposalPrintTooltip}"
+                      styleClass="fa fa-download fa-2x  proposalIconLink" action="{!goToPrintPage}"
+                      rendered="{!!isThirdPartyProposalEnabled}" value=""/>
+    <apex:commandLink title="{!$Label.revvy__MnProposalPrintAttachTooltip}"
+                      styleClass="fa fa-paperclip fa-2x proposalIconLink" action="{!printAndAttach}"
+                      rendered="{!!isThirdPartyProposalEnabled && !disableBeforeSave}" value=""
+                      onclick="if (!checkPageDirty()) return false;"/>
+    <apex:outputText title="{!$Label.revvy__MnProposalPrintAttachProposalBeforeSaveTooltip}"
+                     styleClass="fa fa-paperclip fa-2x proposalIconLink"
+                     rendered="{!disableBeforeSave}"
+                     id="printAttachProposal"/>
+    <script>
+        var adHOCList = new Array();
+        <apex:repeat value="{!adHocIds}" var="adDoc">
+        adHOCList.push('{!adDoc}');
+        </apex:repeat>
+            //One template change if old quote check with user before updating comments
+        function confirmTemplateUpdate(){
+            var checkQuoteNotExists = '{!disableBeforeSave}';
+            createTabStatus();
+            if (checkQuoteNotExists == 'true'){
+                return true;
+            }
+            var warnUser = '{!$Label.revvy__MnProposalChangeTemplateWarn}';
+            var retVal = confirm(warnUser);
+            if(retVal == false){
+                var curValue = '{!quoteParams.REVVY__usedTemplate__c}';
+                var e = document.getElementById('{!$Component.theBlock.sectPropDetails.templateContainer}');
+                e.value = curValue;
+            }
+            return retVal;
+        }
+    </script>
+    <apex:commandButton title="{!$Label.revvy__MnProposalEmailTooltip}"
+                        styleClass="buttons emailButton" action="{!emailProposal}"
+                        rendered="{!!isThirdPartyProposalEnabled}" value="{!$Label.revvy__MnProposalEmailButton}"
+                        disabled="{!disableBeforeSave}"
+                        id="emailProposal"
+                        onclick="if (!createZip(adHOCList)) return false;"/>
+    <apex:commandButton title="{!$Label.revvy__MnProposalSaveTooltip}"
+                        styleClass="buttons saveButton"  action="{!save}" value="{!$Label.revvy__MnProposalSave}"
+                        rendered="{!!readOnly}"
+                        onclick="if (!createTabStatus()) return false;" />
+    <apex:commandButton title="{!$Label.revvy__MnProposalBackToQuoteTooltip}"
+                        styleClass="buttons cancelButton" action="{!returnToQuoteDetails}" value="{!$Label.revvy__MnProposalBackToQuote}" />
+</div>
+<br/><br/>
+
+<!-- editable mode-->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalProposalDetails}" id="sectPropDetails" rendered="{!!readOnly}">
+    <apex:inputField label="{!$Label.revvy__MnProposalProposalTitle}" id="inputPropTitle"
+                     value="{!quoteParams.REVVY__proposalTitle__c}" onchange="setPageDirty();"/>
+
+    <apex:selectList id="templateContainer" size="1" label="{!$Label.revvy__MnProposalTemplate}" value="{!selectedTemplateId}" rendered="{!!isThirdPartyProposalEnabled}">
+        <apex:actionSupport event="onchange" action="{!updateTemplate}" onsubmit="if (!confirmTemplateUpdate()) return false;"></apex:actionSupport>
+        <apex:selectOptions value="{!templateList}"></apex:selectOptions>
+    </apex:selectList>
+
+    <apex:outputText label="{!$Label.revvy__MnProposalQuoteStatus}" value="{!quote.REVVY__Status__c}" />
+
+    <apex:selectRadio label="{!$Label.revvy__MnProposalPrintAs}" value="{!quoteParams.REVVY__printStatus__c}"  rendered="{!showDraftFinalRadioButtons && !isThirdPartyProposalEnabled}" onchange="setPageDirty();">
+        <apex:selectOption itemLabel="{!$Label.revvy__MnProposalDraftStatus}" itemValue="Draft" />
+        <apex:selectOption itemLabel="{!$Label.revvy__MnProposalFinalStatus}" itemValue="Final" />
+    </apex:selectRadio>
+
+    <apex:pageBlockSectionItem rendered="{!!isThirdPartyProposalEnabled}">
+        <apex:outputLabel value="{!$Label.revvy__MnProposalExampleProposal}" />
+        <div class="data2Col proposalImages">
+            <img src="{!printTemplate.imgCoverLetterURL__c}" onerror="this.style.display='none'" class="proposalImage"/>
+            <img src="{!printTemplate.imgOpeningURL__c}" onerror="this.style.display='none'" class="proposalImage" />
+            <img src="{!printTemplate.imgPricingURL__c}" onerror="this.style.display='none'" class="proposalImage" />
+            <img src="{!printTemplate.imgTermsOfServiceURL__c}" onerror="this.style.display='none'"  class="proposalImage"/>
+            <img src="{!printTemplate.imgConclusionURL__c}" onerror="this.style.display='none'" class="proposalImage"/>
+        </div>
+    </apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>
+
+<!-- readonly mode-->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalProposalDetails}" rendered="{!readOnly}">
+    <apex:outputField label="{!$Label.revvy__MnProposalProposalTitle}" id="inputPropTitle"
+                      value="{!quoteParams.REVVY__proposalTitle__c}" />
+
+    <apex:outputText label="{!$Label.revvy__MnProposalTemplate}" value="{!printTemplate.Name}" rendered="{!!isThirdPartyProposalEnabled}"/>
+
+    <apex:outputText label="{!$Label.revvy__MnProposalQuoteStatus}" value="{!quote.REVVY__Status__c}" />
+
+    <apex:outputText label="{!$Label.revvy__MnProposalPrintAs}" value="{!quoteParams.REVVY__printStatus__c}" rendered="{!!isThirdPartyProposalEnabled}"/>
+
+    <apex:pageBlockSectionItem rendered="{!!isThirdPartyProposalEnabled}">
+        <apex:outputLabel value="{!$Label.revvy__MnProposalExampleProposal}" />
+        <div class="data2Col proposalImages">
+            <img src="{!printTemplate.imgCoverLetterURL__c}" onerror="this.style.display='none'" class="proposalImage"/>
+            <img src="{!printTemplate.imgOpeningURL__c}" onerror="this.style.display='none'" class="proposalImage" />
+            <img src="{!printTemplate.imgPricingURL__c}" onerror="this.style.display='none'" class="proposalImage" />
+            <img src="{!printTemplate.imgTermsOfServiceURL__c}" onerror="this.style.display='none'"  class="proposalImage"/>
+            <img src="{!printTemplate.imgConclusionURL__c}" onerror="this.style.display='none'" class="proposalImage"/>
+        </div>
+    </apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>
+
+<!-- both mode -->
+<apex:pageBlockSection columns="2" title="{!$Label.revvy__MnProposalCoverPage}" id="sectCoverLetter" rendered="{!!isThirdPartyProposalEnabled}">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="{!$Label.revvy__MnProposalCustomerLogo}" />
+        <c:CMnImageUploadCmp customObject="{!quoteParams}" imageFieldName="companyLogoURL__c"  imageWidth="64" imageHeight="64" readOnly="{!readOnly}"/>
+    </apex:pageBlockSectionItem>
+    <!--SDR241133 -  fixed data of following field and remove escape=false for security fix -->
+    <apex:pageBlockSectionItem rendered="{!NOT(ISNULL(quoteContact))}">
+        <apex:outputLabel value="{!$Label.revvy__MnProposalPrimaryContact}" />
+        <apex:outputPanel >
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteContact.Name))}">
+                {!quoteContact.Name} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteContact.Phone))}">
+                {!quoteContact.Phone} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteContact.Email))}">
+                {!quoteContact.Email} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAccount.BillingCity))}">
+                {!quoteAccount.BillingCity}
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem rendered="{!ISNULL(quoteContact)}">
+        <apex:outputLabel value="{!$Label.revvy__MnProposalPrimaryContact}" />
+        <apex:outputPanel >Please set a contact in the quote</apex:outputPanel>
+    </apex:pageBlockSectionItem>
+
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="{!$Label.revvy__MnProposalCustomerName}" />
+        <apex:outputPanel >
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAccount.Name))}">
+                {!quoteAccount.Name} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAccount.BillingStreet))}">
+                {!quoteAccount.BillingStreet} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAccount.BillingCity))}">
+                {!quoteAccount.BillingCity} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAccount.BillingState))}">
+                ,&nbsp;{!quoteAccount.BillingState}
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAccount.BillingPostalCode))}">
+                &nbsp;{!quoteAccount.BillingPostalCode} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAccount.BillingCountry))}">
+                {!quoteAccount.BillingCountry}
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="{!$Label.revvy__MnProposalQuoteAuthor}" />
+        <apex:outputPanel >
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAuthor.Name))}">
+                {!quoteAuthor.Name} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAuthor.Phone))}">
+                {!quoteAuthor.Phone} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAuthor.Email))}">
+                {!quoteAuthor.Email} <br/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT(ISNULL(quoteAuthor.City))}">
+                {!quoteAuthor.City}
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>
+
+<!-- editable mode -->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalOpeningComments}" id="sectOpeningComments" rendered="{!!readonly}">
+    <apex:inputField label="{!$Label.revvy__MnProposalPageTitle}" value="{!quoteParams.REVVY__openingCommentsTitle__c}" id="inputOpeningCommentsTitle"  onchange="setPageDirty();"/>
+    <apex:inputField label="{!$Label.revvy__MnProposalText}" value="{!quoteParams.REVVY__openingComments__c}" onchange="setPageDirty();"/>
+</apex:pageBlockSection>
+
+<!-- readonly -->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalOpeningComments}"  rendered="{!readonly}">
+    <apex:outputField label="{!$Label.revvy__MnProposalPageTitle}" value="{!quoteParams.REVVY__openingCommentsTitle__c}" id="inputOpeningCommentsTitle" />
+    <apex:outputField label="{!$Label.revvy__MnProposalText}" value="{!quoteParams.REVVY__openingComments__c}"/>
+</apex:pageBlockSection>
+
+<!-- both mode -->
+<apex:pageBlockSection columns="2" title="{!$Label.revvy__MnProposalPricingSummaryParam}" id="sectPricingSummary" rendered="{!!isThirdPartyProposalEnabled}">
+    <apex:inputCheckbox value="{!quoteParams.REVVY__displayDiscounts__c}" label="{!$Label.revvy__MnProposalDisplayAdjustments}" disabled="{!readonly}" onchange="setPageDirty();"/>
+    <apex:outputField label="{!$Label.revvy__MnProposalPricingDateParam}" value="{!quote.REVVY__Price_Date__c}" />
+    <apex:inputCheckbox value="{!quoteParams.REVVY__displayProductImages__c}"  label="{!$Label.revvy__MnProposalDisplayProductImages}" disabled="{!readonly}" onchange="setPageDirty();"/>
+    <apex:outputField label="{!$Label.revvy__MnProposalExpirationDate}" value="{!quote.REVVY__Expiration_Date__c}" />
+    <apex:inputCheckbox value="{!quoteParams.REVVY__displayProductIds__c}"  label="{!$Label.revvy__MnProposalDisplayProductID}" disabled="{!readonly}" onchange="setPageDirty();"/>
+</apex:pageBlockSection>
+
+<!-- editable -->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalTAndC}" id="sectTermsOfService" rendered="{!!readonly && !isThirdPartyProposalEnabled}">
+    <apex:inputField label="{!$Label.revvy__MnProposalPageTitle}" value="{!quoteParams.REVVY__termsOfServiceTitle__c}" id="inputTermsOfServiceTitle"  onchange="setPageDirty();"/>
+    <apex:inputField rendered="{!printTemplate.REVVY__Edit_T_C__c}" value="{!quoteParams.REVVY__termsOfService__c}" label="{!$Label.revvy__MnProposalText}"  onchange="setPageDirty();"/>
+    <apex:outputField rendered="{!!printTemplate.REVVY__Edit_T_C__c}" value="{!quoteParams.REVVY__termsOfService__c}" label="{!$Label.revvy__MnProposalText}" />
+</apex:pageBlockSection>
+
+<!-- readonly -->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalTAndC}" rendered="{!readonly && !isThirdPartyProposalEnabled}">
+    <apex:outputField label="{!$Label.revvy__MnProposalPageTitle}" value="{!quoteParams.REVVY__termsOfServiceTitle__c}" id="inputTermsOfServiceTitle" />
+    <apex:outputField rendered="{!printTemplate.REVVY__Edit_T_C__c}" value="{!quoteParams.REVVY__termsOfService__c}" label="{!$Label.revvy__MnProposalText}" />
+    <apex:outputField rendered="{!!printTemplate.REVVY__Edit_T_C__c}" value="{!quoteParams.REVVY__termsOfService__c}" label="{!$Label.revvy__MnProposalText}" />
+</apex:pageBlockSection>
+
+
+<!-- editable -->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalClosingComments}" id="sectClosingComments" rendered="{!!readonly}">
+    <apex:inputField label="{!$Label.revvy__MnProposalPageTitle}" value="{!quoteParams.REVVY__closingCommentsTitle__c}" id="inputClosingCommentsTitle" onchange="setPageDirty();"/>
+    <apex:inputField value="{!quoteParams.REVVY__closingComments__c}" label="{!$Label.revvy__MnProposalText}" onchange="setPageDirty();"/>
+</apex:pageBlockSection>
+
+<!-- readonly -->
+<apex:pageBlockSection columns="1" title="{!$Label.revvy__MnProposalClosingComments}" rendered="{!readonly}">
+    <apex:outputField label="{!$Label.revvy__MnProposalPageTitle}" value="{!quoteParams.REVVY__closingCommentsTitle__c}" id="inputClosingCommentsTitle"/>
+    <apex:outputField value="{!quoteParams.REVVY__closingComments__c}" label="{!$Label.revvy__MnProposalText}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:outputPanel>
+</apex:form>
+
+<!-- need to use custom setting value here to make visible -->
+<apex:pageBlock >
+    <div class = "generateProposal">
+        <apex:pageBlockSection id="sectGeneratedProposals" title="{!$Label.revvy__MnProposalGeneratedProposals}" columns="1">
+            <c:VMnAttachmentList parentIdStr="{!quote.id}" excludedIds="{!adHocIds}" readOnly="true"></c:VMnAttachmentList>
+        </apex:pageBlockSection>
+    </div>
+    <!-- cannot use the rendered flag on pageblock section as
+         CMnBasePaginator is still initialized even though VMnList is not
+         rendered. This happens only when you click any of the buttons in
+         this page (e.g. Print,Preview etc) -->
+    <!--<div style="display:{!IF((isThirdPartyProposalEnabled), 'block', 'none')}">-->
+    <div style="display:block">
+        <apex:pageBlockSection id="sectAdHocDocuments" title="{!$Label.revvy__MnProposalAdHocDocuments}" columns="1">
+            <apex:form >
+                <apex:outputPanel styleClass="attButtons" layout="block" rendered="{!!readOnly}">
+                    <apex:inputFile id="attInputFile" title=""  value="{!fileBody}" filename="{!fileName}"/>
+                    <apex:commandButton onclick="" value="{!$Label.revvy__MnProposalAttachFile}" action="{!UploadFile}"/>
+                </apex:outputPanel>
+            </apex:form>
+            <c:VMnList sectionTitle=""  uniqueId="2"
+                       editPageNumber="false" isNewButtonVisible="false"
+                       deleteLinkConfirm="{!$Label.revvy__MnProposalFileDeleteConfirm}"
+                       newButtonLabel="nada" fieldSetName="{!AdHocDocumentSectionFSName}" pageSize="6"
+                       allowEdit="false" sObjTypeStr="MnQuoteProposalAttachment__c" showFilter="false"
+                       allowSelection="false" displayActionColumn="true"
+                       extraWhere="Quote__c = '{!quote.id}'"/>
+        </apex:pageBlockSection>
+    </div>
+
+</apex:pageBlock>
+<script>
+    if(disableBeforeSave){
+        var saveProposalToolTip= "{!$Label.revvy__MnProposalThirdPartyProposalBeforeSaveTooltip}";
+        $("[id*='thirdPartyProposal']").attr('title', saveProposalToolTip);
+        saveProposalToolTip= "{!$Label.revvy__MnProposalESignBeforeSaveTooltip}";
+        $("[id*='eSignProposal']").attr('title', saveProposalToolTip);
+        saveProposalToolTip= "{!$Label.revvy__MnProposalEmailProposalBeforeSaveTooltip}";
+        $("[id*='emailProposal']").attr('title', saveProposalToolTip);
+        $("[id*='thirdPartyProposal']").addClass('disabled');
+        $("[id*='emailProposal']").addClass('disabled');
+        $("[id*='eSignProposal']").addClass('disabled');
+        $("[id*='printAttachProposal']").addClass('disabled');
+    }
+    else{
+        var saveProposalToolTip= "{!$Label.revvy__MnProposalThirdPartyProposalTooltip}";
+        $("[id*='thirdPartyProposal']").attr('title', saveProposalToolTip);
+        saveProposalToolTip= "{!$Label.revvy__MnProposalThirdPartyESignTooltip}";
+        $("[id*='eSignProposal']").attr('title', saveProposalToolTip);
+        saveProposalToolTip= "{!$Label.revvy__MnProposalEmailTooltip}";
+        $("[id*='emailProposal']").attr('title', saveProposalToolTip);
+    }
+
+</script>
+</apex:page>

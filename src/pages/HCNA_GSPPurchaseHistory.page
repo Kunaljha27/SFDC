@@ -1,0 +1,102 @@
+<apex:page controller="HCNA_GSPPurchaseHistoryController" sidebar="false">
+    <!-- Google API inclusion -->
+    <apex:includeScript id="googleAPI" value="https://www.google.com/jsapi" />
+    <apex:sectionHeader title="For Internal Use Only. Not for compensation purposes." subtitle="Purchase History"/>
+    <apex:pagemessages />
+    <apex:outputPanel rendered="{!TotalTable==null}">
+        <apex:outputText value="No data present for this Strategic Account Plan" />
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!TotalTable!=null}">
+    
+        <table cellpadding="5" cellspacing="5" width="50%" height="50" style="float:left;">
+            <tr>
+                <apex:repeat value="{!TotalTable}" var="rec">
+                    <th align="center">{!rec.Year__c}</th>
+                </apex:repeat>
+                <th align="center">Total</th>
+            </tr>
+            <tr>
+                <apex:repeat value="{!TotalTable}" var="rec">
+                    <td align="left">${!rec.Total_M__c}</td>
+                </apex:repeat>
+                <td align="left">${!TotalForTable}</td>
+            </tr>
+            <tr>
+                <td colspan="{!totalRecords}" align="center" id="areaChartBlock"></td> 
+            </tr>
+        </table> 
+                   
+        <table cellpadding="5" cellspacing="5" width="40%" height="50" style="float:right;">
+            <tr>
+                <apex:repeat value="{!PieChartTable}" var="rec">
+                    <th align="center">{!rec.Name}</th>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <apex:repeat value="{!PieChartTable}" var="rec">
+                    <td align="left">${!rec.Value}</td>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <td colspan="8" align="center" id="pieChartBlock"></td>
+            </tr>
+        </table>
+        
+    </apex:outputPanel>
+    <script type="text/javascript">
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.0', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(initCharts);
+        function initCharts() {            
+            HCNA_GSPPurchaseHistoryController.loadAreaChartData(
+                '{!$CurrentPage.parameters.SAPID}',
+                function(resultList, event){ 
+                    // load the chart
+                    var visualization = new google.visualization.AreaChart(document.getElementById('areaChartBlock'));
+                    // Prepare table model for chart with columns
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Year');
+                    data.addColumn('number', 'I/S');  
+                    data.addColumn('number', 'PCMS');   
+                    data.addColumn('number', 'HISS');
+                    data.addColumn('number', 'U/S');
+                    data.addColumn('number', 'POS');                        
+                    // add rows from the remoting results
+                    for(var row =0; row <resultList.length;row++){
+                        var record = resultList[row];                           
+                        data.addRow([record.Year__c, record.I_S__c, record.PCMS__c, record.HISS__c, record.U_S__c, record.POS__c]);
+                    }
+                    var options = {
+                        hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+                        vAxis: {title: 'Business Group',minValue: 0}
+                    };  
+                    // draw the chart with some options to make it look nice.       
+                    visualization.draw(data, options);
+                }, {escape:true}
+            );
+              
+            HCNA_GSPPurchaseHistoryController.loadPieChartData(
+                '{!$CurrentPage.parameters.SAPID}',
+                function(resultList, event){ 
+                    // load the chart
+                    var visualization = new google.visualization.PieChart(document.getElementById('pieChartBlock'));
+                    // Prepare table model for chart with columns
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Financial Objective');
+                    data.addColumn('number', 'Value');                            
+                    // add rows from the remoting results
+                    for(var row =0; row <resultList.length;row++){
+                        var record = resultList[row];                           
+                        data.addRow([record.name, record.value]);
+                    }
+                    //Format data for display 
+                    var formatter = new google.visualization.NumberFormat({pattern: '###,###.##'});
+                    formatter.format(data, 1);
+                    // draw the chart with some options to make it look nice.                    
+                    visualization.draw(data, {pieHole: 0.4, pieSliceText: 'value'});
+                }, {escape:true}
+            );
+        }
+    </script>      
+</apex:page>

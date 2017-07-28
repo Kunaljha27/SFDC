@@ -1,0 +1,6 @@
+<apex:page standardController="REVVY__MnEarning__c" extensions="REVVY.CMnCalculateResultCntrExtn" action="{!calculateResults}" >
+    <apex:pageMessages />
+    <apex:form >
+    	<apex:commandButton action="{!backToSettlement}" value="Back"/>
+    </apex:form>
+</apex:page>

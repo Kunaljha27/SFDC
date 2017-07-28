@@ -1,0 +1,15 @@
+Please review the following payment {!MnPayment__c.Name}
+
+Payment Due: {!MnPayment__c.PaymentDue__c}
+
+Period Start: {!MnPayment__c.PeriodStart__c}
+Period End: {!MnPayment__c.PeriodEnd__c}
+
+Payment: {!MnPayment__c.Payment__c}
+
+Prior Net Payments: {!MnPayment__c.PriorNetPayments__c}
+Adjustment: {!MnPayment__c.Adjustment__c}
+
+Net Payment: {!MnPayment__c.NetPayment__c}
+
+Link to Payment {!MnPayment__c.Link}

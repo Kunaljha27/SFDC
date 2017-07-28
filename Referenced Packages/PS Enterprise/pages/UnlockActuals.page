@@ -1,0 +1,2 @@
+<apex:page standardController="pse__Transaction_Delta__c" extensions="pse.UnlockActualsController" recordSetVar="records"
+  action="{!unlockActuals}" showHeader="false" standardStylesheets="false" sidebar="false"></apex:page>

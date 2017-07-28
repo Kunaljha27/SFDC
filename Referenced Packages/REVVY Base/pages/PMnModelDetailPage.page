@@ -1,0 +1,53 @@
+<apex:page standardController="REVVY__MnConfigEngineModel__c" extensions="REVVY.CMnModelDetailCtrl,REVVY.CMnVFPageGenericCtrl" sidebar="false">
+  <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+  <script>
+    var namespaceLowerCase = "{!JSENCODE(namespaceLowerCase)}";
+    var referer = "{!JSENCODE(referer)}";
+    var productId = "{!JSENCODE(productId)}";
+    var modelId = "{!JSENCODE(MnConfigEngineModel__c.Id)}";
+    var isSolution = "{!isSolution}" != ""? "{!isSolution}":"{!REVVY__MnConfigEngineModel__c.REVVY__IsSolution__c}";
+
+    var navUrl = '';
+    if (productId === '' && modelId !== '') {
+        if(isSolution === 'true') {
+            navUrl = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/solutionmodel/detail/' + "{!MnConfigEngineModel__c.Id}" + getReferer(referer);
+        } else {
+            navUrl = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/configmodel/detail/' + "{!MnConfigEngineModel__c.Id}" + getReferer(referer);
+        }
+    } else if (productId === '') {
+        if(isSolution === 'true') {
+            navUrl = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/solutionmodel/new' + getReferer(referer);
+        } else {
+            navUrl = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/configmodel/new' + getReferer(referer);
+        }
+    } else {
+      if(referer.indexOf(encodeURIComponent('?id='))==-1)
+        {
+        referer = referer + encodeURIComponent('?id=') + productId;
+        }
+
+        if(isSolution === 'true') {
+            navUrl = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/solutionmodel/new' + getReferer(referer) + '/product/' + productId;
+        } else {
+            navUrl = '/apex/' + namespaceLowerCase + 'PMnUIShell#mnconfigadmin/configmodel/new' + getReferer(referer) + '/product/' + productId;
+        }
+    }
+
+    if (navUrl !== '') {
+        mnNavigateToUrl(navUrl);
+    }
+
+
+
+    function getReferer(referer) {
+        if (referer && !isSalesforce1orLE()) {
+            return '/referer/'+ referer;
+        } else {
+            return '';
+        }
+
+    }
+
+  </script>
+  <apex:outputText value="{!REVVY__MnConfigEngineModel__c.REVVY__IsSolution__c}" rendered="false"/>
+</apex:page>

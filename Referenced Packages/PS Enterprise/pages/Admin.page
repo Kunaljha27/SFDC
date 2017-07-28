@@ -1,0 +1,92 @@
+<apex:page controller="pse.AdminController" tabStyle="PS_Admin__tab" title="{!$Label.admin_title}">
+
+<apex:sectionHeader title="{!$Label.admin_title}"/>
+
+<apex:pageMessages id="msgs" />
+
+<apex:form >
+
+  <apex:pageBlock title="{!$Label.Admin_Page_Config_Mgmt}">
+      <apex:outputLink value="{!URLFOR($Page.appirio_core__ConfigExport)}">{!$Label.Admin_Page_Export_Config}</apex:outputLink>
+      <br/><br/>
+      <apex:outputLink value="{!URLFOR($Page.appirio_core__ConfigImport)}">{!$Label.Admin_Page_Import_Config}</apex:outputLink>
+      <br/><br/>
+      <apex:outputLink value="{!URLFOR($Page.pse__CustomSettingsImport)}">{!$Label.Admin_Page_Import_CS}</apex:outputLink>
+  </apex:pageBlock>
+  
+  
+  <apex:pageBlock id="postInstallTasks" title="Post Install Tasks">
+
+   <apex:commandLink value="Show All"       action="{!filterOff}" rendered="{!taskStatusFilter!='..any..'}"/>
+   <apex:commandLink value="Hide Completed" action="{!filterOn}"  rendered="{!taskStatusFilter=='..any..'}"/>
+
+
+    <apex:pageBlockTable value="{!PostInstallTasks}" var="pit">
+       <apex:column headerValue="Perform">
+		   <apex:commandLink value="Perform" action="{!performPostInstallTask}" >
+		      <apex:param name="postInstallTask" value="{!pit.ID}" assignTo="{!postInstallTaskId}" />
+		   </apex:commandLink>
+       </apex:column>
+       <apex:column headerValue="Name"        ><apex:outputText value="{!pit.Name}"/>           </apex:column>
+       <apex:column headerValue="Description" ><apex:outputText value="{!pit.pse__Description__c}"/> </apex:column>
+       <apex:column headerValue="Status"      ><apex:outputText value="{!pit.pse__Status__c}"/>      </apex:column>
+       <apex:column headerValue="Performed By"><apex:outputText value="{!pit.pse__Performed_By__c}"/></apex:column>
+       <apex:column headerValue="Performed At"><apex:outputText value="{!pit.pse__Performed_At__c}"/></apex:column>
+
+    </apex:pageBlockTable> 
+  </apex:pageBlock>
+    
+  <apex:pageBlock title="{!$Label.Admin_Page_Bill_Q_Mgmt}">
+    {!$Label.Admin_Page_Limit_to_Project}<apex:inputField value="{!project.pse__Parent_Project__c}"  required="false"/>
+    <br/>
+    <apex:commandButton action="{!processBillingQueue}" value="{!$Label.Admin_Page_Init_Billing_Queue}" disabled="{!NOT enableSubmitBillingQueue}"/>
+  </apex:pageBlock>
+
+  <apex:pageBlock rendered="{!showWQManager}" title="{!$Label.Admin_Page_WQM}">
+    <apex:commandButton rendered="{!showWQManager}" action="{!scheduleWorkQueueManager}" value="{!$Label.Admin_Page_Start_WQ_Manager}" />
+	<br/>
+    <apex:commandButton rendered="{!showWQMonitor}" action="{!scheduleWorkQueueMonitor}" value="{!$Label.Admin_Page_Start_WQ_Monitor}" />
+  </apex:pageBlock>
+
+
+  <apex:pageBlock title="{!$Label.Admin_Page_RPGPR_Maint_Batch}">
+    <apex:commandButton action="{!processRPGPRMaintBatch}" value="{!$Label.Admin_Page_Submit_Batch}"/>
+    <apex:commandButton action="{!scheduleRPGPRMaintBatch}" value="{!$Label.Admin_Page_Schedule_Batch}"/>
+
+	<apex:selectList id="RPGPR" value="{!source}" size="1">
+	    <apex:selectOption itemValue="all"      itemLabel="{!$Label.common_label_all}"/>
+	    <apex:selectOption itemValue="region"   itemLabel="{!$Label.common_label_region}"/>
+	    <apex:selectOption itemValue="practice" itemLabel="{!$Label.common_label_practice}"/>
+	    <apex:selectOption itemValue="grp"      itemLabel="{!$Label.common_label_group}"/>
+	    <apex:selectOption itemValue="resource" itemLabel="{!$Label.common_label_resource}"/>
+	    <apex:selectOption itemValue="project"  itemLabel="{!$Label.common_label_project}"/>
+	</apex:selectList>
+  
+  </apex:pageBlock>
+
+
+  <apex:pageBlock title="{!$Label.Admin_Page_Actuals_CDB}">
+    <apex:commandButton action="{!processCalcDeltaBatch}"  value="{!$Label.Admin_Page_Submit_Batch}"/>
+    <apex:commandButton action="{!scheduleCalcDeltaBatch}" value="{!$Label.Admin_Page_Schedule_Batch}"/>
+  </apex:pageBlock>
+
+  <apex:pageBlock title="{!$Label.Admin_Page_SJC}">
+    <apex:commandButton action="{!processJobCleanup}"  value="{!$Label.Admin_Page_Submit_Batch}"/>
+    <apex:commandButton action="{!scheduleJobCleanup}" value="{!$Label.Admin_Page_Schedule_Batch}"/>
+  </apex:pageBlock>
+
+  <apex:pageBlock title="{!$Label.common_label_schedule}">
+    <apex:pageBlockSection title="{!$Label.utilization_label_schedule}" columns="1">
+        <c:ApexSchedule schedPattern="{!schedulePattern}"/>
+    </apex:pageBlockSection>
+  </apex:pageBlock>
+
+
+
+
+
+
+</apex:form>
+ 
+  
+</apex:page>

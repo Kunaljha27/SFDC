@@ -1,0 +1,23 @@
+<apex:page standardController="REVVY__MnLifeCycle__c" extensions="REVVY.CMnLifeCyclePhaseReOrderCtrl,REVVY.CMnVFPageGenericCtrl">
+    <script src="{!$Resource.staticui}/mnadmin/ui/src/js/mnNav.js"></script>
+
+    <script>
+        (function() {
+            var namespace = "{!JSENCODE(namespace)}";
+            var namespaceDT = namespace.length > 0 ? namespace.slice(0, -2)+"." : "";
+            var lifeCycleId = '{!lifeCycleId}';
+            var action = '{!action}';
+            var currSeqNum = '{!currSeqNum}';
+            var params = { "lifeCycleId":lifeCycleId, "action":action, "currSeqNum":currSeqNum };
+            Visualforce.remoting.Manager.invokeAction(
+                namespaceDT+'CMnLifeCyclePhaseReOrderCtrl.reorder',
+                params,
+                function(result, event){
+                    mnNavigateToUrl('/' + lifeCycleId);
+                },
+                {escape: true}
+            );
+        })();
+    </script>
+
+</apex:page>

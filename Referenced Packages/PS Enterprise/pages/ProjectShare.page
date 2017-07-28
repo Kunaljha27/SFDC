@@ -1,0 +1,54 @@
+<apex:page standardController="pse__Proj__c" extensions="pse.ProjectShareController" title="Share Project">
+	
+	<c:WaitComponent />
+    <apex:sectionHeader title="Share Project" subtitle="{!pse__Proj__c.Name}"/>
+	<apex:pageMessage summary="{!$Label.projectshare_label_portal_share_not_supported}" severity="info" strength="2" />
+    <apex:pageMessages id="messages"/>
+
+    <apex:form >
+	<apex:actionStatus id="ajaxStatus" onstart="wait(true)" onstop="wait(false)" />
+        <apex:pageBlock title="Share Project" mode="edit">
+            <apex:pageBlockButtons location="both">
+                <apex:commandButton value="Share with Project Manager" action="{!createPMShares}"
+                    rendered="{!displayPMShareButton}" status="ajaxStatus"/>
+                <apex:commandButton value="Share with Project Team" action="{!createTeamShares}"
+                    rendered="{!displayTeamShareButton}" status="ajaxStatus"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection title="Information" columns="2">
+                <apex:outputField value="{!pse__Proj__c.Name}"/>
+                <apex:outputField value="{!pse__Proj__c.pse__Project_Manager__c}"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Default Access" for="changeAllSelect"/>
+                    <apex:selectList value="{!changeAllAccessLevel}" id="changeAllSelect" multiselect="false" size="1">
+                         <apex:selectOptions value="{!accessLevelOptions}"/>
+                         <apex:actionSupport event="onchange" action="{!changeAllAccessLevels}" status="ajaxStatus" rerender="actionSection"/>
+                     </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <p />
+
+            <apex:pageBlockSection title="Access" columns="1" id="actionSection">
+                <table border="0" class="detailList" cellpadding="0" cellspacing="0">
+                    <tbody>
+
+                        <apex:repeat var="so" value="{!projShareableObjects.shareList}">
+                            <tr>
+                                <td class="labelCol"><apex:outputLabel value="{!so.objectLabel}" for="accessLevelSelect"/></td>
+                                <td class="data2Col">
+                                    <apex:selectList value="{!so.accessLevelText}" id="accessLevelSelect"
+                                        multiselect="false" size="1">
+                                        <apex:selectOptions value="{!accessLevelOptions}"/>
+                                    </apex:selectList>
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    <p />
+</apex:page>
